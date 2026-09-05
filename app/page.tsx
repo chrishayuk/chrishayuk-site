@@ -1,5 +1,5 @@
 import { MoeScene } from "@/components/MoeCollection";
-import { FilmSelection } from "@/components/YouTubeCollection";
+import { FilmSelection, YouTubeScene } from "@/components/YouTubeCollection";
 import Link from "next/link";
 import { Media } from "@/components/Media";
 import { SystemStudy } from "@/components/SystemStudy";
@@ -13,6 +13,7 @@ export default function Home() {
   <section className="scene identity" data-scene="00" aria-labelledby="proposition"><Media id="hero-identity" priority className="scene-background"/><div className="hero-overline record-voice"><span>INDEPENDENT THINKING.<br/>CONNECTED WORK.</span><span>LONDON · 2026</span></div><div className="identity-copy"><h1 id="proposition">Building things<br/><em>to find out</em><br/>how they work.</h1></div><div className="scene-bottom record-voice"><span>RESEARCH · ENGINEERING · FILM · DESIGN</span><a href="#person">THE RECORD BEGINS HERE ↓</a></div></section>
   <div className="opening-caption"><span className="record-voice">A RESEARCH HOUSE</span><p>A film, photography and research record by Chris Hay. Intelligent systems, their representations, the interfaces around them, and the experiments along the way.</p><span className="record-voice">EST. IN CURIOSITY</span></div>
   <section id="person" className="scene person-scene" data-scene="01"><Media id="portrait-editorial" className="portrait"/><div className="person-copy"><Kicker>01 / THE PERSON</Kicker><h2>Chris<br/><em>Hay.</em></h2><p className="practice">Research<br/>Engineering<br/>Film<br/>Design</p><div className="inline-links"><TextLink href="/about">ABOUT</TextLink><a className="text-link" href="https://www.linkedin.com/in/chrishayuk/">LINKEDIN ↗</a></div></div></section>
+  <section className="scene youtube-home" data-scene="01-youtube" aria-labelledby="latest-youtube-heading"><YouTubeScene/></section>
   <section className="scene moe-scene moe-home dark-scene" data-scene="02"><MoeScene/></section>
   <section className="scene interlude" data-scene="03" aria-label="London photograph"><Media id="london-night" className="scene-background"/><div className="scene-bottom record-voice"><span>LONDON</span><span>03 / BETWEEN THINGS</span></div></section>
   <section className="scene question-scene" data-scene="04"><div className="question-media"><Media id="ffn-notebook"/></div><div className="question-copy"><Kicker>04 / CURRENT QUESTION · FFN</Kicker><span className="status-label">● OPEN</span><h2>What if<br/>the FFN<br/><em>is a graph?</em></h2><TextLink href="/research/ffn-as-graph">FOLLOW THE THREAD</TextLink></div></section>
