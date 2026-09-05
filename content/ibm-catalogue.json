@@ -1,0 +1,109 @@
+{
+  "channelId": "UCKWaEZ-_VweaEx1j62do_vQ",
+  "channelUrl": "https://www.youtube.com/@IBMTechnology",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLOspHqNVtKADvnJYHm3HButDlWykOTzlP",
+  "retrievedAt": "2026-09-05T19:27:46+00:00",
+  "playlistCount": 128,
+  "playlistMostViewedId": "jC0MGFDawWg",
+  "videos": [
+    {
+      "youtubeId": "W3iQbl5R_Jk",
+      "id": "YT-W3iQbl5R_Jk",
+      "title": "Anthropic reveals hardware specs and Claude updates, OpenAI talks security, and Runway's new model",
+      "format": "video",
+      "channelOrder": 0,
+      "duration": 2086,
+      "views": 17247,
+      "viewsApproximate": false,
+      "published": "2026-09-04",
+      "description": "Chris Hay joins Tim Hwang, Sascha Brodsky, Kaoutar El Maghraoui and Kush Varshney to discuss Claude model updates, AI agent security, hardware guidelines and Runway’s interface-generating model.",
+      "url": "https://www.youtube.com/watch?v=W3iQbl5R_Jk",
+      "poster": "https://i.ytimg.com/vi_webp/W3iQbl5R_Jk/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 64,
+          "title": "Intro"
+        },
+        {
+          "start": 64,
+          "end": 472,
+          "title": "Anthropic unveils Fable, Mythos updates"
+        },
+        {
+          "start": 472,
+          "end": 1010,
+          "title": "OpenAI talks dangerous agents"
+        },
+        {
+          "start": 1010,
+          "end": 1519,
+          "title": "Runway releases first “interface world model”"
+        },
+        {
+          "start": 1519,
+          "end": 2086,
+          "title": "Anthropic debuts AI hardware specs"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "123",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts/anthropic-claude-hardware-guidelines-openai-rogue-agents-runway-solaris",
+      "sourceHash": "73ddd6e3be66d9c438d4656d2527eaa7f52ce90e123fc9756560befcd113d6d0"
+    },
+    {
+      "youtubeId": "jC0MGFDawWg",
+      "id": "YT-jC0MGFDawWg",
+      "title": "DeepSeek facts vs hype, model distillation, and open source competition",
+      "format": "video",
+      "channelOrder": 88,
+      "duration": 2356,
+      "views": 122382,
+      "viewsApproximate": false,
+      "published": "2025-01-31",
+      "description": "Chris Hay joins Tim Hwang, Aaron Baughman and Kate Soule to examine the response to DeepSeek, distinguish early claims from established facts, and discuss model distillation and competition in open models.",
+      "url": "https://www.youtube.com/watch?v=jC0MGFDawWg",
+      "poster": "https://i.ytimg.com/vi/jC0MGFDawWg/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 41,
+          "title": "Intro"
+        },
+        {
+          "start": 41,
+          "end": 1260,
+          "title": "DeepSeek facts vs hype"
+        },
+        {
+          "start": 1260,
+          "end": 1881,
+          "title": "Model distillation"
+        },
+        {
+          "start": 1881,
+          "end": 2356,
+          "title": "Open source and OpenAI"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "40",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts/deepseek-facts-vs-hype-model-distillation-open-source-competition",
+      "sourceHash": "6e14e9a1e916189797385226f0329a4fc949b1243ded1f75305d82ea0e17d610"
+    }
+  ]
+}
