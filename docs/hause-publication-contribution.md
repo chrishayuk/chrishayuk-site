@@ -1,6 +1,6 @@
 # HAUSE contribution and publication audit — 5 September 2026
 
-The reusable implementation belongs to HAUSE. Changes are applied to `/Users/christopherhay/chris-source/hause-design/hause` and mirrored exactly into the portable vendored dependency. The base revision remains `a93fb729c7d9ba02f7c1b2c369394526f9a3d158`; the contribution is an uncommitted local HAUSE change, not a published package release.
+The reusable implementation belongs to HAUSE. Changes are applied to `/Users/christopherhay/chris-source/hause-design/hause` and mirrored exactly into the portable vendored dependency. The base revision remains `a93fb729c7d9ba02f7c1b2c369394526f9a3d158`; the contribution is published in the HAUSE repository at `74cd09234a3d4028edc695353085a0f6f876eccf`. Consumers can pin that revision; this is not an npm registry release.
 
 ## Contributed and consumed
 

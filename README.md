@@ -12,7 +12,7 @@ npm test
 npm run build
 ```
 
-The app uses the bundled Sites/vinext architecture. HAUSE is vendored from clean revision `a93fb729c7d9ba02f7c1b2c369394526f9a3d158` with a portable file dependency. The shared publication/film extensions are also applied to the local HAUSE checkout. See [HAUSE contributions and audit](docs/hause-publication-contribution.md); exhibition-specific media, status and layout behaviour lives in `components/`.
+The app uses the bundled Sites/vinext architecture. HAUSE is vendored from clean revision `a93fb729c7d9ba02f7c1b2c369394526f9a3d158` with a portable file dependency. The shared publication/film extensions are published upstream at HAUSE revision `74cd09234a3d4028edc695353085a0f6f876eccf`. See [HAUSE contributions and audit](docs/hause-publication-contribution.md); exhibition-specific media, status and layout behaviour lives in `components/`.
 
 ## Production state
 
