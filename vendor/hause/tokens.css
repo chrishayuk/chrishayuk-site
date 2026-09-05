@@ -1,0 +1,350 @@
+/* ================================================================
+   HAUSE — design tokens
+   Structure is fixed. Atmosphere is variable.
+
+   This file is the portable part of HAUSE: palette, voices, grid,
+   motion. It assumes Tailwind is available (the @theme inline block
+   below is Tailwind v4 syntax) but nothing here depends on chrishayuk
+   content or routing — lifting HAUSE into another project should mean
+   copying src/hause/ wholesale and importing this file, not untangling
+   it from the site first.
+   ================================================================ */
+
+:root {
+	/* Hause palette (warm neutrals, not pure black/white) */
+	--color-ink: #0b0b0b;
+	--color-paper: #f2f0eb;
+	--color-graphite: #292929;
+	--color-mist: #b8b6b1;
+	--color-white: #fafaf8;
+
+	/* Hause default accent — exhibitions may override per-section via inline vars */
+	--color-accent: #b5651d;
+
+	/* Semantic status — small marks, never badges */
+	--color-status-open: var(--color-graphite);
+	--color-status-ongoing: var(--color-accent);
+	--color-status-supported: #4f7a5b;
+	--color-status-refuted: #a3432f;
+	--color-status-superseded: var(--color-mist);
+
+	/* Working theme (exhibitions redefine these two) */
+	--bg: var(--color-ink);
+	--fg: var(--color-white);
+
+	/* Motion */
+	--ease-hause: cubic-bezier(0.22, 1, 0.36, 1);
+	--motion-immediate: 150ms;
+	--motion-considered: 450ms;
+	--motion-cinematic: 1200ms;
+}
+
+/* ----------------------------------------------------------------
+   Light / Dark — two authored environments, not a CSS inversion.
+   Same identity (voices, grid, motion, hierarchy); different
+   atmosphere (surface, contrast, what Inside looks like against it).
+
+   Default is dark — an explicit editorial choice, not the OS
+   preference. data-mode selects the other environment when a viewer
+   opts in (see ModeToggle); there is no automatic
+   prefers-color-scheme switch.
+   ---------------------------------------------------------------- */
+
+:root[data-mode="light"] {
+	--bg: var(--color-paper);
+	--fg: var(--color-ink);
+}
+
+:root[data-mode="dark"] {
+	--bg: var(--color-ink);
+	--fg: var(--color-white);
+}
+
+@theme inline {
+	--color-ink: var(--color-ink);
+	--color-paper: var(--color-paper);
+	--color-graphite: var(--color-graphite);
+	--color-mist: var(--color-mist);
+	--color-white: var(--color-white);
+	--color-accent: var(--color-accent);
+
+	--color-bg: var(--bg);
+	--color-fg: var(--fg);
+
+	--font-display: var(--font-fraunces);
+	--font-system: var(--font-inter);
+	--font-evidence: var(--font-geist-mono);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--bg);
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	background: var(--bg);
+	color: var(--fg);
+	font-family: var(--font-system);
+	margin: 0;
+	min-height: 100vh;
+	transition:
+		background-color var(--motion-considered) var(--ease-hause),
+		color var(--motion-considered) var(--ease-hause);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body {
+		transition: none;
+	}
+}
+
+::selection {
+	background: var(--color-accent);
+	color: var(--color-white);
+}
+
+a {
+	color: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------------
+   Three voices
+   ---------------------------------------------------------------- */
+
+.voice-editorial {
+	font-family: var(--font-display);
+	font-weight: 480;
+	letter-spacing: -0.01em;
+	line-height: 0.98;
+}
+
+.voice-system {
+	font-family: var(--font-system);
+	letter-spacing: 0.01em;
+}
+
+.voice-evidence {
+	font-family: var(--font-evidence);
+	letter-spacing: 0;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------------
+   Hause grid — 12 columns, wide margins, invisible skeleton
+   ---------------------------------------------------------------- */
+
+.hause-grid {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	gap: clamp(16px, 2.4vw, 32px);
+	padding-inline: clamp(20px, 6vw, 96px);
+}
+
+.hause-bleed {
+	padding-inline: 0;
+}
+
+/* ----------------------------------------------------------------
+   Reveal — content is always in the DOM; only the transition is
+   deferred. prefers-reduced-motion gets a designed static state.
+   ---------------------------------------------------------------- */
+
+.reveal {
+	opacity: 0;
+	transform: translateY(18px);
+	transition:
+		opacity var(--motion-considered) var(--ease-hause),
+		transform var(--motion-considered) var(--ease-hause);
+}
+
+.reveal[data-visible="true"] {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* ----------------------------------------------------------------
+   Status marks — a word and a dot, never a pill
+   ---------------------------------------------------------------- */
+
+.status-mark {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+	font-family: var(--font-evidence);
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.status-mark::before {
+	content: "";
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: currentColor;
+	flex: none;
+}
+
+/* ----------------------------------------------------------------
+   Graph pulse — the materialise-in-sequence flourish for
+   "FOLLOW THIS IDEA". Content is always rendered; this only plays
+   an entrance animation on mount/re-key.
+   ---------------------------------------------------------------- */
+
+@keyframes pulse-in {
+	from {
+		opacity: 0.2;
+		transform: translateX(-6px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.graph-pulse {
+	animation: pulse-in var(--motion-considered) var(--ease-hause) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.graph-pulse {
+		animation: none;
+	}
+}
+
+/* ----------------------------------------------------------------
+   Staged swap — the transition between two physical forms of one
+   logical object (Variants, Prism). Deliberately not a crossfade:
+   the old form is removed instantly (key remount), then the new one
+   holds invisible for a beat before entering. A blend between two
+   representations would depict a conversion; these forms exist for
+   systems where conversion is forbidden.
+   ---------------------------------------------------------------- */
+
+@keyframes swap-in {
+	0% {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	45% {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.swap-in {
+	animation: swap-in var(--motion-cinematic) var(--ease-hause) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.swap-in {
+		animation: none;
+	}
+}
+
+/* ----------------------------------------------------------------
+   Channel — payload streaming through a fixed-capacity conduit.
+   Each animation shifts exactly one pattern period, so the loop is
+   seamless; iteration counts are finite (the stream settles, hause
+   motion never runs forever). Wide payloads move slowly; narrow
+   payloads, the same capacity, arrive more often.
+   ---------------------------------------------------------------- */
+
+@keyframes channel-flow-wide {
+	to {
+		background-position: 24px 0;
+	}
+}
+
+@keyframes channel-flow-narrow {
+	to {
+		background-position: 10px 0;
+	}
+}
+
+.channel-flow-wide {
+	animation: channel-flow-wide 0.9s linear 8;
+}
+
+.channel-flow-narrow {
+	animation: channel-flow-narrow 0.35s linear 24;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.channel-flow-wide,
+	.channel-flow-narrow {
+		animation: none;
+	}
+}
+
+/* ----------------------------------------------------------------
+   Route entrance — the page-to-page transition. A template that
+   remounts per navigation wears this class, so every arrival rises
+   in at the considered pace. One idiom for the whole site; nothing
+   slides, nothing crossfades.
+   ---------------------------------------------------------------- */
+
+@keyframes route-enter {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.route-enter {
+	animation: route-enter var(--motion-considered) var(--ease-hause) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.route-enter {
+		animation: none;
+	}
+}
+
+@keyframes pace-demo {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.pace-demo-box {
+	animation-name: pace-demo;
+	animation-timing-function: var(--ease-hause);
+	animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pace-demo-box {
+		animation: none;
+	}
+}

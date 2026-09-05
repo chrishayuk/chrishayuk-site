@@ -1,0 +1,823 @@
+{
+  "documentKind": "homepage-media-production-inventory",
+  "version": "0.2",
+  "prepared": "2026-09-05",
+  "note": "Production requirements only. No listed asset exists in this workspace. Null metadata must be resolved where required before ingestion/publication. This is not a HAUSE runtime schema.",
+  "hauseBaseline": {
+    "package": "@chrishayuk/hause",
+    "version": "0.1.0",
+    "revision": "a93fb729c7d9ba02f7c1b2c369394526f9a3d158"
+  },
+  "stillWidths": [
+    480,
+    768,
+    1200,
+    1600,
+    2400
+  ],
+  "stillFormats": [
+    "avif",
+    "webp",
+    "jpg"
+  ],
+  "deliveryRoot": "public/media/homepage",
+  "originalsPolicy": "Archive originals outside the public delivery directory; never upscale derivatives.",
+  "scenesWithoutMedia": [
+    "12"
+  ],
+  "scene10FilmPolicy": "Select an authorised film from the same real record shown in the live composition. Add its media ID at selection; pause composition advancement during playback.",
+  "publicationGates": [
+    "Resolve source identity and rights for every published derivative",
+    "Supply accurate alt text and any meaningful notebook transcription",
+    "Verify mobile composition separately",
+    "Keep film/system motion under one coordinator",
+    "No placeholder or invented metadata in public output"
+  ],
+  "assets": [
+    {
+      "productionId": "hero-identity",
+      "scenes": [
+        "00"
+      ],
+      "kind": "FILM_HERO",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Chris walking, train reflection, hand opening notebook. Separate mobile take/edit.",
+      "previewOrHomepageDurationSeconds": 24,
+      "compositions": {
+        "desktop": "2:1",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "hero-identity-desktop-v01.webm",
+        "hero-identity-desktop-v01.mp4",
+        "hero-identity-desktop-poster-v01.avif",
+        "hero-identity-desktop-poster-v01.webp",
+        "hero-identity-desktop-poster-v01.jpg",
+        "hero-identity-mobile-v01.webm",
+        "hero-identity-mobile-v01.mp4",
+        "hero-identity-mobile-poster-v01.avif",
+        "hero-identity-mobile-poster-v01.webp",
+        "hero-identity-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Owned poster and descriptive text",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "portrait-editorial",
+      "scenes": [
+        "01"
+      ],
+      "kind": "IMAGE",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Editorial environmental portrait of Chris, with approved mobile framing.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "4:5",
+        "mobile": "4:5",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "portrait-editorial-desktop-w{width}-v01.{format}",
+        "portrait-editorial-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "moe-feature",
+      "scenes": [
+        "02"
+      ],
+      "kind": "FILM_EDITORIAL",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Select a real episode. Excerpt, still, embed and original-link permissions are distinct. Approved still/link fallback.",
+      "previewOrHomepageDurationSeconds": 10,
+      "compositions": {
+        "desktop": "16:9",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "moe-feature-desktop-v01.webm",
+        "moe-feature-desktop-v01.mp4",
+        "moe-feature-desktop-poster-v01.avif",
+        "moe-feature-desktop-poster-v01.webp",
+        "moe-feature-desktop-poster-v01.jpg",
+        "moe-feature-mobile-v01.webm",
+        "moe-feature-mobile-v01.mp4",
+        "moe-feature-mobile-poster-v01.avif",
+        "moe-feature-mobile-poster-v01.webp",
+        "moe-feature-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": true,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Approved poster and source link",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "london-night",
+      "scenes": [
+        "03"
+      ],
+      "kind": "IMAGE",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Quiet London atmosphere. Use actual capture date or omit it.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "wide approved crop from 3:2",
+        "mobile": "3:4",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "london-night-desktop-w{width}-v01.{format}",
+        "london-night-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "ffn-notebook",
+      "scenes": [
+        "04"
+      ],
+      "kind": "IMAGE",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Actual relevant notebook page and reviewed transcription; no generated handwriting.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "wide macro",
+        "mobile": "portrait macro",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "ffn-notebook-desktop-w{width}-v01.{format}",
+        "ffn-notebook-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "vindex-system",
+      "scenes": [
+        "05"
+      ],
+      "kind": "FILM_SYSTEM",
+      "status": "required",
+      "acquisition": "verified-source-production",
+      "brief": "Representation, addressable contents, execution. Verify mechanism and labels against project source.",
+      "previewOrHomepageDurationSeconds": 12,
+      "compositions": {
+        "desktop": "2:1",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "vindex-system-desktop-v01.webm",
+        "vindex-system-desktop-v01.mp4",
+        "vindex-system-desktop-poster-v01.avif",
+        "vindex-system-desktop-poster-v01.webp",
+        "vindex-system-desktop-poster-v01.jpg",
+        "vindex-system-mobile-v01.webm",
+        "vindex-system-mobile-v01.mp4",
+        "vindex-system-mobile-poster-v01.avif",
+        "vindex-system-mobile-poster-v01.webp",
+        "vindex-system-mobile-poster-v01.jpg",
+        "vindex-system-static-v01.svg"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": false,
+      "staticAlternative": "Three-stage labelled mechanism and source text",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "watch-feature",
+      "scenes": [
+        "06"
+      ],
+      "kind": "FILM_EDITORIAL",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Selected feature film. Poster required; authorised preview optional.",
+      "previewOrHomepageDurationSeconds": 8,
+      "compositions": {
+        "desktop": "16:9",
+        "mobile": "16:9",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "watch-feature-desktop-v01.webm",
+        "watch-feature-desktop-v01.mp4",
+        "watch-feature-desktop-poster-v01.avif",
+        "watch-feature-desktop-poster-v01.webp",
+        "watch-feature-desktop-poster-v01.jpg",
+        "watch-feature-mobile-v01.webm",
+        "watch-feature-mobile-v01.mp4",
+        "watch-feature-mobile-poster-v01.avif",
+        "watch-feature-mobile-poster-v01.webp",
+        "watch-feature-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": true,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Approved poster and source link",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "watch-portrait",
+      "scenes": [
+        "06"
+      ],
+      "kind": "FILM_EDITORIAL",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Selected portrait film with permitted framing. Poster required; authorised preview optional.",
+      "previewOrHomepageDurationSeconds": 8,
+      "compositions": {
+        "desktop": "3:4",
+        "mobile": "3:4",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "watch-portrait-desktop-v01.webm",
+        "watch-portrait-desktop-v01.mp4",
+        "watch-portrait-desktop-poster-v01.avif",
+        "watch-portrait-desktop-poster-v01.webp",
+        "watch-portrait-desktop-poster-v01.jpg",
+        "watch-portrait-mobile-v01.webm",
+        "watch-portrait-mobile-v01.mp4",
+        "watch-portrait-mobile-poster-v01.avif",
+        "watch-portrait-mobile-poster-v01.webp",
+        "watch-portrait-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": true,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Approved poster and source link",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "watch-landscape",
+      "scenes": [
+        "06"
+      ],
+      "kind": "FILM_EDITORIAL",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Selected landscape talk/interview. Poster required; authorised preview optional.",
+      "previewOrHomepageDurationSeconds": 8,
+      "compositions": {
+        "desktop": "16:9",
+        "mobile": "16:9",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "watch-landscape-desktop-v01.webm",
+        "watch-landscape-desktop-v01.mp4",
+        "watch-landscape-desktop-poster-v01.avif",
+        "watch-landscape-desktop-poster-v01.webp",
+        "watch-landscape-desktop-poster-v01.jpg",
+        "watch-landscape-mobile-v01.webm",
+        "watch-landscape-mobile-v01.mp4",
+        "watch-landscape-mobile-poster-v01.avif",
+        "watch-landscape-mobile-poster-v01.webp",
+        "watch-landscape-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": true,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Approved poster and source link",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "watch-wide",
+      "scenes": [
+        "06"
+      ],
+      "kind": "FILM_EDITORIAL",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Selected wide cinematic frame; do not crop source without permission. Preview optional.",
+      "previewOrHomepageDurationSeconds": 8,
+      "compositions": {
+        "desktop": "2.39:1",
+        "mobile": "2.39:1",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "watch-wide-desktop-v01.webm",
+        "watch-wide-desktop-v01.mp4",
+        "watch-wide-desktop-poster-v01.avif",
+        "watch-wide-desktop-poster-v01.webp",
+        "watch-wide-desktop-poster-v01.jpg",
+        "watch-wide-mobile-v01.webm",
+        "watch-wide-mobile-v01.mp4",
+        "watch-wide-mobile-poster-v01.avif",
+        "watch-wide-mobile-poster-v01.webp",
+        "watch-wide-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": true,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Approved poster and source link",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "larql-object",
+      "scenes": [
+        "07"
+      ],
+      "kind": "IMAGE",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "SSD, laptop and hand. Separate physical-media image from the computational trace.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "3:2",
+        "mobile": "4:5",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "larql-object-desktop-w{width}-v01.{format}",
+        "larql-object-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "larql-traversal",
+      "scenes": [
+        "07"
+      ],
+      "kind": "FILM_SYSTEM",
+      "status": "required",
+      "acquisition": "verified-source-production",
+      "brief": "Actual reproducible query, traversal and result. Preserve source revision; no invented performance numbers.",
+      "previewOrHomepageDurationSeconds": 10,
+      "compositions": {
+        "desktop": "2:1",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "larql-traversal-desktop-v01.webm",
+        "larql-traversal-desktop-v01.mp4",
+        "larql-traversal-desktop-poster-v01.avif",
+        "larql-traversal-desktop-poster-v01.webp",
+        "larql-traversal-desktop-poster-v01.jpg",
+        "larql-traversal-mobile-v01.webm",
+        "larql-traversal-mobile-v01.mp4",
+        "larql-traversal-mobile-poster-v01.avif",
+        "larql-traversal-mobile-poster-v01.webp",
+        "larql-traversal-mobile-poster-v01.jpg",
+        "larql-traversal-static-v01.svg"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": false,
+      "staticAlternative": "Three-stage labelled mechanism and source text",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "personal-architecture",
+      "scenes": [
+        "08"
+      ],
+      "kind": "IMAGE",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Architecture from Chris’s photographic record.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "3:4",
+        "mobile": "3:4",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "personal-architecture-desktop-w{width}-v01.{format}",
+        "personal-architecture-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "personal-books",
+      "scenes": [
+        "08"
+      ],
+      "kind": "IMAGE",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Personal books/object photograph, without a productivity caption.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "4:5",
+        "mobile": "4:5",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "personal-books-desktop-w{width}-v01.{format}",
+        "personal-books-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "personal-journey",
+      "scenes": [
+        "08"
+      ],
+      "kind": "IMAGE",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Journey/window/environment photograph; keep the landscape rhythm on mobile.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "16:9",
+        "mobile": "16:9",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "personal-journey-desktop-w{width}-v01.{format}",
+        "personal-journey-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "operator-notebook",
+      "scenes": [
+        "09"
+      ],
+      "kind": "IMAGE",
+      "status": "source-selection-required",
+      "acquisition": "source-selection-required",
+      "brief": "Actual page associated with the selected open notebook record; verify N-0042 before using its ID.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "4:5",
+        "mobile": "4:5",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "operator-notebook-desktop-w{width}-v01.{format}",
+        "operator-notebook-mobile-w{width}-v01.{format}"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Responsive photograph with accurate alt/caption",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "hause-composition-reference",
+      "scenes": [
+        "10"
+      ],
+      "kind": "SYSTEM_REFERENCE",
+      "status": "required",
+      "acquisition": "verified-source-production",
+      "brief": "Static reference export of the actual live composition. The production surface imports real HAUSE forms.",
+      "previewOrHomepageDurationSeconds": null,
+      "compositions": {
+        "desktop": "2:1",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "hause-composition-reference-desktop-static-v01.svg",
+        "hause-composition-reference-mobile-static-v01.svg"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": false,
+      "staticAlternative": "All forms in document order",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "mcp-interaction",
+      "scenes": [
+        "11"
+      ],
+      "kind": "FILM_AMBIENT",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Real hand-to-tool-to-visible-result interaction in a publishable demo environment.",
+      "previewOrHomepageDurationSeconds": 10,
+      "compositions": {
+        "desktop": "16:9",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "mcp-interaction-desktop-v01.webm",
+        "mcp-interaction-desktop-v01.mp4",
+        "mcp-interaction-desktop-poster-v01.avif",
+        "mcp-interaction-desktop-poster-v01.webp",
+        "mcp-interaction-desktop-poster-v01.jpg",
+        "mcp-interaction-mobile-v01.webm",
+        "mcp-interaction-mobile-v01.mp4",
+        "mcp-interaction-mobile-poster-v01.avif",
+        "mcp-interaction-mobile-poster-v01.webp",
+        "mcp-interaction-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Owned poster and descriptive text",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    },
+    {
+      "productionId": "closing-portrait",
+      "scenes": [
+        "13"
+      ],
+      "kind": "FILM_HERO",
+      "status": "required",
+      "acquisition": "owned-shoot",
+      "brief": "Almost-still portrait of Chris; a distinct setup and separate mobile take.",
+      "previewOrHomepageDurationSeconds": 10,
+      "compositions": {
+        "desktop": "16:9",
+        "mobile": "9:16",
+        "mobileRequiresArtDirectionReview": true
+      },
+      "deliveryTargets": [
+        "closing-portrait-desktop-v01.webm",
+        "closing-portrait-desktop-v01.mp4",
+        "closing-portrait-desktop-poster-v01.avif",
+        "closing-portrait-desktop-poster-v01.webp",
+        "closing-portrait-desktop-poster-v01.jpg",
+        "closing-portrait-mobile-v01.webm",
+        "closing-portrait-mobile-v01.mp4",
+        "closing-portrait-mobile-poster-v01.avif",
+        "closing-portrait-mobile-poster-v01.webp",
+        "closing-portrait-mobile-poster-v01.jpg"
+      ],
+      "motionDeliveryConditionalOnRights": false,
+      "photographicAreaEligible": true,
+      "staticAlternative": "Owned poster and descriptive text",
+      "sourceRecordId": null,
+      "publicMediaId": null,
+      "creator": null,
+      "captureDate": null,
+      "sourceUrl": null,
+      "sourceRevision": null,
+      "rights": {
+        "state": "pending",
+        "permittedUses": []
+      },
+      "alt": null,
+      "caption": null,
+      "transcription": null,
+      "existingFiles": []
+    }
+  ]
+}

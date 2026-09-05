@@ -1,0 +1,2 @@
+import { getRecord, getVersion } from "@/lib/records";
+export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){const{id}=await params;const version=new URL(request.url).searchParams.get("version");const snapshot=version?getVersion(id,version):undefined;const record=version?snapshot?.record:getRecord(id);if(!record||record.publication!=="published")return Response.json({error:"Published record not found"},{status:404});return Response.json({record,...(snapshot?{hash:snapshot.hash,algorithm:snapshot.algorithm}:{})});}

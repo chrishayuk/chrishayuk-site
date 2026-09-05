@@ -1,0 +1,331 @@
+"use client";
+
+import { useEffect, useId, useRef, useState } from "react";
+import { tick, refuse } from "../../sound";
+
+/**
+ * TERMINAL — a query surface as an instrument.
+ *
+ * The form is the chrome: banner, scrollback, prompt, input, seed
+ * chips, a CLEAR control, toned lines, the hause sounds. What the
+ * terminal *means* lives entirely in the caller's `execute` — a
+ * function from one typed line to lines out, sync or async. The form
+ * never interprets a statement itself, so whatever discipline governs
+ * the language (an allowlisted AST, a server-side capability profile)
+ * stays in exactly one place: the executor.
+ *
+ * Promoted from vindex3.org's Explorer ("psql, for a model"), where the
+ * executor is a live public query endpoint with an offline snapshot
+ * fallback. `sessionKey` supports that shape: when it changes, the
+ * scrollback resets to the current `banner`, so a transport change
+ * reads as a new connection rather than a spliced history.
+ *
+ * The text fallback discipline holds: pass `fallback` — the plain
+ * sentences that survive with the interaction removed.
+ */
+
+export type TerminalLine = {
+	text: string;
+	tone?: "accent" | "dim" | "err" | "ok";
+	/** Renders the line as a link — the terminal's door into the rest of the site. */
+	href?: string;
+};
+
+/** A designed result: a command need not return text. DESIGNED is the
+ * HAUSE rendering; RAW is the structured object it was rendered from —
+ * the proof the answer is typed output, not prose; GRAPH is where it
+ * came from — the relationships that ground it. */
+export type TerminalPanel = {
+	designed: React.ReactNode;
+	raw?: unknown;
+	graph?: { from: string; rel: string; to: string }[];
+};
+
+export type TerminalResult = {
+	lines: TerminalLine[];
+	/** A designed object rendered beneath the lines, with its RAW proof. */
+	panel?: TerminalPanel;
+	/** Reset the scrollback to the banner instead of appending. */
+	clear?: boolean;
+	/** Play the refusal sound instead of the tick. */
+	refused?: boolean;
+};
+
+type ScrollItem = { kind: "line"; line: TerminalLine } | { kind: "panel"; panel: TerminalPanel };
+
+const asItems = (lines: TerminalLine[]): ScrollItem[] => lines.map((line) => ({ kind: "line", line }));
+
+function PanelBlock({ panel }: { panel: TerminalPanel }) {
+	const [view, setView] = useState<"designed" | "raw" | "graph">("designed");
+	const views: ("designed" | "raw" | "graph")[] = [
+		"designed",
+		...(panel.raw !== undefined ? (["raw"] as const) : []),
+		...(panel.graph?.length ? (["graph"] as const) : []),
+	];
+	return (
+		<div className="border my-2 p-4" style={{ borderColor: "var(--color-accent)", background: "var(--bg)" }}>
+			{views.length > 1 && (
+				<div className="flex gap-2 mb-3">
+					{views.map((v) => (
+						<button
+							key={v}
+							aria-pressed={view === v}
+							aria-label={`Show the ${v} view of this result`}
+							onClick={() => {
+								tick();
+								setView(v);
+							}}
+							className="voice-evidence text-[10px] tracking-[0.12em] uppercase px-2 py-0.5 border"
+							style={{
+								borderColor: view === v ? "var(--color-accent)" : "var(--color-mist)",
+								color: view === v ? "var(--color-accent)" : undefined,
+								opacity: view === v ? 1 : 0.5,
+							}}
+						>
+							{v}
+						</button>
+					))}
+				</div>
+			)}
+			{view === "designed" && panel.designed}
+			{view === "raw" && (
+				<pre className="voice-evidence text-[11px] leading-relaxed overflow-x-auto m-0" style={{ color: "var(--fg)" }}>
+					{JSON.stringify(panel.raw, null, 2)}
+				</pre>
+			)}
+			{view === "graph" && (
+				<div className="flex flex-col gap-1.5">
+					{panel.graph?.map((e, i) => (
+						<p key={i} className="voice-evidence text-[12px] m-0 flex items-baseline gap-2 flex-wrap" style={{ color: "var(--fg)" }}>
+							<span>{e.from}</span>
+							<span className="text-[10px] tracking-[0.08em] uppercase opacity-50">— {e.rel} →</span>
+							<span style={{ color: "var(--color-accent)" }}>{e.to}</span>
+						</p>
+					))}
+				</div>
+			)}
+		</div>
+	);
+}
+
+export function Terminal({
+	kicker,
+	headline,
+	banner,
+	prompt = ">",
+	seeds = [],
+	execute,
+	complete,
+	autorun,
+	notice,
+	sessionKey,
+	height = 420,
+	clearLabel = "CLEAR",
+	fallback,
+	footnote,
+}: {
+	/** Evidence-voice label above the instrument. */
+	kicker: string;
+	/** Editorial-voice line, e.g. "psql, for a model." */
+	headline?: string;
+	/** The lines a fresh session opens with — also what CLEAR restores. */
+	banner: TerminalLine[];
+	/** The prompt string, caller-owned (may change between lines). */
+	prompt?: string;
+	/** One-click statements rendered as chips under the terminal. */
+	seeds?: string[];
+	/** The meaning of the terminal: one line in, lines out. */
+	execute: (line: string) => Promise<TerminalResult> | TerminalResult;
+	/** Tab completion: candidate continuations for the current input. */
+	complete?: (line: string) => string[];
+	/** A command run once on mount — deep links into the terminal. */
+	autorun?: string;
+	/** Appended (not reset) when it changes — e.g. a transport coming live. */
+	notice?: TerminalLine;
+	/** When this changes, the scrollback resets to the current banner. */
+	sessionKey?: string | number;
+	height?: number;
+	clearLabel?: string;
+	/** System-voice sentences that survive with the interaction removed. */
+	fallback?: string;
+	/** Evidence-voice closing line. */
+	footnote?: string;
+}) {
+	const [items, setItems] = useState<ScrollItem[]>(asItems(banner));
+	const [input, setInput] = useState("");
+	const [busy, setBusy] = useState(false);
+	const endRef = useRef<HTMLDivElement>(null);
+	const inputId = useId();
+	// The banner belongs to the session: re-read it only when the
+	// session changes, never on every render.
+	const bannerRef = useRef(banner);
+	bannerRef.current = banner;
+
+	useEffect(() => {
+		if (sessionKey === undefined) return;
+		setItems(asItems(bannerRef.current));
+	}, [sessionKey]);
+
+	const ranRef = useRef(false);
+	useEffect(() => {
+		if (!autorun || ranRef.current) return;
+		ranRef.current = true;
+		const id = setTimeout(() => void run(autorun), 400);
+		return () => clearTimeout(id);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [autorun]);
+
+	useEffect(() => {
+		if (!notice) return;
+		setItems((prev) => [...prev, { kind: "line", line: notice }]);
+		scroll();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [notice]);
+
+	function scroll() {
+		requestAnimationFrame(() => endRef.current?.scrollIntoView({ block: "nearest" }));
+	}
+
+	function reset() {
+		tick();
+		setItems(asItems(bannerRef.current));
+		setInput("");
+		scroll();
+	}
+
+	function onTab() {
+		if (!complete) return;
+		const options = complete(input);
+		if (options.length === 0) return;
+		if (options.length === 1) {
+			tick();
+			setInput(options[0]);
+			return;
+		}
+		// Fill the longest common prefix, then show the choices.
+		let prefix = options[0];
+		for (const o of options) {
+			let k = 0;
+			while (k < prefix.length && k < o.length && prefix[k].toLowerCase() === o[k].toLowerCase()) k++;
+			prefix = prefix.slice(0, k);
+		}
+		if (prefix.length > input.length) setInput(prefix);
+		setItems((prev) => [...prev, { kind: "line", line: { text: options.join("   "), tone: "dim" } }]);
+		scroll();
+	}
+
+	async function run(raw: string) {
+		setItems((prev) => [...prev, { kind: "line", line: { text: `${prompt} ${raw}`, tone: "accent" } }]);
+		setInput("");
+		scroll();
+		setBusy(true);
+		try {
+			const result = await execute(raw);
+			if (result.refused) refuse();
+			else tick();
+			setItems((prev) => {
+				if (result.clear) return asItems(bannerRef.current);
+				const next = [...prev, ...asItems(result.lines)];
+				if (result.panel) next.push({ kind: "panel", panel: result.panel });
+				return next;
+			});
+		} finally {
+			setBusy(false);
+			scroll();
+		}
+	}
+
+	return (
+		<section className="hause-grid py-16 sm:py-24">
+			<div className="col-span-12 md:col-start-2 md:col-span-10 lg:col-span-9">
+				<p className="voice-evidence text-xs tracking-[0.14em] uppercase mb-3 opacity-50">{kicker}</p>
+				{headline ? <p className="voice-editorial text-2xl sm:text-3xl mb-8 max-w-2xl">{headline}</p> : null}
+
+				<div
+					className="border p-4 sm:p-6 overflow-y-auto"
+					style={{ borderColor: "var(--fg)", background: "var(--color-ink)", height }}
+					onClick={() => (document.getElementById(inputId) as HTMLInputElement | null)?.focus()}
+				>
+					<div className="flex flex-col gap-1">
+						{items.map((item, i) => {
+							if (item.kind === "panel") return <PanelBlock key={i} panel={item.panel} />;
+							const l = item.line;
+							const style = {
+								color:
+									l.tone === "accent"
+										? "var(--color-accent)"
+										: l.tone === "err"
+											? "var(--color-status-refuted)"
+											: l.tone === "ok"
+												? "var(--color-status-supported)"
+												: "var(--color-white)",
+								opacity: l.tone === "dim" ? 0.55 : 1,
+							};
+							return l.href ? (
+								<a
+									key={i}
+									href={l.href}
+									className="voice-evidence text-[12px] sm:text-[13px] leading-relaxed whitespace-pre-wrap w-fit border-b pb-0.5"
+									style={{ ...style, borderColor: "var(--color-accent)" }}
+								>
+									{l.text}
+								</a>
+							) : (
+								<p key={i} className="voice-evidence text-[12px] sm:text-[13px] leading-relaxed whitespace-pre-wrap" style={style}>
+									{l.text}
+								</p>
+							);
+						})}
+					</div>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							if (input.trim() && !busy) void run(input);
+						}}
+						className="flex gap-2 mt-2"
+					>
+						<span className="voice-evidence text-[13px]" style={{ color: "var(--color-accent)" }}>
+							{prompt}
+						</span>
+						<input
+							id={inputId}
+							value={input}
+							onChange={(e) => setInput(e.target.value)}
+							aria-label="Terminal input"
+							autoComplete="off"
+							spellCheck={false}
+							className="voice-evidence text-[13px] flex-1 bg-transparent outline-none"
+							style={{ color: "var(--color-white)", caretColor: "var(--color-accent)" }}
+						/>
+					</form>
+					<div ref={endRef} />
+				</div>
+
+				<div className="flex flex-wrap gap-2 mt-4">
+					{seeds.map((s) => (
+						<button
+							key={s}
+							onClick={() => void run(s)}
+							disabled={busy}
+							className="voice-evidence text-[11px] px-3 py-1.5 border opacity-70 hover:opacity-100 disabled:opacity-30"
+							style={{ borderColor: "var(--color-mist)" }}
+						>
+							{s}
+						</button>
+					))}
+					<button
+						onClick={reset}
+						className="voice-evidence text-[11px] px-3 py-1.5 border opacity-70 hover:opacity-100 ml-auto"
+						style={{ borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
+						aria-label="Clear the terminal"
+					>
+						{clearLabel}
+					</button>
+				</div>
+
+				{fallback ? <p className="voice-system text-sm opacity-70 leading-relaxed max-w-2xl mt-6">{fallback}</p> : null}
+				{footnote ? <p className="voice-evidence text-xs opacity-40 leading-relaxed max-w-2xl mt-3">{footnote}</p> : null}
+			</div>
+		</section>
+	);
+}

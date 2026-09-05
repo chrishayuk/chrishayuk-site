@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { records, recordPath } from "@/lib/records";
+export function FilmIndex({ collection = false }: { collection?: boolean }) {
+ const films = records.filter(r => r.kind === "film");
+ return <><header className="index-intro"><p className="kicker record-voice">{collection ? "FILM / IBM" : "THE MOVING IMAGE"}</p><h1>{collection ? <>Mixture<br/><em>of Experts.</em></> : <>Film<span className="amber">.</span></>}</h1><p className="dek">Conversations around intelligence. A selected record of Chris Hay’s appearances, with original films and transcripts at IBM.</p><div className="index-count record-voice"><span>{String(films.length).padStart(2,"0")} SELECTED APPEARANCES</span>{!collection && <Link href="/film/mixture-of-experts">THE IBM COLLECTION ↗</Link>}</div></header><div className="collection-film-list">{films.map((film,i) => <Link className={`film-frame frame-${i}`} href={recordPath(film)} key={film.id}><div className="film-type-poster"><span className="record-voice">IBM / MIXTURE OF EXPERTS</span><p>{film.title}</p><span className="film-play" aria-hidden="true">↗</span><span className="record-voice">EPISODE {film.episode} · ORIGINAL AT IBM</span></div><div className="film-caption"><h3>{film.dek}</h3><span className="record-voice">EP. {film.episode}</span></div></Link>)}</div></>;
+}

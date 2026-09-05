@@ -1,0 +1,16 @@
+import { readFile, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { getRecord } from "../lib/records.ts";
+import { stableJson, validateRecord } from "../lib/publication.ts";
+const [id, version, date] = process.argv.slice(2);
+if(!id||!version||!date)throw new Error("Usage: node --experimental-strip-types scripts/publish-record.ts ID VERSION YYYY-MM-DD");
+if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(Date.parse(date))||new Date(date).toISOString().slice(0,10)!==date)throw new Error("Invalid publication date");
+const record=getRecord(id);if(!record)throw new Error("Unknown record");
+const path=new URL("../content/publications.json",import.meta.url);
+const previous=JSON.parse(await readFile(path,"utf8"));
+if(previous.some((s:{record:{id:string;version:string}})=>s.record.id===id&&s.record.version===version))throw new Error("This version is immutable. Choose a new version.");
+const published=validateRecord({...record,publication:"published",version,published:record.published||date});
+const hash=createHash("sha256").update(stableJson(published)).digest("hex");
+previous.push({record:published,hash,algorithm:"sha256"});
+await writeFile(path,JSON.stringify(previous,null,2)+"\n");
+console.log(`Saved immutable ${id} version ${version}. Publication deployment remains a separate action.`);

@@ -1,0 +1,13 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { chooseMotion } from "../lib/motion.ts";
+import { stableJson, validateRecord, escapeXml } from "../lib/publication.ts";
+import { records, publishedRecords, getVersion } from "../lib/records.ts";
+import { readFile } from "node:fs/promises";
+test("motion chooses one visible owner and holds it across minor area changes",()=>{const a={id:"a",visible:.9,area:90};const b={id:"b",visible:.8,area:100};assert.equal(chooseMotion([a,b],"a",false,false),"a");assert.equal(chooseMotion([{...a,area:20},b],"a",false,false),"b");});
+test("paused and hidden pages stop automatic motion; manual play is scoped",()=>{const a={id:"a",visible:1,area:500};const b={id:"b",visible:.6,area:300,manual:true};assert.equal(chooseMotion([a],"a",true,false),null);assert.equal(chooseMotion([a,b],null,true,false),"b");assert.equal(chooseMotion([a,b],"b",false,true),null);assert.equal(chooseMotion([{...b,visible:.2}],"b",true,false),null);});
+test("draft records never enter public feeds or resolve to invented versions",()=>{assert.ok(records.length>=11);for(const r of publishedRecords()){assert.equal(r.publication,"published");assert.ok(r.published);}assert.equal(getVersion("N-OPERATOR","1.0"),undefined);for(const r of records)validateRecord(r);});
+test("every related record and identifier resolves uniquely",()=>{assert.equal(new Set(records.map(r=>r.id)).size,records.length);assert.equal(new Set(records.map(r=>r.slug)).size,records.length);for(const r of records)for(const id of r.related)assert.ok(records.some(r=>r.id===id),`${r.id} -> ${id}`);});
+test("canonical hashing ignores object key order, but preserves semantic array order",()=>{assert.equal(stableJson({b:2,a:1}),stableJson({a:1,b:2}));assert.notEqual(stableJson([1,2]),stableJson([2,1]));assert.equal(stableJson({a:undefined,b:2}),'{"b":2}');});
+test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
+test("homepage contains every production scene without invented E25 results",async()=>{const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");assert.deepEqual([...page.matchAll(/data-scene="(\d+)"/g)].map(m=>m[1]),Array.from({length:14},(_,i)=>String(i).padStart(2,"0")));assert.doesNotMatch(page,/SUPPORTED.*NATURAL DEPTH|FINDING.*E25/);});

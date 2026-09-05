@@ -1,0 +1,24 @@
+{
+	"name": "@chrishayuk/hause",
+	"version": "0.1.0",
+	"private": true,
+	"description": "HAUSE is a semantic design system for AI interfaces: a vocabulary of communicative acts and the visual forms that render them. It ships as React/TSX, tokens and machine-readable helpers, but it is not a general-purpose component kit.",
+	"type": "module",
+	"sideEffects": [
+		"*.css"
+	],
+	"scripts": {
+		"readme": "node scripts/readme.ts",
+		"readme:check": "node scripts/readme.ts --check"
+	},
+	"peerDependencies": {
+		"next": "^16",
+		"react": "^19",
+		"react-dom": "^19"
+	},
+	"devDependencies": {
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"typescript": "^5.7.4"
+	}
+}
