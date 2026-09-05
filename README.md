@@ -14,11 +14,17 @@ npm run build
 
 The app uses the bundled Sites/vinext architecture. HAUSE is vendored from clean revision `a93fb729c7d9ba02f7c1b2c369394526f9a3d158` with a portable file dependency. The shared publication/film extensions are published upstream at HAUSE revision `74cd09234a3d4028edc695353085a0f6f876eccf`. See [HAUSE contributions and audit](docs/hause-publication-contribution.md); exhibition-specific media, status and layout behaviour lives in `components/`.
 
+## Production hosting
+
+GitHub Actions checks every pull request. A passing push to `main` deploys the Next.js standalone build to the Fly app `chrishayuk-site` in London. `npm run build:fly` builds it; the existing Sites/vinext scripts and private preview remain available. The Docker build enables indexing for the public edition; local and Sites builds default to noindex.
+
+Canonical domain: **https://chrishayuk.com**. The other four owned domains and all five `www` hosts permanently redirect there, preserving paths and query strings. See [deployment and DNS](docs/deployment.md).
+
 ## Production state
 
-This is a private production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter public APIs or feeds; catalogued YouTube source records enter the record API separately from local publications. The global robots policy prevents indexing this edition.
+This is the first public production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter public APIs or feeds; catalogued YouTube source records enter the record API separately from local publications. The public Fly edition permits indexing; drafts remain explicitly labelled and excluded from publication feeds.
 
-The homepage does **not yet meet** the photographic-area launch criterion. Do not make it public until original media and record review are complete.
+The homepage does **not yet meet** the photographic-area launch criterion. The owner has authorized this initial public edition; the media inventory continues to identify the original photography still required.
 
 ## Add media
 

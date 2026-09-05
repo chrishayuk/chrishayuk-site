@@ -1,0 +1,60 @@
+name: Deploy chrishayuk.com
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:fly
+        env:
+          SITE_INDEXABLE: "true"
+      - name: Check production pages and canonical redirects
+        run: |
+          SITE_INDEXABLE=true npm run start:fly -- --port 3000 > /tmp/chrishayuk-server.log 2>&1 &
+          trap 'kill $!' EXIT
+          for attempt in $(seq 1 30); do
+            curl --silent --fail http://localhost:3000/api/health > /dev/null && break
+            sleep 1
+          done
+          npm run test:deployment
+  deploy:
+    needs: verify
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only --ha=false --build-arg GIT_COMMIT=${{ github.sha }}
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Verify deployed revision
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          curl --fail --silent --show-error --retry 5 --retry-all-errors https://chrishayuk-site.fly.dev/api/health -o /tmp/health.json
+          python3 - <<'PY'
+          import json, os
+          health = json.load(open('/tmp/health.json'))
+          assert health['status'] == 'ok'
+          assert health['commit'] == os.environ['EXPECTED_COMMIT'], health
+          print('Deployed revision verified')
+          PY
