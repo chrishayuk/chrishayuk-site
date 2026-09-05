@@ -1,0 +1,480 @@
+{
+  "asOf": "2026-09-05T20:05:06.260697+00:00",
+  "playlistUrl": "https://www.youtube.com/playlist?list=PLOspHqNVtKADvnJYHm3HButDlWykOTzlP",
+  "playlistEntries": 128,
+  "metadataChecked": 127,
+  "verifiedCount": 46,
+  "countBasis": "Minimum confirmed appearances from original IBM YouTube participant credits; numbered episodes deduplicated. Includes separately published bonus episodes. Missing credits do not establish absence.",
+  "firstEpisode": {
+    "youtubeId": "hwNkFnR1U0I",
+    "episode": "1",
+    "title": "Mixture of Experts: Rabbit AI hiccups, GPT-2 chatbot, and OpenAI and the Financial Times",
+    "published": "2024-05-03",
+    "sourceUrl": "https://www.youtube.com/watch?v=hwNkFnR1U0I",
+    "creditSource": "Original IBM YouTube description",
+    "participant": "Chris Hay",
+    "descriptionHash": "216869985cf6f74a24b85c3dcfee3a1251095604c7f7a1258bae9c136b2caa2e"
+  },
+  "appearances": [
+    {
+      "youtubeId": "hwNkFnR1U0I",
+      "episode": "1",
+      "title": "Mixture of Experts: Rabbit AI hiccups, GPT-2 chatbot, and OpenAI and the Financial Times",
+      "published": "2024-05-03",
+      "sourceUrl": "https://www.youtube.com/watch?v=hwNkFnR1U0I",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "216869985cf6f74a24b85c3dcfee3a1251095604c7f7a1258bae9c136b2caa2e"
+    },
+    {
+      "youtubeId": "T6DGGHlkYa0",
+      "episode": "3",
+      "title": "GPT-4o, AI overviews and our multimodal future",
+      "published": "2024-05-17",
+      "sourceUrl": "https://www.youtube.com/watch?v=T6DGGHlkYa0",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "ed84f9f3a702eec699ec8ea5fa34894e4cf0aff18b72915788312ccdfb578a8d"
+    },
+    {
+      "youtubeId": "VMmIdX9Zmuw",
+      "episode": "5",
+      "title": "Google’s AI Overviews, Golden Gate Claude, the \"whale computer\" and scaling laws",
+      "published": "2024-05-31",
+      "sourceUrl": "https://www.youtube.com/watch?v=VMmIdX9Zmuw",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "9f281eae5b8254b8e60f16f77c663403e21ba18c369ce4d5992eb78456a9e6bc"
+    },
+    {
+      "youtubeId": "rn1sjMFRzTQ",
+      "episode": "10",
+      "title": "AI Hardware: Training, Inference, Devices and Model Optimization",
+      "published": "2024-07-03",
+      "sourceUrl": "https://www.youtube.com/watch?v=rn1sjMFRzTQ",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "15051ba91d1091b8c54bacab3700c0fad758b16cb835bbdea2ec5a824a3e938a"
+    },
+    {
+      "youtubeId": "Wlf6id2FH-Q",
+      "episode": "12",
+      "title": "Goldman Sachs Gen AI report, Claude 2.0 Engineer, and RIAA lawsuits",
+      "published": "2024-07-19",
+      "sourceUrl": "https://www.youtube.com/watch?v=Wlf6id2FH-Q",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "38a11e8449a6cc179544753b676e609e86e55719a7abcac5537e7a40504b7936"
+    },
+    {
+      "youtubeId": "bQzPaRYC9BE",
+      "episode": "13",
+      "title": "Meta's Llama 3.1, Mistral Large 2 and big interest in small models",
+      "published": "2024-07-26",
+      "sourceUrl": "https://www.youtube.com/watch?v=bQzPaRYC9BE",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "798a17de7ec000464dbbb53b6b069d11c9676a7b62aae1fb209911728b6e14fa"
+    },
+    {
+      "youtubeId": "emVMHYQVmdQ",
+      "episode": "17",
+      "title": "Agent Q, no AI in art, and AMD acquires ZT Systems",
+      "published": "2024-08-23",
+      "sourceUrl": "https://www.youtube.com/watch?v=emVMHYQVmdQ",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "75f0bd57eab580847a08d755f9e471401dfa3e40455bde9edc4ee1ba177d40ae"
+    },
+    {
+      "youtubeId": "KPsl7IK2_eo",
+      "episode": "21",
+      "title": "OpenAI o1 preview, Agentforce, AI in fantasy football, and machine unlearning",
+      "published": "2024-09-20",
+      "sourceUrl": "https://www.youtube.com/watch?v=KPsl7IK2_eo",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "229695b275ab7d68a32252c3b6472631669548bc491cc403b87506b272537e18"
+    },
+    {
+      "youtubeId": "v9go9rttLO8",
+      "episode": "24",
+      "title": "AI in the Nobels, DGX B200 arrival, and Unstructured’s $40M funding round",
+      "published": "2024-10-11",
+      "sourceUrl": "https://www.youtube.com/watch?v=v9go9rttLO8",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "f9d408d12264c5b9b26cf488dd065b92f0b175b3cd24f0f18784da79612bcc36"
+    },
+    {
+      "youtubeId": "V6vxTXrDCrA",
+      "episode": "28",
+      "title": "SearchGPT, from Naptime to Big Sleep, and GitHub Octoverse updates",
+      "published": "2024-11-08",
+      "sourceUrl": "https://www.youtube.com/watch?v=V6vxTXrDCrA",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "cc04f5a03823e79b0a636599a8eed4b54a0d9c3af0e776e72938a6a30660632d"
+    },
+    {
+      "youtubeId": "QzERUfTbKQw",
+      "episode": "36",
+      "title": "OpenAI o3, DeepSeek-V3, and the Brundage/Marcus AI bet",
+      "published": "2025-01-03",
+      "sourceUrl": "https://www.youtube.com/watch?v=QzERUfTbKQw",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "4fbb79d46d1d4c364d6b7ea2bffe7a8097b119a0ca4f87a93b69b227c4b5c78a"
+    },
+    {
+      "youtubeId": "NcV5GrG5VTA",
+      "episode": "38",
+      "title": "Anthropic valuation rumors, Microsoft CoreAI, NotebookLM upgrades, and AI agents in finance",
+      "published": "2025-01-17",
+      "sourceUrl": "https://www.youtube.com/watch?v=NcV5GrG5VTA",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "5cf59a1fc25991fa1450c0e5c344c1b58fdbb7cab59c52f063aa2c84578c3aa1"
+    },
+    {
+      "youtubeId": "jC0MGFDawWg",
+      "episode": "40",
+      "title": "DeepSeek facts vs hype, model distillation, and open source competition",
+      "published": "2025-01-31",
+      "sourceUrl": "https://www.youtube.com/watch?v=jC0MGFDawWg",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "7e3eaa658261dab8f983a1c2136c3a0ef12ce5a0ad67d65f33885da3387934d8"
+    },
+    {
+      "youtubeId": "qT8GgwQ2rT4",
+      "episode": "41",
+      "title": "OpenAI deep research, o3-mini, AI Action Summit, and Anthropic’s Constitutional Classifiers",
+      "published": "2025-02-07",
+      "sourceUrl": "https://www.youtube.com/watch?v=qT8GgwQ2rT4",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "c8ef4345ed906157197db77f89a4b24acaa6a2adc2decfc27da8f1d453dc9ae8"
+    },
+    {
+      "youtubeId": "KNNi-enb2B4",
+      "episode": "42",
+      "title": "Paris AI Summit, Altman's \"Three Observations,\" and Anthropic's Economic Index",
+      "published": "2025-02-14",
+      "sourceUrl": "https://www.youtube.com/watch?v=KNNi-enb2B4",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "8e7fc5706851aa017f90474b6b73c4b3506041fa15836cd2b15c37f77346c829"
+    },
+    {
+      "youtubeId": "LQEhOObUhQg",
+      "episode": null,
+      "title": "GPT-4.5: And the future of pre-training is...",
+      "published": "2025-03-01",
+      "sourceUrl": "https://www.youtube.com/watch?v=LQEhOObUhQg",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "8e0f47f088ba7ffc2743c3053012dcc411ebfa04542beda25db9f992e27844fd"
+    },
+    {
+      "youtubeId": "iYRdhSEGpg4",
+      "episode": "45",
+      "title": "Quantum leap, Model Context Protocol, CoreWeave IPO and an AI voice companion",
+      "published": "2025-03-07",
+      "sourceUrl": "https://www.youtube.com/watch?v=iYRdhSEGpg4",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "57717d9731ddbbc938267bb01c5ef77bc8d328329343f23b1110df6e1a1b5e64"
+    },
+    {
+      "youtubeId": "Ddh3p185KhA",
+      "episode": "46",
+      "title": "Manus, vibe coding, scaling laws and Perplexity’s AI phone",
+      "published": "2025-03-14",
+      "sourceUrl": "https://www.youtube.com/watch?v=Ddh3p185KhA",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "df84f5b0f248fb0b39202cebd0478dd47f3d12744fc59d9e7feb2430427de4e7"
+    },
+    {
+      "youtubeId": "x0DQfLQHT0Q",
+      "episode": "49",
+      "title": "OpenAI goes open, Anthropic on interpretability, Apple Intelligence updates and Amazon AI agents",
+      "published": "2025-04-04",
+      "sourceUrl": "https://www.youtube.com/watch?v=x0DQfLQHT0Q",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "3bb700191b6be16ab57ebbd92293cf1612354f57ff5b996aa019fc4fa7828063"
+    },
+    {
+      "youtubeId": "8e6StFBP0VM",
+      "episode": "51",
+      "title": "o3 and o4-mini, Google Gemini on-prem and NVIDIA’s U.S. chip manufacturing",
+      "published": "2025-04-18",
+      "sourceUrl": "https://www.youtube.com/watch?v=8e6StFBP0VM",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "8317242e09c30b5c8e49cdeb10778ca0318bdcecf2ba5de73308891a980d7cd1"
+    },
+    {
+      "youtubeId": "yeutlpU13YM",
+      "episode": "53",
+      "title": "LlamaCon, Qwen3, DeepSeek-R2 rumors and JP Morgan’s open letter on AI",
+      "published": "2025-05-02",
+      "sourceUrl": "https://www.youtube.com/watch?v=yeutlpU13YM",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "a3a693c90f8b9f1e193302bbd5a95c0171884995966b76ae0426b65a6fd0c9a5"
+    },
+    {
+      "youtubeId": "kjRHpuXGmH0",
+      "episode": "55",
+      "title": "Mistral Medium 3, OpenAI HealthBench and AI chips to Saudi Arabia",
+      "published": "2025-05-16",
+      "sourceUrl": "https://www.youtube.com/watch?v=kjRHpuXGmH0",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "7d5dbb3f6c09a0688ce51d74a251e1fc2f70be7b093f5424e1e1e62ff7778922"
+    },
+    {
+      "youtubeId": "Blq_pf6yd6U",
+      "episode": null,
+      "title": "Claude 4: Everything you need to know",
+      "published": "2025-05-23",
+      "sourceUrl": "https://www.youtube.com/watch?v=Blq_pf6yd6U",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "227383b8be9dc55ba9d8c6b31834388cb8ac95815b7e850a39ef1a1c419634de"
+    },
+    {
+      "youtubeId": "e_B91C2vILc",
+      "episode": "57",
+      "title": "Claude 4 system prompt, Jony Ive at OpenAI and Microsoft’s “agent factory”",
+      "published": "2025-05-30",
+      "sourceUrl": "https://www.youtube.com/watch?v=e_B91C2vILc",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "930b83e8743f8483f4ec9b95ef2d4bf367d572e86144a0a72a1a4ad084637cd8"
+    },
+    {
+      "youtubeId": "Y5yiQDnTimU",
+      "episode": "59",
+      "title": "Apple’s WWDC, Meta & Scale AI, o3-pro and fault-tolerant quantum computing",
+      "published": "2025-06-13",
+      "sourceUrl": "https://www.youtube.com/watch?v=Y5yiQDnTimU",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "215b3676e5fb4523817bec5648d5f0ec527c91b3cf1ebfbd7086a2b1c2d6a7ec"
+    },
+    {
+      "youtubeId": "SuDcg-lg5So",
+      "episode": "60",
+      "title": "Impact of AI on jobs, Scale AI fallout and chatbot conspiracies",
+      "published": "2025-06-20",
+      "sourceUrl": "https://www.youtube.com/watch?v=SuDcg-lg5So",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "5d32f1d50057f9aaaaeff257b933336b349c196b4cbace475341aafc8eb9161d"
+    },
+    {
+      "youtubeId": "ieR3u8sUX-U",
+      "episode": "63",
+      "title": "Perplexity’s Comet browser, Cloudflare blocks AI scrapers and Wimbledon Match Chat",
+      "published": "2025-07-11",
+      "sourceUrl": "https://www.youtube.com/watch?v=ieR3u8sUX-U",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "a65892b8f4ebe69e4f1572343f6f311988a3a6ca914b6f16a9967f0751ce22ca"
+    },
+    {
+      "youtubeId": "hNvbeXus-pM",
+      "episode": "64",
+      "title": "Kimi K2, DeepSeek-R1 vibe check and Google’s data center investments",
+      "published": "2025-07-18",
+      "sourceUrl": "https://www.youtube.com/watch?v=hNvbeXus-pM",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "859145f4a5cf5ceb3dfd96064b091e8126fdb0121951a6001979c329e61f70fa"
+    },
+    {
+      "youtubeId": "Dtr0scHQVXc",
+      "episode": "67",
+      "title": "Gpt-oss, Genie 3, Personal Superintelligence and Claude pricing",
+      "published": "2025-08-06",
+      "sourceUrl": "https://www.youtube.com/watch?v=Dtr0scHQVXc",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "8c3ff997a826737f45689109384e98c2786863e3d9ce0814fc7ad84f5b3ba31f"
+    },
+    {
+      "youtubeId": "A30mVgbG-OQ",
+      "episode": null,
+      "title": "OpenAI dropped GPT-5, is AGI here?",
+      "published": "2025-08-08",
+      "sourceUrl": "https://www.youtube.com/watch?v=A30mVgbG-OQ",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "ba932e58ad0bd7db858dfaee79ab185b983fdc3a9b5ffff5bb7eab64fd8316a3"
+    },
+    {
+      "youtubeId": "zw0Ymg_DoEs",
+      "episode": "70",
+      "title": "Monster prompt, OpenAI’s business play, nano-banana and US Open experimentations",
+      "published": "2025-08-29",
+      "sourceUrl": "https://www.youtube.com/watch?v=zw0Ymg_DoEs",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "4e3e89dd0dae671a3660510bc4e71bc63f1354eaf3c3197d4d77036c35f65f3e"
+    },
+    {
+      "youtubeId": "SjoxdH9qOTE",
+      "episode": "72",
+      "title": "Why language models hallucinate, revisiting Amodei’s code prediction and AI in the job market",
+      "published": "2025-09-12",
+      "sourceUrl": "https://www.youtube.com/watch?v=SjoxdH9qOTE",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "754b959ce01fa1730b172addf84fe4097aade45d3aae30ef3800fadd059347e3"
+    },
+    {
+      "youtubeId": "lMrOvPloJ0o",
+      "episode": "76",
+      "title": "IBM partners with Anthropic, plus OpenAI drops AgentKit",
+      "published": "2025-10-10",
+      "sourceUrl": "https://www.youtube.com/watch?v=lMrOvPloJ0o",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "50d989843eecdfeb2ce4b6c70106dd21d515a26b239c532e9c0d3aa33b13f13b"
+    },
+    {
+      "youtubeId": "KF3jIUBecFo",
+      "episode": null,
+      "title": "Anthropic’s TPU move and NVIDIA’s Starcloud",
+      "published": "2025-10-31",
+      "sourceUrl": "https://www.youtube.com/watch?v=KF3jIUBecFo",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "eb4d7da845b1ffa01bdbb559d9356853360ef860f3cfc262cfb0789d63abbf85"
+    },
+    {
+      "youtubeId": "SdNRWJ-oqjY",
+      "episode": null,
+      "title": "AI agents in 2025: Why agentic commerce isn't ready for Black Friday yet",
+      "published": "2025-11-28",
+      "sourceUrl": "https://www.youtube.com/watch?v=SdNRWJ-oqjY",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "28e0829ee004021a9d8421d4390701073edd655dab83552f3e24d449873d2695"
+    },
+    {
+      "youtubeId": "oRRDAZtJLmk",
+      "episode": null,
+      "title": "AI Code Generation: Wins, Fails and the Future",
+      "published": "2025-12-26",
+      "sourceUrl": "https://www.youtube.com/watch?v=oRRDAZtJLmk",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "ca656e7fba134242bb691bedf1852da5baa08237d799236bdd7b2d8ed5c6f443"
+    },
+    {
+      "youtubeId": "ARXS-uk19h8",
+      "episode": null,
+      "title": "AI year in review: Trends shaping 2026",
+      "published": "2026-01-02",
+      "sourceUrl": "https://www.youtube.com/watch?v=ARXS-uk19h8",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "5e688588659f2b9b9882530cd0bb20300835f4f5a669232e24ea415ca30d4037"
+    },
+    {
+      "youtubeId": "5gRCyXOYF74",
+      "episode": null,
+      "title": "CES 2026 AI highlights: NVIDIA Rubin & wild gadgets",
+      "published": "2026-01-09",
+      "sourceUrl": "https://www.youtube.com/watch?v=5gRCyXOYF74",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "77d138bb668a6b65fbb7d396d55b6f3c5288bbfab6e70cb7a09ba4ad0d53d335"
+    },
+    {
+      "youtubeId": "s3SHPOByMTY",
+      "episode": null,
+      "title": "The new AI race: Enterprise innovation in 2026",
+      "published": "2026-01-23",
+      "sourceUrl": "https://www.youtube.com/watch?v=s3SHPOByMTY",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "dc8ab47f142586c735985f5ee5f831bda9088ad9b3c830e27ad409b5758d3c12"
+    },
+    {
+      "youtubeId": "C6PZwrsaii0",
+      "episode": null,
+      "title": "Anthropic Claude Opus 4.6 vs OpenAI GPT-5.3-Codex: The AI \"big game”",
+      "published": "2026-02-06",
+      "sourceUrl": "https://www.youtube.com/watch?v=C6PZwrsaii0",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "7b1c32362ab0b28475ebd858801c2762a1a461127d47046f59ac333894980ebf"
+    },
+    {
+      "youtubeId": "iXAgtR-DO3I",
+      "episode": null,
+      "title": "Inside Perplexity Computer’s agent platform",
+      "published": "2026-03-06",
+      "sourceUrl": "https://www.youtube.com/watch?v=iXAgtR-DO3I",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "27659e591d7386b154bfdf6fd3c05afce448ee4fd1236349d585de2830ac158e"
+    },
+    {
+      "youtubeId": "Z_L5KO_GW4o",
+      "episode": null,
+      "title": "Claude Opus 4.7, Apple’s AI glasses and Allbirds AI pivot",
+      "published": "2026-04-17",
+      "sourceUrl": "https://www.youtube.com/watch?v=Z_L5KO_GW4o",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "8a1f3988084d1b5937fdcb3fa21819500583899ddaeab960ee67e29ad24724ca"
+    },
+    {
+      "youtubeId": "1h6e5MFg9I0",
+      "episode": null,
+      "title": "AI at college graduations and why Claude blackmails",
+      "published": "2026-05-22",
+      "sourceUrl": "https://www.youtube.com/watch?v=1h6e5MFg9I0",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "ae06c6ddadd30cf95a6d80ccc8c38ec77dc1791e723c4ddde8cdd0950ebcb960"
+    },
+    {
+      "youtubeId": "tV5zXS78HzU",
+      "episode": null,
+      "title": "GPT-5.6 Sol, FIFA AI & Wall Street’s AI nerves",
+      "published": "2026-07-03",
+      "sourceUrl": "https://www.youtube.com/watch?v=tV5zXS78HzU",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "e7b19e39713a3d6be2d81cfedc15eb3950737cb1223efe8bcc19b997025c7a5f"
+    },
+    {
+      "youtubeId": "8rGYGFmytQs",
+      "episode": null,
+      "title": "Thinking Machines Lab drops Inkling & Meta’s Muse Spark 1.1",
+      "published": "2026-07-17",
+      "sourceUrl": "https://www.youtube.com/watch?v=8rGYGFmytQs",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "9109bdd115f0e5f56f10aeab706974076af2ae9df8313b45cc97e01a19cc3f95"
+    },
+    {
+      "youtubeId": "W3iQbl5R_Jk",
+      "episode": "123",
+      "title": "Anthropic reveals hardware specs and Claude updates, OpenAI talks security, and Runway's new model",
+      "published": "2026-09-04",
+      "sourceUrl": "https://www.youtube.com/watch?v=W3iQbl5R_Jk",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "e303e06cd4cedd00f7b03c877247cc5f9c94ece9dbf4931b58514c3692879bda"
+    }
+  ]
+}

@@ -1,9 +1,10 @@
+import {ibmAppearances,firstEpisodeSource} from "./ibm-appearances.ts";
 import {records,indexedRecords,recordPath,SITE} from "./records.ts";
 import {allVideos,ibm,transcriptFor,videoPath,videoConcepts,videoWork,youtube} from "./youtube.ts";
 export function recordGraph(){
  const indexed=indexedRecords();
  const concepts=[...new Set(records.flatMap(r=>r.concepts))].sort();
- const nodes:object[]=[{id:"PERSON-CHRIS",kind:"person",title:"Chris Hay"},{id:"CHANNEL-YOUTUBE",kind:"collection",url:youtube.channelUrl},{id:"ORG-IBM",kind:"organization",title:"IBM"},{id:"COLLECTION-MOE",kind:"collection",title:"Mixture of Experts",url:ibm.playlistUrl},
+ const nodes:object[]=[{id:"PERSON-CHRIS",kind:"person",title:"Chris Hay"},{id:"CHANNEL-YOUTUBE",kind:"collection",url:youtube.channelUrl},{id:"ORG-IBM",kind:"organization",title:"IBM"},{id:"COLLECTION-MOE",kind:"collection",title:"Mixture of Experts",url:ibm.playlistUrl,panelist:{id:"PERSON-CHRIS",role:"Regular panelist",since:ibmAppearances.firstEpisode.published,minimumConfirmedAppearances:ibmAppearances.verifiedCount,countAsOf:ibmAppearances.asOf,firstEpisodeSource,appearanceSources:ibmAppearances.appearances.map(r=>r.sourceUrl)}},
  ...records.map(r=>({id:r.id,kind:r.kind,title:r.title,url:`${SITE}${recordPath(r)}`,publication:r.publication,retrievable:indexed.some(i=>i.id===r.id)})),
  ...concepts.map(id=>({id:`CONCEPT-${id}`,kind:"concept",title:id.replaceAll("-"," ")}))];
  const edges:object[]=records.flatMap(r=>[{from:r.id,to:r.authors.includes("IBM")?"ORG-IBM":"PERSON-CHRIS",kind:"created-by",basis:r.youtubeId?"source-metadata":"editorial"},...r.concepts.map(c=>({from:r.id,to:`CONCEPT-${c}`,kind:"about",basis:r.youtubeId?"metadata-inferred":"editorial"})),...r.related.map(id=>({from:r.id,to:id,kind:"related",basis:r.youtubeId?"metadata-inferred":"editorial"}))]);
