@@ -1,0 +1,556 @@
+{
+  "8Ppw8254nLI": {
+    "source": "YouTube automatic English captions",
+    "status": "automatic-unreviewed",
+    "language": "en",
+    "passages": [
+      {
+        "start": 0.0,
+        "end": 28.12,
+        "text": "What if I said every single large language model was a database? Specifically, a graph database. Not metaphorically, but physically. If we looked underneath the hood at the weights, it was an actual database with real edges, with real entities, with real nodes. That's how it was physically represented. What would that mean? Well, it would mean that we could query it. We"
+      },
+      {
+        "start": 25.56,
+        "end": 52.88,
+        "text": "could insert new knowledge. We could compile down to weights because it's just a database. And if it's just a database, then we could have query languages like SQL over the top of it. We could programmatically work with the model if that were true. But the good news is it is true. So, let's do it. So, we're going to query it with a language called Larql, which allows us to query"
+      },
+      {
+        "start": 51.08,
+        "end": 80.28,
+        "text": "large language models. So, I'm going to connect it up to the weights of the Gemma 34B model. Believe me, I will connect it up to Gemma 4, but that will be a future video. So, I've now connected up here and you can kind of see there that that model has got 34 layers or 348,000 features. And in fact, if I just run stats against the model there, there you see Google Gemma 3, you see the number of features, and then as you can see"
+      },
+      {
+        "start": 78.08,
+        "end": 105.36,
+        "text": "within here knowledge graph, we have mapped 1,785 features. So, actually what I've done is I've run a probe over the top of that and mapped the internal representation into representations that we know. You can also see there's three layer bands. So, there's a syntax layer, there's a knowledge layer, and the output layer. This is the representation of the Google Gemma model. So, those early layers are really about understanding the question, what the syntax of the query is, and the"
+      },
+      {
+        "start": 103.88,
+        "end": 131.64,
+        "text": "middle layers are really about getting the knowledge out of the weights, and then the final layers is reformatting that out for output. So, let's see what the model knows. So, I'm going to use a command called describe, and what describe allows us to do is describe some of the entities. So, I'll just type in describe France, and we will see what the model knows about France. So, if we have a look at the output there, you can see in the syntax layers where it's figuring out the question. Look at L5, layer five there. You see the word"
+      },
+      {
+        "start": 130.08,
+        "end": 159.92,
+        "text": "Spanish, and then layer eight international. So, you can see that it knows this is some sort of country type query. It's not quite figured out what it means. It's really working out the syntax as opposed to the knowledge. So, as I said, L14 to L27, this is where the knowledge lives. So, you can see France say there at L23. Europe and Italy tagged as nationality. Country is tagged as borders. Then you've got Spain at"
+      },
+      {
+        "start": 156.16,
+        "end": 184.44,
+        "text": "L18, but also Australia at 25, CEO, fountain. This is polysemantic noise sharing the same slots. So, the facts are there, but it's buried alongside unrelated concepts. And then in the output layers L28 to 33, really French is being committed to an answer. It's dominating. But you also see German, European, Western, all plausible next tokens depending on the context. The"
+      },
+      {
+        "start": 182.16,
+        "end": 210.48,
+        "text": "syntax gathers the context, the edges store the knowledge, and the output commits to the token. And that's the kind of three-stage architecture of every transformer. But if we wanted to, we could pull on one of those relations. So, I'm going to do a So, I'm going to do a select star from edges. As I said, this is a graph database, and I'm going to say where entity, and the entity in this case is"
+      },
+      {
+        "start": 208.36,
+        "end": 237.76,
+        "text": "France. And we're going to look at a specific relation, and in this case it's going to be borders. And then what we'll also do is we will put in a score filter just to cut off any noise and look at the things that are really the most important thing. So, if we look at what comes back, we can see L25, feature 5067 for the token country. You can see on the also variations of the spelling country, three capitalization variants of the same token. This is a real fact."
+      },
+      {
+        "start": 235.44,
+        "end": 264.16,
+        "text": "France borders other countries, and it's all stored in one feature at one layer. And if we want to, we can drill into some of the other relationships. So, this time we'll drill into nationality. So, let's just hit clear there for a second, and we're going to say select star from edges uh where entity again is equal to France, and this time relation is equal to"
+      },
+      {
+        "start": 261.84,
+        "end": 290.0,
+        "text": "nationality. And again, I will limit this down to five rows. And And again, let me make this clear. I am querying the real model weights here. So, again, if I look at the result from this, look at L19 there, feature 4924. We see Germany, we see Sweden, we see Italy. We can see this sort of nationality relationship there. So, again, in that one feature, it's storing all of the"
+      },
+      {
+        "start": 287.76,
+        "end": 315.72,
+        "text": "different types of nationalities that occur there. And again, that's polysemantic again. And again, down here we see the same thing in layer 20, feature 8164. We see Greece, Hungary, Thailand. So, you can see that happening in across the layers. This is how the model is grouping countries by nationality relation. So, you're starting to get this idea that was going on here. We have entities, and then we have features, and then we have"
+      },
+      {
+        "start": 313.88,
+        "end": 342.84,
+        "text": "relations that are connecting them together. And again, we can also look at different other entities that are in the model. So, if we do a describe Einstein, for example, let's just see what that looks like. And again, you see the same three-stage structure that we had before, syntax, edges, and output. But notice how different it is there. Probably the ones that are important there, you see the you know, physics coming through."
+      },
+      {
+        "start": 340.68,
+        "end": 368.8,
+        "text": "You see the award relation, and then you see Nobel Prize. So, that's pretty interesting there. And again, you start to see physics on the output, quantum, scientific, all things that are related. Now, one of the things that we'll also support here is a verbose mode for the describe. So, I'm going to look at Einstein there. So, here you see the sort of the the labels that the the probe picked up there."
+      },
+      {
+        "start": 366.8,
+        "end": 395.92,
+        "text": "You know, award for example for Nobel. But actually, if we look in here, you can also see with the also column other things that sit associated with that relationship. So, you can see academy, you can see Nobel, you can see Nobel with a different spelling there. And again, you see astronomy there, also NASA, etc. So, physics, gravity, gravity, quantum. You see different things associated with"
+      },
+      {
+        "start": 393.16,
+        "end": 422.0,
+        "text": "quantum. So, you get a different idea of what the model is associating with the with the entity. Now, coming back to the France example for a second, I can also do queries like select star from edges, and this time I'm going to ask for things that are nearest to France. And again, I can specify a layer. So, I'll say at layer 26. And then we will limit that down to"
+      },
+      {
+        "start": 419.96,
+        "end": 448.64,
+        "text": "10 rows. Now, if we look at that, feature 9348, the token is Australia. And then you also see Italy, Germany, Spain. So, you an idea of a country cluster. French is another exciting one. French has different spellings of French there. We see euros clustering together. You see the the euro symbol, EU, euros. I think that's pretty cool. And then if we look at channel, channel, channel, channel, it starts to think about your"
+      },
+      {
+        "start": 446.2,
+        "end": 474.88,
+        "text": "geographic neighbors as well. So, let's go a little bit raw here. That was a pretty clean view. Let's look at the feedforward network underneath the hood there. Again, everything we're looking at is the FFN, which is really the knowledge store where all of the data stored. Attention is slightly different. We'll talk about that later. But if I do something like show features, and again we'll limit it to layer 26. Feature two is really"
+      },
+      {
+        "start": 472.92,
+        "end": 501.0,
+        "text": "interesting. Look at feature two, five. It's got this concept of five. So, you see five, five, sock. So, it's all the various representations of the number five there. Again, if we look here F9 for runners, runners, runner, runner, runners. Every capitalization variant. So, it's a sort of morphological cluster there. So, F11 is really about discipline. You see various spellings, but also"
+      },
+      {
+        "start": 499.04,
+        "end": 526.32,
+        "text": "concepts, right? So, the misspellings at the top token there. But you see discipline, discipline, self, etc. So, lots of variations within there. And if I wanted to, I can also query it using a select statement. So, you can see just loads of features kind of coming back there. So, if you want to spend some time running some select queries over there, you can just go and have a look at every single feature that exists. So, we've got what a feature is, but how does that relate to how a model"
+      },
+      {
+        "start": 524.88,
+        "end": 552.8,
+        "text": "stores that within the weight? So, basically, a feature is a single column in the FFN. It's one gate vector that decides when it fires, and one down vector that decides what it outputs. Gate times down. That is basically the edge. So, it's an edge in the graph. And the gate is a direction in the residual stream. I'm not going to go into too much detail of what a residual stream is. I've"
+      },
+      {
+        "start": 551.0,
+        "end": 580.6,
+        "text": "covered that in my other videos. But when the model's internal state at that layer has a high cosine similarity with the gate direction, the feature is going to activate. And then the down vector then adds its contribution to the output, pushing the next token prediction towards that specific answer. So, we already saw that France's border relation lives at layer 25, feature 5067."
+      },
+      {
+        "start": 577.64,
+        "end": 605.6,
+        "text": "So, let's look at that feature directly. And again, because it's a database, we can just do select star from features where a layer is equal to 25, and feature is equal to 5067. It really is as simple as that. And we'll run that, and you can see there you go, layer 25, feature 5067. You see country, country, country, and the relation is borders,"
+      },
+      {
+        "start": 603.08,
+        "end": 631.16,
+        "text": "and there is a score. And France is basically one of the many entities that pass through this slot. The feature doesn't belong to France. France is just one node connected by this edge. So, we saw the countries cluster near France in earlier on. We saw this Australia relation on feature 9348. Now, we could just drill into it a little bit more. So, I'm going to do a select star from features"
+      },
+      {
+        "start": 629.0,
+        "end": 655.76,
+        "text": "where feature is equal to 9348 and the layer is equal to 26. And if we look at that there, you can see the Australia token, but it's also got Italy, Germany, and Spain. That feature is not an Australia feature. That's the key thing. It's a Western nations feature. The model has compressed multiple countries into one slot because they appear in similar contexts, and that's basically"
+      },
+      {
+        "start": 654.04,
+        "end": 682.92,
+        "text": "polysematicity. Now, if we wanted to, we could trace that across all the layers. So, I'm just going to take and layer equals 26 away. And if we look down here, there's layer 26 or Australia one. But if we look at the earlier layers, I mean, they're completely different, different concept at each layer. The index is reused. The knowledge is independent. Each layer has its own gate and down matrices."
+      },
+      {
+        "start": 680.08,
+        "end": 708.88,
+        "text": "So, if we look at feature 9348 layer two, for example, you can see it's completely different. And again, we can do this for other features as well. So, if I pick feature 1484, for example, and we have a look at that, you can see at layer two, planet, those Japanese symbols are basically the Japanese for planet. So, it has this concept of planet as a feature."
+      },
+      {
+        "start": 706.2,
+        "end": 733.08,
+        "text": "Same concept, multiple languages. But if we look at layer six, for example, foods. Again, completely unrelated concepts with the same feature in the same slot. But again, if we come down to L23, you can see Arizona, and you can see therefore that is a capital. So, notice capital. So, the probe has picked that up as a capital feature, essentially. And you can see"
+      },
+      {
+        "start": 731.44,
+        "end": 760.56,
+        "text": "Arizona, Phoenix, Phoenix, and Phoenix, of course, is the capital of Arizona. And that's what polysemantic means in practice. The model reuses those 10,240 slots at every layer for different knowledge. And Larco shows you this. One query, all 34 layers, the full life of a feature index throughout the network. So, if we come back to the graph database, which the model is represented underneath, entities are nodes, and"
+      },
+      {
+        "start": 757.2,
+        "end": 786.6,
+        "text": "features are edges, and relations are basically the labels on those edges. And the probe that I ran on this discovered them automatically. They were the relations that already existed the model created whilst it was under training. And again, Larco allows you to query by relation across the entire graph. But what if I want to see the relations? Well, all I need to do there is I can"
+      },
+      {
+        "start": 783.92,
+        "end": 813.88,
+        "text": "just type in show relations. And then you can see a list of the relations that the model knows about. It's got its probe discovered name there, and how many features are associated with that. And as you see, 1,489 probe confirmed relation labels. The top 30 read like a knowledge graph schema, cuz that's what it is. Manufacturer has 76 features, league has got 60, 52, genre 52, language 46. Nobody taught the"
+      },
+      {
+        "start": 811.56,
+        "end": 840.2,
+        "text": "model the schema. The model learned these categories because that is how the world is structured. Things have makers, places have capitals, people have occupations. The FFN reinvented a relational schema from raw text. Now, if we wanted to, we can even query by relations. If I do a select star from edges where relations is equal to capital, we'll limit it by 10."
+      },
+      {
+        "start": 838.16,
+        "end": 867.64,
+        "text": "You are going to see everything that is associated with the capital relationship. So, you get the idea. Basically, 32 features across the network store capital city knowledge, whether it's Washington, Canberra, Brasilia there on feature 8799, or whether it's the Phoenix, Arizona one on 1484, which is the state capital fact. And again, we can look for that as well."
+      },
+      {
+        "start": 863.32,
+        "end": 891.92,
+        "text": "So, if I do a select star from features, and again, it doesn't matter whether I write edges or features. Edges is just looking at the graph as a whole. Features, I'm just being specific to the kind of features edge there. So, if I say select star from features where layer is equal to 23 token is equal to Arizona, you can see it comes back with L23. So, I can sit and mix and match and"
+      },
+      {
+        "start": 890.36,
+        "end": 919.04,
+        "text": "do whatever. So, let's come back to one of the earlier ones. So, if I do a select star from edges, and we'll do a nearest to, and I think Einstein was one of the ones we were looking at earlier, and we'll put it at layer 26, and we'll limit it by 10. And then this will give you the idea of the the award the Nobel features or the award winners. And again, if we look at that, feature"
+      },
+      {
+        "start": 917.0,
+        "end": 944.6,
+        "text": "4874 is the one that we talked about there, academy. You know, Nobel, Nobel Prize, etc. The misbalance, etc. All all very good. But you also see things like brain, brains, brain, etc. And then again, you see particle, particle physics, etc. So, you can you can see that Einstein is associated with being very smart. It's associated with particle physics, for example, but also"
+      },
+      {
+        "start": 943.56,
+        "end": 972.2,
+        "text": "the Nobel Prize winning or award winning. And again, if you want to dive a little bit more into what entities the model knows about, we discovered France earlier, then I can just do a select star from entities, and we will limit by 20. And then you can see some of the entities that are sitting there. So, you see national, you see Australia, Chinese, Microsoft, Google, TikTok, etc. It gives you an idea of all the different entities within there. And it"
+      },
+      {
+        "start": 971.16,
+        "end": 1000.16,
+        "text": "gives you an idea of the number of features that are associated with that entity. You see what I'm saying? Complete graph database. And again, if I want to look at a specific layer, then I can just pick a layer and see what's associated with that. So, in this case, I've case I've limited it to layer 26, and I can see what entities are associated with layer 26. So, everything so far has been about browsing the graph. And and the graph is"
+      },
+      {
+        "start": 996.16,
+        "end": 1025.199,
+        "text": "messy. Feature 9348 fires for Australia, Italy, Germany, and Spain. The capital relation returns for Washington, Canberra, and Brasilia in one cluster. Describe France shows CEO and fountain alongside real facts. So, and why is that the case? Because each feature is one-dimensional. One gate vector, one score, a single scalar activation. So, when the gate fires, it can't"
+      },
+      {
+        "start": 1022.56,
+        "end": 1053.52,
+        "text": "distinguish why it fired. Was the input about France the country, France the language origin, or France the neighbor of Germany? The feature compresses all of this context basically into one number. And that's the polysemanticity problem. It's not a bug, it's a dimensionality constraint. 10,240 features per layer is a lot, but the residual stream is 2,560 dimensional. The model has to project a high-dimensional space down to scalar"
+      },
+      {
+        "start": 1050.44,
+        "end": 1079.679,
+        "text": "activations. Every projection loses information. Every feature is a shadow of the full representation. So, how does the model actually answer the capital of France correctly? And the answer is attention. Attention is all you need. Attention operates in the full dimensional residual stream, not in the one-dimensional feature space. The query capital of France creates a specific"
+      },
+      {
+        "start": 1076.0,
+        "end": 1104.88,
+        "text": "pattern across all 2,560 dimensions, and the attention heads at each layer match that pattern against the key vectors, selecting which features to write the signal through and which to suppress. That's the polysemantic noise. CEO, fountain, Australia gets low attention weight because the query pattern doesn't align with those directions. One feature can't tell you what the capital of France is. 34 layers of attention"
+      },
+      {
+        "start": 1102.76,
+        "end": 1131.52,
+        "text": "weighted features can. The features are the edges, attention is the routing. You need both. Let's do an inference, cuz I haven't done that yet. Let's do infer the capital of France is, and we'll say top five. So, I want you to see here what it's done here. So, it's came back with the predictions, and as you would imagine, the token Paris has came back with 80%. So, this is actual model inference. This is next"
+      },
+      {
+        "start": 1128.32,
+        "end": 1157.32,
+        "text": "token prediction. This is attention and the graph combining together to do that prediction of the next token, which in this case is France. Now, what is interesting about Larco here is it allows you to do an inference trace across the layers on how it got to the answer. And this is the key thing. You can see every single feature that would activate on these layers, and you would see the difference that"
+      },
+      {
+        "start": 1154.72,
+        "end": 1182.919,
+        "text": "attention makes there, and how it gets to the final answer. And here's the thing that might not have been obvious what I did there. When I run inference, and this is the exact same next token prediction that you do on, you know, any LLM, when I run infer there, I want you to notice the walk FFN part. I'm not doing"
+      },
+      {
+        "start": 1180.08,
+        "end": 1208.12,
+        "text": "a matrix multiplication. I'm doing a graph walk because I'm using a format called the V index format, where I decompose all the matrices into a graph structure. The knowledge half of each layer is basically doing a graph walk. Infer is a graph walk. And at each layer, the inference engine takes the current residual stream, does a KNN look up against the gate factors,"
+      },
+      {
+        "start": 1206.8,
+        "end": 1234.76,
+        "text": "finding which features are nearest neighbors to the current state, and then the match features fire. It's the same thing that happens with the dense models. The down vectors accumulate into the residual stream as before, and then the walk moves to the the next layer. Attention is still doing matrix multiplications, QKV projections, and our projections remain the same as dense matrices. Attention is that routing mechanism. It selects which path"
+      },
+      {
+        "start": 1232.36,
+        "end": 1260.84,
+        "text": "the walk takes through the graph. The FFN is the graph, attention is the navigator, and together they produce the forward pass. And here's the thing, although in Larcal, I've turned this FFN into a graph, the FFN was always a graph. The matrix was just an inefficient way of encoding it, and all I've done here with V index in Larcal is I've removed that encoding,"
+      },
+      {
+        "start": 1258.64,
+        "end": 1289.64,
+        "text": "and and I query the structure directly. It's the same weights in in the model. I've just reorganized it, and I'm doing a KNN look up walk. This is the thing. So, when I say the model is a graph, I'm literally saying the model is a graph. The graph is messy, but the the walk is precise, and attention is the thing that gets you through it. Now, here is the cool thing. So far, we've been reading the graph."
+      },
+      {
+        "start": 1287.0,
+        "end": 1314.32,
+        "text": "But, because it is a graph and because it is a database, we can also write it. So, let's take something like infer, we'll say the capital of Atlantis uh is, and then we'll ask for uh top five answers. Now, of course, in this case, it doesn't know what the capital of Atlantis is. Um and we're going to see the model's going to do some"
+      },
+      {
+        "start": 1312.28,
+        "end": 1343.0,
+        "text": "guessing, some good old hallucination, and it's just going to say believed, um said, etc. And you can And you can literally see there that it the model has got no idea. So, there is nothing in the graph, there's nothing in the model for uh Atlantis. So, what we can do is we can we can run an insert. We can give it a fact. So, let's clear this for a second, and we're going to do an insert into edges."
+      },
+      {
+        "start": 1339.12,
+        "end": 1365.84,
+        "text": "Um we will pass an entity, relation, and target. This is cool, right? And we'll say values, and we'll pass in Atlantis, so we're going to give uh the Atlantis as the entity. We're going to say it's going to have the capital relationship. And we're going to say Poseidon is the capital of Atlantis. So, one statement, the insert pipeline captures the model's residual at 26 for the"
+      },
+      {
+        "start": 1364.52,
+        "end": 1393.8,
+        "text": "canonical prompt, the capital of Atlantis is, and engineers a gate vector from that direction, synthesizes a down vector point towards where Poseidon, and installs the gate up down triple into a free feature slot. A balancer. So, we have a balancer on this. Um the balancer is really important so that we deal with all the kind of the all the dimensionality, and it basically scales down the vectors so that the fact lands at the exact right strength, strong enough to be top one on"
+      },
+      {
+        "start": 1391.32,
+        "end": 1420.2,
+        "text": "a canonical prompt, but not so strong that ends up hijacking all the other capital queries. Remember we said that those features, they all have uh you know, lots of different things uh in the same dimensions. So, remember that feature is not satisfying uh one entity. There is lots and lots of different entities that are related as part of that feature. Um so, it just needs to not be strong enough to hijack it. So, now, if I infer, we'll do"
+      },
+      {
+        "start": 1418.36,
+        "end": 1446.84,
+        "text": "the capital of Atlantis is, and we'll just run this one more time. And if we look here, you see predictions, Poseidon is now there, 99.98%. It's at the top, the fact is installed. And again, if I want to, I can just um And if I want to, I can just infer the capital of France one more time. So, we just want to check that we haven't broken uh Paris. There you go, Paris at uh 81% prediction. So, we haven't broken"
+      },
+      {
+        "start": 1444.52,
+        "end": 1472.8,
+        "text": "it whatsoever. There's no leakage, nothing's bleeding, it's all good. And again, if I want to, I can just do a describe Atlantis now in my graph, and there we can see all my edges. I've got my new edge, Poseidon. It's visible in there. Um and you see it's related um to the capital uh feature. Now, you're probably thinking to yourself, that's cool. Um And by the way, this lives in what I call a patch overlay. So,"
+      },
+      {
+        "start": 1471.12,
+        "end": 1500.4,
+        "text": "whenever I'm connected to the session, I leave the the real V index, the weights uh as read-only. And then basically, what I'm doing is a run time edit over the top of the base V index. So, if I want to make it permanent, then I can just do a compilation, and then I can save it for real. So, all I need to do is do a compile um current into V index, and then we just say temp"
+      },
+      {
+        "start": 1498.36,
+        "end": 1526.32,
+        "text": "and Atlantis uh .V index, and then we'll just run that, and that will take a second, and then that will just basically bake that into the weights forever. And the way that I do that is I just use the the Memmet technique. Um so, there is a paper on that which allows you to uh uh basically um make an uh any factor. So, this bakes the fact into a standalone V index. The insert gate up"
+      },
+      {
+        "start": 1524.72,
+        "end": 1553.76,
+        "text": "and down vectors are all written into the canonical weight files. No overlay, no side car, no special lore. And basically, it's a normal V index file. And then, if I want to, I can take that V index file. There is part of the CLI, there is actually an export functionality, and I can export it back out to safe tensors, or I can export it out to GGUF, and then it will basically work with every uh other model provider. And again, if I want to use that new index there, I can just fire up Larcal one more time, and"
+      },
+      {
+        "start": 1552.08,
+        "end": 1580.76,
+        "text": "this time I will just connect to my temporary V index. Um you can see it's now connected up there. And then, if I run the infer the capital of Atlantis is, um this is a fresh session. I've connected directly to the new compiled V index, and you're going to see that the capital of Atlantis is, of course, Poseidon. And there it is at the top there. The fact that I had to compile is basically in the bytes now. And again, I can compile it down to safe tensors,"
+      },
+      {
+        "start": 1578.2,
+        "end": 1605.92,
+        "text": "GGUF. So, there you go. Um I think I've definitively proved that the model, or at least the FFN part of the model, is a database. It's a graph database. You literally watched me query the weights directly. We've done select statements. We've inserted new knowledge. We've compiled it back down into weights. Um it's it's a database. You can select, you can describe, you can see the entities, you can see the relationships."
+      },
+      {
+        "start": 1604.36,
+        "end": 1633.4,
+        "text": "It's pretty cool. And that's all without training. That is just standard database stuff, and that's why I created the Larcal language. Um you saw me work that against the Gemma model, but this will pretty much work against any any model. I There's a few things I need to do to tweak to make it work with the various different models and test it against there. It works great against the Gemma 3 4B model. Uh I'm going to do the Gemma 4 model pretty soon cuz I think I've got something even cooler to show you. Because the impact here is huge."
+      },
+      {
+        "start": 1630.679,
+        "end": 1658.44,
+        "text": "Remember in Larcal, you saw me actually doing inference by doing a KNN walk. I'm walking the graph database as opposed to doing matrix multiplications. The implications of that are absolutely huge. I was editing a model there also without training. The implications of that are huge. And I think when I get into my next video,"
+      },
+      {
+        "start": 1656.88,
+        "end": 1685.92,
+        "text": "I think you're going to see why it's huge because it means what I've essentially done is decoupled attention from the largest part of the model, which is the knowledge store. And therefore, if I've decoupled attention from the knowledge store, well, the knowledge store doesn't need to live on the same machine as attention. It can live on a different server. It can be on"
+      },
+      {
+        "start": 1683.72,
+        "end": 1711.8,
+        "text": "a remote web server. And again, I'm going to show you on one of the next videos. But it also means that we can get super efficient of how we load the model. So, one of the other things we're going to be able to do is actually run some of the largest models, and I mean uh the Gemma 4 31B model, we can run locally on a laptop. In fact, I think we could probably take the largest models like the uh even the"
+      },
+      {
+        "start": 1709.159,
+        "end": 1736.76,
+        "text": "Gemini K2 models, and we could run that on a laptop as well. But that that's for a future video. Um And finally, I think you're probably going to see there that if I can insert patch knowledge there into the database, well, we could probably do What's the best way of saying this? Building models from scratch, training free? Well, you have to wait for another video to"
+      },
+      {
+        "start": 1735.0,
+        "end": 1743.76,
+        "text": "see that. Anyway, I hope this video's been useful, and I hope you get the idea that the model is just a graph database. Cheers."
+      }
+    ]
+  },
+  "UvogrjCgaJQ": {
+    "source": "YouTube automatic English captions",
+    "status": "automatic-unreviewed",
+    "language": "en",
+    "passages": [
+      {
+        "start": 0.08,
+        "end": 29.359,
+        "text": "So over the last year, model context protocol or MCP has gone crazy. There are basically MCP interfaces for everything. Whether it's Slack, Canva, Brave, Outlook, you name it, there is an MCP interface for that. And the reason it's gone crazy is that we finally had a standardized way of calling tools. But a problem with MCP is basically MCP interfaces return text. So you connect with your host, i.e. chat GPT VS Code uh"
+      },
+      {
+        "start": 27.359,
+        "end": 55.76,
+        "text": "Claude um you call the tool, you get your result back, but it renders it in line as part of the conversation as text. What it didn't have until now is a standardized way of presenting UI interfaces. And that's where MCP apps comes in. It was launched about a month ago and it's the first official extension to model context protocol. And probably the bit that surprised everyone is it was co-authored by both Anthropic and OpenAI building upon the MCP UI"
+      },
+      {
+        "start": 54.239,
+        "end": 81.84,
+        "text": "community project. And that means two direct competitors have now agreed on one shared interface for interactive AI interfaces. So that means any UI that you build upon MCP will work on chat GBT. It will work on claude. In fact, it will work on any interface that supports the standard. And how it works is pretty simple. All you do is declare a reference to a UI resource in your MCP tool and then basically the host will go"
+      },
+      {
+        "start": 79.68,
+        "end": 107.04,
+        "text": "off and fetch that resource and render it within a sandbox iframe. So, pretty cool, huh? Yes, unless you've written your MCP server in anything other than Typescript. And if you have, then it gets pretty complicated pretty quickly. So, today I'm going to show you how you can properly decouple your MCP servers from your MCP UI and how I built a component library that makes that a whole lot easier. So, first things"
+      },
+      {
+        "start": 105.68,
+        "end": 135.12,
+        "text": "first, just to make things a little bit real, I'm going to show you how MCP apps works within Claude and ChatgPT. So, I've got Cloud open at the moment. I am going to uh click on settings and we're going to add a new connector that I've built with an MCP server uh already. So, I am going to go to connectors and then at the bottom here, I'm going to add custom connector. I'm going to give it the name chart and then I'm going to"
+      },
+      {
+        "start": 131.44,
+        "end": 160.08,
+        "text": "pass in a URL. So, https chuck mcp chart fly/mcp. So I am just going to uh add that and then if I now open up a new chat you are going to see if I click on connectors you see chart is enabled. Now I'm going to keep weather enabled which is a weather server that I built as well. Again all of these are open source. I'll put the links to them uh for the GitHub"
+      },
+      {
+        "start": 156.64,
+        "end": 186.0,
+        "text": "in the description. And now I'm going to see how this works. So I'm going to ask it a question which is show me a chart showing the temperature in Molly and Cornwall tomorrow broken down by hour. Now before we switch on the chart server I'm just going to leave that off for a second. I'm going to ask that query with sonet 4.6 without the chart server and let's see how this looks. So the first thing you can see there is call my MCP server and it's doing a geocode location. So it's going to try and work"
+      },
+      {
+        "start": 183.12,
+        "end": 209.84,
+        "text": "out where Molly and Cornwall is and you can see that it's done there. And then once it's got the weather for that, so it's got the weather forecast for that geo code, it is then going to try and draw an hourly temperature chart. Now, because I haven't given it access to my chart server, it is probably going to generate some React code and then do that. Now, that's fine, but it's not consistent, and therefore, we're not"
+      },
+      {
+        "start": 208.56,
+        "end": 237.599,
+        "text": "going to get the same results every time. And if I certainly if I go to check GPT or whatever, it's going to look different, and I don't necessarily want code running. So, there you go. That's a pretty awesome chart. Um, but as you say, it's going to generate code every time and it's not going to give me the same result. So, let's do this a different way. So, I'm now going to open up chat and now I am going to switch on my chart server. I'm going to ask it the same question. I'm going to say, show me a chart using the temperature in Mullen Como broken down by hour. Let's see what"
+      },
+      {
+        "start": 235.36,
+        "end": 264.479,
+        "text": "happens. Now, it's done exactly what it did before, which is done the geocode location, got the weather forecast. But notice now that it's called my tool uh my MCP server uh with a tool called show chart which is now showing me the chart that I actually want which is the hourly temperature uh in this way and that chart is part of my component library. Now, the cool thing about this, if I go into chat GPT, for example, notice I'm in developer mode at the moment. But if"
+      },
+      {
+        "start": 261.359,
+        "end": 290.56,
+        "text": "I go into settings and then if we go into apps there, you're going to see that I have the exact same chart and weather server that we defined earlier. There you see Chuck MCP chart blah blah blah blah. So now if I ask the exact same question, show me a chart using a temperature mulling cornal tomorrow. And now I'm going to enable my chart server and I'm going to enable my weather server. Now I am in developer mode. Um"
+      },
+      {
+        "start": 287.6,
+        "end": 314.24,
+        "text": "but this works exactly for the same for anything in the marketplace, the apps marketplace because they're all written with MCP server support and MCP apps. So now what should happen here is when I run show me a chart using temperature mulling Cornwall um what should happen is it's going to call my tool. So, it's now going to call my weather geocode location. And then once it's done that, it should call the exact same chart tool. So, we should have the same"
+      },
+      {
+        "start": 312.72,
+        "end": 344.0,
+        "text": "response. There we go. It's came back. It's done the same tool calls as we did. It called my weather server, etc. And there you go. There's the exact same chart that we saw um on two different UIs. In fact, if I wanted to, I could go a little bit further and we could run the same query from uh my MCP CLI, which also supports um which also supports MCP app. So, if I say show me a chart using temperature, mulling Cornwall um using MCP uh CLI, we"
+      },
+      {
+        "start": 341.919,
+        "end": 370.0,
+        "text": "will get a chart that looks exactly the same as Claude and ChatgPT. And if we look at that, you see you can see the exact calls that have been made. It's done a geolo code to go and work out where Mullian is and then it's gone and got the weather forecast and then once it's done that it's going to make the call to the chart server. There we go. You can see MCP CLI has made the same call. It's done a geocode location. It's done a get weather forecast just the same as cla GPT did. And then finally,"
+      },
+      {
+        "start": 367.84,
+        "end": 396.16,
+        "text": "it's made this call here which is to chart from JSON uh which is the chart server that I created here. And then if we uh look back at the browser, there's the exact same chart running local host there. So again, it is a standard. And again, if we want to look at the tools there, there's the exact tools from the chart server. Show chart, chart from CSV, and chart from JSON. So there's three reason this becomes super important and why it's not just a send them a link to a web app type thing. The"
+      },
+      {
+        "start": 393.6,
+        "end": 424.0,
+        "text": "first one is context, which is the app lives inside a conversation. You don't switch tabs. You don't lose the thread. The UI is right there part of the conversation. It's next to the question that generated it. Let me show you what I mean there. So, if I just come back into MCP CLI and say rerender this as a bar chart. So, you see I've still got all the context from before, you know, blah blah blah. Show me a temperature, etc. But now, it's just going to go and"
+      },
+      {
+        "start": 420.08,
+        "end": 448.56,
+        "text": "update that chart to uh be a bar chart instead of a line chart that we had before. So again, if I come back into the browser, you see there's my interactive chart and it's now changed from the line chart. And again, you can do the same within chat GBT. We can just say change this to a bar chart. And of course, it will do the same thing. There we go. Same chart whether it's in chat GBT or whether it is running from MCP"
+      },
+      {
+        "start": 446.88,
+        "end": 474.639,
+        "text": "CLI. The second thing that makes this important is birectional data flow. So uh the UI can call your MCP tools. The host can push data into the UI. A standalone web app would need its own API, its own authorization, its own state management. MCP apps get all of this through the MCP server. And I think that's pretty cool because you can have that conversation back and forth and have true interactivity. And again, in a future video, I'll show you how that works. And the last one is sandboxing,"
+      },
+      {
+        "start": 473.28,
+        "end": 506.08,
+        "text": "which basically means the app can't escape the parent page, it can't read cookies, it can't escape its container, and host controls what it can and can't do. So, let me kind of show you what this looks like. Again, the code is available uh within uh my uh repo. So, this is a regular fast MCP server. I'm not doing anything special. You can see I'm just doing MCP fast MCP. And then there's a tool here. So, MCP tool get language popularity. Now, there is no UI coming back. This is just a regular old"
+      },
+      {
+        "start": 502.16,
+        "end": 530.48,
+        "text": "fast MCP uh server. Now if I run that for a second. So we will just do a uh uvun um simple server.py. You can see it starts up on port 8000 there. And now if I just modify um this to call local um so mcpi is already hooked up to um this particular server. Uh anything that runs"
+      },
+      {
+        "start": 528.64,
+        "end": 559.92,
+        "text": "on 8,000 will run. You can see there's the tools which is get language popularity. show the get language popularity chart and you can see because I it doesn't have a UI element to this uh it tries and draws a chart there using ASKI art which is kind of cool but it makes a call the tool call as you would expect there so if I now switch this to um uh how you would call uh a manual server"
+      },
+      {
+        "start": 556.8,
+        "end": 584.56,
+        "text": "and fast MCPS so we'll just run the same um and then I'll show you what the code looks like there. Then if we just run this one more time, we'll run the exact same thing in MCP CLI. This time if I look at tools, same tool, show chart. Um, but now when I say get the language popularity chart, it should spin up a chart in my local window as before. So we'll say yes to that. Um, if I go into my browser, you can see there's Python"
+      },
+      {
+        "start": 582.56,
+        "end": 613.36,
+        "text": "JavaScript Rosco. And you can see that's the exact same style of chart that we had before because it's using the same component. That is the key thing. It's using the same component and I'll show you what that is in a second. So let's have a look at the code there for a second. Um we will go to manual server. It's a little bit complicated and fast MCP but again I'll show you how I've simplified that in a second. So the first thing that I want you to see here"
+      },
+      {
+        "start": 609.519,
+        "end": 639.92,
+        "text": "is that we have a regular MCP tool. So you see there's MCP tool just as we had before. But there is a new keyword that is added in here which is meta. And that is probably the key key thing. So we need to have some uh metadata associated with that. And then you can see here there's a resource UI. So in this case um I've specified the the resource URI as UI language chart. And then you can"
+      },
+      {
+        "start": 635.92,
+        "end": 663.279,
+        "text": "see here CDN URL. It's associated with uh a link to a chart. We'll go and look at that what that looks like in a second. And then the if we look at the definition of the chart view for that resource URI that we set there, you can see what I'm doing there is I'm making a really nasty call. So I'm basically going to go and call that chart v1 there. Going to make that call and then"
+      },
+      {
+        "start": 660.959,
+        "end": 688.959,
+        "text": "uh I'm going to get the results from it, put it in a cache, and then return that down there. So now when we look at show chart, you see it's going to do this return. It's a special um uh uh call which is return call tool result and it's going to send back its regular content just as it would have done before but now it's going to send this structured content fast MCP um which has the type the chart popularity the data"
+      },
+      {
+        "start": 686.48,
+        "end": 714.399,
+        "text": "but basically it is now because I've got that meta as part of this in the resource URI then it's going to render out the chart and that is basically how it works and that's nasty if you're a Python developer because you have to go and write all your React components, your TypeScript, etc., etc., etc. So, I've made it a little bit easier in a couple of places. So, the first one is that um I have made an improved version"
+      },
+      {
+        "start": 712.64,
+        "end": 742.399,
+        "text": "of fast MCP, a decorator. I'm going to show you what that looks like in a second. Um but the other thing that I've done is with my own server framework Chuck MCP server uh which is a super fast MCP uh server framework which I use to develop tools. I've actually created a decorator called MCP view tool. And then all I need to do is pass in a resource URI like I did before. Uh pass in a view URL. So say where the view is going to live and we're going to look at that. Notice it's the same view URL as I"
+      },
+      {
+        "start": 739.36,
+        "end": 767.92,
+        "text": "showed earlier. And now from a a show chart perspective, you can just return the same data as well. So that's a little bit easier because that decorator means that you don't uh need to go and do the reads of the HTML etc. And in fact, if I wanted to, if I just run um if I do a UV run chuck manual server um which again is on 8,000 and then we just make the exact same call as we did"
+      },
+      {
+        "start": 766.0,
+        "end": 794.48,
+        "text": "before. Let me kill that. And then we do that same call. You can see if I say get the language popularity, um you're going to see that it's going to come back with basically the same chart. And there you go. Here's the chart coming back. Um notice how fast Chuckmc is. It is a very very fast server framework. Um that's the the reason I built that. So that works pretty pretty well. And I think that's a simpler I did make it a little"
+      },
+      {
+        "start": 791.44,
+        "end": 822.48,
+        "text": "bit easier for both fastmcp and chuckmc server which is if we now go into um a decorator server in fastmcp. One of the things that I've done here and again I'm not going to go into it too much in my video but in my GitHub repo chuck view schemas um what that allows you to do is wrap up React components that I pre-built and I'll show you what that looks like in a second. And I also go and automatically"
+      },
+      {
+        "start": 819.279,
+        "end": 848.32,
+        "text": "generate schemas for fastmcp so that you can have a tool decorator. So now that means in fastmcp for those specific tools you just need to go at chart tool pass in the data light show popularity and then that's going to work and you're going to get the same chart. And now if I just run it one more time you're going to see that you get the exact same uh chart as we did before. And there we go. So how does this actually work? Well,"
+      },
+      {
+        "start": 845.519,
+        "end": 874.959,
+        "text": "what I've actually done here, and if we go to um Chuckmc UI views, I've created a story book of pretty much all of the components that you might need. Um, and again, I've hosted them up on Chuckmc UI uh views. So that means that if you need to use just an existing view like a chart server or whatever then pretty"
+      },
+      {
+        "start": 872.16,
+        "end": 899.519,
+        "text": "much um you can just use that component right so you can just say here's the bar chart the line chart the exact same stuff that you you saw a little bit earlier and it's within that component and I built a whole set of component libraries amongst that so you've got everything from kind of let's say a box plot for example you've got code views use. Um, I've got an audio player there. We've got a video player. There we go."
+      },
+      {
+        "start": 897.36,
+        "end": 924.079,
+        "text": "Playing some video there. You can see specttogram. You've got a quiz component. This is pretty cool. Start quiz. Pacific Ocean. Next question. See the interactivity there. Really cool, right? Um, so you can build entire quizzes within this. Um, and then, uh, you can see your results. Um, you can have things like polls, for example, see the results. And again, that can all be sent back to the MCP server as well."
+      },
+      {
+        "start": 922.399,
+        "end": 950.399,
+        "text": "I've got things like notebooks, for example, which are going to do data analysis. Uh we've got markdown. Uh PDF is in there. There's heat maps. I've just built a ton of uh components. And again, they're all or views and they're able to be used. You see there's data table, there's a counter, and again supports uh dark mode um and light mode. there's comparisons and they're all"
+      },
+      {
+        "start": 948.16,
+        "end": 976.16,
+        "text": "basically available to to to kind of view there. Now, if I compare that to the then the chart server. So, if we look at the chart server that I built at the beginning of the video, um very similar to that one that we just built live with the kind of Python uh side of things. I built this using Chuck MCP, but if we have a look at that, you can see exactly chart tool, MCP description, show chart, etc. So, it's using that"
+      },
+      {
+        "start": 973.92,
+        "end": 1002.959,
+        "text": "exact same decorator that I showed you earlier. And again, I wouldn't necessarily need to use the the decorator. I could use the uh the view tool that I showed you earlier as well. But there's the chart tool there. You can see it's got a better description explaining exactly what all the properties are. Um it's got all these dock strings. Um, but the key thing underneath the hood here is it's using that exact same decorator which just"
+      },
+      {
+        "start": 1000.56,
+        "end": 1029.679,
+        "text": "points back to what the UI resource is. But to come back to that point, it means that the view is now decoupled from the actual app. So we can build things like chart servers, markdown servers here. And again, if I come back to the fast MCP version that I did there and look at the more uh raw and manual version, um, you don't necessarily need to be a React developer anymore. You could just use a component library. Um, as I said, I published one. You can just go and uh clone that. You can deploy it yourself"
+      },
+      {
+        "start": 1027.439,
+        "end": 1055.6,
+        "text": "or you could just stick in the URL and then run it for yourself. And by the time we Yeah. And by the time we do the record, I'll probably do a CDN version of the URL there and then you can just utilize that yourself. But as I said, you can just clone this and use it. So anyway, I hope this video has been useful. I hope it gives you a good overview of MCP apps, why it's useful, how it works across different uh utilities, and then hopefully you like the idea of being able to cover decouple"
+      },
+      {
+        "start": 1052.88,
+        "end": 1077.919,
+        "text": "the UI from your actual MCP tool servers. Um, and uh how you can use that to build interactive UIs across different applications. As I said, that component library I've open source. You can go clone it, do whatever you want with it. Run it on your own servers. You can build upon it. Or, you know, you can just use the techniques that I've used and do something there yourself. Anyway, I hope this video has been useful and I'll catch you on the next"
+      }
+    ]
+  }
+}

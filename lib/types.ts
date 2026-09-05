@@ -12,14 +12,15 @@ export type Act =
 export type PublicationRecord = {
   id: string; slug: string; kind: "work" | "notebook" | "question" | "film";
   title: string; dek: string; abstract: string; created: string; published?: string;
-  version: string; status?: Status; publication: "draft" | "published";
+  version: string; status?: Status; publication: "draft" | "published" | "catalogued";
   authors: string[]; body: Act[]; concepts: string[]; related: string[];
   media: string[]; sources: { title: string; url?: string; note?: string }[];
-  originalUrl?: string; episode?: string; collection?: string;
+  sourceMetadata?: { retrievedAt: string; sourceHash: string; transcript: string; views: number | null; viewsApproximate: boolean };
+  youtubeId?: string; originalUrl?: string; episode?: string; collection?: string;
 };
 export type MediaRecord = {
   id: string; title: string; type: "image" | "film" | "system";
-  state: "required" | "ready"; desktop?: string; mobile?: string;
+  loop?: boolean; state: "required" | "ready"; desktop?: string; mobile?: string;
   poster?: string; mobilePoster?: string; captions?: string;
   alt: string; caption?: string; creator?: string; source?: string;
   rights: "pending" | "owned" | "licensed"; desktopRatio: string; mobileRatio: string;

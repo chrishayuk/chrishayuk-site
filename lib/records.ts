@@ -1,8 +1,9 @@
+import { videoRecords } from "./video-records.ts";
 import snapshots from "../content/publications.json" with { type: "json" };
 import type { PublicationRecord } from "./types";
 
 export const SITE = "https://chrishayuk.com";
-export const socials = { GitHub: "https://github.com/chrishayuk", LinkedIn: "https://www.linkedin.com/in/chrishayuk/", IBM: "https://www.ibm.com/think/podcasts/mixture-of-experts" };
+export const socials = { YouTube: "https://www.youtube.com/@chrishayuk", GitHub: "https://github.com/chrishayuk", LinkedIn: "https://www.linkedin.com/in/chrishayuk/", IBM: "https://www.ibm.com/think/podcasts/mixture-of-experts" };
 const draft = { publication: "draft" as const, version: "0.1", authors: ["Chris Hay"], created: "2026-09-05" };
 // These are reviewable editorial records. Publishing is a separate, explicit
 // transition with a date and immutable snapshot; drafts never enter public feeds.
@@ -38,6 +39,8 @@ const filmSources = [
 ];
 for (const f of filmSources) records.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
+records.push(...videoRecords);
+
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };
 export const publicationSnapshots = snapshots as Snapshot[];
 for (const snapshot of publicationSnapshots) {
@@ -46,6 +49,8 @@ for (const snapshot of publicationSnapshots) {
 }
 export const getVersion = (id: string, version: string) => publicationSnapshots.find(s => s.record.id === id && s.record.version === version);
 export const sectionFor = (record: PublicationRecord) => record.kind === "question" ? "research" : record.kind;
-export const recordPath = (record: PublicationRecord) => `/${sectionFor(record)}/${record.slug}`;
+export const recordPath = (record: PublicationRecord) => record.youtubeId ? `/film/youtube/${record.youtubeId}` : `/${sectionFor(record)}/${record.slug}`;
 export const getRecord = (id: string) => records.find(r => r.id === id || r.slug === id);
 export const publishedRecords = () => records.filter(r => r.publication === "published" && r.published);
+
+export const indexedRecords = () => records.filter(r => r.publication === "catalogued" || (r.publication === "published" && r.published));

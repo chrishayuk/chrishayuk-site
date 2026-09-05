@@ -11,7 +11,7 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   const reconcile = useCallback(() => {
     const next = chooseMotion([...entries.current.values()], owner.current, flags.current.paused, flags.current.hidden || flags.current.suspended);
     if (next === owner.current) return;
-    if (owner.current) entries.current.get(owner.current)?.stop();
+    if (owner.current) { const previous = entries.current.get(owner.current); previous?.stop(); if(previous?.manualOnly) previous.manual = false; }
     owner.current = next;
     if (next) entries.current.get(next)?.start();
   }, []);
@@ -41,9 +41,9 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   const request = useCallback((id: string) => {
     // Manual playback grants this source only; it does not silently resume every film.
     for (const entry of entries.current.values()) entry.manual = entry.id === id;
-    const entry = entries.current.get(id); if (!entry || flags.current.suspended) return;
-    if (owner.current) entries.current.get(owner.current)?.stop();
-    owner.current = id; entry.start();
+    const entry = entries.current.get(id); if (!entry || flags.current.suspended || flags.current.hidden) return;
+    if (owner.current) { const previous = entries.current.get(owner.current); previous?.stop(); if(previous?.manualOnly) previous.manual = false; }
+    entry.manual = true; owner.current = id; entry.start();
   }, []);
   const suspend = useCallback((value: boolean) => { flags.current.suspended = value; reconcile(); }, [reconcile]);
   return <Context.Provider value={{ paused, setPaused, register, request, suspend }}>{children}</Context.Provider>;

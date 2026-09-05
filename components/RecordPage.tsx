@@ -5,10 +5,10 @@ import { citationLd } from "@chrishayuk/hause/seo";
 import { Acts } from "./Acts";
 import { Reference } from "./Reference";
 import { citationRecord, referenceFormats } from "@/lib/citations";
-import { getRecord, recordPath, sectionFor, SITE } from "@/lib/records";
+import { getRecord, recordPath, sectionFor, SITE, records } from "@/lib/records";
 import type { PublicationRecord } from "@/lib/types";
 export function RecordPage({ record }: { record: PublicationRecord }) {
- const citation = citationRecord(record); const related = record.related.map(getRecord).filter(r => r !== undefined);
+ const citation = citationRecord(record); const related = [...record.related.map(getRecord).filter(r => r !== undefined), ...records.filter(r => r.youtubeId && r.related.includes(record.id)).slice(0,4)];
  const structured = citation ? citationLd(citation) : { "@context": "https://schema.org", "@type": "CreativeWork", "@id": `${SITE}${recordPath(record)}`, name: record.title, abstract: record.abstract, author: { "@type": "Person", name: "Chris Hay" }, creativeWorkStatus: "Draft", dateCreated: record.created, version: record.version };
  return <main id="main" className="publication-main"><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(structured).replace(/</g,"\\u003c")}}/><header className="record-header"><nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/">CHRIS HAY</Link><span>/</span><Link href={`/${sectionFor(record)}`}>{sectionFor(record).toUpperCase()}</Link><span>/ {record.id}</span></nav><h1>{record.title}</h1><p className="dek">{record.dek}</p><p className="record-summary">{record.abstract}</p><div className="record-bar record-voice"><span>{record.id}</span><span>{record.status || record.collection}</span><span>RECORDED {record.created}</span><span>{record.publication.toUpperCase()} · V{record.version}</span><a href="#cite">{citation ? "CITE" : "REFERENCE DRAFT"} ↓</a></div></header>
  {record.kind === "film" && <section className="film-record-entry"><span className="record-voice">IBM / MIXTURE OF EXPERTS / EPISODE {record.episode}</span><h2>Enter the conversation.</h2><p>The complete episode and transcript are available from IBM. Follow the original production below.</p><a className="text-link" href={record.originalUrl}>WATCH THE ORIGINAL AT IBM ↗</a></section>}

@@ -1,1 +1,86 @@
-{}
+{
+  "hero-identity": {
+    "state": "ready",
+    "rights": "owned",
+    "creator": "Chris Hay",
+    "title": "Chris Hay in the studio \u00b7 excerpt from MCP Apps",
+    "desktop": "/media/youtube/studio-desktop.mp4",
+    "poster": "/media/youtube/studio-poster.webp",
+    "mobile": "/media/youtube/studio-mobile.mp4",
+    "mobilePoster": "/media/youtube/studio-mobile.webp",
+    "alt": "Chris Hay in the studio \u00b7 excerpt from MCP Apps",
+    "source": "https://www.youtube.com/watch?v=UvogrjCgaJQ",
+    "desktopRatio": "16 / 9",
+    "mobileRatio": "9 / 16",
+    "loop": true
+  },
+  "closing-portrait": {
+    "state": "ready",
+    "rights": "owned",
+    "creator": "Chris Hay",
+    "title": "Chris Hay in the studio \u00b7 excerpt from MCP Apps",
+    "desktop": "/media/youtube/studio-desktop.mp4",
+    "poster": "/media/youtube/studio-poster.webp",
+    "mobile": "/media/youtube/studio-mobile.mp4",
+    "mobilePoster": "/media/youtube/studio-mobile.webp",
+    "alt": "Chris Hay in the studio \u00b7 excerpt from MCP Apps",
+    "source": "https://www.youtube.com/watch?v=UvogrjCgaJQ",
+    "desktopRatio": "16 / 9",
+    "mobileRatio": "9 / 16",
+    "loop": true
+  },
+  "youtube-studio": {
+    "state": "ready",
+    "rights": "owned",
+    "creator": "Chris Hay",
+    "title": "Chris Hay in the studio \u00b7 excerpt from MCP Apps",
+    "desktop": "/media/youtube/studio-desktop.mp4",
+    "poster": "/media/youtube/studio-poster.webp",
+    "mobile": "/media/youtube/studio-desktop.mp4",
+    "mobilePoster": "/media/youtube/studio-poster.webp",
+    "alt": "Chris Hay in the studio \u00b7 excerpt from MCP Apps",
+    "source": "https://www.youtube.com/watch?v=UvogrjCgaJQ",
+    "desktopRatio": "16 / 9",
+    "mobileRatio": "16 / 9",
+    "loop": true
+  },
+  "youtube-larql": {
+    "state": "ready",
+    "rights": "owned",
+    "creator": "Chris Hay",
+    "title": "LARQL \u00b7 querying a learned system",
+    "desktop": "/media/youtube/larql-desktop.mp4",
+    "poster": "/media/youtube/larql-poster.webp",
+    "mobile": "/media/youtube/larql-desktop.mp4",
+    "mobilePoster": "/media/youtube/larql-poster.webp",
+    "alt": "LARQL \u00b7 querying a learned system",
+    "source": "https://www.youtube.com/watch?v=8Ppw8254nLI",
+    "desktopRatio": "16 / 9",
+    "mobileRatio": "16 / 9",
+    "loop": true
+  },
+  "youtube-latest": {
+    "state": "ready",
+    "rights": "owned",
+    "creator": "Chris Hay",
+    "title": "Chris Hay \u00b7 quantizing Qwen",
+    "desktop": "/media/youtube/latest-desktop.mp4",
+    "poster": "/media/youtube/latest-poster.webp",
+    "mobile": "/media/youtube/latest-desktop.mp4",
+    "mobilePoster": "/media/youtube/latest-poster.webp",
+    "alt": "Chris Hay \u00b7 quantizing Qwen",
+    "source": "https://www.youtube.com/watch?v=5_ZiJpl4hvs",
+    "desktopRatio": "16 / 9",
+    "mobileRatio": "16 / 9",
+    "loop": true
+  },
+  "portrait-editorial": {
+    "state": "ready",
+    "rights": "owned",
+    "creator": "Chris Hay",
+    "desktop": "/media/youtube/portrait.webp",
+    "alt": "Chris Hay seated at his desk in the studio, hands together, in blue light.",
+    "caption": "From the film MCP Apps \u00b7 Chris Hay \u00b7 2026",
+    "source": "https://www.youtube.com/watch?v=UvogrjCgaJQ"
+  }
+}

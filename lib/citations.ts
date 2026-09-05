@@ -1,3 +1,4 @@
+import { getVideo, videoReferences } from "./youtube";
 import { citationFormats, type CitationRecord } from "@chrishayuk/hause/cite";
 import { SITE, recordPath } from "./records";
 import type { PublicationRecord } from "./types";
@@ -6,6 +7,7 @@ export function citationRecord(record: PublicationRecord): CitationRecord | null
  return { title: record.title, authors: record.authors, published: record.published, version: record.version, url: `${SITE}/records/${record.id}/${record.version}`, publisher: "Chris Hay", kind: record.kind === "work" ? "software" : record.kind === "notebook" || record.kind === "question" ? "research-note" : "page", abstract: record.abstract, note: record.kind === "film" ? "Editorial record of an appearance; original production by IBM." : undefined };
 }
 export function referenceFormats(record: PublicationRecord) {
+ if(record.youtubeId){const video=getVideo(record.youtubeId);if(video)return videoReferences(video);}
  const citation = citationRecord(record);
  if (citation) return citationFormats(citation);
  const url = `${SITE}${recordPath(record)}`;

@@ -2,6 +2,9 @@ import type { MediaRecord } from "./types";
 import overrides from "../content/media-library.json";
 const required = (id: string, title: string, type: MediaRecord["type"], ratio = "16 / 9"): MediaRecord => ({ id, title, type, state: "required", rights: "pending", alt: title, desktopRatio: ratio, mobileRatio: type === "film" ? "9 / 16" : ratio });
 export const media: MediaRecord[] = [
+  required("youtube-studio", "Chris Hay · studio film", "film"),
+  required("youtube-larql", "LARQL · film excerpt", "film"),
+  required("youtube-latest", "Latest film · excerpt", "film"),
   required("hero-identity", "Identity film · Chris, London", "film", "2 / 1"),
   required("portrait-editorial", "Chris Hay · editorial portrait", "image", "4 / 5"),
   required("moe-feature", "Mixture of Experts · approved episode frame", "film"),

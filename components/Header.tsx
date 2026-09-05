@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useMotion } from "./Motion";
-const links = ["work", "film", "notebook", "research", "about"];
+const links = ["work", "film", "notebook", "research", "about", "ask"];
 export function Header() {
   const path = usePathname(); const dialog = useRef<HTMLDialogElement>(null); const opener = useRef<HTMLButtonElement>(null);
   const { paused, setPaused, suspend } = useMotion();

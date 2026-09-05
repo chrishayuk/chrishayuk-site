@@ -16,9 +16,9 @@ The app uses the bundled Sites/vinext architecture. HAUSE is vendored from clean
 
 ## Production state
 
-This is a private production edition. The original photography and films are missing, so media frames are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter public APIs or feeds. The global robots policy prevents indexing this edition.
+This is a private production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter public APIs or feeds; catalogued YouTube source records enter the record API separately from local publications. The global robots policy prevents indexing this edition.
 
-The homepage does **not yet meet** the photographic-area or three-owned-film launch criteria. Do not make it public until original media and record review are complete.
+The homepage does **not yet meet** the photographic-area launch criterion. Do not make it public until original media and record review are complete.
 
 ## Add media
 
@@ -61,3 +61,21 @@ The command appends a complete snapshot and a SHA-256 of deterministic, sorted-k
 - [Media production inventory](content/homepage-media.production.json)
 
 The social card `public/og.png` was generated using the built-in ImageGen tool. Brief: exact CHRIS HAY identity, BUILDING THINGS / TO FIND OUT / HOW THEY WORK., London 2026, A RESEARCH HOUSE and CHRISHAYUK.COM in editorial serif/sans/monospace on HAUSE ink and paper. No generated photography is used.
+
+
+## YouTube collection and graph
+
+- `/film/youtube`: feature, latest long-form upload, editorial selections, most viewed.
+- `/film/youtube/archive`: all 195 public entries (177 videos, 18 Shorts), searchable and sortable; no public streams tab at retrieval.
+- `/film/youtube/:youtubeId`: explicit full playback, chapters, original description, available timed captions, source citation and related work.
+- `/ask`: source retrieval across video metadata and indexed automatic captions. This is not an LLM answer generator.
+- `/api/graph`: record, concept, channel and timed-passage nodes with typed, attributed edges.
+- `/api/search?q=...`: source passages with original timestamp URLs; metadata-only matches are labelled.
+
+`content/youtube-catalogue.json` is a dated public-source snapshot. Preserve its git history on refresh. Source publication dates are nullable and never inferred from relative “months ago” labels. View counts from flat listings are approximate, explicitly marked. “Latest” uses the long-form channel ordering, not invented dates. IDs preserve YouTube's case-sensitive identity.
+
+Refresh from cached public metadata with `python3 scripts/import-youtube.py work/media-ingest`. The importer checks the channel ID and refuses an empty catalogue. It takes `channel-current.json`, optional `channel-other.jsonl`, per-video `.info.json` and available `.en-orig.json3` captions. It does not copy signed download URLs into source. Full metadata is currently available for three videos; automatic, unreviewed timed captions for two. Caption rate limiting interrupted further ingestion; missing transcripts stay explicit.
+
+Imported films have `publication: catalogued`, distinct from local published editorial claims. Citations identify the original YouTube film. Metadata-derived concept/project edges are for discovery, never proof of a claim. Raw downloads are ignored. `sourceMetadata` retains retrieval time, content hash and coverage. The graph includes draft record stubs marked non-retrievable for cross-links; Ask only retrieves catalogued films at present.
+
+Media edit decisions are recorded in `docs/youtube-media.md`. Full YouTube players load only on explicit activation. Offscreen, hidden-page, menu and global-pause events remove the full player; returning requires another play action. Playback position within the embedded player is not retained on suspension. Muted local previews share the existing motion coordinator. All frames remain useful with video disabled.

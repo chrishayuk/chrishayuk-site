@@ -1,2 +1,2 @@
-import { publishedRecords } from "@/lib/records";
-export function GET(request:Request){const url=new URL(request.url);const kind=url.searchParams.get("kind");const q=(url.searchParams.get("q")||"").toLowerCase();const records=publishedRecords().filter(r=>(!kind||r.kind===kind)&&(!q||`${r.title} ${r.abstract} ${r.concepts.join(" ")}`.toLowerCase().includes(q)));return Response.json({version:"1",count:records.length,records});}
+import { indexedRecords } from "@/lib/records";
+export function GET(request:Request){const url=new URL(request.url);const kind=url.searchParams.get("kind");const q=(url.searchParams.get("q")||"").toLowerCase();const records=indexedRecords().filter(r=>(!kind||r.kind===kind)&&(!q||`${r.title} ${r.abstract} ${r.concepts.join(" ")}`.toLowerCase().includes(q)));return Response.json({version:"1",count:records.length,records});}
