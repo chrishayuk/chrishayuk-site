@@ -1,4 +1,4 @@
-import {ibmAppearances,firstEpisodeSource} from "./ibm-appearances.ts";
+import {ibmAppearances,firstEpisodeSource,panelistIntroduction} from "./ibm-appearances.ts";
 import {records,indexedRecords,recordPath,SITE} from "./records.ts";
 import {allVideos,ibm,transcriptFor,videoPath,videoConcepts,videoWork,youtube} from "./youtube.ts";
 export function recordGraph(){
@@ -13,14 +13,21 @@ export function recordGraph(){
  for(const p of transcriptFor(v.youtubeId)?.passages||[]){const id=`${v.id}@${p.start}`;nodes.push({id,kind:"passage",text:p.text,start:p.start,end:p.end,url:`${v.url}&t=${Math.floor(p.start)}`,transcription:"automatic-unreviewed"});edges.push({from:id,to:v.id,kind:"passage-of",basis:"automatic-captions"});}}
  return {version:"1.0",retrievedAt:[youtube.retrievedAt,ibm.retrievedAt].sort().at(-1),coverage:{films:allVideos.length,transcripts:allVideos.filter(v=>transcriptFor(v.youtubeId)).length},nodes,edges};
 }
-const stop=new Set(["a","an","the","what","why","how","does","do","is","are","i","me","show","chris","hay","about","in","of","to","and","has","he","said","have","with","as","on","for","call","calls","his"]);
+const stop=new Set(["a","an","the","what","why","how","does","do","is","are","i","me","show","chris","hay","about","in","of","to","and","has","he","said","have","with","as","on","for","call","calls","his","was","when","been","did","it"]);
 const normalize=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g," ").split(/\s+/).map(t=>t.length>4&&t.endsWith("s")?t.slice(0,-1):t).join(" ");
 export function searchGraph(query:string){
  const terms=[...new Set(normalize(query).split(/\s+/).filter(t=>t&&!stop.has(t)))].slice(0,16);
  if(!terms.length)return [];
  const results: {id:string;title:string;url:string;sourceUrl:string;basis:string;text:string;score:number;start?:number}[]=[];
+ const panelistText=`${panelistIntroduction} At least ${ibmAppearances.verifiedCount} confirmed appearances as of ${ibmAppearances.asOf.slice(0,10)}; some credits are incomplete.`;
+ const panelistSearch=normalize(`${panelistText} How many episodes appearances first episode start joined since IBM Mixture of Experts`);
+ if(terms.every(t=>panelistSearch.includes(t)))results.push({id:"COLLECTION-MOE",title:"Chris Hay · Mixture of Experts",url:"/film/mixture-of-experts#panelist",sourceUrl:"/film/mixture-of-experts#appearance-record",basis:"verified-appearance-register",text:panelistText,score:terms.length*4});
+ for(const r of indexedRecords().filter(r=>!r.youtubeId)){
+  const text=`${r.title} ${r.abstract}`;
+  if(terms.every(t=>normalize(text).includes(t)))results.push({id:r.id,title:r.title,url:recordPath(r),sourceUrl:`${SITE}${recordPath(r)}`,basis:"published-record",text:r.abstract,score:terms.length*2});
+ }
  for(const v of allVideos){
- const title=normalize(v.title);const meta=normalize(`${title} ${v.description} ${videoConcepts(v).join(" ").replaceAll("-"," ")} ${videoWork(v).join(" ")}`);
+ const title=normalize(v.title);const meta=normalize(`${title} ${v.description} ${videoConcepts(v).join(" ").replaceAll("-"," ")} ${videoWork(v).join(" ")} ${v.chapters.map(c=>c.title).join(" ")}`);
  const passages=transcriptFor(v.youtubeId)?.passages||[];
  const matches=passages.map(p=>({p,score:terms.filter(t=>normalize(p.text).includes(t)).length})).filter(m=>m.score===terms.length).sort((a,b)=>b.score-a.score).slice(0,2);
  for(const{p,score}of matches)results.push({id:`${v.id}@${p.start}`,title:v.title,url:`${videoPath(v)}?t=${Math.floor(p.start)}`,sourceUrl:`${v.url}&t=${Math.floor(p.start)}`,basis:"automatic-caption",text:p.text,score:score*4,start:p.start});

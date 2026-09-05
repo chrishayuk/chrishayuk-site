@@ -54,9 +54,1705 @@
         "Chris Hay"
       ],
       "episode": "123",
+      "uploadedAt": "2026-09-04T10:00:19+00:00",
       "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
       "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts/anthropic-claude-hardware-guidelines-openai-rogue-agents-runway-solaris",
-      "sourceHash": "73ddd6e3be66d9c438d4656d2527eaa7f52ce90e123fc9756560befcd113d6d0"
+      "sourceHash": "526c131fda6debc008917146fa6b6f8fce427793e93681cd45f6cbdb500c1312"
+    },
+    {
+      "youtubeId": "8rGYGFmytQs",
+      "id": "YT-8rGYGFmytQs",
+      "title": "Thinking Machines Lab drops Inkling & Meta’s Muse Spark 1.1",
+      "format": "video",
+      "channelOrder": 7,
+      "duration": 2341,
+      "views": 7837,
+      "viewsApproximate": false,
+      "published": "2026-07-17",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Thinking Machines Lab drops Inkling & Meta’s Muse Spark 1.1”.",
+      "url": "https://www.youtube.com/watch?v=8rGYGFmytQs",
+      "poster": "https://i.ytimg.com/vi/8rGYGFmytQs/maxresdefault.jpg",
+      "chapters": [],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-07-17T10:00:37+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "94e29c7d60f92d6f1492d943282424591c14816b736102cfb55b07e28d09987c"
+    },
+    {
+      "youtubeId": "tV5zXS78HzU",
+      "id": "YT-tV5zXS78HzU",
+      "title": "GPT-5.6 Sol, FIFA AI & Wall Street’s AI nerves",
+      "format": "video",
+      "channelOrder": 9,
+      "duration": 2431,
+      "views": 7097,
+      "viewsApproximate": false,
+      "published": "2026-07-03",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “GPT-5.6 Sol, FIFA AI & Wall Street’s AI nerves”.",
+      "url": "https://www.youtube.com/watch?v=tV5zXS78HzU",
+      "poster": "https://i.ytimg.com/vi/tV5zXS78HzU/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 64,
+          "title": "Introduction"
+        },
+        {
+          "start": 64,
+          "end": 770,
+          "title": "GPT-5.6 Sol"
+        },
+        {
+          "start": 770,
+          "end": 1336,
+          "title": "Wall Street and AI IPOs"
+        },
+        {
+          "start": 1336,
+          "end": 1821,
+          "title": "AI at the World Cup"
+        },
+        {
+          "start": 1821,
+          "end": 2431,
+          "title": "Goats vs. Agentic AI"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-07-03T10:00:27+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "8e0961bc62ccbdaae2e59a6b23a4714a2e3f63ebb1146fdec4e8d310ef46d360"
+    },
+    {
+      "youtubeId": "1h6e5MFg9I0",
+      "id": "YT-1h6e5MFg9I0",
+      "title": "AI at college graduations and why Claude blackmails",
+      "format": "video",
+      "channelOrder": 15,
+      "duration": 3026,
+      "views": 5078,
+      "viewsApproximate": false,
+      "published": "2026-05-22",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “AI at college graduations and why Claude blackmails”.",
+      "url": "https://www.youtube.com/watch?v=1h6e5MFg9I0",
+      "poster": "https://i.ytimg.com/vi_webp/1h6e5MFg9I0/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 65,
+          "title": "Introduction"
+        },
+        {
+          "start": 65,
+          "end": 886,
+          "title": "AI at graduation"
+        },
+        {
+          "start": 886,
+          "end": 1846,
+          "title": "LLMs corrupt documents"
+        },
+        {
+          "start": 1846,
+          "end": 2589,
+          "title": "Why Claude blackmails"
+        },
+        {
+          "start": 2589,
+          "end": 3026,
+          "title": "ChatGPT-generated story wins literary prize"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-05-22T10:00:03+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "72d716a737606700b7b4b08ab7f4120464160dafc15d6e8a079bd79b83a733f7"
+    },
+    {
+      "youtubeId": "Z_L5KO_GW4o",
+      "id": "YT-Z_L5KO_GW4o",
+      "title": "Claude Opus 4.7, Apple’s AI glasses and Allbirds AI pivot",
+      "format": "video",
+      "channelOrder": 20,
+      "duration": 3185,
+      "views": 6368,
+      "viewsApproximate": false,
+      "published": "2026-04-17",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Claude Opus 4.7, Apple’s AI glasses and Allbirds AI pivot”.",
+      "url": "https://www.youtube.com/watch?v=Z_L5KO_GW4o",
+      "poster": "https://i.ytimg.com/vi/Z_L5KO_GW4o/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 62,
+          "title": "Introduction"
+        },
+        {
+          "start": 62,
+          "end": 687,
+          "title": "Claude Opus 4.7 release and analysis"
+        },
+        {
+          "start": 687,
+          "end": 1362,
+          "title": "Apple's AI glasses and wearables strategy"
+        },
+        {
+          "start": 1362,
+          "end": 1971,
+          "title": "Gallup poll: AI adoption in the workplace"
+        },
+        {
+          "start": 1971,
+          "end": 2787,
+          "title": "DeepMind's harmful manipulation research"
+        },
+        {
+          "start": 2787,
+          "end": 3185,
+          "title": "Allbirds pivots to AI infrastructure"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-04-17T10:01:05+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "0b8e35bc05680dbb85975291e2a75ea19cd4ddab143b2fca08bf07e94ab0f6a1"
+    },
+    {
+      "youtubeId": "iXAgtR-DO3I",
+      "id": "YT-iXAgtR-DO3I",
+      "title": "Inside Perplexity Computer’s agent platform",
+      "format": "video",
+      "channelOrder": 27,
+      "duration": 2726,
+      "views": 6537,
+      "viewsApproximate": false,
+      "published": "2026-03-06",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Inside Perplexity Computer’s agent platform”.",
+      "url": "https://www.youtube.com/watch?v=iXAgtR-DO3I",
+      "poster": "https://i.ytimg.com/vi/iXAgtR-DO3I/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 67,
+          "title": "Introduction"
+        },
+        {
+          "start": 67,
+          "end": 683,
+          "title": "Perplexity Computer"
+        },
+        {
+          "start": 683,
+          "end": 1454,
+          "title": "Claude Import Memory"
+        },
+        {
+          "start": 1454,
+          "end": 2114,
+          "title": "NullClaw"
+        },
+        {
+          "start": 2114,
+          "end": 2726,
+          "title": "Tilly Norwood"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-03-06T11:01:15+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "c983565198c2a84cbb70748c544b340407056ac8b514cba0d91a2d8b7d878ada"
+    },
+    {
+      "youtubeId": "C6PZwrsaii0",
+      "id": "YT-C6PZwrsaii0",
+      "title": "Anthropic Claude Opus 4.6 vs OpenAI GPT-5.3-Codex: The AI \"big game”",
+      "format": "video",
+      "channelOrder": 31,
+      "duration": 833,
+      "views": 11932,
+      "viewsApproximate": false,
+      "published": "2026-02-06",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Anthropic Claude Opus 4.6 vs OpenAI GPT-5.3-Codex: The AI \"big game””.",
+      "url": "https://www.youtube.com/watch?v=C6PZwrsaii0",
+      "poster": "https://i.ytimg.com/vi/C6PZwrsaii0/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 14,
+          "title": "Introduction"
+        },
+        {
+          "start": 14,
+          "end": 169,
+          "title": "Claude Opus 4.6 and GPT-5.3-Codex releases"
+        },
+        {
+          "start": 169,
+          "end": 360,
+          "title": "Model comparison"
+        },
+        {
+          "start": 360,
+          "end": 603,
+          "title": "Battle for enterprise AI"
+        },
+        {
+          "start": 603,
+          "end": 833,
+          "title": "Multi-agent workflows"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-02-06T22:05:00+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "98a2c45786587ba886ddd4f987b135d19ad506d010dfcd192ac3c011a9e6d73f"
+    },
+    {
+      "youtubeId": "s3SHPOByMTY",
+      "id": "YT-s3SHPOByMTY",
+      "title": "The new AI race: Enterprise innovation in 2026",
+      "format": "video",
+      "channelOrder": 34,
+      "duration": 2909,
+      "views": 8578,
+      "viewsApproximate": false,
+      "published": "2026-01-23",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “The new AI race: Enterprise innovation in 2026”.",
+      "url": "https://www.youtube.com/watch?v=s3SHPOByMTY",
+      "poster": "https://i.ytimg.com/vi/s3SHPOByMTY/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 90,
+          "title": "Introduction"
+        },
+        {
+          "start": 90,
+          "end": 745,
+          "title": "OpenAI brings ads to ChatGPT"
+        },
+        {
+          "start": 745,
+          "end": 1377,
+          "title": "Claude Code's breakout moment"
+        },
+        {
+          "start": 1377,
+          "end": 2169,
+          "title": "IBV’s Enterprise 2030 report"
+        },
+        {
+          "start": 2169,
+          "end": 2909,
+          "title": "Open Responses: The future of agent APIs"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-01-23T11:01:37+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "4345df63547360da027278b9233586db602fb914f41087e977c8b0ef652b10d5"
+    },
+    {
+      "youtubeId": "5gRCyXOYF74",
+      "id": "YT-5gRCyXOYF74",
+      "title": "CES 2026 AI highlights: NVIDIA Rubin & wild gadgets",
+      "format": "video",
+      "channelOrder": 36,
+      "duration": 2555,
+      "views": 8723,
+      "viewsApproximate": false,
+      "published": "2026-01-09",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “CES 2026 AI highlights: NVIDIA Rubin & wild gadgets”.",
+      "url": "https://www.youtube.com/watch?v=5gRCyXOYF74",
+      "poster": "https://i.ytimg.com/vi/5gRCyXOYF74/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 87,
+          "title": "Introduction"
+        },
+        {
+          "start": 87,
+          "end": 761,
+          "title": "CES 2026"
+        },
+        {
+          "start": 761,
+          "end": 1208,
+          "title": "Meta's USD 2 Billion Manus bet"
+        },
+        {
+          "start": 1208,
+          "end": 2015,
+          "title": "DeepSeek tackles scaling"
+        },
+        {
+          "start": 2015,
+          "end": 2555,
+          "title": "AI optimism vs. fear"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-01-09T14:10:44+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "388c12cd417e99757bc220ff7a21e582f2d99a3a5ebca290c0a97e72187c5062"
+    },
+    {
+      "youtubeId": "ARXS-uk19h8",
+      "id": "YT-ARXS-uk19h8",
+      "title": "AI year in review: Trends shaping 2026",
+      "format": "video",
+      "channelOrder": 37,
+      "duration": 2318,
+      "views": 25990,
+      "viewsApproximate": false,
+      "published": "2026-01-02",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “AI year in review: Trends shaping 2026”.",
+      "url": "https://www.youtube.com/watch?v=ARXS-uk19h8",
+      "poster": "https://i.ytimg.com/vi_webp/ARXS-uk19h8/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 45,
+          "title": "Introduction"
+        },
+        {
+          "start": 45,
+          "end": 746,
+          "title": "Chris: Super agents, reasoning models and 2025 reflections"
+        },
+        {
+          "start": 746,
+          "end": 1337,
+          "title": "Gabe: Open source's breakthrough year and what's next"
+        },
+        {
+          "start": 1337,
+          "end": 1758,
+          "title": "Kaoutar: AI hardware in 2025 and predictions for 2026"
+        },
+        {
+          "start": 1758,
+          "end": 2318,
+          "title": "Aaron & Abe: Multimodal AI and modular model orchestration"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2026-01-02T11:00:30+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "061e9296d484796c2a4fa691e02d9b9d314b03acc7951aaa38f7ce60faf5f63a"
+    },
+    {
+      "youtubeId": "oRRDAZtJLmk",
+      "id": "YT-oRRDAZtJLmk",
+      "title": "AI Code Generation: Wins, Fails and the Future",
+      "format": "video",
+      "channelOrder": 38,
+      "duration": 2119,
+      "views": 13960,
+      "viewsApproximate": false,
+      "published": "2025-12-26",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “AI Code Generation: Wins, Fails and the Future”.",
+      "url": "https://www.youtube.com/watch?v=oRRDAZtJLmk",
+      "poster": "https://i.ytimg.com/vi_webp/oRRDAZtJLmk/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 71,
+          "title": "Introduction"
+        },
+        {
+          "start": 71,
+          "end": 226,
+          "title": "The barbell problem: AI coding wins and fails"
+        },
+        {
+          "start": 226,
+          "end": 472,
+          "title": "Claude Code cracks Apple Metal optimization"
+        },
+        {
+          "start": 472,
+          "end": 704,
+          "title": "Who's the architect: You or the AI?"
+        },
+        {
+          "start": 704,
+          "end": 1244,
+          "title": "Model vs agent orchestration"
+        },
+        {
+          "start": 1244,
+          "end": 1470,
+          "title": "The future of unsupervised AI agents"
+        },
+        {
+          "start": 1470,
+          "end": 2002,
+          "title": "Open source vs proprietary tools"
+        },
+        {
+          "start": 2002,
+          "end": 2119,
+          "title": "The inference cost challenge"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2025-12-26T11:01:42+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "d0aa3078231f1c437c6dd0e17f3af6836bdaa68e87fb9dec61e61ef4af533e8c"
+    },
+    {
+      "youtubeId": "SdNRWJ-oqjY",
+      "id": "YT-SdNRWJ-oqjY",
+      "title": "AI agents in 2025: Why agentic commerce isn't ready for Black Friday yet",
+      "format": "video",
+      "channelOrder": 42,
+      "duration": 2491,
+      "views": 4816,
+      "viewsApproximate": false,
+      "published": "2025-11-28",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “AI agents in 2025: Why agentic commerce isn't ready for Black Friday yet”.",
+      "url": "https://www.youtube.com/watch?v=SdNRWJ-oqjY",
+      "poster": "https://i.ytimg.com/vi_webp/SdNRWJ-oqjY/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 72,
+          "title": "Introduction"
+        },
+        {
+          "start": 72,
+          "end": 572,
+          "title": "Claude 4.5 Opus is here"
+        },
+        {
+          "start": 572,
+          "end": 971,
+          "title": "Will Black Friday be big for agentic commerce?"
+        },
+        {
+          "start": 971,
+          "end": 1051,
+          "title": "Agent experience for consumers vs. Enterprise"
+        },
+        {
+          "start": 1051,
+          "end": 1382,
+          "title": "Is 2025 the year of the Agent?"
+        },
+        {
+          "start": 1382,
+          "end": 1876,
+          "title": "AI agents in the developer ecosystem"
+        },
+        {
+          "start": 1876,
+          "end": 2491,
+          "title": "Who will win the agent race?"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2025-11-28T11:00:54+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "e2856003585d828a480a687691952238516c152a8d0d90ae52abdde118ae3167"
+    },
+    {
+      "youtubeId": "KF3jIUBecFo",
+      "id": "YT-KF3jIUBecFo",
+      "title": "Anthropic’s TPU move and NVIDIA’s Starcloud",
+      "format": "video",
+      "channelOrder": 46,
+      "duration": 2858,
+      "views": 6271,
+      "viewsApproximate": false,
+      "published": "2025-10-31",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Anthropic’s TPU move and NVIDIA’s Starcloud”.",
+      "url": "https://www.youtube.com/watch?v=KF3jIUBecFo",
+      "poster": "https://i.ytimg.com/vi_webp/KF3jIUBecFo/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 65,
+          "title": "Intro"
+        },
+        {
+          "start": 65,
+          "end": 136,
+          "title": "OpenAI goes for profit, NVIDIA’s worth USD 5 Trn, and Amazon smart glasses"
+        },
+        {
+          "start": 136,
+          "end": 769,
+          "title": "Anthropic TPU announcement"
+        },
+        {
+          "start": 769,
+          "end": 1674,
+          "title": "Underwriting Superintelligence"
+        },
+        {
+          "start": 1674,
+          "end": 2534,
+          "title": "ChatGPT sensitive conversations"
+        },
+        {
+          "start": 2534,
+          "end": 2858,
+          "title": "NVIDIA Starcloud"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2025-10-31T10:00:40+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "fd7e9b2c3f50028656cbadab77eda30394e4316a7e86bc514708251c3d20ea90"
+    },
+    {
+      "youtubeId": "lMrOvPloJ0o",
+      "id": "YT-lMrOvPloJ0o",
+      "title": "IBM partners with Anthropic, plus OpenAI drops AgentKit",
+      "format": "video",
+      "channelOrder": 49,
+      "duration": 2627,
+      "views": 5320,
+      "viewsApproximate": false,
+      "published": "2025-10-10",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “IBM partners with Anthropic, plus OpenAI drops AgentKit”.",
+      "url": "https://www.youtube.com/watch?v=lMrOvPloJ0o",
+      "poster": "https://i.ytimg.com/vi_webp/lMrOvPloJ0o/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 69,
+          "title": "Intro"
+        },
+        {
+          "start": 69,
+          "end": 140,
+          "title": "OpenAI and AMD, IBM’s Project Bob, chip diamonds and Peloton's AI Trainers"
+        },
+        {
+          "start": 140,
+          "end": 809,
+          "title": "AgentKit"
+        },
+        {
+          "start": 809,
+          "end": 1369,
+          "title": "IBM & Anthropic partnership"
+        },
+        {
+          "start": 1369,
+          "end": 1912,
+          "title": "Modular manifolds"
+        },
+        {
+          "start": 1912,
+          "end": 2627,
+          "title": "AI in radiology"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "76",
+      "uploadedAt": "2025-10-10T10:01:32+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "b2a5bc6824c5bfa6b0e4d83ce9106c2ea99839a43e15afe9c940a8cd2c90abbe"
+    },
+    {
+      "youtubeId": "SjoxdH9qOTE",
+      "id": "YT-SjoxdH9qOTE",
+      "title": "Why language models hallucinate, revisiting Amodei’s code prediction and AI in the job market",
+      "format": "video",
+      "channelOrder": 53,
+      "duration": 2545,
+      "views": 4727,
+      "viewsApproximate": false,
+      "published": "2025-09-12",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Why language models hallucinate, revisiting Amodei’s code prediction and AI in the job market”.",
+      "url": "https://www.youtube.com/watch?v=SjoxdH9qOTE",
+      "poster": "https://i.ytimg.com/vi_webp/SjoxdH9qOTE/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 78,
+          "title": "Intro"
+        },
+        {
+          "start": 78,
+          "end": 183,
+          "title": "Oracle, data center construction, iPhone 17 and tech saint"
+        },
+        {
+          "start": 183,
+          "end": 959,
+          "title": "Why language models hallucinate"
+        },
+        {
+          "start": 959,
+          "end": 1365,
+          "title": "Dario Amodei’s prediction"
+        },
+        {
+          "start": 1365,
+          "end": 1797,
+          "title": "Job market is hell"
+        },
+        {
+          "start": 1797,
+          "end": 2545,
+          "title": "LLM on a business card"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "72",
+      "uploadedAt": "2025-09-12T10:00:50+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "05bb264ba2ff5d7bf1c76b9331cedaaaece55bea9059a80c97a3fa16a77dbd84"
+    },
+    {
+      "youtubeId": "zw0Ymg_DoEs",
+      "id": "YT-zw0Ymg_DoEs",
+      "title": "Monster prompt, OpenAI’s business play, nano-banana and US Open experimentations",
+      "format": "video",
+      "channelOrder": 55,
+      "duration": 2645,
+      "views": 5541,
+      "viewsApproximate": false,
+      "published": "2025-08-29",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Monster prompt, OpenAI’s business play, nano-banana and US Open experimentations”.",
+      "url": "https://www.youtube.com/watch?v=zw0Ymg_DoEs",
+      "poster": "https://i.ytimg.com/vi/zw0Ymg_DoEs/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 185,
+          "title": "Intro"
+        },
+        {
+          "start": 185,
+          "end": 997,
+          "title": "KPMG’s monster prompt"
+        },
+        {
+          "start": 997,
+          "end": 1510,
+          "title": "OpenAI’s infra for sale?"
+        },
+        {
+          "start": 1510,
+          "end": 2111,
+          "title": "Gemini's nano-banana"
+        },
+        {
+          "start": 2111,
+          "end": 2645,
+          "title": "US Open experimentations"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "70",
+      "uploadedAt": "2025-08-29T10:01:59+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "b45b7903f518311399f022d8487400f74ebed40f24100de31edafc4bd35cb510"
+    },
+    {
+      "youtubeId": "A30mVgbG-OQ",
+      "id": "YT-A30mVgbG-OQ",
+      "title": "OpenAI dropped GPT-5, is AGI here?",
+      "format": "video",
+      "channelOrder": 58,
+      "duration": 2045,
+      "views": 16785,
+      "viewsApproximate": false,
+      "published": "2025-08-08",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “OpenAI dropped GPT-5, is AGI here?”.",
+      "url": "https://www.youtube.com/watch?v=A30mVgbG-OQ",
+      "poster": "https://i.ytimg.com/vi_webp/A30mVgbG-OQ/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 86,
+          "title": "Intro"
+        },
+        {
+          "start": 86,
+          "end": 823,
+          "title": "GPT-5 is here"
+        },
+        {
+          "start": 823,
+          "end": 1250,
+          "title": "Are we closer to AGI?"
+        },
+        {
+          "start": 1250,
+          "end": 2045,
+          "title": "Demo: Opus 4.1 vs. GPT-5"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2025-08-08T18:03:27+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "b5cbb2aeb518f835151bfcd155cbc48f25830330cb62d3931c15675ec05daac3"
+    },
+    {
+      "youtubeId": "Dtr0scHQVXc",
+      "id": "YT-Dtr0scHQVXc",
+      "title": "Gpt-oss, Genie 3, Personal Superintelligence and Claude pricing",
+      "format": "video",
+      "channelOrder": 59,
+      "duration": 2623,
+      "views": 9420,
+      "viewsApproximate": false,
+      "published": "2025-08-06",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Gpt-oss, Genie 3, Personal Superintelligence and Claude pricing”.",
+      "url": "https://www.youtube.com/watch?v=Dtr0scHQVXc",
+      "poster": "https://i.ytimg.com/vi_webp/Dtr0scHQVXc/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 80,
+          "title": "Intro"
+        },
+        {
+          "start": 80,
+          "end": 746,
+          "title": "Gpt-oss"
+        },
+        {
+          "start": 746,
+          "end": 1332,
+          "title": "Genie 3"
+        },
+        {
+          "start": 1332,
+          "end": 1984,
+          "title": "Claude pricing"
+        },
+        {
+          "start": 1984,
+          "end": 2623,
+          "title": "Zuckerberg on Personal Superintelligence"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "67",
+      "uploadedAt": "2025-08-06T22:42:40+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "d2c4d4d874b12c945d3813899c186d82e9046831919fc54f73e9d2a7d2a9bb4b"
+    },
+    {
+      "youtubeId": "hNvbeXus-pM",
+      "id": "YT-hNvbeXus-pM",
+      "title": "Kimi K2, DeepSeek-R1 vibe check and Google’s data center investments",
+      "format": "video",
+      "channelOrder": 62,
+      "duration": 2872,
+      "views": 4629,
+      "viewsApproximate": false,
+      "published": "2025-07-18",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Kimi K2, DeepSeek-R1 vibe check and Google’s data center investments”.",
+      "url": "https://www.youtube.com/watch?v=hNvbeXus-pM",
+      "poster": "https://i.ytimg.com/vi/hNvbeXus-pM/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 78,
+          "title": "Intro"
+        },
+        {
+          "start": 78,
+          "end": 727,
+          "title": "Kimi K2"
+        },
+        {
+          "start": 727,
+          "end": 1729,
+          "title": "DeepSeek-R1 vibe check"
+        },
+        {
+          "start": 1729,
+          "end": 2480,
+          "title": "Google's data center investments"
+        },
+        {
+          "start": 2480,
+          "end": 2872,
+          "title": "Claude powers LLNL research"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "64",
+      "uploadedAt": "2025-07-18T13:05:26+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "136c75b80badd14a8af50fe5aaa16d4afc2a0244793316e8dcc7ed496a83a2ab"
+    },
+    {
+      "youtubeId": "ieR3u8sUX-U",
+      "id": "YT-ieR3u8sUX-U",
+      "title": "Perplexity’s Comet browser, Cloudflare blocks AI scrapers and Wimbledon Match Chat",
+      "format": "video",
+      "channelOrder": 63,
+      "duration": 3120,
+      "views": 4307,
+      "viewsApproximate": false,
+      "published": "2025-07-11",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Perplexity’s Comet browser, Cloudflare blocks AI scrapers and Wimbledon Match Chat”.",
+      "url": "https://www.youtube.com/watch?v=ieR3u8sUX-U",
+      "poster": "https://i.ytimg.com/vi/ieR3u8sUX-U/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 66,
+          "title": "Intro"
+        },
+        {
+          "start": 66,
+          "end": 790,
+          "title": "AI browser wars"
+        },
+        {
+          "start": 790,
+          "end": 1737,
+          "title": "Anthropic on model transparency"
+        },
+        {
+          "start": 1737,
+          "end": 2492,
+          "title": "Cloudflare scrapers"
+        },
+        {
+          "start": 2492,
+          "end": 3120,
+          "title": "Wimbledon Match Chat"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "63",
+      "uploadedAt": "2025-07-11T10:01:16+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "599c251c5a8a636fc52f05d0710a6f905620d4d99ce3fef367599f0ee2b92edd"
+    },
+    {
+      "youtubeId": "SuDcg-lg5So",
+      "id": "YT-SuDcg-lg5So",
+      "title": "Impact of AI on jobs, Scale AI fallout and chatbot conspiracies",
+      "format": "video",
+      "channelOrder": 66,
+      "duration": 2521,
+      "views": 5250,
+      "viewsApproximate": false,
+      "published": "2025-06-20",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Impact of AI on jobs, Scale AI fallout and chatbot conspiracies”.",
+      "url": "https://www.youtube.com/watch?v=SuDcg-lg5So",
+      "poster": "https://i.ytimg.com/vi/SuDcg-lg5So/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 1,
+          "title": "<Untitled Chapter 1>"
+        },
+        {
+          "start": 1,
+          "end": 77,
+          "title": "Intro"
+        },
+        {
+          "start": 77,
+          "end": 748,
+          "title": "AI and jobs"
+        },
+        {
+          "start": 748,
+          "end": 1320,
+          "title": "Scale AI fallout"
+        },
+        {
+          "start": 1320,
+          "end": 2120,
+          "title": "Chatbot conspiracies"
+        },
+        {
+          "start": 2120,
+          "end": 2521,
+          "title": "AI startup ecosystem"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "60",
+      "uploadedAt": "2025-06-20T10:00:53+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "a72c880e8d0d7c3a6ab7fb8ecf00c8a24a9d56071ba7fb683315d779ba554f05"
+    },
+    {
+      "youtubeId": "Y5yiQDnTimU",
+      "id": "YT-Y5yiQDnTimU",
+      "title": "Apple’s WWDC, Meta & Scale AI, o3-pro and fault-tolerant quantum computing",
+      "format": "video",
+      "channelOrder": 67,
+      "duration": 3128,
+      "views": 4513,
+      "viewsApproximate": false,
+      "published": "2025-06-13",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Apple’s WWDC, Meta & Scale AI, o3-pro and fault-tolerant quantum computing”.",
+      "url": "https://www.youtube.com/watch?v=Y5yiQDnTimU",
+      "poster": "https://i.ytimg.com/vi/Y5yiQDnTimU/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 1,
+          "title": "<Untitled Chapter 1>"
+        },
+        {
+          "start": 1,
+          "end": 118,
+          "title": "Intro"
+        },
+        {
+          "start": 118,
+          "end": 1007,
+          "title": "Apple's WWDC"
+        },
+        {
+          "start": 1007,
+          "end": 1843,
+          "title": "OpenAI o3-pro"
+        },
+        {
+          "start": 1843,
+          "end": 2276,
+          "title": "Meta & Scale AI's \"superintelligence\" lab"
+        },
+        {
+          "start": 2276,
+          "end": 3128,
+          "title": "Fault-tolerant quantum computing"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "59",
+      "uploadedAt": "2025-06-13T10:00:58+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "1d7f29ec1e4f39ede0cefdbaf1b74cf09e8337bbdab507aa3e3596f8331de434"
+    },
+    {
+      "youtubeId": "e_B91C2vILc",
+      "id": "YT-e_B91C2vILc",
+      "title": "Claude 4 system prompt, Jony Ive at OpenAI and Microsoft’s “agent factory”",
+      "format": "video",
+      "channelOrder": 69,
+      "duration": 2631,
+      "views": 7625,
+      "viewsApproximate": false,
+      "published": "2025-05-30",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Claude 4 system prompt, Jony Ive at OpenAI and Microsoft’s “agent factory””.",
+      "url": "https://www.youtube.com/watch?v=e_B91C2vILc",
+      "poster": "https://i.ytimg.com/vi/e_B91C2vILc/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 51,
+          "title": "Intro"
+        },
+        {
+          "start": 51,
+          "end": 803,
+          "title": "Claude 4 system prompt"
+        },
+        {
+          "start": 803,
+          "end": 1383,
+          "title": "The Way of Code"
+        },
+        {
+          "start": 1383,
+          "end": 1950,
+          "title": "Jony Ive and OpenAI"
+        },
+        {
+          "start": 1950,
+          "end": 2631,
+          "title": "Microsoft’s “agent factory”"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "57",
+      "uploadedAt": "2025-05-30T10:13:42+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "d9281a5495126cfa1c28fd6b6368b514c43440a2c8bf6264e71d196f509d1d64"
+    },
+    {
+      "youtubeId": "Blq_pf6yd6U",
+      "id": "YT-Blq_pf6yd6U",
+      "title": "Claude 4: Everything you need to know",
+      "format": "video",
+      "channelOrder": 70,
+      "duration": 1658,
+      "views": 22222,
+      "viewsApproximate": false,
+      "published": "2025-05-23",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Claude 4: Everything you need to know”.",
+      "url": "https://www.youtube.com/watch?v=Blq_pf6yd6U",
+      "poster": "https://i.ytimg.com/vi/Blq_pf6yd6U/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 32,
+          "title": "Intro"
+        },
+        {
+          "start": 32,
+          "end": 768,
+          "title": "Claude 4.0"
+        },
+        {
+          "start": 768,
+          "end": 1347,
+          "title": "OpenAI and Jony Ives"
+        },
+        {
+          "start": 1347,
+          "end": 1658,
+          "title": "Anthropic full-stack"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2025-05-23T20:41:26+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "3c3ba715124040616ece4c8b0254be673daf75cf9c3c36ef40d36efa6bf21a22"
+    },
+    {
+      "youtubeId": "kjRHpuXGmH0",
+      "id": "YT-kjRHpuXGmH0",
+      "title": "Mistral Medium 3, OpenAI HealthBench and AI chips to Saudi Arabia",
+      "format": "video",
+      "channelOrder": 72,
+      "duration": 2202,
+      "views": 3988,
+      "viewsApproximate": false,
+      "published": "2025-05-16",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Mistral Medium 3, OpenAI HealthBench and AI chips to Saudi Arabia”.",
+      "url": "https://www.youtube.com/watch?v=kjRHpuXGmH0",
+      "poster": "https://i.ytimg.com/vi/kjRHpuXGmH0/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 47,
+          "title": "Intro"
+        },
+        {
+          "start": 47,
+          "end": 746,
+          "title": "Mistral Medium 3"
+        },
+        {
+          "start": 746,
+          "end": 1281,
+          "title": "AI chips to Saudi Arabia"
+        },
+        {
+          "start": 1281,
+          "end": 1907,
+          "title": "AI evaluation benchmarks"
+        },
+        {
+          "start": 1907,
+          "end": 2202,
+          "title": "Amazon's AI-generated pause ads"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "55",
+      "uploadedAt": "2025-05-16T10:10:00+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "30f17e6d96ac1287e4539bdac7b374a3c1e2da7f53b8b9fa458282858f63c2a3"
+    },
+    {
+      "youtubeId": "yeutlpU13YM",
+      "id": "YT-yeutlpU13YM",
+      "title": "LlamaCon, Qwen3, DeepSeek-R2 rumors and JP Morgan’s open letter on AI",
+      "format": "video",
+      "channelOrder": 74,
+      "duration": 2385,
+      "views": 7796,
+      "viewsApproximate": false,
+      "published": "2025-05-02",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “LlamaCon, Qwen3, DeepSeek-R2 rumors and JP Morgan’s open letter on AI”.",
+      "url": "https://www.youtube.com/watch?v=yeutlpU13YM",
+      "poster": "https://i.ytimg.com/vi/yeutlpU13YM/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 38,
+          "title": "Intro"
+        },
+        {
+          "start": 38,
+          "end": 634,
+          "title": "LlamaCon"
+        },
+        {
+          "start": 634,
+          "end": 1403,
+          "title": "Qwen3 and DeepSeek-R2"
+        },
+        {
+          "start": 1403,
+          "end": 2385,
+          "title": "J.P. Morgan’s open letter"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "53",
+      "uploadedAt": "2025-05-02T10:01:36+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "3dda544d75795a9d5ba83a897fff40680aef19b9ac6eccede772115b2e2dd727"
+    },
+    {
+      "youtubeId": "8e6StFBP0VM",
+      "id": "YT-8e6StFBP0VM",
+      "title": "o3 and o4-mini, Google Gemini on-prem and NVIDIA’s U.S. chip manufacturing",
+      "format": "video",
+      "channelOrder": 76,
+      "duration": 2514,
+      "views": 8366,
+      "viewsApproximate": false,
+      "published": "2025-04-18",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “o3 and o4-mini, Google Gemini on-prem and NVIDIA’s U.S. chip manufacturing”.",
+      "url": "https://www.youtube.com/watch?v=8e6StFBP0VM",
+      "poster": "https://i.ytimg.com/vi/8e6StFBP0VM/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 56,
+          "title": "Intro"
+        },
+        {
+          "start": 56,
+          "end": 897,
+          "title": "OpenAI o3 and o4 mini"
+        },
+        {
+          "start": 897,
+          "end": 1423,
+          "title": "Google Gemini on-prem"
+        },
+        {
+          "start": 1423,
+          "end": 2099,
+          "title": "AI evaluation tools"
+        },
+        {
+          "start": 2099,
+          "end": 2514,
+          "title": "NVIDIA's U.S. chip manufacturing"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "51",
+      "uploadedAt": "2025-04-18T11:47:38+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "9b14d5b60b09077e5c954112d45dde9dc24df596ccd9a5967847bc06ca45d2b8"
+    },
+    {
+      "youtubeId": "x0DQfLQHT0Q",
+      "id": "YT-x0DQfLQHT0Q",
+      "title": "OpenAI goes open, Anthropic on interpretability, Apple Intelligence updates and Amazon AI agents",
+      "format": "video",
+      "channelOrder": 78,
+      "duration": 2600,
+      "views": 8695,
+      "viewsApproximate": false,
+      "published": "2025-04-04",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “OpenAI goes open, Anthropic on interpretability, Apple Intelligence updates and Amazon AI agents”.",
+      "url": "https://www.youtube.com/watch?v=x0DQfLQHT0Q",
+      "poster": "https://i.ytimg.com/vi_webp/x0DQfLQHT0Q/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 48,
+          "title": "Introduction"
+        },
+        {
+          "start": 48,
+          "end": 696,
+          "title": "OpenAI goes open"
+        },
+        {
+          "start": 696,
+          "end": 1495,
+          "title": "Anthropic interpretability results"
+        },
+        {
+          "start": 1495,
+          "end": 2062,
+          "title": "Daring Fireball on Apple Intelligence"
+        },
+        {
+          "start": 2062,
+          "end": 2600,
+          "title": "Amazon’s AI agents"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "49",
+      "uploadedAt": "2025-04-04T10:01:21+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "83fef559b8532a64cac0d8c5f0c0983222174e239eca9eff83d2b6dda9b2b448"
+    },
+    {
+      "youtubeId": "Ddh3p185KhA",
+      "id": "YT-Ddh3p185KhA",
+      "title": "Manus, vibe coding, scaling laws and Perplexity’s AI phone",
+      "format": "video",
+      "channelOrder": 81,
+      "duration": 3004,
+      "views": 17511,
+      "viewsApproximate": false,
+      "published": "2025-03-14",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Manus, vibe coding, scaling laws and Perplexity’s AI phone”.",
+      "url": "https://www.youtube.com/watch?v=Ddh3p185KhA",
+      "poster": "https://i.ytimg.com/vi/Ddh3p185KhA/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 37,
+          "title": "Intro"
+        },
+        {
+          "start": 37,
+          "end": 849,
+          "title": "Manus"
+        },
+        {
+          "start": 849,
+          "end": 1813,
+          "title": "Vibe coding"
+        },
+        {
+          "start": 1813,
+          "end": 2347,
+          "title": "Scaling laws"
+        },
+        {
+          "start": 2347,
+          "end": 3004,
+          "title": "Perplexity's AI phone"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "46",
+      "uploadedAt": "2025-03-14T10:00:17+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "8ffdd4cd33fe69cfba845a439855cd55145cddf91857540c5be714553c91a3aa"
+    },
+    {
+      "youtubeId": "iYRdhSEGpg4",
+      "id": "YT-iYRdhSEGpg4",
+      "title": "Quantum leap, Model Context Protocol, CoreWeave IPO and an AI voice companion",
+      "format": "video",
+      "channelOrder": 82,
+      "duration": 2723,
+      "views": 6883,
+      "viewsApproximate": false,
+      "published": "2025-03-07",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Quantum leap, Model Context Protocol, CoreWeave IPO and an AI voice companion”.",
+      "url": "https://www.youtube.com/watch?v=iYRdhSEGpg4",
+      "poster": "https://i.ytimg.com/vi/iYRdhSEGpg4/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 66,
+          "title": "Intro"
+        },
+        {
+          "start": 66,
+          "end": 1208,
+          "title": "Quantum leap"
+        },
+        {
+          "start": 1208,
+          "end": 1704,
+          "title": "Model Context Protocol"
+        },
+        {
+          "start": 1704,
+          "end": 2412,
+          "title": "CoreWeave IPO"
+        },
+        {
+          "start": 2412,
+          "end": 2723,
+          "title": "Sesame AI voice companion"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "45",
+      "uploadedAt": "2025-03-07T11:02:00+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "78296ea08a84171634e771d3637624a98a69e52e1d51b73b868a3dfa46f3d187"
+    },
+    {
+      "youtubeId": "LQEhOObUhQg",
+      "id": "YT-LQEhOObUhQg",
+      "title": "GPT-4.5: And the future of pre-training is...",
+      "format": "video",
+      "channelOrder": 83,
+      "duration": 1445,
+      "views": 19500,
+      "viewsApproximate": false,
+      "published": "2025-03-01",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “GPT-4.5: And the future of pre-training is...”.",
+      "url": "https://www.youtube.com/watch?v=LQEhOObUhQg",
+      "poster": "https://i.ytimg.com/vi/LQEhOObUhQg/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 25,
+          "title": "Intro"
+        },
+        {
+          "start": 25,
+          "end": 1445,
+          "title": "GPT-4.5"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": null,
+      "uploadedAt": "2025-03-01T14:02:37+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "ee3ad4a316f92fcd8e8efde0762044035bf99fe883c9c2b4327a3a5a9edbfb5c"
+    },
+    {
+      "youtubeId": "KNNi-enb2B4",
+      "id": "YT-KNNi-enb2B4",
+      "title": "Paris AI Summit, Altman's \"Three Observations,\" and Anthropic's Economic Index",
+      "format": "video",
+      "channelOrder": 86,
+      "duration": 2392,
+      "views": 6198,
+      "viewsApproximate": false,
+      "published": "2025-02-14",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Paris AI Summit, Altman's \"Three Observations,\" and Anthropic's Economic Index”.",
+      "url": "https://www.youtube.com/watch?v=KNNi-enb2B4",
+      "poster": "https://i.ytimg.com/vi/KNNi-enb2B4/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 42,
+          "title": "Intro"
+        },
+        {
+          "start": 42,
+          "end": 670,
+          "title": "Paris AI Summit"
+        },
+        {
+          "start": 670,
+          "end": 1172,
+          "title": "s1: Simple test-time scaling"
+        },
+        {
+          "start": 1172,
+          "end": 1841,
+          "title": "Sam Altman’s “Three Observations”"
+        },
+        {
+          "start": 1841,
+          "end": 2392,
+          "title": "Anthropic’s Economic Index"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "42",
+      "uploadedAt": "2025-02-14T18:44:00+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "cf039996522ce13a401cd62d96e2199ea253cbfa8bdebda1b5c5c49937b47809"
+    },
+    {
+      "youtubeId": "qT8GgwQ2rT4",
+      "id": "YT-qT8GgwQ2rT4",
+      "title": "OpenAI deep research, o3-mini, AI Action Summit, and Anthropic’s Constitutional Classifiers",
+      "format": "video",
+      "channelOrder": 87,
+      "duration": 2288,
+      "views": 9196,
+      "viewsApproximate": false,
+      "published": "2025-02-07",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “OpenAI deep research, o3-mini, AI Action Summit, and Anthropic’s Constitutional Classifiers”.",
+      "url": "https://www.youtube.com/watch?v=qT8GgwQ2rT4",
+      "poster": "https://i.ytimg.com/vi/qT8GgwQ2rT4/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 41,
+          "title": "Intro"
+        },
+        {
+          "start": 41,
+          "end": 831,
+          "title": "Open AI deep research and o3-mini"
+        },
+        {
+          "start": 831,
+          "end": 1217,
+          "title": "AI Action Summit"
+        },
+        {
+          "start": 1217,
+          "end": 1734,
+          "title": "Anthropic’s Constitutional Classifiers"
+        },
+        {
+          "start": 1734,
+          "end": 2288,
+          "title": "Microsoft AI Impact team"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "41",
+      "uploadedAt": "2025-02-07T11:01:13+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "8bef01bc12d0c5fb35bb28532dcff0fb72902f46d557f17afda672c4cbca87b2"
     },
     {
       "youtubeId": "jC0MGFDawWg",
@@ -101,9 +1797,591 @@
         "Chris Hay"
       ],
       "episode": "40",
+      "uploadedAt": "2025-01-31T11:01:02+00:00",
       "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
       "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts/deepseek-facts-vs-hype-model-distillation-open-source-competition",
-      "sourceHash": "6e14e9a1e916189797385226f0329a4fc949b1243ded1f75305d82ea0e17d610"
+      "sourceHash": "05745eae82c50f7124ea09c178406fbb49f6ee4aa4537e48013b2fc9b733167c"
+    },
+    {
+      "youtubeId": "NcV5GrG5VTA",
+      "id": "YT-NcV5GrG5VTA",
+      "title": "Anthropic valuation rumors, Microsoft CoreAI, NotebookLM upgrades, and AI agents in finance",
+      "format": "video",
+      "channelOrder": 90,
+      "duration": 2687,
+      "views": 7101,
+      "viewsApproximate": false,
+      "published": "2025-01-17",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Anthropic valuation rumors, Microsoft CoreAI, NotebookLM upgrades, and AI agents in finance”.",
+      "url": "https://www.youtube.com/watch?v=NcV5GrG5VTA",
+      "poster": "https://i.ytimg.com/vi/NcV5GrG5VTA/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 1,
+          "title": "<Untitled Chapter 1>"
+        },
+        {
+          "start": 1,
+          "end": 51,
+          "title": "What would you do with $2 billion?"
+        },
+        {
+          "start": 51,
+          "end": 734,
+          "title": "Anthropic valuation"
+        },
+        {
+          "start": 734,
+          "end": 1501,
+          "title": "Microsoft CoreAI"
+        },
+        {
+          "start": 1501,
+          "end": 2117,
+          "title": "NotebookLM upgrades"
+        },
+        {
+          "start": 2117,
+          "end": 2687,
+          "title": "AI agents in finance"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "38",
+      "uploadedAt": "2025-01-17T11:00:35+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "9727e291cb788a8f5278b5bc6933acfbd1250988fcc39f58d95ff390ad8d90c8"
+    },
+    {
+      "youtubeId": "QzERUfTbKQw",
+      "id": "YT-QzERUfTbKQw",
+      "title": "OpenAI o3, DeepSeek-V3, and the Brundage/Marcus AI bet",
+      "format": "video",
+      "channelOrder": 92,
+      "duration": 2356,
+      "views": 25318,
+      "viewsApproximate": false,
+      "published": "2025-01-03",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “OpenAI o3, DeepSeek-V3, and the Brundage/Marcus AI bet”.",
+      "url": "https://www.youtube.com/watch?v=QzERUfTbKQw",
+      "poster": "https://i.ytimg.com/vi/QzERUfTbKQw/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 49,
+          "title": "Intro"
+        },
+        {
+          "start": 49,
+          "end": 880,
+          "title": "OpenAI o3"
+        },
+        {
+          "start": 880,
+          "end": 1680,
+          "title": "DeepSeek-V3"
+        },
+        {
+          "start": 1680,
+          "end": 2356,
+          "title": "The Brundage/Marcus bet"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "36",
+      "uploadedAt": "2025-01-03T11:00:36+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "bde38067c14a552bce5aee78d1493473292581cc14dafec012414f1a75cd273d"
+    },
+    {
+      "youtubeId": "V6vxTXrDCrA",
+      "id": "YT-V6vxTXrDCrA",
+      "title": "SearchGPT, from Naptime to Big Sleep, and GitHub Octoverse updates",
+      "format": "video",
+      "channelOrder": 100,
+      "duration": 2385,
+      "views": 2883,
+      "viewsApproximate": false,
+      "published": "2024-11-08",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “SearchGPT, from Naptime to Big Sleep, and GitHub Octoverse updates”.",
+      "url": "https://www.youtube.com/watch?v=V6vxTXrDCrA",
+      "poster": "https://i.ytimg.com/vi/V6vxTXrDCrA/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 49,
+          "title": "Intro"
+        },
+        {
+          "start": 49,
+          "end": 870,
+          "title": "Octoverse Updates"
+        },
+        {
+          "start": 870,
+          "end": 1600,
+          "title": "Naptime to Big Sleep"
+        },
+        {
+          "start": 1600,
+          "end": 2385,
+          "title": "SearchGPT"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "28",
+      "uploadedAt": "2024-11-08T11:00:41+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "f1ca1884eaab020831cb4f1359d69855495cf4344ae46c445f6c00a86495de75"
+    },
+    {
+      "youtubeId": "v9go9rttLO8",
+      "id": "YT-v9go9rttLO8",
+      "title": "AI in the Nobels, DGX B200 arrival, and Unstructured’s $40M funding round",
+      "format": "video",
+      "channelOrder": 104,
+      "duration": 2247,
+      "views": 2522,
+      "viewsApproximate": false,
+      "published": "2024-10-11",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “AI in the Nobels, DGX B200 arrival, and Unstructured’s $40M funding round”.",
+      "url": "https://www.youtube.com/watch?v=v9go9rttLO8",
+      "poster": "https://i.ytimg.com/vi_webp/v9go9rttLO8/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 53,
+          "title": "Intro"
+        },
+        {
+          "start": 53,
+          "end": 784,
+          "title": "AI in the Nobels"
+        },
+        {
+          "start": 784,
+          "end": 1443,
+          "title": "DGX B200 Arrival"
+        },
+        {
+          "start": 1443,
+          "end": 2247,
+          "title": "Unstructured's $40M Funding Round"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "24",
+      "uploadedAt": "2024-10-11T10:01:06+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "813c6d4e10447b98909b76fc832ee58844d16450030ca394e09e6716b664f8e4"
+    },
+    {
+      "youtubeId": "KPsl7IK2_eo",
+      "id": "YT-KPsl7IK2_eo",
+      "title": "OpenAI o1 preview, Agentforce, AI in fantasy football, and machine unlearning",
+      "format": "video",
+      "channelOrder": 107,
+      "duration": 2881,
+      "views": 4325,
+      "viewsApproximate": false,
+      "published": "2024-09-20",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “OpenAI o1 preview, Agentforce, AI in fantasy football, and machine unlearning”.",
+      "url": "https://www.youtube.com/watch?v=KPsl7IK2_eo",
+      "poster": "https://i.ytimg.com/vi_webp/KPsl7IK2_eo/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 54,
+          "title": "Intro"
+        },
+        {
+          "start": 54,
+          "end": 1104,
+          "title": "OpenAI o1 preview"
+        },
+        {
+          "start": 1104,
+          "end": 1780,
+          "title": "Agentforce"
+        },
+        {
+          "start": 1780,
+          "end": 2315,
+          "title": "AI in fantasy football"
+        },
+        {
+          "start": 2315,
+          "end": 2881,
+          "title": "Machine unlearning"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "21",
+      "uploadedAt": "2024-09-20T10:00:17+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "c86da4a2fdc364fa03460400c471cfd25d9be90067670501c3fe5717838989c9"
+    },
+    {
+      "youtubeId": "emVMHYQVmdQ",
+      "id": "YT-emVMHYQVmdQ",
+      "title": "Agent Q, no AI in art, and AMD acquires ZT Systems",
+      "format": "video",
+      "channelOrder": 111,
+      "duration": 2845,
+      "views": 2608,
+      "viewsApproximate": false,
+      "published": "2024-08-23",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Agent Q, no AI in art, and AMD acquires ZT Systems”.",
+      "url": "https://www.youtube.com/watch?v=emVMHYQVmdQ",
+      "poster": "https://i.ytimg.com/vi/emVMHYQVmdQ/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 51,
+          "title": "Intro"
+        },
+        {
+          "start": 51,
+          "end": 861,
+          "title": "Agent Q"
+        },
+        {
+          "start": 861,
+          "end": 1752,
+          "title": "No AI in Art"
+        },
+        {
+          "start": 1752,
+          "end": 2845,
+          "title": "AMD Acquires ZT Systems"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "17",
+      "uploadedAt": "2024-08-23T10:00:47+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "6825f9d86cffc9523e3f350a3132ed7d6224dadf6cc2ad98ed97cdee4d63e901"
+    },
+    {
+      "youtubeId": "bQzPaRYC9BE",
+      "id": "YT-bQzPaRYC9BE",
+      "title": "Meta's Llama 3.1, Mistral Large 2 and big interest in small models",
+      "format": "video",
+      "channelOrder": 115,
+      "duration": 1224,
+      "views": 6526,
+      "viewsApproximate": false,
+      "published": "2024-07-26",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Meta's Llama 3.1, Mistral Large 2 and big interest in small models”.",
+      "url": "https://www.youtube.com/watch?v=bQzPaRYC9BE",
+      "poster": "https://i.ytimg.com/vi_webp/bQzPaRYC9BE/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 93,
+          "title": "Intro"
+        },
+        {
+          "start": 93,
+          "end": 608,
+          "title": "Llama 3.1 and Mistral Large 2"
+        },
+        {
+          "start": 608,
+          "end": 1224,
+          "title": "Are Little Models Having a Moment?"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "13",
+      "uploadedAt": "2024-07-26T10:00:27+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "69253d9c8be9cc0e755b2feb3642812ad8554516c76a9ac78ea3c90e40643e8f"
+    },
+    {
+      "youtubeId": "Wlf6id2FH-Q",
+      "id": "YT-Wlf6id2FH-Q",
+      "title": "Goldman Sachs Gen AI report, Claude 2.0 Engineer, and RIAA lawsuits",
+      "format": "video",
+      "channelOrder": 116,
+      "duration": 1875,
+      "views": 3061,
+      "viewsApproximate": false,
+      "published": "2024-07-19",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Goldman Sachs Gen AI report, Claude 2.0 Engineer, and RIAA lawsuits”.",
+      "url": "https://www.youtube.com/watch?v=Wlf6id2FH-Q",
+      "poster": "https://i.ytimg.com/vi/Wlf6id2FH-Q/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 108,
+          "title": "Intro"
+        },
+        {
+          "start": 108,
+          "end": 750,
+          "title": "Goldman Sachs Gen AI Spend Report"
+        },
+        {
+          "start": 750,
+          "end": 1262,
+          "title": "Claude Engineer 2.0"
+        },
+        {
+          "start": 1262,
+          "end": 1875,
+          "title": "RIAA vs. Suno / Udio"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "12",
+      "uploadedAt": "2024-07-19T10:00:35+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "82be3a4747964593ab252bc03d51cfc2763913a9b767ca83e3453ee9d7763d0d"
+    },
+    {
+      "youtubeId": "rn1sjMFRzTQ",
+      "id": "YT-rn1sjMFRzTQ",
+      "title": "AI Hardware: Training, Inference, Devices and Model Optimization",
+      "format": "video",
+      "channelOrder": 118,
+      "duration": 2305,
+      "views": 7630,
+      "viewsApproximate": false,
+      "published": "2024-07-03",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “AI Hardware: Training, Inference, Devices and Model Optimization”.",
+      "url": "https://www.youtube.com/watch?v=rn1sjMFRzTQ",
+      "poster": "https://i.ytimg.com/vi_webp/rn1sjMFRzTQ/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 100,
+          "title": "Intro"
+        },
+        {
+          "start": 100,
+          "end": 1847,
+          "title": "AI Hardware deep dive"
+        },
+        {
+          "start": 1847,
+          "end": 2305,
+          "title": "Model Optimization"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "10",
+      "uploadedAt": "2024-07-03T11:01:00+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "5d39f1fbc7c43b27e161a8a3b6d93304b03374a85b52cd97593f779800aae70a"
+    },
+    {
+      "youtubeId": "VMmIdX9Zmuw",
+      "id": "YT-VMmIdX9Zmuw",
+      "title": "Google’s AI Overviews, Golden Gate Claude, the \"whale computer\" and scaling laws",
+      "format": "video",
+      "channelOrder": 123,
+      "duration": 2670,
+      "views": 4412,
+      "viewsApproximate": false,
+      "published": "2024-05-31",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Google’s AI Overviews, Golden Gate Claude, the \"whale computer\" and scaling laws”.",
+      "url": "https://www.youtube.com/watch?v=VMmIdX9Zmuw",
+      "poster": "https://i.ytimg.com/vi/VMmIdX9Zmuw/maxresdefault.jpg",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 141,
+          "title": "Intro"
+        },
+        {
+          "start": 141,
+          "end": 910,
+          "title": "Google AI Overviews"
+        },
+        {
+          "start": 910,
+          "end": 1731,
+          "title": "Golden Gate Claude"
+        },
+        {
+          "start": 1731,
+          "end": 2670,
+          "title": "\"Whale\" Computers and Scaling Laws"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "5",
+      "uploadedAt": "2024-05-31T10:00:23+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "e1d924ac49963b6848f5e6957a38657fe208cdcb37ce04175e63075951a40759"
+    },
+    {
+      "youtubeId": "T6DGGHlkYa0",
+      "id": "YT-T6DGGHlkYa0",
+      "title": "GPT-4o, AI overviews and our multimodal future",
+      "format": "video",
+      "channelOrder": 125,
+      "duration": 2464,
+      "views": 25868,
+      "viewsApproximate": false,
+      "published": "2024-05-17",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “GPT-4o, AI overviews and our multimodal future”.",
+      "url": "https://www.youtube.com/watch?v=T6DGGHlkYa0",
+      "poster": "https://i.ytimg.com/vi_webp/T6DGGHlkYa0/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 193,
+          "title": "<Untitled Chapter 1>"
+        },
+        {
+          "start": 193,
+          "end": 1014,
+          "title": "The Rise of Multimodality"
+        },
+        {
+          "start": 1014,
+          "end": 1812,
+          "title": "Collapsing Latency & Cost"
+        },
+        {
+          "start": 1812,
+          "end": 2464,
+          "title": "LLMs Eat Google Search"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "3",
+      "uploadedAt": "2024-05-17T10:00:33+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "fd1d72eccb08905c09409b8d314b3b4aa29bee2e61ed44402364b9711fea0bae"
+    },
+    {
+      "youtubeId": "hwNkFnR1U0I",
+      "id": "YT-hwNkFnR1U0I",
+      "title": "Mixture of Experts: Rabbit AI hiccups, GPT-2 chatbot, and OpenAI and the Financial Times",
+      "format": "video",
+      "channelOrder": 127,
+      "duration": 2494,
+      "views": 5918,
+      "viewsApproximate": false,
+      "published": "2024-05-03",
+      "description": "Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “Mixture of Experts: Rabbit AI hiccups, GPT-2 chatbot, and OpenAI and the Financial Times”.",
+      "url": "https://www.youtube.com/watch?v=hwNkFnR1U0I",
+      "poster": "https://i.ytimg.com/vi_webp/hwNkFnR1U0I/maxresdefault.webp",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 124,
+          "title": "Intro"
+        },
+        {
+          "start": 124,
+          "end": 832,
+          "title": "Rabbit AI hiccups"
+        },
+        {
+          "start": 832,
+          "end": 1934,
+          "title": "GPT-2 chatbot"
+        },
+        {
+          "start": 1934,
+          "end": 2494,
+          "title": "Open AI and the Financial Times"
+        }
+      ],
+      "transcript": "missing",
+      "metadataLevel": "full",
+      "producer": "IBM",
+      "collection": "Mixture of Experts",
+      "participants": [
+        "Chris Hay"
+      ],
+      "episode": "1",
+      "uploadedAt": "2024-05-03T16:07:06+00:00",
+      "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
+      "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts",
+      "sourceHash": "17418659689a71ea075a4a479878002f728695550016d3b778e0edb3dc88f5ba"
     }
   ]
 }

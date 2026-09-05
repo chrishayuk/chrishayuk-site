@@ -9,7 +9,7 @@ export function citationRecord(record: PublicationRecord): CitationRecord | null
 export function referenceFormats(record: PublicationRecord) {
  if(record.youtubeId){const video=getVideo(record.youtubeId);if(video)return videoReferences(video);}
  const citation = citationRecord(record);
- if (citation) return citationFormats(citation);
+ if (citation) return citationFormats(citation).map(f => ({ ...f, id: f.id === "csl" ? "csl-json" : f.id }));
  const url = `${SITE}${recordPath(record)}`;
  const plain = `${record.authors.join(", ")}. ${record.title} [Unpublished draft, version ${record.version}]. ${url}`;
  const esc = (v: string) => v.replace(/\\/g, "\\textbackslash{} ").replace(/[{}%&#_]/g, m => `\\${m}`);

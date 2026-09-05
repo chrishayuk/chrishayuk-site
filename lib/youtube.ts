@@ -1,7 +1,8 @@
+import { citationFormats, type CitationRecord } from "../vendor/hause/cite.ts";
 import ibmCatalogue from "../content/ibm-catalogue.json" with { type: "json" };
 import catalogue from "../content/youtube-catalogue.json" with { type: "json" };
 import captions from "../content/youtube-transcripts.json" with { type: "json" };
-export type ChannelVideo = (typeof catalogue.videos)[number] & { producer?: string; collection?: string; participants?: string[]; episode?: string | null; sourcePage?: string; participationEvidence?: string };
+export type ChannelVideo = (typeof catalogue.videos)[number] & { producer?: string; collection?: string; participants?: string[]; episode?: string | null; sourcePage?: string; participationEvidence?: string; uploadedAt?: string | null };
 export type Passage = {start:number;end:number;text:string};
 export const youtube = catalogue;
 const localPosters:Record<string,string>={"8Ppw8254nLI":"larql-poster.webp","UvogrjCgaJQ":"studio-poster.webp","5_ZiJpl4hvs":"latest-poster.webp"};
@@ -37,10 +38,15 @@ export function filterVideos(q="",format="all",sort="channel") {
  if(sort==="title")list.sort((a,b)=>a.title.localeCompare(b.title));
  return list;
 }
-export function videoReferences(v:ChannelVideo){
- const year=v.published?.slice(0,4)||"n.d."; const author=v.producer === "IBM" ? "IBM" : "Hay, C."; const plain=`${author} (${year}). ${v.title} [Video]. YouTube. ${v.url}`;
- const esc=(s:string)=>s.replace(/\\/g,"\\textbackslash{} ").replace(/[{}%&#_]/g,m=>`\\${m}`);
- return [{id:"plain",label:"Plain",text:plain},{id:"apa",label:"APA",text:plain},
- {id:"bibtex",label:"BibTeX",text:`@misc{${v.id},\n  author = {${v.producer === "IBM" ? "{IBM}" : "Hay, Chris"}},\n  title = {${esc(v.title)}},\n${v.published?`  year = {${year}},\n`:""}  howpublished = {YouTube video},\n  url = {${v.url}}\n}`},
- {id:"csl-json",label:"CSL-JSON",text:JSON.stringify({id:v.id,type:"motion_picture",title:v.title,author:v.producer === "IBM" ? [{literal:"IBM"}] : [{given:"Chris",family:"Hay"}],publisher:"YouTube",URL:v.url,...(v.published?{issued:{"date-parts":[v.published.split("-").map(Number)]}}:{})},null,2)}];
+/** Map a source film to HAUSE's citation model; retrieval is not publication. */
+export function videoCitation(v: ChannelVideo): CitationRecord {
+ return { id: v.id, kind: "film", title: v.title,
+  authors: v.producer === "IBM" ? [{ literal: "IBM" }] : [{ family: "Hay", given: "Chris" }],
+  ...(v.published ? { published: v.published } : {}), url: v.url,
+  publisher: "YouTube", abstract: v.description.split("\n\n")[0] || v.title,
+  partOf: { title: v.collection || "Chris Hay on YouTube", url: v.producer === "IBM" ? ibm.playlistUrl : youtube.channelUrl },
+ };
+}
+export function videoReferences(v: ChannelVideo) {
+ return citationFormats(videoCitation(v)).map(f => ({ ...f, id: f.id === "csl" ? "csl-json" : f.id }));
 }

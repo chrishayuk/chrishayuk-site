@@ -28,3 +28,24 @@ test("IBM selections use source dates and counts, with separate producer and par
  assert.ok(searchGraph("agent security").some(r=>r.id===latestMoe.id));
 });
 test("IBM panelist claim is backed by unique, dated original-source credits",async()=>{const audit=JSON.parse(await readFile(new URL("../content/ibm-appearances.json",import.meta.url),"utf8"));assert.equal(audit.verifiedCount,audit.appearances.length);assert.ok(audit.verifiedCount>=46);assert.equal(new Set(audit.appearances.map((r:{youtubeId:string})=>r.youtubeId)).size,audit.verifiedCount);assert.equal(audit.firstEpisode.episode,"1");assert.equal(audit.firstEpisode.published,"2024-05-03");const numbered=audit.appearances.filter((r:{episode:string|null})=>r.episode);assert.equal(new Set(numbered.map((r:{episode:string})=>r.episode)).size,numbered.length);for(const r of audit.appearances){assert.equal(r.participant,"Chris Hay");assert.equal(r.sourceUrl,`https://www.youtube.com/watch?v=${r.youtubeId}`);assert.match(r.descriptionHash,/^[a-f0-9]{64}$/);}assert.ok(audit.metadataChecked<=audit.playlistEntries);});
+
+test("every verified IBM appearance has a retrievable film record and local screening",async()=>{
+ const audit=JSON.parse(await readFile(new URL("../content/ibm-appearances.json",import.meta.url),"utf8"));
+ assert.equal(ibmVideos.length,audit.verifiedCount);assert.equal(allVideos.length,241);
+ for(const row of audit.appearances){const v=getVideo(row.youtubeId);assert.ok(v);assert.equal(v.episode,row.episode);assert.ok(records.some(r=>r.id===v.id&&r.publication==="catalogued"));assert.ok(searchGraph(v.title).some(r=>r.id===v.id));}
+ const history=searchGraph("How many episodes?").find(r=>r.id==="COLLECTION-MOE");assert.ok(history);assert.match(history.text,/at least 46/i);assert.equal(history.basis,"verified-appearance-register");
+});
+const {citationFormats,citationMeta}=await import("../vendor/hause/cite.ts");
+const {videoObjectLd,publicationMetadata}=await import("../vendor/hause/seo.ts");
+test("HAUSE citation surfaces preserve corporate authors, exact dates and missing dates",()=>{
+ const dated={id:"FILM-1",kind:"film" as const,title:"A & B: 4_bit {Models}",authors:[{literal:"Example Research"}],published:"2026-09-04",url:"https://example.org/film",publisher:"YouTube"};
+ const formats=citationFormats(dated);assert.match(formats.find(f=>f.id==="apa")!.text,/2026, September 4/);assert.match(formats.find(f=>f.id==="bibtex")!.text,/author = \{\{Example Research\}\}/);assert.match(formats.find(f=>f.id==="bibtex")!.text,/\\&/);
+ const csl=JSON.parse(formats.find(f=>f.id==="csl")!.text);assert.deepEqual(csl.author,[{literal:"Example Research"}]);assert.deepEqual(csl.issued["date-parts"],[[2026,9,4]]);
+ const unknown={...dated,published:undefined};const refs=citationFormats(unknown);assert.ok(refs.every(f=>!f.text.includes("NaN")));assert.match(refs.find(f=>f.id==="apa")!.text,/n\.d\./);assert.equal(JSON.parse(refs.find(f=>f.id==="csl")!.text).issued,undefined);assert.equal(citationMeta(unknown).citation_publication_date,undefined);assert.equal(citationMeta(dated).citation_publication_date,"2026/09/04");
+});
+test("HAUSE film metadata separates the catalogue URL, original source and participant",()=>{
+ const citation={kind:"film" as const,title:"A film",authors:[{literal:"IBM"}],url:"https://youtube.com/watch?v=example"};
+ const ld=videoObjectLd({citation,pageUrl:"https://example.org/film",thumbnailUrl:"https://example.org/poster.jpg",embedUrl:"https://youtube-nocookie.com/embed/example",participants:["Chris Hay"]});
+ assert.equal(ld.url,"https://example.org/film");assert.equal(ld.sameAs,citation.url);assert.equal(ld.uploadDate,undefined);assert.deepEqual(ld.creator,{"@type":"Organization",name:"IBM"});assert.deepEqual(ld.actor,[{"@type":"Person",name:"Chris Hay"}]);
+ const head=publicationMetadata({title:citation.title,description:"Synopsis",url:"https://example.org/film",siteName:"A publication",citation});assert.equal(head.robots.index,false);assert.equal(head.alternates.canonical,ld.url);assert.equal(head.other?.citation_public_url,citation.url);
+});
