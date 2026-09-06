@@ -23,6 +23,7 @@ export const visualNotebooks: PublicationRecord[] = [
         "notebook-address"
     ],
     "related": [
+        "N-ADDRESS-BUILD",
         "N-STATE",
         "N-ADDRESS",
         "N-AUTHORITY",
@@ -317,7 +318,7 @@ export const visualNotebooks: PublicationRecord[] = [
     dek: "Give a memory a question. Watch what it writes back.",
     abstract: "An address is a pattern a reader can respond to. This notebook follows the operation from six hand-built key–value pairs to Gemma’s evolving state: match a query, combine value directions, then read an answer. The film, source code and saved experiments show both what works and where addressing remains approximate.",
     concepts: ["ffn", "model-as-database", "model-memory", "model-representation"], media: ["notebook-address", "notebook-map"],
-    related: ["N-MAP", "N-STATE", "Q-FFN", "W-LARQL", "W-VINDEX3", "YT-g58j6DrLOZ0", "YT-8Ppw8254nLI"],
+    related: ["N-ADDRESS-BUILD", "N-MAP", "N-STATE", "Q-FFN", "W-LARQL", "W-VINDEX3", "YT-g58j6DrLOZ0", "YT-8Ppw8254nLI"],
     body: [
       { kind: "film", media: "notebook-address" },
       { kind: "observation", label: "01 / WHAT IS AN ADDRESS?", text: "Ask for the capital of France. France identifies the entity; capital identifies the relation you want to read. Currency would ask something different about the same place. In the opening animation, that question arrives at an FFN and a Paris direction is written into the residual stream—the model’s changing working state. The conveyor is an explanatory drawing. The address in a model is a vector of numbers, and matching it need not isolate a single neuron or a single fact." },
@@ -360,7 +361,7 @@ export const visualNotebooks: PublicationRecord[] = [
     abstract: "When two things in one context disagree, which one answers? A recorded long-context arc measures it: a compact record can replace a source that has been retired, is completely inert against one that can still be read, and a single blocked attention layer is enough to change which of them the model answers with. The source itself is never altered, so none of this licenses forgetting it.",
     concepts: ["context-engineering", "model-memory", "source-authority", "model-as-database"],
     media: ["film-still-HJlWDSyDcD4-1222"],
-    related: ["N-STATE", "N-CONTEXT", "N-MAP", "W-LARQL", "W-VINDEX3", "YT-HJlWDSyDcD4", "YT-TYgCRPCAFhE"],
+    related: ["N-ADDRESS-BUILD", "N-STATE", "N-CONTEXT", "N-MAP", "W-LARQL", "W-VINDEX3", "YT-HJlWDSyDcD4", "YT-TYgCRPCAFhE"],
     body: [
       { kind: "film", youtubeId: "HJlWDSyDcD4", start: 1170, caption: "The Apollo document read. The system routes to a stored window, loads it, reads the passage and answers. Every step assumes one thing: that the place it went to is the place entitled to answer." },
       { kind: "statement", text: "A newer record does not win by being right." },

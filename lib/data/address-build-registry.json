@@ -1,0 +1,99 @@
+{
+  "id": "EXP-20260906-181253-00733",
+  "slug": "address-build-1",
+  "title": "ADDRESS-BUILD-1 — at what depth do two phrasings of the same fact become functionally interchangeable?",
+  "status": "completed",
+  "hypothesis": "If a factual address is constructed through depth rather than stored, then two very different wordings of the same fact should start as genuinely different internal states and become interchangeable as depth increases: transplanting one wording's residual into another wording's forward pass should be increasingly harmless the later it is done, while transplanting a state that carries a DIFFERENT entity-relation binding stays consequential. It is false if same-binding transplants are already harmless at the earliest layer tested (the address is established earlier than supposed), or never become harmless (the network preserves distinct trajectories all the way into the final reader), or if late-layer neutrality extends to wrong-binding donors too (the late network is simply insensitive to what state it is given, which is not convergence). Separately and more weakly, if the representation itself changes basis while the address is built, a binding reader fitted at one depth should transfer poorly to a nearby depth and a fitted coordinate transform should recover part of that loss.",
+  "conclusion": "Supported, with a scoped and partly reframed claim. For the capital-vs-language distinction, relation information is already causally consequential and linearly readable by L8, while entity/binding information does not become strongly readable or causally decisive until roughly L24-L28; during that process at least the relation representation changes coordinates across depth. CAUSAL HALF (single-position transplant, splice floor bit-identical at 0.000e+00, 48 native-fact prompts, 4 wordings, 7 depths): same-binding transplants become harmless by L16 (retention 0.56 -> 0.96) and perfect at L20, but gate condition 2 FAILED in an informative way — a different-entity donor under the same relation is equally harmless through L20 (0.96 retention, donor-answer rate 0.00), so what converges by L16 is the relation frame, not the binding. Entity flips regime between L24 and L28 (retention 0.69 -> 0.00, donor-answer 0.12 -> 1.00). A different-relation donor is destructive from the earliest depth tested. The required donor-answer disambiguator earned its place in both directions: at L28-L30 every wrong-binding arm imposes the donor's answer at ~1.00, so late interchangeability is trivial value transport, while at L20 a donor carrying 'Paris' still leaves the model answering 'Tokyo' 96% of the time. REPRESENTATIONAL HALF (Part 2b, 194 prompts, 20 bindings, 12 wordings, 3 folds, blocking component-specific same-layer gate passed by all three): relation readability 0.90 at L8 saturating at L16, entity and binding near chance until L24 then 1.00 at L28 — independently reproducing the causal transition location with a different instrument. Cross-layer transfer shows the relation representation changing basis: L8->L12 identity 0.39 (below the 0.50 chance floor) versus Procrustes 0.90 against a 0.94 same-layer reference, and L20->L24 identity 0.46 versus Procrustes 1.00, with norm_only matching identity in every cell so it is not a scale effect. Gate conditions 4-5 are therefore SUPPORTED FOR RELATION and UNRESOLVED FOR ENTITY, whose same-layer readability is near chance through L24 leaving no signal to transfer. SCOPE LIMITS that bound every claim: single-position splice, so 'entity commits late' means not committed into the FINAL-POSITION residual strongly enough to override recipient context, not absent from the model's state; capital and language only, because currency and continent are unreachable under a shared wording bank on this model (multi-token answers plus a natural ' the' continuation) and per-relation wordings would entangle relation with phrasing; L28-L30 is an endpoint band where the state carries the answer token and each binding maps to a unique answer, so late entity readability is plausibly answer decoding and the mechanistic evidence window is L8-L24. NOT a finding: that the L20->L24 relation basis change is what enables entity binding to commit — a coincidence of location this design cannot adjudicate.",
+  "next_action": "COMPLETE, both halves run. Do not extend this record. The first Part 2 is preserved on it as an instrument failure (~1.5 training examples per binding class, 0.14 entity accuracy in all 21 cells) and must not be reinterpreted; Part 2b is the repair, with its gate frozen and its relation threshold raised from 0.70 to 0.85 for the two-class task before any readability number was seen. Three things would strengthen the result and none is opened now, each needing its own record: (1) a third relation, blocked here because a shared wording bank is required to keep relation from being read off the phrasing and no third relation is reachable under one on this model; (2) a second model, since everything here is Gemma 3 4B; (3) a FULL-MATRIX splice, which is the only way to test whether entity commitment is genuinely late rather than late only in the final-position residual — the recipient's earlier tokens still carry its entity and later attention can re-read them. Hand to map-8-chart-conjugacy, which is next after map-7: this record establishes that a BINDING REPRESENTATION changes charts across depth (for relation); MAP-8 owns whether the OPERATORS are conjugate, and neither licenses the other. The sharp question to carry over, as a question and not a result, is whether the coordinate reorganisation at L20-L24 and the entity binding event are the same phenomenon. Queue unchanged and not refilled: map-7-t3-local -> map-8-chart-conjugacy -> address-algebra-1, dec9-b independent. Also carry forward to address-algebra-1 as orientation only: the relation-early / entity-late ordering is now measured causally and representationally on native facts, which is the object that record asks about, but it does not touch its instrument gate or entity-holdout condition.",
+  "design": {
+    "arms": [
+      "R0 recipient baseline, no transplant",
+      "T1 SAME binding, different wording (Japan/capital -> Japan/capital) — the hypothesis arm",
+      "T2 same relation, DIFFERENT entity (France/capital -> Japan/capital)",
+      "T3 same entity, DIFFERENT relation (Japan/language -> Japan/capital)",
+      "T4 unrelated matched donor — controls for generic state replacement"
+    ],
+    "gate": {
+      "outcomes": [
+        "1-3 only: progressive functional convergence supported, changing charts unresolved",
+        "1-5: progressive construction through changing representations supported",
+        "same-binding swaps already neutral at the earliest layer: the address is established earlier than supposed",
+        "same-binding swaps never become neutral: the converging-address picture is wrong; the network preserves distinct trajectories into the final reader"
+      ],
+      "changing_charts_supported": "additionally: (4) same-layer binding readability improves while naive cross-layer transfer is materially worse; (5) a fitted coordinate transform recovers transfer better than identity and norm-only controls.",
+      "progressive_construction_supported": "ALL THREE: (1) same-binding causal interchangeability improves substantially with depth; (2) wrong-binding controls do NOT show the same improvement; (3) the improvement is not explained by late-layer insensitivity to all transplants, evidenced by T4 remaining consequential and by the donor-answer disambiguator above."
+    },
+    "scale": "12-20 native bindings x 4 paraphrases x 6-7 depths (L8, L12, L16, L20, L24, L28, L30), paired controls. Next-token logits only, no generation. State captures are reused across transplant arms.",
+    "method": "For recipient prompt B, replace the residual entering layer l at the final prompt position with the corresponding residual from donor prompt A, then run the remaining layers normally and read the next-token logits. Boundary convention i_L = residual entering layer L, matching map-7.",
+    "substrate": "google/gemma-3-4b-it bf16 via the MLX runtime already used by the address work (binding_runtime.Runtime), extended with a decoder-layer input hook. No Rust build.",
+    "parent_work": "map-5 is the methodological parent: donor-residual injection at matched layers, which found T_immediate <= L16 and T_branch bracketed in (L20, L24] on the planets set. This asks a different question (paraphrase interchangeability with binding-specific controls on native facts, not donor-forcing on installed content) but inherits the construction. map-5's stateless full-recompute harness is NOT a limitation here because only a single next-token distribution is read; its own conclusion warns that its one-shot failure was structural to that harness, which is exactly the trap this design avoids by not requiring generation.",
+    "splice_floor": "MANDATORY, before any arm is scored: transplanting a prompt's own captured state into itself must reproduce the unmodified forward bit-identically (max |logit delta| = 0.000e0, not merely small). map-2b construction; map-1 and map-2 both shipped a normalisation bug that this check would have caught.",
+    "primary_metric": "Functional interchangeability gap G_l = D(wrong-binding transplant, recipient) - D(same-binding transplant, recipient), with D = full-vocabulary KL. Target-token margin and top-1 retention reported alongside. The prediction is that G_l OPENS with depth.",
+    "programme_note": "Filed under lazarus, tagged address-programme.",
+    "object_under_test": "NATIVE factual bindings in the unmodified model (Japan/capital, France/currency, ...), NOT installed editor slots. This is deliberate and keeps the closed native-record branch closed: no writes, no C+A, no selector, no editing of any kind. It also makes the object the same one address-algebra-1 asks about.",
+    "part_2_changing_charts": {
+      "name": "cached cross-layer reader transfer — a lightweight state-level precursor to map-8",
+      "scope": "This establishes whether the BINDING REPRESENTATION changes charts. map-8 keeps the stronger question of whether the OPERATORS are conjugate. Neither licenses the other.",
+      "method": "fit the same small binding reader at each depth; compare reader_L(h_L) against reader_L(h_{L+delta}); then test whether a fitted orthogonal/Procrustes transform restores transfer",
+      "controls": "identity and norm-only transforms, matching the map-8 arm list"
+    },
+    "required_disambiguator": {
+      "why": "G_l alone cannot separate two very different mechanisms, and both predict the same curve. (i) A shared ADDRESS emerges, so same-binding states become substitutable. (ii) The late state simply carries the ANSWER, so any same-binding donor trivially supplies the right output token while wrong-binding donors supply the wrong one. Reporting only retention would let (ii) be written up as (i) — the same class of error the address-superposition-1 destructive control caught.",
+      "what": "Report DONOR-ANSWER RATE on T2/T3 at every depth, alongside recipient retention. If wrong-binding transplants increasingly cause the model to emit the DONOR's answer, the late state is carrying value identity and the result is about value transport, not address convergence. If they degrade without imposing the donor's answer, that is address-level incompatibility. Both are real findings; they must not be conflated, and the interpretation must be stated from this quantity, not assumed."
+    }
+  },
+  "tags": [
+    "address-programme",
+    "address-build-1",
+    "gemma3-4b",
+    "preregistered",
+    "transplant",
+    "activation-patching",
+    "kill-gated",
+    "progressive-address",
+    "native-facts",
+    "map8-precursor",
+    "staged-construction",
+    "supported-scoped",
+    "instrument-repair"
+  ],
+  "created_at": "2026-09-06T18:12:53.875512Z",
+  "updated_at": "2026-09-06T22:04:31.356983Z",
+  "programme_slug": "lazarus",
+  "programme_name": "Lazarus",
+  "latest_writeup": {
+    "version": 7,
+    "body_md": "## Consolidated statement of record\n\nThe claim this experiment supports, at the width it was earned:\n\n> **For the capital-vs-language distinction, relation information is already causally consequential and linearly readable by L8, while entity/binding information does not become strongly readable or causally decisive until roughly L24–L28. During that process, at least the relation representation changes coordinates across depth.**\n\nThree things carry it, and each is stated with its own scope.\n\n**1. Two independent instruments agree on the late entity transition.** The causal transplant puts entity commitment between L24 and L28; the probe puts the readability jump (0.30 → 1.00) across the same boundary. Different methods, same location. This is the load-bearing agreement in the record.\n\n**2. The coordinate-change result for relation is clean.** L8→L12 identity 0.39 (below the 0.50 chance floor) → Procrustes 0.90 against a 0.94 same-layer reference; L20→L24 identity 0.46 → Procrustes 1.00. `norm_only` matches `identity` in every cell. The information is present and not in the same basis.\n\n**3. L28–L30 is an endpoint band, not address geometry.** The state carries the answer token there (donor-answer rate ≈1.00 causally), and each binding maps to a unique answer, so perfect late \"entity\" readability is plausibly answer decoding. **The mechanistic evidence window is L8–L24.** Nothing in L28–L30 should be cited as evidence about address representation.\n\n### The sequence, with its evidential status marked\n\n| Stage | Support |\n|---|---|\n| relation frame established early | causal (bound by L8) + representational (0.90 at L8) |\n| representation changes chart | representational only, and **only for relation** |\n| entity/binding commits late | causal (L24–L28) + representational (0.30→1.00) |\n| value becomes explicit at the endpoint | causal (donor-answer ≈1.00 at L28) |\n\nEntity's own chart behaviour is **unresolved**: its same-layer readability is near chance through L24, so there is no signal to transfer, and its only strong value sits inside the confounded band.\n\n### One inference, explicitly not a finding\n\nThe larger of the two relation basis changes (L20→L24) falls exactly where entity/binding begins to rise. A tempting reading is that *a coordinate reorganisation of the relation frame is part of what enables entity–relation binding to commit*. That is an inference from a coincidence of location in a single model on a two-relation bank. This design cannot decide it, and it must not be cited as a result — but it is a sharp question to hand to `map-8-chart-conjugacy`, which owns whether the operators themselves are conjugate.\n\n### What would strengthen it\n\nA third relation (blocked here by the shared-wording-bank requirement), a second model, and a full-matrix splice to test whether entity commitment is genuinely late rather than merely late *in the final-position residual*. None of these is opened now; the queue stands.\n",
+    "author": "m3-claude",
+    "created_at": "2026-09-06T22:04:04.323574Z"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "id": 1019,
+      "run_id": null,
+      "experiment_id": "EXP-20260906-181253-00733",
+      "kind": "other",
+      "uri": "git+https://github.com/chrishayuk/larql@f97a470644df1c38498030896f8f6cfffe7689b1",
+      "bytes": null,
+      "sha256": null,
+      "meta": {
+        "probe": "selector-dev/probe_build_hook.py — feasibility, splice floor and timing probe run before the experiment was committed to",
+        "branch": "exp/native-record-composition",
+        "git_repo": "chrishayuk/larql",
+        "git_commit": "f97a470644df1c38498030896f8f6cfffe7689b1",
+        "causal_half": "selector-dev/run_address_build_1.py -> address_build_1_result.json, rows_sha256 9e039cc98dda26749773df55b468ced2bc522d592b8eb72a73dae9e29924a7ba. Splice floor bit-identical at 0.000e+00.",
+        "part_2_failed": "selector-dev/run_address_build_1_part2.py -> address_build_1_part2_result.json, result_sha256 054855279701a4f9c2220e5d746de7677a1f5ed39a06385ec4ea8f1149ec407e. PRESERVED as an instrument failure, not to be reinterpreted.",
+        "remaining_gap": "NPZ state captures excluded by the repo-wide *.npz rule, same as the parent campaign.",
+        "part_2b_repair": "selector-dev/run_address_build_1_part2b.py -> address_build_1_part2b_result.json, result_sha256 516bd1139a73622080890958b5488261cad3e9e889642364ed65b2b450fdcebf"
+      },
+      "created_at": "2026-09-06T22:05:06.142856Z",
+      "name": "address-build-1-harness",
+      "role": "produced",
+      "verify_status": null,
+      "verified_at": null,
+      "verify_detail": null
+    }
+  ]
+}

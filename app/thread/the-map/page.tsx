@@ -6,6 +6,7 @@ import { mapThread as thread, resolveThreadStep, memoryStudy, authorityStudy } f
 import { authorityGate, gateArm } from "@/lib/authority-gate";
 import { getMedia } from "@/lib/media";
 import { SITE } from "@/lib/records";
+import { AddressBuildCard } from "@/components/AddressBuildCard";
 import { WorkVisual } from "@/components/WorkSelection";
 
 export const metadata = pageMetadata(thread.title, thread.abstract, thread.path, `${SITE}/media/notebook/stills/HJlWDSyDcD4-156.webp`);
@@ -20,8 +21,8 @@ export default function Page() {
         <div className="thread-step-number record-voice">{String(i+1).padStart(2,"0")}<span>{step.kind}</span></div>
         <div className="thread-step-content"><p className="kicker record-voice">{step.label}</p><h2><Link href={step.url}>{step.title}</Link></h2><p>{step.text}</p><p className="thread-step-status record-voice">{step.status}{step.date ? ` · ${step.date}` : ""}</p><Link href={step.url} className="text-link">{step.id === memoryStudy.id ? "TRY THE MECHANISM" : step.id === authorityStudy.id ? "OPEN THE INSTRUMENT" : step.kind === "film" ? "WATCH FROM 02:00" : step.kind === "work" ? "EXPLORE THE WORK" : "OPEN THE NOTE"} ↗</Link></div>
         <Link href={step.url} className="thread-step-image" aria-label={`Open ${step.title}`}>
-          {step.id === "W-VINDEX3" ? <WorkVisual id={step.id}/> : step.id === authorityStudy.id ? <div className="thread-authority-preview"><span className="record-voice">EIGHT READS OPEN</span><strong>{gateArm([])!.answer}</strong><span className="record-voice">RETIRE LAYER {authorityGate.architecture.globalLayers[4]}</span><strong data-flipped="true">{gateArm([29])!.answer}</strong><span className="record-voice">RECORDED RESULT ↗</span></div> : step.id === memoryStudy.id ? <div className="thread-demo-preview"><span className="record-voice">{addressedMemory.facts[0].address.toUpperCase()}</span><span aria-hidden="true">↓</span><strong>{readAddress(0).answer}.</strong><span className="record-voice">CHANGE THE QUESTION ↗</span></div> : media && <img src={media.poster || media.desktop} alt={media.alt} width={1600} height={900} loading={i === 0 ? "eager" : "lazy"}/>}
-          {step.id !== memoryStudy.id && step.id !== authorityStudy.id && <span className="record-voice">{step.id === "W-VINDEX3" ? "CONCEPTUAL STUDY" : media?.type === "film" ? "CONSTRUCTED VISUAL STUDY" : "FROM THE FILM"} ↗</span>}
+          {step.id === "N-ADDRESS-BUILD" ? <AddressBuildCard compact/> : step.id === "W-VINDEX3" ? <WorkVisual id={step.id}/> : step.id === authorityStudy.id ? <div className="thread-authority-preview"><span className="record-voice">EIGHT READS OPEN</span><strong>{gateArm([])!.answer}</strong><span className="record-voice">RETIRE LAYER {authorityGate.architecture.globalLayers[4]}</span><strong data-flipped="true">{gateArm([29])!.answer}</strong><span className="record-voice">RECORDED RESULT ↗</span></div> : step.id === memoryStudy.id ? <div className="thread-demo-preview"><span className="record-voice">{addressedMemory.facts[0].address.toUpperCase()}</span><span aria-hidden="true">↓</span><strong>{readAddress(0).answer}.</strong><span className="record-voice">CHANGE THE QUESTION ↗</span></div> : media && <img src={media.poster || media.desktop} alt={media.alt} width={1600} height={900} loading={i === 0 ? "eager" : "lazy"}/>}
+          {step.id !== memoryStudy.id && step.id !== authorityStudy.id && <span className="record-voice">{step.id === "N-ADDRESS-BUILD" ? "RECORDED EVIDENCE" : step.id === "W-VINDEX3" ? "CONCEPTUAL STUDY" : media?.type === "film" ? "CONSTRUCTED VISUAL STUDY" : "FROM THE FILM"} ↗</span>}
         </Link>
       </li>;
     })}</ol>

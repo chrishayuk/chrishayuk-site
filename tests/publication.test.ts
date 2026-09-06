@@ -193,8 +193,9 @@ test("unlisted previews resolve at their own URL and are absent from every listi
 
  // The wiring holds even when nothing is unlisted, which is when it is easiest to break.
  assert.deepEqual(listed.map(r => r.id), allRecords.filter(isListed).map(r => r.id));
- const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
- assert.match(index, /composed\.filter\(isListed\)/);
+ const { notebookSelection } = await import("../lib/notebook-selection.ts");
+ assert.ok(notebookSelection.every(isListed));
+ for (const record of notebookSelection) assert.equal(record, getRecord(record.id));
  assert.match(await readFile(new URL("../app/sitemap.xml/route.ts", import.meta.url), "utf8"), /indexedRecords\(\)/);
  const page = await readFile(new URL("../components/RecordPage.tsx", import.meta.url), "utf8");
  assert.match(page, /UNLISTED PREVIEW · NOT PUBLISHED/);

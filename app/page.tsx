@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AddressBuildCard } from "@/components/AddressBuildCard";
+import { latestNotebook } from "@/lib/notebook-selection";
 import { mapThread } from "@/lib/threads";
 import { HOUSE } from "@/lib/house";
 import { Media } from "@/components/Media";
@@ -13,11 +15,11 @@ const Kicker = ({ children }: { children: React.ReactNode }) => <p className="ki
 const TextLink = ({ href, children }: { href: string; children: React.ReactNode }) => <Link className="text-link" href={href}>{children}<span aria-hidden="true">↗</span></Link>;
 
 export default function Home() {
- const notebook = getRecord("N-MAP")!;
+ const notebook = latestNotebook;
  const notebookPath = recordPath(notebook);
  const selectedFilms = [featuredVideo, popularMoe];
  const notes = [
-  {record:getRecord("N-STATE")!, media:getMedia("film-still-HJlWDSyDcD4-240")!},
+  {record:getRecord("N-MAP")!, media:getMedia("notebook-map")!},
   {record:getRecord("N-ADDRESS")!, media:getMedia("notebook-address")!},
  ];
  return <main id="main" className="homepage editorial-home">
@@ -35,8 +37,8 @@ export default function Home() {
   </section>
 
   <section id="from-the-notebook" className="notebook-scene notebook-feature" data-scene="latest-notebook" data-hause-act="connection" aria-labelledby="notebook-feature-heading">
-   <div className="notebook-feature-visual"><Media id="notebook-map-trajectory"/><p className="record-voice">FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL</p></div>
-   <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">Follow a question through the model. Change the state. Then try a memory you can inspect yourself.</p><div className="inline-links"><TextLink href={notebookPath}>EXPLORE THE NOTE</TextLink><TextLink href={mapThread.path}>FOLLOW THE THREAD</TextLink></div><p className="record-voice notebook-footnote">FILM → EXPLANATION → INTERACTIVE STUDY</p></div>
+   <div className="notebook-feature-visual">{notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>
+   <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">{notebook.dek}</p><div className="inline-links"><TextLink href={notebookPath}>EXPLORE THE NOTE</TextLink><TextLink href={mapThread.path}>FOLLOW THE THREAD</TextLink></div><p className="record-voice notebook-footnote">{notebook.lineage}</p></div>
   </section>
 
   <section id="selected-films" className="home-selected-films" data-scene="selected-films" aria-labelledby="selected-films-heading">
