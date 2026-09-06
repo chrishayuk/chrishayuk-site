@@ -5,7 +5,7 @@ Four draft records are composed in `lib/visual-notebooks.ts`:
 - `N-MAP` — `/notebook/what-is-the-map`
 - `N-STATE` — `/notebook/what-has-to-survive`
 - `N-ADDRESS` — `/notebook/reading-by-address`
-- `N-AUTHORITY` — `/notebook/which-source-wins` (unlisted preview, see [previews](previews.md))
+- `N-AUTHORITY` — `/notebook/which-source-wins`
 
 They enter the existing catalogue and Ask graph as editorial drafts. They do not enter publication feeds or the published citation endpoint. The page's reference controls retain unpublished-draft wording. The new `film` act carries a YouTube identity, starting timestamp and authored caption; its caption is indexed as editorial text, never as an automatic transcript. A `discusses-film` edge links the act to the existing film record. Film pages show the explicitly connected notebook entries.
 
@@ -61,11 +61,7 @@ The expanded note follows query → key match → activation → value sum → a
 
 The review distinguishes a selected stored key from natural-language encoding; positive cross-activations from an exact isolated lookup; top-five retrieval from top-one accuracy; and held-out phrasing from held-out entities. Layer 26 leads paraphrase top-five in `route_sweep.json`, while layer 28 has higher top-one scores. Native retention means six original argmax tokens retained, not universal non-interference. The note stays an explicitly referenced draft.
 
-## Which source wins / draft v0.1, unlisted
-
-This note is deployed as an [unlisted preview](previews.md): it has a working URL and
-appears in no index, feed, thread or graph. `/demos/authority-gate` is withheld the same
-way. Removing `visibility: "unlisted"` from the record and the study lists both.
+## Which source wins / draft v0.1
 
 `N-AUTHORITY` follows a recorded long-context arc through four questions: whether a
 compact record can replace a source that has been retired, whether it can overrule one
@@ -100,3 +96,59 @@ on the scale.
 The study is `noindex`, like the existing demo, and carries a recorded-identity block with
 the experiment IDs behind each instrument. It has no inference backend and no new service
 requirement.
+
+## Studies, not demos
+
+An interactive page is a **study**, and the thing it operates is an **instrument**. The
+word carries a commitment:
+
+> An interactive study may expose recorded evidence. It must never manufacture an answer
+> where the experiment has none.
+
+`/demos/addressed-memory` honours it by computing a constructed example whose every
+operation is inspectable. `/demos/authority-gate` honours it by looking up recorded arms
+and returning nothing for the 241 layer subsets that were never run. Neither simulates a
+result. A future study that cannot meet this rule should not be built.
+
+The paths keep their `/demos/` prefix because they are already public and URL stability is
+a house rule; the language everywhere else says study or instrument.
+
+## Where a note comes from
+
+The notebook began as a companion to the films, and `N-AUTHORITY` is the first note that
+does not start with one. Each record therefore declares its own `lineage`, shown on the
+index card:
+
+| Note | Lineage |
+|---|---|
+| `N-MAP` | FILM → QUESTION → RECORD |
+| `N-STATE` | FILM → QUESTION → RECORD |
+| `N-ADDRESS` | FILM → QUESTION → INSTRUMENT |
+| `N-AUTHORITY` | FILM → QUESTION → EVIDENCE → INSTRUMENT |
+
+Future notes can declare routes the films never supply — `EXPERIMENT → SURPRISE → NOTEBOOK`,
+`PROTOTYPE → QUESTION → NOTEBOOK`, `OBSERVATION → EXPERIMENT → NOTEBOOK`. The index no
+longer says “visual notes”, and its introduction no longer implies every note explains a
+film.
+
+## Two reading speeds
+
+`N-AUTHORITY` is denser than the map note and its ramp is steeper. Rather than cut the
+material that makes it citeable, it carries a `summary` act — the argument in five plain
+lines, immediately after the opening statement and before any measurement:
+
+> Two claims disagree inside one context. The old source is still readable. The new record
+> does nothing at all. Retire one particular attention read. The answer changes.
+
+A surface reader can take those five lines and the instrument and leave. A research reader
+continues into the bits, the layer subsets, the controls, the experiment identifiers and
+the qualifications. The `summary` act is a general form, available to any record whose
+argument outruns its ramp; its text is indexed for retrieval like every other act.
+
+## The index card
+
+`N-AUTHORITY`'s card is not a film frame. `components/AuthorityCard.tsx` draws the conflict
+itself: the layer rail with the gate marked, and both recorded outcomes side by side —
+7431 while eight reads are open, 5824 once one is retired. Both states are always drawn, so
+the still frame carries the whole argument and motion only moves the emphasis between them.
+It registers with the shared motion coordinator and has its own play/pause control.

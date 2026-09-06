@@ -7,13 +7,16 @@ a real phone — before deciding whether it belongs in the publication at all.
 Set one field:
 
 ```ts
-{ ...draft, visibility: "unlisted", id: "N-AUTHORITY", slug: "which-source-wins", … }
+{ ...draft, visibility: "unlisted", id: "N-EXAMPLE", slug: "a-note-in-review", … }
 ```
+
+`N-AUTHORITY` was reviewed this way and is now listed. Nothing is unlisted at present; the
+mechanism and its test remain, because the next note will want it.
 
 ## What that changes
 
-The record resolves at its canonical path, `/notebook/which-source-wins`. The URL does not
-change when it is later listed, so a review link stays valid and no redirect is needed.
+The record resolves at its canonical path, `/notebook/<slug>`. The URL does not change when
+it is later listed, so a review link stays valid and no redirect is needed.
 
 Everywhere else it is absent:
 
@@ -69,9 +72,11 @@ preview without being edited.
 
 ## Listing it
 
-Delete the `visibility` field. Nothing else changes — same URL, same ID, same version. Then
-check the surfaces it rejoins: the notebook index count, the thread numbering and any
-thread copy that assumed the shorter sequence.
+Delete the `visibility` field from the record, and from any study in `lib/threads.ts` that
+should appear with it. Nothing else changes — same URL, same ID, same version. Then check
+the surfaces it rejoins: the notebook index count, the thread numbering, any thread copy
+that assumed the shorter sequence, and `scripts/check-deployment.mjs`, which asserts the
+thread's step count and should now assert the note is listed rather than hidden.
 
 Listing is still not publishing. A listed record remains a draft until it gets a real
 publication date and an immutable snapshot through `scripts/publish-record.ts`.

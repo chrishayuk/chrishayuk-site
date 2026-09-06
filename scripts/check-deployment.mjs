@@ -97,7 +97,7 @@ const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
 assert.match(thread.body,/curated reading order/i);
-for(let step=1;step<=7;step++) assert.ok(thread.body.includes(`id="step-${step}"`));
+for(let step=1;step<=9;step++) assert.ok(thread.body.includes(`id="step-${step}"`));
 assert.match(thread.body,/ItemList/);
 const threadSearch=JSON.parse((await request("/api/search?q=map%20memory&scope=records")).body);
 assert.ok(threadSearch.results.some(r=>r.id==="THREAD-MAP"&&r.basis==="curated-thread"));
@@ -136,23 +136,32 @@ assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
-// An unlisted preview must be reachable at its own URL and listed nowhere.
-for (const [id, path] of [["N-AUTHORITY", "/notebook/which-source-wins"], [null, "/demos/authority-gate"]]) {
-  const page = await request(path);
-  assert.equal(page.status, 200, path);
-  assert.match(page.body, /name="robots" content="noindex, nofollow"/, path);
-  assert.match(page.body, /UNLISTED PREVIEW · NOT PUBLISHED/, path);
-  assert.ok(!sitemap.body.includes(path), `${path} in sitemap`);
-  if (id) assert.ok(!graph.nodes.some(n => n.id === id || n.recordId === id), `${id} in graph`);
-}
-for (const listing of ["/notebook", "/ideas", "/record", "/thread/the-map", "/knowledge"]) {
-  const page = await request(listing);
-  assert.doesNotMatch(page.body, /which-source-wins|N-AUTHORITY|authority-gate/, listing);
-}
-for (const feed of ["/rss.xml", "/feed.json", "/api/records", "/api/concepts"]) {
-  assert.doesNotMatch((await request(feed)).body, /which-source-wins|N-AUTHORITY/, feed);
-}
-assert.deepEqual(JSON.parse((await request("/api/search?q=which%20source%20wins")).body).results, []);
+// The authority note is listed: on the index, in the thread, the graph and Ask.
+const notebook = await request("/notebook");
+assert.match(notebook.body, /href="\/notebook\/which-source-wins"/);
+assert.match(notebook.body, /FILM → QUESTION → EVIDENCE → INSTRUMENT/);
+assert.match(notebook.body, /authority-card/);
+assert.doesNotMatch(notebook.body, /VISUAL NOTES/);
+const authority = await request("/notebook/which-source-wins");
+assert.equal(authority.status, 200);
+assert.match(authority.body, /rel="canonical" href="https:\/\/chrishayuk.com\/notebook\/which-source-wins"/);
+assert.match(authority.body, /name="robots" content="index, follow"/);
+assert.doesNotMatch(authority.body, /UNLISTED PREVIEW/);
+assert.match(authority.body, /THE ARGUMENT, IN FIVE LINES/);
+assert.match(authority.body, /demo-invitation-stage/);
+assert.match(authority.body, /thread-navigation/);
+assert.ok(sitemap.body.includes("/notebook/which-source-wins") === false, "drafts stay out of the sitemap");
+assert.ok(graph.nodes.some(n => n.recordId === "N-AUTHORITY" && n.kind === "act" && n.basis === "draft-record"));
+const authoritySearch = JSON.parse((await request("/api/search?q=inert%20not%20outvoted&scope=records")).body);
+assert.ok(authoritySearch.results.some(r => r.recordId === "N-AUTHORITY" && r.basis === "draft-record"));
+const study = await request("/demos/authority-gate");
+assert.equal(study.status, 200);
+assert.match(study.body, /gate-track/);
+assert.match(study.body, /name="robots" content="noindex, follow"/);
+assert.doesNotMatch(study.body, /UNLISTED PREVIEW/);
+assert.match(study.body, /never manufacture an answer where the experiment has none/);
+// The instrument must never invent an answer for an arm that was not run.
+assert.match(study.body, /Not in the record|were never run/);
 assert.equal((await request("/api/health")).status, 200);
 assert.equal((await request("/og-house.png")).status, 200);
 console.log("Production homepage, visual notebooks, interactive demo, clip media, catalogue, canonical redirects, indexing, graph, Ask and citations verified.");

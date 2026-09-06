@@ -5,7 +5,7 @@ import { Acts } from "@/components/Acts";
 import { pageMetadata } from "@/lib/metadata";
 import { authorityGate as data } from "@/lib/authority-gate";
 
-export const metadata = { ...pageMetadata("Which source wins — interactive study", "Replay the recorded arms of a long-context authority experiment: promote a record beside the question, retire the original sentence from individual attention layers, and read the answer that was actually measured.", "/demos/authority-gate"), robots: { index: false, follow: false } };
+export const metadata = { ...pageMetadata("Which source wins — interactive study", "Replay the recorded arms of a long-context authority experiment: promote a record beside the question, retire the original sentence from individual attention layers, and read the answer that was actually measured.", "/demos/authority-gate"), robots: { index: false, follow: true } };
 
 export default function Page() {
   return <main id="main" className="publication-main authority-demo">
@@ -15,7 +15,6 @@ export default function Page() {
       <p className="dek">Two claims in one context. Only one of them answers.</p>
       <p>A sentence planted 55,000 tokens back says the code is 7431. A short record beside the question says 5824. This study replays what was actually measured: which one the model answered with, and what had to change before the newer record could be read at all.</p>
       <div className="inline-links"><a className="text-link" href="/notebook/which-source-wins">READ THE NOTEBOOK ↗</a><a className="text-link" href="/notebook/what-has-to-survive">WHAT HAS TO SURVIVE ↗</a></div>
-      <aside className="unlisted-banner" role="note"><p className="record-voice">UNLISTED PREVIEW · NOT PUBLISHED</p><p>This study has a working URL so it can be reviewed in place. It is linked from no index, excluded from the reading thread and the sitemap, and marked noindex for search engines.</p></aside>
     </header>
     <PromotionInstrument/>
     <GateInstrument/>
@@ -27,7 +26,7 @@ export default function Page() {
           "Every arm here asks the same question about the same planted sentence, at one depth, on one model.",
           "Layer 29 is sufficient to flip the answer. It is not necessary: two other subsets flip without it.",
           "A recorded divergence is a measurement of these arms, not a property of transformers.",
-        ], principle: "An instrument that replays a small experiment should say how small it is." },
+        ], principle: "An interactive study may expose recorded evidence. It must never manufacture an answer where the experiment has none." },
         { kind: "observation", label: "CONTINUE THE INVESTIGATION", text: "The notebook follows the same arc from the first promotion result to the question it leaves open: what makes a source overridable without an attention intervention at all.", references: [
           { label: "Which source wins?", url: "/notebook/which-source-wins" },
           { label: "What has to survive?", url: "/notebook/what-has-to-survive" },

@@ -7,6 +7,7 @@ export const visualNotebooks: PublicationRecord[] = [
   {
     ...draft,
     "id": "N-MAP",
+    "lineage": "FILM → QUESTION → RECORD",
     "slug": "what-is-the-map",
     "title": "What is the map actually a map of?",
     "dek": "Follow a question through the model. Then change the state it is following.",
@@ -230,7 +231,7 @@ export const visualNotebooks: PublicationRecord[] = [
                     "url": "https://github.com/chrishayuk/the-mechanism/blob/main/ffn.py"
                 },
                 {
-                    "label": "Try the addressed-memory demo",
+                    "label": "Try the addressed-memory study",
                     "url": "/demos/addressed-memory"
                 },
                 {
@@ -282,7 +283,7 @@ export const visualNotebooks: PublicationRecord[] = [
     ]
   },
   {
-    ...draft, id: "N-STATE", slug: "what-has-to-survive", title: "What has to survive?",
+    ...draft, id: "N-STATE", lineage: "FILM → QUESTION → RECORD", slug: "what-has-to-survive", title: "What has to survive?",
     dek: "The next word. The rest of the conversation.",
     abstract: "What state must a model retain to continue? This notebook distinguishes all-position residual state, a single token’s residual and persistent decode state. Full-sequence transplantation and MAP-5 test different boundaries; neither justifies compressing every conversation into one vector.",
     concepts: ["residual-stream", "model-memory", "context-engineering"], media: ["notebook-state"],
@@ -307,7 +308,7 @@ export const visualNotebooks: PublicationRecord[] = [
     ],
   },
   {
-    ...draft, version: "0.2", id: "N-ADDRESS", slug: "reading-by-address", title: "Reading by address.",
+    ...draft, version: "0.2", id: "N-ADDRESS", lineage: "FILM → QUESTION → INSTRUMENT", slug: "reading-by-address", title: "Reading by address.",
     dek: "Give a memory a question. Watch what it writes back.",
     abstract: "An address is a pattern a reader can respond to. This notebook follows the operation from six hand-built key–value pairs to Gemma’s evolving state: match a query, combine value directions, then read an answer. The film, source code and saved experiments show both what works and where addressing remains approximate.",
     concepts: ["ffn", "model-as-database", "model-memory", "model-representation"], media: ["notebook-address", "notebook-map"],
@@ -317,11 +318,11 @@ export const visualNotebooks: PublicationRecord[] = [
       { kind: "observation", label: "01 / WHAT IS AN ADDRESS?", text: "Ask for the capital of France. France identifies the entity; capital identifies the relation you want to read. Currency would ask something different about the same place. In the opening animation, that question arrives at an FFN and a Paris direction is written into the residual stream—the model’s changing working state. The conveyor is an explanatory drawing. The address in a model is a vector of numbers, and matching it need not isolate a single neuron or a single fact." },
       { kind: "observation", label: "A LOCATION THAT A READER RECOGNISES", text: "An address here is closer to a pattern recognised by a reader than a numbered drawer. The input pattern and the weights that respond to it belong together. That connects this note to the map: a point in a picture is only useful once we know which operation reads the underlying state. We can make that relationship concrete by building a memory whose keys and values we can inspect.", references: [{ label: "Begin with the map", url: "/notebook/what-is-the-map" }] },
       { kind: "observation", label: "02 / BUILD A MEMORY WITH SIX FACTS", text: "The Mechanism’s ffn.py plants capital, currency and language facts for two invented places. Atlantis has Paris, Euro and Latin; Zerivia has Cairo, Rand and Tamil. Each full question receives its own random, normalised 24-number key. Each answer receives a value direction. We put the six keys into the rows of an input matrix and the corresponding values into an output matrix. There is no training: we choose what this little memory contains.", references: [{ label: "Read ffn.py", url: "https://github.com/chrishayuk/the-mechanism/blob/main/ffn.py" }] },
-      { kind: "observation", label: "03 / MATCH → ACTIVATE → WRITE → READ", text: "Choose capital of Atlantis. The demo supplies that address’s key vector as the input, compares it with all six keys using dot products, and clips negative matches to zero with ReLU. Each remaining activation scales its value direction; adding those contributions produces the output vector. Finally, the six answer readers score that output and the highest score supplies the displayed word. This is two matrix multiplications with a nonlinearity between them, followed by an answer readout. Nothing iteratively unpacks all six facts before answering this question." },
+      { kind: "observation", label: "03 / MATCH → ACTIVATE → WRITE → READ", text: "Choose capital of Atlantis. The study supplies that address’s key vector as the input, compares it with all six keys using dot products, and clips negative matches to zero with ReLU. Each remaining activation scales its value direction; adding those contributions produces the output vector. Finally, the six answer readers score that output and the highest score supplies the displayed word. This is two matrix multiplications with a nonlinearity between them, followed by an answer readout. Nothing iteratively unpacks all six facts before answering this question." },
       { kind: "connection", demonstration: "addressed-memory", text: "Choose capital of Atlantis and follow the bars to Paris. Switch to currency of Atlantis, then suppress the matching neuron. The key matches, activations and answer scores all come from the calculation you are changing.", links: [{ href: "/demos/addressed-memory", label: "Try the mechanism — choose an address" }] },
-      { kind: "observation", label: "WHAT TO NOTICE WHEN YOU SWITCH A NEURON OFF", text: "The matching key scores approximately one because the input is that key itself. Other randomly chosen keys can still have positive matches, so several values may contribute. Suppressing a neuron removes its contribution from the sum; it does not erase the entire output. Watch the answer scores as well as the winning word. The demo always names the largest score, even after a destructive intervention, so a displayed answer is not a guarantee of a confident or correct read." },
+      { kind: "observation", label: "WHAT TO NOTICE WHEN YOU SWITCH A NEURON OFF", text: "The matching key scores approximately one because the input is that key itself. Other randomly chosen keys can still have positive matches, so several values may contribute. Suppressing a neuron removes its contribution from the sum; it does not erase the entire output. Watch the answer scores as well as the winning word. The study always names the largest score, even after a destructive intervention, so a displayed answer is not a guarantee of a confident or correct read." },
       { kind: "evidence", items: [{ label: "CONSTRUCTED MEMORY / SIX READS", status: "SUPPORTED", detail: "ffn.json records 6/6 intended answers for this set of planted keys and values. The browser adaptation uses the same seed-0 vectors and is checked against independent NumPy readouts. Neuron suppression is an interactive extension, not a result reported in that saved run." }] },
-      { kind: "observation", label: "THE QUESTION IS ALREADY ENCODED IN THIS DEMO", text: "Selecting a label supplies a stored key directly. This small memory does not understand the English phrase, derive a new entity–relation combination, or learn from a document. Those jobs are precisely what a real system must add. Its six successful reads also do not establish unlimited capacity: non-orthogonal keys can activate together, and adding more entries can change the combined output." },
+      { kind: "observation", label: "THE QUESTION IS ALREADY ENCODED IN THIS STUDY", text: "Selecting a label supplies a stored key directly. This small memory does not understand the English phrase, derive a new entity–relation combination, or learn from a document. Those jobs are precisely what a real system must add. Its six successful reads also do not establish unlimited capacity: non-orthogonal keys can activate together, and adding more entries can change the combined output." },
       { kind: "film", media: "notebook-map" },
       { kind: "observation", label: "04 / PACKING AND READING ARE DIFFERENT OPERATIONS", text: "The animation adds capital, currency and language directions into one vector. Recovering every ingredient of that mixture would be a different task from applying a reader that answers one question. The film’s memory argument makes that distinction useful: storing contributions together need not mean reconstructing a complete table of facts for every read. The illustration uses constructed six-dimensional vectors. The 24-dimensional FFN demo uses separate key and value matrices. They illustrate related operations, rather than two measurements of the same model.", references: [{ label: "Vector animation source", url: "https://github.com/chrishayuk/the-mechanism/blob/main/visuals/v1_spot_in_space.py" }] },
       { kind: "film", youtubeId: "g58j6DrLOZ0", start: 1030, caption: "Australia, Sydney and Canberra. The layer readouts change as the model computes an answer. Watch the transition before treating the address as something fixed from the start." },
@@ -348,7 +349,8 @@ export const visualNotebooks: PublicationRecord[] = [
     ],
   },
   {
-    ...draft, visibility: "unlisted", id: "N-AUTHORITY", slug: "which-source-wins", title: "Which source wins?",
+    ...draft, id: "N-AUTHORITY", slug: "which-source-wins", title: "Which source wins?",
+    lineage: "FILM → QUESTION → EVIDENCE → INSTRUMENT",
     dek: "A newer record does not win by being right.",
     abstract: "When two things in one context disagree, which one answers? A recorded long-context arc measures it: a compact record can replace a source that has been retired, is completely inert against one that can still be read, and a single blocked attention layer is enough to change which of them the model answers with. The source itself is never altered, so none of this licenses forgetting it.",
     concepts: ["context-engineering", "model-memory", "source-authority", "model-as-database"],
@@ -357,6 +359,15 @@ export const visualNotebooks: PublicationRecord[] = [
     body: [
       { kind: "film", youtubeId: "HJlWDSyDcD4", start: 1170, caption: "The Apollo document read. The system routes to a stored window, loads it, reads the passage and answers. Every step assumes one thing: that the place it went to is the place entitled to answer." },
       { kind: "statement", text: "A newer record does not win by being right." },
+      { kind: "summary", label: "THE ARGUMENT, IN FIVE LINES",
+        lines: [
+          "Two claims disagree inside one context.",
+          "The old source is still readable.",
+          "The new record does nothing at all.",
+          "Retire one particular attention read.",
+          "The answer changes.",
+        ],
+        detail: "Everything below is how that was measured, what it cost to believe it, and where it stops being true. Read the five lines and the instrument for the shape of it; read the rest for the evidence." },
       { kind: "observation", label: "01 / TWO CLAIMS IN ONE CONTEXT", text: "Any memory system that summarises, supersedes or evicts eventually holds two things that disagree: an original passage and a shorter record standing in for it. The engineering question sounds like bookkeeping — which one is authoritative? The measured answer is not a preference the model expresses. It is a property of what the model can still read at the moment it is asked." },
       { kind: "observation", label: "THE OPERATION BEING TESTED", text: "Build a 64,000-token context from a verbose source. Then, beside the question roughly 55,000 tokens later, inject a compact record and cut the original sentence off from attention. This is not the same as having the record present from the first token, which is what earlier runs measured. It is the operation an eviction system actually performs: replacing something already in memory." },
       { kind: "evidence", items: [{ label: "PROMOTION / THREE OPERATIONS", status: "SUPPORTED", detail: "In the founding run, a 13-token record injected about 49,000 tokens downstream of the source keeps the model correct on all three tested operations — copy 7431, plus one 7432, digit reversal 1347 — with the original span excluded. Padding alone fails on every row (7249, 789, 7892) and a corrupted record steers every row (5824, 5825, 4285). Asked for the code plus one with 5824 injected, the model answers 5825: a value that appears nowhere in the context." }] },

@@ -4,6 +4,7 @@ import type { Act, PublicationRecord } from "./types.ts";
 export function actText(act: Act): string {
   switch (act.kind) {
     case "statement": return act.text;
+    case "summary": return [act.label, ...act.lines, act.detail].filter(Boolean).join(" ");
     case "observation": return [act.label, act.text].filter(Boolean).join(". ");
     case "connection": return [act.text, ...act.links.map(link => link.label)].join(". ");
     case "question": case "claim": return [act.text, act.detail].filter(Boolean).join(" ");

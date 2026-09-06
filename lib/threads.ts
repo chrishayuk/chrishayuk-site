@@ -6,7 +6,7 @@ export const memoryStudy = {
 };
 
 export const authorityStudy = {
-  id: "DEMO-AUTHORITY", title: "Which source wins?", url: "/demos/authority-gate", visibility: "unlisted" as const,
+  id: "DEMO-AUTHORITY", title: "Which source wins?", url: "/demos/authority-gate", visibility: undefined as "unlisted" | undefined,
   text: "Promote a record beside the question, retire the original sentence from individual global attention layers, and read the answer that was recorded. The study replays measured arms from a long-context experiment; it does not run a model, and it returns nothing for combinations that were never run.",
 };
 
