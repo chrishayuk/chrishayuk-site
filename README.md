@@ -54,6 +54,10 @@ Film sources attach only on playback eligibility. Missing independent mobile foo
 
 `lib/records.ts` stores semantic acts and attribution, not layout components. Current authored entries are drafts. Reference controls identify them as unpublished manuscripts, without inventing dates. Actual publication uses HAUSE Citation/Provenance and its formatters.
 
+A record can carry `visibility: "unlisted"`. It then resolves at its own URL so it can be
+reviewed on the deployed site, and appears in no index, catalogue, feed, thread, sitemap or
+graph, with `noindex` metadata and a visible preview notice. See [unlisted previews](docs/previews.md).
+
 After editorial review, create an immutable snapshot with:
 
 ```sh

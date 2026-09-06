@@ -2,7 +2,7 @@ export type Status = "OPEN" | "PROPOSED" | "TESTING" | "ONGOING" | "SUPPORTED" |
 export type Act =
   | { kind: "statement"; text: string }
   | { kind: "observation"; label?: string; text: string; references?: { label: string; url: string }[] }
-  | { kind: "connection"; text: string; links: { href: string; label: string }[]; demonstration?: "addressed-memory" }
+  | { kind: "connection"; text: string; links: { href: string; label: string }[]; demonstration?: "addressed-memory" | "authority-gate" }
   | { kind: "question"; text: string; status: Status; detail?: string }
   | { kind: "claim"; text: string; status: Status; detail?: string }
   | { kind: "evidence"; items: { label: string; status: Status; detail: string }[] }
@@ -15,6 +15,8 @@ export type PublicationRecord = {
   id: string; slug: string; kind: "work" | "notebook" | "question" | "film";
   title: string; dek: string; abstract: string; created: string; published?: string;
   version: string; status?: Status; publication: "draft" | "published" | "catalogued";
+  /** Unlisted records resolve at their own URL and appear in no index, feed or graph. */
+  visibility?: "unlisted";
   authors: string[]; body: Act[]; concepts: string[]; related: string[];
   media: string[]; sources: { title: string; url?: string; note?: string }[];
   sourceMetadata?: { retrievedAt: string; sourceHash: string; transcript: string; views: number | null; viewsApproximate: boolean };

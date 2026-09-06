@@ -1,30 +1,52 @@
-import { getRecord, recordPath } from "./records.ts";
+import { getRecord, recordPath, isListed } from "./records.ts";
 
 export const memoryStudy = {
-  id: "DEMO-ADDRESS", title: "Try the mechanism.", url: "/demos/addressed-memory",
+  id: "DEMO-ADDRESS", title: "Try the mechanism.", url: "/demos/addressed-memory", visibility: undefined as "unlisted" | undefined,
   text: "Choose a planted address, inspect its key matches and suppress a neuron in a constructed six-fact FFN. The browser study makes the calculation inspectable; it does not run a trained language model.",
 };
 
+export const authorityStudy = {
+  id: "DEMO-AUTHORITY", title: "Which source wins?", url: "/demos/authority-gate", visibility: "unlisted" as const,
+  text: "Promote a record beside the question, retire the original sentence from individual global attention layers, and read the answer that was recorded. The study replays measured arms from a long-context experiment; it does not run a model, and it returns nothing for combinations that were never run.",
+};
+
+export const demoStudies = [memoryStudy, authorityStudy];
+
 /** Editorial reading order. Membership never asserts historical causation. */
-export const mapThread = {
+const composedThread = {
   id: "THREAD-MAP", slug: "the-map", title: "From a map to a memory.",
   path: "/thread/the-map", version: "0.1", created: "2026-09-06",
-  abstract: "What can a model’s changing state tell us about the way it reads? Follow the map film into three visual notebooks, a memory you can change yourself, and the questions behind LARQL and VINDEX3.",
-  context: "A curated reading order, rather than a chronology of discovery. Films keep their original dates. Notes and dossiers remain working drafts; the interactive study is a constructed example.",
+  // Deliberately uncounted: steps whose destination is an unlisted preview are
+  // filtered out below, so the summary has to read correctly either way.
+  abstract: "What can a model’s changing state tell us about the way it reads? Follow the map film through the visual notebooks, studies you can work yourself, and the questions behind LARQL and VINDEX3.",
+  context: "A curated reading order, rather than a chronology of discovery. Films keep their original dates. Notes and dossiers remain working drafts. Interactive studies are labelled as either constructed examples or replays of recorded results.",
   steps: [
     { id: "YT-HJlWDSyDcD4", label: "WATCH THE STATE MOVE", text: "Begin with the capital of Japan. The film follows the changing residual state, then asks what happens when a France state enters an Australia computation.", start: 120, media: "film-still-HJlWDSyDcD4-120" },
     { id: "N-MAP", label: "ASK WHAT THE PICTURE MEANS", text: "Which token position is moving? What are the axes? The notebook reads the demonstration alongside its projection code and distinguishes a useful picture from an answer probability.", media: "notebook-map" },
     { id: "N-STATE", label: "CHANGE THE STATE", text: "Replacing one position and replacing the full sequence are different interventions. Follow the transplant evidence into the question of what must persist after the next word.", media: "film-still-HJlWDSyDcD4-240" },
     { id: "N-ADDRESS", label: "EXAMINE THE READER", text: "A state becomes useful when an operation can read it. Follow key matches, activations and value contributions, then compare the constructed memory with the native-model experiments.", media: "notebook-address" },
     { id: memoryStudy.id, label: "MAKE AN INTERVENTION", text: "Choose capital of Atlantis. Inspect the competing activations, remove a neuron and watch the answer scores change. Every operation in this little memory is visible." },
+    { id: "N-AUTHORITY", label: "ASK WHICH ONE ANSWERS", text: "A stored memory eventually holds two things that disagree. Follow the recorded arc from a record that replaces a retired source, to one that is completely inert against a source still being read.", media: "film-still-HJlWDSyDcD4-1222" },
+    { id: authorityStudy.id, label: "RETIRE A READ", text: "Eight attention layers can see the whole context. Switch one off and the newer record takes the answer. The study replays what was measured, and stays silent about what was not." },
     { id: "W-LARQL", label: "TURN THE QUESTION TOWARDS SOFTWARE", text: "LARQL explores how learned systems can be queried. Return from the small memory to the larger engineering question: which operations can a model reliably expose?", media: "film-still-8Ppw8254nLI-1290" },
     { id: "W-VINDEX3", label: "ASK HOW TO REPRESENT IT", text: "If a model has parts we can address and relationships we can inspect, how should we represent them? VINDEX3 gives that question its own system and specification." },
   ],
 };
+export type ThreadStep = (typeof composedThread.steps)[number];
+/** A step whose destination is an unlisted preview is not offered publicly.
+ *  It rejoins the thread, in place, when that record becomes listed. */
+const listedStep = (step: ThreadStep) => {
+  const study = demoStudies.find(s => s.id === step.id);
+  if (study) return study.visibility !== "unlisted";
+  const record = getRecord(step.id);
+  return Boolean(record && isListed(record));
+};
+export const mapThread = { ...composedThread, steps: composedThread.steps.filter(listedStep) };
 export const threads = [mapThread];
-export type ThreadStep = (typeof mapThread.steps)[number];
 export function resolveThreadStep(step: ThreadStep) {
-  if (step.id === memoryStudy.id) return { ...step, title: memoryStudy.title, url: memoryStudy.url, kind: "interactive study", status: "CONSTRUCTED EXAMPLE", date: undefined };
+  const study = demoStudies.find(s => s.id === step.id);
+  if (study) return { ...step, title: study.title, url: study.url, kind: "interactive study",
+    status: study.id === memoryStudy.id ? "CONSTRUCTED EXAMPLE" : "RECORDED RESULTS", date: undefined };
   const record = getRecord(step.id);
   if (!record) throw new Error(`Unresolved thread member: ${step.id}`);
   return { ...step, title: record.title, url: `${recordPath(record)}${step.start !== undefined ? `?t=${step.start}` : ""}`, kind: record.kind,

@@ -18,7 +18,7 @@ export function Acts({ acts, anchored = false, offset = 0, priority = false }: {
   return <div className="acts">{acts.map((act,i) => {
     const rendered = (() => { switch (act.kind) {
       case "statement": return <Statement key={i} text={act.text}/>;
-      case "connection": return act.demonstration ? <DemoConnection key={i} text={act.text} links={act.links}/> : <Connection key={i} text={act.text} links={act.links}/>;
+      case "connection": return act.demonstration ? <DemoConnection key={i} text={act.text} links={act.links} demonstration={act.demonstration}/> : <Connection key={i} text={act.text} links={act.links}/>;
       case "observation": return <div key={i} className="sourced-observation"><Observation label={act.label} text={act.text}/>{act.references?.length ? <p className="act-references record-voice">{act.references.map(ref => <a key={ref.url} href={ref.url}>{ref.label} ↗</a>)}</p> : null}</div>;
       case "question": case "claim": {
         if (!isHauseStatus(act.status)) return <section key={i} className="domain-act"><p className="record-voice">{act.status}</p><h2>{act.text}</h2><p>{act.detail}</p></section>;

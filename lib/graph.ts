@@ -3,7 +3,7 @@ import { ibmAppearances, firstEpisodeSource, panelistIntroduction } from "./ibm-
 import { records, recordPath, SITE } from "./records.ts";
 import { allVideos, ibm, transcriptFor, videoPath, videoConcepts, videoWork, videoRetrievedAt, youtube } from "./youtube.ts";
 import { recordActs } from "./record-knowledge.ts";
-import { threads, memoryStudy } from "./threads.ts";
+import { threads, memoryStudy, demoStudies } from "./threads.ts";
 import type { PublicationRecord, Status } from "./types.ts";
 
 export type GraphScope = "all" | "records" | "films" | "concepts";
@@ -90,7 +90,7 @@ function buildGraph() {
   const related=records.filter(r=>r.concepts.includes(concept));const title=concept.replaceAll("-"," ");
   nodes.push({id:`CONCEPT-${concept}`,kind:"concept",title,text:`${related.length} records tagged ${title}. These are discovery associations from editorial tags or film metadata, not evidence that the records agree.`,url:`${SITE}/knowledge#concept-${concept}`,sourceUrl:`${SITE}/knowledge#concept-${concept}`,basis:"record-associations",retrievable:true,scope:"concepts",keywords:concept});
  }
- nodes.push({id:memoryStudy.id,kind:"interactive-study",title:memoryStudy.title,text:memoryStudy.text,url:`${SITE}${memoryStudy.url}`,sourceUrl:`${SITE}${memoryStudy.url}`,basis:"constructed-example",retrievable:true,scope:"records",publication:"draft",authors:["Chris Hay"]});
+ for(const study of demoStudies.filter(s=>s.visibility!=="unlisted")) nodes.push({id:study.id,kind:"interactive-study",title:study.title,text:study.text,url:`${SITE}${study.url}`,sourceUrl:`${SITE}${study.url}`,basis:study.id===memoryStudy.id?"constructed-example":"recorded-arms",retrievable:true,scope:"records",publication:"draft",authors:["Chris Hay"]});
  for (const thread of threads) {
   nodes.push({id:thread.id,kind:"thread",title:thread.title,text:[thread.abstract,thread.context,...thread.steps.map(s=>`${s.label}. ${s.text}`)].join(" "),url:`${SITE}${thread.path}`,sourceUrl:`${SITE}${thread.path}`,basis:"curated-thread",retrievable:true,scope:"records",publication:"draft",version:thread.version,created:thread.created,authors:["Chris Hay"],keywords:"follow thread map memory LARQL VINDEX3 residual state address",members:thread.steps.map((step,index)=>({id:step.id,position:index+1,reason:step.text,start:step.start}))});
   for (const step of thread.steps) {
