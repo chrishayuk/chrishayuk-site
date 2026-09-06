@@ -58,3 +58,18 @@ Expected redirect destination:
 The Fly test address https://chrishayuk-site.fly.dev works before DNS cutover.
 
 Reference: [Fly custom-domain configuration](https://fly.io/docs/networking/custom-domain/).
+
+
+## Google Analytics
+
+The root layout uses HAUSE's `Analytics` component. Set the Fly runtime variable
+`GOOGLE_ANALYTICS_ID` to this site's own GA4 `G-…` measurement ID to activate it.
+No ID is set by the source code. The tag is omitted when the ID is absent or
+invalid, the edition is not indexable, or the requested hostname is not
+`chrishayuk.com`. Local and Fly preview traffic therefore remain unmeasured.
+HAUSE's own measurement ID is not reused for this publication.
+
+Confirm collection in the property's Realtime/DebugView after configuration;
+a rendered tag alone is not evidence that Google received an event. Search
+Console ownership, sitemap submission and indexing reports are separate account
+checks from GA4 and are not established by the site's HTML.

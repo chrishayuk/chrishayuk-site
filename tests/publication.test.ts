@@ -4,13 +4,27 @@ import { chooseMotion } from "../lib/motion.ts";
 import { stableJson, validateRecord, escapeXml } from "../lib/publication.ts";
 import { records, publishedRecords, getVersion } from "../lib/records.ts";
 import { readFile } from "node:fs/promises";
+import { catalogue, catalogueDate, catalogueUrl, PAGE_SIZE } from "../lib/catalogue.ts";
+test("catalogue filters preserve source authorship and cover each record once across pages",()=>{
+ const films=catalogue({kind:"film",q:"IBM"});assert.ok(films.total>0);assert.ok(films.entries.every(r=>r.kind==="film"));for(const r of films.entries)assert.deepEqual(r.authors,records.find(source=>source.id===r.id)!.authors);assert.ok(films.entries.some(r=>r.authors.includes("IBM")));
+ assert.equal(catalogue({kind:"work"}).total,4);assert.equal(catalogue({q:"N-OPERATOR"}).entries[0].id,"N-OPERATOR");
+ const all=catalogue({});const ids=Array.from({length:all.pages},(_,i)=>catalogue({page:String(i+1)}).entries).flat().map(r=>r.id);
+ assert.equal(ids.length,records.length);assert.equal(new Set(ids).size,records.length);assert.equal(all.entries.length,PAGE_SIZE);
+ assert.equal(catalogue({q:"no-matching-record"}).total,0);assert.equal(catalogue({page:"-2"}).page,1);assert.equal(catalogue({page:"99999"}).page,all.pages);
+ assert.equal(catalogue({kind:"invalid"}).kind,"all");assert.equal(catalogueUrl("a & b","film",2),"/record?q=a+%26+b&kind=film&page=2");
+});
+test("catalogue never presents a retrieval timestamp as a film release date",()=>{
+ const unknown=records.find(r=>r.youtubeId&&!r.published)!;assert.ok(unknown.created);assert.deepEqual(catalogueDate(unknown),{label:"RELEASE DATE",value:"NOT RECORDED"});
+ const dated=records.find(r=>r.youtubeId&&r.published)!;assert.deepEqual(catalogueDate(dated),{label:"RELEASED",value:dated.published});
+ const draft=records.find(r=>r.id==="N-OPERATOR")!;assert.deepEqual(catalogueDate(draft),{label:"RECORDED",value:draft.created});
+});
 test("motion chooses one visible owner and holds it across minor area changes",()=>{const a={id:"a",visible:.9,area:90};const b={id:"b",visible:.8,area:100};assert.equal(chooseMotion([a,b],"a",false,false),"a");assert.equal(chooseMotion([{...a,area:20},b],"a",false,false),"b");});
 test("paused and hidden pages stop automatic motion; manual play is scoped",()=>{const a={id:"a",visible:1,area:500};const b={id:"b",visible:.6,area:300,manual:true};assert.equal(chooseMotion([a],"a",true,false),null);assert.equal(chooseMotion([a,b],null,true,false),"b");assert.equal(chooseMotion([a,b],"b",false,true),null);assert.equal(chooseMotion([{...b,visible:.2}],"b",true,false),null);});
 test("draft records never enter public feeds or resolve to invented versions",()=>{assert.ok(records.length>=11);for(const r of publishedRecords()){assert.equal(r.publication,"published");assert.ok(r.published);}assert.equal(getVersion("N-OPERATOR","1.0"),undefined);for(const r of records)validateRecord(r);});
 test("every related record and identifier resolves uniquely",()=>{assert.equal(new Set(records.map(r=>r.id)).size,records.length);assert.equal(new Set(records.map(r=>r.slug)).size,records.length);for(const r of records)for(const id of r.related)assert.ok(records.some(r=>r.id===id),`${r.id} -> ${id}`);});
 test("canonical hashing ignores object key order, but preserves semantic array order",()=>{assert.equal(stableJson({b:2,a:1}),stableJson({a:1,b:2}));assert.notEqual(stableJson([1,2]),stableJson([2,1]));assert.equal(stableJson({a:undefined,b:2}),'{"b":2}');});
 test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
-test("homepage contains every production scene without invented E25 results",async()=>{const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");assert.deepEqual([...page.matchAll(/data-scene="(\d+)"/g)].map(m=>m[1]),Array.from({length:14},(_,i)=>String(i).padStart(2,"0")));assert.doesNotMatch(page,/SUPPORTED.*NATURAL DEPTH|FINDING.*E25/);});
+test("homepage contains every production scene without invented E25 results",async()=>{const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");assert.deepEqual([...page.matchAll(/data-scene="(\d+)"/g)].map(m=>m[1]).sort(),Array.from({length:14},(_,i)=>String(i).padStart(2,"0")));assert.doesNotMatch(page,/SUPPORTED.*NATURAL DEPTH|FINDING.*E25/);});
 
 // Retrieval must not turn metadata associations into transcript-backed assertions.
 const {channelVideos,allVideos,ibm,ibmVideos,latestMoe,popularMoe,videoReferences,getVideo,filterVideos,transcriptFor}=await import("../lib/youtube.ts");
@@ -57,4 +71,7 @@ test("house positioning is source-linked and never turns IBM productions into ho
  for(const v of ibmVideos)assert.ok(!edges.some(e=>e.from===v.id&&e.to.startsWith("HOUSE-")));
  const result=searchGraph("Ideas, systems and objects").find(r=>r.id==="PRACTICE-CHRIS");assert.ok(result);assert.equal(result.basis,"author-description");assert.equal(result.url,"/about#the-house");
  assert.ok(!searchGraph("unicorn quantum benchmark").some(r=>r.id==="PRACTICE-CHRIS"));
+ for(const r of records)assert.ok(edges.some(e=>e.from===r.id&&e.to==="CATALOGUE-RECORD"&&e.kind==="catalogued-in"));
+ assert.ok(searchGraph("catalogue").some(r=>r.url==="/record"&&r.basis==="catalogue-index"));
+ assert.ok(!searchGraph("operator knows").some(r=>r.id==="N-OPERATOR"),"draft notes must not become published evidence");
 });

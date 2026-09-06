@@ -5,5 +5,5 @@ import { SITE } from "./records";
 export const INDEXABLE = process.env.SITE_INDEXABLE === "true";
 export function pageMetadata(title: string, description: string, path: string, image?: string, citation?: CitationRecord) {
  return publicationMetadata({ title, description, url: `${SITE}${path}`, siteName: "Chris Hay",
-  indexable: INDEXABLE, ...(image ? { image } : {}), citation });
+  indexable: INDEXABLE, image: image || `${SITE}/og-house.png`, citation });
 }

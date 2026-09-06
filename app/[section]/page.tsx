@@ -1,4 +1,7 @@
-import { HOUSE, HOUSE_WORK, HOUSE_PUBLICATIONS } from "@/lib/house";
+import { Systems, Ideas, Objects } from "@/components/HouseCollections";
+import { Catalogue } from "@/components/Catalogue";
+import { catalogueUrl, catalogue } from "@/lib/catalogue";
+import { HOUSE, HOUSE_PUBLICATIONS } from "@/lib/house";
 import { HouseRecord } from "@/components/HouseRecord";
 import { pageMetadata } from "@/lib/metadata";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
@@ -7,15 +10,31 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Media } from "@/components/Media";
-import { SystemStudy } from "@/components/SystemStudy";
-import { HauseStudy } from "@/components/HauseStudy";
 import { FilmIndex } from "@/components/FilmIndex";
 import { records, recordPath, sectionFor, socials } from "@/lib/records";
 import { media } from "@/lib/media";
-const sections = ["work","film","notebook","research","about","colophon","accessibility"];
-export async function generateMetadata({ params }: { params: Promise<{section:string}> }): Promise<Metadata> { const {section}=await params; return pageMetadata(section.charAt(0).toUpperCase()+section.slice(1),section==="about" ? `${HOUSE.personLine} ${HOUSE.description}` : section==="work" ? "LARQL, VINDEX3, HAUSE and MCP-CLI: works from the house of Chris Hay." : HOUSE_PUBLICATIONS.find(p=>p.path===`/${section}`)?.text || `Chris Hay / ${section}. ${HOUSE.descriptor}.`,`/${section}`); }
-export default async function IndexPage({params}:{params:Promise<{section:string}>}) {
+const sections = ["ideas","systems","objects","record","work","film","notebook","research","about","colophon","accessibility"];
+type PageProps = { params: Promise<{section:string}>; searchParams: Promise<{[key:string]:string|string[]|undefined}> };
+const first = (value: string|string[]|undefined) => Array.isArray(value) ? value[0] : value;
+const descriptions: Record<string,string> = {
+ ideas: "Questions, research and the notebook. Chris Hay’s thinking before the answer.",
+ systems: "LARQL, VINDEX3, HAUSE and MCP-CLI. Systems by Chris Hay, with their own identities and a place in the record.",
+ objects: "Films, interfaces and publications by Chris Hay. Ideas made real.",
+ record: "The catalogue of Chris Hay’s work, questions, notebook and films. Stable record identities, authorship, dates and sources."
+};
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+ const {section}=await params;
+ const title=section==="work"?"Systems":section.charAt(0).toUpperCase()+section.slice(1);
+ const description=descriptions[section==="work"?"systems":section] || (section==="about" ? `${HOUSE.personLine} ${HOUSE.description}` : HOUSE_PUBLICATIONS.find(p=>p.path===`/${section}`)?.text || `Chris Hay / ${section}. ${HOUSE.descriptor}.`);
+ if(section==="record") { const raw=await searchParams; const query=catalogue({q:first(raw.q),kind:first(raw.kind),page:first(raw.page)}); const metadata=pageMetadata(title,description,catalogueUrl(query.q,query.kind,query.page)); return {...metadata,...(query.q ? {robots:{index:false,follow:true}} : {})}; }
+ return pageMetadata(title,description,section==="work"?"/systems":`/${section}`);
+}
+export default async function IndexPage({params,searchParams}:PageProps) {
  const {section}=await params; if(!sections.includes(section)) notFound();
+ if(section==="ideas") return <Ideas/>;
+ if(section==="systems"||section==="work") return <Systems/>;
+ if(section==="objects") return <Objects/>;
+ if(section==="record") { const query=await searchParams; return <Catalogue query={{q:first(query.q),kind:first(query.kind),page:first(query.page)}}/>; }
  if(section==="film") return <main id="main" className="publication-main"><FilmIndex/></main>;
  if(section==="about") return <main id="main"><JsonLd data={{"@context":"https://schema.org","@type":"ProfilePage",url:`${SITE}/about`,mainEntity:{"@id":`${SITE}/#person`}}}/><header className="index-intro"><p className="kicker record-voice">CHRIS HAY / ABOUT</p><h1>Chris Hay.</h1><p className="dek">{HOUSE.personLine}</p></header><div className="about-layout"><Media id="portrait-editorial"/><div className="about-copy"><h2>A house for<br/><em>ideas, systems</em><br/>and objects.</h2><p>{HOUSE.description}</p><p>{HOUSE.proposition}</p><p>Research, engineering, design and film form one practice. Software gives an idea something to run on. The notebook keeps the thinking as it develops. Film becomes another way to explore it.</p><p>London.</p><div className="inline-links">{Object.entries(socials).map(([label,url])=><a key={label} href={url} className="text-link">{label} ↗</a>)}</div></div></div><HouseRecord/></main>;
  if(section==="colophon") return <main id="main" className="prose-page"><p className="kicker record-voice">PUBLICATION NOTES / 0.1</p><h1>The colophon.</h1><p>CHRIS HAY is a house for ideas, systems and objects: one practice across research, engineering, design and film. This publication is its primary record. CHRISHAYUK is the web address and handle.</p><h2>The production edition</h2><p>This is the first public edition. Editorial records remain drafts until individually reviewed and published. The YouTube collection contains real films and selected studio excerpts. Further location films and notebook photographs are still to be placed; marked media frames are production slots, not photographs of Chris or his work. The homepage’s visual launch criteria have not yet been met.</p><h2>Composed with HAUSE</h2><p>Real HAUSE semantic forms render the record. The publication adds its own photographic sequences, responsive media and a shared motion coordinator. Fraunces, Inter and Geist Mono supply the editorial, text and record voices.</p><p><a href="https://hause.design/">The specimen book ↗</a></p><h2>Rights and sources</h2><p>Selected IBM episodes use their official YouTube players and posters. IBM remains the producer and host of the original footage; Chris appears as a participant. The collection leads with his latest verified appearance and the most-viewed episode in the official playlist snapshot. Earlier editorial appearance records remain available.</p><p>The typographic social image was generated for this publication. Research notes retain source descriptions and exact draft status. Illustrative E25 findings from the brief have not been published as experimental facts.</p><h2>The media register</h2><ul className="production-list">{media.map(m=><li key={m.id}>{m.title}<span>{m.state === "ready" ? "AVAILABLE" : "ORIGINAL REQUIRED"}</span></li>)}</ul><h2>Publishing the record</h2><p>Published records enter the feeds. The machine-readable index also includes source-attributed YouTube catalogue records. Draft references omit a publication date. Material revisions will retain their earlier snapshots and citations.</p><p><a href="/api/records">Public record index</a> · <a href="/rss.xml">RSS</a> · <a href="/feed.json">JSON Feed</a></p></main>;
@@ -23,5 +42,5 @@ export default async function IndexPage({params}:{params:Promise<{section:string
  const entries=records.filter(r=>sectionFor(r)===section);
  const headings:Record<string,string>={work:"Work",notebook:"Notebook",research:"Research"};
  const descriptions:Record<string,string>={work:"Works from the house of Chris Hay. Software, systems and the questions that make them necessary.",notebook:HOUSE_PUBLICATIONS[1].text,research:"The questions, the evidence, the uncertainty. A record of what has been shown and what remains open."};
- return <main id="main" className="publication-main"><header className="index-intro"><p className="kicker record-voice">CHRIS HAY / {section.toUpperCase()}</p><h1>{headings[section]}<span className="amber">.</span></h1><p className="dek">{descriptions[section]}</p><div className="index-count record-voice"><span>{String(entries.length).padStart(2,"0")} RECORDS</span><span>PRODUCTION EDITION / DRAFTS</span></div></header>{section==="work" ? <div className="work-index">{entries.map((r,i)=><article key={r.id} className="work-story"><Link href={recordPath(r)} className="work-story-heading"><h2>{r.title}</h2><span>↗</span></Link>{r.id==="W-VINDEX3" ? <SystemStudy/> : r.id==="W-HAUSE" ? <HauseStudy/> : <Media id={r.media[0]}/>}<p>{r.dek}</p><div className="work-endorsement record-voice">{HOUSE_WORK.find(w=>w.id===r.id)?.field} · A WORK BY CHRIS HAY</div><Link href={recordPath(r)} className="text-link">OPEN DOSSIER <span className="record-voice">0{i+1} ↗</span></Link></article>)}</div> : <div className="record-list">{entries.map(r=><Link key={r.id} href={recordPath(r)}><span className="record-voice">{r.id}<br/>{r.status}<br/>{r.created}</span><div><h2>{r.title}</h2><p>{r.dek}</p></div><span>↗</span></Link>)}</div>}</main>;
+ return <main id="main" className="publication-main"><header className="index-intro"><p className="kicker record-voice">CHRIS HAY / {section.toUpperCase()}</p><h1>{headings[section]}<span className="amber">.</span></h1><p className="dek">{descriptions[section]}</p><div className="index-count record-voice"><span>{String(entries.length).padStart(2,"0")} RECORDS</span><span>PRODUCTION EDITION / DRAFTS</span></div></header>{<div className="record-list">{entries.map(r=><Link key={r.id} href={recordPath(r)}><span className="record-voice">{r.id}<br/>{r.status}<br/>{r.created}</span><div><h2>{r.title}</h2><p>{r.dek}</p></div><span>↗</span></Link>)}</div>}</main>;
 }

@@ -13,9 +13,9 @@ export const HOUSE = {
 };
 
 export const HOUSE_PARTS = [
-  {id:"ideas",name:"Ideas",path:"/notebook",text:"Questions, research and the notebook. A place for thinking before the answer."},
-  {id:"systems",name:"Systems",path:"/work",text:"Models, software, design languages and infrastructure. Giving an idea a structure that can be explored."},
-  {id:"objects",name:"Objects",path:"/film",text:"What is made: software, interfaces, films and publications. An idea takes a form that can be used, watched or held."},
+  {id:"ideas",name:"Ideas",path:"/ideas",text:"Questions, research and the notebook. A place for thinking before the answer."},
+  {id:"systems",name:"Systems",path:"/systems",text:"Models, software, design languages and infrastructure. Giving an idea a structure that can be explored."},
+  {id:"objects",name:"Objects",path:"/objects",text:"What is made: software, interfaces, films and publications. An idea takes a form that can be used, watched or held."},
 ];
 
 export const HOUSE_WORK = [
@@ -31,4 +31,4 @@ export const HOUSE_PUBLICATIONS = [
   { name: "Film", path: "/film", text: "Another medium for thinking. Experiments, explanations and conversations in public." },
 ];
 
-export const HOUSE_ABSTRACT = `${HOUSE.name}. ${HOUSE.descriptor}. ${HOUSE.proposition} ${HOUSE_PARTS.map(p=>`${p.name}: ${p.text}`).join(" ")} ${HOUSE.description} ${HOUSE.disciplines.join(", ")} form one practice. ${HOUSE_WORK.map(w=>`${w.name}: ${w.text}`).join(" ")} ${HOUSE_PUBLICATIONS.map(p=>`${p.name}: ${p.text}`).join(" ")} ${HOUSE.principle} IBM Mixture of Experts is an external production in which Chris is a regular panelist; IBM remains its producer.`;
+export const HOUSE_ABSTRACT = `${HOUSE.name}. ${HOUSE.descriptor}. ${HOUSE.proposition} ${HOUSE_PARTS.map(p=>`${p.name}: ${p.text}`).join(" ")} ${HOUSE.description} ${HOUSE.disciplines.join(", ")} form one practice. ${HOUSE_WORK.map(w=>`${w.name}: ${w.text}`).join(" ")} ${HOUSE_PUBLICATIONS.map(p=>`${p.name}: ${p.text}`).join(" ")} The record is the catalogue of the practice: stable identities, authorship, dates, source credits and citations. ${HOUSE.principle} IBM Mixture of Experts is an external production in which Chris is a regular panelist; IBM remains its producer.`;

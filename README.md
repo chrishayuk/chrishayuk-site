@@ -99,3 +99,16 @@ Media edit decisions are recorded in `docs/youtube-media.md`. Full YouTube playe
 The Mixture of Experts introduction states regular participation from episode one (3 May 2024) and **at least 46 episodes**, backed by `content/ibm-appearances.json`. The 5 September audit read 127 public video descriptions from the 128-entry official playlist; one entry was unavailable. A direct participant credit confirms each included appearance. The register deduplicates numbered episodes and includes separately published bonus episodes; missing names do not prove absence. All 46 film records are accessible in the page’s collapsed appearance register, each retaining its original source link. Episode-one provenance is independently supported by IBM’s inaugural episode page.
 
 Refresh with `python3 scripts/audit-ibm-appearances.py work/media-ingest` after refreshing the cached playlist and full episode metadata. Review any newly matched credits before publication. This audit intentionally does not change the featured latest/popular film selection or republish IBM transcripts. The series node in `/api/graph` exposes the minimum count, role, start date and source references.
+
+
+## House catalogue and measurement
+
+Ideas, Systems, Objects and Record are the primary entrances. `/record` provides
+server-rendered search, kind filters and pagination across the existing record
+identities. `/work` remains available with `/systems` as its canonical index;
+dossier URLs remain stable. See [brand architecture](docs/brand.md).
+
+Search metadata, citations and the optional Google tag use HAUSE. See the
+[implementation audit](docs/search-and-analytics.md) for verified coverage and
+remaining account-side checks, and [deployment](docs/deployment.md) for the
+site-specific GA4 configuration.
