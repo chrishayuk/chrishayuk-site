@@ -3,6 +3,7 @@ import { ibmAppearances, firstEpisodeSource, panelistIntroduction } from "./ibm-
 import { records, recordPath, SITE } from "./records.ts";
 import { allVideos, ibm, transcriptFor, videoPath, videoConcepts, videoWork, videoRetrievedAt, youtube } from "./youtube.ts";
 import { recordActs } from "./record-knowledge.ts";
+import { threads, memoryStudy } from "./threads.ts";
 import type { PublicationRecord, Status } from "./types.ts";
 
 export type GraphScope = "all" | "records" | "films" | "concepts";
@@ -12,7 +13,7 @@ export type GraphNode = {
  publication?: PublicationRecord["publication"]; status?: Status; version?: string;
  authors?: string[]; created?: string; published?: string; retrievedAt?: string;
  recordId?: string; actKind?: string; start?: number; end?: number; transcription?: string;
- sourceHash?: string; panelist?: object;
+ sourceHash?: string; panelist?: object; members?: { id: string; position: number; reason: string; start?: number }[];
 };
 export type GraphEdge = { from: string; to: string; kind: string; basis: string };
 export type SearchResult = {
@@ -89,8 +90,16 @@ function buildGraph() {
   const related=records.filter(r=>r.concepts.includes(concept));const title=concept.replaceAll("-"," ");
   nodes.push({id:`CONCEPT-${concept}`,kind:"concept",title,text:`${related.length} records tagged ${title}. These are discovery associations from editorial tags or film metadata, not evidence that the records agree.`,url:`${SITE}/knowledge#concept-${concept}`,sourceUrl:`${SITE}/knowledge#concept-${concept}`,basis:"record-associations",retrievable:true,scope:"concepts",keywords:concept});
  }
+ nodes.push({id:memoryStudy.id,kind:"interactive-study",title:memoryStudy.title,text:memoryStudy.text,url:`${SITE}${memoryStudy.url}`,sourceUrl:`${SITE}${memoryStudy.url}`,basis:"constructed-example",retrievable:true,scope:"records",publication:"draft",authors:["Chris Hay"]});
+ for (const thread of threads) {
+  nodes.push({id:thread.id,kind:"thread",title:thread.title,text:[thread.abstract,thread.context,...thread.steps.map(s=>`${s.label}. ${s.text}`)].join(" "),url:`${SITE}${thread.path}`,sourceUrl:`${SITE}${thread.path}`,basis:"curated-thread",retrievable:true,scope:"records",publication:"draft",version:thread.version,created:thread.created,authors:["Chris Hay"],keywords:"follow thread map memory LARQL VINDEX3 residual state address",members:thread.steps.map((step,index)=>({id:step.id,position:index+1,reason:step.text,start:step.start}))});
+  for (const step of thread.steps) {
+   addEdge(thread.id,step.id,"includes","editorial-reading-order");
+   addEdge(step.id,thread.id,"in-thread","editorial-reading-order");
+  }
+ }
  const count=(kind:string)=>nodes.filter(n=>n.kind===kind).length;
- return {version:"1.1",retrievedAt:[youtube.retrievedAt,ibm.retrievedAt].sort().at(-1),coverage:{records:records.length,films:allVideos.length,transcripts:allVideos.filter(v=>transcriptFor(v.youtubeId)).length,systems:count("work"),notebook:count("notebook"),questions:count("question"),editorialDrafts:records.filter(r=>r.publication==="draft").length,acts:count("act"),chapters:count("chapter"),passages:count("passage"),concepts:concepts.length,sourceReferences:count("source"),nodes:nodes.length,relationships:edges.length},nodes,edges};
+ return {version:"1.2",retrievedAt:[youtube.retrievedAt,ibm.retrievedAt].sort().at(-1),coverage:{records:records.length,films:allVideos.length,transcripts:allVideos.filter(v=>transcriptFor(v.youtubeId)).length,systems:count("work"),notebook:count("notebook"),questions:count("question"),threads:count("thread"),editorialDrafts:records.filter(r=>r.publication==="draft").length,acts:count("act"),chapters:count("chapter"),passages:count("passage"),concepts:concepts.length,sourceReferences:count("source"),nodes:nodes.length,relationships:edges.length},nodes,edges};
 }
 const graph=buildGraph();
 export function recordGraph(){return graph;}
@@ -114,7 +123,7 @@ export function searchGraph(query:string, options:{scope?:GraphScope;includeDraf
   if(n.kind==="act"||n.kind==="passage")score+=4;
   if(n.basis==="verified-appearance-register")score+=terms.length*4;
   if(n.basis==="author-description")score-=1;
-  const relations=graph.edges.filter(e=>(e.from===(n.recordId||n.id)&&e.kind==="related") || (n.kind==="concept"&&e.to===n.id&&e.kind==="about"));
+  const relations=graph.edges.filter(e=>(e.from===(n.recordId||n.id)&&["related","in-thread",...(n.kind==="thread"?["includes"]:[])].includes(e.kind)) || (n.kind==="concept"&&e.to===n.id&&e.kind==="about")).sort((a,b)=>Number(b.kind==="in-thread")-Number(a.kind==="in-thread"));
   const related=relations.map(e=>({node:byId.get(n.kind==="concept"?e.from:e.to),basis:e.basis})).filter(x=>x.node&&(options.includeDrafts!==false||x.node.publication!=="draft")).slice(0,4).map(({node,basis})=>({title:node!.title,url:localUrl(node!.url),basis}));
   const excerpt=n.basis==="title-and-description" ? n.text.split(/\n\s*\n/).sort((a,b)=>terms.filter(t=>normalize(b).includes(t)).length-terms.filter(t=>normalize(a).includes(t)).length)[0] : n.text;
   results.push({id:n.id,title:n.title,url:localUrl(n.url),sourceUrl:n.sourceUrl,basis:n.basis!,text:excerpt,score,start:n.start,kind:n.kind,actKind:n.actKind,publication:n.publication,status:n.status,version:n.version,recordId:n.recordId,related});

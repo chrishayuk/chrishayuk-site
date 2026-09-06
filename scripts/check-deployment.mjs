@@ -90,6 +90,18 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
   assert.ok(page.body.includes('id="act-1"'),slug);
   assert.ok(graph.nodes.some(n=>n.recordId===id&&n.kind==="act"&&n.basis==="draft-record"),id);
 }
+const systems=await request("/systems");
+assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
+assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
+const thread=await request("/thread/the-map");
+assert.equal(thread.status,200);
+assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
+assert.match(thread.body,/curated reading order/i);
+for(let step=1;step<=7;step++) assert.ok(thread.body.includes(`id="step-${step}"`));
+assert.match(thread.body,/ItemList/);
+const threadSearch=JSON.parse((await request("/api/search?q=map%20memory&scope=records")).body);
+assert.ok(threadSearch.results.some(r=>r.id==="THREAD-MAP"&&r.basis==="curated-thread"));
+assert.ok(sitemap.body.includes("/thread/the-map"));
 const filmIndex=await request("/film");
 assert.equal(filmIndex.status,200);
 assert.ok(filmIndex.body.indexOf('id="chris-hay-youtube"') < filmIndex.body.indexOf('class="moe-selection"'));
@@ -102,6 +114,8 @@ assert.ok(addressSearch.results.some(r=>r.recordId==="N-ADDRESS"&&r.basis==="dra
 const map=await request("/notebook/what-is-the-map");
 for (const frame of [156,286,434,1222]) assert.ok(map.body.includes(`/media/notebook/stills/HJlWDSyDcD4-${frame}.webp`));
 assert.match(map.body,/demo-invitation-stage/);
+assert.match(map.body,/thread-navigation/);
+assert.match(map.body,/href="\/thread\/the-map#step-2"/);
 assert.match(map.body,/href="\/demos\/addressed-memory"/);
 const mapSearch=JSON.parse((await request("/api/search?q=logit%20lens&scope=records")).body);
 assert.ok(mapSearch.results.some(r=>r.recordId==="N-MAP"&&r.basis==="draft-record"));

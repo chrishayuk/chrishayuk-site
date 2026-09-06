@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mapThread } from "@/lib/threads";
 import { getRecord, recordPath } from "@/lib/records";
 
 const selections = [
@@ -7,7 +8,7 @@ const selections = [
   { id: "W-MCP", description: "An interface to tools and agents.", href: "https://github.com/IBM/mcp-cli", label: "THE SOFTWARE" },
 ];
 
-function WorkVisual({ id }: { id: string }) {
+export function WorkVisual({ id }: { id: string }) {
   if (id === "W-LARQL") return <img src="/media/notebook/stills/8Ppw8254nLI-1306.webp" alt="LARQL’s knowledge-writing demonstration queries the capital of Atlantis." width={1600} height={900} loading="lazy"/>;
   return <svg viewBox="0 0 800 450" role="img" aria-label={id === "W-VINDEX3" ? "Conceptual study: a model representation with addressable parts and relationships." : "Conceptual study: MCP-CLI connects to an MCP server to discover tools, call a tool and receive its result."}>
     <rect width="800" height="450" fill={id === "W-VINDEX3" ? "#151815" : "#e4e0d7"}/>
@@ -31,7 +32,7 @@ export function WorkSelection() {
       const record = getRecord(selection.id)!;
       return <article key={record.id}>
         <Link className="home-work-visual" href={recordPath(record)} aria-label={`Explore ${record.title}`}><WorkVisual id={record.id}/><span className="record-voice">{i === 0 ? "FROM THE FILM / LARQL" : "CONCEPTUAL STUDY"} ↗</span></Link>
-        <div className="home-work-copy"><p className="record-voice">{record.id} / A SYSTEM BY CHRIS HAY</p><h3><Link href={recordPath(record)}>{record.title}</Link></h3><p>{selection.description}</p><div className="inline-links"><Link className="text-link" href={recordPath(record)}>THE DOSSIER ↗</Link><a className="text-link" href={selection.href}>{selection.label} ↗</a></div></div>
+        <div className="home-work-copy"><p className="record-voice">{record.id} / A SYSTEM BY CHRIS HAY</p><h3><Link href={recordPath(record)}>{record.title}</Link></h3><p>{selection.description}</p>{record.id === "W-LARQL" && <Link href={mapThread.path} className="work-thread-link">From the map to an addressable system. Follow the thread ↗</Link>}<div className="inline-links"><Link className="text-link" href={recordPath(record)}>THE DOSSIER ↗</Link><a className="text-link" href={selection.href}>{selection.label} ↗</a></div></div>
       </article>;
     })}</div>
   </section>;

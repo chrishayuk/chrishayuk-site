@@ -72,6 +72,25 @@ test("homepage follows the edited publication sequence and excludes placeholder 
 // Retrieval must not turn metadata associations into transcript-backed assertions.
 const {channelVideos,allVideos,ibm,ibmVideos,latestMoe,popularMoe,videoReferences,getVideo,filterVideos,transcriptFor}=await import("../lib/youtube.ts");
 const {recordGraph,searchGraph}=await import("../lib/graph.ts");
+test("threads preserve reading order, source destinations and draft filtering",async()=>{
+ const {mapThread,resolveThreadStep,threadPosition,memoryStudy}=await import("../lib/threads.ts");
+ const graph=recordGraph();const thread=graph.nodes.find(n=>n.id===mapThread.id)!;
+ assert.equal(thread.basis,"curated-thread");assert.equal(thread.publication,"draft");
+ assert.deepEqual(thread.members?.map(m=>m.id),mapThread.steps.map(s=>s.id));
+ for(const step of mapThread.steps){
+  const resolved=resolveThreadStep(step);assert.ok(resolved.url.startsWith("/"));
+  assert.ok(graph.nodes.some(n=>n.id===step.id));
+  assert.ok(graph.edges.some(e=>e.from===step.id&&e.to===thread.id&&e.kind==="in-thread"&&e.basis==="editorial-reading-order"));
+ }
+ assert.equal(resolveThreadStep(mapThread.steps[0]).url,"/film/youtube/HJlWDSyDcD4?t=120");
+ assert.equal(threadPosition(mapThread.steps[0].id)?.previous,undefined);
+ assert.equal(threadPosition(mapThread.steps.at(-1)!.id)?.next,undefined);
+ assert.equal(threadPosition("N-ADDRESS")?.next?.id,memoryStudy.id);
+ assert.equal(threadPosition("W-MCP"),undefined);
+ assert.ok(searchGraph("map memory",{scope:"records"}).some(r=>r.id===thread.id));
+ assert.ok(!searchGraph("map memory",{includeDrafts:false}).some(r=>r.id===thread.id));
+ assert.ok(searchGraph("N-MAP").some(r=>r.related.some(link=>link.url===mapThread.path)));
+});
 test("full channel catalogue preserves identity, unknown dates and source coverage",()=>{assert.equal(channelVideos.length,195);assert.equal(channelVideos.filter(v=>v.format==="short").length,18);assert.equal(new Set(channelVideos.map(v=>v.id)).size,195);assert.ok(channelVideos.some(v=>v.published===null));for(const v of channelVideos){assert.match(v.youtubeId,/^[A-Za-z0-9_-]{11}$/);assert.equal(v.url,`https://www.youtube.com/watch?v=${v.youtubeId}`);assert.match(v.sourceHash,/^[a-f0-9]{64}$/);if(v.viewsApproximate)assert.equal(v.metadataLevel,"listing");}});
 test("archive filtering and popularity operate on real catalogue fields",()=>{assert.equal(filterVideos("","short").length,18);assert.equal(filterVideos("no-video-has-this-title").length,0);assert.ok(filterVideos("MCP").every(v=>`${v.title} ${v.description}`.toLowerCase().includes("mcp")));const top=filterVideos("","all","views");assert.ok(top.every((v,i)=>i===0||(top[i-1].views??-1)>=(v.views??-1)));});
 test("graph edges resolve and timestamped retrieval cites the original source",()=>{const g=recordGraph();const ids=new Set(g.nodes.map(n=>(n as {id:string}).id));assert.equal(ids.size,g.nodes.length);for(const e of g.edges as {from:string;to:string}[]){assert.ok(ids.has(e.from),e.from);assert.ok(ids.has(e.to),e.to);}assert.equal(g.coverage.films,allVideos.length);assert.equal(g.coverage.transcripts,2);const results=searchGraph("graph");assert.ok(results.some(r=>r.basis==="automatic-caption"));for(const r of results.filter(r=>r.start!==undefined))assert.ok(r.sourceUrl.endsWith(`&t=${Math.floor(r.start!)}`));assert.equal(searchGraph("zzznomatchingcontentzzz").length,0);assert.ok(searchGraph("What has Chris said about models as databases?").length>0);});

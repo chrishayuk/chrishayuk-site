@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mapThread } from "@/lib/threads";
 import { HOUSE } from "@/lib/house";
 import { Media } from "@/components/Media";
 import { FilmPlayer } from "@/components/FilmPlayer";
@@ -35,7 +36,7 @@ export default function Home() {
 
   <section id="from-the-notebook" className="notebook-scene notebook-feature" data-scene="latest-notebook" data-hause-act="connection" aria-labelledby="notebook-feature-heading">
    <div className="notebook-feature-visual"><Media id="notebook-map-trajectory"/><p className="record-voice">FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL</p></div>
-   <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">Follow a question through the model. Change the state. Then try a memory you can inspect yourself.</p><TextLink href={notebookPath}>EXPLORE THE NOTE</TextLink><p className="record-voice notebook-footnote">FILM → EXPLANATION → INTERACTIVE STUDY</p></div>
+   <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">Follow a question through the model. Change the state. Then try a memory you can inspect yourself.</p><div className="inline-links"><TextLink href={notebookPath}>EXPLORE THE NOTE</TextLink><TextLink href={mapThread.path}>FOLLOW THE THREAD</TextLink></div><p className="record-voice notebook-footnote">FILM → EXPLANATION → INTERACTIVE STUDY</p></div>
   </section>
 
   <section id="selected-films" className="home-selected-films" data-scene="selected-films" aria-labelledby="selected-films-heading">

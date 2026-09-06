@@ -1,3 +1,5 @@
+import { ThreadNavigation } from "@/components/ThreadNavigation";
+import { memoryStudy } from "@/lib/threads";
 import { AddressedMemory } from "@/components/AddressedMemory";
 import { Acts } from "@/components/Acts";
 import { pageMetadata } from "@/lib/metadata";
@@ -22,7 +24,7 @@ export default function Page() {
         {kind:"observation",label:"CONTINUE THE INVESTIGATION",text:"The notebook connects this small mechanism to the films, the native-model experiments and the question of how a useful address develops through a transformer.",references:[{label:"Reading by address",url:"/notebook/reading-by-address"},{label:"The map and its readers",url:"/notebook/what-is-the-map"},{label:"Source repository",url:data.source}]}
       ]}/>
     </div>
-    <footer className="demo-provenance">
+    <footer className="demo-provenance"><ThreadNavigation id={memoryStudy.id}/>
       <p className="record-voice">INTERACTIVE STUDY / CONSTRUCTED EXAMPLE / 06 SEPTEMBER 2026</p>
       <p>Based on <a href={`${data.source}/blob/${data.sourceRevision}/ffn.py`}>The Mechanism · ffn.py ↗</a> by Chris Hay. <a href={`${data.source}/blob/${data.sourceRevision}/ffn.json`}>Inspect the saved six reads ↗</a></p>
       <details><summary>Source identity</summary><p className="record-voice">REVISION {data.sourceRevision}<br/>FILE SHA-256 {data.sourceSha256}<br/>BROWSER ADAPTATION / SEED {data.seed} · {data.dimensions} DIMENSIONS</p></details>

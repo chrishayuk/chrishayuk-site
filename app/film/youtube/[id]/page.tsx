@@ -2,6 +2,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
 import { videoObjectLd, breadcrumbLd } from "@chrishayuk/hause/seo";
 import Link from "next/link";
+import { ThreadNavigation } from "@/components/ThreadNavigation";
 import {notFound} from "next/navigation";
 import {getVideo,videoConcepts,videoWork,transcriptFor,videoReferences,videoCitation,durationLabel,viewLabel,youtube,ibm,videoRetrievedAt,videoPath} from "@/lib/youtube";
 import {getRecord,recordPath,SITE,records} from "@/lib/records";
@@ -20,7 +21,7 @@ export default async function Page({params,searchParams}:Props){
  <header className="screening-title"><nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/film">FILM</Link><span>/</span><Link href={v.producer === "IBM"?"/film/mixture-of-experts":"/film/youtube"}>{v.producer === "IBM"?"IBM / MIXTURE OF EXPERTS":"YOUTUBE"}</Link></nav><h1>{v.title}</h1><div className="record-bar record-voice"><span>{v.id}</span><span>{durationLabel(v.duration)}</span>{v.published&&<span>PUBLISHED ON YOUTUBE {v.published}</span>}<a href="#cite">CITE ↓</a></div></header>
  <p className="film-answer-first">{v.description.split("\n\n")[0]||`Chris Hay’s “${v.title}”, a film published on YouTube. Full description and transcript are not yet indexed.`}</p>
  <VideoScreening video={v} preview={previewFor(v)} passages={transcript?.passages||[]} initialStart={start}/>
- <div className="screening-details"><section className="film-description"><p className="kicker record-voice">{v.producer === "IBM"?"ABOUT THE EPISODE / IBM":"FROM CHRIS / ORIGINAL VIDEO DESCRIPTION"}</p>{v.description?<p>{v.description}</p>:<p>Chris Hay’s “{v.title}”. This catalogue entry currently contains the channel listing; a full description and transcript have not yet been imported.</p>}<a className="text-link" href={v.url}>WATCH THE ORIGINAL ON YOUTUBE ↗</a></section>
+ <div className="screening-details"><ThreadNavigation id={v.id}/><section className="film-description"><p className="kicker record-voice">{v.producer === "IBM"?"ABOUT THE EPISODE / IBM":"FROM CHRIS / ORIGINAL VIDEO DESCRIPTION"}</p>{v.description?<p>{v.description}</p>:<p>Chris Hay’s “{v.title}”. This catalogue entry currently contains the channel listing; a full description and transcript have not yet been imported.</p>}<a className="text-link" href={v.url}>WATCH THE ORIGINAL ON YOUTUBE ↗</a></section>
  {related.length>0&&<section className="related-records"><h2>CONNECTED WORK / FROM THE VIDEO METADATA</h2>{related.map(r=><Link href={recordPath(r)} key={r.id}>{r.title}<span>↗</span></Link>)}</section>}
  {notebook.length>0&&<section className="related-records"><h2>AFTER THE FILM / FROM THE NOTEBOOK</h2><p className="notebook-related-context">The questions, experiments and follow-ups connected to this conversation. These are working editorial notes.</p>{notebook.map(r=><Link href={recordPath(r)} key={r.id}>{r.title}<span>↗</span></Link>)}</section>}
  <section className="film-concepts"><h2 className="record-voice">EXPLORE RELATED SUBJECTS</h2><p>Discovery links inferred from the title and description.</p><div>{videoConcepts(v).map(c=><Link key={c} href={`/ask?q=${encodeURIComponent(c.replaceAll("-"," "))}`}>{c.replaceAll("-"," ")} ↗</Link>)}</div></section>

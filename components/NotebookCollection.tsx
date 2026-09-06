@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mapThread } from "@/lib/threads";
 import { records, recordPath } from "@/lib/records";
 import { visualNotebooks } from "@/lib/visual-notebooks";
 import { Media } from "./Media";
@@ -12,7 +13,7 @@ export function NotebookCollection() {
       <p className="kicker record-voice">CHRIS HAY / THE NOTEBOOK</p>
       <h1>Before<br/><em>the answer.</em></h1>
       <div className="notebook-introduction"><p className="dek">A map. A memory. A question<br/>that becomes something to make.</p><p>Films, visual studies and notes from the work. Follow an idea into the experiment—and back to the question it leaves behind.</p></div>
-      <div className="index-count record-voice"><span>VISUAL NOTES / 01—03</span><span>WORKING EDITION · 06 SEPTEMBER 2026</span></div>
+      <Link className="text-link notebook-thread-link" href={mapThread.path}>FOLLOW THE THREAD / FROM A MAP TO A MEMORY ↗</Link><div className="index-count record-voice"><span>VISUAL NOTES / 01—03</span><span>WORKING EDITION · 06 SEPTEMBER 2026</span></div>
     </header>
     <div className="notebook-stories">{visualNotebooks.map((r, i) => <article key={r.id} className={`notebook-story notebook-story-${i+1}`}>
       <div className="notebook-story-top record-voice"><span>0{i+1} / {r.id}</span><span>FILM → QUESTION → RECORD</span></div>

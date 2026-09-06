@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WorkVisual } from "./WorkSelection";
 import { HOUSE_PARTS, HOUSE_WORK } from "@/lib/house";
 import { records, recordPath } from "@/lib/records";
 import { Acts } from "./Acts";
@@ -8,7 +9,7 @@ import { HauseStudy } from "./HauseStudy";
 import { FilmSelection } from "./YouTubeCollection";
 
 export function Systems() {
-  return <main id="main" className="publication-main"><header className="index-intro"><p className="kicker record-voice">CHRIS HAY / SYSTEMS</p><h1>Systems<span className="amber">.</span></h1><p className="dek">Ideas given something to run on.</p><p>Software, representations, design languages and instruments. Each system has its own identity and a place in the record.</p></header><div className="work-index">{HOUSE_WORK.map(w => { const r = records.find(r => r.id === w.id)!; return <article key={r.id} className="work-story"><Link href={w.path} className="work-story-heading"><h2>{w.name}</h2><span>↗</span></Link>{r.id === "W-VINDEX3" ? <SystemStudy/> : r.id === "W-HAUSE" ? <HauseStudy/> : <Media id={r.id === "W-LARQL" ? "youtube-larql" : r.media[0]}/>}<p>{w.text}</p><div className="work-endorsement record-voice">{w.field} · A SYSTEM BY CHRIS HAY</div><Link href={w.path} className="text-link">OPEN DOSSIER <span className="record-voice">{r.id} ↗</span></Link></article>; })}</div></main>;
+  return <main id="main" className="publication-main"><header className="index-intro"><p className="kicker record-voice">CHRIS HAY / SYSTEMS</p><h1>Systems<span className="amber">.</span></h1><p className="dek">Ideas given something to run on.</p><p>Software, representations, design languages and instruments. Each system has its own identity and a place in the record.</p></header><div className="work-index">{HOUSE_WORK.map(w => { const r = records.find(r => r.id === w.id)!; return <article key={r.id} className="work-story"><Link href={w.path} className="work-story-heading"><h2>{w.name}</h2><span>↗</span></Link>{r.id === "W-VINDEX3" ? <SystemStudy/> : r.id === "W-HAUSE" ? <HauseStudy/> : r.id === "W-MCP" ? <figure className="system-work-visual"><WorkVisual id={r.id}/><figcaption className="record-voice">CONCEPTUAL STUDY / DISCOVER → CALL → RESULT</figcaption></figure> : <Media id={r.id === "W-LARQL" ? "youtube-larql" : r.media[0]}/>}<p>{w.text}</p><div className="work-endorsement record-voice">{w.field} · A SYSTEM BY CHRIS HAY</div><Link href={w.path} className="text-link">OPEN DOSSIER <span className="record-voice">{r.id} ↗</span></Link></article>; })}</div></main>;
 }
 
 export function Ideas() {
