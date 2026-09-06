@@ -21,12 +21,16 @@ assert.match(home.body, /rel="canonical" href="https:\/\/chrishayuk.com"/);
 assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
-assert.ok(home.body.indexOf('id="the-work"') < home.body.indexOf('id="person"'));
+assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
 assert.match(home.body, /id="from-the-notebook"/);
 assert.match(home.body, /href="\/notebook\/what-is-the-map"/);
 assert.match(home.body, /data-media-id="notebook-map-trajectory"/);
-assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="the-work"'));
-assert.ok(home.body.indexOf('id="latest-mixture-of-experts"') < home.body.indexOf('id="the-work"'));
+assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="latest-mixture-of-experts"'));
+assert.ok(home.body.indexOf('id="latest-mixture-of-experts"') < home.body.indexOf('id="from-the-notebook"'));
+assert.ok(home.body.indexOf('id="from-the-notebook"') < home.body.indexOf('id="selected-films"'));
+assert.ok(home.body.indexOf('id="selected-films"') < home.body.indexOf('id="further-notes"'));
+assert.ok(home.body.indexOf('id="further-notes"') < home.body.indexOf('id="selected-work"'));
+for (const path of ["/work/larql", "/work/vindex3", "/work/mcp-cli"]) assert.ok(home.body.includes(`href="${path}"`));
 const primaryNav=home.body.match(/<nav[^>]*aria-label="Primary"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
 assert.ok(primaryNav?.includes('href="/film"'),"Film is a first-level navigation destination");
 for(const path of ["/ideas","/systems","/objects","/record","/knowledge"]) {
@@ -86,6 +90,15 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
   assert.ok(page.body.includes('id="act-1"'),slug);
   assert.ok(graph.nodes.some(n=>n.recordId===id&&n.kind==="act"&&n.basis==="draft-record"),id);
 }
+const filmIndex=await request("/film");
+assert.equal(filmIndex.status,200);
+assert.ok(filmIndex.body.indexOf('id="chris-hay-youtube"') < filmIndex.body.indexOf('class="moe-selection"'));
+const address=await request("/notebook/reading-by-address");
+assert.match(address.body,/demo-invitation-stage/);
+assert.match(address.body,/THE MODEL HAS TO BUILD THE QUERY/);
+assert.match(address.body,/route_sweep.json/);
+const addressSearch=JSON.parse((await request("/api/search?q=positive%20matches&scope=records")).body);
+assert.ok(addressSearch.results.some(r=>r.recordId==="N-ADDRESS"&&r.basis==="draft-record"));
 const map=await request("/notebook/what-is-the-map");
 for (const frame of [156,286,434,1222]) assert.ok(map.body.includes(`/media/notebook/stills/HJlWDSyDcD4-${frame}.webp`));
 assert.match(map.body,/demo-invitation-stage/);

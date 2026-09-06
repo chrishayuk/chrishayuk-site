@@ -62,7 +62,12 @@ test("draft records never enter public feeds or resolve to invented versions",()
 test("every related record and identifier resolves uniquely",()=>{assert.equal(new Set(records.map(r=>r.id)).size,records.length);assert.equal(new Set(records.map(r=>r.slug)).size,records.length);for(const r of records)for(const id of r.related)assert.ok(records.some(r=>r.id===id),`${r.id} -> ${id}`);});
 test("canonical hashing ignores object key order, but preserves semantic array order",()=>{assert.equal(stableJson({b:2,a:1}),stableJson({a:1,b:2}));assert.notEqual(stableJson([1,2]),stableJson([2,1]));assert.equal(stableJson({a:undefined,b:2}),'{"b":2}');});
 test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
-test("homepage contains every production scene without invented E25 results",async()=>{const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");assert.deepEqual([...page.matchAll(/data-scene="(\d+)"/g)].map(m=>m[1]).sort(),Array.from({length:14},(_,i)=>String(i).padStart(2,"0")));assert.doesNotMatch(page,/SUPPORTED.*NATURAL DEPTH|FINDING.*E25/);});
+test("homepage follows the edited publication sequence and excludes placeholder scenes",async()=>{
+ const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");
+ assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["identity","latest-youtube","latest-moe","latest-notebook","selected-films","further-notes"]);
+ assert.doesNotMatch(page,/london-night|ffn-notebook|personal-architecture|personal-books|personal-journey|mcp-interaction|operator-notebook|larql-scene/);
+ assert.doesNotMatch(page,/SUPPORTED.*NATURAL DEPTH|FINDING.*E25/);
+});
 
 // Retrieval must not turn metadata associations into transcript-backed assertions.
 const {channelVideos,allVideos,ibm,ibmVideos,latestMoe,popularMoe,videoReferences,getVideo,filterVideos,transcriptFor}=await import("../lib/youtube.ts");

@@ -1,3 +1,5 @@
+> **Superseded homepage sequence — 6 September 2026.** The original 14-scene board below remains a shoot reference. The current homepage is edited around identity → latest YouTube → latest verified MoE appearance → latest notebook (the map) → selected films → further notes → selected work (LARQL, VINDEX3, MCP-CLI). Do not restore unsupplied-media scenes. Work uses an original film still and labelled static conceptual studies; copy flows naturally with no fixed-height title containers. Film navigation is direct, and the Film index presents Chris’s own channel before IBM appearances.
+
 # CHRISHAYUK.COM — homepage production board
 
 Version 0.2 · 05 September 2026 · Status: production specification, grounded in local HAUSE source
