@@ -402,3 +402,43 @@
 .unlisted-banner>.record-voice{font-size:9px;color:var(--accent)}
 .unlisted-banner>p:not(.record-voice){font-size:13px;line-height:1.8;max-width:700px}
 .notebook-record .unlisted-banner{margin-top:38px}
+
+/* The argument in brief, for a reader who wants the shape before the evidence. */
+.act-summary{max-width:900px;margin:10px auto 46px;border-block:1px solid var(--rule);padding:32px 0 34px}
+.act-summary>.record-voice{font-size:9px;color:var(--muted);margin-bottom:26px}
+.act-summary ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.act-summary li{display:grid;grid-template-columns:38px minmax(0,1fr);align-items:baseline;gap:14px;padding:9px 0}
+.act-summary li>.record-voice{font-size:9px;color:var(--stone)}
+.act-summary li p{font:clamp(21px,2.5vw,32px)/1.32 var(--font-fraunces);letter-spacing:-.03em}
+.act-summary li:last-child p{color:var(--accent)}
+.act-summary-detail{margin-top:26px;padding-left:52px;font-size:14px;line-height:1.85;color:var(--muted);max-width:620px}
+@media(max-width:650px){.act-summary li{grid-template-columns:26px minmax(0,1fr);gap:10px}.act-summary-detail{padding-left:0}}
+
+/* The notebook card for the authority note: two recorded outcomes of one context. */
+.authority-card{aspect-ratio:16/9;background:#0b0b0e;color:#e6e2da;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,2.6vw,34px);container-type:inline-size}
+.authority-card-rail{display:grid;grid-template-columns:repeat(48,minmax(0,1fr));align-items:end;height:26px}
+.authority-card-rail>span{justify-self:center;width:1px;height:7px;background:#34352f}
+.authority-card-rail>span[data-global=true]{justify-self:stretch;width:auto;min-width:4px;height:22px;background:#7d7e76}
+.authority-card-rail>span[data-gate=true]{background:transparent;border:1px dashed #e6b460}
+.authority-card-states{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,44px);align-items:end;flex:1;padding-block:clamp(10px,2vw,22px)}
+.authority-card-state{min-width:0;border-top:1px solid #2c2d28;padding-top:14px}
+.authority-card-state>.record-voice{font-size:8px;line-height:1.7;color:#8d8e85}
+.authority-card-answer{font:clamp(38px,7cqw,86px)/1 var(--font-fraunces);letter-spacing:-.05em;margin:10px 0 12px;color:#6f7068}
+.authority-card-note{font-size:clamp(10px,1.15cqw,13px);line-height:1.7;color:#8d8e85;max-width:34ch}
+.authority-card-state[data-state=flipped] .authority-card-answer{color:#e6b460}
+.authority-card-state[data-state=flipped]{border-top-color:#e6b460}
+.authority-card-caption{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:8px;color:#8d8e85;border-top:1px solid #2c2d28;padding-top:14px}
+.authority-card-caption button{background:transparent;border:1px solid #3c3d37;color:#c8c4bc;font:inherit;letter-spacing:.07em;padding:11px 13px;min-height:44px}
+.authority-card-caption button:hover{border-color:#e6b460;color:#e6b460}
+.authority-card.running .authority-card-state[data-state=held]{animation:authority-hand-off 6s ease-in-out infinite}
+.authority-card.running .authority-card-state[data-state=flipped]{animation:authority-hand-off 6s ease-in-out infinite reverse}
+.authority-card.running .authority-card-rail>span[data-gate=true]{animation:authority-gate-pulse 6s ease-in-out infinite}
+@keyframes authority-hand-off{0%,42%{opacity:1}52%,92%{opacity:.42}100%{opacity:1}}
+@keyframes authority-gate-pulse{0%,42%{background:#7d7e76;border-color:transparent}52%,92%{background:transparent;border-color:#e6b460}100%{background:#7d7e76;border-color:transparent}}
+@media(prefers-reduced-motion:reduce){.authority-card.running *{animation:none!important}}
+@media(max-width:650px){.authority-card-states{grid-template-columns:1fr;gap:14px;align-items:start}.authority-card-note{display:none}.authority-card-answer{font-size:clamp(32px,11vw,52px);margin:6px 0}}
+.thread-authority-preview{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#0b0b0e;color:#e6e2da;padding:24px;text-align:center}
+.thread-authority-preview .record-voice{font-size:8px;color:#8d8e85}
+.thread-authority-preview strong{font:clamp(30px,4.5vw,54px)/1 var(--font-fraunces);font-weight:400;letter-spacing:-.045em;color:#6f7068}
+.thread-authority-preview strong[data-flipped=true]{color:#e6b460}
+.thread-authority-preview>.record-voice:last-child{margin-top:10px;color:#e6b460}

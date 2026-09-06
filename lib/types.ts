@@ -3,6 +3,7 @@ export type Act =
   | { kind: "statement"; text: string }
   | { kind: "observation"; label?: string; text: string; references?: { label: string; url: string }[] }
   | { kind: "connection"; text: string; links: { href: string; label: string }[]; demonstration?: "addressed-memory" | "authority-gate" }
+  | { kind: "summary"; label: string; lines: string[]; detail?: string }
   | { kind: "question"; text: string; status: Status; detail?: string }
   | { kind: "claim"; text: string; status: Status; detail?: string }
   | { kind: "evidence"; items: { label: string; status: Status; detail: string }[] }
@@ -18,6 +19,8 @@ export type PublicationRecord = {
   /** Unlisted records resolve at their own URL and appear in no index, feed or graph. */
   visibility?: "unlisted";
   authors: string[]; body: Act[]; concepts: string[]; related: string[];
+  /** How this note came about, shown on the notebook index. Films are one route in, not the only one. */
+  lineage?: string;
   media: string[]; sources: { title: string; url?: string; note?: string }[];
   sourceMetadata?: { retrievedAt: string; sourceHash: string; transcript: string; views: number | null; viewsApproximate: boolean };
   youtubeId?: string; originalUrl?: string; episode?: string; collection?: string;

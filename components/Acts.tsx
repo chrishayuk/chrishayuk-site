@@ -18,6 +18,7 @@ export function Acts({ acts, anchored = false, offset = 0, priority = false }: {
   return <div className="acts">{acts.map((act,i) => {
     const rendered = (() => { switch (act.kind) {
       case "statement": return <Statement key={i} text={act.text}/>;
+      case "summary": return <section key={i} className="act-summary" data-hause-act="summary"><p className="record-voice">{act.label}</p><ol>{act.lines.map((line, n) => <li key={n}><span className="record-voice" aria-hidden="true">{String(n+1).padStart(2,"0")}</span><p>{line}</p></li>)}</ol>{act.detail ? <p className="act-summary-detail">{act.detail}</p> : null}</section>;
       case "connection": return act.demonstration ? <DemoConnection key={i} text={act.text} links={act.links} demonstration={act.demonstration}/> : <Connection key={i} text={act.text} links={act.links}/>;
       case "observation": return <div key={i} className="sourced-observation"><Observation label={act.label} text={act.text}/>{act.references?.length ? <p className="act-references record-voice">{act.references.map(ref => <a key={ref.url} href={ref.url}>{ref.label} ↗</a>)}</p> : null}</div>;
       case "question": case "claim": {

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { readAddress, addressedMemory } from "@/lib/addressed-memory";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
 import { pageMetadata } from "@/lib/metadata";
-import { mapThread as thread, resolveThreadStep, memoryStudy } from "@/lib/threads";
+import { mapThread as thread, resolveThreadStep, memoryStudy, authorityStudy } from "@/lib/threads";
+import { authorityGate, gateArm } from "@/lib/authority-gate";
 import { getMedia } from "@/lib/media";
 import { SITE } from "@/lib/records";
 import { WorkVisual } from "@/components/WorkSelection";
@@ -17,10 +18,10 @@ export default function Page() {
       const media = step.media ? getMedia(step.media) : undefined;
       return <li key={step.id} id={`step-${i+1}`} data-hause-act="connection">
         <div className="thread-step-number record-voice">{String(i+1).padStart(2,"0")}<span>{step.kind}</span></div>
-        <div className="thread-step-content"><p className="kicker record-voice">{step.label}</p><h2><Link href={step.url}>{step.title}</Link></h2><p>{step.text}</p><p className="thread-step-status record-voice">{step.status}{step.date ? ` · ${step.date}` : ""}</p><Link href={step.url} className="text-link">{step.id === memoryStudy.id ? "TRY THE MECHANISM" : step.kind === "film" ? "WATCH FROM 02:00" : step.kind === "work" ? "EXPLORE THE WORK" : "OPEN THE NOTE"} ↗</Link></div>
+        <div className="thread-step-content"><p className="kicker record-voice">{step.label}</p><h2><Link href={step.url}>{step.title}</Link></h2><p>{step.text}</p><p className="thread-step-status record-voice">{step.status}{step.date ? ` · ${step.date}` : ""}</p><Link href={step.url} className="text-link">{step.id === memoryStudy.id ? "TRY THE MECHANISM" : step.id === authorityStudy.id ? "OPEN THE INSTRUMENT" : step.kind === "film" ? "WATCH FROM 02:00" : step.kind === "work" ? "EXPLORE THE WORK" : "OPEN THE NOTE"} ↗</Link></div>
         <Link href={step.url} className="thread-step-image" aria-label={`Open ${step.title}`}>
-          {step.id === "W-VINDEX3" ? <WorkVisual id={step.id}/> : step.id === memoryStudy.id ? <div className="thread-demo-preview"><span className="record-voice">{addressedMemory.facts[0].address.toUpperCase()}</span><span aria-hidden="true">↓</span><strong>{readAddress(0).answer}.</strong><span className="record-voice">CHANGE THE QUESTION ↗</span></div> : media && <img src={media.poster || media.desktop} alt={media.alt} width={1600} height={900} loading={i === 0 ? "eager" : "lazy"}/>}
-          {step.id !== memoryStudy.id && <span className="record-voice">{step.id === "W-VINDEX3" ? "CONCEPTUAL STUDY" : media?.type === "film" ? "CONSTRUCTED VISUAL STUDY" : "FROM THE FILM"} ↗</span>}
+          {step.id === "W-VINDEX3" ? <WorkVisual id={step.id}/> : step.id === authorityStudy.id ? <div className="thread-authority-preview"><span className="record-voice">EIGHT READS OPEN</span><strong>{gateArm([])!.answer}</strong><span className="record-voice">RETIRE LAYER {authorityGate.architecture.globalLayers[4]}</span><strong data-flipped="true">{gateArm([29])!.answer}</strong><span className="record-voice">RECORDED RESULT ↗</span></div> : step.id === memoryStudy.id ? <div className="thread-demo-preview"><span className="record-voice">{addressedMemory.facts[0].address.toUpperCase()}</span><span aria-hidden="true">↓</span><strong>{readAddress(0).answer}.</strong><span className="record-voice">CHANGE THE QUESTION ↗</span></div> : media && <img src={media.poster || media.desktop} alt={media.alt} width={1600} height={900} loading={i === 0 ? "eager" : "lazy"}/>}
+          {step.id !== memoryStudy.id && step.id !== authorityStudy.id && <span className="record-voice">{step.id === "W-VINDEX3" ? "CONCEPTUAL STUDY" : media?.type === "film" ? "CONSTRUCTED VISUAL STUDY" : "FROM THE FILM"} ↗</span>}
         </Link>
       </li>;
     })}</ol>
