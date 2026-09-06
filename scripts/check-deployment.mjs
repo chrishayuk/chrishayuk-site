@@ -22,7 +22,7 @@ assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.ok(home.body.indexOf('id="the-work"') < home.body.indexOf('id="person"'));
-for(const path of ["/ideas","/systems","/objects","/record"]) {
+for(const path of ["/ideas","/systems","/objects","/record","/knowledge"]) {
   const page=await request(path);
   assert.equal(page.status,200,path);
   assert.ok(page.body.includes(`rel="canonical" href="https://chrishayuk.com${path}"`),path);
@@ -63,6 +63,15 @@ assert.equal(graph.nodes.find(n=>n.id==="CATALOGUE-RECORD").url,"https://chrisha
 const ask = await request("/ask?q=How%20many%20episodes%3F");
 assert.equal(ask.status, 200);
 assert.match(ask.body, /at least 46/);
+const draftSearch=JSON.parse((await request("/api/search?q=operator%20knows&scope=records")).body);
+assert.ok(draftSearch.results.some(r=>r.recordId==="N-OPERATOR"&&r.basis==="draft-record"));
+const noDrafts=JSON.parse((await request("/api/search?q=operator%20knows&drafts=exclude")).body);
+assert.ok(noDrafts.results.every(r=>r.publication!=="draft"));
+const note=await request("/notebook/the-operator-and-the-model");
+assert.ok(note.body.includes('id="act-1"'));
+assert.ok(note.body.includes('id="source-1"'));
+assert.equal(graph.coverage.chapters,235);
+assert.equal(graph.coverage.acts,33);
 const films = JSON.parse((await request("/api/records")).body);
 assert.equal(films.count, 241);
 const ibm = films.records.find(r => r.id.includes("W3iQbl5R_Jk"));

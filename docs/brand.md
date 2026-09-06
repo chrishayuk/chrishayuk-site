@@ -54,7 +54,8 @@ The legacy `/work` index uses the Systems presentation and canonical URL. Film,
 Research and Notebook collections remain available under the house and footer.
 The catalogue uses existing IDs rather than adding a decorative numbering scheme.
 Release dates remain distinct from catalogue retrieval dates. Drafts are visible
-in the catalogue but do not enter publication feeds or become evidence in Ask.
+in the catalogue and searchable in Ask with explicit draft labels. They do not
+enter publication feeds or become established findings through retrieval.
 
 The graph connects the new entrances and all catalogue records. IBM films have
 catalogue membership and participant credits, never house authorship. Highway

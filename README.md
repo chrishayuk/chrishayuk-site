@@ -24,7 +24,7 @@ Canonical domain: **https://chrishayuk.com**. The other four owned domains and a
 
 ## Production state
 
-This is the first public production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter public APIs or feeds; catalogued YouTube source records enter the record API separately from local publications. The public Fly edition permits indexing; drafts remain explicitly labelled and excluded from publication feeds.
+This is the first public production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter the publication record API or feeds; catalogued YouTube source records enter the record API separately from local publications. The public Fly edition permits indexing; drafts remain explicitly labelled and excluded from publication feeds.
 
 The homepage does **not yet meet** the photographic-area launch criterion. The owner has authorized this initial public edition; the media inventory continues to identify the original photography still required.
 
@@ -84,7 +84,7 @@ The current social card `public/og-house.png` uses the new house identity. It wa
 
 Refresh from cached public metadata with `python3 scripts/import-youtube.py work/media-ingest`. The importer checks the channel ID and refuses an empty catalogue. It takes `channel-current.json`, optional `channel-other.jsonl`, per-video `.info.json` and available `.en-orig.json3` captions. It does not copy signed download URLs into source. Full metadata is currently available for three videos; automatic, unreviewed timed captions for two. Caption rate limiting interrupted further ingestion; missing transcripts stay explicit.
 
-Imported films have `publication: catalogued`, distinct from local published editorial claims. Citations identify the original YouTube film. Metadata-derived concept/project edges are for discovery, never proof of a claim. Raw downloads are ignored. `sourceMetadata` retains retrieval time, content hash and coverage. The graph includes draft record stubs marked non-retrievable for cross-links; Ask retrieves catalogued films, published editorial records when present, and the verified IBM appearance register.
+Imported films have `publication: catalogued`, distinct from local published editorial claims. Citations identify the original YouTube film. Metadata-derived concept/project edges are for discovery, never proof of a claim. Raw downloads are ignored. `sourceMetadata` retains retrieval time, content hash and coverage. The graph includes the full text of public editorial drafts, preserving draft status, semantic acts and source anchors. Ask retrieves these alongside catalogued films, chapters, published editorial records when present, and the verified IBM appearance register; `drafts=exclude` removes draft results.
 
 Media edit decisions are recorded in `docs/youtube-media.md`. Full YouTube players load only on explicit activation. Offscreen, hidden-page, menu and global-pause events remove the full player; returning requires another play action. Playback position within the embedded player is not retained on suspension. Muted local previews share the existing motion coordinator. All frames remain useful with video disabled.
 
@@ -112,3 +112,29 @@ Search metadata, citations and the optional Google tag use HAUSE. See the
 [implementation audit](docs/search-and-analytics.md) for verified coverage and
 remaining account-side checks, and [deployment](docs/deployment.md) for the
 site-specific GA4 configuration.
+
+
+## Expanded graph
+
+`/knowledge` exposes the connected record behind Ask. `lib/graph.ts` builds one
+corpus for the graph API and retrieval, from the existing records and source
+catalogues. It includes 252 record nodes, 33 authored HAUSE-act passages, 235
+film chapters, 108 automatic-caption passages, 16 concepts and 302 source
+references (955 nodes and 1,879 relationships including house/identity nodes).
+Counts are derived at build/runtime, not maintained independently in the UI.
+
+- `/api/search?q=...&scope=records|films|concepts|all` scopes retrieval.
+- `drafts=exclude` removes editorial drafts, including related-result links.
+- Authored passage IDs include the record version; source URLs resolve to
+  `#act-N` anchors on their record pages.
+- Chapter titles carry `source-chapter` provenance and original YouTube times;
+  they are not treated as transcript quotations.
+- Source reference nodes record citations only; they do not imply ingestion of
+  a linked repository or website. Only two actual transcripts are indexed.
+- Editorial and metadata-inferred edges remain distinct; neither is evidence
+  that connected records support each other's claims.
+
+The raw graph includes draft text because those records are already public on
+the site. This is a change in retrieval coverage, not a publication transition;
+`indexedRecords`, version snapshots, publication feeds and citations retain
+those boundaries. [Implementation and coverage](docs/graph.md).

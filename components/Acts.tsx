@@ -1,3 +1,4 @@
+import { actAnchor } from "@/lib/record-knowledge";
 import { Statement } from "@chrishayuk/hause/components/forms/Statement";
 import { Observation } from "@chrishayuk/hause/components/forms/Observation";
 import { Question } from "@chrishayuk/hause/components/forms/Question";
@@ -9,9 +10,9 @@ import { STATUSES, type Status as HauseStatus } from "@chrishayuk/hause/types";
 import type { Act, Status } from "@/lib/types";
 import { Media } from "./Media";
 const isHauseStatus = (s: Status): s is HauseStatus => (STATUSES as readonly string[]).includes(s);
-export function Acts({ acts }: { acts: Act[] }) {
+export function Acts({ acts, anchored = false }: { acts: Act[]; anchored?: boolean }) {
   return <div className="acts">{acts.map((act,i) => {
-    switch (act.kind) {
+    const rendered = (() => { switch (act.kind) {
       case "statement": return <Statement key={i} text={act.text}/>;
       case "observation": return <Observation key={i} label={act.label} text={act.text}/>;
       case "question": case "claim": {
@@ -23,6 +24,7 @@ export function Acts({ acts }: { acts: Act[] }) {
       case "comparison": return <div className="comparison-wrap" key={i}><Comparison kicker="ONE OBJECT · TWO INTERPRETATIONS" {...act}/></div>;
       case "film": case "photograph": return <Media key={i} id={act.media} caption/>;
       default: { const never: never = act; throw new Error(`Unknown semantic act: ${JSON.stringify(never)}`); }
-    }
+    } })();
+    return anchored ? <section key={i} id={actAnchor(i)} className="act-anchor">{rendered}</section> : rendered;
   })}</div>;
 }

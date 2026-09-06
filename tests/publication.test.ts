@@ -73,5 +73,38 @@ test("house positioning is source-linked and never turns IBM productions into ho
  assert.ok(!searchGraph("unicorn quantum benchmark").some(r=>r.id==="PRACTICE-CHRIS"));
  for(const r of records)assert.ok(edges.some(e=>e.from===r.id&&e.to==="CATALOGUE-RECORD"&&e.kind==="catalogued-in"));
  assert.ok(searchGraph("catalogue").some(r=>r.url==="/record"&&r.basis==="catalogue-index"));
- assert.ok(!searchGraph("operator knows").some(r=>r.id==="N-OPERATOR"),"draft notes must not become published evidence");
+ const draft=searchGraph("operator knows").find(r=>r.recordId==="N-OPERATOR");assert.ok(draft);assert.equal(draft.basis,"draft-record");assert.equal(draft.publication,"draft");assert.ok(!searchGraph("operator knows",{includeDrafts:false}).some(r=>r.recordId==="N-OPERATOR"));
+});
+
+
+test("graph indexes authored acts with exact text, version, source anchors and draft status",async()=>{
+ const {recordActs}=await import("../lib/record-knowledge.ts");const g=recordGraph();
+ for(const r of records.filter(r=>!r.youtubeId))for(const act of recordActs(r)){
+  const node=g.nodes.find(n=>n.id===act.id);assert.ok(node);assert.equal(node.text,act.text);assert.equal(node.publication,r.publication);assert.equal(node.version,r.version);assert.ok(node.sourceUrl!.endsWith(`#${act.anchor}`));
+  assert.ok(g.edges.some(e=>e.from===node.id&&e.to===r.id&&e.kind==="act-of"));
+ }
+ const refusal=searchGraph("predictive locality").find(r=>r.actKind==="refusal");assert.ok(refusal);assert.equal(refusal.publication,"draft");assert.match(refusal.text,/NOT ESTABLISHED/);assert.match(refusal.text,/Open question/);
+ assert.ok(searchGraph("FFN graph",{scope:"records"}).every(r=>r.publication==="draft"));
+ assert.ok(!searchGraph("LARQL",{scope:"films",includeDrafts:false}).some(r=>r.publication==="draft"));
+});
+
+test("film chapters keep exact source titles and seek times without becoming transcripts",()=>{
+ const g=recordGraph();assert.equal(g.coverage.chapters,allVideos.reduce((n,v)=>n+v.chapters.length,0));
+ for(const v of allVideos)for(const c of v.chapters){
+  const n=g.nodes.find(n=>n.id===`${v.id}:chapter@${c.start}`);assert.ok(n);assert.equal(n.text,c.title);assert.equal(n.start,c.start);assert.equal(n.basis,"source-chapter");assert.equal(n.transcription,undefined);assert.equal(n.sourceUrl,`${v.url}&t=${Math.floor(c.start)}`);
+  assert.ok(g.edges.some(e=>e.from===n.id&&e.to===v.id&&e.kind==="chapter-of"));
+ }
+ const chapter=allVideos.flatMap(v=>v.chapters).find(c=>c.title.toLowerCase().includes("agent"))!;assert.ok(chapter);
+ assert.ok(searchGraph(chapter.title,{scope:"films"}).some(r=>r.basis==="source-chapter"));
+});
+
+test("retrieval returns graph sources, preserves scope and never ingests referenced documents by implication",()=>{
+ const g=recordGraph();
+ for(const q of ["LARQL","operator knows","graph","How many episodes?","model representation"]){
+  for(const result of searchGraph(q)){const node=g.nodes.find(n=>n.id===result.id);assert.ok(node?.retrievable);assert.equal(result.sourceUrl,node.sourceUrl);assert.equal(result.basis,node.basis);}
+ }
+ assert.ok(g.nodes.filter(n=>n.kind==="source").every(n=>n.retrievable===false&&n.basis==="source-reference"));
+ const concepts=searchGraph("ffn",{scope:"concepts"});assert.ok(concepts.length>0);assert.ok(concepts.every(n=>n.kind==="concept"&&n.basis==="record-associations"));
+ assert.equal(g.coverage.nodes,g.nodes.length);assert.equal(g.coverage.relationships,g.edges.length);
+ assert.equal(searchGraph("imaginary definitive ffns cured quantum gravity").length,0);
 });

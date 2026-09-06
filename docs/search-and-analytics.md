@@ -15,8 +15,9 @@ Implementation audit: 6 September 2026.
   source citations and publication history. Local draft reference formatting
   remains site code because drafts are not published research.
 - `Analytics`: Google tag loading, configured with a site-specific measurement
-  ID. Chris Hay's layout now uses this existing component; it is inactive until
-  `GOOGLE_ANALYTICS_ID` is supplied. HAUSE's own site uses `G-35LSQK48G5`.
+  ID. Chris Hay's layout uses this existing component with measurement ID
+  `G-4CCGGE1T19`, configured in Fly as `GOOGLE_ANALYTICS_ID`. The correct tag
+  was verified on the live homepage and catalogue; preview hosts exclude it. HAUSE's own site uses `G-35LSQK48G5`.
 
 ## Verified behaviour
 
@@ -30,7 +31,10 @@ Server-rendered summaries, authors, stable URLs and source links are available
 without playing film. The graph contains 241 films and two indexed automatic
 transcripts. The other films are discoverable through available source metadata;
 their complete spoken contents are not searchable. Eleven editorial drafts
-remain outside published feeds and evidence retrieval.
+remain outside published feeds. Their full text and semantic acts now enter
+Ask with explicit draft labels and an exclusion filter, alongside 235 chapter
+titles. The graph and search share the same corpus; chapter titles remain
+distinct from actual transcript passages.
 
 ## Not established by this audit
 
