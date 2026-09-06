@@ -1,6 +1,8 @@
-# CHRIS HAY — a research house
+# CHRIS HAY — a house for ideas, systems and objects
 
-A HAUSE publication with a fourteen-scene homepage, work dossiers, a sourced film collection, notebook and research records, and publication/citation infrastructure.
+The primary record of Chris Hay’s practice: ideas, systems and objects. Built with HAUSE, with a cinematic homepage, work dossiers, a sourced film collection, notebook and research records, and publication/citation infrastructure.
+
+The brand is **CHRIS HAY**. **A house for ideas, systems and objects.** is the umbrella; **Building things to find out how they work.** is the philosophy. `lib/house.ts` supplies the author-described practice to About, metadata and Ask. The graph marks this as positioning, separate from experimental evidence and the authorship of external productions.
 
 ## Run
 
@@ -66,7 +68,7 @@ The command appends a complete snapshot and a SHA-256 of deterministic, sorted-k
 - [HAUSE source inspection](docs/hause-integration-handoff.md)
 - [Media production inventory](content/homepage-media.production.json)
 
-The social card `public/og.png` was generated using the built-in ImageGen tool. Brief: exact CHRIS HAY identity, BUILDING THINGS / TO FIND OUT / HOW THEY WORK., London 2026, A RESEARCH HOUSE and CHRISHAYUK.COM in editorial serif/sans/monospace on HAUSE ink and paper. No generated photography is used.
+The current social card `public/og-house.png` uses the new house identity. It was generated with the built-in image tool; the exact prompt and asset provenance are in [the brand record](docs/brand.md). No generated photography is used.
 
 
 ## YouTube collection and graph

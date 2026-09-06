@@ -1,3 +1,4 @@
+import { HOUSE } from "@/lib/house";
 import { modeScript } from "@chrishayuk/hause/mode";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
 import { webSiteLd } from "@chrishayuk/hause/seo";
@@ -16,9 +17,9 @@ const record = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], d
 export async function generateMetadata(): Promise<Metadata> {
  const h = await headers(); const host = h.get("host") || "chrishayuk.com";
  const origin = INDEXABLE ? SITE : `${host.startsWith("localhost") ? "http" : "https"}://${host}`;
- return { metadataBase: new URL(origin), title: { default: "Chris Hay — A research house", template: "%s — Chris Hay" }, description: "Building things to find out how they work. A film, photography and research record by Chris Hay.", robots: { index: INDEXABLE, follow: INDEXABLE }, openGraph: { title: "Chris Hay — Building things to find out how they work.", description: "A research house. Film, photography, engineering and the ideas along the way.", type: "website", siteName: "Chris Hay", images: [{ url: `${origin}/og.png`, width: 1536, height: 1024, alt: "Chris Hay. Building things to find out how they work." }] }, twitter: { card: "summary_large_image", images: [`${origin}/og.png`] }, icons: { icon: "/favicon.svg" }, alternates: { canonical: SITE, types: { "application/rss+xml": "/rss.xml", "application/feed+json": "/feed.json" } } };
+ return { metadataBase: new URL(origin), title: { default: `Chris Hay — ${HOUSE.descriptor}`, template: "%s — Chris Hay" }, description: `${HOUSE.descriptor}. ${HOUSE.proposition}`, robots: { index: INDEXABLE, follow: INDEXABLE }, openGraph: { title: `Chris Hay — ${HOUSE.descriptor}`, description: `${HOUSE.descriptor}. ${HOUSE.description}`, type: "website", siteName: "Chris Hay", images: [{ url: `${origin}/og-house.png`, width: 1536, height: 1024, alt: "Chris Hay. A house for ideas, systems and objects. Building things to find out how they work." }] }, twitter: { card: "summary_large_image", images: [`${origin}/og-house.png`] }, icons: { icon: "/favicon.svg" }, alternates: { canonical: SITE, types: { "application/rss+xml": "/rss.xml", "application/feed+json": "/feed.json" } } };
 }
 export default function RootLayout({ children }: { children: React.ReactNode }) {
- const person = { "@context": "https://schema.org", "@type": "Person", "@id": `${SITE}/#person`, name: "Chris Hay", description: "Technologist, Futurist and Disruptor.", url: SITE, sameAs: Object.values(socials) };
- return <html lang="en" data-mode="light" suppressHydrationWarning className={`${display.variable} ${text.variable} ${record.variable}`}><head><script dangerouslySetInnerHTML={{__html:modeScript("light")}}/></head><body id="top"><JsonLd data={[person,webSiteLd({name:"Chris Hay",url:SITE,description:"A film, photography and research record by Chris Hay."})]}/><MotionProvider><Header/>{children}<Footer/></MotionProvider></body></html>;
+ const person = { "@context": "https://schema.org", "@type": "Person", "@id": `${SITE}/#person`, name: "Chris Hay", description: HOUSE.description, url: SITE, sameAs: Object.values(socials) };
+ return <html lang="en" data-mode="light" suppressHydrationWarning className={`${display.variable} ${text.variable} ${record.variable}`}><head><script dangerouslySetInnerHTML={{__html:modeScript("light")}}/></head><body id="top"><JsonLd data={[person,webSiteLd({name:"Chris Hay",url:SITE,description:`${HOUSE.descriptor}. ${HOUSE.description}`})]}/><MotionProvider><Header/>{children}<Footer/></MotionProvider></body></html>;
 }

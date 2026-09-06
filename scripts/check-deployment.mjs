@@ -19,7 +19,7 @@ assert.equal(home.status, 200);
 assert.match(home.body, /WITH CHRIS HAY AS A PANELIST/);
 assert.match(home.body, /rel="canonical" href="https:\/\/chrishayuk.com"/);
 assert.match(home.body, /name="robots" content="index, follow"/);
-assert.match(home.body, /https:\/\/chrishayuk.com\/og.png/);
+assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 for (const host of ["www.chrishayuk.com", "chrishay.uk", "www.chrishay.uk", "chrishayuk.net", "www.chrishayuk.net", "chrishay.net", "www.chrishay.net", "chrishayuk.io", "www.chrishayuk.io"]) {
   const response = await request("/film/mixture-of-experts?sort=popular", host);
@@ -47,5 +47,5 @@ const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
 assert.equal((await request("/api/health")).status, 200);
-assert.equal((await request("/og.png")).status, 200);
+assert.equal((await request("/og-house.png")).status, 200);
 console.log("Production homepage, nine redirects, preview noindex, sitemap, film graph, Ask, and static media verified.");

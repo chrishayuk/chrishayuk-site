@@ -49,3 +49,12 @@ test("HAUSE film metadata separates the catalogue URL, original source and parti
  assert.equal(ld.url,"https://example.org/film");assert.equal(ld.sameAs,citation.url);assert.equal(ld.uploadDate,undefined);assert.deepEqual(ld.creator,{"@type":"Organization",name:"IBM"});assert.deepEqual(ld.actor,[{"@type":"Person",name:"Chris Hay"}]);
  const head=publicationMetadata({title:citation.title,description:"Synopsis",url:"https://example.org/film",siteName:"A publication",citation});assert.equal(head.robots.index,false);assert.equal(head.alternates.canonical,ld.url);assert.equal(head.other?.citation_public_url,citation.url);
 });
+
+test("house positioning is source-linked and never turns IBM productions into house work",()=>{
+ const g=recordGraph();const nodes=g.nodes as {id:string;kind:string;basis?:string;sourceUrl?:string}[];const edges=g.edges as {from:string;to:string;kind:string}[];
+ const practice=nodes.find(n=>n.id==="PRACTICE-CHRIS");assert.equal(practice?.kind,"practice");assert.equal(practice?.basis,"author-description");assert.equal(practice?.sourceUrl,"https://chrishayuk.com/about#the-house");
+ for(const id of ["W-LARQL","W-VINDEX3","W-HAUSE","W-MCP"])assert.ok(edges.some(e=>e.from===id&&e.to==="HOUSE-SYSTEMS"&&e.kind==="work-of"));
+ for(const v of ibmVideos)assert.ok(!edges.some(e=>e.from===v.id&&e.to.startsWith("HOUSE-")));
+ const result=searchGraph("Ideas, systems and objects").find(r=>r.id==="PRACTICE-CHRIS");assert.ok(result);assert.equal(result.basis,"author-description");assert.equal(result.url,"/about#the-house");
+ assert.ok(!searchGraph("unicorn quantum benchmark").some(r=>r.id==="PRACTICE-CHRIS"));
+});
