@@ -1,5 +1,19 @@
 # Visual notebook preview
 
+## Visual reading edition / 6 September 2026
+
+N-AUTHORITY now uses six visual chapters through `AuthorityNotebook`, including
+recorded readouts, a supply/override contrast, the layer-29 instrument, a retirement
+matrix, a cache/transplant diagram and two relational walks. N-MAP retains its film
+and animation sequence while `MapNotebook` renders selected explanations as visual
+evidence. Both opening films remain; long synopses and research details use native
+disclosures. Original act anchors, sources and draft records are retained.
+
+The notebook Refusal presentation keeps every line visible once without changing
+the vendored form. See `docs/hause-notebook-contribution.md` for static-mode
+contracts, contribution candidates and verification limits. The earlier editorial
+notes below describe the editions this presentation builds on.
+
 Four draft records are composed in `lib/visual-notebooks.ts`:
 
 - `N-MAP` — `/notebook/what-is-the-map`

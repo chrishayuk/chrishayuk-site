@@ -117,6 +117,11 @@ assert.match(map.body,/demo-invitation-stage/);
 assert.match(map.body,/thread-navigation/);
 assert.match(map.body,/href="\/thread\/the-map#step-2"/);
 assert.match(map.body,/href="\/demos\/addressed-memory"/);
+assert.match(map.body,/map-visual-section/);
+assert.match(map.body,/map-annotated/);
+assert.match(map.body,/map-coordinate-pair/);
+assert.match(map.body,/href="\/notebook\/which-source-wins"/);
+for(let act=1;act<=23;act++) assert.equal(map.body.split(`id="act-${act}"`).length-1,1,`map citation act-${act}`);
 const mapSearch=JSON.parse((await request("/api/search?q=logit%20lens&scope=records")).body);
 assert.ok(mapSearch.results.some(r=>r.recordId==="N-MAP"&&r.basis==="draft-record"));
 const demo=await request("/demos/addressed-memory");
@@ -139,6 +144,7 @@ assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
 // The authority note is listed: on the index, in the thread, the graph and Ask.
 const notebook = await request("/notebook");
 assert.match(notebook.body, /href="\/notebook\/which-source-wins"/);
+assert.match(notebook.body, /href="\/notebook\/what-is-the-map"/);
 assert.match(notebook.body, /FILM → QUESTION → EVIDENCE → INSTRUMENT/);
 assert.match(notebook.body, /authority-card/);
 assert.doesNotMatch(notebook.body, /VISUAL NOTES/);
@@ -150,6 +156,18 @@ assert.doesNotMatch(authority.body, /UNLISTED PREVIEW/);
 assert.match(authority.body, /THE ARGUMENT, IN FIVE LINES/);
 assert.match(authority.body, /demo-invitation-stage/);
 assert.match(authority.body, /thread-navigation/);
+for(let chapter=1;chapter<=6;chapter++) assert.ok(authority.body.includes(`id="authority-chapter-${chapter}"`));
+for(let act=1;act<=28;act++) assert.equal(authority.body.split(`id="act-${act}"`).length-1,1,`authority citation act-${act}`);
+assert.match(authority.body, /authority-scene/);
+assert.match(authority.body, /authority-matrix/);
+assert.match(authority.body, /authority-walk-layouts/);
+assert.match(authority.body, /notebook-refusal/);
+assert.doesNotMatch(authority.body, /three tiers, not two —|authority is not deletion —|two instrument rules earned the hard way —/);
+for(const path of ["/ideas", "/record?q=Which%20source%20wins"]) {
+  const listing=await request(path);
+  assert.equal(listing.status,200,path);
+  assert.match(listing.body,/href="\/notebook\/which-source-wins"/,path);
+}
 assert.ok(sitemap.body.includes("/notebook/which-source-wins") === false, "drafts stay out of the sitemap");
 assert.ok(graph.nodes.some(n => n.recordId === "N-AUTHORITY" && n.kind === "act" && n.basis === "draft-record"));
 const authoritySearch = JSON.parse((await request("/api/search?q=inert%20not%20outvoted&scope=records")).body);

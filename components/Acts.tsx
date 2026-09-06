@@ -13,8 +13,9 @@ import { FilmPlayer } from "./FilmPlayer";
 import { getVideo } from "@/lib/youtube";
 import { Connection } from "@chrishayuk/hause/components/forms/Connection";
 import { DemoConnection } from "./DemoConnection";
+import { NotebookRefusal } from "./NotebookRefusal";
 const isHauseStatus = (s: Status): s is HauseStatus => (STATUSES as readonly string[]).includes(s);
-export function Acts({ acts, anchored = false, offset = 0, priority = false }: { acts: Act[]; anchored?: boolean; offset?: number; priority?: boolean }) {
+export function Acts({ acts, anchored = false, offset = 0, priority = false, staticRefusals = false }: { acts: Act[]; anchored?: boolean; offset?: number; priority?: boolean; staticRefusals?: boolean }) {
   return <div className="acts">{acts.map((act,i) => {
     const rendered = (() => { switch (act.kind) {
       case "statement": return <Statement key={i} text={act.text}/>;
@@ -26,7 +27,7 @@ export function Acts({ acts, anchored = false, offset = 0, priority = false }: {
         return act.kind === "question" ? <Question key={i} {...act} status={act.status}/> : <Claim key={i} {...act} status={act.status}/>;
       }
       case "evidence": return <section key={i}>{act.items.map((item,j) => isHauseStatus(item.status) ? <Evidence key={j} items={[{ ...item, status: item.status }]}/> : <div className="domain-act" key={j}><p className="record-voice">{item.status}</p><h3>{item.label}</h3><p>{item.detail}</p></div>)}</section>;
-      case "refusal": return <Refusal key={i} {...act}/>;
+      case "refusal": return staticRefusals ? <NotebookRefusal key={i} {...act}/> : <Refusal key={i} {...act}/>;
       case "comparison": return <div className="comparison-wrap" key={i}><Comparison kicker="ONE OBJECT · TWO INTERPRETATIONS" {...act}/></div>;
       case "film": {
         if ("media" in act) return <Media key={i} id={act.media} caption priority={priority}/>;

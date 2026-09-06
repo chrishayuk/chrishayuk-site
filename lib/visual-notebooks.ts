@@ -25,6 +25,7 @@ export const visualNotebooks: PublicationRecord[] = [
     "related": [
         "N-STATE",
         "N-ADDRESS",
+        "N-AUTHORITY",
         "Q-FFN",
         "W-LARQL",
         "YT-HJlWDSyDcD4"
@@ -178,6 +179,10 @@ export const visualNotebooks: PublicationRecord[] = [
                 {
                     "label": "Follow the state question",
                     "url": "/notebook/what-has-to-survive"
+                },
+                {
+                    "label": "Next: Which source wins?",
+                    "url": "/notebook/which-source-wins"
                 }
             ]
         },

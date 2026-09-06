@@ -12,6 +12,7 @@ import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/Motion";
 import { SITE, socials } from "@/lib/records";
 import "./globals.css";
+import "./notebook-visuals.css";
 const display = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], display: "swap" });
 const text = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const record = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
