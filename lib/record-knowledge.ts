@@ -5,11 +5,13 @@ export function actText(act: Act): string {
   switch (act.kind) {
     case "statement": return act.text;
     case "observation": return [act.label, act.text].filter(Boolean).join(". ");
+    case "connection": return [act.text, ...act.links.map(link => link.label)].join(". ");
     case "question": case "claim": return [act.text, act.detail].filter(Boolean).join(" ");
     case "refusal": return [act.title, ...act.lines, act.principle].join(". ");
     case "evidence": return act.items.map(item => `${item.label} [${item.status}]. ${item.detail}`).join(" ");
     case "comparison": return `${act.objectLabel}. ${act.left.label}: ${act.left.properties.join("; ")}. ${act.right.label}: ${act.right.properties.join("; ")}.`;
-    case "film": case "photograph": return "";
+    case "film": return "caption" in act ? act.caption : "";
+    case "photograph": return "";
   }
 }
 

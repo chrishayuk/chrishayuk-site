@@ -1,6 +1,7 @@
 import { videoRecords } from "./video-records.ts";
 import snapshots from "../content/publications.json" with { type: "json" };
 import type { PublicationRecord } from "./types";
+import { visualNotebooks } from "./visual-notebooks.ts";
 
 export const SITE = "https://chrishayuk.com";
 export const socials = { YouTube: "https://www.youtube.com/@chrishayuk", GitHub: "https://github.com/chrishayuk", LinkedIn: "https://www.linkedin.com/in/chrishayuk/", IBM: "https://www.ibm.com/think/podcasts/mixture-of-experts" };
@@ -39,6 +40,7 @@ const filmSources = [
 ];
 for (const f of filmSources) records.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
+records.unshift(...visualNotebooks);
 records.push(...videoRecords);
 
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };

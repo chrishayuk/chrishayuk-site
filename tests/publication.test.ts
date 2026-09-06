@@ -5,6 +5,44 @@ import { stableJson, validateRecord, escapeXml } from "../lib/publication.ts";
 import { records, publishedRecords, getVersion } from "../lib/records.ts";
 import { readFile } from "node:fs/promises";
 import { catalogue, catalogueDate, catalogueUrl, PAGE_SIZE } from "../lib/catalogue.ts";
+import { addressedMemory, readAddress } from "../lib/addressed-memory.ts";
+import { filmStill, filmStills, stillPath } from "../lib/film-stills.ts";
+
+test("every notebook passage resolves to its own real film frame without changing the playback start", async () => {
+ const used = new Map<string, string>();
+ for (const record of records.filter(r => ["N-MAP", "N-STATE", "N-ADDRESS"].includes(r.id))) {
+  for (const act of record.body) {
+   if (act.kind !== "film" || !("youtubeId" in act)) continue;
+   const still = filmStill(act.youtubeId, act.start);
+   assert.ok(still, `${record.id}: ${act.youtubeId}@${act.start}`);
+   assert.equal(still.start, act.start);
+   assert.ok(still.frameTime >= act.start);
+   assert.ok((await readFile(new URL(`../public${stillPath(still)}`, import.meta.url))).length > 1000);
+   used.set(`${act.youtubeId}@${act.start}`, stillPath(still));
+  }
+ }
+ assert.equal(new Set(used.values()).size, used.size);
+ assert.equal(filmStills.length, used.size);
+ assert.equal(filmStill("HJlWDSyDcD4", 0), undefined);
+ assert.equal(filmStill("HJlWDSyDcD4", 121), undefined);
+});
+
+test("browser FFN matches all six independently exported NumPy activations and readouts", () => {
+ for (const [index, expected] of addressedMemory.referenceReads.entries()) {
+  const actual = readAddress(index);
+  assert.equal(actual.answer, expected.answer);
+  for (const [i, value] of expected.activations.entries()) assert.ok(Math.abs(actual.activations[i] - value) < 1e-12);
+  for (const [i, value] of expected.scores.entries()) assert.ok(Math.abs(actual.scores[i] - value) < 1e-12);
+ }
+ assert.throws(() => readAddress(-1), RangeError);
+ assert.throws(() => readAddress(6), RangeError);
+});
+
+test("the map explanation retains original animations and timestamped demonstrations", () => {
+ const map = records.find(r => r.id === "N-MAP")!;
+ for (const media of ["notebook-map", "notebook-address"]) assert.ok(map.body.some(a => a.kind === "film" && "media" in a && a.media === media));
+ for (const start of [120, 240, 420, 1170]) assert.ok(map.body.some(a => a.kind === "film" && "youtubeId" in a && a.youtubeId === "HJlWDSyDcD4" && a.start === start));
+});
 test("catalogue filters preserve source authorship and cover each record once across pages",()=>{
  const films=catalogue({kind:"film",q:"IBM"});assert.ok(films.total>0);assert.ok(films.entries.every(r=>r.kind==="film"));for(const r of films.entries)assert.deepEqual(r.authors,records.find(source=>source.id===r.id)!.authors);assert.ok(films.entries.some(r=>r.authors.includes("IBM")));
  assert.equal(catalogue({kind:"work"}).total,4);assert.equal(catalogue({q:"N-OPERATOR"}).entries[0].id,"N-OPERATOR");
@@ -107,4 +145,19 @@ test("retrieval returns graph sources, preserves scope and never ingests referen
  const concepts=searchGraph("ffn",{scope:"concepts"});assert.ok(concepts.length>0);assert.ok(concepts.every(n=>n.kind==="concept"&&n.basis==="record-associations"));
  assert.equal(g.coverage.nodes,g.nodes.length);assert.equal(g.coverage.relationships,g.edges.length);
  assert.equal(searchGraph("imaginary definitive ffns cured quantum gravity").length,0);
+});
+
+test("visual notebook film passages stay connected without becoming transcript evidence",()=>{
+ for(const id of ["N-MAP","N-STATE","N-ADDRESS"]){
+  const r=records.find(r=>r.id===id)!;assert.ok(r);assert.equal(r.publication,"draft");assert.equal(r.published,undefined);
+  for(const [index,act] of r.body.entries()){
+   if(act.kind!=="film"||!("youtubeId" in act))continue;
+   const video=getVideo(act.youtubeId);assert.ok(video);assert.ok(act.start>=0&&act.start<(video.duration||Infinity));
+   const node=recordGraph().nodes.find(n=>n.id===`${r.id}@${r.version}:act-${index+1}`);assert.ok(node);assert.equal(node.text,act.caption);assert.equal(node.basis,"draft-record");
+   assert.ok(recordGraph().edges.some(e=>e.from===node.id&&e.to===video.id&&e.kind==="discusses-film"&&e.basis==="editorial"));
+   assert.ok(r.related.includes(video.id));
+  }
+ }
+ const result=searchGraph("persistent decode state",{scope:"records"});assert.ok(result.some(r=>r.recordId==="N-STATE"));
+ assert.ok(!searchGraph("persistent decode state",{includeDrafts:false}).some(r=>r.recordId==="N-STATE"));
 });

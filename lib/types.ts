@@ -1,13 +1,15 @@
 export type Status = "OPEN" | "PROPOSED" | "TESTING" | "ONGOING" | "SUPPORTED" | "PARTIALLY SUPPORTED" | "NOT SUPPORTED" | "REFUTED" | "SUPERSEDED" | "ARCHIVED";
 export type Act =
   | { kind: "statement"; text: string }
-  | { kind: "observation"; label?: string; text: string }
+  | { kind: "observation"; label?: string; text: string; references?: { label: string; url: string }[] }
+  | { kind: "connection"; text: string; links: { href: string; label: string }[]; demonstration?: "addressed-memory" }
   | { kind: "question"; text: string; status: Status; detail?: string }
   | { kind: "claim"; text: string; status: Status; detail?: string }
   | { kind: "evidence"; items: { label: string; status: Status; detail: string }[] }
   | { kind: "refusal"; title: string; lines: string[]; principle: string }
   | { kind: "photograph"; media: string }
   | { kind: "film"; media: string }
+  | { kind: "film"; youtubeId: string; start: number; caption: string }
   | { kind: "comparison"; objectLabel: string; blockLabels: string[]; left: { label: string; properties: string[] }; right: { label: string; properties: string[] } };
 export type PublicationRecord = {
   id: string; slug: string; kind: "work" | "notebook" | "question" | "film";

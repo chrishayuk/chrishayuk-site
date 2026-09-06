@@ -22,6 +22,13 @@ assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.ok(home.body.indexOf('id="the-work"') < home.body.indexOf('id="person"'));
+assert.match(home.body, /id="from-the-notebook"/);
+assert.match(home.body, /href="\/notebook\/what-is-the-map"/);
+assert.match(home.body, /data-media-id="notebook-map-trajectory"/);
+assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="the-work"'));
+assert.ok(home.body.indexOf('id="latest-mixture-of-experts"') < home.body.indexOf('id="the-work"'));
+const primaryNav=home.body.match(/<nav[^>]*aria-label="Primary"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+assert.ok(primaryNav?.includes('href="/film"'),"Film is a first-level navigation destination");
 for(const path of ["/ideas","/systems","/objects","/record","/knowledge"]) {
   const page=await request(path);
   assert.equal(page.status,200,path);
@@ -71,7 +78,30 @@ const note=await request("/notebook/the-operator-and-the-model");
 assert.ok(note.body.includes('id="act-1"'));
 assert.ok(note.body.includes('id="source-1"'));
 assert.equal(graph.coverage.chapters,235);
-assert.equal(graph.coverage.acts,33);
+assert.equal(graph.coverage.acts,graph.nodes.filter(n=>n.kind==="act").length);
+for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-survive"],["N-ADDRESS","reading-by-address"]]) {
+  const page=await request(`/notebook/${slug}`);
+  assert.equal(page.status,200,slug);
+  assert.ok(page.body.includes(`rel="canonical" href="https://chrishayuk.com/notebook/${slug}"`),slug);
+  assert.ok(page.body.includes('id="act-1"'),slug);
+  assert.ok(graph.nodes.some(n=>n.recordId===id&&n.kind==="act"&&n.basis==="draft-record"),id);
+}
+const map=await request("/notebook/what-is-the-map");
+for (const frame of [156,286,434,1222]) assert.ok(map.body.includes(`/media/notebook/stills/HJlWDSyDcD4-${frame}.webp`));
+assert.match(map.body,/demo-invitation-stage/);
+assert.match(map.body,/href="\/demos\/addressed-memory"/);
+const mapSearch=JSON.parse((await request("/api/search?q=logit%20lens&scope=records")).body);
+assert.ok(mapSearch.results.some(r=>r.recordId==="N-MAP"&&r.basis==="draft-record"));
+const demo=await request("/demos/addressed-memory");
+assert.equal(demo.status,200);
+assert.match(demo.body,/Interactive addressed memory/);
+assert.match(demo.body,/Paris/);
+assert.match(demo.body,/name="robots" content="noindex, follow"/);
+for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.mp4","/media/notebook/address.mp4","/media/notebook/stills/HJlWDSyDcD4-156.webp","/media/notebook/stills/HJlWDSyDcD4-286.webp","/media/notebook/stills/HJlWDSyDcD4-434.webp","/media/notebook/stills/HJlWDSyDcD4-1222.webp"]) {
+  const response=await request(asset);
+  assert.equal(response.status,200,asset);
+  assert.match(response.headers["content-type"], /^(image|video)\//,asset);
+}
 const films = JSON.parse((await request("/api/records")).body);
 assert.equal(films.count, 241);
 const ibm = films.records.find(r => r.id.includes("W3iQbl5R_Jk"));
@@ -81,4 +111,4 @@ assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
 assert.equal((await request("/api/health")).status, 200);
 assert.equal((await request("/og-house.png")).status, 200);
-console.log("Production homepage, house collections, catalogue pagination, canonical URLs, nine redirects, preview noindex, sitemap, graph, Ask, citations and static media verified.");
+console.log("Production homepage, visual notebooks, interactive demo, clip media, catalogue, canonical redirects, indexing, graph, Ask and citations verified.");

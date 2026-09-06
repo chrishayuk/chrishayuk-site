@@ -51,6 +51,9 @@ function buildGraph() {
     nodes.push({id:act.id,kind:"act",actKind:act.kind,title:`${r.title} / ${act.kind}`,text:act.text,url:`${url}#${act.anchor}`,sourceUrl:`${url}#${act.anchor}`,basis,retrievable:true,scope:"records",publication:r.publication,status:act.status||r.status,version:r.version,authors:r.authors,recordId:r.id,keywords:`${r.title} ${r.concepts.join(" ")}`});
     addEdge(act.id,r.id,"act-of","authored-composition");
    }
+   r.body.forEach((act,index)=>{
+    if(act.kind==="film"&&"youtubeId" in act) addEdge(`${r.id}@${r.version}:act-${index+1}`,`YT-${act.youtubeId}`,"discusses-film","editorial");
+   });
   }
   // A reference records what the page cites. It does not ingest the linked document.
   r.sources.forEach((source,index)=>{

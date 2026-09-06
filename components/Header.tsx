@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useMotion } from "./Motion";
-const links = ["ideas", "systems", "objects", "record", "about", "ask"];
-const belongsTo = (path: string, link: string) => [link, ...(link === "ideas" ? ["notebook", "research"] : link === "systems" ? ["work"] : link === "objects" ? ["film"] : [])].some(section => path === `/${section}` || path.startsWith(`/${section}/`));
+const links = ["ideas", "systems", "film", "objects", "record", "about", "ask"];
+const belongsTo = (path: string, link: string) => [link, ...(link === "ideas" ? ["notebook", "research"] : link === "systems" ? ["work"] : [])].some(section => path === `/${section}` || path.startsWith(`/${section}/`));
 export function Header() {
   const path = usePathname(); const dialog = useRef<HTMLDialogElement>(null); const opener = useRef<HTMLButtonElement>(null);
   const { paused, setPaused, suspend } = useMotion();

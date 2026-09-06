@@ -21,5 +21,5 @@ export function Objects() {
 }
 
 export function HouseEntrances() {
-  return <nav className="house-entrances record-voice" aria-label="Explore the house">{HOUSE_PARTS.map(p => <Link key={p.id} href={p.path}>{p.name} ↗</Link>)}<Link href="/record">The record ↗</Link></nav>;
+  return <nav className="house-entrances record-voice" aria-label="Explore the house">{HOUSE_PARTS.map(p => <Link key={p.id} href={p.path}>{p.name} ↗</Link>)}<Link href="/film">Film ↗</Link><Link href="/record">The record ↗</Link></nav>;
 }

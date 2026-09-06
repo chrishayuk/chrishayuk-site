@@ -1,0 +1,25 @@
+import Link from "next/link";
+import { records, recordPath } from "@/lib/records";
+import { visualNotebooks } from "@/lib/visual-notebooks";
+import { Media } from "./Media";
+import { FilmPlayer } from "./FilmPlayer";
+import { getVideo } from "@/lib/youtube";
+
+export function NotebookCollection() {
+  const older = records.filter(r => r.kind === "notebook" && !visualNotebooks.some(n => n.id === r.id));
+  return <main id="main" className="publication-main notebook-collection">
+    <header className="index-intro">
+      <p className="kicker record-voice">CHRIS HAY / THE NOTEBOOK</p>
+      <h1>Before<br/><em>the answer.</em></h1>
+      <div className="notebook-introduction"><p className="dek">A map. A memory. A question<br/>that becomes something to make.</p><p>Films, visual studies and notes from the work. Follow an idea into the experiment—and back to the question it leaves behind.</p></div>
+      <div className="index-count record-voice"><span>VISUAL NOTES / 01—03</span><span>WORKING EDITION · 06 SEPTEMBER 2026</span></div>
+    </header>
+    <div className="notebook-stories">{visualNotebooks.map((r, i) => <article key={r.id} className={`notebook-story notebook-story-${i+1}`}>
+      <div className="notebook-story-top record-voice"><span>0{i+1} / {r.id}</span><span>FILM → QUESTION → RECORD</span></div>
+      {r.body[0].kind === "film" && "youtubeId" in r.body[0] ? <FilmPlayer video={getVideo(r.body[0].youtubeId)!} start={r.body[0].start} priority={i===0}/> : <Media id={r.media[0]} priority={i===0}/>}
+      <div className="notebook-story-caption"><Link href={recordPath(r)}><h2>{r.title}</h2><span className="text-link">OPEN THE NOTE ↗</span></Link><div><p>{r.dek}</p><span className="record-voice">{r.status} / DRAFT · V{r.version}</span></div></div>
+    </article>)}</div>
+    <section className="notebook-earlier"><p className="kicker record-voice">EARLIER QUESTIONS</p><div className="record-list">{older.map(r => <Link key={r.id} href={recordPath(r)}><span className="record-voice">{r.id}<br/>{r.created}</span><div><h2>{r.title}</h2><p>{r.dek}</p></div><span>↗</span></Link>)}</div></section>
+    <div className="notebook-closing"><p>One question<br/><em>leads to another.</em></p><div className="inline-links"><Link className="text-link" href="/research">THE RESEARCH ↗</Link><Link className="text-link" href="/ask">ASK THE WORK ↗</Link></div></div>
+  </main>;
+}

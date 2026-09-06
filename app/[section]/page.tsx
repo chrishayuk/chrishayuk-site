@@ -1,4 +1,5 @@
 import { Systems, Ideas, Objects } from "@/components/HouseCollections";
+import { NotebookCollection } from "@/components/NotebookCollection";
 import { Catalogue } from "@/components/Catalogue";
 import { catalogueUrl, catalogue } from "@/lib/catalogue";
 import { HOUSE, HOUSE_PUBLICATIONS } from "@/lib/house";
@@ -32,6 +33,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 export default async function IndexPage({params,searchParams}:PageProps) {
  const {section}=await params; if(!sections.includes(section)) notFound();
  if(section==="ideas") return <Ideas/>;
+ if(section==="notebook") return <NotebookCollection/>;
  if(section==="systems"||section==="work") return <Systems/>;
  if(section==="objects") return <Objects/>;
  if(section==="record") { const query=await searchParams; return <Catalogue query={{q:first(query.q),kind:first(query.kind),page:first(query.page)}}/>; }
