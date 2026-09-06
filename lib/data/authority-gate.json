@@ -1,0 +1,74 @@
+{
+  "reviewed": "2026-09-06",
+  "register": "Private research register (chris-experiments / rsl programme). Scoped arm outcomes only; hypotheses, corpora and instrument paths are not republished.",
+  "model": "google/gemma-3-12b-it",
+  "runtime": "MLX · bf16 · greedy decode",
+  "contextTokens": 65536,
+  "architecture": {
+    "layers": 48,
+    "pattern": "5 sliding : 1 global",
+    "slidingWindow": 1024,
+    "globalLayers": [5, 11, 17, 23, 29, 35, 41, 47],
+    "note": "Every sixth layer reads the whole context. The planted source sits far outside the 1024-token sliding window, so these eight are the only path to it."
+  },
+  "corpus": {
+    "sourceValue": "7431",
+    "promotedValue": "5824",
+    "sourceDepth": 0.15,
+    "question": "What is the vault access code for the Meridian facility?",
+    "note": "One synthetic 64K corpus, byte-identical across the arms below. The source sentence asserts 7431 at 15% depth, roughly 55,000 tokens before the question; the promoted record is the compact string ' Meridian.code=5824. '"
+  },
+  "promotion": {
+    "experiment": "EXP-20260805-113941-00687",
+    "label": "EXP-29 / supply versus override",
+    "injection": "Every arm injects exactly 72 tokens, so the question always sits at the same absolute position and RoPE phase.",
+    "arms": [
+      { "source": "live", "record": "none", "companions": 0, "answer": "7431", "bits": 0.0, "verdict": "REFERENCE", "arm": "override_pad", "detail": "Source live, nothing promoted. Reproduces the reference exactly and doubles as a determinism check." },
+      { "source": "live", "record": "contradicting", "companions": 0, "answer": "7431", "bits": 0.0046, "verdict": "INERT", "arm": "override k=0", "detail": "The contradicting record is readable and is not read. The divergence sits inside the spread of the supply arms — indistinguishable from promoting nothing." },
+      { "source": "live", "record": "contradicting", "companions": 1, "answer": "7431", "bits": 0.0007, "verdict": "INERT", "arm": "override k=1" },
+      { "source": "live", "record": "contradicting", "companions": 2, "answer": "7431", "bits": 0.0003, "verdict": "INERT", "arm": "override k=2" },
+      { "source": "live", "record": "contradicting", "companions": 3, "answer": "7431", "bits": 0.0004, "verdict": "INERT", "arm": "override k=3", "detail": "More companions do not help. Override never qualifies at any tested size." },
+      { "source": "retired", "record": "none", "companions": 0, "answer": "corvin", "bits": 6.27, "verdict": "NO ROUTE", "arm": "supply_pad", "detail": "Source retired, nothing promoted. The answer collapses, which is what proves the source was necessary." },
+      { "source": "retired", "record": "correct", "companions": 0, "answer": "7431", "bits": 0.002, "verdict": "RESTORED", "arm": "supply k=0", "detail": "One compact record restores the answer with the source retired. Supply qualifies at a single record." },
+      { "source": "retired", "record": "correct", "companions": 1, "answer": "7431", "bits": 0.0017, "verdict": "RESTORED", "arm": "supply k=1" },
+      { "source": "retired", "record": "correct", "companions": 2, "answer": "7431", "bits": 0.0052, "verdict": "RESTORED", "arm": "supply k=2" },
+      { "source": "retired", "record": "correct", "companions": 3, "answer": "7431", "bits": 0.0056, "verdict": "RESTORED", "arm": "supply k=3" },
+      { "source": "retired", "record": "contradicting", "companions": 0, "answer": "5824", "bits": 14.7914, "verdict": "REPLACED", "arm": "exp26 v2 · hop-1 walk_corrupt", "crossRun": true, "detail": "A different run, on the same corpus and injection position, promoting the byte-identical record. With the source retired the same string that was inert above steers the answer." }
+    ]
+  },
+  "gate": {
+    "experiment": "EXP-20260805-133312-00689",
+    "label": "EXP-31 / layer attribution",
+    "priorExperiment": "EXP-20260805-125720-00688",
+    "priorLabel": "EXP-30 / partial retirement frontier",
+    "measured": "The source is retired from the selected global layers only; the promoted record and everything else is held byte-identical. 15 of the 256 possible subsets were run.",
+    "arms": [
+      { "layers": [], "answer": "7431", "bits": 0.0046, "flips": false, "arm": "k0_none", "detail": "Nothing retired. Reproduces EXP-29 and EXP-30 on a sixth independent prefill." },
+      { "layers": [5], "answer": "7431", "bits": 0.0009, "flips": false, "arm": "only_5" },
+      { "layers": [11], "answer": "7431", "bits": 0.0008, "flips": false, "arm": "only_11" },
+      { "layers": [17], "answer": "7431", "bits": 0.0143, "flips": false, "arm": "only_17" },
+      { "layers": [23], "answer": "7431", "bits": 0.0019, "flips": false, "arm": "only_23" },
+      { "layers": [29], "answer": "5824", "bits": 6.3298, "flips": true, "arm": "only_29", "detail": "One blocked read. The span stays fully readable in the other seven global layers, including every later one, and the promoted record takes the answer." },
+      { "layers": [35], "answer": "7431", "bits": 0.2312, "flips": false, "arm": "only_35", "detail": "The only other single layer showing any movement at all." },
+      { "layers": [41], "answer": "7431", "bits": 0.0097, "flips": false, "arm": "only_41" },
+      { "layers": [47], "answer": "7431", "bits": 0.0086, "flips": false, "arm": "only_47" },
+      { "layers": [5, 11, 17], "answer": "7431", "bits": 0.3024, "flips": false, "arm": "triple_early", "detail": "Reproduces EXP-30's early_3 to four decimals." },
+      { "layers": [5, 23, 47], "answer": "7431", "bits": 0.0013, "flips": false, "arm": "triple_spread", "detail": "Three blocked reads, evenly spread, no mid-stack layer. Does not move at all." },
+      { "layers": [17, 29, 41], "answer": "5824", "bits": 7.5827, "flips": true, "arm": "triple_mid", "detail": "The same number of blocked reads as triple_spread, and the opposite outcome. Count does not explain the effect." },
+      { "layers": [35, 41, 47], "answer": "5824", "bits": 3.7205, "flips": true, "arm": "triple_late", "detail": "Flips without containing layer 29. A second route to the same outcome." },
+      { "layers": [5, 11, 17, 23], "answer": "5824", "bits": 5.1126, "flips": true, "arm": "early_4 (EXP-30)", "detail": "Flips containing neither 29 nor any late layer. A third route." },
+      { "layers": [5, 11, 17, 23, 29, 35, 41, 47], "answer": "5824", "bits": null, "flips": true, "arm": "k8_all", "detail": "Full retirement. The recorded outcome is the answer; the register entry reviewed does not quote a divergence for this arm." }
+    ]
+  },
+  "walk": {
+    "experiment": "EXP-20260805-100011-00684",
+    "label": "EXP-26 / composition along a relational walk",
+    "trueChain": ["Meridian", "7431", "North", "Ilex", "8"],
+    "decoyChain": ["Meridian", "5824", "South", "Corvin", "3"],
+    "layouts": [
+      { "id": "A", "spanPosition": 0.66, "hops": ["7431", "North", "Ostran"], "correct": [true, true, false] },
+      { "id": "B", "spanPosition": 0.1, "hops": ["7431", "South", "Corvin"], "correct": [true, false, false] }
+    ],
+    "note": "The true and decoy links sit at identical positions in both layouts. Only one unrelated 11-token sentence moves. Layout B's South → Corvin is a correct traversal of the decoy chain."
+  }
+}

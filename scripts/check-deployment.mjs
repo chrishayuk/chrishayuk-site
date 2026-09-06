@@ -136,6 +136,23 @@ assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
+// An unlisted preview must be reachable at its own URL and listed nowhere.
+for (const [id, path] of [["N-AUTHORITY", "/notebook/which-source-wins"], [null, "/demos/authority-gate"]]) {
+  const page = await request(path);
+  assert.equal(page.status, 200, path);
+  assert.match(page.body, /name="robots" content="noindex, nofollow"/, path);
+  assert.match(page.body, /UNLISTED PREVIEW · NOT PUBLISHED/, path);
+  assert.ok(!sitemap.body.includes(path), `${path} in sitemap`);
+  if (id) assert.ok(!graph.nodes.some(n => n.id === id || n.recordId === id), `${id} in graph`);
+}
+for (const listing of ["/notebook", "/ideas", "/record", "/thread/the-map", "/knowledge"]) {
+  const page = await request(listing);
+  assert.doesNotMatch(page.body, /which-source-wins|N-AUTHORITY|authority-gate/, listing);
+}
+for (const feed of ["/rss.xml", "/feed.json", "/api/records", "/api/concepts"]) {
+  assert.doesNotMatch((await request(feed)).body, /which-source-wins|N-AUTHORITY/, feed);
+}
+assert.deepEqual(JSON.parse((await request("/api/search?q=which%20source%20wins")).body).results, []);
 assert.equal((await request("/api/health")).status, 200);
 assert.equal((await request("/og-house.png")).status, 200);
 console.log("Production homepage, visual notebooks, interactive demo, clip media, catalogue, canonical redirects, indexing, graph, Ask and citations verified.");

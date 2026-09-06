@@ -185,3 +185,51 @@ test("visual notebook film passages stay connected without becoming transcript e
  const result=searchGraph("persistent decode state",{scope:"records"});assert.ok(result.some(r=>r.recordId==="N-STATE"));
  assert.ok(!searchGraph("persistent decode state",{includeDrafts:false}).some(r=>r.recordId==="N-STATE"));
 });
+
+// An unlisted preview has a working URL and appears in no index, feed or graph.
+test("unlisted previews resolve at their own URL and are absent from every listing", async () => {
+ const { allRecords, records: listed, getRecord, isListed, indexedRecords } = await import("../lib/records.ts");
+ const { visualNotebooks } = await import("../lib/visual-notebooks.ts");
+ const { mapThread, threadPosition, demoStudies } = await import("../lib/threads.ts");
+ const unlisted = allRecords.filter(r => !isListed(r));
+ assert.ok(unlisted.length > 0, "this test is only meaningful while a preview exists");
+
+ for (const record of unlisted) {
+  // It still resolves, by id and by slug, so the URL works.
+  assert.equal(getRecord(record.id)?.id, record.id);
+  assert.equal(getRecord(record.slug)?.id, record.id);
+  // And it is in nothing that lists records.
+  assert.ok(!listed.some(r => r.id === record.id), `${record.id} in listed records`);
+  assert.ok(!indexedRecords().some(r => r.id === record.id), `${record.id} indexed`);
+  assert.equal(catalogue({ q: "" }).entries.some(r => r.id === record.id), false);
+  assert.equal(catalogue({ q: record.title }).total, 0);
+  assert.equal(recordGraph().nodes.some(n => n.recordId === record.id || n.id === record.id), false);
+  for (const hit of searchGraph(record.title))
+   assert.ok(hit.recordId !== record.id && hit.id !== record.id, `${record.id} retrievable via Ask`);
+  assert.equal(mapThread.steps.some(s => s.id === record.id), false);
+  assert.equal(threadPosition(record.id), undefined);
+  // Nothing listed links to it, in either direction.
+  for (const r of listed) assert.ok(!r.related.includes(record.id), `${r.id} -> ${record.id}`);
+  assert.ok(record.related.every(id => getRecord(id)), `${record.id} has an unresolved relation`);
+ }
+
+ // The notebook index and the sitemap read filtered sources, not the raw ones.
+ const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
+ assert.match(index, /composed\.filter\(isListed\)/);
+ assert.ok(visualNotebooks.some(n => !isListed(n)), "the preview is still composed alongside the listed notes");
+ const sitemap = await readFile(new URL("../app/sitemap.xml/route.ts", import.meta.url), "utf8");
+ assert.match(sitemap, /indexedRecords\(\)/);
+
+ // An unlisted study is withheld from the thread the same way.
+ for (const study of demoStudies.filter(s => s.visibility === "unlisted")) {
+  assert.equal(mapThread.steps.some(s => s.id === study.id), false);
+  assert.equal(recordGraph().nodes.some(n => n.id === study.id), false, `${study.id} in the graph`);
+  assert.equal(searchGraph(study.title).length, 0, `${study.id} retrievable via Ask`);
+ }
+
+ // The page says so, and asks search engines not to index it.
+ const page = await readFile(new URL("../components/RecordPage.tsx", import.meta.url), "utf8");
+ assert.match(page, /UNLISTED PREVIEW · NOT PUBLISHED/);
+ const route = await readFile(new URL("../app/[section]/[slug]/page.tsx", import.meta.url), "utf8");
+ assert.match(route, /visibility==="unlisted"\?\{\.\.\.meta,robots:\{index:false,follow:false\}\}/);
+});

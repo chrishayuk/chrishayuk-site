@@ -1,10 +1,11 @@
 # Visual notebook preview
 
-Three draft records are composed in `lib/visual-notebooks.ts`:
+Four draft records are composed in `lib/visual-notebooks.ts`:
 
 - `N-MAP` — `/notebook/what-is-the-map`
 - `N-STATE` — `/notebook/what-has-to-survive`
 - `N-ADDRESS` — `/notebook/reading-by-address`
+- `N-AUTHORITY` — `/notebook/which-source-wins` (unlisted preview, see [previews](previews.md))
 
 They enter the existing catalogue and Ask graph as editorial drafts. They do not enter publication feeds or the published citation endpoint. The page's reference controls retain unpublished-draft wording. The new `film` act carries a YouTube identity, starting timestamp and authored caption; its caption is indexed as editorial text, never as an automatic transcript. A `discusses-film` edge links the act to the existing film record. Film pages show the explicitly connected notebook entries.
 
@@ -59,3 +60,43 @@ The Mechanism's native model scripts and KV Anatomist's live backend are separat
 The expanded note follows query → key match → activation → value sum → answer reader, with a prominent HAUSE Connection to the browser study. Both original animations remain beside their explanations, followed by the existing timestamped June mechanism and April LARQL films with their passage-specific stills. The added prose is indexed in Ask through the existing authored-act path.
 
 The review distinguishes a selected stored key from natural-language encoding; positive cross-activations from an exact isolated lookup; top-five retrieval from top-one accuracy; and held-out phrasing from held-out entities. Layer 26 leads paraphrase top-five in `route_sweep.json`, while layer 28 has higher top-one scores. Native retention means six original argmax tokens retained, not universal non-interference. The note stays an explicitly referenced draft.
+
+## Which source wins / draft v0.1, unlisted
+
+This note is deployed as an [unlisted preview](previews.md): it has a working URL and
+appears in no index, feed, thread or graph. `/demos/authority-gate` is withheld the same
+way. Removing `visibility: "unlisted"` from the record and the study lists both.
+
+`N-AUTHORITY` follows a recorded long-context arc through four questions: whether a
+compact record can replace a source that has been retired, whether it can overrule one
+that is still readable, which attention reads have to stop before it can, and whether any
+of that licenses discarding the original. It opens on the existing Apollo document passage
+at 19:30 and closes on the open question the arc leaves behind.
+
+Its measurements come from the private research register and are summarised, not
+republished. Experiment identifiers, model, runtime, context size and the scope of each
+arm appear on the page; hypotheses, corpora and instrument paths do not. Two figures are
+explicitly marked as cross-run comparisons rather than arms of the experiment they are
+quoted beside. The relational-walk result is presented as unavailable rather than refuted,
+in the language its own write-up uses.
+
+## The authority study
+
+`/demos/authority-gate` is the second interactive study, and it works differently from the
+first. `/demos/addressed-memory` computes a constructed example in the browser. This one
+computes nothing: `lib/data/authority-gate.json` holds the recorded arms and
+`lib/authority-gate.ts` looks them up. A combination that was never run returns
+`undefined`, and both instruments render that as an explicit absence rather than an
+interpolation. Fifteen of the 256 possible retirement subsets were measured, and the
+instrument says so on the page.
+
+The promotion instrument sets the original sentence live or retired, chooses what the
+promoted record asserts, and sweeps zero to three companion records. The gate instrument
+renders the model's real layer geometry — 48 layers, every sixth global, a 1,024-token
+sliding window — and toggles which global reads are retired. Bars are logarithmic across
+four orders of magnitude, with the programme's own 0.05-bit qualifying tolerance marked
+on the scale.
+
+The study is `noindex`, like the existing demo, and carries a recorded-identity block with
+the experiment IDs behind each instrument. It has no inference backend and no new service
+requirement.

@@ -8,7 +8,7 @@ export const socials = { YouTube: "https://www.youtube.com/@chrishayuk", GitHub:
 const draft = { publication: "draft" as const, version: "0.1", authors: ["Chris Hay"], created: "2026-09-05" };
 // These are reviewable editorial records. Publishing is a separate, explicit
 // transition with a date and immutable snapshot; drafts never enter public feeds.
-export const records: PublicationRecord[] = [
+const authored: PublicationRecord[] = [
   { ...draft, id: "W-LARQL", slug: "larql", kind: "work", title: "LARQL", dek: "Models are places you can go.",
     abstract: "LARQL explores querying learned systems. This dossier connects the software to questions about model state, representations and what it means to make a model addressable.", status: "ONGOING", concepts: ["model-as-database", "model-representation"], related: ["W-VINDEX3", "N-CONTEXT", "Q-FFN"], media: ["larql-object"],
     body: [{ kind: "statement", text: "Models are places you can go." }, { kind: "question", text: "What if the structure inside a model could be queried?", status: "OPEN" }, { kind: "observation", label: "THE WORK", text: "LARQL is a software project for exploring learned systems. The question behind this record is how the model’s internal representations become something we can inspect, address and work with." }, { kind: "observation", label: "THE THREAD", text: "A model-as-database proposition connects this work to VINDEX3. The context notebook asks what becomes possible when earlier state can be returned to, rather than repeatedly reconstructed." }, { kind: "refusal", title: "NO BENCHMARK CLAIM HERE", lines: ["Record: software and an open line of inquiry", "Evidence: refer to the actual software and experiments"], principle: "A proposition is not a measured result." }],
@@ -38,21 +38,29 @@ const filmSources = [
   { id: "F-040", slug: "deepseek-facts-and-hype", title: "Between the facts and the hype.", dek: "DeepSeek, model distillation and open-source competition.", episode: "40", original: "deepseek-facts-vs-hype-model-distillation-open-source-competition", abstract: "Tim Hwang, Aaron Baughman, Chris Hay and Kate Soule discuss DeepSeek, distillation and competition in open models. An IBM Mixture of Experts episode.", concepts: ["mixture-of-experts", "open-models"] },
   { id: "F-046", slug: "manus-and-vibe-coding", title: "What happens after the prompt?", dek: "Manus, vibe coding, scaling laws and the AI phone.", episode: "46", original: "manus-vibe-coding-scaling-laws-perplexity-ai-phone", abstract: "Tim Hwang, Chris Hay, Kaoutar El Maghraoui and Vyoma Gajjar discuss Manus and agentic work, vibe coding, scaling laws and Perplexity’s AI phone. An IBM Mixture of Experts episode.", concepts: ["mcp", "ai-interface"] },
 ];
-for (const f of filmSources) records.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
+for (const f of filmSources) authored.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
-records.unshift(...visualNotebooks);
-records.push(...videoRecords);
+authored.unshift(...visualNotebooks);
+authored.push(...videoRecords);
 
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };
 export const publicationSnapshots = snapshots as Snapshot[];
 for (const snapshot of publicationSnapshots) {
- const i = records.findIndex(r => r.id === snapshot.record.id);
- if(i >= 0) records[i] = snapshot.record; else records.push(snapshot.record);
+ const i = authored.findIndex(r => r.id === snapshot.record.id);
+ if(i >= 0) authored[i] = snapshot.record; else authored.push(snapshot.record);
 }
+/** Every record, including unlisted previews. Resolution only — never a listing. */
+export const allRecords = authored;
+export const isListed = (record: PublicationRecord) => record.visibility !== "unlisted";
+/** The listed record. Indexes, feeds, the catalogue, the graph and Ask all read
+ *  this, so a surface added later excludes unlisted previews by default. An
+ *  unlisted record still resolves at its own URL through getRecord. */
+export const records: PublicationRecord[] = authored.filter(isListed);
+
 export const getVersion = (id: string, version: string) => publicationSnapshots.find(s => s.record.id === id && s.record.version === version);
 export const sectionFor = (record: PublicationRecord) => record.kind === "question" ? "research" : record.kind;
 export const recordPath = (record: PublicationRecord) => record.youtubeId ? `/film/youtube/${record.youtubeId}` : `/${sectionFor(record)}/${record.slug}`;
-export const getRecord = (id: string) => records.find(r => r.id === id || r.slug === id);
+export const getRecord = (id: string) => allRecords.find(r => r.id === id || r.slug === id);
 export const publishedRecords = () => records.filter(r => r.publication === "published" && r.published);
 
 export const indexedRecords = () => records.filter(r => r.publication === "catalogued" || (r.publication === "published" && r.published));
