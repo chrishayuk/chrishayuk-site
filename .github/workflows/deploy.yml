@@ -3,9 +3,10 @@ name: Deploy chrishayuk.com
 on:
   push:
     branches: [main]
-    # The archive job commits back the first-capture dates it learns. That
-    # commit touches nothing else, and must not start another deploy.
-    paths-ignore: [content/archive.json]
+    # The archive job commits back the first-capture dates it learns, and the
+    # published crawler addresses it refreshes. Those commits touch nothing
+    # else, and must not start another deploy.
+    paths-ignore: [content/archive.json, content/agent-ranges.json]
   pull_request:
   workflow_dispatch:
 
@@ -32,7 +33,7 @@ jobs:
           SITE_INDEXABLE: "true"
       - name: Check production pages and canonical redirects
         run: |
-          SITE_INDEXABLE=true npm run start:fly -- --port 3000 > /tmp/chrishayuk-server.log 2>&1 &
+          SITE_INDEXABLE=true READERSHIP_DB=/tmp/chrishayuk-readership.db npm run start:fly -- --port 3000 > /tmp/chrishayuk-server.log 2>&1 &
           trap 'kill $!' EXIT
           for attempt in $(seq 1 30); do
             curl --silent --fail http://localhost:3000/api/health > /dev/null && break
@@ -102,5 +103,22 @@ jobs:
           git config user.email "noreply@chrishayuk.com"
           git add content/archive.json
           git commit -m "Record independent archive captures"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      # Verification is only as good as the address lists it checks against.
+      # Providers rotate ranges, and a stale snapshot would start calling
+      # real crawlers unverifiable, so the snapshot is refreshed after every
+      # deploy and committed with its retrieval date. A source that fails to
+      # respond leaves what is already on file untouched.
+      - name: Refresh the published crawler addresses
+        timeout-minutes: 5
+        run: node --experimental-strip-types scripts/refresh-agent-ranges.ts
+      - name: Record the published crawler addresses
+        run: |
+          git diff --quiet content/agent-ranges.json && { echo "Published ranges unchanged."; exit 0; }
+          git config user.name "chrishayuk-site"
+          git config user.email "noreply@chrishayuk.com"
+          git add content/agent-ranges.json
+          git commit -m "Refresh published crawler address ranges"
           git pull --rebase origin main
           git push origin HEAD:main

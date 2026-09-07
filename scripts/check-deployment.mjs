@@ -3,9 +3,9 @@ import http from "node:http";
 import { readFile } from "node:fs/promises";
 
 const base = process.env.CHECK_ORIGIN || "http://localhost:3000";
-function request(path, host = "chrishayuk.com") {
+function request(path, host = "chrishayuk.com", headers = {}) {
   return new Promise((resolve, reject) => {
-    const req = http.get(new URL(path, base), { headers: { Host: host } }, res => {
+    const req = http.get(new URL(path, base), { headers: { Host: host, ...headers } }, res => {
       let body = "";
       res.setEncoding("utf8");
       res.on("data", chunk => { body += chunk; });
@@ -330,3 +330,39 @@ for(const note of socialNotes){
  assert.equal(png.bytes.subarray(1,4).toString(),'PNG');assert.equal(png.bytes.readUInt32BE(16),1200);assert.equal(png.bytes.readUInt32BE(20),630);
 }
 console.log(`${socialNotes.length} generated Notebook cards verified.`);
+
+// MACHINE READERSHIP. The measurement the Google tag structurally cannot make,
+// so the check exercises the thing itself rather than the presence of a page:
+// an agent claim from an address its provider publishes has to come out
+// verified, and the same claim from an address its provider excludes has to be
+// refuted and kept out of every total.
+const publishedRanges = JSON.parse(await readFile(new URL("../content/agent-ranges.json", import.meta.url), "utf8"));
+const chatgptUser = publishedRanges.sources.find(source => source.id === "openai-chatgpt-user").prefixes.find(prefix => !prefix.includes(":")).split("/")[0];
+const agent = (name, address) => ({ "User-Agent": name, "X-Forwarded-For": address });
+await request("/notebook", "chrishayuk.com", agent("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot", chatgptUser));
+await request("/follow.json", "chrishayuk.com", agent("Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)", "203.0.113.7"));
+const readership = JSON.parse((await request("/api/readership")).body);
+assert.ok(readership.verification.prefixes > 100, "published address ranges are missing from the build");
+assert.ok(readership.notes.length >= 5 && readership.definitions.ai_user.includes("Requests, not people"));
+if (readership.recording) {
+  assert.equal(readership.counts.purposes.ai_user, 1, "a verified user-initiated retrieval was not counted");
+  assert.equal(readership.counts.confidence.verified, 1);
+  assert.equal(readership.counts.confidence.refuted, 1, "a claim its provider's addresses exclude was not refuted");
+  assert.equal(readership.counts.purposes.ai_training, 0, "a refuted claim reached a published total");
+  assert.deepEqual(readership.counts.providers, [{ provider: "openai", retrieval: 1, indexing: 0, training: 0, total: 1 }], "a refuted claim reached the system breakdown");
+  const page = await request("/readership");
+  assert.equal(page.status, 200);
+  assert.ok(page.body.includes('rel="canonical" href="https://chrishayuk.com/readership"'));
+  assert.match(page.body, /AI RETRIEVALS · USER-INITIATED/);
+  assert.match(page.body, /ChatGPT-User/);
+  // ClaudeBot appears in the published definitions; what must never appear is
+  // its refuted request, as a system, a path or a line in the recent trace.
+  const data = page.body.slice(0, page.body.indexOf("What these numbers do not say"));
+  assert.doesNotMatch(data, /Anthropic|ClaudeBot|follow\.json/, "a refuted claim was named among the counts");
+  console.log("Machine readership verified: one verified retrieval counted, one refuted claim excluded.");
+} else {
+  const page = await request("/readership");
+  assert.equal(page.status, 200);
+  assert.match(page.body, /Not recording on this deployment/);
+  console.log("Machine readership page verified in its no-store state.");
+}

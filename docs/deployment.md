@@ -14,8 +14,21 @@ without deployment credentials. The app-scoped `FLY_API_TOKEN` GitHub secret was
 created on 6 September 2026 with a one-year expiry; rotate it before expiry.
 
 The app runs one 512 MB machine, kept warm in London. Fly handles TLS. The container
-runs as the unprivileged `node` user. There are no database or storage bindings.
-Media and the source catalogue are versioned in Git. New uploads or catalogue
+runs as the unprivileged `node` user. Media and the source catalogue are versioned
+in Git.
+
+One volume is attached, holding the machine readership counters and nothing else:
+
+```sh
+flyctl volumes create readership --size 1 --region lhr --app chrishayuk-site
+```
+
+`fly.toml` mounts it at `/data` and sets `READERSHIP_DB=/data/readership.db`. That
+variable is the switch: where it is unset — local development, previews, the
+Sites/vinext build — requests are classified and nothing is stored. The volume holds
+hourly counters only: no addresses, sessions, cookies or request logs. It is bound to
+one machine, so scaling past a single machine needs a shared store first. See
+[machine readership](machine-readership.md). New uploads or catalogue
 refreshes require another deployment. To roll back, revert the relevant commit and
 push `main` through the same checks.
 

@@ -4,6 +4,17 @@ primary_region = "lhr"
 [build]
   dockerfile = "Dockerfile"
 
+[env]
+  # Machine readership counts live on the volume below. Unset elsewhere, so
+  # local, preview and Sites builds classify requests and store nothing.
+  READERSHIP_DB = "/data/readership.db"
+
+# One machine, one volume: `fly volumes create readership --size 1 --region lhr`.
+# It holds hourly counters only — no addresses, sessions or request logs.
+[mounts]
+  source = "readership"
+  destination = "/data"
+
 [http_service]
   internal_port = 3000
   force_https = true

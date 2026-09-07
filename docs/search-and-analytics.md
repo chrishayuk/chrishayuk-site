@@ -36,6 +36,22 @@ Ask with explicit draft labels and an exclusion filter, alongside 235 chapter
 titles. The graph and search share the same corpus; chapter titles remain
 distinct from actual transcript passages.
 
+## Machine readership
+
+`Analytics` is a script, so it observes browsers and nothing else. Every AI
+crawler, AI search indexer, user-fetch agent and feed client reaches this site
+without executing it, and none of them appeared in any measurement here until
+`proxy.ts` began counting them at the server on 8 September 2026. The public
+surface is `/readership` and `/api/readership`; the classifier, the published
+address lists it verifies against and the retention rules are in
+[machine readership](machine-readership.md).
+
+The two measurements answer different questions and are not reconcilable with
+each other. GA4 counts browser sessions. `/readership` counts server-side
+requests, keeps no address or session, and reports self-declared agent identity
+separately from identity confirmed against a provider's own published address
+ranges.
+
 ## Not established by this audit
 
 A rendered Google tag does not prove receipt in GA4. Realtime/DebugView,
@@ -46,6 +62,11 @@ indexing and search performance are separate account-side checks.
 HAUSE's homepage currently has no dedicated Open Graph image. Most HAUSE pages
 have their own canonical URLs, but older pages still author metadata directly;
 they are not yet all consumers of `publicationMetadata`.
+
+Machine readership counts retrieval, not influence. A verified user-initiated
+retrieval shows that an assistant fetched a page while answering somebody; it
+does not show what the answer said, whether the page was cited, or whether the
+reader saw it. Only the `utm_source=chatgpt.com` arrivals evidence the last step.
 
 Search-readable content and citations create eligibility; they do not guarantee
 ranking or inclusion in generated answers. Google describes AI search visibility

@@ -80,6 +80,47 @@ A feed item identifies a record *version*, so a material revision arrives as the
 
 `components/Follow.tsx` is the reader-facing surface: FOLLOW joins CITE and ARCHIVE in the record bar, and the panel appears on record pages, `/notebook` and `/record`. It is not a mailing list — no account, no address, nothing for this site to store. Email can arrive later as another transport under the same verb.
 
+## Machine readership
+
+The site loads a Google tag, and a tag is a script. Nothing that reads this
+publication without running JavaScript has ever appeared in any measurement here
+— not GPTBot or ClaudeBot collecting text, not OAI-SearchBot or Claude-SearchBot
+indexing it, not ChatGPT-User or Claude-User fetching a page because somebody
+asked a question, not a single feed client polling `/notebook/feed.xml`. That is
+most of the audience this publication was built for.
+
+`proxy.ts` counts them at the server, where they are visible, and `/readership`
+publishes the result. The question it answers is not how many: it is **which
+ideas are being retrieved into somebody's conversation**, as distinct from
+merely being indexed, and whether an agent takes the documents this site
+publishes for machines — the two feeds, `/follow.json`, the record API — or only
+scrapes the pages.
+
+A user agent is a string the client chose to send, so nothing is counted on the
+strength of its name alone. Where a provider publishes the addresses its
+crawlers use, every claim is checked against that published list;
+`content/agent-ranges.json` holds a dated snapshot of eight such documents from
+OpenAI, Anthropic, Perplexity, Google and Microsoft, committed the same way
+`content/archive.json` is and refreshed after every deploy. A claim its own
+provider's addresses contradict is recorded as **refuted** and excluded from
+every total on the page. Verified and self-declared figures are never added
+together, because a number anyone can raise by setting a header is not a
+readership figure.
+
+The store holds counters and nothing else — `(hour, path, agent, outcome) → n`.
+No address, session, cookie, fingerprint or query string, and no timestamp finer
+than the hour. An address is used once, to ask whether a declared agent is where
+its provider says it is, and the three-word answer is what survives.
+
+```sh
+npm run agent-ranges          # refresh the published crawler address snapshot
+```
+
+Counting requires a durable store: `READERSHIP_DB` names a SQLite file on the
+Fly volume. Unset — local, previews, the Sites build — requests are classified
+and nothing is kept, and the page says so rather than showing an invented
+figure. See [machine readership](docs/machine-readership.md).
+
 ## The independent archive
 
 A date on this site is evidence only to someone who already trusts this site. `scripts/archive-wayback.ts` asks the Internet Archive to capture each canonical object after a deploy, then reads the Wayback index back to learn when that URL was **first** captured, and records the answer in `content/archive.json`.

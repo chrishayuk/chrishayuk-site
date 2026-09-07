@@ -36,7 +36,7 @@ import { allRecords, records, indexedRecords, isListed, recordPath, SITE } from 
 /** The pages that are always here, independent of any record. */
 export const standingPaths = [
  "/", "/ideas", "/systems", "/objects", "/record", "/knowledge",
- "/film", "/notebook", "/research", "/about", "/colophon", "/accessibility",
+ "/film", "/notebook", "/research", "/about", "/colophon", "/accessibility", "/readership",
  "/film/youtube", "/film/youtube/archive", "/film/mixture-of-experts",
 ];
 
@@ -50,9 +50,20 @@ export function authoredRecords() {
  return allRecords.filter(record => isListed(record) && record.kind !== "film");
 }
 
+/**
+ * Standing pages that are indexed but never sent to the archive.
+ *
+ * /readership is a live counter, not a claim. Its content differs every
+ * hour, so a third-party capture corroborates nothing about when any
+ * work became readable — it would only pin one hour's traffic figures
+ * in somebody else's permanent collection, and consume the submission
+ * budget that exists for the record itself.
+ */
+const unarchivedPaths = ["/readership"];
+
 /** The evidence surface: what an independent archive is asked to capture. */
 export function archivePaths(): string[] {
- return [...authoredRecords().sort((a,b) => Number(b.kind === "notebook") - Number(a.kind === "notebook")).map(recordPath), ...threads.map(t => t.path), ...standingPaths];
+ return [...authoredRecords().sort((a,b) => Number(b.kind === "notebook") - Number(a.kind === "notebook")).map(recordPath), ...threads.map(t => t.path), ...standingPaths.filter(path => !unarchivedPaths.includes(path))];
 }
 
 /** A path as the absolute URL an archive is given. */
