@@ -14,18 +14,22 @@ const words=(text:string)=>text.trim().split(/\s+/).filter(Boolean).length;
 export function distributionDrafts(record:PublicationRecord){
  const claim=socialClaim(record),url=socialUrl(record),state=socialState(record);
  const passages=[record.abstract,...record.body.flatMap(act=>act.kind==='observation'?[act.text]:act.kind==='question'&&act.detail?[act.detail]:act.kind==='refusal'?[act.principle]:[])];
- let linkedin=claim;const seen=new Set([claim]);
- for(const passage of passages){
-  let excerpt='';
-  for(const sentence of sentences(passage)){
-   if(seen.has(sentence))continue;
-   if(words(`${linkedin} ${excerpt} ${sentence} ${state} ${url}`)>290)break;
-   excerpt+=`${excerpt?' ':''}${sentence}`;seen.add(sentence);
+ let linkedin=record.share?.linkedin?.trim()||claim;
+ if(!record.share?.linkedin){
+  const seen=new Set([claim]);
+  for(const passage of passages){
+   let excerpt='';
+   for(const sentence of sentences(passage)){
+    if(seen.has(sentence))continue;
+    if(words(`${linkedin} ${excerpt} ${sentence} ${state} ${url}`)>290)break;
+    excerpt+=`${excerpt?' ':''}${sentence}`;seen.add(sentence);
+   }
+   if(excerpt)linkedin+=`\n\n${excerpt}`;
+   if(words(linkedin)>=220)break;
   }
-  if(excerpt)linkedin+=`\n\n${excerpt}`;
-  if(words(linkedin)>=220)break;
+  linkedin+=`\n\n${state}`;
  }
- linkedin+=`\n\n${state}\n${url}`;
+ linkedin+=`\n\n${url}`;
  const candidates=passages.flatMap(sentences).filter(t=>[...t].length<=205);
  const thread=[`${claim}\n\nWorking note · v${record.version}.`];
  for(const sentence of candidates){if(!thread.some(t=>t.includes(sentence))&&sentence!==claim)thread.push(sentence);if(thread.length===4)break;}

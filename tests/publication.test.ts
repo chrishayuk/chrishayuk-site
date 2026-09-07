@@ -104,7 +104,7 @@ test("transcript times stay within their source film and automatic provenance re
 test("full film players require explicit activation even when automatic motion is allowed",()=>{const player={id:"player",visible:1,area:1000,manualOnly:true};assert.equal(chooseMotion([player],null,false,false),null);assert.equal(chooseMotion([{...player,manual:true}],null,false,false),"player");assert.equal(chooseMotion([{...player,manual:true}],"player",false,true),null);});
 
 test("IBM selections use source dates and counts, with separate producer and participant attribution",()=>{
- assert.equal(latestMoe.episode,"123");assert.equal(latestMoe.published,"2026-09-04");assert.equal(popularMoe.youtubeId,ibm.playlistMostViewedId);assert.equal(popularMoe.episode,"40");assert.ok(popularMoe.views!>latestMoe.views!);
+ assert.equal(latestMoe.episode,"123");assert.equal(latestMoe.published,"2026-09-04");assert.equal(latestMoe.title,'OpenAI\'s agentic "warning shot"');assert.match(latestMoe.poster,/^https:\/\/cfvod\.kaltura\.com\//);assert.equal(popularMoe.youtubeId,ibm.playlistMostViewedId);assert.equal(popularMoe.episode,"40");assert.ok(popularMoe.views!>latestMoe.views!);
  const edges=recordGraph().edges as {from:string;to:string;kind:string}[];
  for(const v of ibmVideos){assert.equal(v.producer,"IBM");assert.ok(v.participants?.includes("Chris Hay"));assert.ok(v.participationEvidence);assert.ok(v.published);assert.equal(v.viewsApproximate,false);assert.ok(edges.some(e=>e.from===v.id&&e.to==="ORG-IBM"&&e.kind==="created-by"));assert.ok(edges.some(e=>e.from===v.id&&e.to==="PERSON-CHRIS"&&e.kind==="features"));assert.ok(!edges.some(e=>e.from===v.id&&e.to==="PERSON-CHRIS"&&e.kind==="created-by"));const cite=JSON.parse(videoReferences(v).find(f=>f.id==="csl-json")!.text);assert.deepEqual(cite.author,[{literal:"IBM"}]);assert.ok(!channelVideos.some(c=>c.id===v.id));}
  assert.ok(searchGraph("agent security").some(r=>r.id===latestMoe.id));
@@ -400,9 +400,15 @@ test("social objects preserve canonical identity, status and recorded prose",asy
   assert.equal(draft.canonical_url,`${SITE}${recordPath(r)}`);assert.ok(draft.linkedin.endsWith(draft.canonical_url));
   assert.ok(draft.linkedin_words<=300);assert.ok(draft.x_thread.length>=3&&draft.x_thread.length<=5);
   assert.ok(draft.x_thread.every(post=>[...post.replace(/https:\/\/\S+/g,'x'.repeat(23))].length<=280));
-  assert.match(draft.linkedin,/DRAFT/);assert.equal(socialImage(r),socialImage(r));
+  if(!r.share?.linkedin)assert.match(draft.linkedin,/DRAFT/);assert.equal(socialImage(r),socialImage(r));
   assert.notEqual(socialImage(r),socialImage({...r,title:r.title+' revised'}));
  }
  for(const r of allRecords.filter(r=>r.visibility==='unlisted'||r.kind!=='notebook'))assert.equal(socialRecord(r.id),undefined);
  assert.equal(socialRecord('missing'),undefined);
+});
+test("the attribution note has a short reviewed LinkedIn draft",async()=>{
+ const {distributionDrafts}=await import('../lib/social.ts');const record=getRecord('N-ATTRIBUTION')!;const draft=distributionDrafts(record);
+ assert.equal(draft.linkedin_words,32);assert.match(draft.linkedin,/^I say no\.\nThe agent adds it\.\nThe repository refuses it\./);
+ assert.match(draft.linkedin,/The strange part isn't the Git trailer\. It's which instruction won\./);
+ assert.doesNotMatch(draft.linkedin,/DRAFT ·|LARQL’s required pull-request check/);assert.ok(draft.linkedin.endsWith(draft.canonical_url));
 });

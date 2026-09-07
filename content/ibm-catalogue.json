@@ -9,7 +9,7 @@
     {
       "youtubeId": "W3iQbl5R_Jk",
       "id": "YT-W3iQbl5R_Jk",
-      "title": "Anthropic reveals hardware specs and Claude updates, OpenAI talks security, and Runway's new model",
+      "title": "OpenAI's agentic \"warning shot\"",
       "format": "video",
       "channelOrder": 0,
       "duration": 2086,
@@ -18,7 +18,7 @@
       "published": "2026-09-04",
       "description": "Chris Hay joins Tim Hwang, Sascha Brodsky, Kaoutar El Maghraoui and Kush Varshney to discuss Claude model updates, AI agent security, hardware guidelines and Runway’s interface-generating model.",
       "url": "https://www.youtube.com/watch?v=W3iQbl5R_Jk",
-      "poster": "https://i.ytimg.com/vi_webp/W3iQbl5R_Jk/maxresdefault.webp",
+      "poster": "https://cfvod.kaltura.com/p/1773841/sp/177384100/thumbnail/entry_id/1_rwy4uz25/width/1280",
       "chapters": [
         {
           "start": 0,
@@ -57,7 +57,8 @@
       "uploadedAt": "2026-09-04T10:00:19+00:00",
       "participationEvidence": "Chris Hay is named as a participant in the original IBM YouTube description.",
       "sourcePage": "https://www.ibm.com/think/podcasts/mixture-of-experts/anthropic-claude-hardware-guidelines-openai-rogue-agents-runway-solaris",
-      "sourceHash": "526c131fda6debc008917146fa6b6f8fce427793e93681cd45f6cbdb500c1312"
+      "sourcePageCheckedAt": "2026-09-07",
+      "sourceHash": "6145fdb82d1b1a1e7cfbaab7e59b8a432645943dc5984d13ee91d0200a92208f"
     },
     {
       "youtubeId": "8rGYGFmytQs",

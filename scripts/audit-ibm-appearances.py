@@ -22,7 +22,8 @@ for listing in playlist['entries']:
  if key in seen:continue
  seen.add(key)
  date=v.get('upload_date')
- rows.append({'youtubeId':v['id'],'episode':episode,'title':v['title'],
+ source_title={'123':'''OpenAI's agentic "warning shot"'''}.get(episode,v['title'])
+ rows.append({'youtubeId':v['id'],'episode':episode,'title':source_title,
  'published':f'{date[:4]}-{date[4:6]}-{date[6:]}' if date else None,
  'sourceUrl':f'https://www.youtube.com/watch?v={v["id"]}',
  'creditSource':'Original IBM YouTube description','participant':'Chris Hay',

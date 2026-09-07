@@ -23,8 +23,18 @@ export const feedAlternates = {
  "application/feed+json": [{ url: "/feed.json", title: FEEDS.notebook.title }],
 };
 
-export function pageMetadata(title: string, description: string, path: string, image?: string, citation?: CitationRecord) {
+type PageMetadataOptions = {
+ openGraphType?: "website" | "article";
+ image?: { width: number; height: number; alt: string; type?: string };
+};
+
+export function pageMetadata(title: string, description: string, path: string, image?: string, citation?: CitationRecord, options?: PageMetadataOptions) {
  const base = publicationMetadata({ title, description, url: `${SITE}${path}`, siteName: "Chris Hay",
   indexable: INDEXABLE, image: image || `${SITE}/og-house.png`, citation });
- return { ...base, alternates: { ...base.alternates, types: feedAlternates } };
+ const detailedImage=image&&options?.image?{url:image,...options.image}:undefined;
+ return { ...base,
+  openGraph:{...base.openGraph,type:options?.openGraphType||base.openGraph.type,...(detailedImage?{images:[detailedImage]}:{})},
+  twitter:{...base.twitter,...(detailedImage?{images:[{url:detailedImage.url,width:detailedImage.width,height:detailedImage.height,alt:detailedImage.alt}]}:{})},
+  alternates: { ...base.alternates, types: feedAlternates }
+ };
 }

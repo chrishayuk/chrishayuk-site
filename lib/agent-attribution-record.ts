@@ -16,6 +16,9 @@ export const agentAttributionRecord: PublicationRecord = {
   publication: "draft",
   authors: ["Chris Hay"],
   lineage: "INSTRUCTION → AGENT → COMMIT → POLICY",
+  share: {
+    linkedin: "I say no.\nThe agent adds it.\nThe repository refuses it.\n\nThe strange part isn't the Git trailer. It's which instruction won.\n\nA short note on coding agents, authority and provenance.",
+  },
   concepts: ["ai-agents", "authorship", "repository-policy", "source-authority"],
   related: ["W-LARQL", "W-HAUSE", "N-AUTHORITY"],
   media: [],

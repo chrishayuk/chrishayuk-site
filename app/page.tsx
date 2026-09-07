@@ -18,10 +18,8 @@ export default function Home() {
  const notebook = latestNotebook;
  const notebookPath = recordPath(notebook);
  const selectedFilms = [featuredVideo, popularMoe];
- const notes = [
-  {record:getRecord("N-MAP")!, media:getMedia("notebook-map")!},
-  {record:getRecord("N-ADDRESS")!, media:getMedia("notebook-address")!},
- ];
+ const notes = [getRecord("N-ADDRESS-BUILD")!, getRecord("N-MAP")!];
+ const notebookMap = getMedia("notebook-map")!;
  return <main id="main" className="homepage editorial-home">
   <section className="scene identity" data-scene="identity" aria-labelledby="proposition"><Media id="hero-identity" priority className="scene-background"/><div className="hero-overline record-voice"><span>CHRIS HAY</span><span>LONDON · 2026</span></div><div className="identity-copy"><h1 id="proposition">A house for<br/><em>ideas, systems</em><br/>and objects.</h1><p className="hero-philosophy">Exploring how intelligent systems represent knowledge, how they run, and how we can inspect and use them.</p></div><div className="scene-bottom record-voice"><span>RESEARCH · ENGINEERING · DESIGN · FILM</span><a href="#latest-youtube">THE LATEST ↓</a></div></section>
 
@@ -53,8 +51,8 @@ export default function Home() {
 
   <section id="further-notes" className="home-further-notes" data-scene="further-notes" aria-labelledby="further-notes-heading">
    <div className="home-collection-heading"><div><Kicker>FROM THE NOTEBOOK</Kicker><h2 id="further-notes-heading">Further questions.</h2></div><TextLink href="/notebook">ALL NOTES</TextLink></div>
-   <div className="home-note-pair">{notes.map(({record,media})=><article key={record.id}>
-    <Link className="home-note-image" href={recordPath(record)} aria-label={`Read ${record.title}`}><img src={media.poster || media.desktop} alt={media.alt} loading="lazy" width={1600} height={900}/><span className="record-voice">OPEN THE NOTE ↗</span></Link>
+   <div className="home-note-pair">{notes.map(record=><article key={record.id}>
+    <Link className="home-note-image" href={recordPath(record)} aria-label={`Read ${record.title}`}>{record.id==="N-ADDRESS-BUILD"?<AddressBuildCard compact/>:<img src={notebookMap.poster || notebookMap.desktop} alt={notebookMap.alt} loading="lazy" width={1600} height={900}/>}<span className="record-voice">OPEN THE NOTE ↗</span></Link>
     <p className="record-voice home-note-identity">{record.id} · WORKING NOTE · {record.status}</p>
     <h3><Link href={recordPath(record)}>{record.title}</Link></h3><p className="home-note-dek">{record.dek}</p>
    </article>)}</div>
