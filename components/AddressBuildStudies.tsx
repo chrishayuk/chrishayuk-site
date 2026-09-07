@@ -1,51 +1,24 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { MeasurementTrace } from "@chrishayuk/hause/components/MeasurementTrace";
 import { useMotion } from "./Motion";
 import { components, format, layers, percent, reader, readability, stageNotes, transplant, type Layer } from "@/lib/address-build";
 
-/** Recorded measurements only; animation stages are schematic, never model inference. */
+/** The publication adapts its verified record to HAUSE's measured-trace contract. */
 export function AddressDepth() {
-  const [index, setIndex] = useState(0);
-  const [held, setHeld] = useState(false);
-  const [running, setRunning] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-  const id = useId();
-  const { register, request } = useMotion();
-  useEffect(() => {
-    if (!ref.current) return;
-    return register({ id, element: ref.current, start: () => setRunning(true), stop: () => setRunning(false) });
-  }, [id, register]);
-  useEffect(() => {
-    if (!running || held) return;
-    const timer = window.setInterval(() => setIndex(value => (value + 1) % layers.length), 2800);
-    return () => window.clearInterval(timer);
-  }, [running, held]);
-  const layer = layers[index];
-  const select = (value: number) => { setHeld(true); setIndex(value); };
-  return <figure id="act-2" className="address-depth" ref={ref} aria-label="Readability across seven measured model depths">
-    <div className="address-object-label record-voice"><span>01 / THE DEPTH OF A QUESTION</span><span>RECORDED MEASUREMENTS</span></div>
-    <div className="address-depth-head"><div><span className="record-voice">RESIDUAL ENTERING</span><strong>L{layer}</strong></div><p>{layer >= 28 ? <>Answer-token<br /><em>endpoint.</em></> : <>An address<br /><em>under construction.</em></>}</p></div>
-    <div className="address-chart" role="group" aria-label="Choose a measured layer">
-      <div className="address-chart-label record-voice">LAYER</div>
-      {layers.map((value, i) => <button key={value} className="address-layer" data-endpoint={value >= 28} aria-pressed={index === i} onClick={() => select(i)}>L{value}</button>)}
-      {components.map(component => <div className="address-track" key={component} data-component={component}>
-        <span className="address-chart-label record-voice">{component.toUpperCase()}</span>
-        {layers.map(value => <div className="address-reading" data-selected={layer === value} data-endpoint={value >= 28} key={value}>
-          <span className="address-bar-space" aria-hidden="true"><i style={{ height: `${readability(value, component) * 100}%` }}/></span>
-          <span>{format(readability(value, component))}</span>
-        </div>)}
-      </div>)}
-      <div className="address-chart-label record-voice">BASIS</div>
-      <div className="address-chart-change record-voice" style={{ gridColumn: "2 / 4" }}>↻ L8 → 12</div>
-      <div className="address-chart-change record-voice" style={{ gridColumn: "5 / 7" }}>↻ L20 → 24</div>
-      <div className="address-evidence-window record-voice">L8–24 / MECHANISTIC EVIDENCE</div>
-      <div className="address-endpoint-label record-voice">ANSWER<br />TOKEN*</div>
-    </div>
-    <div className="address-depth-controls"><label className="record-voice" htmlFor={`${id}-depth`}>EXPLORE DEPTH</label><input id={`${id}-depth`} type="range" min={0} max={6} step={1} value={index} aria-valuetext={`Layer ${layer}. ${stageNotes[layer].title}`} onChange={event => select(Number(event.target.value))}/><button className="record-voice" onClick={() => { if (running && !held) setHeld(true); else { setHeld(false); request(id); } }}>{running && !held ? "PAUSE Ⅱ" : "PLAY →"}</button></div>
-    <div className="address-depth-note"><strong>{stageNotes[layer].title}</strong><p>{stageNotes[layer].text}</p></div>
-    <figcaption>Held-out reader accuracy · 194 prompts · 3 wording folds.<br />*At L28–30, perfect readability may be answer decoding.</figcaption>
-  </figure>;
+  return <MeasurementTrace id="act-2" className="address-depth"
+    label="Held-out reader accuracy across model depth" kicker="01 / THE DEPTH OF A QUESTION · RECORDED MEASUREMENTS"
+    stageLabel="Residual entering" autoPlay
+    stages={layers.map(layer => ({ id: String(layer), label: `L${layer}`, ...stageNotes[layer], description: stageNotes[layer].text,
+      caution: layer >= 28 ? "Perfect readability may decode the answer token; this endpoint is not clean address geometry." : undefined }))}
+    series={components.map(component => ({ id: component, label: component.toUpperCase(), domain: [0, 1] as const,
+      values: layers.map(layer => readability(layer, component)), precision: 2, unit: "accuracy",
+      color: component === "relation" ? "#bdc7b0" : component === "entity" ? "#e3b374" : "#f0eae0" }))}
+    annotations={[{ from: "8", to: "12", label: "↻ Basis change L8 → 12" }, { from: "20", to: "24", label: "↻ Basis change L20 → 24" }]}
+    bands={[{ from: "8", to: "24", label: "L8–24 / mechanistic evidence" }, { from: "28", to: "30", label: "Answer-token endpoint", caution: true }]}
+    summary="194 prompts · 3 held-out wording folds. Stages are equally spaced for reading; only the displayed depths were measured."
+    source={{ label: "Complete reader record", href: "/data/address-build-1/reader.json" }} />;
 }
 
 export function AddressTransplant() {

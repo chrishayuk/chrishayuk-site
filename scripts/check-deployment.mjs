@@ -157,7 +157,7 @@ const depth = await request(depthPath);
 assert.equal(depth.status, 200);
 assert.ok(depth.body.includes(`rel="canonical" href="https://chrishayuk.com${depthPath}"`));
 for (let act=1;act<=6;act++) assert.equal(depth.body.split(`id="act-${act}"`).length-1,1,`depth citation act-${act}`);
-for (const figure of ["address-depth", "address-transplant", "address-coordinates"]) assert.ok(depth.body.includes(`class="${figure}"`));
+for (const figure of ["address-depth", "address-transplant", "address-coordinates"]) assert.ok(new RegExp(`class="[^"\n]*\\b${figure}\\b`).test(depth.body));
 assert.match(depth.body,/0.000e\+00/);
 assert.ok(graph.edges.some(e=>e.from==="N-ADDRESS-BUILD"&&e.to==="THREAD-MAP"));
 for (const id of ["N-MAP","N-ADDRESS","N-AUTHORITY"]) assert.ok(graph.edges.some(e=>e.from===id&&e.to==="N-ADDRESS-BUILD"&&e.kind==="related"));

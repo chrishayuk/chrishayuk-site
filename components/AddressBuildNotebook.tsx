@@ -1,16 +1,32 @@
 import Link from "next/link";
+import { EvidenceTable } from "@chrishayuk/hause/components/EvidenceTable";
 import { AddressTransplant, AddressCoordinates } from "./AddressBuildStudies";
-import { arms, armNames, causal, components, format, layers, percent, reader, readability, sourceCommit, sourceRoot, transplant } from "@/lib/address-build";
+import { arms, armNames, causal, components, layers, reader, readability, sourceCommit, sourceRoot, transplant } from "@/lib/address-build";
 import registry from "@/lib/data/address-build-registry.json";
 
 function ReadabilityTable() {
-  return <div className="address-table-scroll" role="region" aria-label="Complete same-layer readability" tabIndex={0}><table><caption>Held-out accuracy · Part 2b · mean across 3 folds</caption><thead><tr><th scope="col">Depth</th>{components.map(c => <th scope="col" key={c}>{c}</th>)}</tr></thead><tbody>{layers.map(layer => <tr key={layer}><th scope="row">L{layer}{layer >= 28 ? " *" : ""}</th>{components.map(c => <td key={c}>{format(readability(layer, c))}</td>)}</tr>)}</tbody></table></div>;
+  return <EvidenceTable className="address-evidence" caption="Held-out accuracy · Part 2b · mean across 3 folds" rowLabel="Depth"
+    columns={components.map(id => ({ id, label: id, precision: 2 }))}
+    rows={layers.map(layer => ({ id: String(layer), label: `L${layer}`, note: layer >= 28 ? "Answer-token endpoint" : undefined,
+      values: Object.fromEntries(components.map(c => [c, readability(layer, c)])) }))}
+    source={{ label: "Full-precision reader results", href: "/data/address-build-1/reader.json" }} />;
 }
 function CausalTable() {
-  return <div className="address-table-scroll" role="region" aria-label="All causal arms at all measured layers" tabIndex={0}><table><caption>All transplant arms · KL over the full vocabulary</caption><thead><tr><th scope="col">Depth</th><th scope="col">Donor</th><th scope="col">n</th><th scope="col">Recipient retained</th><th scope="col">Donor answer</th><th scope="col">Median KL</th></tr></thead><tbody>{layers.flatMap(layer => arms.map((arm, i) => { const value = transplant(layer, arm); return <tr key={`${layer}-${arm}`}><th scope="row">L{layer}</th><td>{armNames[i]}</td><td>{value.n}</td><td>{percent(value.retention)}</td><td>{value.donor_answer_rate === null ? "—" : percent(value.donor_answer_rate)}</td><td>{value.median_kl.toFixed(3)}</td></tr>; }))}</tbody></table></div>;
+  return <EvidenceTable className="address-evidence" caption="All transplant arms · KL over the full vocabulary" rowLabel="Depth / donor"
+    columns={[{ id: "n", label: "n", unit: "transplants" }, { id: "retention", label: "Recipient retained", format: "percent" },
+      { id: "donor", label: "Donor answer", format: "percent" }, { id: "kl", label: "Median KL", precision: 3 }]}
+    rows={layers.flatMap(layer => arms.map((arm, i) => { const value = transplant(layer, arm); return {
+      id: `${layer}-${arm}`, label: `L${layer} · ${armNames[i]}`, values: { n: value.n, retention: value.retention,
+        donor: value.donor_answer_rate === null ? { missing: "not-applicable" as const, reason: "Same-binding donor" } : value.donor_answer_rate,
+        kl: value.median_kl } }; }))}
+    source={{ label: "Full-precision causal results", href: "/data/address-build-1/causal.json" }} />;
 }
 function TransferTables() {
-  return <>{components.map(component => <div className="address-table-scroll" role="region" aria-label={`${component} transfer controls`} tabIndex={0} key={component}><table><caption>{component} · cross-layer reader transfer</caption><thead><tr><th scope="col">Transition</th><th scope="col">Raw</th><th scope="col">Norm only</th><th scope="col">Procrustes</th><th scope="col">Same layer</th></tr></thead><tbody>{Object.entries(reader.cross_layer_transfer[component]).map(([transition, v]) => <tr key={transition}><th scope="row">{transition.replace("->", " → ")}</th><td>{format(v.identity)}</td><td>{format(v.norm_only)}</td><td>{format(v.procrustes)}</td><td>{format(v.same_layer_reference)}</td></tr>)}</tbody></table></div>)}</>;
+  return <>{components.map(component => <EvidenceTable className="address-evidence" key={component} caption={`${component} · cross-layer reader transfer`} rowLabel="Transition"
+    columns={[{ id: "identity", label: "Raw", precision: 2 }, { id: "norm_only", label: "Norm only", precision: 2 },
+      { id: "procrustes", label: "Procrustes", precision: 2 }, { id: "same_layer_reference", label: "Same layer", precision: 2 }]}
+    rows={Object.entries(reader.cross_layer_transfer[component]).map(([transition, values]) => ({ id: transition, label: transition.replace("->", " → "), values }))}
+    source={{ label: "Full-precision reader results", href: "/data/address-build-1/reader.json" }} />)}</>;
 }
 
 export function AddressBuildNotebook() {
