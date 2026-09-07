@@ -2,7 +2,6 @@ import Link from "next/link";
 import { AddressBuildCard } from "@/components/AddressBuildCard";
 import { latestNotebook } from "@/lib/notebook-selection";
 import { mapThread } from "@/lib/threads";
-import { HOUSE } from "@/lib/house";
 import { Media } from "@/components/Media";
 import { FilmPlayer } from "@/components/FilmPlayer";
 import { previewFor } from "@/components/YouTubeCollection";
@@ -23,7 +22,7 @@ export default function Home() {
   {record:getRecord("N-ADDRESS")!, media:getMedia("notebook-address")!},
  ];
  return <main id="main" className="homepage editorial-home">
-  <section className="scene identity" data-scene="identity" aria-labelledby="proposition"><Media id="hero-identity" priority className="scene-background"/><div className="hero-overline record-voice"><span>CHRIS HAY</span><span>LONDON · 2026</span></div><div className="identity-copy"><h1 id="proposition">A house for<br/><em>ideas, systems</em><br/>and objects.</h1><p className="hero-philosophy">{HOUSE.proposition}</p></div><div className="scene-bottom record-voice"><span>RESEARCH · ENGINEERING · DESIGN · FILM</span><a href="#latest-youtube">THE LATEST ↓</a></div></section>
+  <section className="scene identity" data-scene="identity" aria-labelledby="proposition"><Media id="hero-identity" priority className="scene-background"/><div className="hero-overline record-voice"><span>CHRIS HAY</span><span>LONDON · 2026</span></div><div className="identity-copy"><h1 id="proposition">A house for<br/><em>ideas, systems</em><br/>and objects.</h1><p className="hero-philosophy">Exploring how intelligent systems represent knowledge, how they run, and how we can inspect and use them.</p></div><div className="scene-bottom record-voice"><span>RESEARCH · ENGINEERING · DESIGN · FILM</span><a href="#latest-youtube">THE LATEST ↓</a></div></section>
 
   <section id="latest-youtube" className="home-latest-film" data-scene="latest-youtube" aria-labelledby="latest-youtube-heading">
    <div className="home-section-label"><Kicker>LATEST / YOUTUBE</Kicker><span className="record-voice">{latestVideo.published} · {durationLabel(latestVideo.duration)}</span></div>
