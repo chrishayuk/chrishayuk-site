@@ -87,7 +87,7 @@ export function AgentAttributionNotebook() {
     </section>
 
     <section className="agent-scene" aria-labelledby="agent-types-title">
-      <div className="agent-section-heading"><span className="record-voice">04 / THE WRONG TYPE</span><h2 id="agent-types-title">Assistance is not<br /><em>authorship.</em></h2></div>
+      <div className="agent-section-heading"><span className="record-voice">04 / THE WRONG TYPE</span><h2 id="agent-types-title">Assistance and authorship<br /><em>are different types.</em></h2></div>
       <div className="agent-types">
         <div data-type="wrong"><span className="record-voice">ONE FIELD DOING TWO JOBS</span><pre>{`commit {
   author: Chris Hay
