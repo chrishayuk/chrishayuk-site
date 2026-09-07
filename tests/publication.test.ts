@@ -156,6 +156,14 @@ test("graph indexes authored acts with exact text, version, source anchors and d
  assert.ok(!searchGraph("LARQL",{scope:"films",includeDrafts:false}).some(r=>r.publication==="draft"));
 });
 
+test("the generated-attribution notebook is a first-class graph record",()=>{
+ const g=recordGraph();const record=getRecord("N-ATTRIBUTION")!;const node=g.nodes.find(n=>n.id===record.id);
+ assert.ok(node,"N-ATTRIBUTION is absent from the graph");assert.equal(node.url,`${SITE}${recordPath(record)}`);assert.equal(node.basis,"draft-record");assert.equal(node.retrievable,true);
+ assert.ok(g.edges.some(e=>e.from===record.id&&e.to==="PERSON-CHRIS"&&e.kind==="created-by"));
+ for(const concept of record.concepts)assert.ok(g.edges.some(e=>e.from===record.id&&e.to===`CONCEPT-${concept}`&&e.kind==="about"),concept);
+ assert.ok(searchGraph("assistance authorship",{scope:"records"}).some(result=>result.recordId===record.id&&result.basis==="draft-record"));
+});
+
 test("film chapters keep exact source titles and seek times without becoming transcripts",()=>{
  const g=recordGraph();assert.equal(g.coverage.chapters,allVideos.reduce((n,v)=>n+v.chapters.length,0));
  for(const v of allVideos)for(const c of v.chapters){

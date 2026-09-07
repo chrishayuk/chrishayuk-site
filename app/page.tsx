@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AddressBuildCard } from "@/components/AddressBuildCard";
+import { AgentAttributionCard } from "@/components/AgentAttributionNotebook";
 import { latestNotebook } from "@/lib/notebook-selection";
 import { mapThread } from "@/lib/threads";
 import { Media } from "@/components/Media";
@@ -36,7 +37,7 @@ export default function Home() {
   </section>
 
   <section id="from-the-notebook" className="notebook-scene notebook-feature" data-scene="latest-notebook" data-hause-act="connection" aria-labelledby="notebook-feature-heading">
-   <div className="notebook-feature-visual">{notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>
+   <div className="notebook-feature-visual">{notebook.id === "N-ATTRIBUTION" ? <AgentAttributionCard/> : notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{notebook.id === "N-ATTRIBUTION" ? "FROM THE REPOSITORY / ONE REQUIRED AUTHORITY GATE" : notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>
    <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">{notebook.dek}</p><div className="inline-links"><TextLink href={notebookPath}>EXPLORE THE NOTE</TextLink><TextLink href={mapThread.path}>FOLLOW THE THREAD</TextLink></div><p className="record-voice notebook-footnote">{notebook.lineage}</p></div>
   </section>
 

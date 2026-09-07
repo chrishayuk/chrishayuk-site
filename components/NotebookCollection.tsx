@@ -8,6 +8,7 @@ import { Media } from "./Media";
 import { FilmPlayer } from "./FilmPlayer";
 import { AuthorityCard } from "./AuthorityCard";
 import { getVideo } from "@/lib/youtube";
+import { AgentAttributionCard } from "./AgentAttributionNotebook";
 
 
 export function NotebookCollection() {
@@ -21,7 +22,12 @@ export function NotebookCollection() {
     </header>
     <div className="notebook-stories">{visualNotebooks.map((r, i) => <article key={r.id} className={`notebook-story notebook-story-${(i % 3) + 1}`}>
       <div className="notebook-story-top record-voice"><span>{String(i+1).padStart(2,"0")} / {r.id}</span><span>{r.lineage || "FILM → QUESTION → RECORD"}</span></div>
-      {r.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : r.id === "N-AUTHORITY" ? <AuthorityCard/> : r.body[0].kind === "film" && "youtubeId" in r.body[0] ? <FilmPlayer video={getVideo(r.body[0].youtubeId)!} start={r.body[0].start} priority={i===0}/> : <Media id={r.media[0]} priority={i===0}/>}
+      {r.id === "N-ATTRIBUTION" ? <AgentAttributionCard/>
+        : r.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/>
+        : r.id === "N-AUTHORITY" ? <AuthorityCard/>
+        : r.body[0].kind === "film" && "youtubeId" in r.body[0]
+          ? <FilmPlayer video={getVideo(r.body[0].youtubeId)!} start={r.body[0].start} priority={i===0}/>
+          : <Media id={r.media[0]} priority={i===0}/>}
       <div className="notebook-story-caption"><Link href={recordPath(r)}><h2>{r.title}</h2><span className="text-link">OPEN THE NOTE ↗</span></Link><div><p>{r.dek}</p><span className="record-voice">{r.status} / DRAFT · V{r.version}</span></div></div>
     </article>)}</div>
     <section className="notebook-earlier"><p className="kicker record-voice">EARLIER QUESTIONS</p><div className="record-list">{older.map(r => <Link key={r.id} href={recordPath(r)}><span className="record-voice">{r.id}<br/>{r.created}</span><div><h2>{r.title}</h2><p>{r.dek}</p></div><span>↗</span></Link>)}</div></section>
