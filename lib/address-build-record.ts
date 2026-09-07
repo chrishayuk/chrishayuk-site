@@ -7,6 +7,12 @@ export const addressBuildRecord: PublicationRecord = {
   abstract: "For capital versus language on Gemma 3 4B IT, two instruments agree: relation information is readable and causally consequential by L8; entity binding becomes decisive in the final-position residual between L24 and L28. Cross-layer reader alignment recovers relation information across changing coordinates. The L28–30 endpoint may carry the answer token, so the mechanistic evidence window is L8–24.",
   created: "2026-09-06", version: "0.1", publication: "draft", status: "SUPPORTED",
   authors: ["Chris Hay"], lineage: "QUESTION → EXPERIMENT → INSTRUMENT",
+  share: {
+    linkedin: "Relation appears early.\n\nEntity binding arrives late.\n\nBetween them, the model changes the coordinates of the address.",
+    linkedinComment: "The diagram, measurements and limits →",
+    x: "Relation appears early. Entity binding arrives late. Between them, the model changes the coordinates of the address.",
+    xReply: "The diagram, measurements and limits →",
+  },
   concepts: ["residual-stream", "model-representation", "model-memory", "factual-recall", "activation-patching"],
   related: ["N-MAP", "N-ADDRESS", "N-AUTHORITY", "W-LARQL"], media: [],
   body: [

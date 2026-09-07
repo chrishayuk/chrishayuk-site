@@ -394,21 +394,27 @@ test("JSON notebook feed is populated, deterministic and explicit about unpublis
  const first=records.find(r=>r.kind==='notebook')!;assert.equal(entryDate({...first,revised:'2026-09-07'}),'2026-09-07');
 });
 test("social objects preserve canonical identity, status and recorded prose",async()=>{
- const {socialRecord,distributionDrafts,socialImage}=await import('../lib/social.ts');
+ const {socialRecord,distributionDrafts,socialImage,socialEditionImage}=await import('../lib/social.ts');
  for(const r of records.filter(r=>r.kind==='notebook')){
   const draft=distributionDrafts(r);assert.equal(socialRecord(r.id)?.id,r.id);
-  assert.equal(draft.canonical_url,`${SITE}${recordPath(r)}`);assert.ok(draft.linkedin.endsWith(draft.canonical_url));
-  assert.ok(draft.linkedin_words<=300);assert.ok(draft.x_thread.length>=3&&draft.x_thread.length<=5);
+  assert.equal(draft.canonical_url,`${SITE}${recordPath(r)}`);assert.ok(!draft.linkedin.includes(draft.canonical_url));
+  assert.ok(draft.linkedin_comment.endsWith(draft.canonical_url));assert.ok(!draft.x.includes(draft.canonical_url));assert.ok(draft.x_reply.endsWith(draft.canonical_url));
+  assert.ok(draft.linkedin_words<=300);assert.equal(draft.x_thread.length,2);
   assert.ok(draft.x_thread.every(post=>[...post.replace(/https:\/\/\S+/g,'x'.repeat(23))].length<=280));
-  if(!r.share?.linkedin)assert.match(draft.linkedin,/DRAFT/);assert.equal(socialImage(r),socialImage(r));
+  assert.deepEqual([draft.assets.og.width,draft.assets.og.height],[1200,630]);
+  assert.deepEqual([draft.assets.linkedin.width,draft.assets.linkedin.height],[1200,1500]);
+  assert.deepEqual([draft.assets.x.width,draft.assets.x.height],[1600,900]);
+  assert.match(draft.assets.linkedin.url,/format=linkedin/);assert.match(draft.assets.x.url,/format=x/);assert.match(draft.assets.linkedin.download_url,/download=1/);
+  assert.equal(socialImage(r),socialImage(r));assert.equal(socialEditionImage(r,'linkedin'),socialEditionImage(r,'linkedin'));
   assert.notEqual(socialImage(r),socialImage({...r,title:r.title+' revised'}));
+  assert.notEqual(socialEditionImage(r,'x'),socialEditionImage({...r,title:r.title+' revised'},'x'));
  }
  for(const r of allRecords.filter(r=>r.visibility==='unlisted'||r.kind!=='notebook'))assert.equal(socialRecord(r.id),undefined);
  assert.equal(socialRecord('missing'),undefined);
 });
-test("the attribution note has a short reviewed LinkedIn draft",async()=>{
+test("the attribution note has reviewed native-image copy with its link in the follow-up",async()=>{
  const {distributionDrafts}=await import('../lib/social.ts');const record=getRecord('N-ATTRIBUTION')!;const draft=distributionDrafts(record);
- assert.equal(draft.linkedin_words,32);assert.match(draft.linkedin,/^I say no\.\nThe agent adds it\.\nThe repository refuses it\./);
- assert.match(draft.linkedin,/The strange part isn't the Git trailer\. It's which instruction won\./);
- assert.doesNotMatch(draft.linkedin,/DRAFT ·|LARQL’s required pull-request check/);assert.ok(draft.linkedin.endsWith(draft.canonical_url));
+ assert.equal(draft.linkedin_words,22);assert.match(draft.linkedin,/^I told my coding agent not to add something\./);
+ assert.match(draft.linkedin_comment,/The strange part isn't the trailer\. It's which instruction won\./);
+ assert.doesNotMatch(draft.linkedin,/https:|DRAFT ·|LARQL’s required pull-request check/);assert.ok(draft.linkedin_comment.endsWith(draft.canonical_url));
 });

@@ -21,8 +21,8 @@ export type PublicationRecord = {
   authors: string[]; body: Act[]; concepts: string[]; related: string[];
   /** How this note came about, shown on the notebook index. Films are one route in, not the only one. */
   lineage?: string;
-  /** Optional reviewed copy for off-site distribution. The canonical URL is appended by the exporter. */
-  share?: { linkedin?: string };
+  /** Optional reviewed copy for native off-site distribution. Links belong in the follow-up, not the image post. */
+  share?: { linkedin?: string; linkedinComment?: string; x?: string; xReply?: string };
   media: string[]; sources: { title: string; url?: string; note?: string }[];
   sourceMetadata?: { retrievedAt: string; sourceHash: string; transcript: string; views: number | null; viewsApproximate: boolean };
   youtubeId?: string; originalUrl?: string; episode?: string; collection?: string;
