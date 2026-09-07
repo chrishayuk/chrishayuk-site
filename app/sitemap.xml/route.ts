@@ -1,3 +1,3 @@
-import { threads } from "@/lib/threads";
-import { indexedRecords, SITE, recordPath } from "@/lib/records";
-export function GET(){const paths=["/","/ideas","/systems","/objects","/record","/knowledge","/film","/notebook","/research","/about","/film/youtube","/film/youtube/archive","/film/mixture-of-experts",...threads.map(t=>t.path),...indexedRecords().map(recordPath)];return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map(p=>`<url><loc>${SITE}${p}</loc></url>`).join("")}</urlset>`,{headers:{"Content-Type":"application/xml; charset=utf-8"}});}
+import { canonicalUrls } from "@/lib/canonical";
+import { escapeXml } from "@/lib/publication";
+export function GET(){return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${canonicalUrls().map(url=>`<url><loc>${escapeXml(url)}</loc></url>`).join("")}</urlset>`,{headers:{"Content-Type":"application/xml; charset=utf-8"}});}

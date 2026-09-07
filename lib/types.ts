@@ -14,7 +14,7 @@ export type Act =
   | { kind: "comparison"; objectLabel: string; blockLabels: string[]; left: { label: string; properties: string[] }; right: { label: string; properties: string[] } };
 export type PublicationRecord = {
   id: string; slug: string; kind: "work" | "notebook" | "question" | "film";
-  title: string; dek: string; abstract: string; created: string; published?: string;
+  title: string; dek: string; abstract: string; created: string; published?: string; revised?: string;
   version: string; status?: Status; publication: "draft" | "published" | "catalogued";
   /** Unlisted records resolve at their own URL and appear in no index, feed or graph. */
   visibility?: "unlisted";

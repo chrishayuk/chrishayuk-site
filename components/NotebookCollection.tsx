@@ -1,3 +1,4 @@
+import { Follow } from "./Follow";
 import Link from "next/link";
 import { mapThread } from "@/lib/threads";
 import { records, recordPath } from "@/lib/records";
@@ -24,6 +25,7 @@ export function NotebookCollection() {
       <div className="notebook-story-caption"><Link href={recordPath(r)}><h2>{r.title}</h2><span className="text-link">OPEN THE NOTE ↗</span></Link><div><p>{r.dek}</p><span className="record-voice">{r.status} / DRAFT · V{r.version}</span></div></div>
     </article>)}</div>
     <section className="notebook-earlier"><p className="kicker record-voice">EARLIER QUESTIONS</p><div className="record-list">{older.map(r => <Link key={r.id} href={recordPath(r)}><span className="record-voice">{r.id}<br/>{r.created}</span><div><h2>{r.title}</h2><p>{r.dek}</p></div><span>↗</span></Link>)}</div></section>
+    <Follow/>
     <div className="notebook-closing"><p>One question<br/><em>leads to another.</em></p><div className="inline-links"><Link className="text-link" href="/research">THE RESEARCH ↗</Link><Link className="text-link" href="/ask">ASK THE WORK ↗</Link></div></div>
   </main>;
 }

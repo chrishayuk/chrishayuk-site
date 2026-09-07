@@ -1,0 +1,1 @@
+Fraunces is a static instance (weight 400, optical size 72, SOFT 0, WONK 1) of the Google Fonts Fraunces variable font, generated with fontTools. Geist Regular is the OFL-licensed font bundled with next/og. The adjacent licenses apply. These fonts are loaded locally for generated social cards.

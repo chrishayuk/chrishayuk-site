@@ -11,8 +11,9 @@
     "build:fly": "next build",
     "start:fly": "next start",
     "test:deployment": "node scripts/check-deployment.mjs",
+    "archive": "node --experimental-strip-types scripts/archive-wayback.ts",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "node --experimental-strip-types --test tests/publication.test.ts",
+    "test": "node --experimental-strip-types --test tests/publication.test.ts && node --experimental-strip-types --test scripts/archive-policy.test.ts",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "typecheck": "tsc --noEmit"

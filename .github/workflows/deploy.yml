@@ -3,6 +3,9 @@ name: Deploy chrishayuk.com
 on:
   push:
     branches: [main]
+    # The archive job commits back the first-capture dates it learns. That
+    # commit touches nothing else, and must not start another deploy.
+    paths-ignore: [content/archive.json]
   pull_request:
   workflow_dispatch:
 
@@ -58,3 +61,46 @@ jobs:
           assert health['commit'] == os.environ['EXPECTED_COMMIT'], health
           print('Deployed revision verified')
           PY
+
+  # PUBLISH -> COMMIT -> ARCHIVE. The deploy is what makes a page real at its
+  # canonical URL; this asks an independent party to keep a copy of it, and
+  # records when that party FIRST saw it. Without IA credentials the script
+  # still runs, reads the public Wayback index and records what is already
+  # there, so a fork or a PR checkout is never blocked on a secret.
+  archive:
+    needs: deploy
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check archive configuration
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+        run: |
+          if [ -z "$IA_ACCESS_KEY" ] || [ -z "$IA_SECRET_KEY" ]; then
+            echo "::warning::New captures need IA_ACCESS_KEY and IA_SECRET_KEY repository secrets. This run only resolves existing captures."
+          fi
+      - name: Archive the canonical objects
+        timeout-minutes: 15
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+        run: node --experimental-strip-types scripts/archive-wayback.ts --limit 6
+      # A first capture is evidence, so it is committed rather than cached:
+      # the date belongs in the repository's history, next to the record it
+      # corroborates. It reaches the site on the next deploy.
+      - name: Record the first captures
+        run: |
+          git diff --quiet content/archive.json && { echo "No new captures."; exit 0; }
+          git config user.name "chrishayuk-site"
+          git config user.email "noreply@chrishayuk.com"
+          git add content/archive.json
+          git commit -m "Record independent archive captures"
+          git pull --rebase origin main
+          git push origin HEAD:main

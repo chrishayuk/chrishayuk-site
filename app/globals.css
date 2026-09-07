@@ -442,3 +442,32 @@
 .thread-authority-preview strong{font:clamp(30px,4.5vw,54px)/1 var(--font-fraunces);font-weight:400;letter-spacing:-.045em;color:#6f7068}
 .thread-authority-preview strong[data-flipped=true]{color:#e6b460}
 .thread-authority-preview>.record-voice:last-child{margin-top:10px;color:#e6b460}
+
+/* FOLLOW — the subscribe surface. A record, not a signup form: the same
+   rules, voice and hairlines as the apparatus it sits beside. */
+.follow-section{border-top:1px solid var(--rule);padding:35px 0}
+.follow-section h2{font:11px var(--font-geist-mono);letter-spacing:.1em;margin-bottom:20px}
+.follow-intro{font-size:14px;line-height:1.8;max-width:620px;margin-bottom:30px;color:var(--muted)}
+.follow-feeds{list-style:none;margin:0;padding:0}
+.follow-feeds>li{display:grid;grid-template-columns:1fr auto;gap:20px 40px;align-items:start;border-top:1px solid var(--rule);padding:24px 0}
+.follow-feed-identity h3{font-family:var(--font-fraunces),Georgia,serif;font-weight:400;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.035em;line-height:1.1}
+.follow-feed-identity p{font-size:14px;line-height:1.7;margin-top:10px;max-width:44ch}
+.follow-feed-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right}
+.follow-feed-actions .text-link{gap:14px}
+.follow-feed-actions button{font:10px var(--font-geist-mono);letter-spacing:.1em;background:none;border:0;padding:12px 0;color:var(--muted);min-height:44px}
+.follow-feed-actions button:hover{color:var(--accent)}
+.follow-feed-actions code{font:10px var(--font-geist-mono);color:var(--muted);overflow-wrap:anywhere}
+@media(max-width:767px){
+ .follow-feeds>li{grid-template-columns:1fr;gap:14px}
+ .follow-feed-actions{align-items:flex-start;text-align:left}
+ .follow-feed-identity h3{font-size:28px}
+}
+.record-verbs{display:flex;flex-wrap:wrap;gap:30px}
+@media(max-width:767px){.record-verbs{gap:15px}}
+.follow-agent{display:flex;flex-direction:column;gap:10px;align-items:flex-start;margin-bottom:30px;max-width:620px}
+.follow-agent>span{font-size:13px;line-height:1.7;color:var(--muted)}
+.follow-signal{margin-top:26px;padding-top:18px;border-top:1px solid var(--rule);color:var(--muted);font-size:9px}
+.follow-signal a{text-decoration:underline;text-underline-offset:4px}
+.follow-signal a:hover{color:var(--accent)}
+
+.notebook-share{margin:36px 0}.distribution-drafts{margin:24px 0;font-size:14px;line-height:1.8}.distribution-drafts summary{cursor:pointer;padding:16px 0}.distribution-drafts>p{max-width:65ch;margin:18px 0}.distribution-drafts h3{font:28px/1.2 var(--font-fraunces);margin:32px 0 14px}.distribution-drafts .record-voice{font-size:10px}.distribution-text{white-space:pre-wrap;overflow-wrap:anywhere;max-width:72ch}.distribution-drafts ol{padding-left:24px}.distribution-drafts li{padding:18px 0;border-bottom:1px solid var(--rule)}.distribution-drafts summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}

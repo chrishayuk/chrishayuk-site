@@ -3,6 +3,12 @@ import test from "node:test";
 import { chooseMotion } from "../lib/motion.ts";
 import { stableJson, validateRecord, escapeXml } from "../lib/publication.ts";
 import { records, publishedRecords, getVersion } from "../lib/records.ts";
+import { archiveUrls } from "../lib/canonical.ts";
+import { archiveIdentifiers, captureDate, captureUrl, captureVoice, firstCapture } from "../lib/archive.ts";
+import { FEEDS, entryDate, entryGuid, entryState, renderFeed } from "../lib/feeds.ts";
+import { allRecords, getRecord, recordPath, SITE } from "../lib/records.ts";
+import { CHATGPT_TASK, followSignal, isMaterialRevision } from "../lib/follow.ts";
+
 import { readFile } from "node:fs/promises";
 import { catalogue, catalogueDate, catalogueUrl, PAGE_SIZE } from "../lib/catalogue.ts";
 import { addressedMemory, readAddress } from "../lib/addressed-memory.ts";
@@ -58,7 +64,7 @@ test("catalogue never presents a retrieval timestamp as a film release date",()=
 });
 test("motion chooses one visible owner and holds it across minor area changes",()=>{const a={id:"a",visible:.9,area:90};const b={id:"b",visible:.8,area:100};assert.equal(chooseMotion([a,b],"a",false,false),"a");assert.equal(chooseMotion([{...a,area:20},b],"a",false,false),"b");});
 test("paused and hidden pages stop automatic motion; manual play is scoped",()=>{const a={id:"a",visible:1,area:500};const b={id:"b",visible:.6,area:300,manual:true};assert.equal(chooseMotion([a],"a",true,false),null);assert.equal(chooseMotion([a,b],null,true,false),"b");assert.equal(chooseMotion([a,b],"b",false,true),null);assert.equal(chooseMotion([{...b,visible:.2}],"b",true,false),null);});
-test("draft records never enter public feeds or resolve to invented versions",()=>{assert.ok(records.length>=11);for(const r of publishedRecords()){assert.equal(r.publication,"published");assert.ok(r.published);}assert.equal(getVersion("N-OPERATOR","1.0"),undefined);for(const r of records)validateRecord(r);});
+test("draft records stay out of published-only feeds and never resolve to invented versions",()=>{assert.ok(records.length>=11);for(const r of publishedRecords()){assert.equal(r.publication,"published");assert.ok(r.published);}assert.equal(getVersion("N-OPERATOR","1.0"),undefined);for(const r of records)validateRecord(r);});
 test("every related record and identifier resolves uniquely",()=>{assert.equal(new Set(records.map(r=>r.id)).size,records.length);assert.equal(new Set(records.map(r=>r.slug)).size,records.length);for(const r of records)for(const id of r.related)assert.ok(records.some(r=>r.id===id),`${r.id} -> ${id}`);});
 test("canonical hashing ignores object key order, but preserves semantic array order",()=>{assert.equal(stableJson({b:2,a:1}),stableJson({a:1,b:2}));assert.notEqual(stableJson([1,2]),stableJson([2,1]));assert.equal(stableJson({a:undefined,b:2}),'{"b":2}');});
 test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
@@ -196,7 +202,9 @@ test("unlisted previews resolve at their own URL and are absent from every listi
  const { notebookSelection } = await import("../lib/notebook-selection.ts");
  assert.ok(notebookSelection.every(isListed));
  for (const record of notebookSelection) assert.equal(record, getRecord(record.id));
- assert.match(await readFile(new URL("../app/sitemap.xml/route.ts", import.meta.url), "utf8"), /indexedRecords\(\)/);
+ const {canonicalPaths}=await import("../lib/canonical.ts");
+ assert.ok(listed.filter(r=>r.kind==="notebook").every(r=>canonicalPaths().includes(recordPath(r))));
+ assert.ok(allRecords.filter(r=>!isListed(r)).every(r=>!canonicalPaths().includes(recordPath(r))));
  const page = await readFile(new URL("../components/RecordPage.tsx", import.meta.url), "utf8");
  assert.match(page, /UNLISTED PREVIEW · NOT PUBLISHED/);
  const route = await readFile(new URL("../app/[section]/[slug]/page.tsx", import.meta.url), "utf8");
@@ -246,4 +254,147 @@ test("notebook notes declare their own lineage and every act kind renders", asyn
  const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
  assert.match(index, /r\.lineage \|\| "FILM → QUESTION → RECORD"/);
  assert.doesNotMatch(index, /VISUAL NOTES/);
+});
+
+test("the archive surface offers a third party only the records that carry a claim, and never an unlisted preview", () => {
+ const urls = archiveUrls();
+ assert.ok(urls.length > 0 && urls.length < 60, `${urls.length} URLs is not an archive list`);
+ assert.ok(urls.every(url => url.startsWith(`${SITE}/`)));
+ assert.equal(new Set(urls).size, urls.length, "a URL is submitted twice");
+ // A capture cannot be withdrawn, so an unlisted preview must never appear.
+ for (const record of allRecords.filter(r => r.visibility === "unlisted"))
+  assert.ok(!urls.includes(`${SITE}${recordPath(record)}`), `${record.id} is unlisted and must not be archived`);
+ // The catalogued IBM records are someone else's productions, and there
+ // are hundreds of them: not a provenance strategy, just traffic.
+ for (const record of allRecords.filter(r => r.publication === "catalogued"))
+  assert.ok(!urls.includes(`${SITE}${recordPath(record)}`), `${record.id} is a catalogued record and carries no claim of Chris Hay's`);
+ // Every notebook entry does, whatever its publication state: priority
+ // attaches to when the work became visible, not to when it was reviewed.
+ for (const record of records.filter(r => r.kind === "notebook"))
+  assert.ok(urls.includes(`${SITE}${recordPath(record)}`), `${record.id} is publicly readable and must be archived`);
+});
+
+test("a first capture is read as a date and never invented", async () => {
+ assert.equal(captureDate("20260906231045"), "2026-09-06");
+ assert.equal(captureVoice("20260906231045"), "6 SEP 2026");
+ assert.equal(captureUrl("https://chrishayuk.com/x", "20260906231045"), "https://web.archive.org/web/20260906231045/https://chrishayuk.com/x");
+ assert.equal(firstCapture("https://chrishayuk.com/never-captured"), null);
+ assert.deepEqual(archiveIdentifiers("https://chrishayuk.com/never-captured"), []);
+ // Every capture on file is a real 14-digit Wayback stamp in the past.
+ const held = JSON.parse(await readFile(new URL("../content/archive.json", import.meta.url), "utf8"));
+ for (const [url, capture] of Object.entries(held) as [string, { first: string }][]) {
+  assert.match(capture.first, /^\d{14}$/, url);
+  assert.ok(Date.parse(`${captureDate(capture.first)}T00:00:00Z`) <= Date.now(), `${url} claims a capture in the future`);
+  assert.deepEqual(archiveIdentifiers(url).map(i => i.label), ["independent archive"]);
+ }
+});
+
+test("the notebook feed carries the notebook as it is kept, and says what state each entry is in", () => {
+ const feed = FEEDS.notebook;
+ const entries = feed.items();
+ assert.deepEqual(entries.map(r => r.id).sort(), records.filter(r => r.kind === "notebook").map(r => r.id).sort());
+ assert.ok(entries.length > 0, "an empty notebook feed is the bug this replaced");
+ // Newest first, by the date the entry was recorded.
+ for (let i = 1; i < entries.length; i++)
+  assert.ok(entryDate(entries[i - 1]) >= entryDate(entries[i]), "the feed is out of order");
+ // A draft must never reach a reader looking like a publication.
+ for (const record of entries.filter(r => r.publication !== "published")) {
+  assert.match(entryState(record), /^DRAFT · V[\d.]+ · RECORDED \d{4}-\d{2}-\d{2}$/);
+  assert.equal(entryGuid(record).permalink, false, `${record.id} has no immutable URL to be a permalink to`);
+  assert.equal(entryGuid(record).value, `urn:chrishayuk:record:${record.id}:${record.version}`);
+ }
+ const xml = renderFeed(feed);
+ assert.match(xml, /<atom:link href="https:\/\/chrishayuk.com\/notebook\/feed.xml" rel="self"/);
+ assert.equal((xml.match(/<item>/g) || []).length, entries.length);
+ // Text content must carry no raw markup: strip every tag and nothing
+ // dangerous may remain between them.
+ const text = xml.replace(/<[^>]*>/g, "");
+ assert.doesNotMatch(text, /[<>]/, "an unescaped angle bracket reached a feed");
+ assert.doesNotMatch(text, /&(?!(amp|lt|gt|quot|apos|#\d+);)/, "an unescaped ampersand reached a feed");
+});
+
+test("the record feed follows the publication policy exactly", () => {
+ const entries = FEEDS.record.items();
+ assert.ok(entries.every(r => r.publication === "published" && r.published), "an unpublished record reached the record feed");
+ assert.deepEqual(entries.map(r => r.id).sort(), publishedRecords().map(r => r.id).sort());
+ for (const record of entries) assert.equal(entryGuid(record).permalink, true);
+ assert.match(renderFeed(FEEDS.record), /<atom:link href="https:\/\/chrishayuk.com\/record\/feed.xml" rel="self"/);
+});
+
+test("a feed item identifies a version, so a revision arrives as a new object and an edit does not", () => {
+ const seen = new Set<string>();
+ for (const feed of Object.values(FEEDS)) for (const record of feed.items()) {
+  const guid = entryGuid(record).value;
+  assert.ok(guid.includes(record.version), `${record.id} does not carry its version`);
+  seen.add(`${feed.path} ${guid}`);
+ }
+ assert.equal(seen.size, Object.values(FEEDS).reduce((n, f) => n + f.items().length, 0), "two entries share one identity");
+});
+
+test("the publication signal is pollable: identical content produces an identical document", () => {
+ const a = JSON.stringify(followSignal());
+ const b = JSON.stringify(followSignal());
+ assert.equal(a, b, "two polls with nothing published between them must not differ");
+ // updated_at is derived from the newest record, never from the clock —
+ // a document that moved on its own would be news on every poll.
+ const signal = followSignal();
+ assert.equal(signal.updated_at, signal.latest[0].updated_at);
+});
+
+test("the publication signal states draft status rather than implying it with a date", () => {
+ const { latest, feeds, policy } = followSignal();
+ assert.ok(latest.length > 0 && latest.length <= 20);
+ for (const entry of latest) {
+  assert.match(entry.recorded_at, /^\d{4}-\d{2}-\d{2}T00:00:00Z$/);
+  assert.ok(["draft", "published", "catalogued"].includes(entry.state));
+  // The whole point: an unpublished record has no publication date, and
+  // one is never manufactured for it.
+  if (entry.state !== "published") assert.equal(entry.published_at, undefined, `${entry.id} is ${entry.state} and must carry no published_at`);
+  else { assert.ok(entry.published_at); assert.match(entry.published_at, /^\d{4}-\d{2}-\d{2}T/); }
+  const source = getRecord(entry.id);
+  assert.ok(source, `${entry.id} is not a record`);
+  assert.equal(entry.url, `${SITE}${recordPath(source)}`);
+  // A revision is a fact about versions, so "ignore minor revisions" works.
+  assert.equal(entry.material_revision, isMaterialRevision(source));
+ }
+ // Newest first, and the same objects the archive surface covers.
+ for (let i = 1; i < latest.length; i++) assert.ok(latest[i-1].updated_at >= latest[i].updated_at);
+ assert.equal(feeds.notebook, `${SITE}/notebook/feed.xml`);
+ assert.match(policy, /draft/);
+});
+
+test("the shared agent task is a real shared task or absent, never a placeholder", () => {
+ // An affordance that does not exist is absent, exactly like an identifier
+ // that does not. A wrong link here would send readers somewhere broken
+ // from every record page at once.
+ if (CHATGPT_TASK === null) return;
+ assert.match(CHATGPT_TASK, /^https:\/\/chatgpt\.com\/s\/[\w-]+$/, "expected a chatgpt.com/s/... shared task link");
+});
+
+
+test("discovery includes public notebook drafts without promoting them or listing catalogue stubs", async()=>{
+ const {canonicalPaths}=await import('../lib/canonical.ts');const paths=canonicalPaths();
+ for(const r of records.filter(r=>r.kind==='notebook')){assert.ok(paths.includes(recordPath(r)));assert.equal(r.publication,'draft');}
+ assert.ok(!records.filter(r=>r.publication==='catalogued').some(r=>paths.includes(recordPath(r))));
+ assert.equal(new Set(paths).size,paths.length);
+});
+test("JSON notebook feed is populated, deterministic and explicit about unpublished dates",async()=>{
+ const {jsonFeed}=await import('../lib/feeds.ts');const feed=jsonFeed(FEEDS.notebook,'/feed.json');
+ assert.ok(feed.items.length>0);assert.equal(JSON.stringify(feed),JSON.stringify(jsonFeed(FEEDS.notebook,'/feed.json')));
+ for(const item of feed.items){if(item._chrishayuk.state==='draft')assert.equal(item.date_published,undefined);assert.ok(item._chrishayuk.recorded_at);}
+ assert.deepEqual(jsonFeed(FEEDS.record,'/record/feed.json').items.map(i=>i.id),FEEDS.record.items().map(r=>entryGuid(r).value));
+ const first=records.find(r=>r.kind==='notebook')!;assert.equal(entryDate({...first,revised:'2026-09-07'}),'2026-09-07');
+});
+test("social objects preserve canonical identity, status and recorded prose",async()=>{
+ const {socialRecord,distributionDrafts,socialImage}=await import('../lib/social.ts');
+ for(const r of records.filter(r=>r.kind==='notebook')){
+  const draft=distributionDrafts(r);assert.equal(socialRecord(r.id)?.id,r.id);
+  assert.equal(draft.canonical_url,`${SITE}${recordPath(r)}`);assert.ok(draft.linkedin.endsWith(draft.canonical_url));
+  assert.ok(draft.linkedin_words<=300);assert.ok(draft.x_thread.length>=3&&draft.x_thread.length<=5);
+  assert.ok(draft.x_thread.every(post=>[...post.replace(/https:\/\/\S+/g,'x'.repeat(23))].length<=280));
+  assert.match(draft.linkedin,/DRAFT/);assert.equal(socialImage(r),socialImage(r));
+  assert.notEqual(socialImage(r),socialImage({...r,title:r.title+' revised'}));
+ }
+ for(const r of allRecords.filter(r=>r.visibility==='unlisted'||r.kind!=='notebook'))assert.equal(socialRecord(r.id),undefined);
+ assert.equal(socialRecord('missing'),undefined);
 });

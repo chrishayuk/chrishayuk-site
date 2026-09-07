@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import http from "node:http";
+import { readFile } from "node:fs/promises";
 
 const base = process.env.CHECK_ORIGIN || "http://localhost:3000";
 function request(path, host = "chrishayuk.com") {
@@ -163,7 +164,7 @@ assert.ok(graph.edges.some(e=>e.from==="N-ADDRESS-BUILD"&&e.to==="THREAD-MAP"));
 for (const id of ["N-MAP","N-ADDRESS","N-AUTHORITY"]) assert.ok(graph.edges.some(e=>e.from===id&&e.to==="N-ADDRESS-BUILD"&&e.kind==="related"));
 const depthSearch=JSON.parse((await request("/api/search?q=relation%20coordinates&scope=records")).body);
 assert.ok(depthSearch.results.some(r=>r.recordId==="N-ADDRESS-BUILD"&&r.sourceUrl.includes("#act-")));
-assert.ok(!sitemap.body.includes(depthPath), "depth note stays a draft");
+assert.ok(sitemap.body.includes(depthPath), "public notebook drafts are discoverable");
 const depthLegacy=await request("/codex/the-address-is-built-through-depth");
 assert.equal(depthLegacy.status,307);
 assert.equal(depthLegacy.headers.location,depthPath);
@@ -192,7 +193,7 @@ for(const path of ["/ideas", "/record?q=Which%20source%20wins"]) {
   assert.equal(listing.status,200,path);
   assert.match(listing.body,/href="\/notebook\/which-source-wins"/,path);
 }
-assert.ok(sitemap.body.includes("/notebook/which-source-wins") === false, "drafts stay out of the sitemap");
+assert.ok(sitemap.body.includes("/notebook/which-source-wins"), "public notebook drafts remain discoverable without changing their status");
 assert.ok(graph.nodes.some(n => n.recordId === "N-AUTHORITY" && n.kind === "act" && n.basis === "draft-record"));
 const authoritySearch = JSON.parse((await request("/api/search?q=inert%20not%20outvoted&scope=records")).body);
 assert.ok(authoritySearch.results.some(r => r.recordId === "N-AUTHORITY" && r.basis === "draft-record"));
@@ -206,4 +207,105 @@ assert.match(study.body, /never manufacture an answer where the experiment has n
 assert.match(study.body, /Not in the record|were never run/);
 assert.equal((await request("/api/health")).status, 200);
 assert.equal((await request("/og-house.png")).status, 200);
-console.log("Production homepage, visual notebooks, interactive demo, clip media, catalogue, canonical redirects, indexing, graph, Ask and citations verified.");
+
+// FOLLOW — the feeds, and the discovery tags that let a reader find them.
+const notebookFeed = await request("/notebook/feed.xml");
+assert.equal(notebookFeed.status, 200);
+assert.match(notebookFeed.headers["content-type"], /application\/rss\+xml/);
+assert.match(notebookFeed.body, /<atom:link href="https:\/\/chrishayuk.com\/notebook\/feed.xml" rel="self"/);
+assert.match(notebookFeed.body, /<title>Which source wins\?<\/title>/);
+// A draft must arrive labelled, and must not claim to be a permalink.
+assert.match(notebookFeed.body, /<guid isPermaLink="false">urn:chrishayuk:record:N-AUTHORITY:0\.1<\/guid>/);
+assert.match(notebookFeed.body, /DRAFT · V0\.1 · RECORDED 2026-09-06/);
+// An empty feed is the failure this replaced; four entries is a floor, not a target.
+assert.ok((notebookFeed.body.match(/<item>/g) || []).length >= 4, "the notebook feed is empty");
+assert.doesNotMatch(notebookFeed.body, /authority-gate|UNLISTED/, "an unlisted preview reached the feed");
+
+const recordFeed = await request("/record/feed.xml");
+assert.equal(recordFeed.status, 200);
+assert.match(recordFeed.body, /<atom:link href="https:\/\/chrishayuk.com\/record\/feed.xml" rel="self"/);
+assert.ok(!recordFeed.body.includes("DRAFT"), "the record feed carries published records only");
+
+// The old address keeps working, permanently, so nobody's reader goes silent.
+const oldFeed = await request("/rss.xml");
+assert.equal(oldFeed.status, 308);
+assert.equal(oldFeed.headers.location, "https://chrishayuk.com/notebook/feed.xml");
+
+// Autodiscovery on a record page, not only the homepage. This is the
+// regression that made the feeds invisible: publicationMetadata returns its
+// own alternates and Next replaces rather than merges them.
+for (const path of ["/", "/notebook", "/notebook/which-source-wins", "/record"]) {
+  const page = await request(path);
+  assert.equal(page.status, 200, path);
+  assert.match(page.body, /<link rel="alternate" type="application\/rss\+xml" href="https:\/\/chrishayuk.com\/notebook\/feed.xml"/, `${path} does not advertise the notebook feed`);
+  assert.match(page.body, /<link rel="alternate" type="application\/rss\+xml" href="https:\/\/chrishayuk.com\/record\/feed.xml"/, `${path} does not advertise the record feed`);
+}
+
+// FOLLOW · CITE · ARCHIVE — the verbs, and the panel they point at.
+const followed = await request("/notebook/which-source-wins");
+assert.match(followed.body, /FOLLOW THE WORK/);
+assert.match(followed.body, /href="\/notebook\/feed.xml"/);
+assert.match(followed.body, /href="#follow"/);
+assert.doesNotMatch(followed.body, /newsletter|Subscribe to|mailing list/i, "Follow is not a mailing list");
+assert.match((await request("/notebook")).body, /FOLLOW THE WORK/);
+assert.match(followed.body, /follow\.json/);
+
+// follow.json — the publication signal, for readers that are programs.
+const signalResponse = await request("/follow.json");
+assert.equal(signalResponse.status, 200);
+assert.match(signalResponse.headers["content-type"], /application\/json/);
+const signal = JSON.parse(signalResponse.body);
+assert.ok(Array.isArray(signal.latest) && signal.latest.length > 0, "the publication signal is empty");
+assert.equal(signal.author, "Chris Hay");
+assert.equal(signal.feeds.notebook, "https://chrishayuk.com/notebook/feed.xml");
+// Pollable: nothing published between two requests means no difference at
+// all. A signal that changed on its own would make every poll look like news.
+assert.equal((await request("/follow.json")).body, signalResponse.body, "the publication signal is not stable between polls");
+assert.equal(signal.updated_at, signal.latest[0].published_at ?? signal.latest[0].recorded_at);
+// A draft carries the date it was recorded and no publication date.
+for (const entry of signal.latest) {
+  assert.ok(entry.recorded_at, `${entry.id} has no recorded_at`);
+  if (entry.state !== "published") assert.equal(entry.published_at, undefined, `${entry.id} is a draft with a published_at`);
+}
+assert.ok(signal.latest.some(e => e.id === "N-MAP"), "N-MAP is not in the publication signal");
+
+// ARCHIVE appears exactly where there is a capture to point at, and nowhere
+// else. An identifier that does not exist is absent, never a placeholder.
+const held = JSON.parse(await readFile(new URL("../content/archive.json", import.meta.url), "utf8"));
+const archivedRecords = Object.keys(held).filter(u => /\/(notebook|research|work)\//.test(u));
+if (archivedRecords.length) {
+  const page = await request(new URL(archivedRecords[0]).pathname);
+  assert.match(page.body, /ARCHIVE/, `${archivedRecords[0]} has a capture but shows no ARCHIVE`);
+  assert.match(page.body, /web\.archive\.org\/web\//);
+  const entry = signal.latest.find(e => e.url === archivedRecords[0]);
+  if (entry) assert.ok(entry.archive_url, `${entry.id} has a capture that follow.json does not carry`);
+} else {
+  assert.doesNotMatch(followed.body, /ARCHIVE/, "ARCHIVE is offered with no capture behind it");
+}
+
+console.log("Production homepage, visual notebooks, interactive demo, clip media, catalogue, canonical redirects, indexing, graph, Ask citations, feeds and feed discovery verified.");
+
+// Distribution objects stay attached to the public record and keep draft status.
+assert.ok(sitemap.body.includes('/notebook/which-source-wins'));
+assert.match(depth.body,/api\/social\/N-ADDRESS-BUILD/);
+assert.match(depth.body,/sharing\/share-offsite/);
+assert.match(depth.body,/twitter.com\/intent\/tweet/);
+const notebookJson=JSON.parse((await request('/feed.json')).body);
+assert.ok(notebookJson.items.length>0);
+assert.ok(notebookJson.items.every(item=>item._chrishayuk.state!=='draft'||!item.date_published));
+const distribution=JSON.parse((await request('/api/share/N-ADDRESS-BUILD')).body);
+assert.equal(distribution.canonical_url,'https://chrishayuk.com/notebook/the-address-is-built-through-depth');
+assert.equal(distribution.state,'draft');
+assert.equal((await request('/api/share/not-a-record')).status,404);
+// Exercise the image renderer itself: metadata alone cannot catch a broken font.
+const socialNotes=JSON.parse((await request('/follow.json')).body).latest.filter(item=>item.kind==='notebook');
+for(const note of socialNotes){
+ const png=await new Promise((resolve,reject)=>{
+  const req=http.get(new URL(`/api/social/${note.id}`,base),{headers:{Host:'chrishayuk.com'}},res=>{
+   const chunks=[];res.on('data',chunk=>chunks.push(chunk));res.on('error',reject);res.on('end',()=>resolve({status:res.statusCode,type:res.headers['content-type'],bytes:Buffer.concat(chunks)}));
+  });req.setTimeout(30000,()=>req.destroy(new Error('Social image timeout')));req.on('error',reject);
+ });
+ assert.equal(png.status,200,note.id);assert.match(png.type,/image\/png/);
+ assert.equal(png.bytes.subarray(1,4).toString(),'PNG');assert.equal(png.bytes.readUInt32BE(16),1200);assert.equal(png.bytes.readUInt32BE(20),630);
+}
+console.log(`${socialNotes.length} generated Notebook cards verified.`);

@@ -24,7 +24,7 @@ Canonical domain: **https://chrishayuk.com**. The other four owned domains and a
 
 ## Production state
 
-This is the first public production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter the publication record API or feeds; catalogued YouTube source records enter the record API separately from local publications. The public Fly edition permits indexing; drafts remain explicitly labelled and excluded from publication feeds.
+This is the first public production edition. Real channel films, three short preview excerpts and a studio portrait are in place. Remaining original location and notebook photography slots are explicitly labelled. No stock portrait or synthetic notebook impersonates Chris’s record. IBM film records link to verified original productions. Their local editorial titles are not claimed as original episode titles. Drafts do not enter the published-only record feed; the notebook feeds carry explicitly labelled drafts; catalogued YouTube source records enter the record API separately from local publications. The public Fly edition permits indexing; drafts remain explicitly labelled and excluded from publication feeds.
 
 The homepage does **not yet meet** the photographic-area launch criterion. The owner has authorized this initial public edition; the media inventory continues to identify the original photography still required.
 
@@ -65,6 +65,38 @@ node --experimental-strip-types scripts/publish-record.ts RECORD-ID 1.0 YYYY-MM-
 ```
 
 The command appends a complete snapshot and a SHA-256 of deterministic, sorted-key JSON to `content/publications.json`. An existing ID/version cannot be overwritten. First publication date remains unchanged on a new version. Rebuild and deploy to make the new snapshot available. Version pages live at `/records/ID/VERSION`; records, citations and concepts are available under `/api/`. Publishing a record is separate from allowing public access to the site.
+
+## Following the work
+
+Two feeds, because two questions are being asked. `/record/feed.xml` and `/record/feed.json` carry published records only, following the publication policy exactly. `/notebook/feed.xml` and the default `/feed.json` carry the notebook as it is actually kept — drafts included, each entry labelled `DRAFT · V0.1 · RECORDED <date>` in its own description, with a `urn:chrishayuk:record:ID:VERSION` GUID that is explicitly not a permalink. A draft that reached a reader looking like a publication would be the one thing these feeds must never do.
+
+A feed item identifies a record *version*, so a material revision arrives as the new object it is and an ordinary edit produces no feed event at all. `lib/feeds.ts` holds both definitions; the routes are two lines each.
+
+`/rss.xml` is a 308 to `/record/feed.xml`. Autodiscovery lives in `feedAlternates` (`lib/metadata.ts`) and is applied by both the root layout and `pageMetadata` — the latter matters, because `publicationMetadata` returns its own `alternates` and Next replaces rather than merges them, which previously left every record page advertising no feed at all.
+
+`/follow.json` is the same authority in the form a program wants: per record, its version, `state` (`draft` or `published`), `recorded_at`, `published_at` only where one exists, `material_revision`, topics, summary, canonical URL and the independent capture where there is one. Three properties make it safe to poll — `updated_at` is derived from the newest record rather than the clock, so two polls with nothing published between them return byte-identical documents; `material_revision` is true only when an earlier version of that record exists, so "ignore minor revisions" is a rule a watcher can actually act on; and a draft carries no `published_at`, because manufacturing one is the exact claim this record exists to make impossible.
+
+`CHATGPT_TASK` in `lib/follow.ts` is the one fact the site cannot derive. A ChatGPT shared scheduled-task link is created by hand in an account and cannot be minted through an API, so paste the `chatgpt.com/s/...` URL there and the Follow panel grows a **FOLLOW WITH CHATGPT** option; left `null`, it offers none. A reader who takes that link gets their own copy of the task in their own account — this site is never told, and holds nothing about them.
+
+`components/Follow.tsx` is the reader-facing surface: FOLLOW joins CITE and ARCHIVE in the record bar, and the panel appears on record pages, `/notebook` and `/record`. It is not a mailing list — no account, no address, nothing for this site to store. Email can arrive later as another transport under the same verb.
+
+## The independent archive
+
+A date on this site is evidence only to someone who already trusts this site. `scripts/archive-wayback.ts` asks the Internet Archive to capture each canonical object after a deploy, then reads the Wayback index back to learn when that URL was **first** captured, and records the answer in `content/archive.json`.
+
+```sh
+npm run archive                 # resolve-only: reads the public CDX index, submits nothing
+IA_ACCESS_KEY=... IA_SECRET_KEY=... npm run archive   # also submits to Save Page Now
+```
+
+Credentials are Internet Archive S3-style keys from <https://archive.org/account/s3.php>; Save Page Now rejects anonymous requests. Without them the script still runs and records whatever has already been captured, so it is never blocked on a secret.
+
+The script bounds network calls and submits at most six pages per run by default. A successful Save Page Now job never establishes a first-capture date by itself; only a valid earliest CDX result does. The rules it enforces: a capture already on file is never moved forward (an earlier one replaces it, a later one does not); a URL must be on the public allowlist, including when supplied with `--url`, and the live site must return 200; and nothing is invented — a URL with no capture gets no entry and no page shows an archive line.
+
+`lib/canonical.ts` holds two deliberately different lists. `canonicalPaths` is the shared sitemap surface: standing pages, threads and indexed authored records, including public notebook drafts. Catalogue-only film stubs remain reachable through their collections. `archivePaths` is the evidence surface and follows *visibility*, because priority attaches to when work became publicly readable rather than to when its author finished reviewing it. Unlisted previews appear in neither — a third-party capture cannot be withdrawn. The several hundred catalogued IBM records are excluded too: they are records of someone else's productions and carry no claim of Chris's.
+
+The deploy workflow runs the archive job after a successful deploy and commits `content/archive.json` back. That commit is excluded from the push trigger by `paths-ignore`, so it starts no second deploy; the dates reach the site on the next one.
+
 
 ## Handoff
 
@@ -142,3 +174,13 @@ The raw graph includes draft text because those records are already public on
 the site. This is a change in retrieval coverage, not a publication transition;
 `indexedRecords`, version snapshots, publication feeds and citations retain
 those boundaries. [Implementation and coverage](docs/graph.md).
+
+## Social distribution
+
+Every listed Notebook record has a deterministic 1200×630 PNG at `/api/social/ID`. Open Graph and X metadata use that card, with a content-derived cache key. The card carries the real title, proposition, ID, version and editorial status; a draft has a recorded date, not an invented publication date. Fraunces is bundled with its OFL license so card rendering needs no font service.
+
+HAUSE supplies `Share`: LinkedIn, X and a native Copy disclosure with clipboard feedback and selectable text. The site supplies the proposition and canonical URL. No social SDK or automatic posting is involved. `/api/share/ID` exports editable LinkedIn and X drafts extracted from the same record; short source records remain short rather than acquiring filler or invented claims. Unlisted and non-notebook records return 404 from both social routes.
+
+`revised` is an authored material-revision date. Publication snapshots retain their original `published` date, while feed ordering and `follow.json.updated_at` use the revision event. Polls do not generate timestamps. Optional shared-task UI remains absent until a real destination has been configured.
+
+The legacy `/rss.xml` address now follows the Notebook, keeping default RSS and JSON discovery aligned. The explicitly named Record feeds remain published-only.

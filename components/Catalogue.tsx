@@ -1,3 +1,4 @@
+import { Follow } from "./Follow";
 import Link from "next/link";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
 import { catalogue, catalogueDate, PAGE_SIZE, catalogueUrl, CATALOGUE_KINDS, type CatalogueQuery } from "@/lib/catalogue";
@@ -14,6 +15,7 @@ export function Catalogue({ query }: { query: CatalogueQuery }) {
     <div className="catalogue-entries">{entries.map(r => { const date = catalogueDate(r); return <article key={r.id}><div className="catalogue-identity record-voice"><span>{r.id}</span><span>{names[r.kind]} · {r.publication}</span>{r.status && <span>{r.status}</span>}</div><div><h2><Link href={recordPath(r)}>{r.title} ↗</Link></h2><p>{r.dek}</p><p className="record-voice">{r.authors.join(" · ")} · VERSION {r.version}</p></div><div className="catalogue-source record-voice"><span>{date.label}<br/>{date.value}</span><Link href={`${recordPath(r)}#cite`}>{r.publication === "draft" ? "DRAFT REFERENCE" : "CITE SOURCE"} ↗</Link></div></article>; })}</div>
     {entries.length === 0 && <p className="catalogue-empty">No records match. Try a shorter phrase or another kind of record.</p>}
     <nav className="catalogue-pagination record-voice" aria-label="Catalogue pages">{page > 1 ? <Link rel="prev" href={catalogueUrl(q, kind, page - 1)}>← PREVIOUS</Link> : <span/>}<span>{page} / {pages}</span>{page < pages ? <Link rel="next" href={catalogueUrl(q, kind, page + 1)}>NEXT →</Link> : <span/>}</nav>
+    <Follow/>
     <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: "The record — Chris Hay", url: `${SITE}${catalogueUrl(q, kind, page)}`, mainEntity: { "@type": "ItemList", numberOfItems: total, itemListElement: entries.map((r, i) => ({ "@type": "ListItem", position: (page - 1) * PAGE_SIZE + i + 1, name: r.title, url: `${SITE}${recordPath(r)}` })) } }}/>
   </main>;
 }

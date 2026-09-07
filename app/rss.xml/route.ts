@@ -1,3 +1,4 @@
-import { publishedRecords, SITE, recordPath } from "@/lib/records";
-import { escapeXml as x } from "@/lib/publication";
-export function GET(){const items=publishedRecords().map(r=>`<item><title>${x(r.title)}</title><link>${SITE}${recordPath(r)}</link><guid>${SITE}/records/${r.id}/${r.version}</guid><description>${x(r.abstract)}</description><pubDate>${new Date(`${r.published}T00:00:00Z`).toUTCString()}</pubDate></item>`).join("");return new Response(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Chris Hay — The record</title><link>${SITE}</link><description>Published records by Chris Hay. Drafts are omitted.</description>${items}</channel></rss>`,{headers:{"Content-Type":"application/rss+xml; charset=utf-8"}});}
+import { FEEDS } from "@/lib/feeds";
+import { SITE } from "@/lib/records";
+/** The default RSS follows the public Notebook, retaining each entry's draft label. */
+export const GET = () => Response.redirect(`${SITE}${FEEDS.notebook.path}`, 308);
