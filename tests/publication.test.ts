@@ -164,6 +164,18 @@ test("the generated-attribution notebook is a first-class graph record",()=>{
  assert.ok(searchGraph("assistance authorship",{scope:"records"}).some(result=>result.recordId===record.id&&result.basis==="draft-record"));
 });
 
+test("the exhibition notebook is one connected semantic record",async()=>{
+ const {recordActs}=await import("../lib/record-knowledge.ts");const g=recordGraph();const record=getRecord("N-EXHIBITION")!;const node=g.nodes.find(n=>n.id===record.id);
+ assert.ok(node,"N-EXHIBITION is absent from the graph");assert.equal(node.url,`${SITE}${recordPath(record)}`);assert.equal(node.basis,"draft-record");
+ assert.ok(record.body.some(act=>act.kind==="comparison"));assert.ok(record.body.some(act=>act.kind==="refusal"));
+ for(const act of recordActs(record)){
+  assert.ok(g.nodes.some(n=>n.id===act.id&&n.text===act.text),act.id);
+  assert.ok(g.edges.some(e=>e.from===act.id&&e.to===record.id&&e.kind==="act-of"),act.id);
+ }
+ assert.ok(searchGraph("cinematic directing attention",{scope:"records"}).some(result=>result.recordId===record.id));
+ assert.ok(g.edges.some(e=>e.from===record.id&&e.to==="W-HAUSE"&&e.kind==="related"));
+});
+
 test("film chapters keep exact source titles and seek times without becoming transcripts",()=>{
  const g=recordGraph();assert.equal(g.coverage.chapters,allVideos.reduce((n,v)=>n+v.chapters.length,0));
  for(const v of allVideos)for(const c of v.chapters){

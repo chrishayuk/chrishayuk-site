@@ -55,6 +55,11 @@ function OperatorVisual({portrait}:{portrait:boolean}){
  return <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',width:'100%',borderTop:`1px solid ${rule}`,paddingTop:portrait?42:22}}><span style={{fontFamily:'Fraunces',fontSize:portrait?50:36}}>trajectory</span><span style={{fontSize:portrait?74:54,color:accent}}>≠</span><span style={{fontFamily:'Fraunces',fontSize:portrait?50:36}}>computation</span></div>;
 }
 
+function ExhibitionVisual({portrait}:{portrait:boolean}){
+ const stages=['EXHIBITION','CINEMATIC COMPOSITION','FORMS','SEMANTIC FORMS','AI COMPOSITION'];
+ return <div style={{display:'flex',flexDirection:'column',width:'100%',borderTop:`1px solid ${rule}`,paddingTop:portrait?30:17,gap:portrait?16:8}}>{stages.map((stage,i)=><div key={stage} style={{display:'flex',alignItems:'center',gap:portrait?22:14,color:i===stages.length-1?accent:ink}}><span style={{width:portrait?42:32,fontSize:portrait?18:14,color:muted}}>{String(i+1).padStart(2,'0')}</span><span style={{fontFamily:'Fraunces',fontSize:portrait?35:25}}>{stage}</span>{i<stages.length-1&&<span style={{marginLeft:'auto',color:accent}}>↓</span>}</div>)}</div>;
+}
+
 function GenericVisual({record,portrait}:{record:PublicationRecord;portrait:boolean}){
  return <div style={{display:'flex',flexDirection:'column',gap:portrait?24:13,width:'100%',borderTop:`1px solid ${rule}`,paddingTop:portrait?32:18}}><span style={{fontSize:portrait?19:16,letterSpacing:3,color:accent}}>{record.lineage||'QUESTION → RECORD'}</span><span style={{fontFamily:'Fraunces',fontSize:portrait?42:30,lineHeight:1.25,maxWidth:portrait?900:1100}}>{record.dek}</span></div>;
 }
@@ -62,7 +67,7 @@ function GenericVisual({record,portrait}:{record:PublicationRecord;portrait:bool
 export function NotebookSocialEdition({record,format}:{record:PublicationRecord;format:Format}){
  const portrait=format==='linkedin';
  const titleSize=portrait?(record.title.length>42?78:94):(record.title.length>42?63:74);
- const visual=record.id==='N-ATTRIBUTION'?<AttributionVisual portrait={portrait}/>:record.id==='N-ADDRESS-BUILD'?<DepthVisual portrait={portrait}/>:record.id==='N-AUTHORITY'?<AuthorityVisual portrait={portrait}/>:record.id==='N-MAP'?<MapVisual portrait={portrait}/>:record.id==='N-STATE'?<StateVisual portrait={portrait}/>:record.id==='N-ADDRESS'?<AddressVisual portrait={portrait}/>:record.id==='N-CONTEXT'?<ContextVisual portrait={portrait}/>:record.id==='N-OPERATOR'?<OperatorVisual portrait={portrait}/>:<GenericVisual record={record} portrait={portrait}/>;
+ const visual=record.id==='N-EXHIBITION'?<ExhibitionVisual portrait={portrait}/>:record.id==='N-ATTRIBUTION'?<AttributionVisual portrait={portrait}/>:record.id==='N-ADDRESS-BUILD'?<DepthVisual portrait={portrait}/>:record.id==='N-AUTHORITY'?<AuthorityVisual portrait={portrait}/>:record.id==='N-MAP'?<MapVisual portrait={portrait}/>:record.id==='N-STATE'?<StateVisual portrait={portrait}/>:record.id==='N-ADDRESS'?<AddressVisual portrait={portrait}/>:record.id==='N-CONTEXT'?<ContextVisual portrait={portrait}/>:record.id==='N-OPERATOR'?<OperatorVisual portrait={portrait}/>:<GenericVisual record={record} portrait={portrait}/>;
  return <div style={{display:'flex',flexDirection:'column',justifyContent:'space-between',width:'100%',height:'100%',fontFamily:'Geist',background:paper,color:ink,padding:portrait?'62px 70px 55px':'42px 58px 38px',borderTop:`12px solid ${accent}`}}>
   <div style={{display:'flex',justifyContent:'space-between',fontSize:portrait?21:17,letterSpacing:3}}><span>CHRIS HAY / NOTEBOOK</span><span>{record.id}</span></div>
   <div style={{display:'flex',flexDirection:'column',gap:portrait?48:24}}><div style={{display:'flex',fontFamily:'Fraunces',fontSize:titleSize,lineHeight:.98,letterSpacing:-2,maxWidth:portrait?1040:1450,textTransform:record.id==='N-ATTRIBUTION'?'uppercase':'none'}}>{record.title}</div>{visual}</div>

@@ -6,8 +6,9 @@ import {socialRecord} from '@/lib/social';
 import {NotebookSocialCard} from '@/components/NotebookSocialCard';
 import {NotebookSocialEdition} from '@/components/NotebookSocialEdition';
 export const runtime='nodejs';
-const font=readFile(join(process.cwd(),'public/fonts/Fraunces.ttf'));
-const textFont=readFile(join(process.cwd(),'public/fonts/Geist-Regular.ttf'));
+// Node deployments read packaged fonts once. Workers serve the same public
+// assets over HTTP because their bundle filesystem does not contain public/.
+const packagedFonts=Promise.all(['Geist-Regular.ttf','Fraunces.ttf'].map(name=>readFile(join(process.cwd(),'public/fonts',name)))).catch(()=>null);
 export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){
  const record=socialRecord((await params).id);if(!record)return new Response('Not found',{status:404});
  const search=new URL(request.url).searchParams;
@@ -16,5 +17,9 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string}>}
  const size=format==='linkedin'?{width:1200,height:1500}:format==='x'?{width:1600,height:900}:{width:1200,height:630};
  const artwork=format==='og'?createElement(NotebookSocialCard,{record}):createElement(NotebookSocialEdition,{record,format});
  const disposition=search.get('download')==='1'?`attachment; filename="${record.slug}-${format}.png"`:'inline';
- return new ImageResponse(artwork,{...size,fonts:[{name:'Geist',data:await textFont,weight:400,style:'normal'},{name:'Fraunces',data:await font,weight:400,style:'normal'}],headers:{'Content-Disposition':disposition}});
+ // Public assets are served by both local runtimes; they are not filesystem
+ // entries inside the worker bundle used by the Vite development server.
+ const loadFont=async(name:string)=>{const response=await fetch(new URL(`/fonts/${name}`,request.url));if(!response.ok)throw new Error(`Unable to load social font: ${name}`);return response.arrayBuffer();};
+ const [textFont,font]=await packagedFonts ?? await Promise.all([loadFont('Geist-Regular.ttf'),loadFont('Fraunces.ttf')]);
+ return new ImageResponse(artwork,{...size,fonts:[{name:'Geist',data:textFont,weight:400,style:'normal'},{name:'Fraunces',data:font,weight:400,style:'normal'}],headers:{'Content-Disposition':disposition}});
 }

@@ -12,6 +12,7 @@ import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/Motion";
 import { SITE, socials } from "@/lib/records";
 import "./globals.css";
+import "@chrishayuk/hause/exhibition.css";
 import "./notebook-visuals.css";
 import "./address-build.css";
 import "./social-editions.css";
