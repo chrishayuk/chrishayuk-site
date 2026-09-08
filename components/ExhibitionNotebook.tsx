@@ -74,6 +74,10 @@ function ReadingComparison({ act }: { act: Act }) {
 
 export function ExhibitionNotebook({ acts }: { acts: Act[] }) {
   if (acts.length !== 18 || acts[0]?.kind !== "photograph" || acts[17]?.kind !== "question") throw new Error("Exhibition notebook no longer matches its authored record");
+  const performance = acts[16];
+  if (performance.kind !== "observation") throw new Error("Expected the exhibition performance record");
+  const [motion, discovery] = performance.text.split("\n\n");
+  if (!discovery) throw new Error("Expected the exhibition contribution passage");
   return <NotebookFieldNotes><div className="exhibition-edition">
     <RoomEntrance number="01" title="THE INFLUENCE" detail="The room is part of the story." />
     <section className="exhibition-opening-prose"><Acts acts={acts.slice(1, 3)} anchored offset={1} /></section>
@@ -101,7 +105,10 @@ export function ExhibitionNotebook({ acts }: { acts: Act[] }) {
     <FieldNotes acts={acts} index={15} label="INFORMATION HAS DRAMATURGY" />
     <RoomEntrance number="05" title="THE PERFORMANCE" detail="The space between two states has meaning." />
     <StagedTransition from="Claim." to="Evidence." kicker="ONE CHANGE / THREE AUTHORED BEATS" score={[{ label: "Exit.", description: "The claim leaves." }, { label: "Hold.", description: "A beat of empty space." }, { label: "Enter.", description: "The evidence arrives." }]} caption="The empty beat says that the first state has ended." />
-    <FieldNotes acts={acts} index={16} label="MOTION AS EXPLANATION" />
+    <section id="act-17">
+      <details className="authority-notes exhibition-field-notes"><summary className="record-voice">MOTION AS EXPLANATION <span>READ +</span></summary><Acts acts={[{ ...performance, text: motion, references: performance.references?.slice(0, 1) }]} /></details>
+      <div className="exhibition-act-question"><Acts acts={[{ ...performance, label: "DISCOVERED THROUGH MAKING", text: discovery, references: performance.references?.slice(1) }]} /></div>
+    </section>
     <section className="exhibition-final-question"><p className="record-voice">THE QUESTION CHANGED</p><span>How should I stage this idea?</span><b aria-hidden="true">↓</b><Acts acts={[acts[17]]} anchored offset={17} /></section>
   </div></NotebookFieldNotes>;
 }

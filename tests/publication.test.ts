@@ -174,6 +174,15 @@ test("the exhibition notebook is one connected semantic record",async()=>{
  }
  assert.ok(searchGraph("cinematic directing attention",{scope:"records"}).some(result=>result.recordId===record.id));
  assert.ok(g.edges.some(e=>e.from===record.id&&e.to==="W-HAUSE"&&e.kind==="related"));
+ assert.equal(record.body.length,18,"existing citation positions are preserved");
+ const performance=record.body[16];assert.equal(performance.kind,"observation");
+ if(performance.kind==="observation"){
+  assert.equal(performance.text.split("\n\n").length,2);
+  assert.match(performance.text,/Writing this page changed the system/);
+  assert.ok(performance.references?.some(ref=>ref.url==="#source-10"));
+ }
+ assert.equal(record.body[17].kind,"question");
+ assert.equal(record.sources?.[9].url,"https://github.com/chrishayuk/hause/commit/5758e7eb194c6217b59a4945a3d3fffda40304d2");
 });
 
 test("film chapters keep exact source titles and seek times without becoming transcripts",()=>{

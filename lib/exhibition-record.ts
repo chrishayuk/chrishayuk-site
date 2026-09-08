@@ -38,7 +38,7 @@ export const exhibitionRecord: PublicationRecord = {
     {
       kind: "observation",
       label: "02 / DIRECTING ATTENTION",
-      text: "A good exhibition does something software often forgets. Not everything receives the same amount of space. Not everything arrives at once. Not everything stays still. Sometimes the room is the argument; sometimes the absence before an object matters almost as much as the object itself.",
+      text: "Software inherited the vocabulary of application interfaces. I wanted some of the vocabulary of exhibitions: not just where an idea sits, but when and how it meets the reader. Not everything receives the same amount of space. Not everything arrives at once. Sometimes the room is the argument; sometimes the absence before an object matters almost as much as the object itself.",
     },
     { kind: "statement", text: "Cinematic does not mean motion. It means directing attention through time." },
     {
@@ -85,7 +85,7 @@ export const exhibitionRecord: PublicationRecord = {
     {
       kind: "observation",
       label: "08 / THREE ROOMS",
-      text: "Statements are forms the reader reads. Instruments are forms the reader operates. Performances are forms the reader watches. The categories appeared after real pages needed different ways of explaining things. The material asked for the rooms; the library named them afterwards.",
+      text: "A Statement occupies attention. An Instrument lets the reader investigate. A Performance controls sequence. Read. Operate. Watch. Together, they give the system a way to compose attention through space and time. The categories appeared after real pages needed different ways of explaining things. The material asked for the rooms; the library named them afterwards.",
       references: [{ label: "HAUSE / current record", url: "#source-4" }],
     },
     {
@@ -109,8 +109,8 @@ export const exhibitionRecord: PublicationRecord = {
     {
       kind: "observation",
       label: "11 / EXIT · HOLD · ENTER",
-      text: "Cinematic can become an excuse for gratuitous motion. That is not the point. HAUSE stages a change when the relationship requires it: exit, a held beat, enter. A crossfade can suggest two physical states coexist; an authored absence can say that one has ended before another begins. The transition is part of the explanation, while reduced motion and no JavaScript retain a designed resting state.",
-      references: [{ label: "HAUSE / Performances", url: "#source-5" }],
+      text: "Cinematic can become an excuse for gratuitous motion. That is not the point. HAUSE stages a change when the relationship requires it: exit, a held beat, enter. A crossfade can suggest two physical states coexist; an authored absence can say that one has ended before another begins. The transition is part of the explanation, while reduced motion and no JavaScript retain a designed resting state.\n\nWriting this page changed the system. It needed rooms, archival space and a transition with a held absence. Those needs became shared HAUSE forms. The language grew because there was something to show.",
+      references: [{ label: "HAUSE / Performances", url: "#source-5" }, { label: "HAUSE / the contribution this page made", url: "#source-10" }],
     },
     {
       kind: "question",
@@ -164,6 +164,11 @@ export const exhibitionRecord: PublicationRecord = {
       title: "Burberry / Our Story",
       url: "https://uk.burberry.com/c/burberry-world/heritage/our-story/",
       note: "Official Burberry history, reviewed 8 September 2026. It records the 1968 Hayward Gallery campaign, Burberry Acoustic and the 2010 fashion-show livestream.",
+    },
+    {
+      title: "HAUSE / forms discovered through this Notebook",
+      url: "https://github.com/chrishayuk/hause/commit/5758e7eb194c6217b59a4945a3d3fffda40304d2",
+      note: "The contribution adds shared exhibition composition primitives, Statement’s room presentation, authored Comparison panels and the StagedTransition performance. Its documentation names this Notebook as the page that exposed those needs.",
     },
   ],
 };
