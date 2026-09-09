@@ -1,11 +1,16 @@
 import Link from "next/link";
 import type { PublicationRecord } from "@/lib/types";
 import { ErasingTrailer } from "./ErasingTrailer";
+import type { Act } from "@/lib/types";
+import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
+import { Statement } from "@chrishayuk/hause/components/forms/Statement";
+import { Acts } from "./Acts";
+import { NotebookFieldNotes } from "./NotebookFieldNotes";
 
 export function AgentAttributionHero({ record, citation, captureUrl }: { record: PublicationRecord; citation: boolean; captureUrl?: string }) {
   return <header className="agent-hero">
     <nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/">CHRIS HAY</Link><span>/</span><Link href="/notebook">NOTEBOOK</Link><span>/ {record.id}</span></nav>
-    <p className="agent-hero-title record-voice">{record.title}</p>
+    <h1 className="agent-hero-title">{record.title}</h1>
     <div className="agent-commit" aria-label="Illustrative commit fragment">
       <span>commit a83c19…</span>
       <span>Author: Chris Hay</span>
@@ -45,19 +50,22 @@ if (findings.length > 0) {
   );
 }`;
 
-export function AgentAttributionNotebook() {
-  return <div className="agent-notebook">
-    <section className="agent-scene agent-scene-intro" aria-labelledby="agent-act-one">
+export function AgentAttributionNotebook({ acts }: { acts: Act[] }) {
+  if (acts.length !== 5 || acts[4]?.kind !== "question") throw new Error("Attribution notebook record changed");
+  const notes = (index: number) => <FieldNotes label="THE RECORDED ARGUMENT"><Acts acts={[acts[index]]} /></FieldNotes>;
+  return <NotebookFieldNotes><div className="agent-notebook">
+    <section id="act-1" className="agent-scene agent-scene-intro" aria-label="What happened">
       <span className="record-voice">01 / WHAT HAPPENED</span>
       <div className="agent-three-act">
-        <p id="agent-act-one">You tell the agent<br /><em>not to add something.</em></p>
-        <p>It adds it.</p>
-        <p>Your CI<br /><em>refuses it.</em></p>
+        <Statement text="You tell the agent" continuation="not to add something." presentation="room" />
+        <Statement text="It adds it." presentation="room" />
+        <Statement text="Your CI" continuation="refuses it." presentation="room" />
       </div>
       <p className="agent-fact-note">CI cannot edit an immutable commit in place. The required check blocks the pull request until the metadata is rewritten.</p>
+      {notes(0)}
     </section>
 
-    <section className="agent-scene" aria-labelledby="agent-authority-title">
+    <section id="act-2" className="agent-scene" aria-labelledby="agent-authority-title">
       <div className="agent-section-heading"><span className="record-voice">02 / THE AUTHORITY CHAIN</span><h2 id="agent-authority-title">Who<br /><em>decides?</em></h2></div>
       <div className="agent-authority-layout">
         <div className="agent-authority-chain">
@@ -68,9 +76,10 @@ export function AgentAttributionNotebook() {
         <blockquote>The strange part isn’t the trailer.<br /><em>It’s which instruction won.</em></blockquote>
       </div>
       <p className="agent-verdict">Authority resolved at the last possible boundary.</p>
+      {notes(1)}
     </section>
 
-    <section className="agent-scene" aria-labelledby="agent-correction-title">
+    <section id="act-3" className="agent-scene" aria-labelledby="agent-correction-title">
       <div className="agent-section-heading"><span className="record-voice">03 / THE CORRECTION</span><h2 id="agent-correction-title">A policy,<br /><em>made executable.</em></h2></div>
       <figure className="agent-machine">
         <div className="agent-machine-head"><span className="record-voice">LARQL / REQUIRED PULL-REQUEST CHECK</span><strong>.github/workflows/<br />commit-messages.yml</strong><span className="record-voice">GITHUB API · NO CHECKOUT<br />TIMEOUT / 2 MINUTES</span></div>
@@ -84,9 +93,10 @@ export function AgentAttributionNotebook() {
         <span aria-hidden="true">→</span>
         <div><span className="record-voice">REWRITE / CLEAN</span><code>Signed-off-by: Chris Hay</code><strong>0 markers found</strong></div>
       </div>
+      {notes(2)}
     </section>
 
-    <section className="agent-scene" aria-labelledby="agent-types-title">
+    <section id="act-4" className="agent-scene" aria-labelledby="agent-types-title">
       <div className="agent-section-heading"><span className="record-voice">04 / THE WRONG TYPE</span><h2 id="agent-types-title">Assistance and authorship<br /><em>are different types.</em></h2></div>
       <div className="agent-types">
         <div data-type="wrong"><span className="record-voice">ONE FIELD DOING TWO JOBS</span><pre>{`commit {
@@ -101,12 +111,14 @@ export function AgentAttributionNotebook() {
       </div>
       <p className="agent-thought">We have sophisticated agents and surprisingly primitive vocabulary for authority and authorship.</p>
       <p className="agent-type-note">Not a proposed Git schema. A distinction the existing schema cannot express cleanly.</p>
+      {notes(3)}
     </section>
 
     <section className="agent-ending" aria-label="End of note">
       <ErasingTrailer compact />
     </section>
-  </div>;
+    <div className="notebook-open-question"><Acts acts={[acts[4]]} anchored offset={4} /></div>
+  </div></NotebookFieldNotes>;
 }
 
 export function AgentAttributionCard() {

@@ -28,7 +28,7 @@ export function Acts({ acts, anchored = false, offset = 0, priority = false, sta
       }
       case "evidence": return <section key={i}>{act.items.map((item,j) => isHauseStatus(item.status) ? <Evidence key={j} items={[{ ...item, status: item.status }]}/> : <div className="domain-act" key={j}><p className="record-voice">{item.status}</p><h3>{item.label}</h3><p>{item.detail}</p></div>)}</section>;
       case "refusal": return staticRefusals ? <NotebookRefusal key={i} {...act}/> : <Refusal key={i} {...act}/>;
-      case "comparison": return <div className="comparison-wrap" key={i}><Comparison kicker="ONE OBJECT · TWO INTERPRETATIONS" {...act}/></div>;
+      case "comparison": return <div className="comparison-wrap" key={i}><Comparison kicker="ONE OBJECT · TWO INTERPRETATIONS" {...act} panels={staticRefusals ? { left: <ul className="notebook-reading-list">{act.left.properties.map(text => <li key={text}><p>{text}</p></li>)}</ul>, right: <ul className="notebook-reading-list">{act.right.properties.map(text => <li key={text}><p>{text}</p></li>)}</ul> } : undefined}/></div>;
       case "film": {
         if ("media" in act) return <Media key={i} id={act.media} caption priority={priority}/>;
         const video = getVideo(act.youtubeId);

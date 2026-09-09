@@ -8,6 +8,7 @@ import { Comparison } from "@chrishayuk/hause/components/forms/Comparison";
 import { Claim } from "@chrishayuk/hause/components/forms/Claim";
 import { Evidence } from "@chrishayuk/hause/components/forms/Evidence";
 import { Question } from "@chrishayuk/hause/components/forms/Question";
+import { FieldNotes as HauseFieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { ExhibitionEntrance as RoomEntrance, ReferenceStudies as HauseReferenceStudies, UniformGrid, ReleasedActs, ArchiveExhibit, ReadingRooms, GrammarComparison } from "@chrishayuk/hause/components/exhibition/Exhibition";
 
 function RoomStatement({ act, index }: { act: Act; index: number }) {
@@ -17,7 +18,7 @@ function RoomStatement({ act, index }: { act: Act; index: number }) {
 }
 
 function FieldNotes({ acts, index, label = "FIELD NOTES" }: { acts: Act[]; index: number; label?: string }) {
-  return <details className="authority-notes exhibition-field-notes"><summary className="record-voice">{label} <span>READ +</span></summary><Acts acts={[acts[index]]} anchored offset={index} staticRefusals /></details>;
+  return <HauseFieldNotes className="authority-notes exhibition-field-notes" label={label} detail="READ +"><Acts acts={[acts[index]]} anchored offset={index} staticRefusals /></HauseFieldNotes>;
 }
 
 function ReferenceStudies() {
@@ -106,7 +107,7 @@ export function ExhibitionNotebook({ acts }: { acts: Act[] }) {
     <RoomEntrance number="05" title="THE PERFORMANCE" detail="The space between two states has meaning." />
     <StagedTransition from="Claim." to="Evidence." kicker="ONE CHANGE / THREE AUTHORED BEATS" score={[{ label: "Exit.", description: "The claim leaves." }, { label: "Hold.", description: "A beat of empty space." }, { label: "Enter.", description: "The evidence arrives." }]} caption="The empty beat says that the first state has ended." />
     <section id="act-17">
-      <details className="authority-notes exhibition-field-notes"><summary className="record-voice">MOTION AS EXPLANATION <span>READ +</span></summary><Acts acts={[{ ...performance, text: motion, references: performance.references?.slice(0, 1) }]} /></details>
+      <HauseFieldNotes className="authority-notes exhibition-field-notes" label="MOTION AS EXPLANATION" detail="READ +"><Acts acts={[{ ...performance, text: motion, references: performance.references?.slice(0, 1) }]} /></HauseFieldNotes>
       <div className="exhibition-act-question"><Acts acts={[{ ...performance, label: "DISCOVERED THROUGH MAKING", text: discovery, references: performance.references?.slice(1) }]} /></div>
     </section>
     <section className="exhibition-final-question"><p className="record-voice">THE QUESTION CHANGED</p><span>How should I stage this idea?</span><b aria-hidden="true">↓</b><Acts acts={[acts[17]]} anchored offset={17} /></section>

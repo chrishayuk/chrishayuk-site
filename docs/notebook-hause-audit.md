@@ -1,5 +1,35 @@
 # Notebook / HAUSE audit — 9 September 2026
 
+## Implemented after the cinematic review
+
+The audit below describes the earlier state. The subsequent visual pass now:
+
+| Entry | Improvement |
+| --- | --- |
+| N-STATE | Distinct rooms for the intervention, measured result, later branch and open persistence question; authored Comparison panels and one still Refusal. |
+| N-ADDRESS | Seven-stage reading journey, six-fact table, calculation sequence, scoped probe/router/write evidence; original qualifications in citable field notes. |
+| N-ATTRIBUTION | Restored H1 and all five graph anchors, exact record text in field notes, actual closing question, HAUSE Statement and coordinated TextCorrection. Correction now accurately says CI requires a rewrite, not that CI edits the commit. |
+| N-MAP | Shared StudyRoom and StudySequence replace local presentation scaffolding; dark intervention/coordinate rooms and a contrasting document-to-authority turn. |
+| N-AUTHORITY | A distinct dark source-preservation chapter, shared FieldNotes, static Refusal and native comparison readings. Original evidence matrices retained. |
+| N-ADDRESS-BUILD | Existing visual experiments retained; supporting record moved to shared FieldNotes. |
+| N-CONTEXT / N-OPERATOR | Compact proposition rooms and one explanatory distinction; explicitly open, without inventing an experiment. |
+
+HAUSE source contribution: `7532558ee63b4a85741b0a1a2d4c2da980141fa2`.
+See `vendor/hause/STUDIES.md`. The base vendor revision remains unchanged; the
+eight contributed files match the authoritative source contribution.
+
+Browser checks covered all eight entries at 320, 390, 820, 1440 and 1920px,
+including opened field notes, one H1 and all 99 act destinations. Keyboard
+comparisons retain stage height with and without JavaScript. TextCorrection was
+checked for coordinated pause/replay and reduced-motion resting state. The
+research records, source URLs, experiment values and film starts were not edited.
+
+Still separate work: authority matrix consolidation with EvidenceTable, the
+publication-local summary capability, and any future domain-specific instrument
+extraction. Those are not claimed as completed by this presentation pass.
+
+## Original audit
+
 Reviewed all eight existing public Notebook entries in source and in the local
 browser at 1440px and 390px, with reduced motion. This is an audit, not a claim
 that the older entries have all been migrated. No older article was rewritten.

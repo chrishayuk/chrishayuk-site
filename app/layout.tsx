@@ -14,6 +14,7 @@ import { SITE, socials } from "@/lib/records";
 import "./globals.css";
 import "@chrishayuk/hause/exhibition.css";
 import "./notebook-visuals.css";
+import "./notebook-studies.css";
 import "./address-build.css";
 import "./social-editions.css";
 const display = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], display: "swap" });

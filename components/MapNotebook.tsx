@@ -5,6 +5,8 @@ import { actAnchor } from "@/lib/record-knowledge";
 import { Acts } from "./Acts";
 import { Media } from "./Media";
 import { NotebookFieldNotes } from "./NotebookFieldNotes";
+import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
+import { StudyRoom, StudySequence } from "@chrishayuk/hause/components/exhibition/Study";
 function Flow({ steps }: {
     steps: {
         label: string;
@@ -12,7 +14,7 @@ function Flow({ steps }: {
         detail?: string;
     }[];
 }) {
-    return <div className="notebook-flow">{steps.map((step, i) => <div key={step.label}><span className="record-voice">{step.label}</span><strong>{step.value}</strong>{step.detail && <small>{step.detail}</small>}{i < steps.length - 1 && <span className="notebook-flow-arrow" aria-hidden="true">→</span>}</div>)}</div>;
+    return <StudySequence label="AN EXPLANATORY SEQUENCE" steps={steps} />;
 }
 function LayerJourney({ label, answer }: {
     label: string;
@@ -119,12 +121,12 @@ export function MapNotebook({ acts }: {
             const visual = act.kind === "observation" ? visualFor(act.label || "") : undefined;
             if (!visual)
                 return <Acts staticRefusals key={offset} acts={[act]} anchored offset={offset}/>;
-            return <section className="map-visual-section" id={actAnchor(offset)} key={offset}>
-      <span className="record-voice map-section-label">{act.kind === "observation" && act.label}</span>
-      <h2>{visual.title}</h2>
+            const label = act.kind === "observation" ? act.label || "" : "";
+            const tone = label.startsWith("04 /") || label.startsWith("07 /") ? "dark" : label === "AND THE 370,000-TOKEN DOCUMENT?" ? "accent" : "paper";
+            return <div className="map-visual-section map-staged-section" key={offset}><StudyRoom id={actAnchor(offset)} label={label} title={visual.title} tone={tone}>
       <div className="map-evidence-object">{visual.figure}</div>
       {visual.boundary && <p className="notebook-boundary">{visual.boundary}</p>}
-      <details className="authority-notes"><summary className="record-voice">FIELD NOTES <span>EXPLANATION & SOURCES +</span></summary><Acts staticRefusals acts={[act]}/></details>
-    </section>;
+      <FieldNotes><Acts staticRefusals acts={[act]}/></FieldNotes>
+    </StudyRoom></div>;
         })}</NotebookFieldNotes>;
 }

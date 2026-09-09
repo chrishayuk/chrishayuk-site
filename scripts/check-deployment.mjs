@@ -84,6 +84,20 @@ assert.match(exhibition.body, /compose attention through space and time/);
 assert.match(exhibition.body, /id="source-10"/);
 assert.ok(graph.nodes.some(n => n.id === "N-EXHIBITION" && n.url === `https://chrishayuk.com${exhibitionPath}`));
 assert.ok(sitemap.body.includes(exhibitionPath));
+for (const [slug, count] of [["what-has-to-survive",9],["reading-by-address",23],["my-ci-has-to-undo-my-coding-agent",5],["what-is-the-map",23],["which-source-wins",28],["the-address-is-built-through-depth",6],["context-should-be-abundant",3],["the-operator-and-the-model",2]]) {
+  const note = await request(`/notebook/${slug}`);
+  assert.equal(note.status,200,slug);
+  assert.equal((note.body.match(/<h1[\s>]/g)||[]).length,1,`${slug}: one H1`);
+  for(let act=1;act<=count;act++) assert.equal(note.body.split(`id="act-${act}"`).length-1,1,`${slug}: act-${act}`);
+  assert.doesNotMatch(note.body,/class="agent-erasure/,`${slug}: no independent erasure`);
+}
+const stateStudy = await request("/notebook/what-has-to-survive");
+assert.match(stateStudy.body,/hause-study-measures/);
+assert.match(stateStudy.body,/hause-refusal-still/);
+assert.match(stateStudy.body,/exhibition-comparison-panels/);
+const addressStudy = await request("/notebook/reading-by-address");
+assert.match(addressStudy.body,/hause-study-sequence/);
+assert.match(addressStudy.body,/Cross-relation/);
 assert.equal(graph.coverage.films, 241);
 assert.equal(graph.nodes.find(n=>n.id==="HOUSE-SYSTEMS").url,"https://chrishayuk.com/systems");
 assert.equal(graph.nodes.find(n=>n.id==="CATALOGUE-RECORD").url,"https://chrishayuk.com/record");
@@ -218,7 +232,7 @@ for(let act=1;act<=28;act++) assert.equal(authority.body.split(`id="act-${act}"`
 assert.match(authority.body, /authority-scene/);
 assert.match(authority.body, /authority-matrix/);
 assert.match(authority.body, /authority-walk-layouts/);
-assert.match(authority.body, /notebook-refusal/);
+assert.match(authority.body, /hause-refusal-still/);
 assert.doesNotMatch(authority.body, /three tiers, not two —|authority is not deletion —|two instrument rules earned the hard way —/);
 for(const path of ["/ideas", "/record?q=Which%20source%20wins"]) {
   const listing=await request(path);
