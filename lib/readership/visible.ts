@@ -14,12 +14,18 @@ import { allVideos, videoPath } from "../youtube.ts";
  * It follows visibility, not publication. Unlisted previews are absent
  * for the same reason they are absent from the sitemap, the feeds and
  * the archive: naming one here would publish it.
+ *
+ * /machines is named here and deliberately not in the sitemap. It is
+ * advertised to machines through /llms.txt rather than to indexers
+ * through the canonical surface, which is what makes the question it
+ * exists to ask — how a machine visitor found it — answerable from
+ * these counters at all.
  */
 const MACHINE_DOCUMENTS = [
  "/robots.txt", "/sitemap.xml", "/follow.json", "/feed.json", "/rss.xml",
  "/record/feed.xml", "/record/feed.json", "/notebook/feed.xml",
  "/api/records", "/api/record", "/api/graph", "/api/search", "/api/citations", "/api/concepts", "/api/social", "/api/share", "/api/readership",
- "/llms.txt", "/readership",
+ "/llms.txt", "/readership", "/machines",
 ];
 
 let cache: ReadonlySet<string> | null = null;
