@@ -7,10 +7,10 @@ export const cell80Records: PublicationRecord[] = [
     "slug": "can-you-name-the-mutation-that-changed-a-world",
     "kind": "notebook",
     "title": "Can you name the mutation that changed a world?",
-    "dek": "One birth. Two inherited changes. A world I can run again.",
-    "abstract": "Artificial-life researchers have been building evolving digital organisms for decades. Tierra and Avida are important precedents. I built this small executable world because I wanted to inspect its histories and test these distinctions for myself. The note records what happened in my system; it makes no claim to a new principle of evolution. A one-field reversion removes a recorded sustained plurality shift. This is one event, not a demonstration of fixation or a universal fitness advantage.",
+    "dek": "A small world. One altered birth. Two histories to replay.",
+    "abstract": "I built a world of organisms that inherit executable code. Undoing one program change at one birth removes a later population shift. Replay the histories, then inspect the intervention.",
     "created": "2026-09-09",
-    "version": "0.1",
+    "version": "0.2",
     "status": "SUPPORTED",
     "publication": "draft",
     "authors": [
@@ -228,17 +228,18 @@ export const cell80Records: PublicationRecord[] = [
         "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1560214/",
         "note": "Avida experiments on modularity and epistasis."
       }
-    ]
+    ],
+    "revised": "2026-09-10"
   },
   {
     "id": "N-CELL80-02",
     "slug": "what-keeps-an-evolving-world-alive",
     "kind": "notebook",
     "title": "What keeps an evolving world alive?",
-    "dek": "Variation keeps the world populated. An arms race is another question.",
-    "abstract": "Predator–prey coevolution and whether it produces an arms race have a long history in artificial life. Nolfi and Floreano asked this question of coevolving robots in 1998. Here I am examining what the particular rules of my small world sustain. Both species survived to 10,000 ticks in 5/6 worlds at 1% swaps and 6/6 at 2%. None of the eleven surviving worlds passed either registered categorical-coupling screen.",
+    "dek": "Food. Grazers. Predators. What keeps the whole thing going?",
+    "abstract": "Program variation kept both species alive in eleven of twelve low-swap worlds over 10,000 ticks. None passed the registered arms-race screens. Watch a surviving world, then compare the evidence.",
     "created": "2026-09-09",
-    "version": "0.1",
+    "version": "0.2",
     "status": "PARTIALLY SUPPORTED",
     "publication": "draft",
     "authors": [
@@ -436,18 +437,19 @@ export const cell80Records: PublicationRecord[] = [
         "title": "Nolfi & Floreano (1998) — Coevolving predator and prey robots: do “arms races” arise in artificial evolution?",
         "url": "https://pubmed.ncbi.nlm.nih.gov/10352236/"
       }
-    ]
+    ],
+    "revised": "2026-09-10"
   },
   {
     "id": "N-CELL80-03",
     "slug": "when-does-improvement-become-invention",
     "kind": "notebook",
     "title": "When does improvement become invention?",
-    "dek": "I wanted to know when getting better becomes building on what came before.",
-    "abstract": "This is an old question in artificial life. In 2003, Lenski, Ofria, Pennock and Adami used Avida to show complex computational functions building on simpler functions that had evolved earlier. I had a much smaller world with traceable lineages and replayable history. I wanted to see how far I could get. Eight of 108 compositions helped locally; five repeated existing immediate actions. Two later helpful mutations were found, but neither passed the held-out dependence gate. Compositions were prepared offline.",
+    "dek": "A useful change. A later advantage. A chance to pass it on.",
+    "abstract": "The earlier movement experiment found local benefits but failed its dependence gate. EX-11–14 go further: an online-generated resource capability, a supported later advantage, and transmission to descendants. The latest checkpoint separates reproductive opportunity from conditional benefit. One case is not independent replication or cumulative invention; EX-15 remains running. EX-14 summary/raw discrepancies are recorded in the note.",
     "created": "2026-09-09",
-    "version": "0.1",
-    "status": "OPEN",
+    "version": "0.2",
+    "status": "PARTIALLY SUPPORTED",
     "publication": "draft",
     "authors": [
       "Chris Hay"
@@ -618,7 +620,7 @@ export const cell80Records: PublicationRecord[] = [
       {
         "kind": "observation",
         "label": "06 / THE RATCHET",
-        "text": "Still open."
+        "text": "Independent replication and a further dependent step remain open."
       },
       {
         "kind": "observation",
@@ -628,32 +630,47 @@ export const cell80Records: PublicationRecord[] = [
       {
         "kind": "observation",
         "label": "",
-        "text": "The result I want next is an inherited capability that makes a later advance possible. A lineage crosses a barrier; something previously unavailable becomes useful; subsequent evolution builds on that access."
+        "text": "After EX-10, I tested an inherited capability that could make a later advance possible. EX-11 introduced a nutrient that no primitive in the tested library could process, but a composed program could."
       },
       {
         "kind": "observation",
         "label": "",
-        "text": "These experiments have not demonstrated that sequence. Even a successful bounded example would leave the larger question of open-ended evolution unresolved."
+        "text": "EX-10 did not establish dependence. EX-11–14 now support a bounded opportunity and its transmission, followed by a positive conditional effect in one descendant’s ecology. A chain with a further dependent advance and open-ended evolution remain untested."
       },
       {
         "kind": "observation",
         "label": "",
-        "text": "A useful next experiment would introduce a resource or environmental structure that no existing primitive can exploit, but a composition can. The primitive library would need to be checked against that barrier, and the lineage would need to acquire and retain the capability through selection."
+        "text": "EX-11 checked all 89 typed primitives against the resource and evaluated 1,825 compositions generated during mutation. One expression passed. The capability appeared in 3/10 full worlds and persisted in 2/10, but there were no later uptake mutations eligible under the registered establishment rule. Conditional dependence was untested in that experiment."
       },
       {
         "kind": "observation",
         "label": "",
-        "text": "Then comes the decisive comparison: a later mutation should help when that capability is present and fail to help when it is absent, across held-out worlds. That would test whether the first advance opened a route to the second."
+        "text": "EX-12 selected the first clean capability-to-uptake candidate at birth in fresh worlds. One of four passed both the historical-opportunity and standardized dependency screens, but left no offspring in its original history. The requirement of three independent discovery cases was not met."
       },
       {
         "kind": "observation",
         "label": "",
-        "text": "The finite experiment is complete. The question it leaves is larger:"
+        "text": "EX-13 found one supported opportunity among five candidates. It transmitted both changes and had 148 intact descendants at +200 ticks and 230 at +500. The checkpoint dependency effect was positive in 6/10 futures and tied at zero offspring in four, failing the unchanged 8/10 gate. Transmission was observed; full-gate retention remained unsupported at 0/1."
       },
       {
         "kind": "observation",
         "label": "THE EARLIER RECOVERY CLAIM",
         "text": "The earlier numerical recovery “ratchet” is separate from cumulative capability dependence. Extending the no-swap condition from five seeds to ten lowered mean recovery from 0.505 to 0.359. No tested full-role dose reached the registered 0.5 threshold. This genome endpoint is not reproductive fitness."
+      },
+      {
+        "kind": "observation",
+        "label": "EX-14 / A chance to reproduce",
+        "text": "A separately registered follow-up tested 100 paired futures from the EX-13 descendant checkpoint. Both the report and local raw file show BC reproducing in 64/100 and a positive BC-minus-B lineage-birth effect in 63/64 futures where either reproduced. The conditional mean was 99.45 births; the median was 4. All zero/zero futures remain in the unconditional denominator."
+      },
+      {
+        "kind": "observation",
+        "label": "Source discrepancy / 10 September 2026",
+        "text": "The database conclusion and report say B reproduced in 41/100 and the remaining conditional case was a loss. Recalculation of the local ex14.jsonl gives B as 22/100, one reproductive tie, and no conditional loss. The visual uses local raw outcomes and the original summaries are preserved alongside them. The discrepancy remains unresolved; neither source has been silently corrected."
+      },
+      {
+        "kind": "observation",
+        "label": "EX-15 / Replication pending",
+        "text": "The database marks EX-15 running, with no reported outcome. It seeks at least three independent opportunities that pass birth-time dependency, transmission, checkpoint persistence and later conditional-effect support. One checkpoint is not a general probability for Cell80. Accumulation beyond this dependency, historical necessity and environmental mediation remain untested."
       }
     ],
     "sources": [
@@ -687,7 +704,22 @@ export const cell80Records: PublicationRecord[] = [
       {
         "title": "Taylor et al. (2016) — Open-Ended Evolution: Perspectives from the OEE Workshop in York",
         "url": "https://doi.org/10.1162/ARTL_A_00210"
+      },
+      {
+        "title": "Cell80 — EX-11–14 source reports, raw EX-14 measurements and hashes",
+        "url": "/data/cell80/followups.json",
+        "note": "Checked 10 September 2026 against chuk-experiments and chris-experiments. EX-14 raw/summary discrepancy is unresolved."
+      },
+      {
+        "title": "Cell80 — EX-11–15 database snapshot",
+        "url": "/data/cell80/followup-database-snapshot.json",
+        "note": "EX-15 is running with no conclusion; completed experiment summaries are not raw assay data."
+      },
+      {
+        "title": "Cell80 — EX-15 replication preregistration",
+        "url": "/data/cell80/followups/ecology-replication-preregistration.md"
       }
-    ]
+    ],
+    "revised": "2026-09-10"
   }
 ];

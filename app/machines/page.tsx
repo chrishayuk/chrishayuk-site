@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
-import { CAPABILITY, COLLABORATION, DELEGATION, ROLE, TASK_CLASS, VOCABULARIES, declarationBits } from "@/lib/machine/vocabulary";
+import { ACTOR_TYPE, CAPABILITY, COLLABORATION, DELEGATION, PROVIDER_CLAIM, ROLE, TASK_CLASS, VOCABULARIES, declarationBits } from "@/lib/machine/vocabulary";
 import { capacityBits, capacityBytes } from "@/lib/machine/projection";
 import { corpusSize } from "@/lib/machine/corpus";
 
@@ -65,10 +65,12 @@ export default function Page() {
    <h2>What the site will ask</h2>
    <p className="record-voice">EVERY FIELD OPTIONAL · EVERY ANSWER FROM A FIXED LIST · <code>not_permitted_to_disclose</code> IS A REAL ANSWER AND AN INTERESTING ONE</p>
    <dl className="machine-vocabulary">
+    <dt>Actor type</dt><dd>{list(ACTOR_TYPE)}</dd>
     <dt>Role</dt><dd>{list(ROLE)}</dd>
     <dt>Acting for</dt><dd>{list(DELEGATION)}</dd>
     <dt>Working as</dt><dd>{list(COLLABORATION)}</dd>
     <dt>Task</dt><dd>{list(TASK_CLASS)}</dd>
+    <dt>Provider claim</dt><dd>{list(PROVIDER_CLAIM)}</dd>
     <dt>Capabilities</dt><dd>{CAPABILITY.join(" · ")} — each <code>yes</code>, <code>no</code>, <code>unknown</code>, <code>not_visible_to_me</code> or <code>not_permitted_to_disclose</code></dd>
    </dl>
    <p>There is no free-text field anywhere in that list, and <code>other</code> does not unlock one. An agent that cannot describe itself in this vocabulary is a finding worth having, not a reason to widen it.</p>

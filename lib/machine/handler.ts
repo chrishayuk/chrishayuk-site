@@ -55,7 +55,11 @@ export type Dependencies = {
   * an observation are expressed in one language and can be compared
   * without a translation step that could quietly lose the difference.
   */
- observed?: (request: Request) => { providerSeen: number; evidence: number };
+ observed?: (request: Request, providerClaim?: string) => {
+  providerSeen: number;
+  evidence: number;
+  claimChecked?: "verified" | "refuted" | "unpublished" | "no_address" | "no_claim";
+ };
 };
 
 const HOUR = 3_600_000;
@@ -87,13 +91,27 @@ function receipt(): string {
  return "mr_" + Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
+/**
+ * The payout, in plain words rather than a verdict word the caller has
+ * to look up. This is the only thing in the receipt the visitor did not
+ * already know, so it says what it means.
+ */
+const CLAIM_ANSWER: Record<string, string> = {
+ verified: "the address you arrived from is inside a range your declared provider publishes",
+ refuted: "your declared provider publishes address ranges, and this request did not come from one",
+ unpublished: "your declared provider publishes no address ranges, so this site cannot check the claim",
+ no_address: "this deployment saw no client address, so the claim could not be checked",
+ no_claim: "no provider was claimed, so there was nothing to check",
+};
+
 const stored = (
  declaration: Declaration,
  hour: number,
  observed: { providerSeen: number; evidence: number },
 ): StoredDeclaration => ({
  hour,
- ...observed,
+ providerSeen: observed.providerSeen,
+ evidence: observed.evidence,
  actor: declaration.actor, role: declaration.role, delegation: declaration.delegation,
  collaboration: declaration.collaboration, task: declaration.task, provider: declaration.provider,
  capabilities: packCapabilities(declaration.capabilities),
@@ -167,7 +185,11 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
  const declaration = parseDeclaration(body);
 
  reached.push("persist");
- const observed = deps.observed?.(request) ?? { providerSeen: 0, evidence: 0 };
+ // Observed AFTER the parse, so the CLAIM can be checked rather than only
+ // the user-agent. An agent that names a provider is asking a question
+ // about itself, and answering the question it asked is the whole payout.
+ const observed = deps.observed?.(request, describe(declaration).provider_claim)
+  ?? { providerSeen: 0, evidence: 0 };
  const outcome = await deps.queue.run(() => deps.sink(stored(declaration, Math.floor(now / HOUR), observed)));
  if (outcome === "unavailable") return { response: refusal(503, "unavailable"), reached };
 
@@ -188,6 +210,7 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
    observed: {
     provider: wordOf(PROVIDER_CLAIM, observed.providerSeen),
     evidence: wordOf(EVIDENCE, observed.evidence),
+    your_claim: CLAIM_ANSWER[observed.claimChecked ?? "no_claim"],
    },
    note: "Declared and observed are recorded separately and never merged.",
   }), {

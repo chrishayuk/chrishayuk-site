@@ -1,6 +1,34 @@
 /* Cell80 supplies evidence and instruments; HAUSE owns the reading rooms. */
 .cell80-record .record-body{max-width:1400px}
 .cell80-record .record-header h1{max-width:15ch;text-wrap:balance}
+.cell80-record .record-header{padding-top:32px;padding-bottom:16px}
+.cell80-record .breadcrumbs{margin-bottom:12px}
+.cell80-record .cell80-series-marker{margin:8px 0 20px;align-items:center}
+.cell80-record .record-header h1{font-size:clamp(42px,5.8vw,82px);max-width:24ch;margin-bottom:18px}
+.cell80-record .record-header .dek{font-size:clamp(17px,1.8vw,22px);max-width:55ch}
+.cell80-record .record-bar{padding-top:14px;font-size:9px}
+.cell80-notebook .cell80-entry-nav{margin-bottom:18px;padding:4px 0;font-size:9px}
+.cell80-notebook #cell80-study{margin-top:0;padding-top:30px}
+.cell80-notebook #cell80-study>header{display:grid;grid-template-columns:1fr 1fr;gap:12px 36px;margin-bottom:26px;align-items:end}
+.cell80-notebook #cell80-study>header>.exhibition-label{grid-column:1/-1;margin-bottom:4px}
+.cell80-notebook #cell80-study>header>h2{font-size:clamp(32px,4vw,54px)}
+.cell80-notebook #cell80-study>header>p{font-size:16px;line-height:1.6;margin:0;max-width:44ch}
+.cell80-realization>figcaption{color:var(--muted);margin-bottom:24px}
+.cell80-realization-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,70px);align-items:center}
+.cell80-futures{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px}
+.cell80-futures>span{display:grid;place-items:center;aspect-ratio:1;border:1px solid var(--rule);font:14px var(--font-geist-mono);color:var(--muted)}
+.cell80-futures [data-outcome=helpful]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.cell80-futures [data-outcome=tied]{border-color:var(--accent);color:var(--accent)}
+.cell80-realization-result>strong{font:clamp(70px,10vw,140px)/1 var(--font-fraunces);letter-spacing:-.06em;color:var(--accent)}
+.cell80-realization-result>strong small{font-size:.45em;color:var(--muted)}
+.cell80-realization-result>p{font-size:clamp(17px,2vw,24px);line-height:1.5;margin-top:20px;max-width:30ch}
+.cell80-realization-result>p.cell80-caption{font-size:13px}
+.cell80-realization-arms{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.cell80-realization-arms>div{border-top:1px solid var(--rule);padding-top:16px}
+.cell80-realization-arms dt{font:11px var(--font-geist-mono);margin-bottom:16px}
+.cell80-realization-arms dd{font:32px var(--font-fraunces);margin:0}
+.cell80-realization-arms small{display:block;font:12px/1.6 var(--font-inter);color:var(--muted)}
+@media(max-width:700px){.cell80-notebook #cell80-study>header{grid-template-columns:1fr;gap:16px}.cell80-realization-layout{grid-template-columns:1fr}.cell80-realization-result{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}.cell80-realization-result>p{margin:0}.cell80-realization-result>p.cell80-caption{grid-column:1/-1;max-width:none}.cell80-realization-arms{grid-template-columns:1fr 1fr}.cell80-record .record-bar{gap:8px 14px}.cell80-record .cell80-series-marker{gap:8px 20px}}
 .cell80-series-marker{display:flex;gap:24px;flex-wrap:wrap;margin:26px 0;color:var(--accent)}
 .cell80-series-marker a{min-height:44px;display:inline-flex;align-items:center;border-bottom:1px solid transparent}
 .cell80-series-marker a[aria-current=page]{border-color:currentColor}

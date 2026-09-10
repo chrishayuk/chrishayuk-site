@@ -722,6 +722,21 @@ C0 ends:
 first deployment exposing the MG-2 declaration treatment
 ```
 
+```text
+C0 ended / C1 start
+revision: 94f463d
+deployed: 2026-09-10T06:40:43Z
+duration: 6 hours 47 minutes
+
+condition:
+machine entry point advertised;
+declaration open at /api/machines/declaration
+
+evidence of the boundary:
+scripts/c0-treatment.mjs fails against 94f463d
+scripts/c1-treatment.mjs passes against 94f463d
+```
+
 **C0 ended at the MG-2B deployment.** It ran from 2026-09-09T23:53:17Z and contained
 **zero machine arrivals at `/machines`** — every request to it in that window was
 operator verification, and nothing but the operator read `/llms.txt` either. The

@@ -1,5 +1,6 @@
 import { classify } from "../readership/classify.ts";
 import { confidenceFor } from "../readership/store.ts";
+import { verifyProvider } from "../readership/ranges.ts";
 import { EVIDENCE, PROVIDER_CLAIM, ordinalOf } from "./vocabulary.ts";
 
 /**
@@ -19,7 +20,14 @@ import { EVIDENCE, PROVIDER_CLAIM, ordinalOf } from "./vocabulary.ts";
  * still keeps is for a deployment shape this endpoint does not have,
  * and an address a caller can choose is not evidence about the caller.
  */
-export function observedFor(request: Request): { providerSeen: number; evidence: number } {
+export type Observation = {
+ providerSeen: number;
+ evidence: number;
+ /** The claimed provider, checked against that provider's own published ranges. */
+ claimChecked: "verified" | "refuted" | "unpublished" | "no_address" | "no_claim";
+};
+
+export function observedFor(request: Request, providerClaim?: string): Observation {
  const url = new URL(request.url);
  const classification = classify({
   pathname: url.pathname,
@@ -28,8 +36,18 @@ export function observedFor(request: Request): { providerSeen: number; evidence:
   host: request.headers.get("host"),
  });
  const confidence = confidenceFor(classification, request.headers.get("fly-client-ip"));
+ const ip = request.headers.get("fly-client-ip");
+ // The question the visitor actually asked by naming a provider, rather
+ // than the one its user-agent happens to answer.
+ const claimChecked = !providerClaim || providerClaim === "unknown" || providerClaim === "not_permitted_to_disclose"
+  ? "no_claim" as const
+  : !ip
+   ? "no_address" as const
+   : verifyProvider(providerClaim, ip);
+
  return {
   providerSeen: ordinalOf(PROVIDER_CLAIM, classification.provider),
   evidence: ordinalOf(EVIDENCE, confidence),
+  claimChecked,
  };
 }

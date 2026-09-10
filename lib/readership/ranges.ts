@@ -112,6 +112,29 @@ export const rangeSnapshot = {
 export const isVerifiable = (agent: string) => byAgent.has(agent.toLowerCase());
 
 /**
+ * CHECK A CLAIMED PROVIDER, RATHER THAN A CLAIMED AGENT.
+ *
+ * `verify` answers "is this ClaudeBot where Anthropic says ClaudeBot is".
+ * A machine that fills in the guestbook does not name an agent; it names
+ * a PROVIDER. This answers the question it actually asked: is this
+ * address inside any range that provider publishes, for any of its
+ * agents?
+ *
+ * That matters because it is the one fact this site holds which the
+ * visitor may genuinely not hold about itself — and without it, an agent
+ * claiming `anthropic` from a laptop is told nothing at all.
+ */
+export function verifyProvider(provider: string, ip: string | null): Verification {
+ const name = provider.trim().toLowerCase();
+ const agents = snapshot.sources.filter(source => source.provider === name).flatMap(source => source.agents);
+ // "unpublished" must mean the provider publishes nothing — not that this
+ // deployment had no address to check. Saying the first when the second is
+ // true would be telling the visitor something false about its provider.
+ if (agents.length === 0 || !ip) return "unpublished";
+ return agents.some(agent => verify(agent, ip) === "verified") ? "verified" : "refuted";
+}
+
+/**
  * Test a declared agent against the addresses its provider publishes.
  * The address is not stored by this call or by its caller — the answer
  * is one of three words, and the address that produced it is gone.

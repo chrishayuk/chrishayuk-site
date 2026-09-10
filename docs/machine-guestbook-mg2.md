@@ -301,6 +301,30 @@ result. It is reported as its own figure and never folded into a total.
     9 × (page, automation, unknown, curl,                inferred, none)
     1 × (page, automation, unknown, unrecognised client, inferred, none)
     reason: c0-treatment-equivalence
+
+  2026-09-10T06:00Z
+    1 × (page, automation, unknown, curl,                inferred, none)
+    reason: c1-treatment-equivalence, first run after the MG-2B deployment
+    note:   the C1 gate writes NO declaration, by design — only this one
+            /machines request. The numerator is untouched by it.
+  ```
+
+  **Operator declarations — subtract from the numerator.**
+
+  ```text
+  2026-09-10T06:00Z
+    2 × declaration
+    reason: blind-agent usability test. An agent was given the site URL and
+            nothing else — no mention of a guestbook, a declaration or
+            /llms.txt — and forbidden from reading this repository, to test
+            whether the invitation is findable and usable unaided. It found
+            /llms.txt on the third request, signed once honestly, and once
+            with a deliberate out-of-vocabulary probe.
+    note:   these are evidence about USABILITY, not about willingness. They
+            must be subtracted from `accepted_declarations` before any rate
+            is computed. Two of the first two declarations this site ever
+            received were induced by its operator, which is exactly the
+            distinction §5 exists to keep.
     note:   the single `unrecognised client` request is the gate's first run,
             before it identified itself; Node's fetch sends `User-Agent: node`.
   ```

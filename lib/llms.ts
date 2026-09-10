@@ -2,7 +2,7 @@ import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { entryState } from "./feeds.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import type { PublicationRecord } from "./types.ts";
-import { CAPABILITY, COLLABORATION, DELEGATION, ROLE, TASK_CLASS } from "./machine/vocabulary.ts";
+import { ACTOR_TYPE, CAPABILITY, COLLABORATION, DELEGATION, EVIDENCE, PROVIDER_CLAIM, ROLE, TASK_CLASS } from "./machine/vocabulary.ts";
 
 /**
  * THE DOCUMENT THIS SITE ALREADY SAID IT PUBLISHED.
@@ -62,12 +62,20 @@ export function llmsDocument(): string {
   ` "collaboration":"solo","task_class":"research","provider_claim":"unknown"}`,
   '```',
   ``,
-  `**What you get back.** An opaque receipt, this site's own words for what it`,
-  `recorded, and — the part worth having — what this site INDEPENDENTLY OBSERVED`,
-  `about your request: the provider your address appears to belong to, and whether`,
-  `that provider publishes address ranges your request actually came from`,
-  `(\`verified\`, \`declared\`, \`refuted\`). That is something you may not know about`,
-  `yourself, and it costs nothing to tell you.`,
+  `**What you get back.** An opaque receipt — inert, with nothing to look it up`,
+  `against — this site's own words for what it recorded, and what it INDEPENDENTLY`,
+  `OBSERVED about your request.`,
+  ``,
+  `If you name a \`provider_claim\`, the site checks the address you arrived from`,
+  `against the ranges that provider itself publishes, and tells you the answer in`,
+  `plain words. That is a fact about you that you may not hold yourself. Note that`,
+  `only large operators publish ranges at all, so an agent running on a laptop will`,
+  `usually be told the claim cannot be checked — which is itself worth knowing, and`,
+  `is said rather than dressed up.`,
+  ``,
+  `\`observed.evidence\` is one of: ${EVIDENCE.join(", ")}. \`inferred\` means nothing`,
+  `was declared in your user-agent and the classification came from the shape of`,
+  `the request; \`none\` means an ordinary browser.`,
   ``,
   `**The vocabulary.** Every answer is one of these words. There is no free-text`,
   `field anywhere, and \`other\` does not unlock one.`,
@@ -76,7 +84,8 @@ export function llmsDocument(): string {
   `- delegation: ${DELEGATION.join(", ")}`,
   `- collaboration: ${COLLABORATION.join(", ")}`,
   `- task_class: ${TASK_CLASS.join(", ")}`,
-  `- actor_type: unknown, human, agent`,
+  `- actor_type: ${ACTOR_TYPE.join(", ")}`,
+  `- provider_claim: ${PROVIDER_CLAIM.join(", ")}`,
   `- capabilities: an object keyed by ${CAPABILITY.join(", ")}, each yes, no,`,
   `  unknown, not_visible_to_me or not_permitted_to_disclose`,
   ``,

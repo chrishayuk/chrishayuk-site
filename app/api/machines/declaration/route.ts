@@ -32,11 +32,12 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 /**
- * Anything that is not a POST is answered by the same contract the
- * handler applies, so the method refusal is one string comparison and
- * says the same thing here as it does there.
+ * POST and nothing else, deliberately.
+ *
+ * An earlier version exported GET so the refusal came from the same
+ * contract — which made Next advertise `Allow: GET, HEAD, OPTIONS, POST`
+ * while GET answered 405. A blind agent did the conventional thing,
+ * fetched the endpoint to see whether it self-described, got a 405, ran
+ * OPTIONS, was told GET was allowed, and briefly concluded it was being
+ * rate limited. Contradicting yourself is worse than saying less.
  */
-export async function GET(request: Request): Promise<Response> {
- const { response } = await handleDeclaration(request, { sink: writeDeclaration, queue, observed: observedFor });
- return response;
-}
