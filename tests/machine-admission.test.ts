@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import * as V from "../lib/machine/vocabulary.ts";
 import { LIMITS, MAX_BODY_BYTES, UNTRUSTED_SOURCE, WRITE, WriteQueue, admit, readBounded, resetLimiter, sourceOf, type Stage } from "../lib/machine/admission.ts";
 import { handleDeclaration, type StoredDeclaration } from "../lib/machine/handler.ts";
 
@@ -170,7 +171,7 @@ test("ADVERSARIAL: storage failure is a bounded 503 and does not escape this end
    deps({ sink: failing, queue }),
   );
   assert.equal(response.status, 503);
-  assert.equal(await response.text(), JSON.stringify({ error: "unavailable" }));
+  assert.deepEqual(JSON.parse(await response.text()), { error: "unavailable", see: "/api/machines/declaration" });
   assert.ok(reached.includes("persist"), "the failure happened at storage, where it should");
  }
  assert.equal(attempts, 3, "each attempt reached storage and each was contained");
@@ -241,6 +242,21 @@ test("every response is bounded, does not amplify, and echoes nothing that was s
 
  assert.equal(bigBody.length, smallBody.length, "response size must not track request size");
  assert.ok(bigBody.length < 1024, `response is ${bigBody.length} bytes`);
+
+ // Corrections can grow a response — a caller that answers every field in a
+ // language this site does not speak is told every field and every accepted
+ // word. That is bounded by the VOCABULARY, not by what arrived, so it is
+ // still not amplification; but the ceiling is asserted rather than assumed.
+ const allWrong = await handleDeclaration(post(JSON.stringify({
+  actor_type: "?", role: "?", delegation: "?", collaboration: "?",
+  task_class: "?", provider_claim: "?",
+  capabilities: Object.fromEntries(V.CAPABILITY.map(name => [name, "?"])),
+ }), { "fly-client-ip": "198.18.9.9" }), deps({ sink: s.fn }));
+ const worst = await allWrong.response.text();
+ assert.equal(allWrong.response.status, 201, "a wrong word is still a declaration, not an error");
+ assert.ok(worst.includes("corrections"), "and the caller is told which fields were not understood");
+ assert.ok(!worst.includes('"?"'), "without ever repeating what it sent");
+ assert.ok(worst.length < 4096, `worst-case response is ${worst.length} bytes`);
  assert.ok(!bigBody.includes("example.com") && !bigBody.includes("secret-payload"), "nothing submitted is echoed");
  assert.match(bigBody, /"receipt":"mr_[0-9a-f]{16}"/);
 

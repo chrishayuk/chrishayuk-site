@@ -108,6 +108,50 @@ export const describeProvenance = (declaration: Declaration): Record<V.DeclaredF
  )) as Record<V.DeclaredField, V.Provenance>;
 
 /**
+ * WHAT TO TELL A VISITOR THAT GOT IT WRONG.
+ *
+ * A word this site does not know is recorded as `unknown` and the text
+ * is discarded at the door. That is correct, and on its own it is
+ * useless to the sender: a blind agent found the behaviour only by
+ * probing with garbage and inspecting a provenance field it had to
+ * guess the meaning of.
+ *
+ * So say so. One entry per field that was answered in a language this
+ * site does not speak, naming the field and the words it accepts.
+ *
+ * OMISSION IS NOT AN ERROR and never appears here. Leaving a field out
+ * is a legitimate choice and reporting it as a correction would be
+ * nagging a visitor for declining an optional question.
+ *
+ * The submitted value is NEVER repeated back. Naming the field is this
+ * site's own word; repeating what arrived would make the endpoint an
+ * echo service, which is the one thing the response must not become.
+ */
+export type Correction = { field: V.DeclaredField; problem: "unrecognised"; accepted: readonly string[] };
+
+const VOCABULARY_FOR: Record<V.DeclaredField, V.Vocabulary> = {
+ actor_type: V.ACTOR_TYPE,
+ role: V.ROLE,
+ delegation: V.DELEGATION,
+ collaboration: V.COLLABORATION,
+ task_class: V.TASK_CLASS,
+ provider_claim: V.PROVIDER_CLAIM,
+};
+
+export const corrections = (declaration: Declaration): Correction[] =>
+ V.DECLARED_FIELD.flatMap((field, index) =>
+  declaration.provenance[index] === 2
+   ? [{ field, problem: "unrecognised" as const, accepted: VOCABULARY_FOR[field] }]
+   : []);
+
+/** The same, for the capability sub-object. */
+export const capabilityCorrections = (declaration: Declaration): { capability: V.Capability; accepted: readonly string[] }[] =>
+ V.CAPABILITY.flatMap((capability, index) =>
+  declaration.capabilityProvenance[index] === 2
+   ? [{ capability, accepted: V.CAPABILITY_VALUE }]
+   : []);
+
+/**
  * A field is a STATEMENT about the agent when it was sent and it was one
  * of our words — including `unknown`, `not_visible_to_me` and
  * `not_permitted_to_disclose`, each of which describes the boundary of

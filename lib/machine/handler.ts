@@ -1,5 +1,5 @@
 import { admit, readBounded, sourceOf, MAX_BODY_BYTES, type Facts, type Stage, type WriteQueue } from "./admission.ts";
-import { describe, describeProvenance, packCapabilities, packProvenance, parseDeclaration, type Declaration } from "./declaration.ts";
+import { capabilityCorrections, corrections, describe, describeProvenance, packCapabilities, packProvenance, parseDeclaration, type Declaration } from "./declaration.ts";
 import { EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
 
 /**
@@ -65,8 +65,17 @@ export type Dependencies = {
 const HOUR = 3_600_000;
 
 /** Fixed, small, and never built from anything the caller sent. */
+/** Where a refused caller should look. Fixed, and this site's own. */
+const CONTRACT = "/api/machines/declaration";
+
 const refusal = (status: number, error: string, retryAfterSeconds?: number) =>
- new Response(JSON.stringify(retryAfterSeconds === undefined ? { error } : { error, retry_after: retryAfterSeconds }), {
+ new Response(JSON.stringify({
+  error,
+  ...(retryAfterSeconds === undefined ? {} : { retry_after: retryAfterSeconds }),
+  // A refusal that does not say where the rules are makes the caller
+  // guess, and guessing costs it another request and us another refusal.
+  see: CONTRACT,
+ }), {
   status,
   headers: {
    "Content-Type": "application/json; charset=utf-8",
@@ -188,6 +197,8 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
  // Observed AFTER the parse, so the CLAIM can be checked rather than only
  // the user-agent. An agent that names a provider is asking a question
  // about itself, and answering the question it asked is the whole payout.
+ const fieldCorrections = corrections(declaration);
+ const capCorrections = capabilityCorrections(declaration);
  const observed = deps.observed?.(request, describe(declaration).provider_claim)
   ?? { providerSeen: 0, evidence: 0 };
  const outcome = await deps.queue.run(() => deps.sink(stored(declaration, Math.floor(now / HOUR), observed)));
@@ -207,6 +218,12 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
    receipt: receipt(),
    recorded: describe(declaration),
    provenance: describeProvenance(declaration),
+   // Told, not left to be inferred from a provenance field whose meaning
+   // a caller has to work out. Names the field and the words this site
+   // accepts; never repeats what arrived.
+   ...(fieldCorrections.length || capCorrections.length
+    ? { corrections: [...fieldCorrections, ...capCorrections] }
+    : {}),
    observed: {
     provider: wordOf(PROVIDER_CLAIM, observed.providerSeen),
     evidence: wordOf(EVIDENCE, observed.evidence),

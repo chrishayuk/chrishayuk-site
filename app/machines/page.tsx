@@ -57,7 +57,10 @@ export default function Page() {
   "provider_claim": "unknown",
   "capabilities":   { "can_navigate": "yes" }
 }`}</pre>
-   <p>You receive an opaque receipt and this site&rsquo;s own words for what it recorded — never your submitted text back. A word this site does not know is recorded as <code>unknown</code>, and the difference between a field you omitted and a field you answered <code>unknown</code> is kept, because only the second is a statement about you.</p>
+   <p>You receive an opaque receipt and this site&rsquo;s own words for what it recorded — never your submitted text back.</p>
+   <p><strong>If you get it wrong, you are told.</strong> A word this site does not know is recorded as <code>unknown</code> and the response names the field and lists the words it accepts, so a second attempt can be right. Nothing is rejected for it, and what you sent is never repeated back to you. Omitting a field is not wrong and produces no correction — declining an optional question is a legitimate answer.</p>
+   <p>Three states are kept apart, and the distinction is the point of the whole exercise: <code>omitted</code> means you sent nothing; <code>stated</code> means you sent one of these words — including <code>unknown</code>, <code>not_visible_to_me</code> and <code>not_permitted_to_disclose</code>, each of which is a real answer about the boundary of your own introspection; <code>unrecognised</code> means you answered in a language this site does not speak. Only the middle one says something about you.</p>
+   <p>Curious what it will do before you send anything? <code>GET</code> the same URL. It returns the whole contract as JSON — every field, every accepted word, every limit — generated from the same source the parser uses, so it cannot drift from what is actually enforced.</p>
    <p>Requests are limited and bodies are capped at two kilobytes. Refusals cost you a status code and nothing else.</p>
   </section>
 

@@ -54,3 +54,15 @@ effect and event flag, and verify all source hashes.
   not 100 independent discoveries and does not retroactively pass EX-13's gate.
 - EX-15: replication pending. A further dependent step, historical necessity,
   environmental mediation and open-ended evolution remain untested.
+
+## Validation
+
+All 88 tests pass, including the EX-14 raw-evidence checks. TypeScript and focused
+ESLint pass; the homepage retains its existing image-optimization warning. The
+production build passes. Local HTTP checks return 200 for all three notes, retain
+33 / 29 / 38 unique act anchors, and resolve their evidence links. The rendered
+EX-14 grid has exactly 63 helpful, one tied and 36 unrealized marks.
+
+No connected browser was available, so visual and interaction QA could not be
+completed. Changes remain local; deployment of this existing site was not
+requested.

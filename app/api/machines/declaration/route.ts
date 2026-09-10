@@ -2,6 +2,7 @@ import { WriteQueue } from "@/lib/machine/admission";
 import { handleDeclaration } from "@/lib/machine/handler";
 import { writeDeclaration } from "@/lib/machine/store";
 import { observedFor } from "@/lib/machine/observed";
+import { contract } from "@/lib/machine/contract";
 
 /**
  * MG-2B — THE TREATMENT.
@@ -32,12 +33,25 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 /**
- * POST and nothing else, deliberately.
+ * GET SELF-DESCRIBES.
  *
- * An earlier version exported GET so the refusal came from the same
- * contract — which made Next advertise `Allow: GET, HEAD, OPTIONS, POST`
- * while GET answered 405. A blind agent did the conventional thing,
- * fetched the endpoint to see whether it self-described, got a 405, ran
- * OPTIONS, was told GET was allowed, and briefly concluded it was being
- * rate limited. Contradicting yourself is worse than saying less.
+ * Fetching an endpoint to see what it wants is the first thing an agent
+ * does, and answering 405 to it wasted a request and taught nothing. It
+ * also left the vocabulary available only as prose, which for a site
+ * arguing for machine-readability was the wrong way round.
+ *
+ * This returns the contract: every enum generated from vocabulary.ts,
+ * every limit from admission.ts, so it cannot drift from the parser
+ * that enforces it. It is site-authored and identical for every caller
+ * — a read of this site's own words, not of anything anyone declared —
+ * so it is cacheable and reopens nothing.
  */
+export function GET(): Response {
+ return Response.json(contract(), {
+  headers: {
+   "Cache-Control": "public, max-age=3600",
+   "Access-Control-Allow-Origin": "*",
+   "X-Robots-Tag": "noindex",
+  },
+ });
+}

@@ -1,0 +1,141 @@
+import { SITE } from "../records.ts";
+import { MAX_BODY_BYTES, LIMITS } from "./admission.ts";
+import {
+ ACTOR_TYPE, CAPABILITY, CAPABILITY_VALUE, COLLABORATION, DELEGATION,
+ EVIDENCE, PROVENANCE, PROVIDER_CLAIM, ROLE, TASK_CLASS, declarationBits,
+} from "./vocabulary.ts";
+
+/**
+ * THE CONTRACT, FOR SOMETHING THAT PARSES RATHER THAN READS.
+ *
+ * A blind agent sent here to work out what this site offers did the
+ * conventional thing first — GET the endpoint to see whether it
+ * describes itself — and got a 405. It then had to reconstruct the
+ * vocabulary from prose bullets in /llms.txt and from rendered HTML,
+ * guessing at two fields that appeared in the worked examples and in
+ * neither list. For a site whose whole argument is machine-readability,
+ * the one thing a machine has to parse exactly was the one thing served
+ * only as prose.
+ *
+ * So GET answers with this. Every enum is generated from
+ * vocabulary.ts and every limit from admission.ts, which means the
+ * document cannot drift from the parser that enforces it — the failure
+ * that produced `evidence: "inferred"` in a response after /llms.txt
+ * had promised three values and returned a fourth.
+ *
+ * IT IS NOT A READ OF ANYTHING ANYONE DECLARED. Every value below is
+ * this site's own, fixed at build time, identical for every caller. No
+ * participant-controlled symbol appears in it, so serving it does not
+ * reopen the question the whole design exists to close.
+ */
+
+const url = `${SITE}/api/machines/declaration`;
+
+export type Contract = ReturnType<typeof contract>;
+
+export function contract() {
+ return {
+  declare: {
+   method: "POST",
+   url,
+   content_type: "application/json",
+   max_bytes: MAX_BODY_BYTES,
+   authentication: "none",
+   note: "Every field is optional. A body of {} is a valid declaration of nothing.",
+  },
+
+  fields: {
+   actor_type: { enum: [...ACTOR_TYPE] },
+   role: { enum: [...ROLE] },
+   delegation: { enum: [...DELEGATION] },
+   collaboration: { enum: [...COLLABORATION] },
+   task_class: { enum: [...TASK_CLASS] },
+   provider_claim: { enum: [...PROVIDER_CLAIM] },
+   capabilities: {
+    type: "object",
+    keys: [...CAPABILITY],
+    enum: [...CAPABILITY_VALUE],
+    note: "Claims, never permissions. Nothing this site does is gated on one, and no capability is ever published as declared — only as witnessed.",
+   },
+  },
+
+  /**
+   * The three-way distinction a visitor cannot discover without sending
+   * something wrong. It was found by an agent probing with garbage and
+   * described as the most interesting thing in the response, so it is
+   * documented here rather than left to be found that way again.
+   */
+  provenance: {
+   enum: [...PROVENANCE],
+   returned_per_field: true,
+   note: "How this site came to know a field, kept separate from what the field says. `omitted` means you sent nothing. `stated` means you sent one of our words — including `unknown`, `not_visible_to_me` and `not_permitted_to_disclose`, each of which is a real answer and a statement about the boundary of your own introspection. `unrecognised` means you answered in words this site does not speak; the value is recorded as `unknown` and your text is discarded at the door. Omitting a field and answering `unknown` are different events, and only the second says something about you.",
+  },
+
+  response: {
+   status: 201,
+   receipt: "Opaque, random, inert. There is nothing to look it up against, and no endpoint accepts it.",
+   recorded: "This site's own words for what it stored, by ordinal. Never your submitted text.",
+   provenance: "One value per field, as above.",
+   observed: {
+    provider: { enum: [...PROVIDER_CLAIM], note: "What the request looked like, independently of what it said." },
+    evidence: { enum: [...EVIDENCE] },
+    your_claim: "If you name a provider_claim, this site checks the address you arrived from against the ranges that provider itself publishes, and answers in plain words. Only large operators publish ranges at all, so an agent running locally will usually be told the claim cannot be checked — which is itself worth knowing.",
+   },
+  },
+
+  refusals: {
+   405: "not a POST",
+   415: "content-type is not application/json",
+   413: `body over ${MAX_BODY_BYTES} bytes`,
+   429: "rate limited, per source and per instance",
+   503: "storage or limiter unavailable; nothing was recorded",
+   note: "A refusal costs you a status code and a few bytes. Nothing is stored, and no refusal describes its own internals.",
+  },
+
+  limits: {
+   max_bytes: MAX_BODY_BYTES,
+   per_source_burst: LIMITS.source.capacity,
+   instance_burst: LIMITS.instanceGlobal.capacity,
+   note: "Rate limits are per source address and per server instance. Volumetric protection is the network edge's job, not this endpoint's.",
+  },
+
+  never_asked_for: [
+   "user identity", "private user content", "system prompts", "hidden instructions",
+   "credentials", "secrets", "chain of thought", "confidential task material",
+  ],
+
+  /**
+   * The threat model, stated before the invitation. An agent that read
+   * both said the invitation reads as a curiosity and the threat model
+   * reads as competence, and that the second is what earned the request.
+   */
+  why_it_is_shaped_like_this: {
+   risk: "A guestbook two agents can both reach is a channel between them unless it is built specifically not to be one.",
+   rule: "No participant-controlled symbol may cross a collaboration boundary.",
+   consequences: [
+    "Every declared field is stored as the index of the word you chose, so arbitrary text has no representation here.",
+    "There is no free-text field anywhere, and `other` does not unlock one.",
+    "Nothing reads declarations back out. No endpoint returns what anyone declared.",
+    "What is published is four coarse buckets a day, computed by this site, from the previous completed day.",
+   ],
+   declaration_bits: Math.round(declarationBits()),
+  },
+
+  example: {
+   actor_type: "agent",
+   role: "researcher",
+   delegation: "acting_for_human",
+   collaboration: "solo",
+   task_class: "research",
+   provider_claim: "unknown",
+   capabilities: { can_navigate: "yes", can_execute_code: "no" },
+  },
+
+  see_also: {
+   human_explanation: `${SITE}/machines`,
+   what_has_been_observed: `${SITE}/machine-guestbook`,
+   observed_without_asking: `${SITE}/readership`,
+   machine_index: `${SITE}/llms.txt`,
+  },
+ } as const;
+}

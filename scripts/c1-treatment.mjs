@@ -62,11 +62,23 @@ assert.equal(machines.status, 200);
 assert.match(machines.body, /\/api\/machines\/declaration/, "/machines must name the endpoint it offers");
 
 // TREATMENT — mounted, and refusing correctly, without writing anything.
+// GET self-describes. It returns this site's own contract — generated from the
+// same vocabulary the parser uses — and never anything anyone declared.
 const mounted = await send("/api/machines/declaration", { method: "GET" });
-assert.equal(mounted.status, 405, "a GET must be 405 (mounted and refusing), never 404 (absent)");
+assert.equal(mounted.status, 200, "GET must return the contract, not a refusal");
+const described = JSON.parse(await mounted.clone().text());
+assert.equal(described.declare.method, "POST");
+assert.ok(Array.isArray(described.fields.role.enum) && described.fields.role.enum.includes("verifier"));
+assert.ok(Array.isArray(described.provenance.enum) && described.provenance.enum.includes("unrecognised"),
+ "the contract must document the distinction a visitor would otherwise find by probing");
+for (const key of ["receipt", "recorded", "visit_id", "declarations"]) {
+ assert.ok(!Object.keys(described).includes(key), `the contract leaked ${key}: it must describe, never report`);
+}
 
 const wrongType = await send("/api/machines/declaration", { type: "text/plain" });
 assert.equal(wrongType.status, 415, "the content-type contract holds at the edge");
+assert.equal(JSON.parse(await wrongType.clone().text()).see, "/api/machines/declaration",
+ "a refusal must say where the rules are");
 
 // A REAL oversized body, not a lying Content-Length. Claiming a large body and
 // sending a short one makes the server wait for bytes that never arrive and
@@ -77,14 +89,14 @@ const tooLarge = await send("/api/machines/declaration", {
 });
 assert.equal(tooLarge.status, 413, "the body ceiling holds at the edge");
 
-for (const response of [mounted, wrongType, tooLarge]) {
+for (const response of [wrongType, tooLarge]) {
  const text = await response.clone().text();
  assert.ok(text.length < 120, "a refusal is a handful of bytes and cannot amplify");
 }
 
 // NO RELAY — nothing hands declarations back out.
 for (const path of [
- "/api/machines/declaration?all=1", "/api/machines/declarations",
+ "/api/machines/declarations",
  "/api/machines/guestbook", "/api/machines", "/api/machines/collaboration",
 ]) {
  const response = await get(path);
@@ -106,7 +118,7 @@ const hour = new Date().toISOString().slice(0, 13) + ":00Z";
 
 console.log(`C1 CONDITION HOLDS at ${origin}`);
 console.log("  topology unchanged: /llms.txt is still the only route to /machines");
-console.log("  declaration endpoint mounted; method, type and size contracts hold at the edge");
+console.log("  declaration endpoint mounted; GET self-describes; type and size contracts hold at the edge");
 console.log("  nothing reads declarations back out");
 console.log("");
 console.log("contamination:");

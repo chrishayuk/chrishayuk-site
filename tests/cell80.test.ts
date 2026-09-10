@@ -5,6 +5,30 @@ import { createHash } from "node:crypto";
 import { cell80, dependenceGate, factorialAt } from "../lib/cell80.ts";
 import { cell80Thread, threadPosition } from "../lib/threads.ts";
 import { getRecord, publishedRecords } from "../lib/records.ts";
+import { cell80Followups, realization } from "../lib/cell80-followups.ts";
+
+test("EX-14 visual preserves paired raw outcomes, missing reproduction and source provenance", async () => {
+  const raw = (await readFile(new URL('../public/data/cell80/followups/ex14.jsonl', import.meta.url), 'utf8'))
+    .trim().split('\n').map(line => JSON.parse(line));
+  const assays = raw.filter(row => row.type === 'assay');
+  assert.equal(assays.length, 100);
+  assert.equal(new Set(assays.map(row => row.seed)).size, 100);
+  for (const [i, row] of assays.entries()) {
+    const births = Object.fromEntries(row.values.map((value: { genotype: string; N: number }) => [value.genotype, value.N]));
+    assert.deepEqual(cell80Followups.assays[i], { seed: row.seed, births });
+    assert.equal(row.D, births.BC - births.B);
+    assert.equal(row.event, births.BC > 0 || births.B > 0);
+  }
+  assert.deepEqual(realization.arms.map(arm => arm.count), [0,22,0,64]);
+  assert.deepEqual([realization.positive, realization.tied, realization.negative, realization.unrealized], [63,1,0,36]);
+  assert.equal(realization.events + realization.unrealized, realization.total);
+  const downloaded = JSON.parse(await readFile(new URL('../public/data/cell80/followups.json', import.meta.url), 'utf8'));
+  assert.deepEqual(downloaded, cell80Followups);
+  for (const source of cell80Followups.provenance) {
+    const bytes = await readFile(new URL(`../public/data/cell80/${source.file}`, import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), source.sha256);
+  }
+});
 
 test("factorial interaction is reconstructed from all four recorded birth counts", () => {
   assert.equal(cell80.factorials.length, 40);
