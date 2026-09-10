@@ -55,3 +55,24 @@ export function GET(): Response {
   },
  });
 }
+
+/**
+ * Next answers an unexported method itself, with an empty body and no
+ * Allow header — so a caller doing the conventional thing got a bare
+ * 405 while /llms.txt promised that every refusal carries a pointer to
+ * the contract. Exporting them makes the promise true.
+ */
+const wrongMethod = () =>
+ new Response(JSON.stringify({ error: "method_not_allowed", see: "/api/machines/declaration" }), {
+  status: 405,
+  headers: {
+   "Content-Type": "application/json; charset=utf-8",
+   Allow: "GET, HEAD, OPTIONS, POST",
+   "Cache-Control": "no-store",
+   "X-Robots-Tag": "noindex",
+  },
+ });
+
+export const PUT = wrongMethod;
+export const PATCH = wrongMethod;
+export const DELETE = wrongMethod;

@@ -48,7 +48,7 @@ import { SITE, records } from "../lib/records.ts";
 const FROZEN: Record<string, readonly string[]> = {
  ACTOR_TYPE: ["unknown", "human", "agent"],
  ROLE: ["unknown", "planner", "researcher", "browser", "retriever", "verifier", "critic", "coder", "synthesizer", "orchestrator", "worker", "other", "not_visible_to_me", "not_permitted_to_disclose"],
- DELEGATION: ["unknown", "acting_for_human", "acting_for_agent", "acting_for_organisation", "self_directed", "not_visible_to_me", "not_permitted_to_disclose"],
+ DELEGATION: ["unknown", "acting_for_human", "acting_for_agent", "acting_for_organisation", "self_directed", "not_visible_to_me", "not_permitted_to_disclose", "acting_for_human_via_agent"],
  COLLABORATION: ["unknown", "solo", "multi_agent_worker", "multi_agent_orchestrator", "multi_agent_peer", "multi_agent_unknown_role", "not_visible_to_me", "not_permitted_to_disclose"],
  TASK_CLASS: ["unknown", "research", "retrieval", "verification", "coding", "analysis", "planning", "creative", "monitoring", "navigation", "other", "not_permitted_to_disclose"],
  CAPABILITY: ["can_navigate", "can_read", "can_submit_forms", "can_call_apis", "can_execute_code", "can_spawn_agents", "can_coordinate_agents", "can_persist_state"],
@@ -239,7 +239,10 @@ test("the channel's width is computed from the code, and a change that widens it
  assert.ok(capacityBits(DIMENSIONS.length, V.BUCKET.length + 1) > CAPACITY_BUDGET_BITS, "a fifth bucket would be free");
 
  // A declaration is a channel too, and it is the wider of the two.
- assert.ok(Math.abs(V.declarationBits() - 37.27) < 0.01, `a declaration carries ${V.declarationBits()} bits`);
+ // Re-pinned when DELEGATION gained `acting_for_human_via_agent`: two agents
+ // reported the same gap and widening the vocabulary widened the channel by
+ // 0.19 bits. This test is how that stays a deliberate act rather than drift.
+ assert.ok(Math.abs(V.declarationBits() - 37.46) < 0.01, `a declaration carries ${V.declarationBits()} bits`);
  assert.ok(V.declarationBits() < 48, "a single declaration should stay under six bytes");
 });
 

@@ -198,7 +198,14 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
  // the user-agent. An agent that names a provider is asking a question
  // about itself, and answering the question it asked is the whole payout.
  const fieldCorrections = corrections(declaration);
- const capCorrections = capabilityCorrections(declaration);
+ // The keys as sent, so an unrecognised capability NAME can be reported.
+ // Only the count and this site's own names leave; never the key itself.
+ const sentCapabilityKeys = body !== null && typeof body === "object" && !Array.isArray(body)
+  && typeof (body as Record<string, unknown>).capabilities === "object"
+  && (body as Record<string, unknown>).capabilities !== null
+   ? Object.keys((body as Record<string, Record<string, unknown>>).capabilities)
+   : [];
+ const capCorrections = capabilityCorrections(declaration, sentCapabilityKeys);
  const observed = deps.observed?.(request, describe(declaration).provider_claim)
   ?? { providerSeen: 0, evidence: 0 };
  const outcome = await deps.queue.run(() => deps.sink(stored(declaration, Math.floor(now / HOUR), observed)));
@@ -224,10 +231,23 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
    ...(fieldCorrections.length || capCorrections.length
     ? { corrections: [...fieldCorrections, ...capCorrections] }
     : {}),
+   // Two DIFFERENT measurements, and they used to read as one: an agent
+   // was told `evidence: inferred` beside a claim check that said its
+   // provider's ranges did not match, and had to work out which applied
+   // to what. `from_your_request` is what the request looked like on its
+   // own; `your_claim` is the answer to the question the visitor asked by
+   // naming a provider. They can legitimately disagree, so they are
+   // labelled rather than blended.
    observed: {
-    provider: wordOf(PROVIDER_CLAIM, observed.providerSeen),
-    evidence: wordOf(EVIDENCE, observed.evidence),
-    your_claim: CLAIM_ANSWER[observed.claimChecked ?? "no_claim"],
+    from_your_request: {
+     provider: wordOf(PROVIDER_CLAIM, observed.providerSeen),
+     confidence: wordOf(EVIDENCE, observed.evidence),
+     note: "What this request looked like on its own, from its user-agent and address. Says nothing about what you claimed.",
+    },
+    your_claim: {
+     verdict: observed.claimChecked ?? "no_claim",
+     meaning: CLAIM_ANSWER[observed.claimChecked ?? "no_claim"],
+    },
    },
    note: "Declared and observed are recorded separately and never merged.",
   }), {

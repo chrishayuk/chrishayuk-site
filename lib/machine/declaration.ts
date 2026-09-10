@@ -144,12 +144,33 @@ export const corrections = (declaration: Declaration): Correction[] =>
    ? [{ field, problem: "unrecognised" as const, accepted: VOCABULARY_FOR[field] }]
    : []);
 
-/** The same, for the capability sub-object. */
-export const capabilityCorrections = (declaration: Declaration): { capability: V.Capability; accepted: readonly string[] }[] =>
- V.CAPABILITY.flatMap((capability, index) =>
+/**
+ * The same, for the capability sub-object — and for its KEYS.
+ *
+ * A misspelled capability name used to vanish in silence: only bad
+ * VALUES were reported, so `can_browse_web` was dropped without a word
+ * and the sender had no way to discover it. That is the one failure an
+ * agent cannot self-correct from, which makes it the one most worth
+ * reporting.
+ *
+ * The unknown key itself is never repeated back — it is the sender's
+ * text. The site says how many were not understood and which names it
+ * knows, which is enough to fix a typo and carries none of the sender's
+ * bytes onward.
+ */
+export const capabilityCorrections = (
+ declaration: Declaration,
+ submittedKeys: readonly string[] = [],
+): ({ capability: V.Capability; accepted: readonly string[] } | { unknown_capability_keys: number; accepted_keys: readonly string[] })[] => {
+ const values = V.CAPABILITY.flatMap((capability, index) =>
   declaration.capabilityProvenance[index] === 2
    ? [{ capability, accepted: V.CAPABILITY_VALUE }]
    : []);
+ const unknown = submittedKeys.filter(key => !(V.CAPABILITY as readonly string[]).includes(key)).length;
+ return unknown > 0
+  ? [...values, { unknown_capability_keys: unknown, accepted_keys: V.CAPABILITY }]
+  : values;
+};
 
 /**
  * A field is a STATEMENT about the agent when it was sent and it was one

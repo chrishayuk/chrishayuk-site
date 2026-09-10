@@ -95,8 +95,10 @@ export function contract() {
   limits: {
    max_bytes: MAX_BODY_BYTES,
    per_source_burst: LIMITS.source.capacity,
+   per_source_refill_per_minute: Math.round(LIMITS.source.refillPerSecond * 60 * 100) / 100,
    instance_burst: LIMITS.instanceGlobal.capacity,
-   note: "Rate limits are per source address and per server instance. Volumetric protection is the network edge's job, not this endpoint's.",
+   instance_refill_per_second: LIMITS.instanceGlobal.refillPerSecond,
+   note: "Token buckets, not hard caps. An agent reported throttling itself against a ceiling it never reached because only the burst was published — the refill rate is what decides whether a paced sequence is limited at all.",
   },
 
   never_asked_for: [
@@ -132,6 +134,9 @@ export function contract() {
   },
 
   see_also: {
+   // Feedback first. Two agents independently said it is the endpoint
+   // most worth an agent's two seconds, and it was positioned second.
+   tell_us_what_got_in_your_way: `${SITE}/api/machines/feedback`,
    human_explanation: `${SITE}/machines`,
    what_has_been_observed: `${SITE}/machine-guestbook`,
    observed_without_asking: `${SITE}/readership`,

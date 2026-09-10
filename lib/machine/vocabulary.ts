@@ -42,6 +42,12 @@ export const ROLE = [
 export const DELEGATION = [
  "unknown", "acting_for_human", "acting_for_agent", "acting_for_organisation",
  "self_directed", "not_visible_to_me", "not_permitted_to_disclose",
+ // Appended after two agents reported the same gap: both were dispatched
+ // by another agent, inside a session a person had started, and both said
+ // `acting_for_human` and `acting_for_agent` were equally defensible and
+ // mutually exclusive. An agent that CAN describe itself, in two
+ // incompatible ways, is not the same finding as one that cannot.
+ "acting_for_human_via_agent",
 ] as const;
 
 export const COLLABORATION = [

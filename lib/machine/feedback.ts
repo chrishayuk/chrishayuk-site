@@ -111,6 +111,12 @@ let opening: Promise<Database | null> | null = null;
 let insert: Statement | null = null;
 
 function open(): Promise<Database | null> {
+ // A FAILED OPEN IS NOT MEMOISED. Caching the promise means a transient
+ // fault — a permissions error, a volume not yet mounted — becomes
+ // permanent for the life of the process, and the endpoint goes on
+ // answering 201 while writing nothing. That is exactly what happened:
+ // a root-owned empty file made every open fail, the null was cached,
+ // and two real reports were acknowledged and lost.
  opening ??= (async () => {
   const file = process.env.FEEDBACK_DB;
   if (!file) return null;
@@ -124,16 +130,31 @@ function open(): Promise<Database | null> {
    return db;
   } catch (error) {
    console.error("feedback: store unavailable —", (error as Error).message);
+   opening = null;
    return null;
   }
  })();
  return opening;
 }
 
+/**
+ * Configured but unreachable is an ERROR, not an absence.
+ *
+ * `FEEDBACK_DB` unset means this deployment deliberately stores nothing —
+ * local, preview, the Worker build — and writing is a no-op. `FEEDBACK_DB`
+ * SET and the store unopenable means something is wrong, and returning
+ * quietly there tells a caller its submission was recorded when it was
+ * discarded.
+ */
+const storeExpected = () => Boolean(process.env.FEEDBACK_DB);
+
 /** Throws on a real failure, so the handler's queue turns it into a 503. */
 export async function writeFeedback(record: Feedback & { hour: number }): Promise<void> {
  const db = await open();
- if (!db || !insert) return;
+ if (!db || !insert) {
+  if (storeExpected()) throw new Error("feedback store configured but unavailable");
+  return;
+ }
  insert.run(record.hour, record.friction, record.task, record.detail);
 }
 
