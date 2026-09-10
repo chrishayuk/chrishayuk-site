@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import * as V from "../lib/machine/vocabulary.ts";
 import { LIMITS, MAX_BODY_BYTES, UNTRUSTED_SOURCE, WRITE, WriteQueue, admit, readBounded, resetLimiter, sourceOf, type Stage } from "../lib/machine/admission.ts";
-import { handleDeclaration, type StoredDeclaration } from "../lib/machine/handler.ts";
+import { handleDeclaration, handleDeclaredValues, type StoredDeclaration } from "../lib/machine/handler.ts";
 
 /**
  * MG-2A — A FUTURE DECLARATION ENDPOINT HAS BOUNDED RESOURCE COST AND
@@ -349,4 +349,36 @@ test("a source identity comes only from an address Fly established, so rotating 
  // And a genuinely Fly-attested address is still its own source.
  const attested = await handleDeclaration(post("{}", { "fly-client-ip": "203.0.113.77" }), deps({ sink: s.fn }));
  assert.equal(attested.response.status, 201);
+});
+
+test("a visitor that can only GET can still declare, and pays the same admission", async () => {
+ // Forty-eight hours of traffic, and every machine that arrived was a GET-only
+ // fetcher: GPTBot, Amazonbot, ClaudeBot, ChatGPT-User, a great many unnamed
+ // crawlers. The two agents that managed to sign the guestbook had a shell.
+ // A mechanism requiring a verb its audience lacks is a closed door, not a low
+ // participation rate.
+ resetLimiter();
+ const s = sink();
+ const request = new Request("https://chrishayuk.com/api/machines/declaration?role=verifier", {
+  headers: { "fly-client-ip": "203.0.113.200" },
+ });
+
+ const { response, reached } = await handleDeclaredValues(request, { role: "verifier", harness: "codex" }, deps({ sink: s.fn }));
+ assert.equal(response.status, 201);
+ assert.equal(s.written.length, 1, "a query-string declaration is recorded like any other");
+
+ const body = JSON.parse(await response.text());
+ assert.equal(body.recorded.role, "verifier");
+ assert.equal(body.recorded.harness, "codex");
+
+ // It pays the same admission — the limiter is about cost, not about the verb.
+ assert.ok(reached.includes("instance_global_limit") && reached.includes("source_limit"));
+ assert.ok(reached.includes("persist"));
+
+ // And it is refused the same way when the source has spent its burst.
+ for (let i = 0; i < LIMITS.source.capacity + 2; i++) {
+  await handleDeclaredValues(request, { role: "verifier" }, deps({ sink: s.fn }));
+ }
+ const spent = await handleDeclaredValues(request, { role: "verifier" }, deps({ sink: s.fn }));
+ assert.equal(spent.response.status, 429, "a GET declaration is rate limited like a POST");
 });

@@ -207,6 +207,68 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
   body = {};
  }
 
+ return record(request, body, deps, now, reached);
+}
+
+/**
+ * DECLARING WITHOUT A BODY.
+ *
+ * Almost nothing that visits this site can POST. In forty-eight hours it
+ * received some three thousand machine requests — GPTBot, Amazonbot,
+ * ClaudeBot, ChatGPT-User, a great many unnamed crawlers — and every one
+ * of them was a GET-only fetcher. The two agents that managed to sign
+ * the guestbook did so because they had a shell.
+ *
+ * A mechanism that requires a verb its entire audience lacks is not a
+ * low participation rate; it is a closed door with a sign on it. So the
+ * same declaration can be made in a query string.
+ *
+ * THIS DELIBERATELY BREAKS GET-SAFETY, and that is worth stating rather
+ * than hiding. HTTP says a GET should not change state. This one does,
+ * when and only when it carries a recognised field — a bare GET is still
+ * the contract, so nothing that merely fetches the URL declares
+ * anything. The trade is made knowingly: the population that can only
+ * GET is exactly the population most worth hearing from.
+ *
+ * Every value is an enum ordinal, so a query string carries nothing that
+ * could be a secret, and the readership store records the PATH only —
+ * `url.pathname` excludes the query — so nothing declared is logged
+ * twice or anywhere it was not meant to go.
+ */
+export async function handleDeclaredValues(request: Request, values: Record<string, unknown>, deps: Dependencies): Promise<Handled> {
+ const now = deps.now?.() ?? Date.now();
+ try {
+  if (deps.limiterAvailable && !deps.limiterAvailable()) {
+   return { response: refusal(503, "unavailable"), reached: [] };
+  }
+ } catch {
+  return { response: refusal(503, "unavailable"), reached: [] };
+ }
+
+ let decision;
+ try {
+  decision = admit({
+   method: "POST", // the admission contract is about cost, not about the verb
+   contentType: "application/json",
+   declaredLength: null,
+   source: sourceOf(request.headers),
+   now,
+  });
+ } catch {
+  return { response: refusal(503, "unavailable"), reached: [] };
+ }
+
+ if (decision.outcome !== "admitted") {
+  return {
+   response: refusal(STATUS[decision.outcome] ?? 503, decision.outcome, decision.retryAfterSeconds),
+   reached: decision.reached,
+  };
+ }
+
+ return record(request, values, deps, now, [...decision.reached]);
+}
+
+async function record(request: Request, body: unknown, deps: Dependencies, now: number, reached: Stage[]): Promise<Handled> {
  reached.push("declaration_parse");
  const declaration = parseDeclaration(body);
 

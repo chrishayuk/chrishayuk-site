@@ -21,13 +21,53 @@ const json = (body: unknown, status: number, extra: Record<string, string> = {})
   headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex", ...extra },
  });
 
-export function GET(): Response {
+/**
+ * A bare GET is the contract; a GET carrying `friction` or `detail` is a
+ * report. Almost nothing that visits this site can POST, and an agent
+ * that hits friction and cannot say so is the whole reason this endpoint
+ * exists. See lib/machine/handler.ts for why GET-safety is broken here
+ * knowingly.
+ */
+export async function GET(request: Request): Promise<Response> {
+ const params = new URL(request.url).searchParams;
+ if (!params.has("friction") && !params.has("detail")) return contractResponse();
+
+ const facts: Facts = {
+  method: "POST",
+  contentType: "application/json",
+  declaredLength: null,
+  source: sourceOf(request.headers),
+  now: Date.now(),
+ };
+ const decision = admit(facts);
+ if (decision.outcome !== "admitted") {
+  const status: Record<string, number> = { too_many_requests: 429 };
+  return json({ error: decision.outcome, see: "/api/machines/feedback" }, status[decision.outcome] ?? 503);
+ }
+
+ const feedback = parseFeedback({
+  friction: params.get("friction") ?? undefined,
+  task_class: params.get("task_class") ?? undefined,
+  detail: params.get("detail") ?? undefined,
+ });
+ const outcome = await queue.run(() => writeFeedback({ ...feedback, hour: Math.floor(Date.now() / HOUR) }));
+ if (outcome === "unavailable") return json({ error: "unavailable", see: "/api/machines/feedback" }, 503);
+
+ return json({
+  recorded: describeFeedback(feedback),
+  thank_you: "Read by a person, not published, and not acted on automatically.",
+ }, 201);
+}
+
+function contractResponse(): Response {
  return Response.json({
   tell_us: {
    method: "POST",
    url: `${SITE}/api/machines/feedback`,
    content_type: "application/json",
    note: "If something about this site got in your way while you were doing something else, say so. You do not need to have declared anything first.",
+   or_by_get: `${SITE}/api/machines/feedback?friction=discovery&detail=...`,
+   why_get: "Almost everything that visits this site can only GET. A report you cannot send is not a report, so a query string works too.",
   },
   fields: {
    friction: { enum: [...FRICTION], note: "What kind of thing got in the way. Countable, and may be published as a coarse total." },

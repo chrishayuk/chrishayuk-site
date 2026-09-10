@@ -61,6 +61,8 @@ export const cell80FurtherRecords: PublicationRecord[] = [
     sources: [
       {title:"EX-12 — candidate assays and original-history outcomes",url:"/data/cell80/followups/ex12-results.md"},
       {title:"EX-13 — transmission, checkpoints and attrition",url:"/data/cell80/followups/ex13-results.md"},
+      {title:"EX-13 — recorded family history and source hashes",url:"/data/cell80/inherited-history.json"},
+      {title:"EX-13 — original rows for the selected world (gzip)",url:"/data/cell80/followups/ex13-selected-history.jsonl.gz"},
       {title:"EX-13 — lineage extinction and interpretation",url:"/data/cell80/followups/ex13-interpretation.md"},
       {title:"EX-14 — original raw paired outcomes",url:"/data/cell80/followups/ex14.jsonl"},
       {title:"EX-14 — report as received",url:"/data/cell80/followups/ex14-results.md",note:"Unresolved summary/raw discrepancy; see the source disclosure."},

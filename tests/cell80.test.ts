@@ -3,6 +3,7 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { gunzipSync } from "node:zlib";
 import barrier from "../lib/data/cell80-barrier-index.json" with { type: "json" };
+import inheritedHistory from "../lib/data/cell80-inherited-history.json" with { type: "json" };
 import barrierPreview from "../lib/data/cell80-barrier-preview.json" with { type: "json" };
 import { createHash } from "node:crypto";
 import { cell80, dependenceGate, factorialAt } from "../lib/cell80.ts";
@@ -202,4 +203,32 @@ test("EX-11 viewer preserves every recorded population count, including births l
   assert.equal(fleeting.origins,1);assert.equal(fleeting.firstBirth,475);assert.equal(fleeting.firstObserved,null);
   const downloaded=JSON.parse(await readFile(new URL('../public/data/cell80/barrier/index.json',import.meta.url),'utf8'));
   assert.deepEqual(downloaded,barrier);
+});
+
+
+test("EX-13 family playback preserves every recorded step and distinguishes a family from the whole world", async()=>{
+  const compressed=await readFile(new URL(`../public/data/cell80/${inheritedHistory.source.file}`,import.meta.url));
+  assert.equal(createHash('sha256').update(compressed).digest('hex'),inheritedHistory.source.sha256);
+  const raw=gunzipSync(compressed);
+  assert.equal(createHash('sha256').update(raw).digest('hex'),inheritedHistory.source.selectedRowsSha256);
+  const rows=raw.toString().trim().split('\n').map(line=>JSON.parse(line));
+  const trace=rows.find(r=>r.type==='retention_trace').trace;
+  const world=rows.find(r=>r.type==='discovery' && r.arm==='full').result;
+  assert.ok(rows.every(r=>r.seed===inheritedHistory.seed));
+  assert.equal(inheritedHistory.child,trace.candidate.child);
+  assert.equal(inheritedHistory.birth,trace.candidate.tick);
+  assert.deepEqual(inheritedHistory.firstTransmission,trace.first_bc_transmission);
+  assert.equal(inheritedHistory.frames.length,2835);
+  for(const [i,actual] of inheritedHistory.frames.entries()){
+    const f=trace.trajectory[i];const w=world.trajectory[f.tick];
+    assert.deepEqual(actual,[f.tick,w.alive,f.intact_descendants_alive,w.capable_high,f.descendants_alive,Number(f.founder_alive)]);
+    assert.equal(f.tick,inheritedHistory.birth+i);
+    assert.ok(actual[2]<=actual[4] && actual[4]+actual[5]<=actual[1] && actual[2]+actual[5]<=actual[3]);
+  }
+  assert.deepEqual([50,200,500].map(age=>inheritedHistory.frames[age][2]),[217,148,230]);
+  assert.equal(inheritedHistory.extinction,1268);
+  const endOfFamily=inheritedHistory.frames[1268-inheritedHistory.birth];
+  assert.deepEqual([endOfFamily[2],endOfFamily[4],endOfFamily[5],endOfFamily[3]],[0,0,0,239]);
+  assert.deepEqual([inheritedHistory.frames.at(-1)![2],inheritedHistory.frames.at(-1)![3]],[0,235]);
+  assert.deepEqual(JSON.parse(await readFile(new URL('../public/data/cell80/inherited-history.json',import.meta.url),'utf8')),inheritedHistory);
 });

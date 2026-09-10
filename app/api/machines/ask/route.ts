@@ -30,13 +30,35 @@ const json = (body: unknown, status: number) =>
   headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
  });
 
-export function GET(): Response {
+/** A bare GET is the contract; a GET carrying a question is a question. */
+export async function GET(request: Request): Promise<Response> {
+ const params = new URL(request.url).searchParams;
+ const question = params.get("question");
+ if (!question) return contractResponse();
+
+ const decision = admit({
+  method: "POST", contentType: "application/json", declaredLength: null,
+  source: sourceOf(request.headers), now: Date.now(),
+ });
+ if (decision.outcome !== "admitted") {
+  return json({ error: decision.outcome, see: "/api/machines/ask" }, decision.outcome === "too_many_requests" ? 429 : 503);
+ }
+
+ const bundle = await queue.run(async () => researchBundle({
+  question, role: params.get("role"), task_class: params.get("task_class"), scope: params.get("scope"),
+ }));
+ if (bundle === "unavailable") return json({ error: "unavailable", see: "/api/machines/ask" }, 503);
+ return json(bundle, 200);
+}
+
+function contractResponse(): Response {
  return Response.json({
   ask: {
    method: "POST",
    url: `${SITE}/api/machines/ask`,
    content_type: "application/json",
    note: "You do not need to have declared anything first, and nothing is gated on doing so. Sending a role changes the ranking and the framing, not what you are allowed to see.",
+   or_by_get: `${SITE}/api/machines/ask?question=what+is+LARQL&role=verifier`,
   },
   fields: {
    question: { type: "string", max_chars: 500, note: "Not stored, and not returned to you. It reaches the index and is discarded." },

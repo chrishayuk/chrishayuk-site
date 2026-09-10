@@ -1,5 +1,5 @@
 import { WriteQueue } from "@/lib/machine/admission";
-import { handleDeclaration } from "@/lib/machine/handler";
+import { handleDeclaration, handleDeclaredValues } from "@/lib/machine/handler";
 import { writeDeclaration } from "@/lib/machine/store";
 import { observedFor } from "@/lib/machine/observed";
 import { contract } from "@/lib/machine/contract";
@@ -22,6 +22,34 @@ import { contract } from "@/lib/machine/contract";
  * bound on the machine rather than on each request.
  */
 const queue = new WriteQueue();
+
+/**
+ * A DECLARING URL IS A URL, AND URLS GET FETCHED AGAIN.
+ *
+ * Once a declaration can be made by GET, the address that makes it can
+ * be bookmarked, retried, shared, prefetched and re-crawled — and every
+ * one of those would be another row. A count that anybody can raise by
+ * refreshing is not a count.
+ *
+ * So an identical declaration from the same source inside the window is
+ * answered exactly as before and recorded once. Process-local and
+ * bounded, like the limiter: a restart forgets, which costs at most one
+ * duplicate and keeps the memory flat.
+ */
+const RECENT_TTL_MS = 3_600_000;
+const RECENT_MAX = 2048;
+const recent = new Map<string, number>();
+
+function alreadyDeclared(key: string, now: number): boolean {
+ const seen = recent.get(key);
+ if (seen !== undefined && now - seen < RECENT_TTL_MS) return true;
+ if (recent.size >= RECENT_MAX) {
+  for (const [id, at] of recent) if (now - at > RECENT_TTL_MS) recent.delete(id);
+  if (recent.size >= RECENT_MAX) recent.clear();
+ }
+ recent.set(key, now);
+ return false;
+}
 
 export async function POST(request: Request): Promise<Response> {
  const { response } = await handleDeclaration(request, {
@@ -46,7 +74,62 @@ export async function POST(request: Request): Promise<Response> {
  * — a read of this site's own words, not of anything anyone declared —
  * so it is cacheable and reopens nothing.
  */
-export function GET(): Response {
+/**
+ * The fields a query string may carry. Anything else is ignored, so a
+ * URL with tracking parameters or a cache-buster is still just a fetch.
+ */
+const QUERY_FIELDS = [
+ "actor_type", "role", "delegation", "collaboration", "task_class",
+ "provider_claim", "transport", "execution", "harness", "model_name",
+ "agent_name_kind", "agent_name",
+];
+
+/**
+ * A bare GET is the contract. A GET carrying a recognised field is a
+ * declaration — see handleDeclaredValues for why this endpoint breaks
+ * GET-safety on purpose, and why a fetch that declares nothing must
+ * still declare nothing.
+ */
+export async function GET(request: Request): Promise<Response> {
+ const params = new URL(request.url).searchParams;
+ const values: Record<string, unknown> = {};
+ for (const field of QUERY_FIELDS) {
+  const value = params.get(field);
+  if (value !== null) values[field] = value;
+ }
+ // Capabilities collapse to one repeatable parameter, so a query string
+ // does not need nesting: ?capability=can_navigate:yes
+ const capabilities: Record<string, string> = {};
+ for (const pair of params.getAll("capability")) {
+  const [name, claim] = pair.split(":");
+  if (name && claim) capabilities[name] = claim;
+ }
+ if (Object.keys(capabilities).length) values.capabilities = capabilities;
+
+ if (!Object.keys(values).length) return contractResponse();
+
+ // Same source, same declaration, same hour: recorded once. The receipt
+ // still comes back, because a caller that retried should not be told it
+ // failed.
+ const source = request.headers.get("fly-client-ip") ?? "untrusted";
+ const key = `${source}|${[...params.entries()].sort().map(pair => pair.join("=")).join("&")}`;
+ if (alreadyDeclared(key, Date.now())) {
+  return Response.json({
+   receipt: "mr_repeat",
+   recorded: "This declaration was already recorded for this source within the hour, so it was not recorded again.",
+   note: "A count anybody can raise by refetching a URL is not a count.",
+  }, { status: 200, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
+ }
+
+ const { response } = await handleDeclaredValues(request, values, {
+  sink: writeDeclaration,
+  queue,
+  observed: observedFor,
+ });
+ return response;
+}
+
+function contractResponse(): Response {
  return Response.json(contract(), {
   headers: {
    "Cache-Control": "public, max-age=3600",
