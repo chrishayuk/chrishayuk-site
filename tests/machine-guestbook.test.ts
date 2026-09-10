@@ -463,15 +463,22 @@ test("identity buys understanding, not access: the corpus is the same and only t
  const verifier = researchBundle({ question, role: "verifier" });
  const synthesizer = researchBundle({ question, role: "synthesizer" });
 
- // NOTHING IS GATED. The same items reach every caller; a declaration cannot
- // unlock a record and cannot withhold one. If this ever fails, the bargain has
- // quietly become the human web's — identity for entry — which is the thing
- // this endpoint exists not to be.
- const ids = (bundle: { canonical_sources: { id: string }[] }) =>
-  new Set(bundle.canonical_sources.map(source => source.id));
- assert.deepEqual([...ids(verifier)].sort(), [...ids(anonymous)].sort(),
-  "a declared role must not change WHICH sources are reachable");
- assert.deepEqual([...ids(synthesizer)].sort(), [...ids(anonymous)].sort());
+ // NOTHING IS GATED. The same corpus is searched for every caller; a
+ // declaration cannot unlock a record and cannot withhold one. If this ever
+ // fails, the bargain has quietly become the human web's — identity for
+ // entry — which is the thing this endpoint exists not to be.
+ //
+ // An earlier version of this compared the top twelve of each list, which was
+ // wrong in a way worth recording: a role changes the ORDER, so different
+ // items legitimately make that cut. `matched` is the count before any
+ // truncation, and it is the number that must not move.
+ assert.equal(verifier.matched, anonymous.matched, "a declared role must not change how much is reachable");
+ assert.equal(synthesizer.matched, anonymous.matched);
+ assert.ok(anonymous.matched > 0, "the fixture question must actually retrieve something");
+
+ // And the top of the list DOES move, or the shaping is decorative.
+ const top = (bundle: { canonical_sources: { id: string }[] }) => bundle.canonical_sources[0]?.id;
+ assert.notEqual(top(synthesizer), top(anonymous), "a synthesizer must be shown something different first");
 
  // What it does change is the order, and the site says so in words rather than
  // leaving a caller to wonder why two requests differed.

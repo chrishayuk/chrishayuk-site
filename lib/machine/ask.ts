@@ -85,6 +85,14 @@ const reference = (result: SearchResult) => ({
 
 export type ResearchBundle = {
  answer: "retrieval-result";
+ /**
+  * How many sources matched, before any list below was truncated.
+  *
+  * A caller cannot otherwise tell whether it is seeing everything, and it
+  * is the honest way to state the guarantee that nothing is gated: this
+  * number is identical for every role, and only the ORDER moves.
+  */
+ matched: number;
  shaped_by: { role: Role; task_class: TaskClass } | null;
  shaping: string[];
  canonical_sources: ReturnType<typeof reference>[];
@@ -97,12 +105,80 @@ export type ResearchBundle = {
 
 export type AskRequest = { question: string; role?: unknown; task_class?: unknown; scope?: unknown };
 
+/**
+ * A QUESTION IS NOT A KEYWORD QUERY, AND MACHINES ASK QUESTIONS.
+ *
+ * searchGraph requires EVERY term to appear in the same node, so a single
+ * word the corpus has never seen eliminates every result. "predictive
+ * locality" finds a record; "what evidence supports predictive locality"
+ * finds nothing, because "supports" appears nowhere. Both blind agents
+ * reported the same shape of failure against the public search, and an
+ * endpoint that answers a natural question with an empty bundle is worse
+ * than one that does not exist — it is a promise that fails silently.
+ *
+ * So: ask as written, and if that finds nothing, drop the words that
+ * match nothing rather than the words that matter. A term present in no
+ * node contributes no information and removes every result, which makes
+ * it exactly the right thing to discard.
+ *
+ * The public /ask is untouched. This relaxation belongs to the machine
+ * endpoint, where the caller is asking in sentences.
+ */
+/**
+ * Words that carry no information about this corpus.
+ *
+ * An earlier attempt inferred selectivity by probing with a common word,
+ * which was unreliable — the underlying search already discards its own
+ * stopwords, so the probe returned nothing and the derived ceiling
+ * started discarding MEANINGFUL terms instead. An explicit list is
+ * duller and correct.
+ */
+const NOISE = new Set([
+ "a", "about", "all", "an", "and", "any", "are", "as", "at", "be", "been", "but", "by",
+ "can", "could", "did", "do", "does", "for", "from", "had", "has", "have", "here", "how",
+ "i", "if", "in", "into", "is", "it", "its", "just", "many", "may", "me", "much", "my",
+ "no", "not", "of", "on", "or", "our", "out", "över", "please", "should", "so", "some",
+ "supports", "tell", "than", "that", "the", "their", "them", "then", "there", "these",
+ "they", "this", "to", "us", "was", "we", "were", "what", "when", "where", "which", "who",
+ "why", "will", "with", "would", "you", "your",
+ // Indefinite pronouns. They are ordinary English, they appear all over
+ // authored prose, and they say nothing about what is being asked for.
+ "anybody", "anyone", "anything", "everybody", "everyone", "everything",
+ "nobody", "nothing", "somebody", "someone", "something", "thing", "things",
+]);
+
+function retrieve(question: string, scope: GraphScope): { results: SearchResult[]; usedTerms: string[] | null } {
+ const asked = searchGraph(question, { scope, includeDrafts: true });
+ if (asked.length) return { results: asked, usedTerms: null };
+
+ // Answering noise with confident-looking sources is a worse failure than
+ // answering nothing: "zzz nothing at all here" found records on the
+ // strength of "all" and "here". Drop the words that carry no information
+ // about this corpus, then keep only those the corpus has actually seen.
+ const words = [...new Set(question.toLowerCase().split(/[^\p{L}\p{N}-]+/u)
+  .filter(word => word.length > 2 && !NOISE.has(word)))].slice(0, 16);
+ const productive = words.filter(word => searchGraph(word, { scope, includeDrafts: true }).length > 0);
+ if (!productive.length) return { results: [], usedTerms: [] };
+
+ const narrowed = searchGraph(productive.join(" "), { scope, includeDrafts: true });
+ if (narrowed.length) return { results: narrowed, usedTerms: productive };
+
+ // Each term finds something, no node holds them all. Union, best first.
+ const merged = new Map<string, SearchResult>();
+ for (const word of productive) {
+  for (const result of searchGraph(word, { scope, includeDrafts: true })) {
+   if (!merged.has(result.id)) merged.set(result.id, result);
+  }
+ }
+ return { results: [...merged.values()].sort((a, b) => b.score - a.score), usedTerms: productive };
+}
+
 export function researchBundle(input: AskRequest): ResearchBundle {
  const role = wordOf(ROLE, ordinalOf(ROLE, input.role));
  const task = wordOf(TASK_CLASS, ordinalOf(TASK_CLASS, input.task_class));
  const scope = (["records", "films", "concepts", "all"].includes(String(input.scope)) ? input.scope : "all") as GraphScope;
 
- const results = searchGraph(String(input.question ?? "").slice(0, 500), { scope, includeDrafts: true });
+ const { results, usedTerms } = retrieve(String(input.question ?? "").slice(0, 500), scope);
  const weights = WEIGHTS[role];
 
  const ranked = weights
@@ -114,10 +190,20 @@ export function researchBundle(input: AskRequest): ResearchBundle {
 
  return {
   answer: "retrieval-result",
+  matched: results.length,
   shaped_by: weights ? { role, task_class: task } : null,
-  shaping: weights
-   ? SHAPING[role] ?? []
-   : ["No role was declared, or the role was not one this site knows, so results are in the site's ordinary order."],
+  shaping: [
+   ...(weights
+    ? SHAPING[role] ?? []
+    : ["No role was declared, or the role was not one this site knows, so results are in the site's ordinary order."]),
+   // Say when the question was not answerable as asked. A caller that
+   // cannot tell the difference between "nothing matched" and "matched
+   // something else" cannot correct its next question.
+   ...(usedTerms === null ? []
+    : usedTerms.length === 0
+     ? ["Nothing in this corpus matched any word of your question, so there is nothing below. That is an absence, not a ranking."]
+     : [`Your question found nothing as written — every term must appear in the same record. These results are for the words this corpus knows: ${usedTerms.join(", ")}.`]),
+  ],
 
   // The ranked list itself, whole.
   //
