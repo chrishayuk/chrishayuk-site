@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "scope": "Spatial replay exports, not additional independent experimental worlds. EX-4 is regenerated using its historical library; EX-9 reproduces the recorded 2% seed-42 world.",
+  "engine": "Current Rust tick engine, CPU-loaded cells; existing memoized batch dispatcher retains both output and instruction cost.",
+  "sources": [
+    {
+      "file": "experiments/cell80-life/src/ex2.rs",
+      "sha256": "65a45a103e67a150768f2fc906598ffe7602e913279889afc7e5ea4ff1512cf6"
+    },
+    {
+      "file": "experiments/cell80-life/src/ex3.rs",
+      "sha256": "97057025318370087dc6f15ce442827538ce41dba1eb72e41d19040f03d7e2c1"
+    },
+    {
+      "file": "experiments/cell80-life/src/genes.rs",
+      "sha256": "4542e798c484ec5e0a15160b04f135e24694e97fd4a76c461d7c723572bb540f"
+    },
+    {
+      "file": "experiments/cell80-life/src/history.rs",
+      "sha256": "b1c31217ff428dec644ae2cc4784802f27b354398f36e17e73631dbf861f2931"
+    },
+    {
+      "file": "experiments/cell80-life/src/rng.rs",
+      "sha256": "0a0b9a9d9484e32047760b6ea90eabd1980c33cdb3d5e34ec69b00a66e814047"
+    },
+    {
+      "file": "experiments/cell80-life/src/pools.rs",
+      "sha256": "b2f24312de9e0cc6e074deade5cee75e2b411f6768fcce736eea1717e846d69d"
+    },
+    {
+      "file": "experiments/cell80-life/src/world2d.rs",
+      "sha256": "e8125b4cd81cf6001116f41f005082eae3f03562514098cfd1441881de641f44"
+    },
+    {
+      "file": "experiments/cell80-life/src/contention.rs",
+      "sha256": "c23dad4d9f9cbf894228e3ec00b15728f7019b2d00067ad99eef5441cb38f538"
+    },
+    {
+      "file": "experiments/cell80-life/src/lineage.rs",
+      "sha256": "182f26bbe382b5d55359c9a598914d6bac4b0c3a69c915c896e2c0ba95d9c35b"
+    },
+    {
+      "file": "experiments/cell80-life/src/bin/notebook_replay.rs",
+      "sha256": "4a6d755ba2384612847452e622c0797e895b3438fce5e645746521506246c077"
+    }
+  ],
+  "replays": {
+    "lineage": {
+      "file": "lineage-replay.json.gz",
+      "bytes": 1643429,
+      "sha256": "734f14e0e70aa2b1cde23d88a991e392ff99c17d64cac3105562d906e642a849",
+      "decodedSha256": "3483ef4d5e5548d5075b417ced9b1c6e7b828a8c2c9f9a3b4a210fa933b6f5ba",
+      "histories": [
+        {
+          "label": "Observed history",
+          "hash": "eaa918bce1b2d4eb7613dcd9eb9c153e519b4b3a18b85bd52f0a685d452a8326",
+          "frames": 1106
+        },
+        {
+          "label": "Program change undone",
+          "hash": "1439c6e2313a5a526aeaba1601ed7a03f20f6f2cd41073a53891d87c6b141a25",
+          "frames": 1106
+        }
+      ],
+      "verification": {
+        "eventAfterRevert": false,
+        "originBirth": 2231,
+        "originTick": 994,
+        "peak": 0.41596638655462187,
+        "preForkIdentical": true,
+        "share": 0.35323383084577115,
+        "shiftTick": 1080
+      },
+      "libraryCommit": "b989b81c52c64ed75048521b59c47ad56fa07b76",
+      "sampling": "Every 2 ticks, every tick 990\u20131200, plus final tick"
+    },
+    "ecology": {
+      "file": "ecology-replay.json.gz",
+      "bytes": 9318320,
+      "sha256": "7900e543e675aa65dc02d3b500d62f71cc321a3ec8ad0a5f3bf1aa06de819f04",
+      "decodedSha256": "2d7ebe4a5077a972579889e783d474878cb621fd51183498b8f703d4131e0fca",
+      "histories": [
+        {
+          "label": "Predators + grazers",
+          "hash": "80cd62fd95d677e28c3d45d40ff4c4a69a75a115df7fcaa0aa4aacb4134eef36",
+          "frames": 501
+        }
+      ],
+      "verification": {
+        "closureHistoryHashMatches": true,
+        "grazers": 1630,
+        "predators": 746
+      },
+      "libraryCommit": null,
+      "sampling": "Every 20 ticks plus final tick"
+    }
+  }
+}

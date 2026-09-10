@@ -25,8 +25,12 @@ assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
 assert.match(home.body, /id="from-the-notebook"/);
 assert.match(home.body, /href="\/notebook\/what-is-the-map"/);
-assert.match(home.body, /href="\/notebook\/i-wanted-a-website-to-behave-like-an-exhibition"/);
-assert.match(home.body, /data-media-id="notebook-exhibition"/);
+assert.match(home.body, /href="\/notebook\/can-you-name-the-mutation-that-changed-a-world"/);
+assert.match(home.body, /class="cell80-home-preview"/);
+assert.match(home.body, /\/data\/cell80\/home-observed\.png/);
+assert.match(home.body, /WATCH THE REPLAY/);
+assert.match(home.body, /href="\/notebook\/what-keeps-an-evolving-world-alive"/);
+assert.match(home.body, /href="\/notebook\/when-does-improvement-become-invention"/);
 assert.match(home.body, /href="\/notebook\/the-address-is-built-through-depth"/);
 assert.match(home.body, /class="address-teaser"/);
 assert.match(home.body, /cfvod\.kaltura\.com\/p\/1773841\/sp\/177384100\/thumbnail\/entry_id\/1_rwy4uz25\/width\/1280/);
@@ -36,6 +40,22 @@ assert.ok(home.body.indexOf('id="from-the-notebook"') < home.body.indexOf('id="s
 assert.ok(home.body.indexOf('id="selected-films"') < home.body.indexOf('id="further-notes"'));
 assert.ok(home.body.indexOf('id="further-notes"') < home.body.indexOf('id="selected-work"'));
 for (const path of ["/work/larql", "/work/vindex3", "/work/mcp-cli"]) assert.ok(home.body.includes(`href="${path}"`));
+// The Cell80 edition uses authored HAUSE rooms and preserves its draft record.
+for (const slug of ['can-you-name-the-mutation-that-changed-a-world','what-keeps-an-evolving-world-alive','when-does-improvement-become-invention']) {
+ const note=await request(`/notebook/${slug}`);
+ assert.equal(note.status,200,slug);
+ assert.match(note.body,/id="cell80-study"/);
+ assert.match(note.body,/hause-study-room/);
+ assert.match(note.body,/hause-field-notes/);
+ assert.match(note.body,/href="\/thread\/cell80"/);
+ assert.match(note.body,/DRAFT/);
+}
+const ecologyThread=await request('/thread/cell80');
+assert.equal(ecologyThread.status,200);
+for(const n of [1,2,3]) assert.ok(ecologyThread.body.includes(`id="step-${n}"`));
+const ecologyEvidence=JSON.parse((await request('/data/cell80/evidence.json')).body);
+assert.equal(ecologyEvidence.factorials.length,40);
+assert.equal(ecologyEvidence.firstSteps.length,108);
 const primaryNav=home.body.match(/<nav[^>]*aria-label="Primary"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
 assert.ok(primaryNav?.includes('href="/film"'),"Film is a first-level navigation destination");
 for(const path of ["/ideas","/systems","/objects","/record","/knowledge"]) {

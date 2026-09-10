@@ -1,0 +1,22 @@
+{
+  "tick": 1080,
+  "width": 32,
+  "histories": [
+    {
+      "label": "Observed history",
+      "image": "/data/cell80/home-observed.png",
+      "population": 201,
+      "program33": 71,
+      "share": "35.3%",
+      "historyHash": "eaa918bce1b2d4eb7613dcd9eb9c153e519b4b3a18b85bd52f0a685d452a8326"
+    },
+    {
+      "label": "Program change undone",
+      "image": "/data/cell80/home-undone.png",
+      "population": 108,
+      "program33": 8,
+      "share": "7.4%",
+      "historyHash": "1439c6e2313a5a526aeaba1601ed7a03f20f6f2cd41073a53891d87c6b141a25"
+    }
+  ]
+}

@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { Cell80HomePreview } from "@/components/Cell80HomePreview";
+import { Cell80Card } from "@/components/Cell80Notebook";
+import { cell80Part } from "@/lib/cell80";
 import { AddressBuildCard } from "@/components/AddressBuildCard";
 import { AgentAttributionCard } from "@/components/AgentAttributionNotebook";
 import { latestNotebook } from "@/lib/notebook-selection";
-import { mapThread } from "@/lib/threads";
+import { mapThread, cell80Thread, resolveThreadStep } from "@/lib/threads";
 import { Media } from "@/components/Media";
 import { FilmPlayer } from "@/components/FilmPlayer";
 import { previewFor } from "@/components/YouTubeCollection";
@@ -20,6 +23,8 @@ export default function Home() {
  const selectedFilms = [featuredVideo, popularMoe];
  const notes = [getRecord("N-ADDRESS-BUILD")!, getRecord("N-MAP")!];
  const notebookMap = getMedia("notebook-map")!;
+ const ecologySteps = cell80Thread.steps.map(resolveThreadStep);
+ const ecologyIntroductions = ["Replay the same world with one inherited change undone.", "Watch predators and grazers, then ask what survival tells us.", "Test whether one useful change makes the next more valuable."];
  return <main id="main" className="homepage editorial-home">
   <section className="scene identity" data-scene="identity" aria-labelledby="proposition"><Media id="hero-identity" priority className="scene-background"/><div className="hero-overline record-voice"><span>CHRIS HAY</span><span>LONDON · 2026</span></div><div className="identity-copy"><h1 id="proposition">A house for<br/><em>ideas, systems</em><br/>and objects.</h1><p className="hero-philosophy">Exploring how intelligent systems represent knowledge, how they run, and how we can inspect and use them.</p></div><div className="scene-bottom record-voice"><span>RESEARCH · ENGINEERING · DESIGN · FILM</span><a href="#latest-youtube">THE LATEST ↓</a></div></section>
 
@@ -35,8 +40,12 @@ export default function Home() {
   </section>
 
   <section id="from-the-notebook" className="notebook-scene notebook-feature" data-scene="latest-notebook" data-hause-act="connection" aria-labelledby="notebook-feature-heading">
-   <div className="notebook-feature-visual">{notebook.id === "N-EXHIBITION" ? <Media id="notebook-exhibition"/> : notebook.id === "N-ATTRIBUTION" ? <AgentAttributionCard/> : notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{notebook.id === "N-EXHIBITION" ? "FROM THE EXHIBITION / THE SPACE AROUND AN IDEA" : notebook.id === "N-ATTRIBUTION" ? "FROM THE REPOSITORY / ONE REQUIRED AUTHORITY GATE" : notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>
-   <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">{notebook.dek}</p><div className="inline-links"><TextLink href={notebookPath}>EXPLORE THE NOTE</TextLink><TextLink href={notebook.id === "N-EXHIBITION" ? "/work/hause" : mapThread.path}>{notebook.id === "N-EXHIBITION" ? "EXPLORE HAUSE" : "FOLLOW THE THREAD"}</TextLink></div><p className="record-voice notebook-footnote">{notebook.lineage}</p></div>
+   <div className="notebook-feature-visual">{notebook.id === "N-CELL80-01" ? <Cell80HomePreview href={notebookPath}/> : cell80Part(notebook.id) ? <Cell80Card part={cell80Part(notebook.id)}/> : notebook.id === "N-EXHIBITION" ? <Media id="notebook-exhibition"/> : notebook.id === "N-ATTRIBUTION" ? <AgentAttributionCard/> : notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{cell80Part(notebook.id) ? "CELL80 / TWO RECORDED WORLDS · OPEN THE NOTE TO PLAY" : notebook.id === "N-EXHIBITION" ? "FROM THE EXHIBITION / THE SPACE AROUND AN IDEA" : notebook.id === "N-ATTRIBUTION" ? "FROM THE REPOSITORY / ONE REQUIRED AUTHORITY GATE" : notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>
+   <div className="notebook-copy"><Kicker>LATEST / NOTEBOOK</Kicker><div className="note-meta record-voice"><span>{notebook.id}</span><span>WORKING NOTE · {notebook.status}</span></div><h2 id="notebook-feature-heading"><Link href={notebookPath}>{notebook.title}</Link></h2><p className="notebook-feature-dek">{cell80Part(notebook.id) ? "I built a small world where organisms eat, move, reproduce and inherit executable code. Rewind one birth, undo one change, and watch two histories diverge." : notebook.dek}</p><div className="inline-links"><TextLink href={cell80Part(notebook.id) ? `${notebookPath}#cell80-study` : notebookPath}>{cell80Part(notebook.id) ? "WATCH THE REPLAY" : "EXPLORE THE NOTE"}</TextLink><TextLink href={cell80Part(notebook.id) ? "/thread/cell80" : notebook.id === "N-EXHIBITION" ? "/work/hause" : mapThread.path}>{cell80Part(notebook.id) ? "THE THREE QUESTIONS" : notebook.id === "N-EXHIBITION" ? "EXPLORE HAUSE" : "FOLLOW THE THREAD"}</TextLink></div><p className="record-voice notebook-footnote">{notebook.lineage}</p></div>
+   {cell80Part(notebook.id) > 0 && <nav className="cell80-home-sequence" aria-label="Read the three Cell80 Notebook entries">
+    <div className="cell80-home-sequence-heading"><Kicker>CELL80 / THREE QUESTIONS</Kicker><p>A replayable world. A surviving ecology. An unresolved invention.</p></div>
+    <ol>{ecologySteps.map((step,i)=><li key={step.id}><Link href={step.url}><span className="record-voice">0{i+1} / {step.label}</span><h3>{step.title}</h3><p>{ecologyIntroductions[i]}</p><span className="record-voice">OPEN THE NOTE ↗</span></Link></li>)}</ol>
+   </nav>}
   </section>
 
   <section id="selected-films" className="home-selected-films" data-scene="selected-films" aria-labelledby="selected-films-heading">
@@ -52,7 +61,7 @@ export default function Home() {
   <section id="further-notes" className="home-further-notes" data-scene="further-notes" aria-labelledby="further-notes-heading">
    <div className="home-collection-heading"><div><Kicker>FROM THE NOTEBOOK</Kicker><h2 id="further-notes-heading">Further questions.</h2></div><TextLink href="/notebook">ALL NOTES</TextLink></div>
    <div className="home-note-pair">{notes.map(record=><article key={record.id}>
-    <Link className="home-note-image" href={recordPath(record)} aria-label={`Read ${record.title}`}>{record.id==="N-ADDRESS-BUILD"?<AddressBuildCard compact/>:<img src={notebookMap.poster || notebookMap.desktop} alt={notebookMap.alt} loading="lazy" width={1600} height={900}/>}<span className="record-voice">OPEN THE NOTE ↗</span></Link>
+    <Link className="home-note-image" href={recordPath(record)} aria-label={`Read ${record.title}`}>{cell80Part(record.id)?<Cell80Card part={cell80Part(record.id)} compact/>:record.id==="N-ADDRESS-BUILD"?<AddressBuildCard compact/>:<img src={notebookMap.poster || notebookMap.desktop} alt={notebookMap.alt} loading="lazy" width={1600} height={900}/>}<span className="record-voice">OPEN THE NOTE ↗</span></Link>
     <p className="record-voice home-note-identity">{record.id} · WORKING NOTE · {record.status}</p>
     <h3><Link href={recordPath(record)}>{record.title}</Link></h3><p className="home-note-dek">{record.dek}</p>
    </article>)}</div>
