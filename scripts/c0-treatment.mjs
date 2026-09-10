@@ -70,6 +70,20 @@ const sitemap = await probe("/sitemap.xml");
 assert.equal(sitemap.status, 200);
 assert.doesNotMatch(sitemap.body, /chrishayuk\.com\/machines/, "/machines must stay out of the sitemap: discoverability is held constant");
 
+// MG-D1 — the public exhibit is a human surface and must stay one. It may be
+// in the sitemap and in navigation; it must NOT link to /machines, because a
+// second inbound route would change discoverability at the same moment MG-2B
+// changes participation, and the experiment would lose the ability to say
+// which one mattered.
+const guestbook = await probe("/machine-guestbook");
+assert.equal(guestbook.status, 200, "/machine-guestbook must be served");
+assert.doesNotMatch(guestbook.body, /href="\/machines"|chrishayuk\.com\/machines/,
+ "/machine-guestbook must not link to /machines: the discovery topology is held constant");
+assert.doesNotMatch(guestbook.body, /api\/machines/, "/machine-guestbook must not advertise a declaration endpoint");
+for (const forbidden of ["fly-client-ip", "user-agent", "collaboration_token", "session"]) {
+ assert.ok(!guestbook.body.toLowerCase().includes(forbidden), `/machine-guestbook leaked ${forbidden}`);
+}
+
 // NO TREATMENT — the surface exists and offers nothing to do.
 const machines = await probe("/machines");
 assert.equal(machines.status, 200, "/machines must be served");

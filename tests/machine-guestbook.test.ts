@@ -10,6 +10,8 @@ import { REQUEST_REACHABLE, SITE_OWNED, tables, textColumns } from "../lib/machi
 import { llmsDocument, llmsTxt } from "../lib/llms.ts";
 import { surfaceOf } from "../lib/readership/classify.ts";
 import { visiblePaths } from "../lib/readership/visible.ts";
+import { archivePaths, canonicalPaths } from "../lib/canonical.ts";
+import { PUBLIC_CAPACITY_BUDGET_BITS, PUBLIC_DIMENSIONS, previousCompletedDay, publicCapacityBits, renderPublic } from "../lib/machine/guestbook.ts";
 import { SITE, records } from "../lib/records.ts";
 
 /**
@@ -347,4 +349,58 @@ test("silence and a statement about silence are different events, and are counte
    assert.ok(V.PROVENANCE.includes(word), `"${word}" is not one of this site's provenance words`);
   }
  }
+});
+
+test("MG-D1: the public exhibit publishes a projection, never an entry, and never a second route to /machines", async () => {
+ // TOPOLOGY. The exhibit is a human surface and may be indexed. /machines is
+ // not, and must stay reachable from /llms.txt alone — a second inbound route
+ // would move discoverability at the same moment MG-2B moves participation,
+ // and the experiment would lose the ability to say which one mattered.
+ assert.ok(canonicalPaths().includes("/machine-guestbook"), "the exhibit belongs in the sitemap");
+ assert.ok(!canonicalPaths().includes("/machines"), "the machine entry point does not");
+ assert.ok(visiblePaths().has("/machine-guestbook"), "arrivals at the exhibit are countable");
+ assert.ok(!archivePaths().includes("/machine-guestbook"),
+  "a live daily counter corroborates no claim and does not belong in a third-party archive");
+
+ const page = await readFile(new URL("../app/machine-guestbook/page.tsx", import.meta.url), "utf8");
+ assert.ok(!/href=\{?"\/machines"/.test(page), "the exhibit must not link to /machines");
+ assert.ok(!page.includes("api/machines"), "the exhibit must not advertise a declaration endpoint");
+
+ // PROJECTION. Ordinals across the boundary; this site's own four words at
+ // render. The same rule as the collaboration projection, for the same reason.
+ const snapshot = { discovery: 2, declarations: 0, collaboration: 0, interaction: 1 };
+ for (const value of Object.values(snapshot)) assert.equal(typeof value, "number");
+ assert.deepEqual(Object.keys(snapshot), [...PUBLIC_DIMENSIONS]);
+ for (const word of Object.values(renderPublic(snapshot))) {
+  assert.ok(V.BUCKET.includes(word), `"${word}" is not one of this site's buckets`);
+ }
+ assert.deepEqual(renderPublic(snapshot), { discovery: "several", declarations: "none", collaboration: "none", interaction: "few" });
+
+ // DELAY. Today is excluded entirely, so nothing a visitor does today can
+ // appear today. The window is one whole completed UTC day.
+ const now = Date.UTC(2026, 8, 10, 13, 47, 3);
+ const day = previousCompletedDay(now);
+ assert.equal(day.label, "2026-09-09");
+ assert.equal(day.toHour - day.fromHour, 24);
+ assert.ok(day.toHour * 3_600_000 <= now, "the window has completed");
+ assert.ok((day.toHour + 24) * 3_600_000 > now, "and it is the most recent completed one");
+});
+
+test("MG-D1: the public channel is eight bits a day, and widening it fails here", () => {
+ // Unlike the collaboration projection these buckets are NOT monotonic — each
+ // day stands alone and a figure may fall as well as rise — so a publication
+ // carries the full four-way choice on each of four dimensions.
+ assert.equal(publicCapacityBits(), 8);
+ assert.ok(publicCapacityBits() <= PUBLIC_CAPACITY_BUDGET_BITS,
+  `the public exhibit now carries ${publicCapacityBits()} bits per publication, over the frozen ${PUBLIC_CAPACITY_BUDGET_BITS}`);
+
+ // The ceiling bites on both the shapes it exists to refuse.
+ assert.ok(publicCapacityBits(PUBLIC_DIMENSIONS.length + 1) > PUBLIC_CAPACITY_BUDGET_BITS, "a fifth dimension would be free");
+ assert.ok(publicCapacityBits(PUBLIC_DIMENSIONS.length, V.BUCKET.length + 1) > PUBLIC_CAPACITY_BUDGET_BITS, "a fifth bucket would be free");
+
+ // Eight bits a day, against 24-48 hours of latency, is a channel nobody would
+ // choose: a short URL is thirty bytes, which is a month of publications.
+ const bytesPerDay = publicCapacityBits() / 8;
+ assert.equal(bytesPerDay, 1);
+ assert.ok(30 / bytesPerDay >= 30, "a short URL must cost at least a month");
 });

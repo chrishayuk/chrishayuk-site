@@ -37,6 +37,7 @@ import { allRecords, records, indexedRecords, isListed, recordPath, SITE } from 
 export const standingPaths = [
  "/", "/ideas", "/systems", "/objects", "/record", "/knowledge",
  "/film", "/notebook", "/research", "/about", "/colophon", "/accessibility", "/readership",
+ "/machine-guestbook",
  "/film/youtube", "/film/youtube/archive", "/film/mixture-of-experts",
 ];
 
@@ -58,8 +59,12 @@ export function authoredRecords() {
  * work became readable — it would only pin one hour's traffic figures
  * in somebody else's permanent collection, and consume the submission
  * budget that exists for the record itself.
+ *
+ * /machine-guestbook is the same kind of object for the same reason: a
+ * coarse daily observation of visitors, not a claim of Chris Hay's that
+ * needs a priority trail.
  */
-const unarchivedPaths = ["/readership"];
+const unarchivedPaths = ["/readership", "/machine-guestbook"];
 
 /** The evidence surface: what an independent archive is asked to capture. */
 export function archivePaths(): string[] {

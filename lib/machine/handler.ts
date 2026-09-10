@@ -1,4 +1,4 @@
-import { admit, readBounded, MAX_BODY_BYTES, type Facts, type Stage, type WriteQueue } from "./admission.ts";
+import { admit, readBounded, sourceOf, MAX_BODY_BYTES, type Facts, type Stage, type WriteQueue } from "./admission.ts";
 import { describe, describeProvenance, packCapabilities, packProvenance, parseDeclaration, type Declaration } from "./declaration.ts";
 
 /**
@@ -102,9 +102,10 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
   declaredLength: Number.isFinite(Number(request.headers.get("content-length")))
    ? Number(request.headers.get("content-length"))
    : null,
-  source: request.headers.get("fly-client-ip")
-   ?? request.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim()
-   ?? null,
+  // Only an address Fly established. An untrusted caller shares one
+  // bucket with every other untrusted caller, so rotating a header
+  // cannot mint a fresh allowance.
+  source: sourceOf(request.headers),
   now,
  };
 

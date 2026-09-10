@@ -218,5 +218,36 @@ export async function summary(days: number, visible: ReadonlySet<string>): Promi
  return value;
 }
 
+/**
+ * ONE NUMBER, FOR ONE PATH, OVER ONE WINDOW.
+ *
+ * `summary` cannot answer this. It accumulates only ai, aiUser and human
+ * per path and drops any path where both are zero, so a path visited
+ * entirely by `automation` is invisible to it — which is exactly the
+ * shape of traffic the machine surface receives.
+ *
+ * This is deliberately narrow: one path, one window, one integer, and no
+ * breakdown. The public Guestbook turns the integer into a coarse bucket
+ * and never publishes it, so widening this function is not the way to
+ * add a figure to a page.
+ *
+ * `refuted` is excluded here for the same reason it is excluded from
+ * every total on /readership: a claim its own provider's published
+ * addresses contradict is not a reading of anything.
+ */
+export async function machineRequestsAt(path: string, fromHour: number, toHour: number): Promise<number | null> {
+ const db = await open();
+ if (!db) return null;
+ try {
+  const rows = db.prepare(
+   "SELECT SUM(n) AS total FROM rollup WHERE path = ? AND hour >= ? AND hour < ? AND purpose != 'human' AND confidence != 'refuted'",
+  ).all(path, fromHour, toHour) as { total: number | null }[];
+  return rows[0]?.total ?? 0;
+ } catch (error) {
+  console.error("readership: machine requests unavailable —", (error as Error).message);
+  return null;
+ }
+}
+
 /** Whether this deployment is recording at all. The page says so rather than showing an empty chart. */
 export const isRecording = () => Boolean(process.env.READERSHIP_DB);

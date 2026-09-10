@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { LIMITS, MAX_BODY_BYTES, WRITE, WriteQueue, admit, readBounded, resetLimiter, type Stage } from "../lib/machine/admission.ts";
+import { LIMITS, MAX_BODY_BYTES, UNTRUSTED_SOURCE, WRITE, WriteQueue, admit, readBounded, resetLimiter, sourceOf, type Stage } from "../lib/machine/admission.ts";
 import { handleDeclaration, type StoredDeclaration } from "../lib/machine/handler.ts";
 
 /**
@@ -122,7 +122,7 @@ test("ADVERSARIAL: a single source floods itself out, before storage", async () 
  assert.equal(s.written.length, LIMITS.source.capacity, "storage saw only the admitted requests");
 
  // The refusal stopped at the limiter and never touched the body.
- assert.deepEqual(lastReached, ["method", "content_type", "declared_length", "global_limit", "source_limit"]);
+ assert.deepEqual(lastReached, ["method", "content_type", "declared_length", "instance_global_limit", "source_limit"]);
  for (const stage of EXPENSIVE) assert.ok(!lastReached.includes(stage), `reached ${stage}`);
 
  // A different source is unaffected: this is a per-source limit, not an outage.
@@ -130,7 +130,7 @@ test("ADVERSARIAL: a single source floods itself out, before storage", async () 
  assert.equal(other.response.status, 201);
 });
 
-test("ADVERSARIAL: a flood spread across many sources is stopped by the global ceiling", async () => {
+test("ADVERSARIAL: a flood spread across many sources is stopped by the instance ceiling", async () => {
  resetLimiter();
  const s = sink();
  let refused: Stage[] = [];
@@ -139,7 +139,7 @@ test("ADVERSARIAL: a flood spread across many sources is stopped by the global c
  // Every request from a different address, so the per-source limiter can
  // never fire. This is the case a per-source limit cannot cover by
  // construction, and it is why the global ceiling is checked first.
- for (let i = 0; i < LIMITS.global.capacity + 10; i++) {
+ for (let i = 0; i < LIMITS.instanceGlobal.capacity + 10; i++) {
   const { response, reached } = await handleDeclaration(
    post("{}", { "fly-client-ip": `198.51.100.${i % 256}` }),
    deps({ sink: s.fn }),
@@ -148,12 +148,12 @@ test("ADVERSARIAL: a flood spread across many sources is stopped by the global c
   else if (response.status === 429) refused = reached;
  }
 
- assert.equal(admitted, LIMITS.global.capacity, "the global ceiling is what held");
- assert.equal(s.written.length, LIMITS.global.capacity);
+ assert.equal(admitted, LIMITS.instanceGlobal.capacity, "the instance ceiling is what held");
+ assert.equal(s.written.length, LIMITS.instanceGlobal.capacity);
 
- // Refused on the global check — it never even reached the per-source lookup,
+ // Refused on the instance check — it never even reached the per-source lookup,
  // so a distributed flood costs one integer comparison per request.
- assert.deepEqual(refused, ["method", "content_type", "declared_length", "global_limit"]);
+ assert.deepEqual(refused, ["method", "content_type", "declared_length", "instance_global_limit"]);
  assert.ok(!refused.includes("source_limit"), "a distributed flood must not cost a hash per request");
  for (const stage of EXPENSIVE) assert.ok(!refused.includes(stage), `reached ${stage}`);
 });
@@ -278,16 +278,55 @@ test("malformed JSON is a declaration of nothing, and the parser never reports o
 
 test("the admission decision itself is ordered cheapest first, and the order is the design", () => {
  resetLimiter();
- const base = { method: "POST", contentType: "application/json", declaredLength: 10, source: "203.0.113.1", now: 1 };
+ const base = { method: "POST", contentType: "application/json", declaredLength: 10, source: { id: "203.0.113.1", trusted: true }, now: 1 };
 
  assert.deepEqual(admit({ ...base, method: "GET" }).reached, ["method"]);
  assert.deepEqual(admit({ ...base, contentType: "text/html" }).reached, ["method", "content_type"]);
  assert.deepEqual(admit({ ...base, declaredLength: MAX_BODY_BYTES + 1 }).reached,
   ["method", "content_type", "declared_length"]);
  assert.deepEqual(admit(base).reached,
-  ["method", "content_type", "declared_length", "global_limit", "source_limit"]);
+  ["method", "content_type", "declared_length", "instance_global_limit", "source_limit"]);
 
  // A missing Content-Length is not a refusal — the ceiling is enforced at the
  // body instead. Refusing here would lock out chunked senders for nothing.
  assert.equal(admit({ ...base, declaredLength: null }).outcome, "admitted");
+});
+
+test("a source identity comes only from an address Fly established, so rotating a header buys nothing", async () => {
+ resetLimiter();
+ const s = sink();
+
+ // Fly sets this and a client cannot forge it.
+ assert.deepEqual(sourceOf(new Headers({ "fly-client-ip": "203.0.113.4" })), { id: "203.0.113.4", trusted: true });
+
+ // Everything else is the caller's own text and is given NO identity of its
+ // own. X-Forwarded-For in particular: trusting it would let one attacker
+ // mint unlimited per-source allowances by changing a string.
+ const forgeable: Record<string, string>[] = [
+  { "x-forwarded-for": "203.0.113.5" },
+  { "x-forwarded-for": "1.1.1.1, 2.2.2.2, 3.3.3.3" },
+  { "x-real-ip": "203.0.113.6" },
+  {},
+ ];
+ for (const headers of forgeable) {
+  assert.deepEqual(sourceOf(new Headers(headers)), { id: UNTRUSTED_SOURCE, trusted: false }, JSON.stringify(headers));
+ }
+
+ // The consequence that matters: a caller rotating X-Forwarded-For gets the
+ // SAME bucket every time, so it spends one per-source allowance, not many.
+ const statuses: number[] = [];
+ for (let i = 0; i < LIMITS.source.capacity + 3; i++) {
+  const { response } = await handleDeclaration(
+   post("{}", { "x-forwarded-for": `198.51.100.${i}` }),
+   deps({ sink: s.fn }),
+  );
+  statuses.push(response.status);
+ }
+ assert.equal(statuses.filter(status => status === 201).length, LIMITS.source.capacity,
+  "rotating a forgeable header must not multiply the allowance");
+ assert.ok(statuses.slice(-3).every(status => status === 429));
+
+ // And a genuinely Fly-attested address is still its own source.
+ const attested = await handleDeclaration(post("{}", { "fly-client-ip": "203.0.113.77" }), deps({ sink: s.fn }));
+ assert.equal(attested.response.status, 201);
 });

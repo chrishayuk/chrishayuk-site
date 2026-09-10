@@ -70,7 +70,7 @@ a benchmark drifts with the machine it runs on, a stage ledger does not.
 1  method            one string comparison
 2  content type      one string comparison
 3  declared length   one integer comparison, before any body is read
-4  global limit      one integer comparison and a decrement
+4  instance global   one integer comparison and a decrement
 5  source limit      one non-cryptographic hash and a map lookup
 6  body read         bounded by a hard ceiling, never by trust
 7  json parse        only now is attacker-controlled text parsed
@@ -80,10 +80,41 @@ a benchmark drifts with the machine it runs on, a stage ledger does not.
 
 Nothing before stage 6 touches the body; nothing before stage 9 touches storage; no
 stage performs cryptography, because a rejection path running a deliberately slow
-hash is an amplifier pointed at its own host. Global precedes per-source because a
-distributed flood defeats a per-source limiter by construction, so the cheap ceiling
-is the one that has to hold — and a distributed flood therefore costs one integer
-comparison per request, never a hash.
+hash is an amplifier pointed at its own host. The instance ceiling precedes
+per-source because a distributed flood defeats a per-source limiter by construction,
+so the cheap check is the one that has to hold — and a distributed flood therefore
+costs one integer comparison per request, never a hash.
+
+**Two production facts, stated rather than assumed.**
+
+*Where a source identity comes from.* Only `Fly-Client-IP`, which Fly sets and a
+client cannot forge. `X-Forwarded-For` is a header the caller chose, and treating it
+as an identity would let one attacker mint unlimited per-source allowances by
+rotating a string. So an untrusted request is given no identity of its own: it goes
+in one shared bucket with every other untrusted request, and rotating headers buys
+nothing. A test asserts exactly that.
+
+*What "global" means.* The limiter is in memory, so the ceiling is global within a
+process, not across a deployment. Today those coincide — one machine in `fly.toml`,
+`--ha=false` on deploy — but that is a deployment fact and not a guarantee, so the
+stage is named `instance_global_limit` and the claim is layered:
+
+```text
+Internet
+   ↓  network edge — volumetric protection, not this code's job
+machine instance
+   ↓  cheap instance-global ceiling      (stage 4)
+   ↓  per-source ceiling                 (stage 5)
+   ↓  bounded body, parser, store        (stages 6-9)
+```
+
+Putting a shared datastore at stage 4 would buy a mathematically deployment-global
+counter by placing I/O on the cheap rejection path, which is the one thing this
+design exists to keep free of it. The defensible claim is therefore:
+
+> MG-2A prevents the declaration feature from becoming a cheap application-level
+> denial-of-service or amplification primitive. Volumetric protection remains the
+> network edge's responsibility.
 
 Four adversarial shapes are tested, each asserting both the status and the stages:
 
@@ -102,6 +133,20 @@ an endpoint that writes while unable to count is worse than one that refuses. Th
 write queue is bounded rather than growing. Responses are the same size whatever
 arrived, so refusing can never amplify, and nothing submitted appears in any
 response.
+
+**MG-D1 — the public exhibit.** `/machine-guestbook`, a human-facing projection,
+shipped during C0 so it is already there when C1 begins. It publishes four coarse
+buckets from the **previous completed UTC day** and never an individual entry: a
+live feed of declarations would be a message board with a nicer typeface, and one
+needing no token at all. Eight bits per publication, one publication per day, with
+24–48 hours between acting and observing — a short URL costs a month. It is in the
+sitemap and may be in navigation; it does **not** link to `/machines`, because a
+second inbound route would move discoverability at the same moment MG-2B moves
+participation. `scripts/c0-treatment.mjs` asserts that link's absence.
+
+The page separates two clocks. Facts the site controls — phase, whether declaration
+is open, the date observation began — are current, because no visitor can move them.
+Anything a visitor can influence is a day behind.
 
 **MG-2B — the treatment.** Mounts `/api/machines/declaration` and supplies the real
 store. `scripts/c0-treatment.mjs` fails at that deployment, and **that deployment's

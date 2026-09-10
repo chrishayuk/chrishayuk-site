@@ -20,7 +20,7 @@
  *   1  method            one string comparison
  *   2  content type      one string comparison
  *   3  declared length   one integer comparison, before any body is read
- *   4  global limit      one integer comparison and a decrement
+ *   4  instance global   one integer comparison and a decrement
  *   5  source limit      one non-cryptographic hash and a map lookup
  *   6  body read         bounded by a hard ceiling, never by trust
  *   7  json parse        only now is attacker-controlled text parsed
@@ -33,16 +33,39 @@
  * hash designed to be slow is a denial-of-service amplifier pointed at
  * its own host.
  *
- * Global comes before per-source deliberately. A distributed flood
- * defeats a per-source limiter by construction — that is what
- * "distributed" means — so the cheap global ceiling is the one that has
+ * The instance ceiling comes before per-source deliberately. A
+ * distributed flood defeats a per-source limiter by construction — that
+ * is what "distributed" means — so the cheap ceiling is the one that has
  * to hold, and the per-source limit exists to stop a single caller
  * consuming it.
+ *
+ * WHAT "GLOBAL" HONESTLY MEANS HERE. This state is in memory, so the
+ * ceiling is global WITHIN A PROCESS, not across a deployment. Today
+ * that is the same thing — fly.toml runs one machine and the deploy
+ * uses --ha=false — but that is a deployment fact and not a guarantee,
+ * so the name says `instance` and the claim is layered rather than
+ * overstated:
+ *
+ *   Internet
+ *      ↓  network edge — volumetric protection, not this file's job
+ *   machine instance
+ *      ↓  cheap instance-global ceiling      (stage 4)
+ *      ↓  per-source ceiling                 (stage 5)
+ *      ↓  bounded body, parser, store        (stages 6-9)
+ *
+ * A shared datastore at stage 4 would buy a mathematically
+ * deployment-global counter by putting I/O on the cheap rejection path,
+ * which is the one thing this design exists to keep free of it. So the
+ * defensible claim is:
+ *
+ *   MG-2A prevents the declaration feature from becoming a cheap
+ *   application-level denial-of-service or amplification primitive.
+ *   Volumetric protection remains the network edge's responsibility.
  */
 
 /** The stages a request can reach. Recorded so refusal cost can be asserted. */
 export const STAGE = [
- "method", "content_type", "declared_length", "global_limit", "source_limit",
+ "method", "content_type", "declared_length", "instance_global_limit", "source_limit",
  "body_read", "json_parse", "declaration_parse", "persist",
 ] as const;
 
@@ -70,13 +93,14 @@ export const MAX_BODY_BYTES = 2048;
 /**
  * Ceilings.
  *
- * Per-source stops one caller consuming the global allowance. Global
- * stops everyone else doing it between them, and is the only one that
- * holds against a distributed flood.
+ * Per-source stops one caller consuming the instance allowance. The
+ * instance ceiling stops everyone else doing it between them, and is the
+ * only one of the two that holds against a distributed flood.
  */
 export const LIMITS = {
  source: { capacity: 5, refillPerSecond: 1 / 12 },
- global: { capacity: 60, refillPerSecond: 2 },
+ /** Per process, not per deployment. See the note above. */
+ instanceGlobal: { capacity: 60, refillPerSecond: 2 },
  /** The per-source table is itself an attack surface, so it is bounded. */
  maxSources: 4096,
  /** How long a quiet source is kept before its bucket is swept. */
@@ -106,7 +130,7 @@ function key(value: string): number {
 }
 
 const sources = new Map<number, Bucket>();
-let globalBucket: Bucket = { tokens: LIMITS.global.capacity, last: 0 };
+let instanceBucket: Bucket = { tokens: LIMITS.instanceGlobal.capacity, last: 0 };
 
 function take(bucket: Bucket, capacity: number, refillPerSecond: number, now: number): boolean {
  const elapsed = bucket.last === 0 ? 0 : Math.max(0, now - bucket.last);
@@ -131,7 +155,33 @@ function sweep(now: number): void {
 /** Tests only. The limiter is process state and must be resettable to be testable. */
 export function resetLimiter(): void {
  sources.clear();
- globalBucket = { tokens: LIMITS.global.capacity, last: 0 };
+ instanceBucket = { tokens: LIMITS.instanceGlobal.capacity, last: 0 };
+}
+
+export type TrustedSource = { id: string; trusted: boolean };
+
+/**
+ * WHERE A SOURCE IDENTITY IS ALLOWED TO COME FROM.
+ *
+ * `Fly-Client-IP` is set by Fly itself and a client cannot forge it.
+ * Nothing else here is trustworthy: `X-Forwarded-For` is a header the
+ * caller chose, and treating it as an identity would let one attacker
+ * mint unlimited per-source allowances by rotating a string.
+ *
+ * So an untrusted request is not given an identity of its own — it is
+ * put in ONE SHARED BUCKET. Rotating headers then buys nothing, because
+ * every forged identity lands in the same bucket as every other. That
+ * is the whole trick, and it is why there is no `?? xff` fallback here.
+ *
+ * The proxy's own rule is the same one from the other direction: it
+ * takes the LAST X-Forwarded-For entry rather than the first, because
+ * earlier entries are whatever the caller sent. See proxy.ts.
+ */
+export const UNTRUSTED_SOURCE = "untrusted";
+
+export function sourceOf(headers: Headers): TrustedSource {
+ const fly = headers.get("fly-client-ip")?.trim();
+ return fly ? { id: fly, trusted: true } : { id: UNTRUSTED_SOURCE, trusted: false };
 }
 
 export type Facts = {
@@ -139,8 +189,11 @@ export type Facts = {
  contentType: string | null;
  /** The Content-Length header as sent. Untrusted, and checked anyway — it is free. */
  declaredLength: number | null;
- /** Whatever the edge says the caller is. Hashed, never stored, never logged. */
- source: string | null;
+ /**
+  * The caller's identity, and whether it came from somewhere that
+  * cannot be forged. Hashed, never stored, never logged.
+  */
+ source: TrustedSource;
  now: number;
 };
 
@@ -168,15 +221,15 @@ export function admit(facts: Facts): Decision {
   return { outcome: "payload_too_large", reached };
  }
 
- // Global before per-source: the cheap ceiling is the one that has to
- // hold against traffic spread across many addresses.
- reached.push("global_limit");
- if (!take(globalBucket, LIMITS.global.capacity, LIMITS.global.refillPerSecond, facts.now)) {
+ // Instance ceiling before per-source: the cheap check is the one that
+ // has to hold against traffic spread across many addresses.
+ reached.push("instance_global_limit");
+ if (!take(instanceBucket, LIMITS.instanceGlobal.capacity, LIMITS.instanceGlobal.refillPerSecond, facts.now)) {
   return { outcome: "too_many_requests", reached, retryAfterSeconds: 1 };
  }
 
  reached.push("source_limit");
- const id = key(facts.source ?? "");
+ const id = key(facts.source.id);
  let bucket = sources.get(id);
  if (!bucket) {
   if (sources.size >= LIMITS.maxSources) {
