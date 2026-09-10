@@ -16,6 +16,23 @@ export const INDEXABLE = process.env.SITE_INDEXABLE === "true";
  * all. Anything that builds on `pageMetadata` now carries both.
  */
 export const feedAlternates = {
+ /**
+  * THE MACHINE INDEX, ON EVERY PAGE.
+  *
+  * A blind agent sent to explore this site reached /llms.txt by guessing
+  * that the convention exists — nothing here pointed at it. That is the
+  * wrong way round: an agent arriving at a notebook entry from a
+  * citation is already reading for meaning, which is exactly the
+  * audience robots.txt comments do NOT reach, because the things
+  * fetching robots.txt are crawler fetchers that parse directives and
+  * discard prose.
+  *
+  * So the pointer goes where the agent already is. It names /llms.txt
+  * and not /machines: the machine index remains the single route to the
+  * machine surface, which is what keeps "how did it find that room"
+  * answerable.
+  */
+ "text/plain": [{ url: "/llms.txt", title: "Chris Hay — machine index" }],
  "application/rss+xml": [
   { url: FEEDS.notebook.path, title: FEEDS.notebook.title },
   { url: FEEDS.record.path, title: FEEDS.record.title },

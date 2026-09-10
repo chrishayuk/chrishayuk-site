@@ -49,7 +49,14 @@ export function proxy(request: NextRequest) {
  } catch {
   // Counting readers is never a reason to fail to serve one.
  }
- return NextResponse.next();
+ // The same pointer as the <link> in the head, for anything that reads
+ // headers without parsing HTML — a HEAD request, a fetcher that never
+ // renders, a client that looks at Link before deciding what to pull.
+ const response = NextResponse.next();
+ // Relative on purpose: a preview or the Fly hostname must point at its
+ // own machine index, not at production's.
+ response.headers.append("Link", '</llms.txt>; rel="alternate"; type="text/plain"; title="machine index"');
+ return response;
 }
 
 export const config = {
