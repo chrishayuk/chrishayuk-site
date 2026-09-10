@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import index from "@/lib/data/cell80-barrier-index.json";
+import { Cell80PopulationTrace } from "./Cell80PopulationTrace";
 import preview from "@/lib/data/cell80-barrier-preview.json";
 import { Cell80Meaning as Meaning } from "./Cell80Meaning";
 
@@ -15,30 +16,6 @@ const conditions = [
 const start = index.worlds.find(w => w.key === preview.key)!;
 const format = (n:number) => n.toLocaleString("en-GB");
 
-function PopulationTrace({history, tick}:{history:History; tick:number}) {
-  const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const draw = () => {
-      const width = canvas.clientWidth, height = 150, ratio = window.devicePixelRatio || 1;
-      canvas.width = width * ratio; canvas.height = height * ratio;
-      const ctx = canvas.getContext("2d"); if (!ctx) return;
-      ctx.scale(ratio,ratio); ctx.clearRect(0,0,width,height);
-      const x = (t:number) => 2 + t / 2999 * (width - 4);
-      const y = (n:number) => height - 3 - n / 256 * (height - 6);
-      ctx.strokeStyle = "#d4d9c13d"; ctx.lineWidth = 1;
-      for (const n of [0,128,256]) {ctx.beginPath();ctx.moveTo(0,y(n));ctx.lineTo(width,y(n));ctx.stroke();}
-      for (const [field, color] of [[1,"#8c9185"],[2,"#e3b56b"],[3,"#f1eee5"]] as const) {
-        ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=1.5;
-        history.frames.forEach((f,i)=>{if(i===0)ctx.moveTo(x(f[0]),y(f[field]));else ctx.lineTo(x(f[0]),y(f[field]));});ctx.stroke();
-      }
-      ctx.beginPath();ctx.strokeStyle="#f1eee5";ctx.setLineDash([3,4]);ctx.moveTo(x(tick),0);ctx.lineTo(x(tick),height);ctx.stroke();
-    };
-    draw();const observer = new ResizeObserver(draw);observer.observe(canvas);return()=>observer.disconnect();
-  },[history,tick]);
-  return <div className="cell80-barrier-trace"><div className="record-voice"><span>POPULATION / 0–256</span><span>ALL 3,000 RECORDED STEPS</span></div><canvas ref={ref} role="img" aria-label="Population history: grey is all living organisms, amber is those able to use the new food, and white is those also carrying increased food intake. The vertical line marks the selected time."/><div className="record-voice"><span>0</span><span>1,500</span><span>2,999</span></div></div>;
-}
 
 export function Cell80BarrierWorld() {
   const id = useId();
@@ -100,7 +77,7 @@ export function Cell80BarrierWorld() {
       <div className="cell80-barrier-readout"><span className="record-voice"><Meaning term="tick">TICK</Meaning> {format(shownTick)}</span><strong>{format(capable)}<small> / 256</small></strong><p>carry a program that can use the new food</p><dl><div><dt>Alive</dt><dd>{format(alive)}</dd></div><div><dt>Also have higher food intake</dt><dd>{format(high)}</dd></div></dl><p className="cell80-caption">{status}</p></div>
     </div>
     <p className="cell80-legend cell80-barrier-legend"><span><i data-kind="ordinary"/>Other organisms</span><span><i data-kind="capable"/>Can use new food</span><span><i data-kind="high"/>Also higher intake</span><span><i data-kind="empty"/>Empty place</span></p>
-    {ready && <PopulationTrace history={history} tick={tick}/>}
+    {ready && <Cell80PopulationTrace history={history} tick={tick} label="Population history: grey is all living organisms, amber is those able to use the new food, and white is those also carrying increased food intake. The vertical line marks the selected time."/>}
     <div className="cell80-barrier-playback"><button type="button" disabled={!ready} onClick={()=>{if(playing)setPlaying(false);else{playFrom.current=tick===2999?0:tick;setPlaying(true);}}}>{playing?"Pause":"Play history"}</button><div className="cell80-scrubber"><label htmlFor={id}>Time step <span>{format(shownTick)} / 2,999</span></label><input id={id} type="range" min={0} max={2999} value={shownTick} disabled={!ready} onChange={e=>seek(Number(e.target.value))}/></div></div>
     <div className="cell80-replay-jumps"><button type="button" disabled={!ready} onClick={()=>seek(0)}>Beginning</button>{meta.firstBirth!==null && <><button type="button" disabled={!ready} onClick={()=>seek(Math.max(0,meta.firstBirth!-1))}>Before the new program</button><button type="button" disabled={!ready} onClick={()=>seek(meta.firstBirth!)}>Its first birth / {format(meta.firstBirth)}</button></>}<button type="button" disabled={!ready} onClick={()=>seek(2999)}>Endpoint</button></div>
     <div className="cell80-controls" role="group" aria-label="Choose experimental conditions">{conditions.map(c=><button type="button" key={c.id} aria-pressed={meta.arm===c.id} onClick={()=>choose(`${c.id}-${c.initial}`)}>{c.label}</button>)}</div>

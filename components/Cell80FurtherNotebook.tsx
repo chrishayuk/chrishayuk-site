@@ -1,10 +1,13 @@
 import Link from "next/link";
+import barrierIndex from "@/lib/data/cell80-barrier-index.json";
+import inheritedHistory from "@/lib/data/cell80-inherited-history.json";
 import { StudyRoom, StudySequence, StudyMeasures } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { Question } from "@chrishayuk/hause/components/forms/Question";
 import { EvidenceTable } from "@chrishayuk/hause/components/EvidenceTable";
 import { cell80FurtherPart } from "@/lib/cell80-further-records";
 import type { PublicationRecord } from "@/lib/types";
+import { Cell80InheritedHistory } from "./Cell80InheritedHistory";
 import { Cell80BarrierWorld, Cell80BarrierOutcomes } from "./Cell80Barrier";
 import { Cell80Realization } from "./Cell80Realization";
 import { NotebookFieldNotes } from "./NotebookFieldNotes";
@@ -36,11 +39,12 @@ function Barrier() {
 
 function InheritedHistory() {
   return <>
-    <StudyRoom id="cell80-study" label="EX-13 / FOLLOW ONE ORGANISM’S FAMILY" title={<>Passed on.<br/><em>Then lost.</em></>} tone="dark" description="In a digital world, I tested a new food-processing program and a later change that increased food intake. Then I followed one organism’s descendants to see how long they kept both changes. This chart follows that family.">
-      <figure className="cell80-descendants"><figcaption className="record-voice">LIVING DESCENDANTS STILL CARRYING BOTH CHANGES</figcaption>
+    <StudyRoom id="cell80-study" label="EX-13 / FOLLOW ONE ORGANISM’S FAMILY" title={<>Passed on.<br/><em>Then lost.</em></>} tone="dark" description="In a digital world, I tested a new food-processing program and a later change that increased food intake. Then I followed one organism’s descendants to see how long they kept both changes. Follow that family through time.">
+      <Cell80InheritedHistory/>
+      <FieldNotes label="Four recorded checkpoints" detail="READ +"><figure className="cell80-descendants"><figcaption className="record-voice">LIVING DESCENDANTS STILL CARRYING BOTH CHANGES</figcaption>
         <div className="cell80-descendant-bars">{[{label:"+50 TICKS",count:217},{label:"+200 TICKS",count:148},{label:"+500 TICKS",count:230},{label:"END / TICK 3,000",count:0}].map(point => <div key={point.label}><span className="record-voice">{point.label}</span><strong>{point.count}</strong><div className="cell80-descendant-track" aria-hidden="true"><i style={{height:`${point.count/256*100}%`}}/></div></div>)}</div>
         <p className="cell80-caption">The first three times are measured from the chosen organism’s birth. A tick is one time step. Each descendant must have inherited both changes without a break. Scale: 0–256 places. The entire family died out at tick 1,268. <a href="/data/cell80/followups/ex13-results.md">Recorded cohort counts ↗</a></p>
-      </figure>
+      </figure></FieldNotes>
       <div className="cell80-prose"><p>Other families still carried the food-processing program. This <Meaning term="lineage">lineage</Meaning> disappeared even though its kind of capability remained in the world.</p></div>
       <p className="cell80-caption">The <Link href="/notebook/give-invention-something-to-unlock">preceding note</Link> explains how programs evolved to use this new food.</p>
     </StudyRoom>
@@ -73,5 +77,10 @@ export function Cell80FurtherNotebook({record}:{record:PublicationRecord}) {
 }
 
 export function Cell80FurtherCard({part}:{part:number}) {
-  return <div className="cell80-preview"><span className="record-voice">CELL80 / FURTHER NOTES · {part === 1 ? "EX-11" : "EX-12–14"}</span><strong className="cell80-further-card-number">{part === 1 ? "0 → 1" : "148 → 0"}</strong><p>{part === 1 ? <>Something new.<br/><em>Something useful.</em></> : <>Passed on.<br/><em>Then lost.</em></>}</p><span className="record-voice">{part === 1 ? "THE CAPABILITY BARRIER" : "THE FATE OF ONE LINEAGE"}</span></div>;
+  const checkpoints=[50,200,500].map(age=>({label:`+${age}`,count:inheritedHistory.frames[age][2]}));
+  checkpoints.push({label:"END",count:inheritedHistory.frames.at(-1)![2]});
+  return <div className="cell80-preview cell80-further-preview"><span className="record-voice">CELL80 / 0{part+3} · {part===1?"EX-11":"EX-12–14"}</span>
+    {part===1?<div className="cell80-barrier-preview" role="img" aria-label="Forty worlds: the capability was retained in two full-evolution worlds, one with fixed food intake, and none in either control.">{["full","b_only","no_substrate","atomic_only"].map((arm,i)=><div key={arm}><span className="record-voice">{["FULL EVOLUTION","FIXED INTAKE","NO NEW FOOD","NO COMBINATIONS"][i]}</span><div>{barrierIndex.worlds.filter(w=>w.arm===arm).map(w=><i key={w.key} data-result={w.retained?"retained":w.origins?"appeared":"absent"}/>)}</div></div>)}</div>:<div className="cell80-history-preview" role="img" aria-label="Descendants carrying both changes: 217 after 50 steps, 148 after 200, 230 after 500, zero at the end.">{checkpoints.map(c=><div key={c.label}><strong>{c.count}</strong><div><i style={{height:`${c.count/256*100}%`}}/></div><span className="record-voice">{c.label}</span></div>)}</div>}
+    <p>{part===1?<>Something new.<br/><em>Will it stay?</em></>:<>Passed on.<br/><em>Then lost.</em></>}</p><span className="record-voice">{part===1?"40 RECORDED WORLDS":"ONE RECORDED FAMILY"} · OPEN TO PLAY ↗</span>
+  </div>;
 }

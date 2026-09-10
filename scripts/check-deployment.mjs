@@ -31,6 +31,11 @@ assert.match(home.body, /\/data\/cell80\/home-observed\.png/);
 assert.match(home.body, /WATCH THE REPLAY/);
 assert.match(home.body, /href="\/notebook\/what-keeps-an-evolving-world-alive"/);
 assert.match(home.body, /href="\/notebook\/when-does-improvement-become-invention"/);
+assert.match(home.body, /Continue through the five Cell80 Notebook entries/);
+assert.doesNotMatch(home.body, /cell80-further-preview|cell80-barrier-world|cell80-inherited-world/);
+assert.match(home.body, /href="\/notebook\/give-invention-something-to-unlock"/);
+assert.match(home.body, /href="\/notebook\/an-advantage-needs-a-chance-to-become-history"/);
+
 assert.match(home.body, /href="\/notebook\/the-address-is-built-through-depth"/);
 assert.match(home.body, /class="address-teaser"/);
 assert.match(home.body, /cfvod\.kaltura\.com\/p\/1773841\/sp\/177384100\/thumbnail\/entry_id\/1_rwy4uz25\/width\/1280/);
@@ -50,6 +55,14 @@ for (const slug of ['can-you-name-the-mutation-that-changed-a-world','what-keeps
  assert.match(note.body,/href="\/thread\/cell80"/);
  assert.match(note.body,/DRAFT/);
 }
+const inheritedNote=await request('/notebook/an-advantage-needs-a-chance-to-become-history');
+assert.equal(inheritedNote.status,200);
+assert.match(inheritedNote.body,/cell80-inherited-world/);
+assert.match(inheritedNote.body,/Play family history/);
+assert.match(inheritedNote.body,/Choose one of 100 recorded matched futures/);
+const familyHistory=JSON.parse((await request('/data/cell80/inherited-history.json')).body);
+assert.equal(familyHistory.frames.length,2835);
+assert.equal(familyHistory.frames[200][2],148);
 const ecologyThread=await request('/thread/cell80');
 assert.equal(ecologyThread.status,200);
 for(const n of [1,2,3]) assert.ok(ecologyThread.body.includes(`id="step-${n}"`));
