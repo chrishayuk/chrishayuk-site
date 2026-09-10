@@ -508,3 +508,22 @@ test("the question is not returned, and no submitted byte appears in a bundle", 
  assert.ok(bundle.limits.some(limit => limit.includes("draft is not a finding")));
  assert.ok(bundle.limits.some(limit => limit.includes("retrieval, not generation")));
 });
+
+test("the machine index is reachable by something that follows links", async () => {
+ // The failure this exists to prevent, and it ran for a day undetected: the
+ // machine surface was advertised ONLY by a `link rel=alternate` in the head
+ // and a comment in robots.txt. Crawlers follow neither — they follow sitemaps
+ // and anchors. In 929 verified AI requests a day, not one reached /llms.txt,
+ // so nothing ever saw the guestbook, and a zero that means "never discovered"
+ // reads exactly like a zero that means "not interested".
+ assert.ok(canonicalPaths().includes("/llms.txt"), "the machine index belongs in the sitemap");
+
+ const footer = await readFile(new URL("../components/Footer.tsx", import.meta.url), "utf8");
+ assert.match(footer, /<a href="\/llms\.txt"/, "and needs one anchor a crawler can follow");
+
+ // The topology it exists to preserve is unchanged: pointing at the index is
+ // not pointing at the machine surface, and /machines keeps its single route.
+ assert.ok(!canonicalPaths().includes("/machines"), "the machine surface stays out of the sitemap");
+ assert.ok(!footer.includes("/machines\""), "and out of the footer");
+ assert.ok(!archivePaths().includes("/llms.txt"), "a regenerated index corroborates nothing");
+});

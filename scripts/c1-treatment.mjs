@@ -55,6 +55,12 @@ assert.match(llms.body, /\]\(https:\/\/chrishayuk\.com\/machines\)/, "/llms.txt 
 
 const sitemap = await get("/sitemap.xml");
 assert.doesNotMatch(sitemap.body, /chrishayuk\.com\/machines</, "/machines must stay out of the sitemap");
+// And the index itself must be reachable by something that follows links, or
+// nothing discovers the machine surface at all — which is how a day passed
+// with 929 AI requests and zero arrivals.
+assert.match(sitemap.body, /chrishayuk\.com\/llms\.txt</, "/llms.txt must be in the sitemap");
+const home = await get("/");
+assert.match(home.body, /href="\/llms\.txt"/, "an anchor to the machine index must exist on ordinary pages");
 
 machineProbes++;
 const machines = await get("/machines");

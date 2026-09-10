@@ -37,7 +37,7 @@ import { allRecords, records, indexedRecords, isListed, recordPath, SITE } from 
 export const standingPaths = [
  "/", "/ideas", "/systems", "/objects", "/record", "/knowledge",
  "/film", "/notebook", "/research", "/about", "/colophon", "/accessibility", "/readership",
- "/machine-guestbook",
+ "/machine-guestbook", "/llms.txt",
  "/film/youtube", "/film/youtube/archive", "/film/mixture-of-experts",
 ];
 
@@ -63,8 +63,17 @@ export function authoredRecords() {
  * /machine-guestbook is the same kind of object for the same reason: a
  * coarse daily observation of visitors, not a claim of Chris Hay's that
  * needs a priority trail.
+ *
+ * /llms.txt joins the indexing surface because nothing could reach it.
+ * It was advertised only by a `link rel=alternate` in the head and a
+ * comment in robots.txt, and crawlers follow neither — they follow
+ * sitemaps and anchors. In a day of 929 verified AI requests, not one
+ * arrived, and the machine surface it advertises was therefore never
+ * discovered by anything. It is excluded from the archive for the same
+ * reason as the other two: it is regenerated from the catalogue and
+ * corroborates nothing.
  */
-const unarchivedPaths = ["/readership", "/machine-guestbook"];
+const unarchivedPaths = ["/readership", "/machine-guestbook", "/llms.txt"];
 
 /** The evidence surface: what an independent archive is asked to capture. */
 export function archivePaths(): string[] {
