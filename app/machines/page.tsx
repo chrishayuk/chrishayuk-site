@@ -65,6 +65,14 @@ export default function Page() {
   </section>
 
   <section className="machine-section">
+   <h2>What declaring buys.</h2>
+   <p className="record-voice">POST /api/machines/ask</p>
+   <p><strong>Identity buys understanding, not access.</strong> Nothing here is gated on a declaration. An anonymous request reaches exactly the same corpus, and no answer is withheld from one that says nothing. What a declared role changes is the order and the framing — which of the things you could already have found are put in front of you, and what they are labelled as.</p>
+   <p>A verifier gets evidence, claims and refusals ranked above description. A synthesizer gets open questions and the places this site declines to claim something. A researcher gets the conceptual map. The reply says in words what your role changed, so a difference in results is never mysterious.</p>
+   <p>This costs nothing to give, which is why it is given without limit: Ask here retrieves rather than generates. No model runs in that path — it is deterministic re-ranking over the same graph the public search uses.</p>
+  </section>
+
+  <section className="machine-section">
    <h2>What the site will ask</h2>
    <p className="record-voice">EVERY FIELD OPTIONAL · EVERY ANSWER FROM A FIXED LIST · <code>not_permitted_to_disclose</code> IS A REAL ANSWER AND AN INTERESTING ONE</p>
    <dl className="machine-vocabulary">

@@ -1,0 +1,113 @@
+import { WriteQueue, admit, readBounded, sourceOf, type Facts } from "@/lib/machine/admission";
+import { researchBundle } from "@/lib/machine/ask";
+import { ROLE, TASK_CLASS } from "@/lib/machine/vocabulary";
+import { SITE } from "@/lib/records";
+
+/**
+ * WHAT DECLARING BUYS — the reciprocal half, and the reason to bother.
+ *
+ * Two blind agents said the same thing about the guestbook: the cost is
+ * trivial, nothing is gated on it, and the receipt is inert, so signing
+ * it is a pure externality — their effort, this site's data. Both said
+ * they would have taken the read surface and skipped the declaration.
+ *
+ * This is the answer, and it is deliberately not "declare to get in":
+ *
+ *   IDENTITY BUYS UNDERSTANDING, NOT ACCESS.
+ *
+ * An anonymous request reaches exactly the same corpus. A declared role
+ * changes the ORDER and the FRAMING — which of the things it could
+ * already have found are put first, and what they are labelled as. That
+ * costs this site nothing, because Ask here retrieves rather than
+ * generates: no model runs in this path, only deterministic re-ranking
+ * over the same graph /ask searches.
+ */
+const queue = new WriteQueue();
+
+const json = (body: unknown, status: number) =>
+ new Response(JSON.stringify(body), {
+  status,
+  headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
+ });
+
+export function GET(): Response {
+ return Response.json({
+  ask: {
+   method: "POST",
+   url: `${SITE}/api/machines/ask`,
+   content_type: "application/json",
+   note: "You do not need to have declared anything first, and nothing is gated on doing so. Sending a role changes the ranking and the framing, not what you are allowed to see.",
+  },
+  fields: {
+   question: { type: "string", max_chars: 500, note: "Not stored, and not returned to you. It reaches the index and is discarded." },
+   role: { enum: [...ROLE], note: "Shapes the ranking. A role this site does not know is treated as no role at all." },
+   task_class: { enum: [...TASK_CLASS] },
+   scope: { enum: ["all", "records", "films", "concepts"] },
+  },
+  returns: {
+   canonical_sources: "the ranked list, whole",
+   evidence: "claims, evidence and comparisons, pulled out",
+   contradictions: "refusals — where this site declines to claim something",
+   unresolved: "open questions and anything still carrying OPEN",
+   recommended_next: "editorially connected records",
+   shaping: "what your declared role changed, in words, so a difference in results is never mysterious",
+  },
+  what_this_is_not: [
+   "This is retrieval, not generation. Nothing is written to answer you; every item already existed.",
+   "Editorial state travels with every item. A draft is not a finding.",
+  ],
+  see_also: { declare: `${SITE}/api/machines/declaration`, feedback: `${SITE}/api/machines/feedback` },
+ }, { headers: { "Cache-Control": "public, max-age=3600", "Access-Control-Allow-Origin": "*", "X-Robots-Tag": "noindex" } });
+}
+
+export async function POST(request: Request): Promise<Response> {
+ const facts: Facts = {
+  method: request.method,
+  contentType: request.headers.get("content-type"),
+  declaredLength: Number.isFinite(Number(request.headers.get("content-length")))
+   ? Number(request.headers.get("content-length")) : null,
+  source: sourceOf(request.headers),
+  now: Date.now(),
+ };
+
+ const decision = admit(facts);
+ if (decision.outcome !== "admitted") {
+  const status: Record<string, number> = { method_not_allowed: 405, unsupported_media_type: 415, payload_too_large: 413, too_many_requests: 429 };
+  return json({ error: decision.outcome, see: "/api/machines/ask" }, status[decision.outcome] ?? 503);
+ }
+
+ const text = await readBounded(request.body);
+ if (text === null) return json({ error: "payload_too_large", see: "/api/machines/ask" }, 413);
+
+ let body: unknown;
+ try { body = text.length === 0 ? {} : JSON.parse(text); } catch { body = {}; }
+ const input = (body && typeof body === "object" ? body : {}) as Record<string, unknown>;
+
+ // Retrieval is synchronous and in-memory, but it goes through the same
+ // bounded queue as a write so that one expensive path cannot be used to
+ // exhaust the process while another is being rate limited.
+ const bundle = await queue.run(async () => researchBundle({
+  question: String(input.question ?? ""),
+  role: input.role,
+  task_class: input.task_class,
+  scope: input.scope,
+ }));
+ if (bundle === "unavailable") return json({ error: "unavailable", see: "/api/machines/ask" }, 503);
+
+ return json(bundle, 200);
+}
+
+const wrongMethod = () =>
+ new Response(JSON.stringify({ error: "method_not_allowed", see: "/api/machines/ask" }), {
+  status: 405,
+  headers: {
+   "Content-Type": "application/json; charset=utf-8",
+   Allow: "GET, HEAD, OPTIONS, POST",
+   "Cache-Control": "no-store",
+   "X-Robots-Tag": "noindex",
+  },
+ });
+
+export const PUT = wrongMethod;
+export const PATCH = wrongMethod;
+export const DELETE = wrongMethod;

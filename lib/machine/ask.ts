@@ -119,9 +119,15 @@ export function researchBundle(input: AskRequest): ResearchBundle {
    ? SHAPING[role] ?? []
    : ["No role was declared, or the role was not one this site knows, so results are in the site's ordinary order."],
 
-  // Everything that is a record or a primary source, ranked for this role.
-  canonical_sources: ranked.filter(result => result.kind !== "act" || !["evidence", "refusal"].includes(kindOf(result)))
-   .slice(0, 12).map(reference),
+  // The ranked list itself, whole.
+  //
+  // An earlier version excluded evidence and refusals here on the grounds
+  // that they had their own sections — which meant a verifier's ranking
+  // applied only to items this list had already dropped, and the shaping
+  // was invisible in the one place a caller looks first. The sections
+  // below are additional VIEWS of the same ranking, not slices taken out
+  // of it.
+  canonical_sources: ranked.slice(0, 12).map(reference),
 
   evidence: of("evidence", "claim", "comparison"),
 

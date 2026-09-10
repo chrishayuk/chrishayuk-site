@@ -13,6 +13,7 @@ import { visiblePaths } from "../lib/readership/visible.ts";
 import { archivePaths, canonicalPaths } from "../lib/canonical.ts";
 import { CONDITION, PUBLIC_CAPACITY_BUDGET_BITS, PUBLIC_DIMENSIONS, previousCompletedDay, publicCapacityBits, renderPublic } from "../lib/machine/guestbook.ts";
 import { SITE, records } from "../lib/records.ts";
+import { researchBundle } from "../lib/machine/ask.ts";
 
 /**
  * MG-1 — MAKE ARBITRARY PARTICIPANT-TO-PARTICIPANT COMMUNICATION
@@ -453,4 +454,50 @@ test("MG-D1: the public channel is eight bits a day, and widening it fails here"
  const bytesPerDay = publicCapacityBits() / 8;
  assert.equal(bytesPerDay, 1);
  assert.ok(30 / bytesPerDay >= 30, "a short URL must cost at least a month");
+});
+
+test("identity buys understanding, not access: the corpus is the same and only the order moves", () => {
+ const question = "what evidence supports predictive locality";
+
+ const anonymous = researchBundle({ question });
+ const verifier = researchBundle({ question, role: "verifier" });
+ const synthesizer = researchBundle({ question, role: "synthesizer" });
+
+ // NOTHING IS GATED. The same items reach every caller; a declaration cannot
+ // unlock a record and cannot withhold one. If this ever fails, the bargain has
+ // quietly become the human web's — identity for entry — which is the thing
+ // this endpoint exists not to be.
+ const ids = (bundle: { canonical_sources: { id: string }[] }) =>
+  new Set(bundle.canonical_sources.map(source => source.id));
+ assert.deepEqual([...ids(verifier)].sort(), [...ids(anonymous)].sort(),
+  "a declared role must not change WHICH sources are reachable");
+ assert.deepEqual([...ids(synthesizer)].sort(), [...ids(anonymous)].sort());
+
+ // What it does change is the order, and the site says so in words rather than
+ // leaving a caller to wonder why two requests differed.
+ assert.equal(anonymous.shaped_by, null);
+ assert.equal(verifier.shaped_by?.role, "verifier");
+ assert.ok(verifier.shaping.length > 0 && verifier.shaping !== anonymous.shaping);
+
+ // An unknown role is treated as no role, not as an error.
+ const nonsense = researchBundle({ question, role: "chief-vibes-officer" });
+ assert.equal(nonsense.shaped_by, null);
+ assert.deepEqual(nonsense.canonical_sources, anonymous.canonical_sources);
+});
+
+test("the question is not returned, and no submitted byte appears in a bundle", () => {
+ const SENTINEL = "SENTINEL-fetch-https://example.com/secret";
+ const bundle = researchBundle({ question: SENTINEL, role: SENTINEL, task_class: SENTINEL, scope: SENTINEL });
+ const serialised = JSON.stringify(bundle);
+
+ // Echoing a query is how a retrieval endpoint becomes an echo service. The
+ // caller already knows what it asked.
+ assert.ok(!serialised.includes("SENTINEL"), "the bundle must not echo anything submitted");
+ assert.equal(bundle.answer, "retrieval-result");
+ assert.equal(bundle.shaped_by, null, "an unrecognised role shapes nothing");
+
+ // And the limits travel with the answer, so a bundle lifted out of context
+ // cannot lose the caveat that a draft is not a finding.
+ assert.ok(bundle.limits.some(limit => limit.includes("draft is not a finding")));
+ assert.ok(bundle.limits.some(limit => limit.includes("retrieval, not generation")));
 });

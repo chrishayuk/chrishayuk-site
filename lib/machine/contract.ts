@@ -146,6 +146,7 @@ export function contract() {
   see_also: {
    // Feedback first. Two agents independently said it is the endpoint
    // most worth an agent's two seconds, and it was positioned second.
+   what_declaring_buys: `${SITE}/api/machines/ask`,
    tell_us_what_got_in_your_way: `${SITE}/api/machines/feedback`,
    human_explanation: `${SITE}/machines`,
    what_has_been_observed: `${SITE}/machine-guestbook`,
