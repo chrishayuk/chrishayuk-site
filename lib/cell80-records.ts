@@ -42,7 +42,7 @@ export const cell80Records: PublicationRecord[] = [
       {
         "kind": "observation",
         "label": "THE NOTE",
-        "text": "At tick 993, the two histories are identical."
+        "text": "A tick is one time step in the digital world. At tick 993, the two histories are identical."
       },
       {
         "kind": "observation",
@@ -112,7 +112,7 @@ export const cell80Records: PublicationRecord[] = [
       {
         "kind": "observation",
         "label": "",
-        "text": "At tick 1080, program 33 had become the plurality choice. It accounted for 35.3% of the population, reaching 41.6% during the recorded sustain window. The detector sampled every twenty ticks and required the new leader to persist for a further five samples."
+        "text": "At tick 1080, program 33 was the largest group: 35.3% of the population, reaching 41.6% over the next hundred ticks. This is a plurality, not a majority. The detector sampled every twenty ticks and required the new leader to persist for five further samples."
       },
       {
         "kind": "observation",
@@ -237,7 +237,7 @@ export const cell80Records: PublicationRecord[] = [
     "kind": "notebook",
     "title": "What keeps an evolving world alive?",
     "dek": "Food. Grazers. Predators. What keeps the whole thing going?",
-    "abstract": "Program variation kept both species alive in eleven of twelve low-swap worlds over 10,000 ticks. None passed the registered arms-race screens. Watch a surviving world, then compare the evidence.",
+    "abstract": "I varied how often inherited programs changed in twelve predator–grazer worlds. Eleven kept both species alive for 10,000 time steps. None of those eleven passed the tests for an evolutionary response between species.",
     "created": "2026-09-09",
     "version": "0.2",
     "status": "PARTIALLY SUPPORTED",
@@ -445,8 +445,8 @@ export const cell80Records: PublicationRecord[] = [
     "slug": "when-does-improvement-become-invention",
     "kind": "notebook",
     "title": "When does improvement become invention?",
-    "dek": "A useful change. A later advantage. A chance to pass it on.",
-    "abstract": "The earlier movement experiment found local benefits but failed its dependence gate. EX-11–14 go further: an online-generated resource capability, a supported later advantage, and transmission to descendants. The latest checkpoint separates reproductive opportunity from conditional benefit. One case is not independent replication or cumulative invention; EX-15 remains running. EX-14 summary/raw discrepancies are recorded in the note.",
+    "dek": "A useful change. A new behaviour. Does one advance help the next?",
+    "abstract": "I tested combined movement programs by keeping or undoing them at 108 births. Eight helped their carrier leave more offspring. Three made new choices in the tested world. Two later improvements followed, but neither sequence showed that the first change reliably made the next more useful. Linked notes follow the later food-processing experiments.",
     "created": "2026-09-09",
     "version": "0.2",
     "status": "PARTIALLY SUPPORTED",
@@ -632,7 +632,8 @@ export const cell80Records: PublicationRecord[] = [
       {
         "kind": "observation",
         "label": "",
-        "text": "After EX-10, I tested an inherited capability that could make a later advance possible. EX-11 introduced a nutrient that no primitive in the tested library could process, but a composed program could."
+        "text": "After EX-10, I built a different world with new food. No existing program could process it alone, but a combination could. Two further notes follow that experiment and the fate of the organisms that inherited this capability.",
+        "references": [{"label":"The food-processing experiment","url":"/notebook/give-invention-something-to-unlock"},{"label":"Following the descendants","url":"/notebook/an-advantage-needs-a-chance-to-become-history"}]
       },
       {
         "kind": "observation",
@@ -662,7 +663,7 @@ export const cell80Records: PublicationRecord[] = [
       {
         "kind": "observation",
         "label": "EX-14 / A chance to reproduce",
-        "text": "A separately registered follow-up tested 100 paired futures from the EX-13 descendant checkpoint. Both the report and local raw file show BC reproducing in 64/100 and a positive BC-minus-B lineage-birth effect in 63/64 futures where either reproduced. The conditional mean was 99.45 births; the median was 4. All zero/zero futures remain in the unconditional denominator."
+        "text": "EX-14 tested 100 matched futures from one descendant’s world. B keeps the food-processing program; BC also keeps higher food intake. BC’s family reproduced in 64/100 futures. It produced more births in 63/64 futures where either version reproduced: mean gain 99.45 births, median 4. Both sources agree on these counts. The 36 futures without reproduction still count toward the total."
       },
       {
         "kind": "observation",

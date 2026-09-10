@@ -74,7 +74,14 @@
 .cell80-controls button[aria-pressed=true]{border-color:var(--accent);background:var(--accent);color:var(--bg)}
 .cell80-controls button:hover{border-color:var(--accent)}
 .cell80-controls button>span{opacity:.75}
-.cell80-caption{font-size:12px;line-height:1.85;color:var(--muted);max-width:85ch;margin-top:22px;overflow-wrap:anywhere}
+.cell80-caption{font-size:14px;line-height:1.75;color:var(--muted);max-width:75ch;margin-top:22px;overflow-wrap:anywhere}
+.cell80-caption p+p{margin-top:12px}
+.cell80-reading-key{font:12px/1.6 var(--font-inter);color:var(--muted);margin:0 0 12px}
+.cell80-meaning>button{display:inline;background:none;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;text-align:inherit;border:0;border-bottom:1px dotted var(--accent);padding:2px 0;cursor:help;text-decoration:none}
+.cell80-meaning>button:hover{color:var(--accent)}
+.cell80-meaning>button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cell80-meaning-note{position:fixed;z-index:1000;box-sizing:border-box;width:min(320px,calc(100vw - 24px));padding:16px;border:1px solid var(--accent);background:var(--bg);color:var(--fg);box-shadow:0 6px 24px #0003;font:14px/1.6 var(--font-inter);letter-spacing:normal;text-transform:none;text-align:left;white-space:normal;overflow-wrap:break-word}
+.cell80-notebook .hause-field-notes>summary{font-size:11px}
 .cell80-survival>figcaption,.cell80-benefits>figcaption,.cell80-novelty>figcaption,.cell80-dependence>figcaption{color:var(--muted);margin-bottom:30px}
 .cell80-survival-row{display:grid;grid-template-columns:130px 1fr;gap:25px;padding:30px 0;border-top:1px solid var(--rule);align-items:center}
 .cell80-survival-row>div:first-child{display:flex;flex-direction:column;gap:12px}

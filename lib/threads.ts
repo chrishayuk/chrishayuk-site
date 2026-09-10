@@ -51,7 +51,7 @@ export const cell80Thread = {
   steps: ([
     { id: "N-CELL80-01", label: "REPLAY THE WORLD", text: "One birth changes two inherited fields. Undo only the reproduction-program change, then examine the recorded outcome." },
     { id: "N-CELL80-02", label: "KEEP IT ALIVE", text: "Program variation sustains predators and grazers in the tested conditions. Survival and a detected arms race remain separate claims." },
-    { id: "N-CELL80-03", label: "ASK WHAT IT CAN BUILD", text: "A capability unlocks a later advantage. Follow its transmission, the chance to reproduce, and the replication still pending." },
+    { id: "N-CELL80-03", label: "ASK WHAT IT CAN BUILD", text: "Compare useful programs, new movement choices, and whether one improvement makes the next more useful. Follow the later experiments in two further notes." },
   ] as ThreadStep[]).filter(listedStep),
 };
 export const threads = [mapThread, cell80Thread];
