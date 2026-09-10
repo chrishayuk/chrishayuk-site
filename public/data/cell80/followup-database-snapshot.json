@@ -1,0 +1,224 @@
+{
+  "checked": "2026-09-10",
+  "experiments": [
+    {
+      "id": "EXP-20260909-223227-00738",
+      "slug": "ex-11-capability-barrier",
+      "title": "An evolved enzyme enables a later uptake mutation",
+      "status": "completed",
+      "hypothesis": "In a deliberately constructed nutrient environment, mutation can create and retain a composed enzyme that no existing binary primitive supplies, after which increased uptake becomes advantageous only in the enzyme's presence.",
+      "conclusion": "Mixed: the engineered capability barrier was crossed by online mutation, but the registered evolutionary-ratchet criterion was not met. One of 1,825 evaluated compositions passed where all 89 typed primitives failed; B appeared in 3/10 full worlds and persisted in 2/10, while B-only retention passed in only 1/10 against the required 8/10. Both observed B-to-high-uptake events occurred before B's establishment gate, leaving zero eligible candidates and conditional dependence untested, not refuted.",
+      "next_action": "Close this fixed matrix without retuning. If revisited, preregister a separate first-clean-B-to-C candidate rule and paired held-out conditional-fitness/removal/restoration test, separating capability discovery from retention conditional on discovery. Do not count the two post hoc early sequences as confirmatory successes; no follow-up worlds have been run.",
+      "design": {
+        "ticks": 3000,
+        "claim_scope": "bounded engineered ratchet, not open-ended evolution",
+        "heldout_seeds": 10,
+        "prereg_sha256": "2ddff28f7e7b4d5813732d363f4b3cc8c5443f0f8937a67194c5448b6da30f61",
+        "max_candidates": 10,
+        "discovery_worlds": 40,
+        "population_slots": 256,
+        "program_generation": "online argument substitution, max two cells"
+      },
+      "tags": [
+        "ecology",
+        "evolution",
+        "capability-barrier"
+      ],
+      "created_at": "2026-09-09T22:32:27.916125Z",
+      "updated_at": "2026-09-09T22:46:10.552627Z",
+      "programme_slug": "cell-native-architectures",
+      "programme_name": "Cell Native Architectures",
+      "latest_writeup": {
+        "version": 2,
+        "body_md": "# The barrier was crossed, but the registered ratchet was not demonstrated\n\nThis experiment produced an online-generated resource-processing capability outside\nthe tested primitive repertoire. It did **not** meet the registered conditions for\na reproducible, established-B-then-C evolutionary ratchet. The decisive conditional\nfitness assays were not reached, so dependence is **untested**, not disproved.\n\n## What was done\n\nEX-11 introduced a deliberately engineered nutrient into a new controlled Cell80\nmetabolic world. To exploit it, an organism's program had to compute\n`min(65535, a + (a XOR b))` correctly on all 64 registered input pairs. Every one of\nthe 89 existing stateless binary-u16 primitives failed at least one input. The\nclaim is specific to this library and interface, not every possible program.\n\nFounders carried only `mask_xor`, with low nutrient uptake. Mutation could generate\ntwo-cell expressions directly at birth from 84 composable primitives; it did not\ndraw from a pre-screened successful-program pool. High uptake was a separate,\ncostly allele. Ten seeds each ran full evolution, uptake-disabled (B-only),\nno-substrate, and atomic-only controls: 40 worlds, each 3,000 ticks and 256 slots.\nThe preregistration, code, all changed-genome births, trajectories and state hashes\nare retained alongside the analysis.\n\n## What was found\n\nOf 1,825 distinct composed expressions evaluated during mutation, one passed:\n`add_sat(a, mask_xor(a,b))`. The same expression arose in multiple worlds; these are\nrepeated origins, not multiple kinds of innovation. The expression was known to\nthe experimenter as a validation witness but was not inserted into evolution.\nThe actual Cell80 tree interpreter and an independent bytecode interpreter agree\non its output over all 64 resource inputs.\n\nIn the full arm, this capability appeared in 3/10 worlds and established and\npersisted in 2/10. Those two worlds ended with approximately 91% capable organisms\non average over the final 200 ticks. With uptake mutation disabled, it appeared\nin 2/10 and established and persisted in 1/10, whose final-window capable fraction\nwas approximately 81%. The registered B-only retention requirement was **8/10**.\n\nWithout substrate, the capability arose in three worlds but established in none.\nWith composition disabled, it never arose. These controls behaved as expected;\nthey do not compensate for the failed retention gate.\n\nThere were B-then-high-uptake sequences in the two successful full worlds. However,\nthe uptake changes occurred **19 and 4 ticks before** their B lineage completed\nthe registered establishment period (at least 20% of slots for 50 consecutive\ncompleted ticks). They were therefore ineligible. No qualifying later candidate\nappeared, and the experiment did not substitute these early events after seeing\ntheir outcomes. Zero primary factorial, historical-fork or restoration assays ran.\n\n## What it means\n\nThe positive result is narrower but useful: mutation can assemble a capability\nthat no primitive supplies in this domain, and populations carrying it can spread\nand persist in the constructed environment. This goes beyond the earlier\nexperiment's offline composition pool and immediate-movement novelty checks.\n\nThe negative result is failure of the registered overall criterion: reliable\ndiscovery/retention and eligible sequential-candidate supply were insufficient.\nThe timing observations suggest that the strict establishment-before-C screen\nexcluded biologically interesting sequences, but that is a **post-run diagnosis**,\nnot permission to loosen the screen. Candidate eligibility is an evidential rule;\nit is not itself a definition of what biological evolution can do.\n\nWe have not measured whether those early uptake changes require B for their\nfitness advantage in held-out worlds. The energetic design makes that plausible,\nbut plausibility is not the registered paired removal/restoration evidence.\nNor does this finite, two-cell, experimenter-designed resource demonstrate\nopen-ended evolution, naturalistic chemistry, or an upgrade of the older\npredator/grazer world into a cumulative ecology.\n\nClose this matrix with its unchanged gates. A separate follow-up could preregister\nan immediate-first-B→C candidate rule and test clean ancestry plus conditional\nfitness directly, while reporting B discovery probability separately from\nretention conditional on discovery. That proposal is not run here and must not\nturn the present early events into confirmatory evidence.\n\nSee [RESULTS.md](RESULTS.md) for every world and [PROVENANCE.md](PROVENANCE.md) for\nreproduction and the separation between primary evidence and regression checks.\n\n\n## Verification and archive\n\nThe 40 primary worlds replayed exactly in a separate verification run; only elapsed wall time differs. All 71 distinct tests passed across the full 69-test regression run and the expanded six-test barrier run (four overlapping). The unchanged preregistration SHA-256 is `2ddff28f7e7b4d5813732d363f4b3cc8c5443f0f8937a67194c5448b6da30f61`.\n\nLocal reproducibility archive: `ecology-research/experiments/ecology-barrier-bundle.tar.gz`; SHA-256 `f16841bb6b112f9eacacbf210d861a6b2190f4fd2661173c28168d4f0708f1bd`. All 55 manifested source/evidence files were verified against the archived bytes. This is an overlay for Cell80 base `7d61b00719899b449e73c34a90ebbdbae73da19a`, not a standalone workspace or a database attachment. The earlier 379-world closure archive remains unchanged.\n",
+        "author": "codex-cli",
+        "created_at": "2026-09-09T22:46:07.944514Z"
+      },
+      "runs": [],
+      "artifacts": []
+    },
+    {
+      "id": "EXP-20260909-231059-00739",
+      "slug": "ex-12-nascent-innovation",
+      "title": "A nascent innovation changes the value of a later mutation",
+      "status": "completed",
+      "hypothesis": "An online-generated resource-processing innovation can make a later uptake mutation beneficial before the innovation completes its establishment period. This dependence should hold both in its birth-time ecology and in standardized held-out worlds.",
+      "conclusion": "Mixed, limited support: one online-born B-to-C candidate passed both functional-dependency and historical-opportunity gates before B's operational establishment, but the required three independent discovery cases were not obtained. In that case B was 45 ticks old and occupied 12.5% of slots; both contexts gave B>A in 9/10 futures, BC>B in 10/10, and C-only<=A in 10/10. The child was overwritten during its original birth phase and left zero offspring, so the result supports a conditional selective opportunity, not an accumulated retained causal step. Historical necessity of B, environmental mediation and multi-edge depth remain untested.",
+      "next_action": "Close the fixed EX-12 matrix unchanged. Decide whether a separate preregistered follow-up should independently replicate nascent opportunities or test prospective retention/transmission of supported opportunities. Preserve the first-candidate rule and report attrition; do not search later births in this matrix for replacement successes. Reuse the serialized context/intervention ledger, but do not pool identical standardized genotype/seed assays or label an unretained opportunity as accumulated depth.",
+      "design": {
+        "arms": [
+          "full",
+          "b_only",
+          "no_substrate",
+          "atomic_only"
+        ],
+        "ticks": 3000,
+        "ecology": "unchanged EX-11",
+        "contexts": [
+          "historical_opportunity",
+          "functional_dependency"
+        ],
+        "seed_base": "0x5eedb4111e001000",
+        "assay_ticks": 200,
+        "prereg_sha256": "86ccf9d68e561e51bfd843a347dcbc55aa38d496096189aaa66a468d7f4703de",
+        "candidate_rule": "first clean B-to-C birth, no establishment/outcome filter",
+        "primary_worlds": 40,
+        "population_slots": 256,
+        "replicated_success": "at least 3 pre-establishment candidates pass both contexts",
+        "historical_necessity": "untested",
+        "assay_seeds_per_context": 10
+      },
+      "tags": [
+        "ecology",
+        "evolution",
+        "causal-dependency",
+        "nascent-innovation"
+      ],
+      "created_at": "2026-09-09T23:10:59.473823Z",
+      "updated_at": "2026-09-09T23:24:43.877397Z",
+      "programme_slug": "cell-native-architectures",
+      "programme_name": "Cell Native Architectures",
+      "latest_writeup": {
+        "version": 2,
+        "body_md": "# EX-12: a supported opportunity, not yet an accumulated step\n\nOne online-born, pre-establishment B→C candidate passed the registered dependency\ngates in both its birth-time ecology and standardized worlds. This is **limited\nsupport**, not the registered replicated success: three independent discovery\nseeds were required, and only one qualified. That candidate also left **zero\noffspring in the original history**. We have evidence for a context-specific\nselective opportunity, not a retained causal chain or open-ended evolution.\n\n## What was done\n\nThe EX-11 ecology, resource barrier, online composition operator, mutation rates,\npopulation size and 3,000-tick horizon were unchanged. EX-12 used 40 new discovery\nworlds: ten seeds each for full evolution, B-only, no-substrate and atomic-only.\nCandidate selection changed to the first clean B-lineage descendant acquiring\nhigh uptake C, irrespective of establishment or subsequent reproductive success.\nThe protocol and evidence gates were recorded before fresh seeds were run.\n\nFor every selected candidate, we tested A, B, C-only and BC in two distinct\ncontexts: ten paired continuations from its serialized birth-time snapshot, and\nten separate standardized worlds with ancestral competitors. All these assays\ndisabled further mutation. The actual pre-B parent program supplied A/C-only.\nEach context required B>A, BC>B and positive interaction in at least8/10 futures\nand on average, with C-only<=A in at least8/10 and on average. No extinct lineage\nor tie was dropped. These are registered screening gates, not calibrated p-values.\n\nThe complete record contains 40 discovery worlds, 320 factorial worlds, 80\nfactorial restorations, four original-history C reversions, four discovery\nrestorations and four untouched-snapshot continuation checks. Every selected\ncandidate was tested; none was replaced after failure.\n\n## The supported case\n\nIn discovery seed `6840321394656415753` (offset+9), B was born at tick955 and its\nclean descendant acquired C at tick1000. B was **45 ticks old**, and its clean\nlineage occupied **32/256 slots (12.5%)** immediately before C's birth. The\nonline-generated enzyme was `add_sat(a,mask_xor(a,b))`, the same capability known\nfrom EX-11, with a new evolutionary origin rather than a seeded genotype.\n\n| Registered contrast | Historical opportunity | Functional dependency |\n|---|---:|---:|\n| B better than A | 9/10 | 9/10 |\n| BC better than B | 10/10 | 10/10 |\n| C-only no better than A | 10/10 | 10/10 |\n| Positive interaction | 10/10 | 10/10 |\n\nAll required mean signs also passed. The mean C-with-B effect was +14,984.2\nfocal-lineage births in historical continuations and +11,320 in standardized\nworlds. Without B, the mean C effect was -0.3 and -6.2, respectively. These are\n200-tick descendant-lineage totals, not direct offspring or per-tick fitness.\nThe designed resource economics strongly favour high uptake after decoding;\nthis is not a newly discovered biological principle.\n\n## Why the original-history result matters\n\nThe passing candidate was overwritten by another birth during the same birth\nphase, before it could reproduce. Suppressing its C mutation made no difference\nto its descendant count (0 versus0) or the original world's end-of-tick history\nhash. A separate post-run audit of the saved pending-parent list and original\ncounter RNG identifies replacement child3852, parent3838, at slot119.\n\nThe historical-opportunity assay keeps the actual birth-time population, nutrient\nstocks, location and newborn energy, but samples fresh future randomness and\ndisables mutation. It therefore establishes a **conditional reproductive\nopportunity from that state**. It does not retroactively make the original child\nsuccessful, prove an advantage in the exact realized future, or establish\nhistorical necessity of B.\n\nThis is the distinction the instrument now makes visible: a genotype can offer\na robust opportunity in controlled futures and still disappear immediately in\nthe history that actually occurred.\n\n## The other contexts were different\n\nFour first-clean candidates were selected; three preceded operational\nestablishment. The other pre-establishment candidates arose at clean-B fractions\nof63.3% and79.3%, demonstrating why \"before the50-tick rule\" must not be treated\nas synonymous with \"rare.\" They failed the historical gate: B>A in4/10 and6/10,\nand BC>B in7/10 for both. The already-established candidate also failed the\nhistorical B>A gate (4/10), despite BC>B in9/10.\n\nAll four passed the standardized gate, but **they share the same genotypes and\nthe same standardized assay seeds**. These are40 distinct genotype/seed assays\nexecuted four times, not160 independent functional tests or four different\ninnovations. Their historical snapshots are distinct and their effects are\nreported separately. We do not pool the two contexts.\n\nTwo candidates did leave large descendant lineages in their original worlds,\nand their C-only reversions eliminated those particular descendants. Neither\npassed both assay contexts. The case passing both contexts was not one of the\nhistorically successful cases. Choosing a later surviving mutation instead would\nviolate the registered first-candidate rule.\n\n## Discovery was separated from retention\n\nB appeared in5/10 full worlds and established and persisted in4/5 of those.\nB-only had the same5/10 discovery and4/5 conditional retention. With no substrate,\nB appeared in5/10 and established in0/5. Atomic-only acquired no capability.\nThese are small-sample, paired-arm observations, not precise probabilities or\nproof that innovation supply is the sole bottleneck.\n\n## What the causal ledger can claim\n\nFor the offset+9 edge, functional dependency and historical opportunity meet\ntheir registered gates. Historical necessity of B and environmental mediation\nremain **untested**. One conditional edge is supported; no two-edge chain has\nbeen tested, and no accumulated retained depth is established by this result.\nAll four selected first-clean candidates were assayed, but coverage of every\npotential causal relationship in these histories is unknown.\n\nEX-12 closes without changing its gates. The next design decision is whether to\nprioritize independent replication of nascent opportunities or the retention and\ntransmission of supported opportunities. A future retention-focused protocol\nmust select candidates prospectively and report attrition; it cannot rescue this\nmatrix by searching its later births for successful replacements. Physics,\necological inheritance and mutation-policy evolution were not introduced.\n\nSee [RESULTS.md](RESULTS.md) for every world, [edges.json](edges.json) for the full\ncontext-indexed intervention ledger, and [PROVENANCE.md](PROVENANCE.md) for replay\nand reconstruction details.\n\n\n## Verification and local archive\n\nAll 73 regression tests passed with authorized Metal access; the initial sandbox-only GPU failure is retained in the logs. All 452 engine executions of the fixed matrix were repeated, producing byte-identical JSONL; this is verification, not independent replication. Snapshot continuation, exact pre-birth C reversion and restoration checks all passed. The refactored engine also reproduced all 40 EX-11 scientific records unchanged.\n\nLocal overlay archive: `ecology-research/experiments/ecology-nascent-bundle.tar.gz`, SHA-256 `6bebe8ca99d472b930c3cb9c89ee3ba8b5a0a25f2a8239546e3a48d84bdab5f7`. All 61 manifested source/evidence files were verified against archived bytes. Base commit: `7d61b00719899b449e73c34a90ebbdbae73da19a`. Raw files remain local, not attached to this database entry. The EX-11 and earlier closure archives remain unchanged.\n",
+        "author": "codex-cli",
+        "created_at": "2026-09-09T23:24:41.336290Z"
+      },
+      "runs": [],
+      "artifacts": []
+    },
+    {
+      "id": "EXP-20260909-233305-00740",
+      "slug": "ex-13-opportunity-retention",
+      "title": "Can a supported evolutionary opportunity become inherited history?",
+      "status": "completed",
+      "hypothesis": "A newly born B-to-C opportunity supported by controlled assays can transmit its dependency to descendants that persist in the original mutating ecology. We test whether that dependency remains supported in an intact descendant's ecology 200 ticks later.",
+      "conclusion": "Mixed: a supported online B-to-C opportunity transmitted BC and persisted genetically, but no case met the full retained-dependency criterion. Of five first-clean candidates, one passed both birth-context screens; it had 148 intact descendants at +200 and 230 at +500. Its checkpoint dependency effects were positive in 6/10 futures and tied at zero offspring in four, failing the unchanged 8/10 gate without demonstrating a reversal. Full-gate retention was 0/1 supported opportunities (too small to estimate a general probability). The event lineage later went extinct while the capability remained common in other lineages. Accumulation, B's historical necessity and environmental mediation remain untested.",
+      "next_action": "Close EX-13 without changing gates or substituting survivors. Before selecting any later D, preregister how to distinguish a genotype's context-specific selective opportunity from its realization probability in single-carrier assays, retaining extinction/ties in unconditional outcomes. Seek independent replication, and keep event-lineage retention separate from continued capability presence in other lineages. Do not treat this checkpoint screen failure as evidence that the dependency reversed.",
+      "design": {
+        "ticks": 3000,
+        "seed_base": "0x5eedb4111e002000",
+        "accumulation": "untested",
+        "prereg_sha256": "b4e95cc24060235fa87f6ea2118be0085ffab5cd05b20846689d10c16ee1b48f",
+        "candidate_rule": "first clean B-to-C birth, no outcome filter",
+        "checkpoint_gate": "C-with-B positive, C-without-B nonpositive, interaction positive, BC greater than C-only; each >=8/10 and mean sign",
+        "opportunity_gate": "unchanged EX-12 dual-context screen",
+        "population_slots": 256,
+        "primary_checkpoint": 200,
+        "replicated_success": "at least 3 independent retained supported opportunities",
+        "additional_checkpoints": [
+          50,
+          500,
+          "end"
+        ],
+        "primary_discovery_worlds": 40
+      },
+      "tags": [
+        "ecology",
+        "evolution",
+        "causal-dependency",
+        "retention"
+      ],
+      "created_at": "2026-09-09T23:33:05.898603Z",
+      "updated_at": "2026-09-09T23:47:56.672555Z",
+      "programme_slug": "cell-native-architectures",
+      "programme_name": "Cell Native Architectures",
+      "latest_writeup": {
+        "version": 2,
+        "body_md": "# EX-13: transmitted opportunity, unconfirmed retained dependency\n\nA supported B→C opportunity survived, reproduced and produced intact BC\ndescendants that persisted for hundreds of ticks in the original mutating world.\nHowever, its later-context dependency assay did not meet the registered8/10 gate.\nThe full retained-edge outcome was therefore **0/1 supported opportunities**,\nnot replicated support. Accumulation remains **untested**: no later D was assayed.\n\nThis is not a replay of EX-12's immediate-loss result. Genetic transmission and\npersistence were observed here. Nor does the failed later assay show that the\ndependency reversed: its four nonwins were zero-offspring ties across all four\ngenotypes. One opportunity is far too small a denominator to infer a general\nretention probability.\n\n## What was fixed in advance\n\nThe ecology, library, online composition operator, mutation rates,256 slots and\n3,000-tick discovery horizon were unchanged. Forty fresh worlds ran across full,\nB-only, no-substrate and atomic-only arms. The first clean B→C candidate in each\nfull world was selected at birth without looking at its fate. None was rescued\nfrom contention, replaced by a later survivor or omitted for failing an assay.\n\nEvery candidate received the existing dual-context opportunity screen: actual\nbirth-time ecology plus standardized worlds, ten paired futures each, with all\nfurther mutation disabled. Their unmodified discovery histories continued with\nmutation enabled and were traced prospectively.\n\nThe primary persistence checkpoint was end of tick C-birth+200. Intact carriers\nmust retain the exact BC genotype continuously from the selected child; losing\nand reacquiring a component does not repair that path. A living descendant was\nrequired, not merely survival of the founder. The lowest-ID intact descendant\nwas selected before inspecting its future and tested in its actual checkpoint\necology. No checkpoint candidate was selected for being assay-successful.\n\nThe checkpoint required positive C benefit with B, nonpositive C benefit without\nB, positive interaction and a positive effect of keeping B in BC, each with the\nregistered8/10 count and mean sign. Unlike the birth screen, it did not require\nB-alone to remain advantageous in the later ecology. This distinction was\nregistered before any EX-13 outcome, not introduced to rescue a result.\n\n## The supported opportunity and its descendants\n\nThe passing birth-opportunity case was seed `6840321394656419844` (offset+4).\nB appeared at tick115; the selected C child1124 was born at tick165. B was50 ticks\nold and its clean lineage occupied67/256 slots (26.2%), before operational\nestablishment. The program was the same resource-processing composition as in\nEX-11/12, arising online in this fresh world.\n\nThe birth-time opportunity assay gave B>A in8/10 futures, BC>B in10/10 and\nC-only<=A in10/10; standardized assays gave9/10,10/10 and10/10. Interaction and\nall required mean signs also passed.\n\nIn the actual mutating history:\n\n- The child survived its birth phase.\n- It first reproduced at tick167; its first direct intact BC transmission was\n  child1172 at tick169.\n- There were217 intact BC descendants at+50 ticks,148 at+200 and230 at+500.\n- The+200 checkpoint representative was descendant13943 at the boundary after\n  tick365, with its actual position and energy preserved in the assays.\n\nThis directly establishes transmission and finite-horizon genetic persistence\nof a genotype whose opportunity had passed both birth-context screens.\n\n## The later assay did not pass—but did not show a reversal\n\nFor the representative in its checkpoint ecology:\n\n| Contrast | Positive | Tie | Negative | Registered outcome |\n|---|---:|---:|---:|---|\n| C benefit with B: BC−B | 6 | 4 | 0 | Fails8/10 |\n| C benefit without B: C−A | 0 | 10 | 0 | Passes nonpositive gate |\n| Interaction | 6 | 4 | 0 | Fails8/10 |\n| Removing B from BC: BC−C | 6 | 4 | 0 | Fails8/10 |\n\nThe four ties were futures in which **all four focal genotypes produced zero\noffspring**. We retained them in the denominator. The mean C-with-B effect was\n+421.3 lineage births, but a positive mean did not override the registered\nreplication requirement. Its median was just1 birth: the mean was dominated by\ntwo much larger lineages. Full paired outcomes are in `edges.json`.\n\nThe defensible result is **dependency not supported at the required reliability\nin this later context**, not \"the biological dependency disappeared.\" The assay\nmeasures a particular carrier's reproductive outcomes in a particular ecology,\nincluding stochastic loss. It is not a direct, context-free measurement of the\ngenotype's biochemical requirement.\n\n## Event lineage and capability retention also diverged\n\nThe selected C child's entire genealogical lineage became extinct at tick1268.\nThat does not mean the resource-processing capability disappeared: the world\nstill had239 capable high-uptake organisms then, and235 at the final tick. Its\nfinal200-tick capable fraction averaged91.9%. These organisms were outside the\nselected C child's descendant cohort.\n\nThus the instrument distinguishes survival of a particular historical origin\nfrom continued presence of the same functional genotype elsewhere. We did not\ncount another lineage carrying BC as rescue of the selected event, and did not\ntest whether those other lineages were causally dependent on that event.\n\n## Whole-matrix result and ledger\n\nFive first-clean candidates were selected. All survived, transmitted BC and had\nintact descendants at+200. Only one passed BOTH birth-opportunity contexts. One\ndifferent candidate passed the checkpoint dependency gate but had failed the\nbirth-opportunity screen; combining those successes would be invalid.\n\nFor the one supported opportunity, the ledger reads:\n\n- opportunity: **supported**;\n- transmission: **observed**;\n- genetic persistence at+200 and+500: **observed**;\n- retained dependency under the full checkpoint criterion: **not supported**;\n- accumulation, historical necessity of B and environmental mediation:\n  **untested**.\n\nThere were no censored supported opportunities. The observed full-gate fraction\nis0/1, while transmission and+200 intact persistence were each1/1. Neither is a\nprecise population probability. Censoring bounds reported by the analyzer concern\nmissing follow-up in this finite cohort, not sampling uncertainty or confidence.\n\nAll five candidates share the same standardized genotype/seed cases:200 executed\nstandardized assays represent40 distinct cases, not five independent functional\nreplications. Their historical and checkpoint ecologies are separate contexts.\nNo multi-edge path was constructed or counted as causal depth.\n\nEX-13 closes with unchanged gates. The next design question is how to distinguish\ncontext-dependent selective opportunity from its probability of realization in\na single-carrier assay, while preserving unconditional reporting of extinction.\nDo not discard zero-offspring futures, retrospectively choose another descendant\nor infer a later D from genotype persistence. Independent replication and a\nprospectively specified measurement design are needed before attempting that\nstronger accumulated-chain claim.\n\nSee [RESULTS.md](RESULTS.md) for all worlds, [edges.json](edges.json) for the status\nledger and effects, and [PROVENANCE.md](PROVENANCE.md) for verification.\n\n\n## Verification and archive\n\nAll 76 regression tests passed with Metal access. The complete 810-execution EX-13 matrix was repeated byte-for-byte, including prospective cohort traces and checkpoint assays. The preceding EX-12 compatibility matrix was also byte-identical to its sealed primary output. All original birth/checkpoint resume, reversion and restoration checks passed.\n\nLocal overlay archive: `ecology-research/experiments/ecology-retention-bundle.tar.gz`; SHA-256 `e893f62ca194a21155f502980b08be26ef93c8e757b8fe37567dc056d32b2f86`. All 63 manifested source/evidence files were verified against archived bytes. Base: `7d61b00719899b449e73c34a90ebbdbae73da19a`. Earlier EX-11, EX-12 and closure archives remain unchanged. Raw files are local, not attached to the database.\n",
+        "author": "codex-cli",
+        "created_at": "2026-09-09T23:47:54.113059Z"
+      },
+      "runs": [],
+      "artifacts": []
+    },
+    {
+      "id": "EXP-20260910-000808-00742",
+      "slug": "ex-14-realization-effect",
+      "title": "Is a transmitted dependency unavailable or merely unrealized?",
+      "status": "completed",
+      "hypothesis": "In the EX-13 checkpoint ecology, the zero-offspring outcomes reflect stochastic reproductive realization; conditional on either B or BC producing descendants, BC retains a positive selective effect.",
+      "conclusion": "Realization-limited: across 100 paired checkpoint futures, B realized births in 41/100 and BC in 64/100. On the preregistered subset where either realized, D=N_BC-N_B was positive in 63/64 futures (mean 99.45, median 4), meeting the 80% conditional-effect gate. A and C-only realized 0/100. Thus EX-13's weak 6/10 checkpoint result was primarily a reproductive-opportunity bottleneck in this ecology, not evidence that the dependency eroded. This remains one transmitted opportunity; accumulation, historical necessity and environmental mediation are untested.",
+      "next_action": "Close EX-14. Before attempting D, independently replicate this realization/conditional-effect decomposition across supported opportunities or preregister a cohort-level design. Keep unconditional and conditional quantities separate, and do not treat this one checkpoint as a general Cell80 probability or as accumulated causal depth.",
+      "design": {
+        "seeds": "0x5eedb4111e003000 + 0..99",
+        "ticks": 200,
+        "mutation": "off",
+        "genotypes": [
+          "A",
+          "B",
+          "C",
+          "BC"
+        ],
+        "accumulation": "untested",
+        "prereg_sha256": "7e17e38d9d733a1761691aa9da1eeb4e85b7c8c9ae654aa3ea0f0358b9f1d143",
+        "conditional_gate": "D>0 in >=80% event seeds and positive mean",
+        "conditional_metric": "D=R_BC-R_B given R_BC>0 or R_B>0",
+        "unconditional_metric": "P(R_g>0)",
+        "source_ex13_candidate": "offset+4 checkpoint descendant 13943"
+      },
+      "tags": [
+        "ecology",
+        "evolution",
+        "causal-dependency",
+        "realization"
+      ],
+      "created_at": "2026-09-10T00:08:08.811223Z",
+      "updated_at": "2026-09-10T00:16:40.274693Z",
+      "programme_slug": "cell-native-architectures",
+      "programme_name": "Cell Native Architectures",
+      "latest_writeup": {
+        "version": 2,
+        "body_md": "Protocol amendment before execution (2026-09-10): notation was clarified without changing any seed, genotype, horizon, gate or procedure. `N_g` now denotes focal lineage birth count; `I_g = 1[N_g > 0]` denotes binary realization. Unconditional results use `P(I_g=1)` over all 100 futures. Conditional effect is `D = N_BC - N_B`, evaluated only where `I_BC ∨ I_B` is true. This is explicitly a mechanistic decomposition of paired counterfactuals, not another unconditional fitness estimate. Amended preregistration SHA-256: `bd6a3a3fe18362abd42685a5ed5805dce188bf2ad9a24802c7068015770e64ff`.",
+        "author": "codex-cli",
+        "created_at": "2026-09-10T00:09:58.857231Z"
+      },
+      "runs": [],
+      "artifacts": []
+    },
+    {
+      "id": "EXP-20260910-002427-00743",
+      "slug": "ex-15-replicated-transmitted-dependency",
+      "title": "Replicated transmitted dependency",
+      "status": "running",
+      "hypothesis": "Across independently discovered opportunities in the unchanged ecology, at least three B-to-C opportunities will pass birth-time dependency, transmission, checkpoint persistence and later realization/conditional-effect support.",
+      "conclusion": null,
+      "next_action": null,
+      "design": {
+        "arms": [
+          "full",
+          "b_only",
+          "no_substrate",
+          "atomic_only"
+        ],
+        "ecology": "unchanged EX-11 through EX-14",
+        "depth_beyond": "untested",
+        "prereg_sha256": "db1bf3c7b479f4ba61c2a5ee0e555a8c38d9b2c76a36849553ba90dd9402d18d",
+        "candidate_rule": "first clean B-to-C, online, no outcome filter",
+        "primary_success": "at least three independent opportunities pass the complete pipeline",
+        "unit_of_replication": "independent discovered opportunity",
+        "max_full_discovery_worlds": 100,
+        "per_case_checkpoint_futures": 100,
+        "per_case_birth_context_futures": 10
+      },
+      "tags": [
+        "ecology",
+        "evolution",
+        "causal-dependency",
+        "replication"
+      ],
+      "created_at": "2026-09-10T00:24:27.534268Z",
+      "updated_at": "2026-09-10T00:25:03.109088Z",
+      "programme_slug": "cell-native-architectures",
+      "programme_name": "Cell Native Architectures",
+      "latest_writeup": {
+        "version": 1,
+        "body_md": "Planned: EX-15 is a replication rung, not a new mechanism. No EX-15 discovery or assay outcomes have been observed. The preregistered protocol is frozen before execution; local SHA-256 `db1bf3c7b479f4ba61c2a5ee0e555a8c38d9b2c76a36849553ba90dd9402d18d`.",
+        "author": "codex-cli",
+        "created_at": "2026-09-10T00:24:28.989410Z"
+      },
+      "runs": [],
+      "artifacts": []
+    }
+  ]
+}
