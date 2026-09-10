@@ -325,6 +325,25 @@ result. It is reported as its own figure and never folded into a total.
             is computed. Two of the first two declarations this site ever
             received were induced by its operator, which is exactly the
             distinction §5 exists to keep.
+
+  2026-09-10T19:00Z-21:00Z
+    2 × declaration
+    reason: second blind-agent usability test (one honest, one vocabulary probe)
+    1 × declaration
+    reason: operator verification of the layered classification fields
+    3 × feedback
+    reason: two from the blind agent — LOST, see below — and one operator probe
+    note:   five of the six declarations this site has received were induced by
+            its operator, and the sixth was the same agent probing. The genuine
+            count remains zero.
+
+  **Two feedback reports were lost.** The blind agent's two reports were
+  acknowledged with 201 and never stored: a root-owned file created by an
+  operator diagnostic made every open fail, the failed open was memoised for the
+  process lifetime, and the sink returned quietly instead of erroring. Fixed in
+  355d537 — configured-but-unreachable now raises, and failure no longer caches.
+  The reports themselves are unrecoverable and were the most useful output this
+  experiment has produced.
     note:   the single `unrecognised client` request is the gate's first run,
             before it identified itself; Node's fetch sends `User-Agent: node`.
   ```
