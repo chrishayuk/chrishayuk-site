@@ -327,10 +327,11 @@ assert.equal(signal.feeds.notebook, "https://chrishayuk.com/notebook/feed.xml");
 // Pollable: nothing published between two requests means no difference at
 // all. A signal that changed on its own would make every poll look like news.
 assert.equal((await request("/follow.json")).body, signalResponse.body, "the publication signal is not stable between polls");
-assert.equal(signal.updated_at, signal.latest[0].published_at ?? signal.latest[0].recorded_at);
+assert.equal(signal.updated_at, signal.latest[0].updated_at);
 // A draft carries the date it was recorded and no publication date.
 for (const entry of signal.latest) {
   assert.ok(entry.recorded_at, `${entry.id} has no recorded_at`);
+  assert.ok(entry.updated_at >= entry.recorded_at, `${entry.id} was updated before it was recorded`);
   if (entry.state !== "published") assert.equal(entry.published_at, undefined, `${entry.id} is a draft with a published_at`);
 }
 assert.ok(signal.latest.some(e => e.id === "N-MAP"), "N-MAP is not in the publication signal");
