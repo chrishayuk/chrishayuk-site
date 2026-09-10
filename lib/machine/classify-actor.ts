@@ -15,9 +15,14 @@ import type { Purpose } from "../readership/classify.ts";
  * a visitor cannot name its own class any more than it can name its own
  * evidence level.
  *
- * The question it makes answerable is the one worth asking: how much of
- * this site's machine traffic is acting on an immediate task rather than
- * indexing the web.
+ * NOT YET WIRED, and saying so rather than implying otherwise. Nothing
+ * imports this, there is no `machine_class` column, and no declaration
+ * has ever been classified. The question it is meant to make answerable
+ * — how much of this site's machine traffic acts on an immediate task
+ * rather than indexing the web — therefore cannot be answered from what
+ * is currently recorded. It is derived at read time in the Observatory
+ * below, which is enough to see it working, and belongs in the store
+ * before any figure is published from it.
  */
 export function machineClass(declaration: Declaration, observedPurpose: Purpose): MachineClass {
  const transport = wordOf(TRANSPORT, declaration.transport);

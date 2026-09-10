@@ -282,6 +282,11 @@ async function record(request: Request, body: unknown, deps: Dependencies, now: 
  const sentCapabilityKeys = body !== null && typeof body === "object" && !Array.isArray(body)
   && typeof (body as Record<string, unknown>).capabilities === "object"
   && (body as Record<string, unknown>).capabilities !== null
+  // An array is an object, and `["can_navigate"]` would otherwise be
+  // reported as one unknown capability KEY named "0" — telling the caller
+  // it misspelled a name when it sent the wrong JSON type. The parser
+  // already rejects arrays; these two halves must agree.
+  && !Array.isArray((body as Record<string, unknown>).capabilities)
    ? Object.keys((body as Record<string, Record<string, unknown>>).capabilities)
    : [];
  const capCorrections = capabilityCorrections(declaration, sentCapabilityKeys);

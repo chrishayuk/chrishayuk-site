@@ -25,6 +25,13 @@ import { ROLE, TASK_CLASS, ordinalOf, wordOf, type Role, type TaskClass } from "
  * back in the response — a machine endpoint that returns submitted text
  * unchanged is an echo service whatever else it does, and the caller
  * already knows what it asked.
+ *
+ * That was briefly untrue. When a question had to be narrowed, the reply
+ * named the surviving words — a caller-chosen subset of its own question,
+ * in its own order. Corpus-intersected and so not a cross-participant
+ * relay, but the stated invariant was false as written, on a site whose
+ * whole argument is that its stated invariants are checkable. It reports
+ * a count now.
  */
 
 /**
@@ -202,7 +209,7 @@ export function researchBundle(input: AskRequest): ResearchBundle {
    ...(usedTerms === null ? []
     : usedTerms.length === 0
      ? ["Nothing in this corpus matched any word of your question, so there is nothing below. That is an absence, not a ranking."]
-     : [`Your question found nothing as written — every term must appear in the same record. These results are for the words this corpus knows: ${usedTerms.join(", ")}.`]),
+     : [`Your question found nothing as written — every term must appear in the same record. These results are for the ${usedTerms.length} of its words that this corpus knows.`]),
   ],
 
   // The ranked list itself, whole.
@@ -230,7 +237,7 @@ export function researchBundle(input: AskRequest): ResearchBundle {
    "This is retrieval, not generation. Nothing here was written to answer your question; every item is a source that already existed.",
    "Editorial state travels with every item. A draft is not a finding, and quoting one as a finding misrepresents it.",
    "Declaring a role changes ranking and framing only. Nothing on this site is gated on a declaration, and an anonymous request reaches exactly the same corpus.",
-   "Your question was not stored and is not returned. It reached the index and was discarded.",
+   "Your question was not stored and is not returned. It reached the index and was discarded — including when it had to be narrowed, which is reported as a count of words rather than the words themselves.",
   ],
  };
 }

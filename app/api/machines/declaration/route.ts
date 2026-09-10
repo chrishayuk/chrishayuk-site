@@ -40,15 +40,23 @@ const RECENT_TTL_MS = 3_600_000;
 const RECENT_MAX = 2048;
 const recent = new Map<string, number>();
 
-function alreadyDeclared(key: string, now: number): boolean {
+function seenRecently(key: string, now: number): boolean {
  const seen = recent.get(key);
- if (seen !== undefined && now - seen < RECENT_TTL_MS) return true;
+ return seen !== undefined && now - seen < RECENT_TTL_MS;
+}
+
+/**
+ * Remembered only AFTER a declaration is recorded. Marking it beforehand
+ * meant a caller refused by the limiter, or by an unavailable store, was
+ * told on its honest retry that the thing had already been recorded —
+ * while nothing had ever been written.
+ */
+function remember(key: string, now: number): void {
  if (recent.size >= RECENT_MAX) {
   for (const [id, at] of recent) if (now - at > RECENT_TTL_MS) recent.delete(id);
   if (recent.size >= RECENT_MAX) recent.clear();
  }
  recent.set(key, now);
- return false;
 }
 
 export async function POST(request: Request): Promise<Response> {
@@ -111,9 +119,12 @@ export async function GET(request: Request): Promise<Response> {
  // Same source, same declaration, same hour: recorded once. The receipt
  // still comes back, because a caller that retried should not be told it
  // failed.
+ // Keyed on what was DECLARED, not on every parameter: keying on the whole
+ // query string let `?role=verifier&cb=1`, `&cb=2` … each count as new.
  const source = request.headers.get("fly-client-ip") ?? "untrusted";
- const key = `${source}|${[...params.entries()].sort().map(pair => pair.join("=")).join("&")}`;
- if (alreadyDeclared(key, Date.now())) {
+ const key = `${source}|${Object.entries(values).sort().map(pair => `${pair[0]}=${JSON.stringify(pair[1])}`).join("&")}`;
+ const now = Date.now();
+ if (seenRecently(key, now)) {
   return Response.json({
    receipt: "mr_repeat",
    recorded: "This declaration was already recorded for this source within the hour, so it was not recorded again.",
@@ -126,6 +137,7 @@ export async function GET(request: Request): Promise<Response> {
   queue,
   observed: observedFor,
  });
+ if (response.status === 201) remember(key, now);
  return response;
 }
 

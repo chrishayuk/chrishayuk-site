@@ -135,13 +135,19 @@ let opening: Promise<Database | null> | null = null;
 let insert: Statement | null = null;
 
 function open(): Promise<Database | null> {
- // A FAILED OPEN IS NOT MEMOISED. Caching the promise means a transient
- // fault — a permissions error, a volume not yet mounted — becomes
- // permanent for the life of the process, and the endpoint goes on
- // answering 201 while writing nothing. That is exactly what happened:
- // a root-owned empty file made every open fail, the null was cached,
- // and two real reports were acknowledged and lost.
- opening ??= (async () => {
+ if (opening) return opening;
+
+ // A FAILED OPEN MUST NOT BE REMEMBERED.
+ //
+ // The previous attempt at this put `opening = null` inside the catch of
+ // an `opening ??= (async () => …)()`. The body contains no await, so it
+ // ran to completion synchronously while the right-hand side was being
+ // evaluated: the null was assigned first and `??=` then wrote the
+ // resolved promise straight over it. One attempt, memoised for the life
+ // of the process — the exact bug it was written to fix, shipped as its
+ // own fix. Clearing it AFTER the promise resolves is the part that has
+ // to happen asynchronously.
+ const attempt = (async () => {
   const file = process.env.FEEDBACK_DB;
   if (!file) return null;
   try {
@@ -154,11 +160,12 @@ function open(): Promise<Database | null> {
    return db;
   } catch (error) {
    console.error("feedback: store unavailable —", (error as Error).message);
-   opening = null;
    return null;
   }
  })();
- return opening;
+ opening = attempt;
+ void attempt.then(db => { if (db === null && opening === attempt) opening = null; });
+ return attempt;
 }
 
 /**

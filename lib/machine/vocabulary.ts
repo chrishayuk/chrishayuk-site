@@ -146,7 +146,7 @@ export const DECLARED_FIELD = [
  // Appended: a brand is not a kind of actor. Transport says how it
  // arrived, execution says why, harness says what it is running inside,
  // and none of the three is answered by naming a provider.
- "transport", "execution", "harness_claim", "model_name", "agent_name_kind",
+ "transport", "execution", "harness", "model_name", "agent_name_kind",
 ] as const;
 
 /**

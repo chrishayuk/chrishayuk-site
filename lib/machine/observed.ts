@@ -1,6 +1,6 @@
 import { classify } from "../readership/classify.ts";
 import { confidenceFor } from "../readership/store.ts";
-import { agentsOf, verifyProvider } from "../readership/ranges.ts";
+import { agentsOf, verify } from "../readership/ranges.ts";
 import { EVIDENCE, PROVIDER_CLAIM, ordinalOf } from "./vocabulary.ts";
 
 /**
@@ -67,7 +67,12 @@ export function observedFor(request: Request, providerClaim?: string): Observati
    : agentsOf(providerClaim).length === 0
     ? "unpublished" as const
     : claimsCrawler
-     ? verifyProvider(providerClaim, ip)
+     // Against the agent it PRESENTED as, not against every agent the
+     // provider publishes. Checking them all would report `verified` for a
+     // request presenting as ClaudeBot from an address Anthropic publishes
+     // only for Claude-User — a stronger claim than the evidence supports,
+     // in the one column this experiment exists to compare.
+     ? (verify(classification.agent, ip) === "verified" ? "verified" as const : "refuted" as const)
      : "not_attestable" as const;
 
  return {

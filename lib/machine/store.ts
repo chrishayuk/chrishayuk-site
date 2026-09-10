@@ -1,10 +1,12 @@
 import { SCHEMA } from "./schema.ts";
 import type { StoredDeclaration } from "./handler.ts";
 import { describe, describeProvenance, unpackCapabilities, unpackProvenance, type DescribedDeclaration } from "./declaration.ts";
-import { CLAIM_CHECK, DECLARED_FIELD, EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
+import { CAPABILITY, CLAIM_CHECK, DECLARED_FIELD, EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
 
 /** Provenance is packed positionally, so unpacking must use the current width. */
 const V_DECLARED_FIELDS = DECLARED_FIELD.length;
+/** Same reason: CAPABILITY is append-only, so the width must be read, not typed. */
+const V_CAPABILITIES = CAPABILITY.length;
 
 /**
  * WHERE A DECLARATION GOES.
@@ -41,13 +43,19 @@ let insert: Statement | null = null;
 let labelInsert: Statement | null = null;
 
 function open(): Promise<Database | null> {
- // A FAILED OPEN IS NOT MEMOISED. Caching the promise means a transient
- // fault — a permissions error, a volume not yet mounted — becomes
- // permanent for the life of the process, and the endpoint goes on
- // answering 201 while writing nothing. That is exactly what happened:
- // a root-owned empty file made every open fail, the null was cached,
- // and two real reports were acknowledged and lost.
- opening ??= (async () => {
+ if (opening) return opening;
+
+ // A FAILED OPEN MUST NOT BE REMEMBERED.
+ //
+ // The previous attempt at this put `opening = null` inside the catch of
+ // an `opening ??= (async () => …)()`. The body contains no await, so it
+ // ran to completion synchronously while the right-hand side was being
+ // evaluated: the null was assigned first and `??=` then wrote the
+ // resolved promise straight over it. One attempt, memoised for the life
+ // of the process — the exact bug it was written to fix, shipped as its
+ // own fix. Clearing it AFTER the promise resolves is the part that has
+ // to happen asynchronously.
+ const attempt = (async () => {
   const file = process.env.MACHINE_DB;
   if (!file) return null;
   try {
@@ -79,11 +87,12 @@ function open(): Promise<Database | null> {
    return db;
   } catch (error) {
    console.error("machine: store unavailable —", (error as Error).message);
-   opening = null;
    return null;
   }
  })();
- return opening;
+ opening = attempt;
+ void attempt.then(db => { if (db === null && opening === attempt) opening = null; });
+ return attempt;
 }
 
 /**
@@ -181,7 +190,8 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
  if (!db) return null;
  try {
   const rows = db.prepare(`SELECT visit_id, hour, actor, role, delegation, collaboration, task,
-    provider_claim, capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked
+    provider_claim, capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked,
+    transport, execution, harness, model_name, agent_kind
    FROM visit ORDER BY visit_id DESC LIMIT ?`).all(Math.min(Math.max(1, limit), 500)) as Record<string, number>[];
   return rows.map(row => {
    const declaration = {
@@ -191,7 +201,7 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
     model: row.model_name ?? 0, agentKind: row.agent_kind ?? 0, label: null,
     capabilities: unpackCapabilities(row.capabilities),
     provenance: unpackProvenance(row.provenance, V_DECLARED_FIELDS),
-    capabilityProvenance: unpackProvenance(row.cap_provenance, 8),
+    capabilityProvenance: unpackProvenance(row.cap_provenance, V_CAPABILITIES),
    };
    return {
     visit: row.visit_id, hour: row.hour,
@@ -217,4 +227,5 @@ export const isStoring = () => Boolean(process.env.MACHINE_DB);
 export function resetStoreForTests(): void {
  opening = null;
  insert = null;
+ labelInsert = null;
 }

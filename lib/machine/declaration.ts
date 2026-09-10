@@ -169,7 +169,7 @@ const VOCABULARY_FOR: Record<V.DeclaredField, V.Vocabulary> = {
  provider_claim: V.PROVIDER_CLAIM,
  transport: V.TRANSPORT,
  execution: V.EXECUTION,
- harness_claim: V.HARNESS_CLAIM,
+ harness: V.HARNESS_CLAIM,
  model_name: V.MODEL_NAME,
  agent_name_kind: V.AGENT_NAME_KIND,
 };

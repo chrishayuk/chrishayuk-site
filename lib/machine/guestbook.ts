@@ -148,11 +148,15 @@ export type PublishedObservations = {
  * keeps that cheap.
  */
 const CACHE_MS = 3_600_000;
-let cached: { at: number; value: PublishedObservations } | null = null;
+let cached: { at: number; day: string; value: PublishedObservations } | null = null;
 
 export async function publishedObservations(now = Date.now()): Promise<PublishedObservations> {
- if (cached && now - cached.at < CACHE_MS) return cached.value;
  const day = previousCompletedDay(now);
+ // Keyed on the DAY as well as the age. The cache previously ignored `now`
+ // entirely, so a caller passing an explicit time — the parameter exists
+ // for that — could be handed another day's snapshot, and a `now` in the
+ // past satisfied the age test trivially.
+ if (cached && cached.day === day.label && now - cached.at < CACHE_MS && now >= cached.at) return cached.value;
  const [arrivals, declared, notes] = await Promise.all([
   machineRequestsAt("/machines", day.fromHour, day.toHour),
   declarationCounts(day.fromHour, day.toHour),
@@ -161,7 +165,11 @@ export async function publishedObservations(now = Date.now()): Promise<Published
  const value: PublishedObservations = {
   through: day.label,
   notes: notes ?? [],
-  available: arrivals !== null,
+  // Either store answering means there is something to publish. Deriving
+  // this from the readership counters alone made a deployment with
+  // MACHINE_DB set and READERSHIP_DB unset render "no store" while real
+  // declaration counts were being discarded.
+  available: arrivals !== null || declared !== null,
   snapshot: {
    discovery: bucket(arrivals ?? 0),
    declarations: bucket(declared?.declarations ?? 0),
@@ -169,7 +177,7 @@ export async function publishedObservations(now = Date.now()): Promise<Published
    interaction: bucket(declared?.challenges ?? 0),
   },
  };
- cached = { at: now, value };
+ cached = { at: now, day: day.label, value };
  return value;
 }
 
