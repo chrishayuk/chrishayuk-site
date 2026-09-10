@@ -80,11 +80,25 @@ const SHAPING: Partial<Record<Role, string[]>> = {
 
 const kindOf = (result: SearchResult) => result.actKind ?? result.kind;
 
+/**
+ * A reference carries the TEXT, not just a pointer to it.
+ *
+ * It did not, and that made the endpoint rewarding declaration strictly
+ * worse than the anonymous /api/search beside it: this returned
+ * id/title/url/kind and required N more fetches, while the undeclared
+ * surface returned the actual content. An agent reported exactly that,
+ * and it is fatal to the bargain — identity is supposed to buy
+ * understanding, and it was buying a worse retriever with better
+ * sorting.
+ */
 const reference = (result: SearchResult) => ({
  id: result.id,
  title: result.title,
  url: result.sourceUrl,
  kind: kindOf(result),
+ text: result.text.length > 600 ? result.text.slice(0, 600) + "…" : result.text,
+ basis: result.basis,
+ score: result.score,
  ...(result.status ? { status: result.status } : {}),
  ...(result.publication ? { editorial_state: result.publication } : {}),
  ...(result.version ? { version: result.version } : {}),
@@ -209,7 +223,12 @@ export function researchBundle(input: AskRequest): ResearchBundle {
    ...(usedTerms === null ? []
     : usedTerms.length === 0
      ? ["Nothing in this corpus matched any word of your question, so there is nothing below. That is an absence, not a ranking."]
-     : [`Your question found nothing as written — every term must appear in the same record. These results are for the ${usedTerms.length} of its words that this corpus knows.`]),
+     // Naming them is not an echo: a surviving term is one this CORPUS
+     // contains, so it carries the site's vocabulary rather than the
+     // caller's. Reporting only a count was an over-correction — it left a
+     // caller unable to refine, which an agent reported as the difference
+     // between a narrowed answer and a useless one.
+     : [`Your question found nothing as written — every term must appear in the same record, so it was narrowed to the words this corpus contains: ${usedTerms.join(", ")}.`]),
   ],
 
   // The ranked list itself, whole.
@@ -235,9 +254,10 @@ export function researchBundle(input: AskRequest): ResearchBundle {
 
   limits: [
    "This is retrieval, not generation. Nothing here was written to answer your question; every item is a source that already existed.",
+   "Matching is AND across a single record: every term must appear in the same item. A natural-language question is narrowed to the terms this corpus contains, and `shaping` says when that happened and to what.",
    "Editorial state travels with every item. A draft is not a finding, and quoting one as a finding misrepresents it.",
    "Declaring a role changes ranking and framing only. Nothing on this site is gated on a declaration, and an anonymous request reaches exactly the same corpus.",
-   "Your question was not stored and is not returned. It reached the index and was discarded — including when it had to be narrowed, which is reported as a count of words rather than the words themselves.",
+   "Your question was not stored. It is not returned either, except that a narrowed query reports which of its terms this corpus contains — those are words from the corpus, not from you.",
   ],
  };
 }

@@ -3,6 +3,7 @@ import { handleDeclaration, handleDeclaredValues } from "@/lib/machine/handler";
 import { writeDeclaration } from "@/lib/machine/store";
 import { observedFor } from "@/lib/machine/observed";
 import { contract } from "@/lib/machine/contract";
+import { capabilityCorrections, corrections, describe, describeProvenance, parseDeclaration } from "@/lib/machine/declaration";
 
 /**
  * MG-2B — THE TREATMENT.
@@ -115,6 +116,27 @@ export async function GET(request: Request): Promise<Response> {
  if (Object.keys(capabilities).length) values.capabilities = capabilities;
 
  if (!Object.keys(values).length) return contractResponse();
+
+ // A DRY RUN, because the only way to reach the corrections was to record
+ // a declaration. An agent probing the vocabulary left a mostly-`unknown`
+ // row behind — exactly the noise every other part of this design works to
+ // exclude — and said so. Same parse, same corrections, nothing stored.
+ if (params.get("validate") === "1") {
+  const declaration = parseDeclaration(values);
+  const capabilityKeys = typeof values.capabilities === "object" && values.capabilities !== null
+   ? Object.keys(values.capabilities as Record<string, unknown>) : [];
+  const fieldCorrections = corrections(declaration);
+  const capCorrections = capabilityCorrections(declaration, capabilityKeys);
+  return Response.json({
+   validated: true,
+   stored: false,
+   recorded: describe(declaration),
+   provenance: describeProvenance(declaration),
+   ...(fieldCorrections.length || capCorrections.length
+    ? { corrections: [...fieldCorrections, ...capCorrections] } : {}),
+   note: "Nothing was recorded. Send the same request without validate=1 to declare.",
+  }, { headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
+ }
 
  // Same source, same declaration, same hour: recorded once. The receipt
  // still comes back, because a caller that retried should not be told it

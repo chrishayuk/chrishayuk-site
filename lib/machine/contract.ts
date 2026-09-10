@@ -49,6 +49,12 @@ export function contract() {
    * The same declaration, for the overwhelming majority of visitors that
    * cannot issue a POST at all.
    */
+  validate: {
+   method: "GET",
+   url: `${url}?validate=1&role=verifier&harness=claude_code`,
+   note: "Same parse, same corrections, nothing stored. Reaching the corrections used to require recording a declaration, which left probe rows in the counts.",
+  },
+
   declare_by_get: {
    method: "GET",
    url: `${url}?actor_type=agent&role=researcher&harness=claude_code`,
@@ -86,7 +92,7 @@ export function contract() {
    */
   provenance: {
    enum: [...PROVENANCE],
-   returned_per_field: true,
+   returned_per_field: "one entry per field in `fields`, EXCEPT `capabilities` and `agent_name`. Capabilities carry their own provenance internally and surface only as corrections; `agent_name` is operator-only and appears in no response at all. An agent found this claim overstated in the document whose whole argument is that it cannot drift.",
    note: "How this site came to know a field, kept separate from what the field says. `omitted` means you sent nothing. `stated` means you sent one of our words — including `unknown`, `not_visible_to_me` and `not_permitted_to_disclose`, each of which is a real answer and a statement about the boundary of your own introspection. `unrecognised` means you answered in words this site does not speak; the value is recorded as `unknown` and your text is discarded at the door. Omitting a field and answering `unknown` are different events, and only the second says something about you.",
   },
 
