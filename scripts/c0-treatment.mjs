@@ -75,13 +75,22 @@ assert.doesNotMatch(sitemap.body, /chrishayuk\.com\/machines/, "/machines must s
 // second inbound route would change discoverability at the same moment MG-2B
 // changes participation, and the experiment would lose the ability to say
 // which one mattered.
+// The exhibit's EXISTENCE is not part of the C0 condition — it arrived
+// mid-phase, and this gate must stay runnable against any C0 revision,
+// including ones that predate it. What is part of the condition is that if it
+// exists, it adds no second route to /machines.
 const guestbook = await probe("/machine-guestbook");
-assert.equal(guestbook.status, 200, "/machine-guestbook must be served");
-assert.doesNotMatch(guestbook.body, /href="\/machines"|chrishayuk\.com\/machines/,
- "/machine-guestbook must not link to /machines: the discovery topology is held constant");
-assert.doesNotMatch(guestbook.body, /api\/machines/, "/machine-guestbook must not advertise a declaration endpoint");
-for (const forbidden of ["fly-client-ip", "user-agent", "collaboration_token", "session"]) {
- assert.ok(!guestbook.body.toLowerCase().includes(forbidden), `/machine-guestbook leaked ${forbidden}`);
+let exhibit = "not deployed at this revision";
+if (guestbook.status === 200) {
+ assert.doesNotMatch(guestbook.body, /href="\/machines"|chrishayuk\.com\/machines/,
+  "/machine-guestbook must not link to /machines: the discovery topology is held constant");
+ assert.doesNotMatch(guestbook.body, /api\/machines/, "/machine-guestbook must not advertise a declaration endpoint");
+ for (const forbidden of ["fly-client-ip", "user-agent", "collaboration_token", "session"]) {
+  assert.ok(!guestbook.body.toLowerCase().includes(forbidden), `/machine-guestbook leaked ${forbidden}`);
+ }
+ exhibit = "served, and adds no route to /machines";
+} else {
+ assert.equal(guestbook.status, 404, `/machine-guestbook answered ${guestbook.status}`);
 }
 
 // NO TREATMENT — the surface exists and offers nothing to do.
@@ -108,6 +117,7 @@ for (const path of [
 console.log(`C0 CONDITION HOLDS at ${origin}`);
 console.log(`  /llms.txt advertises /machines; /machines absent from sitemap`);
 console.log(`  /machines offers no participation mechanism; no declaration endpoint answers`);
+console.log(`  /machine-guestbook: ${exhibit}`);
 // The aggregate cell this run's /machines request lands in, from the site's
 // own classifier — the same function the proxy calls on the way in.
 const cell = classify({ pathname: "/machines", userAgent: AGENT });
