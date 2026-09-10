@@ -46,6 +46,67 @@ uninterpretable, which is the whole reason C0 was shipped alone.
 The contract is served as JSON from the same path under content negotiation, so an
 agent can read the vocabulary without parsing a page.
 
+## 2a. MG-2A and MG-2B — the treatment moves once
+
+MG-2 lands in two rungs so that exactly one deployment changes the condition.
+
+**MG-2A — bounded admission.** The safety substrate, built and mounted nowhere.
+`lib/machine/admission.ts` and `lib/machine/handler.ts` implement the endpoint's
+whole behaviour; no file under `app/api` reaches them, so
+`scripts/c0-treatment.mjs` still finds no declaration endpoint and **C0 survives
+this deployment**. Storage arrives as a port rather than an import, which is what
+lets the failure cases be tested before the store exists.
+
+The claim MG-2A establishes:
+
+> A future machine declaration endpoint has bounded resource cost and fails closed
+> under overload, without exposing the treatment.
+
+It is proved structurally rather than by benchmark. Every request records the
+STAGES it reached, and the tests assert what a refusal cost rather than timing it —
+a benchmark drifts with the machine it runs on, a stage ledger does not.
+
+```text
+1  method            one string comparison
+2  content type      one string comparison
+3  declared length   one integer comparison, before any body is read
+4  global limit      one integer comparison and a decrement
+5  source limit      one non-cryptographic hash and a map lookup
+6  body read         bounded by a hard ceiling, never by trust
+7  json parse        only now is attacker-controlled text parsed
+8  declaration parse total, closed vocabulary, all ordinals
+9  persist           bounded queue, and the only I/O in the list
+```
+
+Nothing before stage 6 touches the body; nothing before stage 9 touches storage; no
+stage performs cryptography, because a rejection path running a deliberately slow
+hash is an amplifier pointed at its own host. Global precedes per-source because a
+distributed flood defeats a per-source limiter by construction, so the cheap ceiling
+is the one that has to hold — and a distributed flood therefore costs one integer
+comparison per request, never a hash.
+
+Four adversarial shapes are tested, each asserting both the status and the stages:
+
+```text
+single source flood       429 at source_limit, storage untouched
+distributed source flood  429 at global_limit, per-source never consulted
+oversized request         413 at declared_length, and at body_read when no
+                          length is declared — the header is a claim, the
+                          ceiling is the enforcement
+storage failure           bounded 503, queue drains, endpoint recovers,
+                          nothing escapes into the rest of the site
+```
+
+Also fixed here: the limiter being unavailable fails **closed** and costs nothing —
+an endpoint that writes while unable to count is worse than one that refuses. The
+write queue is bounded rather than growing. Responses are the same size whatever
+arrived, so refusing can never amplify, and nothing submitted appears in any
+response.
+
+**MG-2B — the treatment.** Mounts `/api/machines/declaration` and supplies the real
+store. `scripts/c0-treatment.mjs` fails at that deployment, and **that deployment's
+timestamp is the C0 → C1 boundary**.
+
 ## 3. The denominator, frozen
 
 **A count here is a request, not a visitor.** `lib/readership/store.ts` keeps
