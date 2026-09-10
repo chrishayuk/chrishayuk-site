@@ -2,7 +2,8 @@ import { SITE } from "../records.ts";
 import { MAX_BODY_BYTES, LIMITS } from "./admission.ts";
 import {
  ACTOR_TYPE, CAPABILITY, CAPABILITY_VALUE, COLLABORATION, DELEGATION,
- CLAIM_CHECK, EVIDENCE, PROVENANCE, PROVIDER_CLAIM, ROLE, TASK_CLASS, declarationBits,
+ AGENT_NAME_KIND, CLAIM_CHECK, EVIDENCE, EXECUTION, HARNESS_CLAIM, MODEL_NAME,
+ PROVENANCE, PROVIDER_CLAIM, ROLE, TASK_CLASS, TRANSPORT, declarationBits,
 } from "./vocabulary.ts";
 
 /**
@@ -50,7 +51,13 @@ export function contract() {
    delegation: { enum: [...DELEGATION] },
    collaboration: { enum: [...COLLABORATION] },
    task_class: { enum: [...TASK_CLASS] },
-   provider_claim: { enum: [...PROVIDER_CLAIM] },
+   provider_claim: { enum: [...PROVIDER_CLAIM], note: "Who made you. Separate from what you are running inside." },
+   harness: { enum: [...HARNESS_CLAIM], note: "What you are running inside — Claude Code, Codex, a custom agent. A brand is not a kind of actor and this is not answered by naming a provider." },
+   model_name: { enum: [...MODEL_NAME], note: "What model you believe you are. A closed list, so one this site has not heard of is recorded as `other` and shows up as a gap worth filling." },
+   transport: { enum: [...TRANSPORT], note: "How you arrived. A crawler and a CLI tool are both machines and are not the same visitor." },
+   execution: { enum: [...EXECUTION], note: "Why you arrived: indexing the web, or acting on somebody's immediate task." },
+   agent_name_kind: { enum: [...AGENT_NAME_KIND], note: "The kind of thing you call yourself. Publishable." },
+   agent_name: { type: "string", max_chars: 64, note: "Your own label for yourself, if you have one. Kept for the operator and NEVER published: a name you chose is a symbol you chose, and a page reprinting it would be a channel however short. The kind above is the publishable half." },
    capabilities: {
     type: "object",
     keys: [...CAPABILITY],

@@ -1,7 +1,10 @@
 import { SCHEMA } from "./schema.ts";
 import type { StoredDeclaration } from "./handler.ts";
 import { describe, describeProvenance, unpackCapabilities, unpackProvenance, type DescribedDeclaration } from "./declaration.ts";
-import { CLAIM_CHECK, EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
+import { CLAIM_CHECK, DECLARED_FIELD, EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
+
+/** Provenance is packed positionally, so unpacking must use the current width. */
+const V_DECLARED_FIELDS = DECLARED_FIELD.length;
 
 /**
  * WHERE A DECLARATION GOES.
@@ -35,6 +38,7 @@ export const DECLARATION_RETENTION_DAYS = 400;
 
 let opening: Promise<Database | null> | null = null;
 let insert: Statement | null = null;
+let labelInsert: Statement | null = null;
 
 function open(): Promise<Database | null> {
  // A FAILED OPEN IS NOT MEMOISED. Caching the promise means a transient
@@ -56,11 +60,22 @@ function open(): Promise<Database | null> {
    // add it to a table that is already there, and the evidence comparison is
    // a primary measure — losing it silently on an existing volume is worse
    // than a noisy failure here.
-   try { db.exec("ALTER TABLE visit ADD COLUMN claim_checked INTEGER NOT NULL DEFAULT 0"); } catch { /* already present */ }
+   for (const column of [
+    "claim_checked INTEGER NOT NULL DEFAULT 0",
+    "transport INTEGER NOT NULL DEFAULT 0",
+    "execution INTEGER NOT NULL DEFAULT 0",
+    "harness INTEGER NOT NULL DEFAULT 0",
+    "model_name INTEGER NOT NULL DEFAULT 0",
+    "agent_kind INTEGER NOT NULL DEFAULT 0",
+   ]) {
+    try { db.exec(`ALTER TABLE visit ADD COLUMN ${column}`); } catch { /* already present */ }
+   }
    insert = db.prepare(`INSERT INTO visit
     (visit_id, hour, actor, role, delegation, collaboration, task, provider_claim,
-     capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked, challenge, resources, asks, published)
-    VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0)`);
+     capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked,
+     transport, execution, harness, model_name, agent_kind, challenge, resources, asks, published)
+    VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0)`);
+   labelInsert = db.prepare("INSERT OR REPLACE INTO visit_label (visit_id, label) VALUES ((SELECT MAX(visit_id) FROM visit), ?)");
    return db;
   } catch (error) {
    console.error("machine: store unavailable —", (error as Error).message);
@@ -103,7 +118,11 @@ export async function writeDeclaration(record: StoredDeclaration): Promise<void>
   record.hour, record.actor, record.role, record.delegation, record.collaboration,
   record.task, record.provider, record.capabilities, record.provenance,
   record.capabilityProvenance, record.providerSeen, record.evidence, record.claimChecked,
+  record.transport, record.execution, record.harness, record.model, record.agentKind,
  );
+ // The visitor's own label, in its own table, read only by the
+ // authenticated page. Written after the row so it can attach to it.
+ if (record.label && labelInsert) labelInsert.run(record.label);
 }
 
 export type DeclarationCounts = {
@@ -168,8 +187,10 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
    const declaration = {
     actor: row.actor, role: row.role, delegation: row.delegation,
     collaboration: row.collaboration, task: row.task, provider: row.provider_claim,
+    transport: row.transport ?? 0, execution: row.execution ?? 0, harness: row.harness ?? 0,
+    model: row.model_name ?? 0, agentKind: row.agent_kind ?? 0, label: null,
     capabilities: unpackCapabilities(row.capabilities),
-    provenance: unpackProvenance(row.provenance, 6),
+    provenance: unpackProvenance(row.provenance, V_DECLARED_FIELDS),
     capabilityProvenance: unpackProvenance(row.cap_provenance, 8),
    };
    return {

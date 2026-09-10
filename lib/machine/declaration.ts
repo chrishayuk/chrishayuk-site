@@ -29,6 +29,19 @@ export type Declaration = {
  collaboration: number;
  task: number;
  provider: number;
+ transport: number;
+ execution: number;
+ harness: number;
+ model: number;
+ agentKind: number;
+ /**
+  * The agent's own name for itself, if it gave one. OPERATOR-ONLY, and
+  * the second and last free-text field this site accepts: a name a
+  * visitor chose is a symbol a visitor chose, and a page reprinting
+  * `research-worker-3` is a channel however small. The KIND is
+  * publishable; the label is not.
+  */
+ label: string | null;
  /** One CAPABILITY_VALUE ordinal per CAPABILITY, in vocabulary order. */
  capabilities: number[];
  /**
@@ -43,8 +56,11 @@ export type Declaration = {
 };
 
 /** The declaration this site records when it was told nothing at all. */
+export const MAX_LABEL_CHARS = 64;
+
 export const UNKNOWN: Declaration = {
  actor: 0, role: 0, delegation: 0, collaboration: 0, task: 0, provider: 0,
+ transport: 0, execution: 0, harness: 0, model: 0, agentKind: 0, label: null,
  capabilities: V.CAPABILITY.map(() => 0),
  provenance: V.DECLARED_FIELD.map(() => 0),
  capabilityProvenance: V.CAPABILITY.map(() => 0),
@@ -75,6 +91,16 @@ export function parseDeclaration(input: unknown): Declaration {
   collaboration: V.ordinalOf(V.COLLABORATION, body.collaboration),
   task: V.ordinalOf(V.TASK_CLASS, body.task_class),
   provider: V.ordinalOf(V.PROVIDER_CLAIM, body.provider_claim),
+  transport: V.ordinalOf(V.TRANSPORT, body.transport),
+  execution: V.ordinalOf(V.EXECUTION, body.execution),
+  harness: V.ordinalOf(V.HARNESS_CLAIM, body.harness),
+  model: V.ordinalOf(V.MODEL_NAME, body.model_name),
+  agentKind: V.ordinalOf(V.AGENT_NAME_KIND, body.agent_name_kind),
+  // The one place a visitor's own string is kept, and it never leaves the
+  // operator's view. See the note on `label` above.
+  label: typeof body.agent_name === "string" && body.agent_name.trim()
+   ? [...body.agent_name.trim()].slice(0, MAX_LABEL_CHARS).join("")
+   : null,
   capabilities: V.CAPABILITY.map(name => V.ordinalOf(V.CAPABILITY_VALUE, declared[name])),
   provenance: [
    provenanceOf(body, "actor_type", V.ACTOR_TYPE),
@@ -83,6 +109,11 @@ export function parseDeclaration(input: unknown): Declaration {
    provenanceOf(body, "collaboration", V.COLLABORATION),
    provenanceOf(body, "task_class", V.TASK_CLASS),
    provenanceOf(body, "provider_claim", V.PROVIDER_CLAIM),
+   provenanceOf(body, "transport", V.TRANSPORT),
+   provenanceOf(body, "execution", V.EXECUTION),
+   provenanceOf(body, "harness", V.HARNESS_CLAIM),
+   provenanceOf(body, "model_name", V.MODEL_NAME),
+   provenanceOf(body, "agent_name_kind", V.AGENT_NAME_KIND),
   ],
   capabilityProvenance: V.CAPABILITY.map(name => provenanceOf(declared, name, V.CAPABILITY_VALUE)),
  };
@@ -136,6 +167,11 @@ const VOCABULARY_FOR: Record<V.DeclaredField, V.Vocabulary> = {
  collaboration: V.COLLABORATION,
  task_class: V.TASK_CLASS,
  provider_claim: V.PROVIDER_CLAIM,
+ transport: V.TRANSPORT,
+ execution: V.EXECUTION,
+ harness_claim: V.HARNESS_CLAIM,
+ model_name: V.MODEL_NAME,
+ agent_name_kind: V.AGENT_NAME_KIND,
 };
 
 export const corrections = (declaration: Declaration): Correction[] =>
@@ -209,6 +245,11 @@ export type DescribedDeclaration = {
  collaboration: V.Collaboration;
  task_class: V.TaskClass;
  provider_claim: V.ProviderClaim;
+ transport: V.Transport;
+ execution: V.Execution;
+ harness: V.HarnessClaim;
+ model_name: V.ModelName;
+ agent_name_kind: V.AgentNameKind;
  capabilities: Record<V.Capability, V.CapabilityValue>;
 };
 
@@ -220,6 +261,11 @@ export function describe(declaration: Declaration): DescribedDeclaration {
   collaboration: V.wordOf(V.COLLABORATION, declaration.collaboration),
   task_class: V.wordOf(V.TASK_CLASS, declaration.task),
   provider_claim: V.wordOf(V.PROVIDER_CLAIM, declaration.provider),
+  transport: V.wordOf(V.TRANSPORT, declaration.transport),
+  execution: V.wordOf(V.EXECUTION, declaration.execution),
+  harness: V.wordOf(V.HARNESS_CLAIM, declaration.harness),
+  model_name: V.wordOf(V.MODEL_NAME, declaration.model),
+  agent_name_kind: V.wordOf(V.AGENT_NAME_KIND, declaration.agentKind),
   capabilities: Object.fromEntries(V.CAPABILITY.map((name, index) =>
    [name, V.wordOf(V.CAPABILITY_VALUE, declaration.capabilities[index] ?? 0)],
   )) as Record<V.Capability, V.CapabilityValue>,
@@ -236,4 +282,5 @@ export function describe(declaration: Declaration): DescribedDeclaration {
  */
 export const isSilent = (declaration: Declaration): boolean =>
  declaration.provenance.every(value => value === 0)
- && declaration.capabilityProvenance.every(value => value === 0);
+ && declaration.capabilityProvenance.every(value => value === 0)
+ && declaration.label === null;

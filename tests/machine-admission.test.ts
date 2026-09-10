@@ -241,7 +241,11 @@ test("every response is bounded, does not amplify, and echoes nothing that was s
  const smallBody = await small.response.text();
 
  assert.equal(bigBody.length, smallBody.length, "response size must not track request size");
- assert.ok(bigBody.length < 1024, `response is ${bigBody.length} bytes`);
+ // Re-pinned when the declaration gained transport, execution, harness, model
+ // and agent-kind: five more fields echoed back in this site's own words. The
+ // property that matters is unchanged and asserted above — the response is the
+ // SAME SIZE whatever arrived, so it tracks the vocabulary and never the input.
+ assert.ok(bigBody.length < 1536, `response is ${bigBody.length} bytes`);
 
  // Corrections can grow a response — a caller that answers every field in a
  // language this site does not speak is told every field and every accepted

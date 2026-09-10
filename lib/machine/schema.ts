@@ -49,6 +49,11 @@ export const SCHEMA = `
   provider_seen  INTEGER NOT NULL,
   evidence       INTEGER NOT NULL,
   claim_checked  INTEGER NOT NULL DEFAULT 0,
+  transport      INTEGER NOT NULL DEFAULT 0,
+  execution      INTEGER NOT NULL DEFAULT 0,
+  harness        INTEGER NOT NULL DEFAULT 0,
+  model_name     INTEGER NOT NULL DEFAULT 0,
+  agent_kind     INTEGER NOT NULL DEFAULT 0,
   challenge      INTEGER NOT NULL,
   resources      INTEGER NOT NULL,
   asks           INTEGER NOT NULL,
@@ -64,6 +69,18 @@ export const SCHEMA = `
   node           INTEGER,
   corpus_version INTEGER NOT NULL
  );
+
+ -- THE ONE REQUEST-REACHABLE TEXT COLUMN, AND IT IS NEVER PUBLIC.
+ --
+ -- An agent may call itself research-worker-3. The KIND of thing it is
+ -- calling itself is a closed vocabulary and publishable; the label is a
+ -- string the visitor chose, so a page reprinting it would be a channel
+ -- however short. It lives in its own table, is read only by the
+ -- authenticated Observatory, and appears in no projection.
+ CREATE TABLE IF NOT EXISTS visit_label (
+  visit_id INTEGER PRIMARY KEY,
+  label    TEXT NOT NULL
+ ) WITHOUT ROWID;
 
  CREATE TABLE IF NOT EXISTS corpus (
   corpus_version INTEGER NOT NULL,
@@ -81,6 +98,14 @@ export const REQUEST_REACHABLE = ["visit", "event"] as const;
 
 /** Tables written only from the site's own corpus, never from a request. */
 export const SITE_OWNED = ["corpus"] as const;
+
+/**
+ * Request-reachable, holds text, and is never public. Declared as its own
+ * category rather than smuggled into REQUEST_REACHABLE, so the claim
+ * "every column a request can influence is an INTEGER" stays true of the
+ * tables it was made about, and the exception has to be named to exist.
+ */
+export const OPERATOR_ONLY_TEXT = ["visit_label"] as const;
 
 export type Column = { name: string; type: string };
 

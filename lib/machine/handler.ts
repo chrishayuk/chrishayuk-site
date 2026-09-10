@@ -35,6 +35,13 @@ export type StoredDeclaration = {
  evidence: number;
  /** CLAIM_CHECK ordinal: the answer to the question the visitor asked. */
  claimChecked: number;
+ transport: number;
+ execution: number;
+ harness: number;
+ model: number;
+ agentKind: number;
+ /** Operator-only, and stored in its own table. */
+ label: string | null;
 };
 
 export type Sink = (record: StoredDeclaration) => Promise<void>;
@@ -125,6 +132,12 @@ const stored = (
  providerSeen: observed.providerSeen,
  evidence: observed.evidence,
  claimChecked: ordinalOf(CLAIM_CHECK, observed.claimChecked ?? "no_claim"),
+ transport: declaration.transport,
+ execution: declaration.execution,
+ harness: declaration.harness,
+ model: declaration.model,
+ agentKind: declaration.agentKind,
+ label: declaration.label,
  actor: declaration.actor, role: declaration.role, delegation: declaration.delegation,
  collaboration: declaration.collaboration, task: declaration.task, provider: declaration.provider,
  capabilities: packCapabilities(declaration.capabilities),

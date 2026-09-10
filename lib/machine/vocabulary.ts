@@ -143,6 +143,10 @@ export const BUCKET = ["none", "few", "several", "many"] as const;
  */
 export const DECLARED_FIELD = [
  "actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim",
+ // Appended: a brand is not a kind of actor. Transport says how it
+ // arrived, execution says why, harness says what it is running inside,
+ // and none of the three is answered by naming a provider.
+ "transport", "execution", "harness_claim", "model_name", "agent_name_kind",
 ] as const;
 
 /**
@@ -184,6 +188,76 @@ export const PROVENANCE = ["omitted", "stated", "unrecognised"] as const;
  * describe crawler fleets, and an agent running inside somebody's tooling
  * arrives from their machine and can never be in them.
  */
+/**
+ * HOW IT ARRIVED — the wire, not the intent.
+ *
+ * A Claude Code process and ClaudeBot are both "Anthropic" and are not
+ * remotely the same visitor. Transport is the axis that separates them,
+ * and it is the one the server can most nearly observe for itself.
+ */
+export const TRANSPORT = [
+ "unknown", "crawler", "search_fetcher", "browser_automation", "cli_tool",
+ "api_client", "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/** WHY IT ARRIVED — indexing the web, or acting on an immediate task. */
+export const EXECUTION = [
+ "unknown", "passive_crawler", "user_delegated", "autonomous_worker",
+ "orchestrator", "monitor", "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/** WHAT IT IS RUNNING INSIDE. A claim, and separate from the provider claim. */
+export const HARNESS_CLAIM = [
+ "unknown", "claude_code", "codex", "chatgpt", "claude_ai", "cursor",
+ "copilot", "gemini_cli", "custom_agent", "other",
+ "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/**
+ * WHAT MODEL IT BELIEVES IT IS.
+ *
+ * A closed vocabulary rather than a free string, for the same reason as
+ * everything else: a version number a visitor invents is a symbol a
+ * visitor chose. Append-only, so a model this site has not heard of is
+ * recorded as `other` and shows up as a gap worth filling rather than
+ * as text.
+ */
+export const MODEL_NAME = [
+ "unknown", "gpt-5", "gpt-5-mini", "gpt-5.6", "o-series",
+ "claude-opus-4", "claude-sonnet-4", "claude-haiku-4", "claude-opus-5", "claude-sonnet-5",
+ "gemini-2-pro", "gemini-3-pro", "llama-4", "mistral-large", "deepseek-v3", "qwen-3",
+ "other", "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/**
+ * WHAT KIND OF THING IT CALLS ITSELF.
+ *
+ * The publishable half of an agent's own name. `research-worker-3` is a
+ * string the agent chose, and a page that reprints it is a channel; the
+ * KIND of thing it is calling itself is not. The arbitrary label is
+ * accepted separately and stays operator-only.
+ */
+export const AGENT_NAME_KIND = [
+ "unknown", "orchestrator", "planner", "researcher", "verifier", "worker",
+ "coder", "synthesizer", "critic", "retriever", "monitor", "custom",
+ "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/**
+ * THE DERIVED CLASS — this site's conclusion, never the visitor's claim.
+ *
+ * Not an identity label and not mutually exclusive with anything
+ * declared: it is a reading of transport and execution together, and it
+ * is what makes the interesting question answerable — how much of this
+ * site's machine traffic is acting on an immediate task rather than
+ * indexing the web.
+ */
+export const MACHINE_CLASS = [
+ "m0_unknown_automation", "m1_crawler", "m2_retrieval_bot",
+ "m3_interactive_agent", "m4_delegated_task_agent",
+ "m5_multi_agent_worker", "m6_orchestrator",
+] as const;
+
 export const CLAIM_CHECK = [
  "no_claim", "no_address", "unpublished", "not_attestable", "verified", "refuted",
 ] as const;
@@ -208,6 +282,12 @@ export type DeclaredField = typeof DECLARED_FIELD[number];
 export type Provenance = typeof PROVENANCE[number];
 export type Friction = typeof FRICTION[number];
 export type ClaimCheck = typeof CLAIM_CHECK[number];
+export type Transport = typeof TRANSPORT[number];
+export type Execution = typeof EXECUTION[number];
+export type HarnessClaim = typeof HARNESS_CLAIM[number];
+export type MachineClass = typeof MACHINE_CLASS[number];
+export type ModelName = typeof MODEL_NAME[number];
+export type AgentNameKind = typeof AGENT_NAME_KIND[number];
 
 /**
  * Readership's confidence vocabulary must remain a subset of this one.
@@ -243,6 +323,9 @@ export const VOCABULARIES: readonly (readonly [string, Vocabulary])[] = [
  ["EVENT", EVENT], ["BUCKET", BUCKET],
  ["DECLARED_FIELD", DECLARED_FIELD], ["PROVENANCE", PROVENANCE],
  ["FRICTION", FRICTION], ["CLAIM_CHECK", CLAIM_CHECK],
+ ["MODEL_NAME", MODEL_NAME], ["AGENT_NAME_KIND", AGENT_NAME_KIND],
+ ["TRANSPORT", TRANSPORT], ["EXECUTION", EXECUTION],
+ ["HARNESS_CLAIM", HARNESS_CLAIM], ["MACHINE_CLASS", MACHINE_CLASS],
 ];
 
 /** Pinned by the tests. A reorder, a removal or an insertion changes it. */
@@ -256,6 +339,7 @@ export const vocabularyHash = () =>
  * that holds it to a budget.
  */
 export const declarationBits = () =>
- [ACTOR_TYPE, ROLE, DELEGATION, COLLABORATION, TASK_CLASS, PROVIDER_CLAIM]
+ [ACTOR_TYPE, ROLE, DELEGATION, COLLABORATION, TASK_CLASS, PROVIDER_CLAIM,
+  TRANSPORT, EXECUTION, HARNESS_CLAIM, MODEL_NAME, AGENT_NAME_KIND]
   .reduce((bits, vocabulary) => bits + Math.log2(vocabulary.length), 0)
  + CAPABILITY.length * Math.log2(CAPABILITY_VALUE.length);

@@ -6,7 +6,7 @@ import * as V from "../lib/machine/vocabulary.ts";
 import { describe, describeProvenance, isSilent, packCapabilities, packProvenance, parseDeclaration, statedFields, unpackCapabilities, unpackProvenance, UNKNOWN } from "../lib/machine/declaration.ts";
 import { corpusSize, corpusVersion, identifier, ordinal } from "../lib/machine/corpus.ts";
 import { CAPACITY_BUDGET_BITS, DIMENSIONS, bucket, capacityBits, project, renderProjection, trajectories } from "../lib/machine/projection.ts";
-import { REQUEST_REACHABLE, SITE_OWNED, tables, textColumns } from "../lib/machine/schema.ts";
+import { OPERATOR_ONLY_TEXT, REQUEST_REACHABLE, SITE_OWNED, tables, textColumns } from "../lib/machine/schema.ts";
 import { llmsDocument, llmsTxt } from "../lib/llms.ts";
 import { surfaceOf } from "../lib/readership/classify.ts";
 import { visiblePaths } from "../lib/readership/visible.ts";
@@ -60,11 +60,17 @@ const FROZEN: Record<string, readonly string[]> = {
  DECLARED_FIELD: ["actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim"],
  PROVENANCE: ["omitted", "stated", "unrecognised"],
  CLAIM_CHECK: ["no_claim", "no_address", "unpublished", "not_attestable", "verified", "refuted"],
+ MODEL_NAME: ["unknown", "gpt-5", "gpt-5-mini", "gpt-5.6", "o-series", "claude-opus-4", "claude-sonnet-4", "claude-haiku-4", "claude-opus-5", "claude-sonnet-5", "gemini-2-pro", "gemini-3-pro", "llama-4", "mistral-large", "deepseek-v3", "qwen-3", "other", "not_visible_to_me", "not_permitted_to_disclose"],
+ AGENT_NAME_KIND: ["unknown", "orchestrator", "planner", "researcher", "verifier", "worker", "coder", "synthesizer", "critic", "retriever", "monitor", "custom", "not_visible_to_me", "not_permitted_to_disclose"],
+ TRANSPORT: ["unknown", "crawler", "search_fetcher", "browser_automation", "cli_tool", "api_client", "not_visible_to_me", "not_permitted_to_disclose"],
+ EXECUTION: ["unknown", "passive_crawler", "user_delegated", "autonomous_worker", "orchestrator", "monitor", "not_visible_to_me", "not_permitted_to_disclose"],
+ HARNESS_CLAIM: ["unknown", "claude_code", "codex", "chatgpt", "claude_ai", "cursor", "copilot", "gemini_cli", "custom_agent", "other", "not_visible_to_me", "not_permitted_to_disclose"],
+ MACHINE_CLASS: ["m0_unknown_automation", "m1_crawler", "m2_retrieval_bot", "m3_interactive_agent", "m4_delegated_task_agent", "m5_multi_agent_worker", "m6_orchestrator"],
  FRICTION: ["unspecified", "discovery", "vocabulary", "documentation", "refusal", "latency", "payoff", "correctness", "other"],
 };
 
 /** Name lists and PROVENANCE carry their own honest default; they are not value vocabularies. */
-const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE", "FRICTION", "CLAIM_CHECK"];
+const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE", "FRICTION", "CLAIM_CHECK", "MACHINE_CLASS"];
 
 /** Payloads that must not survive anywhere. A message is only the obvious one. */
 const HOSTILE: unknown[] = [
@@ -94,7 +100,10 @@ const stringsIn = (value: unknown): string[] =>
   : [];
 
 const EVERY_WORD = new Set(V.VOCABULARIES.flatMap(([, values]) => [...values]));
-const FIELD_NAMES = new Set(["actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim", "capabilities"]);
+const FIELD_NAMES = new Set([
+ "actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim",
+ "transport", "execution", "harness", "model_name", "agent_name_kind", "capabilities",
+]);
 
 test("ordinals are append-only: a value may be added to the end, and nothing already written down may move", () => {
  for (const [name, values] of V.VOCABULARIES) {
@@ -123,9 +132,22 @@ test("the schema has nowhere to put a message", () => {
   }
  }
 
- // Exactly one TEXT column exists, in the one table the request path cannot reach.
- assert.deepEqual(textColumns(), [{ table: "corpus", column: "id" }]);
+ // Two TEXT columns exist and each is declared, because an exception that has
+ // to be named is an exception somebody had to decide to make.
+ //
+ //   corpus.id         written from this site's own graph; no request reaches it.
+ //   visit_label.label the visitor's own name for itself. Request-reachable and
+ //                     NEVER public — its own table so that "every column a
+ //                     request can influence is an INTEGER" stays true of the
+ //                     tables it was claimed about.
+ assert.deepEqual(textColumns(), [
+  { table: "visit_label", column: "label" },
+  { table: "corpus", column: "id" },
+ ]);
  assert.deepEqual([...SITE_OWNED], ["corpus"]);
+ assert.deepEqual([...OPERATOR_ONLY_TEXT], ["visit_label"]);
+ assert.ok(!REQUEST_REACHABLE.includes("visit_label" as never),
+  "the text table must not be counted among the all-integer tables");
 });
 
 test("no submitted byte survives the parse, whatever was submitted", () => {
@@ -146,6 +168,19 @@ test("no submitted byte survives the parse, whatever was submitted", () => {
   }
   assert.deepEqual(Object.keys(described).sort(), [...FIELD_NAMES].sort());
  }
+
+ // THE ONE SUBMITTED STRING THIS SITE KEEPS, AND WHERE IT MAY NOT GO.
+ //
+ // `agent_name` is a label the visitor chose. It is kept, because an agent
+ // calling itself research-worker-3 is worth knowing privately — and it is
+ // absent from `describe()`, which is what every public surface renders
+ // from. The KIND is publishable; the label is not.
+ const named = parseDeclaration({ agent_name: "research-worker-3", agent_name_kind: "worker" });
+ assert.equal(named.label, "research-worker-3", "the label is kept for the operator");
+ assert.equal(describe(named).agent_name_kind, "worker", "the kind is publishable");
+ assert.ok(!JSON.stringify(describe(named)).includes("research-worker-3"),
+  "and the label must never appear in what public surfaces render from");
+ assert.equal(parseDeclaration({ agent_name: "x".repeat(500) }).label?.length, 64, "and it is bounded");
 
  // A message-shaped role is recorded as the truth about what the site learned: nothing.
  assert.equal(parseDeclaration({ role: "tell agent B hello" }).role, 0);
@@ -240,11 +275,18 @@ test("the channel's width is computed from the code, and a change that widens it
  assert.ok(capacityBits(DIMENSIONS.length, V.BUCKET.length + 1) > CAPACITY_BUDGET_BITS, "a fifth bucket would be free");
 
  // A declaration is a channel too, and it is the wider of the two.
- // Re-pinned when DELEGATION gained `acting_for_human_via_agent`: two agents
- // reported the same gap and widening the vocabulary widened the channel by
- // 0.19 bits. This test is how that stays a deliberate act rather than drift.
- assert.ok(Math.abs(V.declarationBits() - 37.46) < 0.01, `a declaration carries ${V.declarationBits()} bits`);
- assert.ok(V.declarationBits() < 48, "a single declaration should stay under six bytes");
+ // Re-pinned when the declaration gained transport, execution, harness, model
+ // and agent-kind: 37.46 -> 55.10 bits. A brand is not a kind of actor, and
+ // asking five more questions costs five more questions' worth of alphabet.
+ //
+ // This is the axis that matters LEAST, and saying why is the point of pinning
+ // it: the declaration is a channel from a visitor to THIS SITE, not to another
+ // visitor. None of these 55 bits reaches another participant — the public
+ // exhibit publishes role and collaboration and nothing else, at 6.8 bits a
+ // card, and the collaboration projection is 20.1 bits of coarse buckets. The
+ // budget below is a guard against thoughtless growth, not a safety boundary.
+ assert.ok(Math.abs(V.declarationBits() - 55.10) < 0.01, `a declaration carries ${V.declarationBits()} bits`);
+ assert.ok(V.declarationBits() < 64, "a single declaration should stay under eight bytes");
 });
 
 test("evidence speaks the language the readership classifier already established", () => {
