@@ -461,6 +461,8 @@ export const cell80Records: PublicationRecord[] = [
       "causal-intervention"
     ],
     "related": [
+      "N-CELL80-BARRIER",
+      "N-CELL80-HISTORY",
       "N-CELL80-01",
       "N-CELL80-02"
     ],

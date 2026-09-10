@@ -28,6 +28,15 @@
 .cell80-realization-arms dt{font:11px var(--font-geist-mono);margin-bottom:16px}
 .cell80-realization-arms dd{font:32px var(--font-fraunces);margin:0}
 .cell80-realization-arms small{display:block;font:12px/1.6 var(--font-inter);color:var(--muted)}
+.cell80-descendants>figcaption{color:var(--muted);margin-bottom:28px}
+.cell80-descendant-bars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,4vw,45px)}
+.cell80-descendant-bars>div{min-width:0}
+.cell80-descendant-bars .record-voice{font-size:9px}
+.cell80-descendant-bars strong{display:block;font:clamp(38px,7vw,88px)/1.15 var(--font-fraunces);color:var(--accent);margin:15px 0}
+.cell80-descendant-track{height:150px;display:flex;align-items:flex-end;border-bottom:1px solid var(--accent);background:var(--rule)}
+.cell80-descendant-track i{display:block;width:100%;background:var(--accent)}
+.cell80-further-card-number{font:clamp(38px,6vw,75px)/1 var(--font-fraunces);font-weight:400;color:var(--accent)}
+.cell80-further-notes{scroll-margin-top:100px}
 @media(max-width:700px){.cell80-notebook #cell80-study>header{grid-template-columns:1fr;gap:16px}.cell80-realization-layout{grid-template-columns:1fr}.cell80-realization-result{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}.cell80-realization-result>p{margin:0}.cell80-realization-result>p.cell80-caption{grid-column:1/-1;max-width:none}.cell80-realization-arms{grid-template-columns:1fr 1fr}.cell80-record .record-bar{gap:8px 14px}.cell80-record .cell80-series-marker{gap:8px 20px}}
 .cell80-series-marker{display:flex;gap:24px;flex-wrap:wrap;margin:26px 0;color:var(--accent)}
 .cell80-series-marker a{min-height:44px;display:inline-flex;align-items:center;border-bottom:1px solid transparent}

@@ -1,3 +1,5 @@
+import { Cell80FurtherCard } from "./Cell80FurtherNotebook";
+import { cell80FurtherPart } from "@/lib/cell80-further-records";
 import { Cell80Card } from "./Cell80Notebook";
 import { cell80Part } from "@/lib/cell80";
 import { Follow } from "./Follow";
@@ -20,11 +22,11 @@ export function NotebookCollection() {
       <p className="kicker record-voice">CHRIS HAY / THE NOTEBOOK</p>
       <h1>Before<br/><em>the answer.</em></h1>
       <div className="notebook-introduction"><p className="dek">A map. A memory. A question<br/>that becomes something to make.</p><p>Films, experiments and instruments from the work. Some notes begin with something to watch; others begin with a result that did not behave as expected. Each is followed into the question it leaves behind.</p></div>
-      <Link className="text-link notebook-thread-link" href={mapThread.path}>FOLLOW THE THREAD / FROM A MAP TO A MEMORY ↗</Link><Link className="text-link notebook-thread-link" href="/thread/cell80">CELL80 / A WORLD THAT CAN BE QUESTIONED ↗</Link><div className="index-count record-voice"><span>NOTES / 01—{String(visualNotebooks.length).padStart(2,"0")}</span><span>WORKING EDITION · 09 SEPTEMBER 2026</span></div>
+      <Link className="text-link notebook-thread-link" href={mapThread.path}>FOLLOW THE THREAD / FROM A MAP TO A MEMORY ↗</Link><Link className="text-link notebook-thread-link" href="/thread/cell80">CELL80 / A WORLD THAT CAN BE QUESTIONED ↗</Link><div className="index-count record-voice"><span>NOTES / 01—{String(visualNotebooks.length).padStart(2,"0")}</span><span>WORKING EDITION · 10 SEPTEMBER 2026</span></div>
     </header>
     <div className="notebook-stories">{visualNotebooks.map((r, i) => <article key={r.id} className={`notebook-story notebook-story-${(i % 3) + 1}`}>
       <div className="notebook-story-top record-voice"><span>{String(i+1).padStart(2,"0")} / {r.id}</span><span>{r.lineage || "FILM → QUESTION → RECORD"}</span></div>
-      {cell80Part(r.id) ? <Cell80Card part={cell80Part(r.id)}/> : r.id === "N-ATTRIBUTION" ? <AgentAttributionCard/>
+      {cell80FurtherPart(r.id) ? <Cell80FurtherCard part={cell80FurtherPart(r.id)}/> : cell80Part(r.id) ? <Cell80Card part={cell80Part(r.id)}/> : r.id === "N-ATTRIBUTION" ? <AgentAttributionCard/>
         : r.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/>
         : r.id === "N-AUTHORITY" ? <AuthorityCard/>
         : r.body[0].kind === "film" && "youtubeId" in r.body[0]

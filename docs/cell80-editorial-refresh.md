@@ -64,5 +64,29 @@ production build passes. Local HTTP checks return 200 for all three notes, retai
 EX-14 grid has exactly 63 helpful, one tied and 36 unrealized marks.
 
 No connected browser was available, so visual and interaction QA could not be
-completed. Changes remain local; deployment of this existing site was not
-requested.
+completed. The refreshed three-note edition was deployed on 10 September 2026
+through the existing GitHub-to-Fly workflow, and its live revision, pages and
+evidence download were verified.
+
+
+## Further notes
+
+The later completed experiments support two focused companion drafts:
+
+- `N-CELL80-BARRIER`: **Give invention something to unlock.** EX-11's resource
+  barrier, online composition, all four control arms and the two ineligible early
+  uptake events. The first figure pairs 0/89 primitives with 1/1,825 compositions.
+- `N-CELL80-HISTORY`: **An advantage needs a chance to become history.** EX-12's
+  unrealized opportunity, EX-13's transmitted cohort and EX-14's conditional
+  effect. The first figure follows 217, 148, 230 and zero intact descendants;
+  the later figure reuses the verified 100 paired EX-14 futures.
+
+These remain distinct from the original three-question sequence, with links in
+its Further Notes section, the Notebook collection and the invention record.
+Both have complete semantic records, source references and stable act anchors.
+The source catalogue and local files still supply no completed EX-15 result.
+
+TypeScript, focused ESLint, the full test suite and the Sites build pass. Local
+HTTP checks verify both pages, nine and ten unique act anchors, draft labels,
+source links, both sequence links, and the exact EX-14 outcome marks. No connected
+browser was available for visual QA.
