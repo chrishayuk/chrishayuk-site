@@ -126,13 +126,18 @@ export const isVerifiable = (agent: string) => byAgent.has(agent.toLowerCase());
  */
 export function verifyProvider(provider: string, ip: string | null): Verification {
  const name = provider.trim().toLowerCase();
- const agents = snapshot.sources.filter(source => source.provider === name).flatMap(source => source.agents);
+ const agents = agentsOf(name);
  // "unpublished" must mean the provider publishes nothing — not that this
  // deployment had no address to check. Saying the first when the second is
  // true would be telling the visitor something false about its provider.
  if (agents.length === 0 || !ip) return "unpublished";
  return agents.some(agent => verify(agent, ip) === "verified") ? "verified" : "refuted";
 }
+
+/** The crawler agents a provider publishes addresses for, and only those. */
+export const agentsOf = (provider: string): string[] =>
+ snapshot.sources.filter(source => source.provider === provider.trim().toLowerCase())
+  .flatMap(source => source.agents);
 
 /**
  * Test a declared agent against the addresses its provider publishes.

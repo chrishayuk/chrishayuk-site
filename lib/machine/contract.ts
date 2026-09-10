@@ -2,7 +2,7 @@ import { SITE } from "../records.ts";
 import { MAX_BODY_BYTES, LIMITS } from "./admission.ts";
 import {
  ACTOR_TYPE, CAPABILITY, CAPABILITY_VALUE, COLLABORATION, DELEGATION,
- EVIDENCE, PROVENANCE, PROVIDER_CLAIM, ROLE, TASK_CLASS, declarationBits,
+ CLAIM_CHECK, EVIDENCE, PROVENANCE, PROVIDER_CLAIM, ROLE, TASK_CLASS, declarationBits,
 } from "./vocabulary.ts";
 
 /**
@@ -79,7 +79,10 @@ export function contract() {
    observed: {
     provider: { enum: [...PROVIDER_CLAIM], note: "What the request looked like, independently of what it said." },
     evidence: { enum: [...EVIDENCE] },
-    your_claim: "If you name a provider_claim, this site checks the address you arrived from against the ranges that provider itself publishes, and answers in plain words. Only large operators publish ranges at all, so an agent running locally will usually be told the claim cannot be checked — which is itself worth knowing.",
+    your_claim: {
+     enum: [...CLAIM_CHECK],
+     note: "The answer to the question you asked by naming a provider. Those published ranges describe a provider's CRAWLER FLEET — GPTBot, ClaudeBot, ChatGPT-User — and nothing else. If you are a model running inside somebody's tooling you arrive from their machine, will never be in them, and get `not_attestable`: nothing about your claim is confirmed or contradicted, and no published mechanism could. `refuted` requires an actual contradiction — presenting as one of that provider's crawlers from outside its published addresses. This site will not dress the first up as the second.",
+    },
    },
   },
 

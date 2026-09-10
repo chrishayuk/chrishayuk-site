@@ -64,7 +64,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
      ? <p>No declarations yet. That is a result, not an empty state.</p>
      : <table className="machine-table"><thead><tr>
         <th>#</th><th>hour</th><th>actor</th><th>role</th><th>acting for</th>
-        <th>working as</th><th>task</th><th>claimed</th><th>seen</th><th>evidence</th>
+        <th>working as</th><th>task</th><th>claimed</th><th>seen</th><th>request</th><th>claim check</th>
        </tr></thead><tbody>
         {declarations.map(row => <tr key={row.visit}>
          <td>{row.visit}</td>
@@ -77,6 +77,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
          <td>{row.declared.provider_claim}</td>
          <td>{row.observed.provider}</td>
          <td>{row.observed.evidence}</td>
+         <td>{row.observed.claimChecked}</td>
         </tr>)}
        </tbody></table>}
   </section>

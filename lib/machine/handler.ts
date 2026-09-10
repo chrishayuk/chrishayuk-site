@@ -1,6 +1,6 @@
 import { admit, readBounded, sourceOf, MAX_BODY_BYTES, type Facts, type Stage, type WriteQueue } from "./admission.ts";
 import { capabilityCorrections, corrections, describe, describeProvenance, packCapabilities, packProvenance, parseDeclaration, type Declaration } from "./declaration.ts";
-import { EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
+import { CLAIM_CHECK, EVIDENCE, PROVIDER_CLAIM, ordinalOf, wordOf } from "./vocabulary.ts";
 
 /**
  * THE DECLARATION HANDLER, BUILT AND NOT MOUNTED.
@@ -33,6 +33,8 @@ export type StoredDeclaration = {
   */
  providerSeen: number;
  evidence: number;
+ /** CLAIM_CHECK ordinal: the answer to the question the visitor asked. */
+ claimChecked: number;
 };
 
 export type Sink = (record: StoredDeclaration) => Promise<void>;
@@ -58,7 +60,7 @@ export type Dependencies = {
  observed?: (request: Request, providerClaim?: string) => {
   providerSeen: number;
   evidence: number;
-  claimChecked?: "verified" | "refuted" | "unpublished" | "no_address" | "no_claim";
+  claimChecked?: "verified" | "refuted" | "not_attestable" | "unpublished" | "no_address" | "no_claim";
  };
 };
 
@@ -108,7 +110,8 @@ function receipt(): string {
 const CLAIM_ANSWER: Record<string, string> = {
  verified: "the address you arrived from is inside a range your declared provider publishes",
  refuted: "your declared provider publishes address ranges, and this request did not come from one",
- unpublished: "your declared provider publishes no address ranges, so this site cannot check the claim",
+ not_attestable: "your declared provider publishes addresses only for its crawler fleet, and this request did not present as one of those crawlers. Nothing about your claim is confirmed or contradicted by that: an agent running inside somebody's tooling arrives from their machine, and no published mechanism can attest it. This site will not pretend otherwise.",
+ unpublished: "your declared provider publishes no address ranges at all, so this site cannot check the claim",
  no_address: "this deployment saw no client address, so the claim could not be checked",
  no_claim: "no provider was claimed, so there was nothing to check",
 };
@@ -116,11 +119,12 @@ const CLAIM_ANSWER: Record<string, string> = {
 const stored = (
  declaration: Declaration,
  hour: number,
- observed: { providerSeen: number; evidence: number },
+ observed: { providerSeen: number; evidence: number; claimChecked?: string },
 ): StoredDeclaration => ({
  hour,
  providerSeen: observed.providerSeen,
  evidence: observed.evidence,
+ claimChecked: ordinalOf(CLAIM_CHECK, observed.claimChecked ?? "no_claim"),
  actor: declaration.actor, role: declaration.role, delegation: declaration.delegation,
  collaboration: declaration.collaboration, task: declaration.task, provider: declaration.provider,
  capabilities: packCapabilities(declaration.capabilities),

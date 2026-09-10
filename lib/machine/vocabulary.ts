@@ -175,6 +175,19 @@ export const PROVENANCE = ["omitted", "stated", "unrecognised"] as const;
  * under the same capacity argument as everything else; the prose beside
  * it is operator-only and never rendered anywhere a visitor can read.
  */
+/**
+ * The answer to the question a visitor asks by naming a provider.
+ *
+ * `refuted` requires an actual contradiction — a request declaring one of
+ * that provider's crawler agents from outside its published addresses.
+ * `not_attestable` is the honest and much commoner answer: the ranges
+ * describe crawler fleets, and an agent running inside somebody's tooling
+ * arrives from their machine and can never be in them.
+ */
+export const CLAIM_CHECK = [
+ "no_claim", "no_address", "unpublished", "not_attestable", "verified", "refuted",
+] as const;
+
 export const FRICTION = [
  "unspecified", "discovery", "vocabulary", "documentation", "refusal",
  "latency", "payoff", "correctness", "other",
@@ -194,6 +207,7 @@ export type Bucket = typeof BUCKET[number];
 export type DeclaredField = typeof DECLARED_FIELD[number];
 export type Provenance = typeof PROVENANCE[number];
 export type Friction = typeof FRICTION[number];
+export type ClaimCheck = typeof CLAIM_CHECK[number];
 
 /**
  * Readership's confidence vocabulary must remain a subset of this one.
@@ -228,7 +242,7 @@ export const VOCABULARIES: readonly (readonly [string, Vocabulary])[] = [
  ["PROVIDER_CLAIM", PROVIDER_CLAIM], ["EVIDENCE", EVIDENCE],
  ["EVENT", EVENT], ["BUCKET", BUCKET],
  ["DECLARED_FIELD", DECLARED_FIELD], ["PROVENANCE", PROVENANCE],
- ["FRICTION", FRICTION],
+ ["FRICTION", FRICTION], ["CLAIM_CHECK", CLAIM_CHECK],
 ];
 
 /** Pinned by the tests. A reorder, a removal or an insertion changes it. */

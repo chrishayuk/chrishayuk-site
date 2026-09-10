@@ -1,7 +1,7 @@
 import { SCHEMA } from "./schema.ts";
 import type { StoredDeclaration } from "./handler.ts";
 import { describe, describeProvenance, unpackCapabilities, unpackProvenance, type DescribedDeclaration } from "./declaration.ts";
-import { EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
+import { CLAIM_CHECK, EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
 
 /**
  * WHERE A DECLARATION GOES.
@@ -52,10 +52,15 @@ function open(): Promise<Database | null> {
    const db = new runtime.DatabaseSync(file);
    db.exec("PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL; PRAGMA busy_timeout = 2000;");
    db.exec(SCHEMA);
+   // A column added after rows existed. CREATE TABLE IF NOT EXISTS will not
+   // add it to a table that is already there, and the evidence comparison is
+   // a primary measure — losing it silently on an existing volume is worse
+   // than a noisy failure here.
+   try { db.exec("ALTER TABLE visit ADD COLUMN claim_checked INTEGER NOT NULL DEFAULT 0"); } catch { /* already present */ }
    insert = db.prepare(`INSERT INTO visit
     (visit_id, hour, actor, role, delegation, collaboration, task, provider_claim,
-     capabilities, provenance, cap_provenance, provider_seen, evidence, challenge, resources, asks, published)
-    VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0)`);
+     capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked, challenge, resources, asks, published)
+    VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0)`);
    return db;
   } catch (error) {
    console.error("machine: store unavailable —", (error as Error).message);
@@ -97,7 +102,7 @@ export async function writeDeclaration(record: StoredDeclaration): Promise<void>
  insert.run(
   record.hour, record.actor, record.role, record.delegation, record.collaboration,
   record.task, record.provider, record.capabilities, record.provenance,
-  record.capabilityProvenance, record.providerSeen, record.evidence,
+  record.capabilityProvenance, record.providerSeen, record.evidence, record.claimChecked,
  );
 }
 
@@ -149,7 +154,7 @@ export type DeclarationRow = {
  visit: number; hour: number;
  declared: DescribedDeclaration;
  provenance: Record<string, string>;
- observed: { provider: string; evidence: string };
+ observed: { provider: string; evidence: string; claimChecked: string };
 };
 
 export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] | null> {
@@ -157,7 +162,7 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
  if (!db) return null;
  try {
   const rows = db.prepare(`SELECT visit_id, hour, actor, role, delegation, collaboration, task,
-    provider_claim, capabilities, provenance, cap_provenance, provider_seen, evidence
+    provider_claim, capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked
    FROM visit ORDER BY visit_id DESC LIMIT ?`).all(Math.min(Math.max(1, limit), 500)) as Record<string, number>[];
   return rows.map(row => {
    const declaration = {
@@ -174,6 +179,7 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
     observed: {
      provider: wordOf(PROVIDER_CLAIM, row.provider_seen),
      evidence: wordOf(EVIDENCE, row.evidence),
+     claimChecked: wordOf(CLAIM_CHECK, row.claim_checked ?? 0),
     },
    };
   });

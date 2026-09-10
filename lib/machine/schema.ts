@@ -48,6 +48,7 @@ export const SCHEMA = `
   cap_provenance INTEGER NOT NULL,
   provider_seen  INTEGER NOT NULL,
   evidence       INTEGER NOT NULL,
+  claim_checked  INTEGER NOT NULL DEFAULT 0,
   challenge      INTEGER NOT NULL,
   resources      INTEGER NOT NULL,
   asks           INTEGER NOT NULL,
