@@ -31,6 +31,8 @@ export const cell80FurtherRecords: PublicationRecord[] = [
     ],
     sources: [
       {title:"EX-11 — results and all 40 primary worlds",url:"/data/cell80/followups/ex11-results.md"},
+      {title:"EX-11 — all 40 population histories and source hashes",url:"/data/cell80/barrier/index.json"},
+      {title:"EX-11 — original recorded outcomes (gzip)",url:"/data/cell80/followups/ex11.jsonl.gz"},
       {title:"EX-11 — interpretation and limits",url:"/data/cell80/followups/ex11-interpretation.md"},
       {title:"EX-11 — preregistration",url:"/data/cell80/followups/ecology-barrier-preregistration.md"},
       {title:"EX-11–15 — database snapshot",url:"/data/cell80/followup-database-snapshot.json"},

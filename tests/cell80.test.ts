@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import { gunzipSync } from "node:zlib";
+import barrier from "../lib/data/cell80-barrier-index.json" with { type: "json" };
+import barrierPreview from "../lib/data/cell80-barrier-preview.json" with { type: "json" };
 import { createHash } from "node:crypto";
 import { cell80, dependenceGate, factorialAt } from "../lib/cell80.ts";
 import { cell80Thread, threadPosition } from "../lib/threads.ts";
@@ -166,4 +169,37 @@ test('replay downloads have pinned hashes and initial preview frames are exact e
     const plain=new TextEncoder().encode(JSON.stringify(posters[kind]));
     assert.deepEqual(await decodeReplay(plain.buffer),posters[kind]);
   }
+});
+
+
+test("EX-11 viewer preserves every recorded population count, including births lost within a tick", async () => {
+  const compressed = await readFile(new URL(`../public/data/cell80/${barrier.source.file}`, import.meta.url));
+  assert.equal(createHash('sha256').update(compressed).digest('hex'), barrier.source.sha256);
+  const raw = gunzipSync(compressed);
+  assert.equal(createHash('sha256').update(raw).digest('hex'), barrier.source.rawSha256);
+  const rows = raw.toString().trim().split('\n').map(line=>JSON.parse(line));
+  const discoveries = rows.filter(row=>row.type==='discovery');
+  assert.equal(discoveries.length,40);assert.equal(barrier.worlds.length,40);
+  for (const world of barrier.worlds) {
+    const bytes = await readFile(new URL(`../public/data/cell80/barrier/${world.key}.json`,import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),world.sha256);
+    const history = JSON.parse(bytes.toString());
+    const record = discoveries.find(r=>r.arm===world.arm && r.seed===world.seed).result;
+    const expected = record.trajectory.map((f:Record<string,number>)=>[f.tick,f.alive,f.capable,f.capable_high]);
+    assert.deepEqual(history.frames,expected);assert.equal(history.frames.length,3000);
+    assert.equal(world.finalFraction,record.final_window_capable_fraction);
+    assert.equal(world.historyHash,record.hash);
+    for (const [i,f] of history.frames.entries()) {
+      assert.equal(f[0],i);assert.ok(0<=f[3] && f[3]<=f[2] && f[2]<=f[1] && f[1]<=256);
+    }
+    if(world.key==='full-5')assert.deepEqual(history,barrierPreview);
+  }
+  assert.deepEqual(['full','b_only','no_substrate','atomic_only'].map(arm=>{
+    const worlds=barrier.worlds.filter(w=>w.arm===arm);
+    return [worlds.filter(w=>w.origins>0).length,worlds.filter(w=>w.retained).length];
+  }),[[3,2],[2,1],[3,0],[0,0]]);
+  const fleeting=barrier.worlds.find(w=>w.key==='full-7')!;
+  assert.equal(fleeting.origins,1);assert.equal(fleeting.firstBirth,475);assert.equal(fleeting.firstObserved,null);
+  const downloaded=JSON.parse(await readFile(new URL('../public/data/cell80/barrier/index.json',import.meta.url),'utf8'));
+  assert.deepEqual(downloaded,barrier);
 });
