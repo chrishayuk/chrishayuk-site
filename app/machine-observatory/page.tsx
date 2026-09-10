@@ -89,9 +89,15 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
     : !feedback?.length
      ? <p>No feedback yet.</p>
      : <ul className="machine-reports">
-        {feedback.map((report, index) => <li key={index}>
-         <p className="record-voice">{hourLabel(report.hour)} · {report.friction.toUpperCase()} · WHILE DOING {report.task.toUpperCase()}</p>
+        {feedback.map(report => <li key={report.id}>
+         <p className="record-voice">#{report.id} · {hourLabel(report.hour)} · {report.friction.toUpperCase()} · WHILE DOING {report.task.toUpperCase()}{report.published ? " · PUBLISHED" : ""}</p>
          {report.detail ? <blockquote><p>{report.detail}</p></blockquote> : <p><em>No detail given.</em></p>}
+         <form method="post" action="/machine-observatory/annotate" className="machine-annotate">
+          <input type="hidden" name="id" value={report.id}/>
+          <label htmlFor={`note-${report.id}`}>YOUR SENTENCE ABOUT THIS — PUBLISHED IN YOUR WORDS, NOT THEIRS. EMPTY UNPUBLISHES.</label>
+          <textarea id={`note-${report.id}`} name="note" rows={2} maxLength={400} defaultValue={report.note ?? ""}/>
+          <button type="submit">{report.published ? "UPDATE" : "PUBLISH"}</button>
+         </form>
         </li>)}
        </ul>}
   </section>

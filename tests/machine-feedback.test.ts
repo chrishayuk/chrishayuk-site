@@ -90,11 +90,23 @@ test("no public surface can reach the prose", async () => {
  assert.ok(observatory.includes("untrusted"), "the page must label agent prose as untrusted input");
 });
 
-test("the public guestbook cannot show feedback, because it never reads it", async () => {
+test("the public guestbook can show the operator's sentences and never the agent's", async () => {
+ // The exhibit now publishes prose ABOUT feedback. Everything turns on who
+ // wrote it: `note` is the operator's sentence and may be published; `detail`
+ // is the agent's own bytes and may not, because a page reprinting what one
+ // visitor wrote for another to read is a message board however it is worded.
  const guestbook = await readFile(new URL("../app/machine-guestbook/page.tsx", import.meta.url), "utf8");
- for (const forbidden of ["feedback", "recentFeedback", "detail"]) {
+ for (const forbidden of ["recentFeedback", "detail", "observatorySnapshot"]) {
   assert.ok(!guestbook.includes(forbidden), `the public exhibit references ${forbidden}`);
  }
+
+ // The reader it does use selects the operator's column and nothing else.
+ const feedback = await readFile(new URL("../lib/machine/feedback.ts", import.meta.url), "utf8");
+ const publisher = feedback.slice(feedback.indexOf("export async function publishedNotes"));
+ const query = publisher.slice(0, publisher.indexOf("}"));
+ assert.ok(query.includes("SELECT hour, friction, note"), "publishedNotes selects the note column");
+ assert.ok(!query.includes("detail"), "publishedNotes must have no expression that reaches the agent's words");
+ assert.ok(query.includes("published = 1"), "and nothing is public that was not deliberately published");
  // Its four dimensions are the declaration store's, and friction is not among them.
  assert.deepEqual([...PUBLIC_DIMENSIONS], ["discovery", "declarations", "collaboration", "interaction"]);
 });

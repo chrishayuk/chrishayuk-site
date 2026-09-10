@@ -95,10 +95,34 @@ export const FEEDBACK_SCHEMA = `
   hour        INTEGER NOT NULL,
   friction    INTEGER NOT NULL,
   task        INTEGER NOT NULL,
-  detail      TEXT
+  detail      TEXT,
+  note        TEXT,
+  published   INTEGER NOT NULL DEFAULT 0
  );
  CREATE INDEX IF NOT EXISTS feedback_hour ON feedback(hour);
 `;
+
+/**
+ * TWO TEXT COLUMNS, AND EVERYTHING TURNS ON WHO WROTE EACH.
+ *
+ *   detail  the agent's words. Operator-only, for ever. Publishing it
+ *           would make this a message board: one visitor writes, another
+ *           reads, and the capacity becomes whatever the operator
+ *           happens to publish — editorial judgement rather than a
+ *           property of the code, which is the one thing nothing else
+ *           here relies on.
+ *
+ *   note    the OPERATOR's words about a report. Publishable, because
+ *           the operator is not a participant and their sentence carries
+ *           none of the agent's bytes.
+ *
+ * This is the original specification's rule applied exactly as written:
+ * there is no arbitrary public comment, and the site writes the prose,
+ * not the visitor. An agent can cause a subject to be discussed. It
+ * cannot cause a single byte of its own to be published, and no
+ * selection policy can be gamed into letting it, because selection is
+ * not the mechanism — rewriting is.
+ */
 
 type Statement = { run: (...params: unknown[]) => unknown; all: (...params: unknown[]) => unknown[] };
 type Database = { exec: (sql: string) => void; prepare: (sql: string) => Statement };
@@ -201,23 +225,72 @@ export async function frictionCounts(fromHour: number, toHour: number): Promise<
  * may act on it automatically — a feedback box that is obeyed is a
  * remote control with a friendly name.
  */
-export type FeedbackReport = { hour: number; friction: Friction; task: TaskClass; detail: string | null };
+export type FeedbackReport = {
+ id: number; hour: number; friction: Friction; task: TaskClass;
+ detail: string | null;
+ /** The operator's own sentence, if one has been written. */
+ note: string | null;
+ published: boolean;
+};
 
 export async function recentFeedback(limit = 50): Promise<FeedbackReport[] | null> {
  const db = await open();
  if (!db) return null;
  try {
-  const rows = db.prepare("SELECT hour, friction, task, detail FROM feedback ORDER BY feedback_id DESC LIMIT ?")
-   .all(Math.min(Math.max(1, limit), 200)) as { hour: number; friction: number; task: number; detail: string | null }[];
+  const rows = db.prepare("SELECT feedback_id, hour, friction, task, detail, note, published FROM feedback ORDER BY feedback_id DESC LIMIT ?")
+   .all(Math.min(Math.max(1, limit), 200)) as { feedback_id: number; hour: number; friction: number; task: number; detail: string | null; note: string | null; published: number }[];
   return rows.map(row => ({
+   id: row.feedback_id,
    hour: row.hour,
    friction: wordOf(FRICTION, row.friction),
    task: wordOf(TASK_CLASS, row.task),
    detail: row.detail,
+   note: row.note,
+   published: row.published === 1,
   }));
  } catch (error) {
   console.error("feedback: reports unavailable —", (error as Error).message);
   return null;
+ }
+}
+
+/**
+ * WHAT THE PUBLIC PAGE MAY READ. It selects `note` and never `detail`,
+ * so the public renderer has no expression that could reach an agent's
+ * words even if someone later wired it wrongly.
+ */
+export type PublishedNote = { hour: number; friction: Friction; note: string };
+
+export async function publishedNotes(limit = 50): Promise<PublishedNote[] | null> {
+ const db = await open();
+ if (!db) return null;
+ try {
+  const rows = db.prepare(
+   "SELECT hour, friction, note FROM feedback WHERE published = 1 AND note IS NOT NULL ORDER BY feedback_id DESC LIMIT ?",
+  ).all(Math.min(Math.max(1, limit), 100)) as { hour: number; friction: number; note: string }[];
+  return rows.map(row => ({ hour: row.hour, friction: wordOf(FRICTION, row.friction), note: row.note }));
+ } catch (error) {
+  console.error("feedback: notes unavailable —", (error as Error).message);
+  return null;
+ }
+}
+
+/**
+ * The editorial act, reachable only from the authenticated page. An
+ * empty note unpublishes: nothing is public that the operator has not
+ * written a sentence about.
+ */
+export async function annotate(id: number, note: string): Promise<boolean> {
+ const db = await open();
+ if (!db) return false;
+ const trimmed = note.trim().slice(0, 400);
+ try {
+  db.prepare("UPDATE feedback SET note = ?, published = ? WHERE feedback_id = ?")
+   .run(trimmed || null, trimmed ? 1 : 0, id);
+  return true;
+ } catch (error) {
+  console.error("feedback: annotation failed —", (error as Error).message);
+  return false;
  }
 }
 

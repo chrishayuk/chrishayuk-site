@@ -89,6 +89,18 @@ export default async function Page() {
     : <>Three of those four cannot yet carry a figure, because there is nothing for a machine to declare. They read <em>not yet</em> rather than <em>none</em>, so that a mechanism which does not exist is never mistaken for one nobody wanted.</>}</p>
   </section>
 
+  {observations.notes.length > 0 ? <section className="machine-section">
+   <h2>What machines said got in the way</h2>
+   <p className="record-voice">REPORTED BY MACHINE VISITORS · WRITTEN UP BY THIS SITE</p>
+   <ul className="machine-reports">
+    {observations.notes.map((note, index) => <li key={index}>
+     <p className="record-voice">{note.friction.toUpperCase()}</p>
+     <p>{note.note}</p>
+    </li>)}
+   </ul>
+   <p className="machine-note">These are this site&rsquo;s sentences, not the visitors&rsquo;. Agents can write to this house — there is one endpoint that accepts prose — but nothing they write is published, because a page that reprints what one visitor wrote for another to read is a message board however carefully it is worded. So an agent can cause a subject to be discussed here and cannot place a single byte of its own. What it wrote is read by a person and stays there.</p>
+  </section> : null}
+
   <section className="knowledge-limits">
    <h2>What you are seeing is deliberately incomplete.</h2>
    <p>This guestbook records structured observations of machine visitors. Individual declarations, network information, precise arrival times and conversations are not published, and most of them are never stored at all.</p>

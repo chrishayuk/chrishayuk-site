@@ -2,6 +2,7 @@ import { BUCKET, wordOf, type Bucket } from "./vocabulary.ts";
 import { bucket } from "./projection.ts";
 import { machineRequestsAt } from "../readership/store.ts";
 import { declarationCounts } from "./store.ts";
+import { publishedNotes, type PublishedNote } from "./feedback.ts";
 
 /**
  * THE PUBLIC GUESTBOOK — an exhibit, and the second place this site has
@@ -117,6 +118,12 @@ export const CONDITION: Condition = {
 export type PublishedObservations = {
  through: string;
  snapshot: PublicSnapshot;
+ /**
+  * What agents reported, in the OPERATOR's words. `publishedNotes`
+  * selects `note` and never `detail`, so this surface has no expression
+  * that could reach an agent's own bytes.
+  */
+ notes: PublishedNote[];
  /** False when this deployment has no store, so the page says so rather than showing zeroes. */
  available: boolean;
 };
@@ -146,12 +153,14 @@ let cached: { at: number; value: PublishedObservations } | null = null;
 export async function publishedObservations(now = Date.now()): Promise<PublishedObservations> {
  if (cached && now - cached.at < CACHE_MS) return cached.value;
  const day = previousCompletedDay(now);
- const [arrivals, declared] = await Promise.all([
+ const [arrivals, declared, notes] = await Promise.all([
   machineRequestsAt("/machines", day.fromHour, day.toHour),
   declarationCounts(day.fromHour, day.toHour),
+  publishedNotes(30),
  ]);
  const value: PublishedObservations = {
   through: day.label,
+  notes: notes ?? [],
   available: arrivals !== null,
   snapshot: {
    discovery: bucket(arrivals ?? 0),
