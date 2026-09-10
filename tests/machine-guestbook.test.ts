@@ -59,10 +59,11 @@ const FROZEN: Record<string, readonly string[]> = {
  BUCKET: ["none", "few", "several", "many"],
  DECLARED_FIELD: ["actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim"],
  PROVENANCE: ["omitted", "stated", "unrecognised"],
+ FRICTION: ["unspecified", "discovery", "vocabulary", "documentation", "refusal", "latency", "payoff", "correctness", "other"],
 };
 
 /** Name lists and PROVENANCE carry their own honest default; they are not value vocabularies. */
-const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE"];
+const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE", "FRICTION"];
 
 /** Payloads that must not survive anywhere. A message is only the obvious one. */
 const HOSTILE: unknown[] = [

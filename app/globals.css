@@ -550,3 +550,16 @@
 @media(max-width:760px){.machine-section{padding-bottom:40px}.machine-section h2{font-size:28px}}
 .machine-contract{margin:26px 0;padding:24px;background:var(--ink);color:var(--paper);font:12px/1.9 var(--font-geist-mono);overflow-x:auto;white-space:pre}
 @media(max-width:760px){.machine-contract{padding:16px;font-size:11px}}
+
+/* THE PRIVATE OBSERVATORY. Not linked, not indexed, not in the sitemap. */
+.machine-observatory .knowledge-coverage strong{font-size:clamp(30px,4vw,58px)}
+.machine-table{width:100%;border-collapse:collapse;margin:26px 0;font:11px/1.7 var(--font-geist-mono);display:block;overflow-x:auto;white-space:nowrap}
+.machine-table th{text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--rule);letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--muted)}
+.machine-table td{padding:10px 14px 10px 0;border-bottom:1px solid var(--rule)}
+.machine-table tr:hover td{background:var(--raised)}
+.untrusted-warning{margin:0 0 26px;padding:18px 22px;border-left:3px solid var(--accent);background:var(--raised);font-size:14px;line-height:1.75;max-width:830px}
+.machine-reports{list-style:none;padding:0;margin:0;max-width:860px}
+.machine-reports li{padding:22px 0;border-top:1px solid var(--rule)}
+.machine-reports blockquote{margin:12px 0 0;padding-left:18px;border-left:2px solid var(--rule)}
+.machine-reports blockquote p{font-size:15px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:760px){.machine-table{font-size:10px}.untrusted-warning{padding:14px 16px}}

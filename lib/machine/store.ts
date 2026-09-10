@@ -1,5 +1,7 @@
 import { SCHEMA } from "./schema.ts";
 import type { StoredDeclaration } from "./handler.ts";
+import { describe, describeProvenance, unpackCapabilities, unpackProvenance, type DescribedDeclaration } from "./declaration.ts";
+import { EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
 
 /**
  * WHERE A DECLARATION GOES.
@@ -108,6 +110,54 @@ export async function declarationCounts(fromHour: number, toHour: number): Promi
   };
  } catch (error) {
   console.error("machine: counts unavailable —", (error as Error).message);
+  return null;
+ }
+}
+
+/**
+ * Every declaration, in this site's own words, for the private
+ * Observatory alone. Ordinals in, words out; no address, no session, no
+ * identifier of any kind, because none was ever stored.
+ *
+ * Realtime is safe HERE and nowhere else. The public guestbook is coarse
+ * and a day late because anyone can read it; a page only the operator
+ * can open crosses no participant boundary, so the delay buys nothing
+ * and costs the only reader the thing they need.
+ */
+export type DeclarationRow = {
+ visit: number; hour: number;
+ declared: DescribedDeclaration;
+ provenance: Record<string, string>;
+ observed: { provider: string; evidence: string };
+};
+
+export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] | null> {
+ const db = await open();
+ if (!db) return null;
+ try {
+  const rows = db.prepare(`SELECT visit_id, hour, actor, role, delegation, collaboration, task,
+    provider_claim, capabilities, provenance, cap_provenance, provider_seen, evidence
+   FROM visit ORDER BY visit_id DESC LIMIT ?`).all(Math.min(Math.max(1, limit), 500)) as Record<string, number>[];
+  return rows.map(row => {
+   const declaration = {
+    actor: row.actor, role: row.role, delegation: row.delegation,
+    collaboration: row.collaboration, task: row.task, provider: row.provider_claim,
+    capabilities: unpackCapabilities(row.capabilities),
+    provenance: unpackProvenance(row.provenance, 6),
+    capabilityProvenance: unpackProvenance(row.cap_provenance, 8),
+   };
+   return {
+    visit: row.visit_id, hour: row.hour,
+    declared: describe(declaration),
+    provenance: describeProvenance(declaration),
+    observed: {
+     provider: wordOf(PROVIDER_CLAIM, row.provider_seen),
+     evidence: wordOf(EVIDENCE, row.evidence),
+    },
+   };
+  });
+ } catch (error) {
+  console.error("machine: declarations unavailable —", (error as Error).message);
   return null;
  }
 }

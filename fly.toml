@@ -12,6 +12,9 @@ primary_region = "lhr"
   # because declarations and traffic counters have different retention rules,
   # and separate files are the only separation that survives a hurried DELETE.
   MACHINE_DB = "/data/machine.db"
+  # Agent feedback: its own file again, because it is the only store here
+  # that holds prose and it must not share a retention rule with counters.
+  FEEDBACK_DB = "/data/feedback.db"
 
 # One machine, one volume: `fly volumes create readership --size 1 --region lhr`.
 # It holds hourly counters only — no addresses, sessions or request logs.

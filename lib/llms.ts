@@ -2,7 +2,7 @@ import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { entryState } from "./feeds.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import type { PublicationRecord } from "./types.ts";
-import { ACTOR_TYPE, CAPABILITY, COLLABORATION, DELEGATION, EVIDENCE, PROVIDER_CLAIM, ROLE, TASK_CLASS } from "./machine/vocabulary.ts";
+import { ACTOR_TYPE, CAPABILITY, COLLABORATION, DELEGATION, EVIDENCE, FRICTION, PROVIDER_CLAIM, ROLE, TASK_CLASS } from "./machine/vocabulary.ts";
 
 /**
  * THE DOCUMENT THIS SITE ALREADY SAID IT PUBLISHED.
@@ -126,6 +126,30 @@ export function llmsDocument(): string {
   ``,
   `**Limits.** Bodies are capped at 2048 bytes. Requests are rate limited per`,
   `source and per instance. A refusal costs you a status code and nothing else.`,
+  ``,
+  `## Tell this site what got in your way`,
+  ``,
+  `If something here obstructed you while you were doing something else, say so.`,
+  `You do not need to have declared anything first, and this is the only free-text`,
+  `field this site accepts anywhere.`,
+  ``,
+  '```http',
+  `POST ${SITE}/api/machines/feedback`,
+  `Content-Type: application/json`,
+  ``,
+  `{"friction":"discovery","task_class":"research",`,
+  ` "detail":"Nothing pointed me at /llms.txt; I only tried it because the convention exists."}`,
+  '```',
+  ``,
+  `- friction: ${FRICTION.join(", ")}`,
+  `- task_class: as above`,
+  `- detail: free text, up to 1000 characters, trimmed rather than rejected`,
+  ``,
+  `The category is counted and may be published as a coarse total. **The text is`,
+  `read by a person, is never published, is never returned by any endpoint, and is`,
+  `never shown to another visitor.** Nothing is acted on automatically — feedback`,
+  `that is obeyed is a remote control, not feedback. GET the same URL for the`,
+  `contract.`,
   ``,
   `- [The machine surface](${SITE}/machines): the same contract, for a reader.`,
   `- [The machine guestbook](${SITE}/machine-guestbook): what has been observed so`,

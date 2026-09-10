@@ -156,6 +156,24 @@ export const DECLARED_FIELD = [
  */
 export const PROVENANCE = ["omitted", "stated", "unrecognised"] as const;
 
+/**
+ * WHAT GOT IN THE WAY — the countable half of agent feedback.
+ *
+ * A blind agent sent to use this site found real problems and none of
+ * them were expressible in any vocabulary here: the search API could not
+ * find the machine surface, the advertised payoff could not pay out for
+ * the population able to declare, two fields appeared in the examples
+ * and in no list. Prose found those. An enum never would have.
+ *
+ * So feedback is both. This enum is countable, and therefore publishable
+ * under the same capacity argument as everything else; the prose beside
+ * it is operator-only and never rendered anywhere a visitor can read.
+ */
+export const FRICTION = [
+ "unspecified", "discovery", "vocabulary", "documentation", "refusal",
+ "latency", "payoff", "correctness", "other",
+] as const;
+
 export type ActorType = typeof ACTOR_TYPE[number];
 export type Role = typeof ROLE[number];
 export type Delegation = typeof DELEGATION[number];
@@ -169,6 +187,7 @@ export type Event = typeof EVENT[number];
 export type Bucket = typeof BUCKET[number];
 export type DeclaredField = typeof DECLARED_FIELD[number];
 export type Provenance = typeof PROVENANCE[number];
+export type Friction = typeof FRICTION[number];
 
 /**
  * Readership's confidence vocabulary must remain a subset of this one.
@@ -203,6 +222,7 @@ export const VOCABULARIES: readonly (readonly [string, Vocabulary])[] = [
  ["PROVIDER_CLAIM", PROVIDER_CLAIM], ["EVIDENCE", EVIDENCE],
  ["EVENT", EVENT], ["BUCKET", BUCKET],
  ["DECLARED_FIELD", DECLARED_FIELD], ["PROVENANCE", PROVENANCE],
+ ["FRICTION", FRICTION],
 ];
 
 /** Pinned by the tests. A reorder, a removal or an insertion changes it. */
