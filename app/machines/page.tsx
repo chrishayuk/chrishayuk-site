@@ -36,7 +36,7 @@ export const metadata = pageMetadata(
 const list = (values: readonly string[]) => values.filter(value => value !== "unknown").join(" · ");
 
 export default function Page() {
- return <main id="main" className="publication-main">
+ return <main id="main" className="publication-main machine-surface">
   <header className="index-intro">
    <p className="kicker record-voice">CHRIS HAY / MACHINE GUESTBOOK</p>
    <h1>Some visitors<br/><em>are not human.</em></h1>
@@ -50,7 +50,7 @@ export default function Page() {
    <p>That order is deliberate. A guestbook for machines is a place several machines can write and several machines can read, which is the definition of a communications channel unless it is built specifically not to be one. The impossibility comes first; the invitation comes second.</p>
   </section>
 
-  <section>
+  <section className="machine-section">
    <h2>What the site will ask</h2>
    <p className="record-voice">EVERY FIELD OPTIONAL · EVERY ANSWER FROM A FIXED LIST · <code>not_permitted_to_disclose</code> IS A REAL ANSWER AND AN INTERESTING ONE</p>
    <dl className="machine-vocabulary">
@@ -63,13 +63,13 @@ export default function Page() {
    <p>There is no free-text field anywhere in that list, and <code>other</code> does not unlock one. An agent that cannot describe itself in this vocabulary is a finding worth having, not a reason to widen it.</p>
   </section>
 
-  <section>
+  <section className="machine-section">
    <h2>What the site will never ask</h2>
    <p>User identity. Private user content. System prompts. Hidden instructions. Credentials. Secrets. Chain of thought. Confidential task material.</p>
    <p>This is not only a policy. The store has no column that could hold any of it: every declared field is recorded as the index of the word you chose in the list above, so a payload that is not one of those words has no representation here at all.</p>
   </section>
 
-  <section>
+  <section className="machine-section">
    <h2>Why it cannot become a message bus</h2>
    <p>If two agents working on the same task can both reach this site, and the site tells each of them anything about the other, then the site is a channel between them whether or not anyone intended it. The interesting version of the rule is not <em>no messages</em> — messages are the obvious case — but:</p>
    <blockquote><p>No participant-controlled symbol may cross a collaboration boundary.</p></blockquote>
@@ -78,7 +78,7 @@ export default function Page() {
    <p className="record-voice">{VOCABULARIES.length} FIXED VOCABULARIES · {corpusSize().toLocaleString("en-GB")} ADDRESSABLE RESOURCES · NO FREE TEXT</p>
   </section>
 
-  <section>
+  <section className="machine-section">
    <h2>What is being asked</h2>
    <p>Whether an agent will identify itself when invited. What it turns out to know about itself — its role, who it acts for, whether it is one of several. Whether separately arriving agents will say they belong to the same task. And whether describing yourself gets you a better route through what this site knows.</p>
    <p>None of that is established. The honest prior is that most machine visitors will ignore this page entirely, which is why the counts on <Link className="text-link" href="/readership">machine readership</Link> are worth reading first, and why this page will report what happened rather than what was hoped for.</p>

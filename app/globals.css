@@ -503,3 +503,48 @@
  .readership-table{overflow-x:auto}
  .readership-table table{min-width:520px}
 }
+
+/* MACHINE SURFACES — /machines and /machine-guestbook.
+   The publication's sections carry the page gutter themselves; a bare
+   <section> does not, which is why every block here sets var(--margin)
+   rather than relying on an ancestor. */
+.machine-observed{margin:0 var(--margin) 10px}
+.machine-observed-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 30px;margin-bottom:28px}
+.machine-observed-head h2{font-size:clamp(32px,4vw,56px);line-height:1.05}
+.machine-guestbook .knowledge-coverage{margin-inline:0}
+.machine-guestbook .knowledge-coverage strong{font-size:clamp(26px,3.2vw,46px);letter-spacing:-.03em}
+.machine-guestbook .knowledge-coverage span{color:var(--muted)}
+.machine-dormant{color:var(--muted);font-style:italic;letter-spacing:-.02em!important}
+.machine-note{margin:26px var(--margin) 0;font-size:15px;line-height:1.85;max-width:830px;color:var(--muted)}
+.machine-observed .machine-note{margin-inline:0}
+.machine-guestbook .index-count{gap:20px 40px;flex-wrap:wrap}
+.machine-closing{padding:0 var(--margin) 95px;max-width:900px}
+.machine-closing h2{font-size:clamp(28px,3.2vw,44px);margin-bottom:24px}
+.machine-closing p{font-size:16px;line-height:1.85;margin-bottom:20px}
+.machine-guestbook .knowledge-limits{margin-top:70px}
+
+/* The declaration vocabulary, on /machines. Definition list as a two
+   column register: the field, and the words this site will accept. */
+.machine-vocabulary{margin:30px var(--margin) 0;display:grid;grid-template-columns:minmax(140px,200px) 1fr;gap:0 40px}
+.machine-vocabulary dt{font:10px/1.6 var(--font-geist-mono);letter-spacing:.1em;text-transform:uppercase;padding:20px 0;border-top:1px solid var(--rule)}
+.machine-vocabulary dd{margin:0;padding:20px 0;border-top:1px solid var(--rule);font-size:14px;line-height:1.9;overflow-wrap:anywhere}
+.machine-vocabulary code{font:12px var(--font-geist-mono);color:var(--muted)}
+
+@media(max-width:760px){
+ .machine-observed-head h2{font-size:32px}
+ .machine-guestbook .knowledge-coverage{grid-template-columns:1fr 1fr;gap:26px 20px}
+ .machine-guestbook .knowledge-coverage strong{font-size:30px}
+ .machine-guestbook .index-count{flex-direction:column;gap:10px}
+ .machine-closing{padding-bottom:60px}
+ .machine-vocabulary{grid-template-columns:1fr;gap:0}
+ .machine-vocabulary dt{padding-bottom:6px}
+ .machine-vocabulary dd{border-top:0;padding-top:0;padding-bottom:22px}
+}
+.machine-section{padding:0 var(--margin) 55px;max-width:1000px}
+.machine-section h2{font-size:clamp(28px,3.4vw,48px);margin-bottom:22px}
+.machine-section>p{font-size:16px;line-height:1.85;margin-bottom:18px;max-width:830px}
+.machine-section blockquote{margin:26px 0;padding-left:24px;border-left:2px solid var(--accent)}
+.machine-section blockquote p{font-family:var(--font-fraunces);font-size:clamp(20px,2.4vw,30px);line-height:1.35}
+.machine-section>.record-voice{margin-bottom:22px;color:var(--muted)}
+.machine-surface .knowledge-limits{margin-block:20px 60px}
+@media(max-width:760px){.machine-section{padding-bottom:40px}.machine-section h2{font-size:28px}}

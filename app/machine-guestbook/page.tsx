@@ -28,6 +28,12 @@ export const metadata = pageMetadata(
  *    the previous completed UTC day, and nothing finer. See
  *    lib/machine/guestbook.ts for why a live feed of declarations would
  *    be a message board with a nicer typeface.
+ *
+ * The layout uses the publication's own furniture — `index-intro`,
+ * `index-count`, `knowledge-coverage`, `knowledge-limits` — because
+ * those carry the page gutter (`var(--margin)`). A bare <section> does
+ * not, and text laid against the left edge of the viewport is how that
+ * shows up.
  */
 export const dynamic = "force-dynamic";
 
@@ -38,39 +44,47 @@ const LABEL: Record<string, string> = {
  interaction: "MULTI-STEP INTERACTION",
 };
 
+const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+const began = (iso: string) => {
+ const [year, month, day] = iso.split("-");
+ return { day, month: MONTHS[Number(month) - 1] ?? "", year };
+};
+
 export default async function Page() {
  const observations = await publishedObservations();
  const words = renderPublic(observations.snapshot);
  const open = CONDITION.declarationEndpoint === "open";
+ const start = began(CONDITION.startedOn);
 
- return <main id="main" className="publication-main">
+ return <main id="main" className="publication-main machine-guestbook">
   <header className="index-intro">
    <p className="kicker record-voice">CHRIS HAY / MACHINE GUESTBOOK</p>
    <h1>Some visitors<br/><em>are not human.</em></h1>
    <p className="dek">This house keeps a guestbook for machines. What it records is deliberately coarse and deliberately late, because a guestbook that showed each machine’s entry as it arrived would be somewhere machines could leave messages for one another — and that is the one thing this was built not to be.</p>
+   <div className="index-count record-voice">
+    <span>PHASE {CONDITION.phase} · OBSERVATION ONLY</span>
+    <span>DECLARATION {open ? "OPEN" : "NOT YET OPEN"}</span>
+    <span>BEGAN {start.day} {start.month} {start.year}</span>
+   </div>
   </header>
 
-  <section className="knowledge-coverage" aria-label="The condition of the experiment">
-   <div><strong>{CONDITION.phase}</strong><span>PHASE · OBSERVATION ONLY</span></div>
-   <div><strong>{open ? "OPEN" : "NOT YET"}</strong><span>DECLARATION</span></div>
-   <div><strong>{CONDITION.startedOn.slice(8)}<span style={{ fontSize: "0.5em" }}> SEP</span></strong><span>BEGAN · 2026</span></div>
-  </section>
-
-  <section>
-   <h2>What has been observed</h2>
-   <p className="record-voice">PUBLISHED THROUGH {observations.through} · PREVIOUS COMPLETED DAY</p>
+  <section className="machine-observed" aria-labelledby="observed">
+   <div className="machine-observed-head">
+    <h2 id="observed">What has been observed</h2>
+    <p className="record-voice">PUBLISHED THROUGH {observations.through} · PREVIOUS COMPLETED DAY</p>
+   </div>
    {!observations.available
-    ? <p>This deployment keeps no counters, so there is nothing to publish. The figures appear only where the published edition has a durable store; a preview shows no invented number in its place.</p>
-    : <dl className="machine-vocabulary">
+    ? <p className="machine-note">This deployment keeps no counters, so there is nothing to publish. The figures appear only where the published edition has a durable store; a preview shows no invented number in its place.</p>
+    : <div className="knowledge-coverage">
        {PUBLIC_DIMENSIONS.map(dimension =>
         <div key={dimension}>
-         <dt>{LABEL[dimension]}</dt>
-         <dd>{dimension !== "discovery" && !open
-          ? <em>not yet open</em>
-          : <strong>{words[dimension]}</strong>}</dd>
+         <strong className={dimension !== "discovery" && !open ? "machine-dormant" : undefined}>
+          {dimension !== "discovery" && !open ? "not yet" : words[dimension]}
+         </strong>
+         <span>{LABEL[dimension]}</span>
         </div>)}
-      </dl>}
-   <p>Three of those four cannot yet have a figure, because there is nothing for a machine to declare. They read <em>not yet open</em> rather than <em>none</em>, so that a mechanism which does not exist is never mistaken for one nobody wanted.</p>
+      </div>}
+   <p className="machine-note">Three of those four cannot yet carry a figure, because there is nothing for a machine to declare. They read <em>not yet</em> rather than <em>none</em>, so that a mechanism which does not exist is never mistaken for one nobody wanted.</p>
   </section>
 
   <section className="knowledge-limits">
@@ -81,7 +95,7 @@ export default async function Page() {
    <p>The parts of this page that update immediately — the phase, whether declaration is open, the date the observation began — are facts about the site rather than about its visitors. No arriving machine can move them.</p>
   </section>
 
-  <section>
+  <section className="machine-closing">
    <h2>Why a house would ask</h2>
    <p>Most of what reads this publication never runs a line of its JavaScript. <Link className="text-link" href="/readership">Machine readership</Link> counts that traffic from the outside — a name in a header, an address checked against the list its provider publishes, a path. This guestbook is the other half of the question: what a machine would say about itself, if a site asked it plainly and promised to keep almost none of the answer.</p>
    <p>Nothing here identifies a visitor, and nothing here is a headcount. A count is a request. A machine is not a person.</p>
