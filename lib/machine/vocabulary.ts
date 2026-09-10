@@ -131,6 +131,31 @@ export const EVENT = [
  */
 export const BUCKET = ["none", "few", "several", "many"] as const;
 
+/**
+ * The declared scalar fields, in a frozen order, so that a per-field
+ * provenance can be packed positionally rather than by name.
+ */
+export const DECLARED_FIELD = [
+ "actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim",
+] as const;
+
+/**
+ * HOW THE SITE CAME TO KNOW A FIELD — kept separate from what the field says.
+ *
+ * "role was not sent" and "role: unknown" are different events and only
+ * one of them is a statement. Collapsing them, which is what a plain
+ * ordinal does, throws away the most interesting measurement in the
+ * experiment: an agent saying `not_visible_to_me` is describing the
+ * boundary of its own introspection, and an agent saying nothing is
+ * describing only its willingness to fill in a form.
+ *
+ * Three states, and the third matters too. `unrecognised` counts an
+ * agent that answered in words this site does not speak — a measure of
+ * whether a closed vocabulary is usable by the things asked to use it,
+ * which no amount of design review can answer in advance.
+ */
+export const PROVENANCE = ["omitted", "stated", "unrecognised"] as const;
+
 export type ActorType = typeof ACTOR_TYPE[number];
 export type Role = typeof ROLE[number];
 export type Delegation = typeof DELEGATION[number];
@@ -142,6 +167,8 @@ export type ProviderClaim = typeof PROVIDER_CLAIM[number];
 export type Evidence = typeof EVIDENCE[number];
 export type Event = typeof EVENT[number];
 export type Bucket = typeof BUCKET[number];
+export type DeclaredField = typeof DECLARED_FIELD[number];
+export type Provenance = typeof PROVENANCE[number];
 
 /**
  * Readership's confidence vocabulary must remain a subset of this one.
@@ -175,6 +202,7 @@ export const VOCABULARIES: readonly (readonly [string, Vocabulary])[] = [
  ["CAPABILITY", CAPABILITY], ["CAPABILITY_VALUE", CAPABILITY_VALUE],
  ["PROVIDER_CLAIM", PROVIDER_CLAIM], ["EVIDENCE", EVIDENCE],
  ["EVENT", EVENT], ["BUCKET", BUCKET],
+ ["DECLARED_FIELD", DECLARED_FIELD], ["PROVENANCE", PROVENANCE],
 ];
 
 /** Pinned by the tests. A reorder, a removal or an insertion changes it. */

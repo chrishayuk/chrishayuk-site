@@ -37,6 +37,8 @@ export const SCHEMA = `
   task           INTEGER NOT NULL,
   provider_claim INTEGER NOT NULL,
   capabilities   INTEGER NOT NULL,
+  provenance     INTEGER NOT NULL,
+  cap_provenance INTEGER NOT NULL,
   agent          INTEGER NOT NULL,
   evidence       INTEGER NOT NULL,
   challenge      INTEGER NOT NULL,

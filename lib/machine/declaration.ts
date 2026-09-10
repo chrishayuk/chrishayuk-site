@@ -31,13 +31,34 @@ export type Declaration = {
  provider: number;
  /** One CAPABILITY_VALUE ordinal per CAPABILITY, in vocabulary order. */
  capabilities: number[];
+ /**
+  * How the site came to know each scalar field, in DECLARED_FIELD order:
+  * one PROVENANCE ordinal each. Kept beside the value rather than folded
+  * into it, because "not sent" and "sent as unknown" are different
+  * events and only the second is a statement about the agent.
+  */
+ provenance: number[];
+ /** The same, per capability. */
+ capabilityProvenance: number[];
 };
 
 /** The declaration this site records when it was told nothing at all. */
 export const UNKNOWN: Declaration = {
  actor: 0, role: 0, delegation: 0, collaboration: 0, task: 0, provider: 0,
  capabilities: V.CAPABILITY.map(() => 0),
+ provenance: V.DECLARED_FIELD.map(() => 0),
+ capabilityProvenance: V.CAPABILITY.map(() => 0),
 };
+
+/**
+ * Absent, one of our words, or something else. The ordinal that
+ * accompanies this is 0 in the first and third cases — the site learned
+ * nothing — but the reason it learned nothing is retained.
+ */
+const provenanceOf = (body: Record<string, unknown>, key: string, vocabulary: V.Vocabulary): number =>
+ !(key in body) || body[key] === undefined ? 0
+ : typeof body[key] === "string" && vocabulary.includes(body[key] as string) ? 1
+ : 2;
 
 const object = (value: unknown): Record<string, unknown> =>
  value !== null && typeof value === "object" && !Array.isArray(value)
@@ -55,8 +76,45 @@ export function parseDeclaration(input: unknown): Declaration {
   task: V.ordinalOf(V.TASK_CLASS, body.task_class),
   provider: V.ordinalOf(V.PROVIDER_CLAIM, body.provider_claim),
   capabilities: V.CAPABILITY.map(name => V.ordinalOf(V.CAPABILITY_VALUE, declared[name])),
+  provenance: [
+   provenanceOf(body, "actor_type", V.ACTOR_TYPE),
+   provenanceOf(body, "role", V.ROLE),
+   provenanceOf(body, "delegation", V.DELEGATION),
+   provenanceOf(body, "collaboration", V.COLLABORATION),
+   provenanceOf(body, "task_class", V.TASK_CLASS),
+   provenanceOf(body, "provider_claim", V.PROVIDER_CLAIM),
+  ],
+  capabilityProvenance: V.CAPABILITY.map(name => provenanceOf(declared, name, V.CAPABILITY_VALUE)),
  };
 }
+
+/** Two bits each: three states, and room left for a fourth that is not needed yet. */
+export const PROVENANCE_BITS = 2;
+
+export const packProvenance = (values: readonly number[]): number =>
+ values.reduce((packed, value, index) => packed | (value & 3) << (index * PROVENANCE_BITS), 0);
+
+export const unpackProvenance = (packed: number, count: number): number[] =>
+ Array.from({ length: count }, (_unused, index) => (packed >> (index * PROVENANCE_BITS)) & 3);
+
+/**
+ * What the site was told, and how it came to be told it. This is the
+ * shape the MG-2 receipt echoes and the shape the field-awareness
+ * measures are counted from — never the submitted body.
+ */
+export const describeProvenance = (declaration: Declaration): Record<V.DeclaredField, V.Provenance> =>
+ Object.fromEntries(V.DECLARED_FIELD.map((field, index) =>
+  [field, V.wordOf(V.PROVENANCE, declaration.provenance[index] ?? 0)],
+ )) as Record<V.DeclaredField, V.Provenance>;
+
+/**
+ * A field is a STATEMENT about the agent when it was sent and it was one
+ * of our words — including `unknown`, `not_visible_to_me` and
+ * `not_permitted_to_disclose`, each of which describes the boundary of
+ * what the agent can see or say. Silence is not one of those.
+ */
+export const statedFields = (declaration: Declaration): number =>
+ declaration.provenance.filter(value => value === 1).length;
 
 /**
  * Eight fields of five values in one integer, so a declaration stays
@@ -112,6 +170,5 @@ export function describe(declaration: Declaration): DescribedDeclaration {
  * that posted an empty body.
  */
 export const isSilent = (declaration: Declaration): boolean =>
- declaration.actor === 0 && declaration.role === 0 && declaration.delegation === 0
- && declaration.collaboration === 0 && declaration.task === 0 && declaration.provider === 0
- && declaration.capabilities.every(value => value === 0);
+ declaration.provenance.every(value => value === 0)
+ && declaration.capabilityProvenance.every(value => value === 0);

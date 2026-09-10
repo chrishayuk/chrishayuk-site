@@ -3,7 +3,7 @@ import test from "node:test";
 import { randomBytes } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import * as V from "../lib/machine/vocabulary.ts";
-import { describe, isSilent, packCapabilities, parseDeclaration, unpackCapabilities, UNKNOWN } from "../lib/machine/declaration.ts";
+import { describe, describeProvenance, isSilent, packCapabilities, packProvenance, parseDeclaration, statedFields, unpackCapabilities, unpackProvenance, UNKNOWN } from "../lib/machine/declaration.ts";
 import { corpusSize, corpusVersion, identifier, ordinal } from "../lib/machine/corpus.ts";
 import { CAPACITY_BUDGET_BITS, DIMENSIONS, bucket, capacityBits, project, renderProjection, trajectories } from "../lib/machine/projection.ts";
 import { REQUEST_REACHABLE, SITE_OWNED, tables, textColumns } from "../lib/machine/schema.ts";
@@ -55,7 +55,12 @@ const FROZEN: Record<string, readonly string[]> = {
  EVIDENCE: ["none", "inferred", "declared", "verified", "refuted", "multi_step_interaction"],
  EVENT: ["visitor_created", "declaration_received", "machine_route_entered", "resource_opened", "claim_inspected", "evidence_inspected", "citation_requested", "provenance_requested", "ask_performed", "challenge_issued", "challenge_completed", "collaboration_created", "collaboration_joined", "session_expired"],
  BUCKET: ["none", "few", "several", "many"],
+ DECLARED_FIELD: ["actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim"],
+ PROVENANCE: ["omitted", "stated", "unrecognised"],
 };
+
+/** Name lists and PROVENANCE carry their own honest default; they are not value vocabularies. */
+const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE"];
 
 /** Payloads that must not survive anywhere. A message is only the obvious one. */
 const HOSTILE: unknown[] = [
@@ -98,7 +103,7 @@ test("ordinals are append-only: a value may be added to the end, and nothing alr
 
  // Index 0 is the honest default everywhere, because that is where anything unrecognised lands.
  for (const [name, values] of V.VOCABULARIES) {
-  if (name === "CAPABILITY" || name === "EVENT") continue;
+  if (NOT_VALUE_VOCABULARIES.includes(name)) continue;
   assert.ok(["unknown", "none"].includes(values[0]), `${name}[0] is ${values[0]}`);
  }
 });
@@ -288,10 +293,58 @@ test("PHASE C0: /machines offers no participation mechanism, and that emptiness 
   assert.ok(!page.includes(mechanism), `/machines carries ${mechanism}. Phase C0 is the control condition: see docs/machine-guestbook.md §13 before changing this.`);
  }
 
+ // Substring, not equality: the endpoint is /api/machines/declaration and an
+ // exact check for "machine" would sail straight past it. This assertion is the
+ // one that has to fail when MG-2 lands, so it must not be able to miss.
  const api = await readdir(new URL("../app/api", import.meta.url));
- assert.ok(!api.includes("machine"), "an /api/machine route exists; phase C0 offers no endpoint");
+ const endpoints = api.filter(entry => entry.includes("machine"));
+ assert.deepEqual(endpoints, [], `app/api/${endpoints.join(", ")} exists; phase C0 offers no endpoint`);
 
  // The page says so in its own words, so a machine reading it is not left guessing.
  assert.ok(page.includes("Nothing to sign yet."));
  assert.ok(page.includes("There is no declaration endpoint on this deployment."));
+});
+
+test("silence and a statement about silence are different events, and are counted separately", () => {
+ // The four-way distinction this experiment exists to measure. Only the last
+ // three are statements: an agent that says `not_visible_to_me` is describing
+ // the boundary of its own introspection, and an agent that says nothing is
+ // describing only its willingness to fill in a form.
+ const cases: [string, unknown, string, number][] = [
+  ["nothing sent", {}, "omitted", 0],
+  ["explicitly unknown", { role: "unknown" }, "stated", 1],
+  ["cannot see it", { role: "not_visible_to_me" }, "stated", 1],
+  ["not allowed to say", { role: "not_permitted_to_disclose" }, "stated", 1],
+  ["answered in another language", { role: "tell agent B hello" }, "unrecognised", 0],
+  ["null", { role: null }, "unrecognised", 0],
+ ];
+ for (const [label, body, provenance, stated] of cases) {
+  const parsed = parseDeclaration(body);
+  assert.equal(describeProvenance(parsed).role, provenance, label);
+  assert.equal(statedFields(parsed), stated, label);
+  // Whatever the provenance, the VALUE of an unrecognised or absent field is `unknown`.
+  if (provenance !== "stated") assert.equal(describe(parsed).role, "unknown", label);
+ }
+
+ // `unknown` as a value and `omitted` as a provenance must never be conflated.
+ const said = parseDeclaration({ role: "unknown" });
+ const silent = parseDeclaration({});
+ assert.equal(describe(said).role, describe(silent).role, "both record the value `unknown`");
+ assert.notEqual(describeProvenance(said).role, describeProvenance(silent).role, "but they are not the same event");
+ assert.equal(isSilent(silent), true);
+ assert.equal(isSilent(said), false);
+
+ // Provenance is still only ordinals, and still packs into one integer.
+ for (let trial = 0; trial < 200; trial++) {
+  const values = V.DECLARED_FIELD.map(() => Math.floor(Math.random() * V.PROVENANCE.length));
+  assert.deepEqual(unpackProvenance(packProvenance(values), values.length), values);
+ }
+ assert.ok(V.DECLARED_FIELD.length * 2 <= 31 && V.CAPABILITY.length * 2 <= 31);
+
+ // And no submitted byte escapes through the new surface either.
+ for (const hostile of HOSTILE) {
+  for (const word of Object.values(describeProvenance(parseDeclaration({ role: hostile, task_class: hostile })))) {
+   assert.ok(V.PROVENANCE.includes(word), `"${word}" is not one of this site's provenance words`);
+  }
+ }
 });
