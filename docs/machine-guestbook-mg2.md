@@ -280,7 +280,7 @@ result. It is reported as its own figure and never folded into a total.
   OPERATOR CORRECTIONS — /machines
 
   2026-09-10T00:00Z
-    6 × (page, automation, unknown, curl,                inferred, none)
+    9 × (page, automation, unknown, curl,                inferred, none)
     1 × (page, automation, unknown, unrecognised client, inferred, none)
     reason: c0-treatment-equivalence
     note:   the single `unrecognised client` request is the gate's first run,
@@ -289,7 +289,10 @@ result. It is reported as its own figure and never folded into a total.
 
   `scripts/c0-treatment.mjs` prints the cell and the count on every run, computed by
   calling the site's own `classify()` rather than asserted, so the recorded tuple
-  cannot drift from what the store writes. Every further run is appended here. The
+  cannot drift from what the store writes. Every further run is appended here —
+  by hand, today, which is the weak link: a missed run understates the correction
+  and there is nothing that would catch it. Having the gate append to a ledger file
+  itself is the obvious fix and is not yet done. The
   total subtracted is reported in the write-up so a reader can add it back.
 - No snapshot is taken. The store is hourly-bucketed with 400-day retention, so
   both windows are reconstructable after the fact; a snapshot would add nothing and
