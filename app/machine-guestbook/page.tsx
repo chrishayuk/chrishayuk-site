@@ -62,7 +62,7 @@ export default async function Page() {
    <h1>Some visitors<br/><em>are not human.</em></h1>
    <p className="dek">This house keeps a guestbook for machines. What it records is deliberately coarse and deliberately late, because a guestbook that showed each machine’s entry as it arrived would be somewhere machines could leave messages for one another — and that is the one thing this was built not to be.</p>
    <div className="index-count record-voice">
-    <span>PHASE {CONDITION.phase} · OBSERVATION ONLY</span>
+    <span>PHASE {CONDITION.phase} · {open ? "DECLARATION INVITED" : "OBSERVATION ONLY"}</span>
     <span>DECLARATION {open ? "OPEN" : "NOT YET OPEN"}</span>
     <span>BEGAN {start.day} {start.month} {start.year}</span>
    </div>
@@ -84,7 +84,9 @@ export default async function Page() {
          <span>{LABEL[dimension]}</span>
         </div>)}
       </div>}
-   <p className="machine-note">Three of those four cannot yet carry a figure, because there is nothing for a machine to declare. They read <em>not yet</em> rather than <em>none</em>, so that a mechanism which does not exist is never mistaken for one nobody wanted.</p>
+   <p className="machine-note">{open
+    ? <>These are the previous completed day. The guestbook opened part-way through this experiment, so the first days will read <em>none</em> for reasons that have nothing to do with whether machines were willing — a figure only appears the day after the day it describes.</>
+    : <>Three of those four cannot yet carry a figure, because there is nothing for a machine to declare. They read <em>not yet</em> rather than <em>none</em>, so that a mechanism which does not exist is never mistaken for one nobody wanted.</>}</p>
   </section>
 
   <section className="knowledge-limits">

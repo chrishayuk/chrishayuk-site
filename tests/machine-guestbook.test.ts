@@ -11,7 +11,7 @@ import { llmsDocument, llmsTxt } from "../lib/llms.ts";
 import { surfaceOf } from "../lib/readership/classify.ts";
 import { visiblePaths } from "../lib/readership/visible.ts";
 import { archivePaths, canonicalPaths } from "../lib/canonical.ts";
-import { PUBLIC_CAPACITY_BUDGET_BITS, PUBLIC_DIMENSIONS, previousCompletedDay, publicCapacityBits, renderPublic } from "../lib/machine/guestbook.ts";
+import { CONDITION, PUBLIC_CAPACITY_BUDGET_BITS, PUBLIC_DIMENSIONS, previousCompletedDay, publicCapacityBits, renderPublic } from "../lib/machine/guestbook.ts";
 import { SITE, records } from "../lib/records.ts";
 
 /**
@@ -280,31 +280,34 @@ test("/llms.txt is served, and says the same thing the readership classifier alr
  for (const record of records) assert.ok(!withheld.includes(record.title), `${record.id} leaked from an unpublished edition`);
 });
 
-test("PHASE C0: /machines offers no participation mechanism, and that emptiness is the control condition", async () => {
- // MG-1 deliberately ships a machine surface that a machine can find and read and
- // do nothing with. Whether agents arrive while nothing is on offer is a different
- // measurement from whether they arrive once something is, and the second is only
- // interpretable against the first. One variable moves between the two phases.
+test("PHASE C1: the route, the page and the published condition move together or not at all", async () => {
+ // This test was PHASE C0 and asserted the opposite of everything below. It was
+ // edited deliberately, in the commit that mounted /api/machines/declaration —
+ // the commit that ended C0. It is kept rather than replaced so the boundary is
+ // legible in the history of one assertion.
  //
- // WHEN MG-2 SHIPS, THIS TEST IS EDITED DELIBERATELY and the phase marker in
- // docs/machine-guestbook.md §13 moves with it. It is here so that the baseline
- // cannot be destroyed by a commit that did not know it existed — and a destroyed
- // baseline cannot be restored by reverting, because the window will have passed.
- const page = await readFile(new URL("../app/machines/page.tsx", import.meta.url), "utf8");
- for (const mechanism of ["<form", "<input", "<button", "<textarea", "<select", "onSubmit", "onClick", "useState", "\"use client\""]) {
-  assert.ok(!page.includes(mechanism), `/machines carries ${mechanism}. Phase C0 is the control condition: see docs/machine-guestbook.md §13 before changing this.`);
- }
-
- // Substring, not equality: the endpoint is /api/machines/declaration and an
- // exact check for "machine" would sail straight past it. This assertion is the
- // one that has to fail when MG-2 lands, so it must not be able to miss.
+ // What it guards now is the drift that would otherwise be invisible: a page
+ // confidently telling visitors the endpoint is closed while the endpoint
+ // answers. Three things have to agree.
  const api = await readdir(new URL("../app/api", import.meta.url));
- const endpoints = api.filter(entry => entry.includes("machine"));
- assert.deepEqual(endpoints, [], `app/api/${endpoints.join(", ")} exists; phase C0 offers no endpoint`);
+ const mounted = api.includes("machines")
+  && (await readdir(new URL("../app/api/machines", import.meta.url))).includes("declaration");
 
- // The page says so in its own words, so a machine reading it is not left guessing.
- assert.ok(page.includes("Nothing to sign yet."));
- assert.ok(page.includes("There is no declaration endpoint on this deployment."));
+ assert.ok(mounted, "the declaration route is mounted");
+ assert.equal(CONDITION.declarationEndpoint, "open",
+  "the route exists, so the published condition must say open — a page saying otherwise tells visitors something untrue");
+ assert.equal(CONDITION.phase, "C1", "mounting the treatment ends C0");
+
+ const page = await readFile(new URL("../app/machines/page.tsx", import.meta.url), "utf8");
+ assert.ok(page.includes("/api/machines/declaration"), "the machine surface names the endpoint it offers");
+ assert.ok(!page.includes("There is no declaration endpoint on this deployment"),
+  "the C0 sentence must not survive into C1");
+
+ // The treatment opened. The anti-relay rules did not move with it: no free-text
+ // field appeared alongside the endpoint, and the vocabulary is still closed.
+ for (const field of ["<textarea", "\"comment\"", "\"notes\"", "\"message\"", "\"description\""]) {
+  assert.ok(!page.includes(field), `/machines gained ${field}: the vocabulary is closed`);
+ }
 });
 
 test("silence and a statement about silence are different events, and are counted separately", () => {

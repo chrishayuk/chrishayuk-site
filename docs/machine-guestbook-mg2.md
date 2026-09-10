@@ -148,9 +148,27 @@ The page separates two clocks. Facts the site controls — phase, whether declar
 is open, the date observation began — are current, because no visitor can move them.
 Anything a visitor can influence is a day behind.
 
-**MG-2B — the treatment.** Mounts `/api/machines/declaration` and supplies the real
-store. `scripts/c0-treatment.mjs` fails at that deployment, and **that deployment's
-timestamp is the C0 → C1 boundary**.
+**MG-2B — the treatment, shipped.** `app/api/machines/declaration/route.ts` mounts
+the handler built during MG-2A and supplies the real store. The route file is a
+handful of lines because everything difficult was finished before there was anywhere
+to reach it. `scripts/c0-treatment.mjs` fails against that deployment by design, and
+**its failure is the C0 → C1 boundary**; `scripts/c1-treatment.mjs` asserts the
+condition that replaced it and writes nothing, because a valid declaration posted by
+the operator would contaminate the NUMERATOR — far worse than the denominator, since
+one operator row could be most of the result.
+
+Three things moved in that one commit, and a test ties them together so they cannot
+drift apart: the route exists, `CONDITION` says `open`, and the exhibit says so too.
+A page telling visitors the endpoint is closed while it answers is the failure that
+would otherwise be invisible.
+
+**Making it worth signing.** The receipt returns what the site INDEPENDENTLY
+OBSERVED about the request — the provider the address appears to belong to, and
+whether that provider publishes ranges the request actually came from. An agent may
+genuinely not know that about itself, and it costs this site nothing to give back.
+`/llms.txt` carries the whole contract inline — endpoint, exact body, every
+vocabulary — generated from `vocabulary.ts` so the document cannot drift from the
+parser.
 
 ## 3. The denominator, frozen
 

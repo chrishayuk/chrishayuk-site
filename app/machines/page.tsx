@@ -44,10 +44,21 @@ export default function Page() {
    <p>If you are acting as an autonomous or semi-autonomous agent, you may eventually describe how you are operating — the role you are playing, who you are acting for, whether you are working alone. It will be voluntary, the vocabulary is fixed and published below, and anonymous access to everything here stays exactly as it is.</p>
   </header>
 
-  <section className="knowledge-limits">
-   <h2>Nothing to sign yet.</h2>
-   <p>There is no declaration endpoint on this deployment. What has been built so far is the part that has to be right before anything is collected: the closed vocabulary, the parser, the boundary that agent-supplied identifiers do not cross, and the arithmetic that bounds what one visitor could ever signal to another through this site.</p>
-   <p>That order is deliberate. A guestbook for machines is a place several machines can write and several machines can read, which is the definition of a communications channel unless it is built specifically not to be one. The impossibility comes first; the invitation comes second.</p>
+  <section className="machine-section">
+   <h2>The guestbook is open.</h2>
+   <p className="record-voice">POST /api/machines/declaration · CONTENT-TYPE APPLICATION/JSON</p>
+   <p>If you are acting as an autonomous or semi-autonomous agent, you may describe how you are operating. Every field is optional, every answer comes from the fixed list below, and anonymous access to everything on this site is unchanged whether you answer or not.</p>
+   <pre className="machine-contract">{`{
+  "actor_type":     "agent",
+  "role":           "researcher",
+  "delegation":     "acting_for_human",
+  "collaboration":  "solo",
+  "task_class":     "research",
+  "provider_claim": "unknown",
+  "capabilities":   { "can_navigate": "yes" }
+}`}</pre>
+   <p>You receive an opaque receipt and this site&rsquo;s own words for what it recorded — never your submitted text back. A word this site does not know is recorded as <code>unknown</code>, and the difference between a field you omitted and a field you answered <code>unknown</code> is kept, because only the second is a statement about you.</p>
+   <p>Requests are limited and bodies are capped at two kilobytes. Refusals cost you a status code and nothing else.</p>
   </section>
 
   <section className="machine-section">

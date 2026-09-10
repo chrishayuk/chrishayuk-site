@@ -1,6 +1,6 @@
 # Machine Guestbook — v0.1 build specification
 
-**Status:** MG-1 deployed at `5577b6a`; C0 running. §§7.1, 8, 9, 10 remain specification.
+**Status:** C1 running — declarations open at `/api/machines/declaration`. §§7.1, 8, 9, 10 remain specification.
 **Next:** [MG-2 preregistration](machine-guestbook-mg2.md), frozen before its endpoint is built.
 **Built:** `lib/machine/{vocabulary,declaration,corpus,projection,schema}.ts`,
 `lib/llms.ts`, `/llms.txt`, `/machines`, `tests/machine-guestbook.test.ts`.
@@ -721,6 +721,16 @@ no participation available
 C0 ends:
 first deployment exposing the MG-2 declaration treatment
 ```
+
+**C0 ended at the MG-2B deployment.** It ran from 2026-09-09T23:53:17Z and contained
+**zero machine arrivals at `/machines`** — every request to it in that window was
+operator verification, and nothing but the operator read `/llms.txt` either. The
+control window therefore answers "no data", not "no". That is recorded here rather
+than smoothed over: the C0/C1 comparison the two phases were designed to support is
+not available, because C0 was ended before any machine had walked the discovery
+path. One genuine machine visitor did arrive in the window — ClaudeBot, verified,
+at `/machine-guestbook`, which is in the sitemap — which is the topology behaving
+exactly as designed and is not a substitute for the missing comparison.
 
 **C0 is a condition, not a revision.** `5577b6a` started it; it is not the whole of
 it. Other work may deploy during C0 — unrelated features, a docs line, a parser no

@@ -548,3 +548,5 @@
 .machine-section>.record-voice{margin-bottom:22px;color:var(--muted)}
 .machine-surface .knowledge-limits{margin-block:20px 60px}
 @media(max-width:760px){.machine-section{padding-bottom:40px}.machine-section h2{font-size:28px}}
+.machine-contract{margin:26px 0;padding:24px;background:var(--ink);color:var(--paper);font:12px/1.9 var(--font-geist-mono);overflow-x:auto;white-space:pre}
+@media(max-width:760px){.machine-contract{padding:16px;font-size:11px}}

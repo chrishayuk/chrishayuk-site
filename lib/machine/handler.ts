@@ -1,5 +1,6 @@
 import { admit, readBounded, sourceOf, MAX_BODY_BYTES, type Facts, type Stage, type WriteQueue } from "./admission.ts";
 import { describe, describeProvenance, packCapabilities, packProvenance, parseDeclaration, type Declaration } from "./declaration.ts";
+import { EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
 
 /**
  * THE DECLARATION HANDLER, BUILT AND NOT MOUNTED.
@@ -24,6 +25,14 @@ export type StoredDeclaration = {
  capabilities: number;
  provenance: number;
  capabilityProvenance: number;
+ /**
+  * The other half of the evidence comparison: what the request looked
+  * like, independently of what it said. PROVIDER_CLAIM and EVIDENCE
+  * ordinals, from classify.ts and ranges.ts. Adjacent to the claim and
+  * never merged with it.
+  */
+ providerSeen: number;
+ evidence: number;
 };
 
 export type Sink = (record: StoredDeclaration) => Promise<void>;
@@ -40,6 +49,13 @@ export type Dependencies = {
   * fail CLOSED.
   */
  limiterAvailable?: () => boolean;
+ /**
+  * What this site independently observed about the request. Supplied by
+  * the route from the same classifier /readership uses, so a claim and
+  * an observation are expressed in one language and can be compared
+  * without a translation step that could quietly lose the difference.
+  */
+ observed?: (request: Request) => { providerSeen: number; evidence: number };
 };
 
 const HOUR = 3_600_000;
@@ -71,8 +87,13 @@ function receipt(): string {
  return "mr_" + Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
-const stored = (declaration: Declaration, hour: number): StoredDeclaration => ({
+const stored = (
+ declaration: Declaration,
+ hour: number,
+ observed: { providerSeen: number; evidence: number },
+): StoredDeclaration => ({
  hour,
+ ...observed,
  actor: declaration.actor, role: declaration.role, delegation: declaration.delegation,
  collaboration: declaration.collaboration, task: declaration.task, provider: declaration.provider,
  capabilities: packCapabilities(declaration.capabilities),
@@ -146,16 +167,29 @@ export async function handleDeclaration(request: Request, deps: Dependencies): P
  const declaration = parseDeclaration(body);
 
  reached.push("persist");
- const outcome = await deps.queue.run(() => deps.sink(stored(declaration, Math.floor(now / HOUR))));
+ const observed = deps.observed?.(request) ?? { providerSeen: 0, evidence: 0 };
+ const outcome = await deps.queue.run(() => deps.sink(stored(declaration, Math.floor(now / HOUR), observed)));
  if (outcome === "unavailable") return { response: refusal(503, "unavailable"), reached };
 
  // The receipt is built from this site's own words, indexed by ordinals.
  // Nothing submitted appears in it, so it cannot amplify and cannot echo.
+ //
+ // `observed` is the part worth having, and the reason to sign at all
+ // today: the site tells you what it independently saw about your
+ // request, in the same words it offered you. An agent that claims a
+ // provider learns whether the address it arrived from is one that
+ // provider publishes — which is something it may genuinely not know
+ // about itself, and which costs this site nothing to give back.
  return {
   response: new Response(JSON.stringify({
    receipt: receipt(),
    recorded: describe(declaration),
    provenance: describeProvenance(declaration),
+   observed: {
+    provider: wordOf(PROVIDER_CLAIM, observed.providerSeen),
+    evidence: wordOf(EVIDENCE, observed.evidence),
+   },
+   note: "Declared and observed are recorded separately and never merged.",
   }), {
    status: 201,
    headers: {

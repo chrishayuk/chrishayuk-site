@@ -14,6 +14,13 @@
  * mechanically by tests/machine-guestbook.test.ts rather than promised
  * in a document. There is nowhere to put the bytes.
  *
+ * `visit` carries BOTH halves of the evidence comparison: what the
+ * visitor said about itself (`provider_claim`) and what the request
+ * independently looked like (`provider_seen`, `evidence`, from
+ * classify.ts and ranges.ts). They are adjacent columns and are never
+ * merged into one, for the same reason /readership never adds verified
+ * and declared into a single impressive number.
+ *
  * `corpus` is the one table with a TEXT column and the one table the
  * request path cannot reach. It is written at boot from
  * `recordGraph()`, holds this site's own identifiers and no others, and
@@ -39,7 +46,7 @@ export const SCHEMA = `
   capabilities   INTEGER NOT NULL,
   provenance     INTEGER NOT NULL,
   cap_provenance INTEGER NOT NULL,
-  agent          INTEGER NOT NULL,
+  provider_seen  INTEGER NOT NULL,
   evidence       INTEGER NOT NULL,
   challenge      INTEGER NOT NULL,
   resources      INTEGER NOT NULL,

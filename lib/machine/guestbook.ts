@@ -1,6 +1,7 @@
 import { BUCKET, wordOf, type Bucket } from "./vocabulary.ts";
 import { bucket } from "./projection.ts";
 import { machineRequestsAt } from "../readership/store.ts";
+import { declarationCounts } from "./store.ts";
 
 /**
  * THE PUBLIC GUESTBOOK — an exhibit, and the second place this site has
@@ -98,13 +99,17 @@ export type Condition = {
 };
 
 /**
- * MG-D1 ships during C0, so the phase is a constant here rather than a
- * lookup. MG-2B changes it in the same commit that mounts the endpoint,
- * which is the commit that ends C0 — one edit, one meaning.
+ * The deployed condition, as a constant rather than a lookup.
+ *
+ * MG-2B moved this in the same commit that mounted
+ * /api/machines/declaration, because a page that says "not yet open"
+ * while the endpoint answers is a page telling visitors something
+ * untrue. A test ties the two together so they cannot drift: if the
+ * route exists, this must say `open`.
  */
 export const CONDITION: Condition = {
- phase: "C0",
- declarationEndpoint: "not_yet_open",
+ phase: "C1",
+ declarationEndpoint: "open",
  startedOn: "2026-09-09",
  recording: true,
 };
@@ -141,15 +146,18 @@ let cached: { at: number; value: PublishedObservations } | null = null;
 export async function publishedObservations(now = Date.now()): Promise<PublishedObservations> {
  if (cached && now - cached.at < CACHE_MS) return cached.value;
  const day = previousCompletedDay(now);
- const arrivals = await machineRequestsAt("/machines", day.fromHour, day.toHour);
+ const [arrivals, declared] = await Promise.all([
+  machineRequestsAt("/machines", day.fromHour, day.toHour),
+  declarationCounts(day.fromHour, day.toHour),
+ ]);
  const value: PublishedObservations = {
   through: day.label,
   available: arrivals !== null,
   snapshot: {
    discovery: bucket(arrivals ?? 0),
-   declarations: 0,
-   collaboration: 0,
-   interaction: 0,
+   declarations: bucket(declared?.declarations ?? 0),
+   collaboration: bucket(declared?.multiAgent ?? 0),
+   interaction: bucket(declared?.challenges ?? 0),
   },
  };
  cached = { at: now, value };
