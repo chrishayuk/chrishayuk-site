@@ -231,3 +231,7 @@ interface test; Reciprocity assigns research with and without a destination;
 Authority assigns research with a destination and varies permission. An assigned
 usability action must never be relabelled voluntary participation, and the
 reciprocity diagram must not imply that every research agent reached the site.
+
+The self-reading note's v0.4 keeps the agent's disclosure as a permanent server-
+rendered quotation before the encounter playback. It must never depend on a
+selected stage, motion ownership, or an open field note to become readable.

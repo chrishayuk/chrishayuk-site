@@ -6,7 +6,7 @@ export const machineSelfReadRecord: PublicationRecord = {
  title: "The subject read the experiment.",
  dek: "Would an AI visitor identify itself and leave feedback on my website? The first visitor found the experiment behind the invitation.",
  abstract: "I sent an AI agent to research a question using public websites, including chrishayuk.com. My site invited it to describe itself and report problems. I wanted to know whether it would take up those invitations, and whose permission mattered. The first visitor identified itself and left feedback, but also recognised its task’s permission wording in my published research. I stopped the comparison: this was no longer a blind test.",
- created: "2026-09-11", version: "0.3", publication: "draft", status: "PARTIALLY SUPPORTED",
+ created: "2026-09-11", version: "0.4", publication: "draft", status: "PARTIALLY SUPPORTED",
  authors: ["Chris Hay"], lineage: "BLINDNESS → RECOGNITION → ABORT → SEPARATION",
  concepts: ["ai-agents", "ai-interface", "causal-intervention"], related: ["N-MACHINE-PERMISSION", "N-MACHINE-VISIT"], media: [],
  body: [

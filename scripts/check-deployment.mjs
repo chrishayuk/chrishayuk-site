@@ -491,3 +491,8 @@ for (const page of [visitExhibition, permissionNote, selfReadNote]) {
  assert.match(page.body, /LEAVE FEEDBACK/);
 }
 console.log("All three machine notes explain the user, agent and website interaction.");
+
+assert.match(selfReadNote.body, /<figure id="agent-disclosure" class="sr-agent-quote">/);
+assert.match(selfReadNote.body, /I am almost certainly a run inside this experiment\./);
+assert.doesNotMatch(selfReadNote.body, /sr-encounter-disclosure/);
+console.log("The agent quote is a permanent part of the note, outside playback.");
