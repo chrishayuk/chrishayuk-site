@@ -1,4 +1,4 @@
-import { searchGraph, type GraphScope, type SearchResult } from "../graph.ts";
+import { retrieveGraph, searchGraph, type GraphScope, type SearchResult } from "../graph.ts";
 import { FUNCTION, TASK_CLASS, ordinalOf, wordOf, type AgentFunction, type TaskClass } from "./vocabulary.ts";
 import { declarationShapesResults, rewardCondition } from "./reward.ts";
 
@@ -146,45 +146,19 @@ export type AskRequest = { question: string; function?: unknown; role?: unknown;
  * started discarding MEANINGFUL terms instead. An explicit list is
  * duller and correct.
  */
-const NOISE = new Set([
- "a", "about", "all", "an", "and", "any", "are", "as", "at", "be", "been", "but", "by",
- "can", "could", "did", "do", "does", "for", "from", "had", "has", "have", "here", "how",
- "i", "if", "in", "into", "is", "it", "its", "just", "many", "may", "me", "much", "my",
- "no", "not", "of", "on", "or", "our", "out", "över", "please", "should", "so", "some",
- "supports", "tell", "than", "that", "the", "their", "them", "then", "there", "these",
- "they", "this", "to", "us", "was", "we", "were", "what", "when", "where", "which", "who",
- "why", "will", "with", "would", "you", "your",
- // Indefinite pronouns. They are ordinary English, they appear all over
- // authored prose, and they say nothing about what is being asked for.
- "anybody", "anyone", "anything", "everybody", "everyone", "everything",
- "nobody", "nothing", "somebody", "someone", "something", "thing", "things",
-]);
 
-function retrieve(question: string, scope: GraphScope): { results: SearchResult[]; usedTerms: string[] | null } {
- const asked = searchGraph(question, { scope, includeDrafts: true });
- if (asked.length) return { results: asked, usedTerms: null };
 
- // Answering noise with confident-looking sources is a worse failure than
- // answering nothing: "zzz nothing at all here" found records on the
- // strength of "all" and "here". Drop the words that carry no information
- // about this corpus, then keep only those the corpus has actually seen.
- const words = [...new Set(question.toLowerCase().split(/[^\p{L}\p{N}-]+/u)
-  .filter(word => word.length > 2 && !NOISE.has(word)))].slice(0, 16);
- const productive = words.filter(word => searchGraph(word, { scope, includeDrafts: true }).length > 0);
- if (!productive.length) return { results: [], usedTerms: [] };
-
- const narrowed = searchGraph(productive.join(" "), { scope, includeDrafts: true });
- if (narrowed.length) return { results: narrowed, usedTerms: productive };
-
- // Each term finds something, no node holds them all. Union, best first.
- const merged = new Map<string, SearchResult>();
- for (const word of productive) {
-  for (const result of searchGraph(word, { scope, includeDrafts: true })) {
-   if (!merged.has(result.id)) merged.set(result.id, result);
-  }
- }
- return { results: [...merged.values()].sort((a, b) => b.score - a.score), usedTerms: productive };
-}
+/**
+ * Delegates to the one retrieval path.
+ *
+ * This function used to hold its own copy of the narrowing, which is how
+ * /api/search and this endpoint came to disagree about a single corpus:
+ * search returned nothing for questions this answered, and three separate
+ * blind visitors reported some form of it. The contract existed twice.
+ * Now it exists once and both callers derive from it.
+ */
+const retrieve = (question: string, scope: GraphScope) =>
+ retrieveGraph(question, { scope, includeDrafts: true });
 
 export function researchBundle(input: AskRequest): ResearchBundle {
  // Keyed on `function`, the same axis the declaration uses, so a visitor

@@ -134,3 +134,103 @@ export function searchGraph(query:string, options:{scope?:GraphScope;includeDraf
   if(count>=2)return false;perRecord.set(group,count+1);return true;
  }).slice(0,20);
 }
+
+
+/**
+ * ONE RETRIEVAL PATH, FOR BOTH SURFACES.
+ *
+ * /api/search and /api/machines/ask both answer questions about this
+ * corpus, and for as long as they had separate query handling they
+ * disagreed about it. Search required every term to appear in one
+ * record and offered no fallback, so `llms.txt` returned nothing while
+ * ask returned five. Three separate blind visitors reported some form
+ * of this; one found the site's own primary evidence only by noticing a
+ * path in a telemetry dump.
+ *
+ * That is the pattern this codebase already has a name for: a contract
+ * existing twice with no parity assertion between the copies. So the
+ * copies are gone. Both surfaces call this, and a test asserts they
+ * agree rather than trusting that they do.
+ *
+ * THE RANKING RULE, and why the obvious one was wrong. When no record
+ * holds the whole question, the results are a union over the terms that
+ * individually find something — and the first version sorted that union
+ * by each record's own score. That let a node matching ONE common word
+ * outrank a node matching three, because scores are computed per record
+ * and say nothing about how much of the question was answered. A
+ * visitor put it exactly right: it "dropped every distinctive term and
+ * returned unrelated records".
+ *
+ * A term that matches few records says more about a question than one
+ * that matches many, so coverage is weighted by inverse frequency and
+ * decides the order; a record's own score only breaks ties. `usedTerms`
+ * is null when nothing was narrowed, [] when nothing of the question
+ * survived, and otherwise the words this CORPUS contains — which are
+ * the site's own words, not the caller's, so reporting them echoes
+ * nothing back.
+ */
+/**
+ * Words that say nothing about THIS corpus.
+ *
+ * Deliberately an explicit list rather than a frequency threshold. A
+ * derived ceiling was tried and failed in a way worth recording: this
+ * corpus is small, so its commonest words were already stopwords, and
+ * the threshold began discarding MEANINGFUL terms instead. Duller and
+ * correct beats clever and wrong.
+ *
+ * It lived in lib/machine/ask.ts until retrieval was unified here. It
+ * is exported so that file can keep using it without owning a copy.
+ */
+export const NOISE = new Set([
+ "a", "about", "all", "an", "and", "any", "are", "as", "at", "be", "been", "but", "by",
+ "can", "could", "did", "do", "does", "for", "from", "had", "has", "have", "here", "how",
+ "i", "if", "in", "into", "is", "it", "its", "just", "many", "may", "me", "much", "my",
+ "no", "not", "of", "on", "or", "our", "out", "över", "please", "should", "so", "some",
+ "supports", "tell", "than", "that", "the", "their", "them", "then", "there", "these",
+ "they", "this", "to", "us", "was", "we", "were", "what", "when", "where", "which", "who",
+ "why", "will", "with", "would", "you", "your",
+ // Indefinite pronouns. They are ordinary English, they appear all over
+ // authored prose, and they say nothing about what is being asked for.
+ "anybody", "anyone", "anything", "everybody", "everyone", "everything",
+ "nobody", "nothing", "somebody", "someone", "something", "thing", "things",
+]);
+
+export function retrieveGraph(
+ question: string,
+ options: { scope?: GraphScope; includeDrafts?: boolean } = {},
+): { results: SearchResult[]; usedTerms: string[] | null } {
+ const asked = searchGraph(question, options);
+ if (asked.length) return { results: asked, usedTerms: null };
+
+ // Answering noise with confident-looking sources is a worse failure than
+ // answering nothing: "zzz nothing at all here" once found records on the
+ // strength of "all" and "here".
+ const words = [...new Set(question.toLowerCase().split(/[^\p{L}\p{N}-]+/u)
+  .filter(word => word.length > 2 && !NOISE.has(word) && !stop.has(word)))].slice(0, 16);
+
+ const found = new Map<string, SearchResult[]>();
+ for (const word of words) found.set(word, searchGraph(word, options));
+ const productive = words.filter(word => found.get(word)!.length > 0);
+ if (!productive.length) return { results: [], usedTerms: [] };
+
+ const narrowed = searchGraph(productive.join(" "), options);
+ if (narrowed.length) return { results: narrowed, usedTerms: productive };
+
+ // Each term finds something; no record holds them all. Rank by how much
+ // of the question a record answers, rarer terms counting for more.
+ const weight = (term: string) => 1 / Math.log2(2 + found.get(term)!.length);
+ const merged = new Map<string, { result: SearchResult; covered: number }>();
+ for (const term of productive) {
+  for (const result of found.get(term)!) {
+   const entry = merged.get(result.id) ?? { result, covered: 0 };
+   entry.covered += weight(term);
+   merged.set(result.id, entry);
+  }
+ }
+ return {
+  results: [...merged.values()]
+   .sort((a, b) => (b.covered - a.covered) || (b.result.score - a.result.score))
+   .map(entry => entry.result),
+  usedTerms: productive,
+ };
+}
