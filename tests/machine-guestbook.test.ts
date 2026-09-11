@@ -735,3 +735,24 @@ test("RECIPROCITY: each reward condition advertises exactly what it pays", () =>
   if (was === undefined) delete process.env.MACHINE_REWARD; else process.env.MACHINE_REWARD = was;
  }
 });
+
+
+/**
+ * The instrument must be able to name the thing it is measuring.
+ *
+ * Every request to the three machine endpoints was counted as "other
+ * paths" from the day they were built until MACHINE-RECIPROCITY-1 went
+ * looking for them in the readership record and found nothing there. A
+ * real declaration and a crawler hitting a typo were the same row.
+ */
+test("the readership record can name the machine endpoints, or it cannot measure participation", () => {
+ const visible = visiblePaths();
+ for (const path of ["/api/machines/declaration", "/api/machines/ask", "/api/machines/feedback", "/llms.txt", "/machines"]) {
+  assert.ok(visible.has(path), `${path} must be nameable, or contact with it is indistinguishable from a request for a typo`);
+  assert.equal(surfaceOf(path), path.startsWith("/api/") ? "api" : path === "/llms.txt" ? "agent_document" : "page");
+ }
+ // And the property that made the list a list: anything a caller invents
+ // still collapses, so naming these did not open a channel.
+ assert.ok(!visible.has("/api/machines/declaration?hello"), "a caller-chosen string must not become nameable");
+ assert.ok(!visible.has("/api/machines/" + "x".repeat(64)));
+});

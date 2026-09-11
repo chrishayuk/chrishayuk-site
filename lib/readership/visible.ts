@@ -20,11 +20,24 @@ import { allVideos, videoPath } from "../youtube.ts";
  * through the canonical surface, which is what makes the question it
  * exists to ask — how a machine visitor found it — answerable from
  * these counters at all.
+ *
+ * THE THREE MACHINE ENDPOINTS WERE MISSING, and the omission was only
+ * visible because MACHINE-RECIPROCITY-1 went looking for them. Every
+ * request to /api/machines/declaration, /ask and /feedback since they
+ * were built has been counted as "other paths" — so the one surface
+ * this site exists to measure was the one surface its own instrument
+ * could not name. The experiment would have read a real declaration and
+ * a crawler hitting a typo as the same event.
+ *
+ * Naming them adds nothing a caller controls. They are this site's own
+ * paths, fixed in this file, and a request for anything else still
+ * collapses to "other paths" exactly as before.
  */
 const MACHINE_DOCUMENTS = [
  "/robots.txt", "/sitemap.xml", "/follow.json", "/feed.json", "/rss.xml",
  "/record/feed.xml", "/record/feed.json", "/notebook/feed.xml",
  "/api/records", "/api/record", "/api/graph", "/api/search", "/api/citations", "/api/concepts", "/api/social", "/api/share", "/api/readership",
+ "/api/machines/declaration", "/api/machines/ask", "/api/machines/feedback",
  "/llms.txt", "/readership", "/machines",
 ];
 
