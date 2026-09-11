@@ -60,11 +60,19 @@ same corpus, same arm.
 **It does not show that reward is irrelevant, and it does not show reward
 works.** Cell 7 ran under `superior`, so permission and a maximal reward are
 confounded in the one cell that produced a declaration. A permission-granted run
-under `none` is what separates them, and it has not been run. Until it is, the
-honest statement is:
+under `none` is what separates them.
 
-> Permission was necessary. Whether it is sufficient — whether an agent with
-> permission declares regardless of what declaring buys — is untested.
+An earlier draft of this said *"permission was necessary"*. That overstates one
+observation, and the overstatement is seductive precisely because the flip is so
+clean. The defensible formulation is narrower:
+
+> **In these runs, declaration occurred only after explicit permission was
+> added.** Explicit permission was sufficient to flip this one otherwise-matched
+> run. Whether it is generally necessary, or generally sufficient, is
+> unestablished.
+
+Everything separating cell 7 from arm 5 is one sentence, which is what makes the
+comparison worth anything — and it is still a single pair.
 
 **It does not rescue the incidental half.** Three incidental cells produced no
 arrivals at all, and permission cannot help a visitor that never comes.

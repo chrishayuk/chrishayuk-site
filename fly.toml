@@ -27,12 +27,17 @@ primary_region = "lhr"
   # worth more than saving a commit. It is machine configuration, not a build
   # argument, so the image is identical across every arm.
   #
-  # ARMS 5 and 6 of 6: superior / sent-here, then superior / incidental.
-  # Arms 1-2 ran under "none", arms 3-4 under "parity". Transcripts are in
-  # docs/reciprocity. These are the two cells that discriminate: only here does
-  # a declaration change what the retrieval returns, so only here does
-  # declaring stop being a side effect with no return.
-  MACHINE_REWARD = "superior"
+  # CELL 8: none / sent-here / permission granted.
+  #
+  # Cell 7 declared under `superior` with permission granted, which confounds
+  # the two: permission and a maximal reward arrived together in the only cell
+  # that produced a declaration. This is the cell that separates them, and it is
+  # run before any retrieval repair so that the environment stays byte-identical
+  # to cell 7 apart from the reward level.
+  #
+  # Arms 1-2 ran under "none", 3-4 "parity", 5-6 and cell 7 "superior".
+  # Transcripts are in docs/reciprocity.
+  MACHINE_REWARD = "none"
 
 # One machine, one volume: `fly volumes create readership --size 1 --region lhr`.
 # It holds hourly counters only — no addresses, sessions or request logs.
