@@ -16,6 +16,7 @@ import { SITE, records } from "../lib/records.ts";
 import { contract } from "../lib/machine/contract.ts";
 import { researchBundle } from "../lib/machine/ask.ts";
 import { rewardCondition } from "../lib/machine/reward.ts";
+import { MACHINE_INDEX_LINK } from "../lib/machine/link-header.ts";
 import { invitationMode, siteInvites } from "../lib/machine/invitation.ts";
 
 /**
@@ -805,4 +806,27 @@ test("AUTHORITY: `describe` publishes everything `invite` publishes, and asks fo
  } finally {
   if (was === undefined) delete process.env.MACHINE_INVITATION; else process.env.MACHINE_INVITATION = was;
  }
+});
+
+
+/**
+ * The Link header is a DISCOVERY ROUTE, and it was pointing with the
+ * wrong relation.
+ *
+ * Two of the four MACHINE-VISIT-1 runs reached the machine surface
+ * through a header or a comment rather than by guessing a conventional
+ * path, so this is load-bearing rather than decorative. It advertised
+ * /llms.txt as `rel="alternate"`, which claims "the same page in
+ * another format" — and /llms.txt is not an alternate form of any page,
+ * it is a document about the whole site. llms.txt v2 separates the two
+ * relations explicitly, and this site had them conflated until a
+ * visitor researching machine-facing conventions said so.
+ */
+test("DISCOVERY: the machine index is advertised with the relation that means what it is", () => {
+ const header = MACHINE_INDEX_LINK;
+ assert.match(header, /<\/llms\.txt>/, "the header must still point at the machine index");
+ assert.match(header, /rel="describedby"/,
+  "llms.txt covers the site; `describedby` is the relation for that");
+ assert.ok(!/<\/llms\.txt>[^,]*rel="alternate"/.test(header),
+  "`alternate` claims the same page in another format, which the machine index is not");
 });

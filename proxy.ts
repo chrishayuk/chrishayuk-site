@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { classify } from "@/lib/readership/classify";
 import { record } from "@/lib/readership/store";
+import { MACHINE_INDEX_LINK } from "@/lib/machine/link-header";
 
 /**
  * MACHINE READERSHIP — the measurement this site did not have.
@@ -53,9 +54,14 @@ export function proxy(request: NextRequest) {
  // headers without parsing HTML — a HEAD request, a fetcher that never
  // renders, a client that looks at Link before deciding what to pull.
  const response = NextResponse.next();
- // Relative on purpose: a preview or the Fly hostname must point at its
- // own machine index, not at production's.
- response.headers.append("Link", '</llms.txt>; rel="alternate"; type="text/plain"; title="machine index"');
+ // See lib/machine/link-header.ts for why `describedby` rather than
+ // `alternate`, and why the value lives there rather than inline.
+ //
+ // Reported by a blind visitor that had spent the preceding minutes
+ // gathering evidence on which machine-facing conventions agents actually
+ // follow. The header was one of the routes by which earlier visitors found
+ // the machine surface at all, so it was load-bearing and wrong at once.
+ response.headers.append("Link", MACHINE_INDEX_LINK);
  return response;
 }
 
