@@ -47,3 +47,5 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T01:32:11Z precheck
 # the first request is worth subtracting.
 /api/search 2 2026-09-11T01:42:21Z verification
 /api/machines/ask 2 2026-09-11T01:42:37Z verification
+llms.txt 2 /api/machines/ask 1 2026-09-11T01:43:50Z precheck
+/api/readership 1 2026-09-11T01:50:09.226Z observer

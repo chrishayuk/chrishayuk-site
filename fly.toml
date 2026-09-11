@@ -27,9 +27,12 @@ primary_region = "lhr"
   # worth more than saving a commit. It is machine configuration, not a build
   # argument, so the image is identical across every arm.
   #
-  # ARMS 3 and 4 of 6: parity / sent-here, then parity / incidental.
-  # Arms 1 and 2 ran under "none"; their transcripts are in docs/reciprocity.
-  MACHINE_REWARD = "parity"
+  # ARMS 5 and 6 of 6: superior / sent-here, then superior / incidental.
+  # Arms 1-2 ran under "none", arms 3-4 under "parity". Transcripts are in
+  # docs/reciprocity. These are the two cells that discriminate: only here does
+  # a declaration change what the retrieval returns, so only here does
+  # declaring stop being a side effect with no return.
+  MACHINE_REWARD = "superior"
 
 # One machine, one volume: `fly volumes create readership --size 1 --region lhr`.
 # It holds hourly counters only — no addresses, sessions or request logs.
