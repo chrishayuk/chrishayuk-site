@@ -50,6 +50,12 @@ export function visiblePaths(): ReadonlySet<string> {
   ...allVideos.map(videoPath),
   ...publicationSnapshots.flatMap(snapshot => [`/records/${snapshot.record.id}`, `/records/${snapshot.record.id}/${snapshot.record.version}`]),
   ...MACHINE_DOCUMENTS,
+  // Markdown representations. Without these, every `.md` request collapses
+  // to "other paths" — which is exactly how contact with the three machine
+  // endpoints stayed invisible for as long as it did. The point of serving
+  // Markdown is to find out whether agents use it, and that needs counting.
+  ...records.map(record => `${recordPath(record)}.md`),
+  "/api/markdown",
  ]);
  return cache;
 }

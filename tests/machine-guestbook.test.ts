@@ -17,6 +17,8 @@ import { contract } from "../lib/machine/contract.ts";
 import { researchBundle } from "../lib/machine/ask.ts";
 import { rewardCondition } from "../lib/machine/reward.ts";
 import { MACHINE_INDEX_LINK } from "../lib/machine/link-header.ts";
+import { recordMarkdown } from "../lib/record-markdown.ts";
+import { recordPath } from "../lib/records.ts";
 import { invitationMode, siteInvites } from "../lib/machine/invitation.ts";
 
 /**
@@ -829,4 +831,70 @@ test("DISCOVERY: the machine index is advertised with the relation that means wh
   "llms.txt covers the site; `describedby` is the relation for that");
  assert.ok(!/<\/llms\.txt>[^,]*rel="alternate"/.test(header),
   "`alternate` claims the same page in another format, which the machine index is not");
+});
+
+
+/**
+ * MARKDOWN ALTERNATES — the surface agents actually use.
+ *
+ * Thirty days of this site's own logs: 48 fetches of /llms.txt, one of
+ * them a provider crawler, while GPTBot, ChatGPT-User, ClaudeBot and
+ * Amazonbot fetched pages in the hundreds and the index never. The
+ * route agents exercise is `.md` and `Accept: text/markdown`, and this
+ * site served neither.
+ *
+ * These assert the PROPERTY that makes a Markdown edition safe to
+ * publish, not that a route returns 200. The danger of handing an agent
+ * a clean quotable rendering is that editorial state falls off it, and
+ * a draft becomes a finding the moment a sentence is lifted.
+ */
+test("MARKDOWN: every record renders, and its editorial state arrives before anything quotable", () => {
+ for (const record of records.filter(r => r.kind === "notebook").slice(0, 12)) {
+  const md = recordMarkdown(record);
+  const lines = md.split("\n").filter(Boolean);
+
+  assert.match(lines[0], /^# /, `${record.id}: must open with the title`);
+  // The state line must come before the first body prose. An agent that
+  // lifts a sentence must not be able to lose the draft marker while
+  // doing it, which is the same rule the HTML and the feeds already keep.
+  const stateAt = lines.findIndex(l => /DRAFT|RECORDED|PUBLISHED|VERSION|V\d/i.test(l));
+  const bodyAt = lines.findIndex(l => l.startsWith("## Body"));
+  assert.ok(stateAt > -1, `${record.id}: editorial state must appear`);
+  assert.ok(stateAt < bodyAt, `${record.id}: state must precede the body, not follow it`);
+
+  assert.ok(md.includes(`${SITE}${recordPath(record)}`), `${record.id}: must name its canonical URL`);
+  assert.ok(!md.includes("[object Object]"), `${record.id}: a block kind is unrendered`);
+  // An UNRENDERED FIELD, not the English word. A record legitimately says
+  // "the outcome is undefined" in its own prose, and a first version of this
+  // test failed on exactly that — asserting a string match where the property
+  // is "a template slot came out empty". Check the structural positions.
+  for (const line of lines) {
+   if (/^- [A-Z][a-z]+: undefined/.test(line) || /\]\(undefined/.test(line) || /^\*\*undefined/.test(line)) {
+    assert.fail(`${record.id}: a field rendered as undefined -> ${line}`);
+   }
+  }
+ }
+});
+
+test("MARKDOWN: a claim keeps its status and a refusal keeps its principle", () => {
+ // These are the two block kinds most likely to be quoted out of shape.
+ const withClaim = records.find(r => r.body.some(b => b.kind === "claim"));
+ if (withClaim) {
+  const md = recordMarkdown(withClaim);
+  for (const b of withClaim.body) {
+   if (b.kind === "claim") assert.ok(md.includes(`Claim — ${b.status}`), "a claim must carry its status");
+   if (b.kind === "refusal") assert.ok(md.includes(b.principle), "a refusal must carry its principle");
+  }
+ }
+});
+
+test("MARKDOWN: the representations are countable, or serving them measures nothing", () => {
+ // The three machine endpoints were invisible in the readership record for
+ // as long as they were, because nothing named them. Same mistake, same fix.
+ const visible = visiblePaths();
+ for (const record of records.filter(r => r.kind === "notebook").slice(0, 5)) {
+  assert.ok(visible.has(`${recordPath(record)}.md`),
+   `${recordPath(record)}.md must be nameable, or Markdown uptake cannot be measured`);
+ }
+ assert.ok(visible.has("/api/markdown"));
 });

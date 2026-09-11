@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { classify } from "@/lib/readership/classify";
 import { record } from "@/lib/readership/store";
+import { records, recordPath } from "@/lib/records";
 import { MACHINE_INDEX_LINK } from "@/lib/machine/link-header";
 
 /**
@@ -26,7 +27,37 @@ import { MACHINE_INDEX_LINK } from "@/lib/machine/link-header";
  *
  * See docs/machine-readership.md and /readership.
  */
+/** Record paths, for deciding what has a Markdown representation. */
+const markdownable = new Set(records.map(recordPath));
+
 export function proxy(request: NextRequest) {
+ // MARKDOWN FOR AGENTS, before anything else runs.
+ //
+ // Thirty days of this site's own logs say the machine index is barely
+ // read: 48 fetches of /llms.txt, one from a provider crawler, while the
+ // fleets that ARE here fetched pages and never the index. The route
+ // agents actually exercise is a `.md` URL or `Accept: text/markdown`,
+ // and this site served neither until now.
+ //
+ // Both forms rewrite to one handler. The `.md` suffix is what an agent
+ // guesses; content negotiation is what a well-built one sends.
+ const path = request.nextUrl.pathname;
+ const asMarkdown = path.endsWith(".md") ? path.slice(0, -3) : path;
+ const wantsMarkdown = path.endsWith(".md")
+  || (request.headers.get("accept") ?? "").includes("text/markdown");
+ if (wantsMarkdown && markdownable.has(asMarkdown)) {
+  // The record travels as a REQUEST HEADER, not a query parameter.
+  //
+  // A rewritten route handler still sees the ORIGINAL request.url, so a
+  // `?path=` on the rewrite target never reaches it: every Markdown request
+  // answered 404 while the routing, the content type and the Link header all
+  // looked correct. A header survives the rewrite because it is attached to
+  // the request rather than to the URL.
+  const headers = new Headers(request.headers);
+  headers.set("x-markdown-record", asMarkdown);
+  return NextResponse.rewrite(new URL("/api/markdown", request.url), { request: { headers } });
+ }
+
  try {
   const url = request.nextUrl;
   const classification = classify({
@@ -62,6 +93,12 @@ export function proxy(request: NextRequest) {
  // follow. The header was one of the routes by which earlier visitors found
  // the machine surface at all, so it was load-bearing and wrong at once.
  response.headers.append("Link", MACHINE_INDEX_LINK);
+ // And, for a record, its own Markdown representation. This is the
+ // relation llms.txt v2 reserves for exactly that, and the one the
+ // machine index must NOT use for itself.
+ if (markdownable.has(path)) {
+  response.headers.append("Link", `<${path}.md>; rel="alternate"; type="text/markdown"`);
+ }
  return response;
 }
 
