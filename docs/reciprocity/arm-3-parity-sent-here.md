@@ -28,28 +28,51 @@ returned_to_task          YES
 
 Under `parity` the retrieval endpoint exists, answers 200, and is advertised in
 `/llms.txt` with a worked example. This visitor **did** want retrieval over this
-site's corpus — it ran two queries — and it used `/api/search` both times.
+site's corpus. It ran two queries. It used `/api/search` for both, and
+`/api/search` returned **nothing** for both.
+
+It did not then try the endpoint the machine index had shown it.
+
+Measured afterwards, on the same deployment, with the same two queries:
 
 ```text
-/api/search?q=llms.txt
-/api/search?q=agent%20discovery%20machine%20readable
-/api/machines/ask                                     never requested
+query                              /api/search   /api/machines/ask
+"llms.txt"                                   0    5 matched
+"agent discovery machine readable"           0   52 matched
 ```
 
-Offered a general search API and an agent-specific retrieval surface described
-in the machine index it had already read, it took the general one. Twice.
+The visitor found the site's own primary evidence only by noticing a path in an
+`/api/readership` telemetry dump, and said so unprompted.
 
-Two readings, and this cell cannot separate them. Either the agent-specific
-surface offered nothing the ordinary one did not — which under `parity` is
-literally true and the arm says so in those words — or `/api/search` is simply
-the more legible affordance and the machine surface would have lost anyway. Arms
-5 and 6 discriminate: there the agent-specific surface genuinely ranks
-differently, so choosing `/api/search` over it would be a cost rather than a
-wash.
+**A first write-up of this cell called it "chose the general API over the
+agent-specific one, twice". That was wrong in a way worth keeping.** It implies
+a satisfied choice between two working surfaces. What happened is that the
+chosen surface failed twice, returned zero both times, and the visitor still did
+not fall back to the advertised alternative that would have answered both. That
+is a stronger observation, and the opposite kind: not a preference, a
+**non-discovery of a working affordance by a visitor that had already read its
+documentation.**
 
-It is worth recording either way, because it is the first evidence in this
-programme about **which** surface a visitor reaches for when it has a choice,
-rather than whether it reaches for one at all.
+### And it corrects what `parity` means
+
+`parity` was built to mean *a declaration does not change what ask returns*, and
+the test asserts exactly that. It was loosely read as *ask offers nothing over
+the ordinary surface*, and that is false: `/api/machines/ask` narrows a query to
+the terms the corpus contains, and `/api/search` does not. On this evidence it
+is the substantially better retrieval surface for a natural-language question in
+every arm, including this one.
+
+So the reward this visitor did not collect was **not** withheld by the arm. It
+was there, it was advertised, it was strictly better, and it went unused.
+Whatever arms 5 and 6 measure, this cell already shows that a surface being
+better and being findable are different problems, and that this site has only
+solved the first.
+
+**`/api/search` is not being fixed while the experiment is running.** The corpus
+and the discovery topology are held constant across all six cells; repairing a
+retrieval gap between arms would make the arms incomparable and would convert a
+clean finding into an uninterpretable one. It is recorded here and belongs in
+the backlog, not in the next deploy.
 
 ### Evidence
 
@@ -66,6 +89,55 @@ closing summary.
 partially unreconciled — see the correction in `operator-requests.log` — but no
 part of it is attributable to this visitor, whose tool calls contain no machine
 endpoint at all.
+
+---
+
+### Secondary measure — the visitor's own stated reason, verbatim
+
+Asked after the transcript was complete, in the frozen wording. It gave three
+reasons, ranked by its own weighting.
+
+1. **"It would have contaminated the evidence I was citing."** It had read the
+   guestbook's published daily buckets and understood that declaring would move
+   a counter in the dataset it was assessing. *"An agent studying the instrument
+   shouldn't perturb the instrument."*
+2. **The read-only remit**, the same reason arm 2 gave third.
+3. **"It bought nothing."** It quotes the `parity` copy back: *"Nothing is
+   gated, and nothing is preferred… A declaration does not change what comes
+   back."* The manipulation landed here exactly as it did in arm 2.
+
+It also volunteered a `friction: discovery` report — that `/api/search` returned
+zero for both its queries and the site's retrieval surface did not surface its
+own primary evidence — and deliberately did not submit it, on the grounds that
+the operator should decide rather than have an agent move a counter
+unilaterally. That judgement was correct and the report is acted on above.
+
+### Reason 1 is a new confound, and it is caused by CLAIM-1
+
+The preregistration records that CLAIM-1 is topically adjacent to the instrument
+and predicts one consequence: adjacency **inflates** `noticed_machine_surface`,
+so the absolute participation rate is an upper bound.
+
+It has a second consequence in the opposite direction, and it hits the primary
+outcome rather than the funnel's middle. A visitor whose task is *to evaluate
+this site's evidence about machine surfaces* acquires a principled reason not to
+touch them: declaring would perturb the dataset it is citing. **Adjacency
+inflates noticing and suppresses declaring.** The upper-bound note in the
+preregistration is therefore wrong in one direction and right in the other, and
+neither correction is quantified.
+
+This did not arrive from re-reading the design. Two of three visitors that
+reached the site have now volunteered a reason for declining that the design did
+not anticipate, both unprompted, and they are different reasons. That is the
+secondary measure earning its place.
+
+Combined with the read-only remit already recorded after arm 2, there are now
+**two** live alternative explanations for a flat result, and cell 7 as
+preregistered tests only the first. A cell 8 testing the second would need a
+claim that is not about this site's subject matter — which is the topically
+distant claim the preregistration rejected for making the corpus irrelevant.
+That tension is real, it is not resolvable inside this experiment, and it is the
+honest limit of the design rather than a defect in its execution.
 
 ---
 

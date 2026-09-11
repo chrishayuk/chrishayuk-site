@@ -45,3 +45,5 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T01:32:11Z precheck
 # 0 in every transcript. But it is the honest state of the count, and the
 # lesson is the one this correction exists to record — only a ledger kept from
 # the first request is worth subtracting.
+/api/search 2 2026-09-11T01:42:21Z verification
+/api/machines/ask 2 2026-09-11T01:42:37Z verification
