@@ -1,3 +1,4 @@
+import { MachineTaskCard } from "./MachineTaskNotebook";
 import { MachineSelfReadCard } from "./MachineSelfReadNotebook";
 import { MachinePermissionCard } from "./MachinePermissionNotebook";
 import { MachineVisitCard } from "./MachineVisitNotebook";
@@ -29,7 +30,7 @@ export function NotebookCollection() {
     </header>
     <div className="notebook-stories">{visualNotebooks.map((r, i) => <article key={r.id} className={`notebook-story notebook-story-${(i % 3) + 1}`}>
       <div className="notebook-story-top record-voice"><span>{String(i+1).padStart(2,"0")} / {r.id}</span><span>{r.lineage || "FILM → QUESTION → RECORD"}</span></div>
-      {r.id === "N-MACHINE-SELF-READ" ? <MachineSelfReadCard/> : r.id === "N-MACHINE-PERMISSION" ? <MachinePermissionCard/> : r.id === "N-MACHINE-VISIT" ? <MachineVisitCard/> : cell80FurtherPart(r.id) ? <Cell80FurtherCard part={cell80FurtherPart(r.id)}/> : cell80Part(r.id) ? <Cell80Card part={cell80Part(r.id)}/> : r.id === "N-ATTRIBUTION" ? <AgentAttributionCard/>
+      {r.id === "N-MACHINE-TASK" ? <MachineTaskCard/> : r.id === "N-MACHINE-SELF-READ" ? <MachineSelfReadCard/> : r.id === "N-MACHINE-PERMISSION" ? <MachinePermissionCard/> : r.id === "N-MACHINE-VISIT" ? <MachineVisitCard/> : cell80FurtherPart(r.id) ? <Cell80FurtherCard part={cell80FurtherPart(r.id)}/> : cell80Part(r.id) ? <Cell80Card part={cell80Part(r.id)}/> : r.id === "N-ATTRIBUTION" ? <AgentAttributionCard/>
         : r.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/>
         : r.id === "N-AUTHORITY" ? <AuthorityCard/>
         : r.body[0].kind === "film" && "youtubeId" in r.body[0]

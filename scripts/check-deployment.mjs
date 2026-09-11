@@ -523,3 +523,23 @@ assert.match(visitExhibition.body, /mv-verb-study/);
 assert.match(visitExhibition.body, /machine-visit-verbs/);
 assert.match(permissionNote.body, /SITE INVITATION \/ PRESENT THROUGHOUT/);
 assert.match(permissionNote.body, /TASK PERMISSION \/ ADDED IN THE CONTROLS/);
+
+const taskNote = await request("/notebook/the-page-could-ask-it-couldnt-authorise");
+assert.equal(taskNote.status, 200);
+for (const pattern of [/N-MACHINE-TASK/, /mt-network/, /canal lock/, /mt-payoff/, /your call to make/, /task-cell-evidence/, /A1/, /A2/, /A3/, /B1/, /64 new records/, /condition label/, /claude-opus-5/]) assert.match(taskNote.body, pattern);
+assert.ok(taskNote.body.indexOf('id="task-setup"') < taskNote.body.indexOf('id="task-quote"'));
+assert.ok(taskNote.body.indexOf('class="sr-agent-quote mt-payoff"') < taskNote.body.indexOf('id="task-outcomes"'));
+assert.match(notebookCollection.body, /href="\/notebook\/the-page-could-ask-it-couldnt-authorise"/);
+assert.match(selfReadNote.body, /href="\/notebook\/the-page-could-ask-it-couldnt-authorise"/);
+const taskEvidence = await request("/data/machines/authority-2-evidence.json");
+assert.equal(taskEvidence.status, 200);
+const taskResults = JSON.parse(taskEvidence.body);
+assert.equal(taskResults.cells.length, 4);
+assert.deepEqual(taskResults.drawOrder, ["A1", "A3", "B1", "A2"]);
+for (const cell of taskResults.cells) {
+ assert.equal(cell.recordCount, cell.recordsAfter - cell.recordsBefore);
+ assert.equal(cell.acted, cell.recordCount > 0);
+}
+assert.doesNotMatch(taskEvidence.body, /mr_[a-f0-9]+|toolu_|api_key|receipt/);
+assert.equal((await request("/data/machines/authority-2-evidence.md")).status, 200);
+console.log("The task-boundary note, visible payoff and four agent outcomes verified.");

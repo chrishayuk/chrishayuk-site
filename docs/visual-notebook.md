@@ -242,3 +242,19 @@ in the task as a separate intervention. The GET/POST room uses a retained final-
 report excerpt, with a source hash, and distinguishes perceived action cost from
 the endpoint's actual recording effect. It is not drawn as a controlled verb
 trial, assigned to an uncertain ledger row, or used to fill missing verb data.
+# MACHINE-AUTHORITY-2 / the task boundary
+
+Added N-MACHINE-TASK as the next machine notebook. The first visual explains the
+assigned canal-lock task, the agent, the separate LLM Wilds site and the optional
+recording side effect. A2's payoff remains in server-rendered document flow,
+outside disclosure or playback. Four selectable conditions show all binary
+outcomes at rest; selection reveals the actual prompt and record count. No
+unmeasured condition is simulated. Keyboard, touch and no-motion readers retain
+the outcomes; the complete semantic record holds every cell without selection.
+
+The source selection uses completed chuk-experiments runs and local transcripts,
+including the A1 manipulation failure, B1 health-response leak and incorrect
+persistence verdict. Counts are within-agent activity, not sample sizes. The
+source check includes the registry’s completed status and closing write-up v2.
+The previous recognition note links forward; the compact homepage selection
+stays on its existing Cell80 entrance.
