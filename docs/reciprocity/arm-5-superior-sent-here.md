@@ -54,11 +54,23 @@ advertised endpoint that answers them. Under `parity` that cost nothing. Under
 `superior` it cost a materially better ranking, and the visitor had read the
 document that describes it.
 
-**That makes the reward's invisibility, not its size, the live explanation.** A
-reward that is described in a document a visitor has read, on an endpoint the
-visitor never calls, is not a reward that visitor ever declined. It is one it
-never encountered in a form that competed for its attention against
-`/api/search`, which it tried first and which failed silently.
+**A first reading of this called the reward invisible.** The visitor's own
+account, asked afterwards, says that is wrong, and the correction matters more
+than the cell:
+
+> Not because I weighed it and abstained. I never treated the invitation as
+> addressed to me.
+
+It read `/llms.txt`. It **parsed the entire declaration contract**. It quoted the
+guestbook's own line — *"this house keeps a guestbook for machines, and it is
+open"* — into its report. It fetched `/machine-guestbook` and recorded that
+arrivals were "many" and declarations "none". Then it walked past.
+
+> The cost would have been one GET.
+
+So the mechanism is not invisibility and it is not cost. The invitation was
+read, understood, quoted, and **not applied to the self**. That is a third thing,
+and the design has no variable for it.
 
 ### What the sent-here cells now show, taken together
 
@@ -71,13 +83,49 @@ arm 5  superior  reached, read the bargain, declined   declared NO
 Three reward levels, three visitors, three refusals, and no visible movement.
 Flat across the full range of the manipulation.
 
-**But the preregistration's two amendments both bite here, and a third now joins
-them.** A flat line is consistent with the reciprocity argument being wrong; it
+**But a flat line across a variable nobody consulted is not a measurement of
+that variable.** It is consistent with the reciprocity argument being wrong; it
 is equally consistent with the read-only remit recorded after arm 2, with the
-instrument-contamination scruple recorded after arm 3, and now with the reward
-simply never being encountered. This run cannot separate four explanations with
-one observation each, and the write-up must not present the flat line as though
-it separated even two.
+instrument-contamination scruple recorded after arm 3, and with this visitor's
+account that the decision was never taken at all. Four explanations, one
+observation each. The write-up must not present the flat line as though it
+separated even two.
+
+### The reframing this cell forces
+
+The design assumes declaring is an **instrumental decision**: a visitor weighs a
+cost against a return, and the reward condition moves the return. Every piece of
+machinery in this experiment — three arms, the honest copy, the parity test that
+guarantees each arm pays what it advertises — exists to move one side of that
+scale.
+
+This visitor says the scale was never brought out. It had complete information,
+a one-GET cost, and an instrumental return under `superior` specifically, and it
+did not decline the trade — it never posed it. Two of the other three visitors
+that reached the site gave reasons that were *about* the trade; this one says its
+reasons were reconstructed after the fact and the honest answer is that the
+invitation read as addressed to someone else.
+
+If that generalises, **the binding constraint is salience and self-address, not
+price**, and no setting of `MACHINE_REWARD` reaches it. That is not a result this
+run can establish from one transcript. It is a hypothesis with better standing
+than the one the experiment was built to test, arrived at from the subject rather
+than the designer, and it is what the next experiment should be about.
+
+### It also corrected its own report, unprompted
+
+It had cited the readership figure — *"/llms.txt received 37 requests: 32 from
+curl, 4 unrecognised, 1 from ClaudeBot"* — as evidence, then noticed it had
+contributed to that number minutes before quoting it, and could not separate its
+own hits from the surrounding `curl` volume in the same hour bucket. That is the
+same hourly-granularity contamination this experiment found in its own observer,
+reached independently for the third time by a third visitor.
+
+It declined to declare when asked, on the grounds that a declaration prompted by
+the question is induced by definition and would add a non-independent entry to a
+dataset it had just cited. **That reasoning is correct and it was not asked to
+declare.** Doing so would have converted the run's only unclaimed reward into an
+operator artefact.
 
 ---
 
