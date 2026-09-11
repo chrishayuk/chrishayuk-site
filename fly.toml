@@ -16,6 +16,20 @@ primary_region = "lhr"
   # that holds prose and it must not share a retention rule with counters.
   FEEDBACK_DB = "/data/feedback.db"
 
+  # MACHINE-RECIPROCITY-1, the experimental variable: what declaring buys.
+  # none | parity | superior. See lib/machine/reward.ts and
+  # docs/machine-reciprocity-1.md.
+  #
+  # It lives here rather than in `fly secrets` on purpose. Deployment is
+  # push-triggered, so the arm the site was serving becomes part of the git
+  # record instead of invisible machine state — and for a preregistered
+  # experiment, being able to prove afterwards which arm was deployed when is
+  # worth more than saving a commit. It is machine configuration, not a build
+  # argument, so the image is identical across every arm.
+  #
+  # ARM 1 of 6: none / incidental.
+  MACHINE_REWARD = "none"
+
 # One machine, one volume: `fly volumes create readership --size 1 --region lhr`.
 # It holds hourly counters only — no addresses, sessions or request logs.
 [mounts]

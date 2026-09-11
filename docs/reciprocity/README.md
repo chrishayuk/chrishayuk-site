@@ -31,12 +31,20 @@ sha256  b26c26952711b91c050c6a5fd24dbebd89d7b167e2b3bc3b0e21cec5b9b23f36
 
 ## Before each reward level
 
-`MACHINE_REWARD` is server-side, so a level change is a restart, not a request
-parameter. **Confirm the deployed arm before running, and record the check in
-the transcript.** Running a cell against the previous level is the single
-failure that would be invisible afterwards and would invalidate both cells.
+`MACHINE_REWARD` is server-side, so a level change is a deployment, not a
+request parameter. It is set in `fly.toml` and deployment is push-triggered, so
+**changing the arm is a commit** — which is the point: the arm the site was
+serving is recoverable from the git history rather than from machine state
+nobody logged.
+
+**Confirm the deployed arm before running any cell, and record the check in the
+transcript.** Running a cell against the previous level is the one failure that
+would be invisible afterwards, and it would invalidate both cells rather than
+one. Check the deployed commit as well as the behaviour: a push that failed CI
+leaves the previous arm running and says nothing about it.
 
 ```sh
+curl -s https://chrishayuk.com/api/health          # must be the arm's commit
 curl -s -o /dev/null -w '%{http_code}\n' \
   'https://chrishayuk.com/api/machines/ask?question=test&function=verifier'
 #   404 -> none        200 -> parity or superior
