@@ -73,6 +73,17 @@ function open(): Promise<Database | null> {
      console.error("machine: archived machine-declaration/1 rows as visit_v1");
     }
    } catch { /* no table yet */ }
+   // One name for one thing. The columns were `actor` and `task` while the
+   // fields were `actor_type` and `task_class` — a second representation of
+   // the same set, which is the drift that broke the GET parser. Guarded
+   // renames, because CREATE TABLE IF NOT EXISTS will not touch a table that
+   // already exists.
+   for (const rename of [
+    "RENAME COLUMN actor TO actor_type",
+    "RENAME COLUMN task TO task_class",
+   ]) {
+    try { db.exec(`ALTER TABLE visit ${rename}`); } catch { /* already renamed, or no table yet */ }
+   }
    db.exec(SCHEMA);
    // A column added after rows existed. CREATE TABLE IF NOT EXISTS will not
    // add it to a table that is already there, and the evidence comparison is
@@ -89,8 +100,8 @@ function open(): Promise<Database | null> {
     try { db.exec(`ALTER TABLE visit ADD COLUMN ${column}`); } catch { /* already present */ }
    }
    insert = db.prepare(`INSERT INTO visit
-    (visit_id, vocabulary_version, hour, actor, provider_claim, model_variant, harness,
-     transport, topology, function, coordination, runtime_context, task,
+    (visit_id, vocabulary_version, hour, actor_type, provider_claim, model_variant, harness,
+     transport, topology, function, coordination, runtime_context, task_class,
      capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked,
      challenge, resources, asks, published)
     VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ${VOCABULARY_VERSION},
@@ -202,16 +213,16 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
  const db = await open();
  if (!db) return null;
  try {
-  const rows = db.prepare(`SELECT visit_id, vocabulary_version, hour, actor, provider_claim,
-    model_variant, harness, transport, topology, function, coordination, runtime_context, task,
+  const rows = db.prepare(`SELECT visit_id, vocabulary_version, hour, actor_type, provider_claim,
+    model_variant, harness, transport, topology, function, coordination, runtime_context, task_class,
     capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked
    FROM visit ORDER BY visit_id DESC LIMIT ?`).all(Math.min(Math.max(1, limit), 500)) as Record<string, number>[];
   return rows.map(row => {
    const declaration = {
-    actor: row.actor, provider: row.provider_claim, variant: row.model_variant,
+    actor: row.actor_type, provider: row.provider_claim, variant: row.model_variant,
     harness: row.harness, transport: row.transport, topology: row.topology,
     function: row.function, coordination: row.coordination,
-    runtimeContext: row.runtime_context, task: row.task, label: null,
+    runtimeContext: row.runtime_context, task: row.task_class, label: null,
     capabilities: unpackCapabilities(row.capabilities),
     provenance: unpackProvenance(row.provenance, V_DECLARED_FIELDS),
     capabilityProvenance: unpackProvenance(row.cap_provenance, V_CAPABILITIES),

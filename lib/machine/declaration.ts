@@ -75,6 +75,27 @@ const provenanceOf = (body: Record<string, unknown>, key: string, vocabulary: V.
  : typeof body[key] === "string" && vocabulary.includes(body[key] as string) ? 1
  : 2;
 
+/**
+ * THE ONE PLACE A FIELD IS TIED TO ITS VOCABULARY.
+ *
+ * Every wire key equals its field name, so this table is enough to
+ * derive the parse, the provenance and the corrections. It is typed
+ * against DeclaredField, so a field added to the vocabulary and not to
+ * this map fails the typecheck rather than going quietly missing.
+ */
+const VOCABULARY_FOR: Record<V.DeclaredField, V.Vocabulary> = {
+ actor_type: V.ACTOR_TYPE,
+ provider_claim: V.PROVIDER_CLAIM,
+ model_variant: V.MODEL_VARIANT,
+ harness: V.HARNESS_CLAIM,
+ transport: V.TRANSPORT,
+ topology: V.TOPOLOGY,
+ function: V.FUNCTION,
+ coordination: V.COORDINATION,
+ runtime_context: V.RUNTIME_CONTEXT,
+ task_class: V.TASK_CLASS,
+};
+
 const object = (value: unknown): Record<string, unknown> =>
  value !== null && typeof value === "object" && !Array.isArray(value)
   ? value as Record<string, unknown>
@@ -100,18 +121,14 @@ export function parseDeclaration(input: unknown): Declaration {
    ? [...body.agent_name.trim()].slice(0, MAX_LABEL_CHARS).join("")
    : null,
   capabilities: V.CAPABILITY.map(name => V.ordinalOf(V.CAPABILITY_VALUE, declared[name])),
-  provenance: [
-   provenanceOf(body, "actor_type", V.ACTOR_TYPE),
-   provenanceOf(body, "provider_claim", V.PROVIDER_CLAIM),
-   provenanceOf(body, "model_variant", V.MODEL_VARIANT),
-   provenanceOf(body, "harness", V.HARNESS_CLAIM),
-   provenanceOf(body, "transport", V.TRANSPORT),
-   provenanceOf(body, "topology", V.TOPOLOGY),
-   provenanceOf(body, "function", V.FUNCTION),
-   provenanceOf(body, "coordination", V.COORDINATION),
-   provenanceOf(body, "runtime_context", V.RUNTIME_CONTEXT),
-   provenanceOf(body, "task_class", V.TASK_CLASS),
-  ],
+  // DERIVED from DECLARED_FIELD, not restated in parallel.
+  //
+  // This was a hand-ordered array that had to match the canonical order
+  // exactly. A reorder there would have silently misattributed every
+  // provenance value in the store — the same class of defect as the GET
+  // parser carrying a stale copy of the field list, and worse, because
+  // it corrupts what is written rather than dropping what is read.
+  provenance: V.DECLARED_FIELD.map(field => provenanceOf(body, field, VOCABULARY_FOR[field])),
   capabilityProvenance: V.CAPABILITY.map(name => provenanceOf(declared, name, V.CAPABILITY_VALUE)),
  };
 }
@@ -157,18 +174,7 @@ export const describeProvenance = (declaration: Declaration): Record<V.DeclaredF
  */
 export type Correction = { field: V.DeclaredField; problem: "unrecognised"; accepted: readonly string[] };
 
-const VOCABULARY_FOR: Record<V.DeclaredField, V.Vocabulary> = {
- actor_type: V.ACTOR_TYPE,
- provider_claim: V.PROVIDER_CLAIM,
- model_variant: V.MODEL_VARIANT,
- harness: V.HARNESS_CLAIM,
- transport: V.TRANSPORT,
- topology: V.TOPOLOGY,
- function: V.FUNCTION,
- coordination: V.COORDINATION,
- runtime_context: V.RUNTIME_CONTEXT,
- task_class: V.TASK_CLASS,
-};
+
 
 export const corrections = (declaration: Declaration): Correction[] =>
  V.DECLARED_FIELD.flatMap((field, index) =>

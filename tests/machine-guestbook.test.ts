@@ -13,6 +13,7 @@ import { visiblePaths } from "../lib/readership/visible.ts";
 import { archivePaths, canonicalPaths } from "../lib/canonical.ts";
 import { CONDITION, PUBLIC_CAPACITY_BUDGET_BITS, PUBLIC_DIMENSIONS, previousCompletedDay, publicCapacityBits, renderPublic } from "../lib/machine/guestbook.ts";
 import { SITE, records } from "../lib/records.ts";
+import { contract } from "../lib/machine/contract.ts";
 import { researchBundle } from "../lib/machine/ask.ts";
 
 /**
@@ -589,4 +590,69 @@ test("MACHINE-DECLARATION/2: every shape composes from the axes, and none needs 
      .map(value => `${name}.${value}`));
  assert.deepEqual(compounds.filter(entry => !entry.startsWith("COLLABORATION.") && !entry.startsWith("DELEGATION.") && !entry.startsWith("EXECUTION.")), [],
   "a v2 axis gained a compound value; factor it instead");
+});
+
+test("PARITY: the canonical field set appears everywhere it must, and nowhere as a second copy", async () => {
+ // The methodological result from run 4: ninety-nine tests were green while the
+ // public machine interface was broken in exactly the path most machines use.
+ // QUERY_FIELDS was a hand-written second representation of DECLARED_FIELD, the
+ // ontology moved, and the copy did not. No unit test could see it because each
+ // half was internally consistent.
+ //
+ // So this asserts AGREEMENT BETWEEN REPRESENTATIONS rather than the behaviour
+ // of any one of them. Every place the field set is stated again is either
+ // derived from the canonical list or checked against it here.
+ const canonical = [...V.DECLARED_FIELD];
+
+ // 1. The parser accepts exactly these, and says so through provenance.
+ const everything = Object.fromEntries(canonical.map(field => [field, "unknown"]));
+ const parsed = parseDeclaration(everything);
+ assert.deepEqual(Object.keys(describeProvenance(parsed)), canonical,
+  "provenance must report the canonical fields, in the canonical order");
+ for (const field of canonical) {
+  assert.equal(describeProvenance(parsed)[field], "stated",
+   `${field} is canonical but the parser did not read it from the wire`);
+ }
+
+ // 2. What the receipt echoes covers the canonical set.
+ const described = Object.keys(describe(parsed));
+ for (const field of canonical) {
+  assert.ok(described.includes(field), `describe() omits the canonical field ${field}`);
+ }
+
+ // 3. The GET route reads the canonical set. This is the exact defect run 4
+ //    found, and the reason the list is now derived rather than written twice.
+ const route = await readFile(new URL("../app/api/machines/declaration/route.ts", import.meta.url), "utf8");
+ assert.match(route, /QUERY_FIELDS = \[\.\.\.DECLARED_FIELD/,
+  "the GET field list must be derived from the vocabulary, never restated");
+
+ // 4. The published contract documents every canonical field.
+ const documented = Object.keys(contract().fields);
+ for (const field of canonical) {
+  assert.ok(documented.includes(field), `the contract does not document ${field}`);
+ }
+ for (const field of documented) {
+  assert.ok(canonical.includes(field as never) || ["capabilities", "agent_name"].includes(field),
+   `the contract documents ${field}, which is not a field this site accepts`);
+ }
+
+ // 5. The machine index names every canonical field, because an agent that
+ //    reads only /llms.txt must not be told about a subset.
+ const index = llmsDocument();
+ for (const field of canonical) {
+  assert.ok(index.includes(field), `/llms.txt never mentions ${field}`);
+ }
+
+ // 6. The store has a column for each, so nothing is parsed and then dropped.
+ const columns = tables().visit.map(column => column.name);
+ for (const field of canonical) {
+  const column = field === "provider_claim" ? "provider_claim" : field;
+  assert.ok(columns.includes(column), `the visit table has nowhere to put ${field}`);
+ }
+
+ // 7. And no retired v1 field survives anywhere a caller can reach.
+ for (const retired of ["delegation", "agent_name_kind", "model_name", "execution"]) {
+  assert.ok(!documented.includes(retired), `the contract still offers the retired field ${retired}`);
+  assert.ok(!route.includes(`"${retired}"`), `the GET route still names the retired field ${retired}`);
+ }
 });
