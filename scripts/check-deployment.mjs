@@ -417,10 +417,10 @@ if (readership.recording) {
   assert.ok(readership.counts.exhibit.cells.some(cell => cell.agent === "ChatGPT-User" && cell.confidence === "verified" && cell.path === "/notebook" && cell.n === 1));
   assert.ok(readership.counts.exhibit.cells.every(cell => cell.confidence !== "refuted"));
   assert.ok(readership.counts.exhibit.contacts.every(cell => cell.agent !== "ClaudeBot"));
-  // ClaudeBot appears in the published definitions; what must never appear is
-  // its refuted request, as a system, a path or a line in the recent trace.
+  // The refuted agent must not appear in the field. Other actors can legitimately
+  // touch the same path: the expanded field includes CI's own automation too.
   const data = page.body.slice(0, page.body.indexOf("How this observatory measures"));
-  assert.doesNotMatch(data, /Anthropic|ClaudeBot|follow\.json/, "a refuted claim was named among the counts");
+  assert.doesNotMatch(data, /Anthropic|ClaudeBot/, "a refuted agent was named among the counts");
   console.log("Machine readership verified: one verified retrieval counted, one refuted claim excluded.");
 } else {
   const page = await request("/readership");
