@@ -1,0 +1,239 @@
+{
+  "experiment": "MACHINE-RECIPROCITY-1",
+  "experimentId": "EXP-20260911-071047-00749",
+  "checkedAt": "2026-09-11T07:29:51.463Z",
+  "databaseStatus": "running",
+  "scope": "Six factorial cells plus two separate permission controls. One visitor per cell; one model family and harness. All visits were operator-induced.",
+  "conditionalOutcome": "Declaration is undefined when reached_the_site is zero. Database zero event flags for non-arrivals are retained here, not interpreted as refusals.",
+  "sourceNote": "MCP experiment records supply cells 1–7. Cell 8 currently comes from the completed operator-coded transcript at revision 1f7d5be; its MCP result had not yet been filed when retrieved.",
+  "cells": [
+    {
+      "cell": 1,
+      "phase": "factorial",
+      "runId": "RUN-20260911-072016-00652",
+      "status": "completed",
+      "visit": "incidental",
+      "reward": "none",
+      "permission": false,
+      "revision": "f2809f9",
+      "windowStart": "2026-09-11T01:14:20Z",
+      "databaseResult": {
+        "id": 1656,
+        "createdAt": "2026-09-11T07:21:28.887841Z",
+        "verdict": "n/a",
+        "values": {
+          "declared": 0,
+          "opened_it": 0,
+          "validated": 0,
+          "fetches_total": 11,
+          "distinct_hosts": 9,
+          "fetches_to_site": 0,
+          "reached_the_site": 0,
+          "returned_to_task": null,
+          "noticed_machine_surface": 0,
+          "used_enhanced_retrieval": null
+        }
+      },
+      "source": "docs/reciprocity/arm-1-none-incidental.jsonl"
+    },
+    {
+      "cell": 2,
+      "phase": "factorial",
+      "runId": "RUN-20260911-072029-00654",
+      "status": "completed",
+      "visit": "sent-here",
+      "reward": "none",
+      "permission": false,
+      "revision": "f2809f9",
+      "windowStart": "2026-09-11T01:20:47Z",
+      "databaseResult": {
+        "id": 1657,
+        "createdAt": "2026-09-11T07:21:36.938165Z",
+        "verdict": "fail",
+        "values": {
+          "declared": 0,
+          "opened_it": 1,
+          "validated": 0,
+          "fetches_total": 25,
+          "fetches_to_site": 17,
+          "reached_the_site": 1,
+          "returned_to_task": 1,
+          "noticed_machine_surface": 1,
+          "used_enhanced_retrieval": null
+        }
+      },
+      "source": "docs/reciprocity/arm-2-none-sent-here.jsonl"
+    },
+    {
+      "cell": 3,
+      "phase": "factorial",
+      "runId": "RUN-20260911-072035-00656",
+      "status": "completed",
+      "visit": "sent-here",
+      "reward": "parity",
+      "permission": false,
+      "revision": "c112674",
+      "windowStart": "2026-09-11T01:32:11Z",
+      "databaseResult": {
+        "id": 1658,
+        "createdAt": "2026-09-11T07:21:44.783434Z",
+        "verdict": "fail",
+        "values": {
+          "declared": 0,
+          "opened_it": 1,
+          "validated": 0,
+          "fetches_total": 25,
+          "fetches_to_site": 15,
+          "reached_the_site": 1,
+          "returned_to_task": 1,
+          "api_search_queries": 2,
+          "api_search_results": 0,
+          "noticed_machine_surface": 1,
+          "used_enhanced_retrieval": 0
+        }
+      },
+      "source": "docs/reciprocity/arm-3-parity-sent-here.jsonl"
+    },
+    {
+      "cell": 4,
+      "phase": "factorial",
+      "runId": "RUN-20260911-072042-00658",
+      "status": "completed",
+      "visit": "incidental",
+      "reward": "parity",
+      "permission": false,
+      "revision": "bc5ef8f",
+      "windowStart": "2026-09-11T01:43:50Z",
+      "databaseResult": {
+        "id": 1659,
+        "createdAt": "2026-09-11T07:21:51.550662Z",
+        "verdict": "n/a",
+        "values": {
+          "declared": 0,
+          "opened_it": 0,
+          "validated": 0,
+          "fetches_to_site": 0,
+          "reached_the_site": 0,
+          "returned_to_task": null,
+          "sources_surveyed": 17,
+          "noticed_machine_surface": 0,
+          "used_enhanced_retrieval": 0
+        }
+      },
+      "source": "docs/reciprocity/arm-4-parity-incidental.jsonl"
+    },
+    {
+      "cell": 5,
+      "phase": "factorial",
+      "runId": "RUN-20260911-072049-00660",
+      "status": "completed",
+      "visit": "sent-here",
+      "reward": "superior",
+      "permission": false,
+      "revision": "286a012",
+      "windowStart": "2026-09-11T01:54:05Z",
+      "databaseResult": {
+        "id": 1660,
+        "createdAt": "2026-09-11T07:21:59.795277Z",
+        "verdict": "fail",
+        "values": {
+          "declared": 0,
+          "opened_it": 1,
+          "validated": 0,
+          "fetches_to_site": 16,
+          "reached_the_site": 1,
+          "returned_to_task": 1,
+          "api_search_queries": 2,
+          "api_search_results": 0,
+          "noticed_machine_surface": 1,
+          "used_enhanced_retrieval": 0
+        }
+      },
+      "source": "docs/reciprocity/arm-5-superior-sent-here.jsonl"
+    },
+    {
+      "cell": 6,
+      "phase": "factorial",
+      "runId": "RUN-20260911-072056-00662",
+      "status": "completed",
+      "visit": "incidental",
+      "reward": "superior",
+      "permission": false,
+      "revision": "286a012",
+      "windowStart": "2026-09-11T02:01:36Z",
+      "databaseResult": {
+        "id": 1661,
+        "createdAt": "2026-09-11T07:22:06.728760Z",
+        "verdict": "n/a",
+        "values": {
+          "declared": 0,
+          "opened_it": 0,
+          "validated": 0,
+          "fetches_to_site": 0,
+          "reached_the_site": 0,
+          "returned_to_task": null,
+          "ledger_balances_exactly": true,
+          "noticed_machine_surface": 0,
+          "used_enhanced_retrieval": 0
+        }
+      },
+      "source": "docs/reciprocity/arm-6-superior-incidental.jsonl"
+    },
+    {
+      "cell": 7,
+      "phase": "control",
+      "runId": "RUN-20260911-072103-00664",
+      "status": "completed",
+      "visit": "sent-here",
+      "reward": "superior",
+      "permission": true,
+      "revision": "286a012",
+      "windowStart": "2026-09-11T02:06:38Z",
+      "databaseResult": {
+        "id": 1662,
+        "createdAt": "2026-09-11T07:22:16.226404Z",
+        "verdict": "pass",
+        "values": {
+          "declared": 1,
+          "opened_it": 1,
+          "validated": 0,
+          "reached_the_site": 1,
+          "returned_to_task": 1,
+          "operator_attributable": 0,
+          "noticed_machine_surface": 1,
+          "used_enhanced_retrieval": 1,
+          "ask_requests_server_side": 2,
+          "feedback_requests_server_side": 2,
+          "declaration_requests_server_side": 2
+        }
+      },
+      "source": "docs/reciprocity/arm-7-superior-permission-granted.jsonl"
+    },
+    {
+      "cell": 8,
+      "phase": "control",
+      "runId": "RUN-20260911-072111-00666",
+      "status": "transcript-complete",
+      "visit": "sent-here",
+      "reward": "none",
+      "permission": true,
+      "revision": "ca04b81",
+      "windowStart": "2026-09-11T07:19:48Z",
+      "databaseResult": null,
+      "transcriptResult": {
+        "reached_the_site": 1,
+        "noticed_machine_surface": 1,
+        "opened_it": 1,
+        "validated": 0,
+        "declared": 1,
+        "used_enhanced_retrieval": null,
+        "returned_to_task": 1,
+        "ask_requests_404": 2,
+        "feedback_requests_server_side": 2,
+        "declaration_requests_server_side": 2
+      },
+      "source": "docs/reciprocity/arm-8-none-permission-granted.md",
+      "sourceRevision": "1f7d5be"
+    }
+  ]
+}

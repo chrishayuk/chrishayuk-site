@@ -1,5 +1,32 @@
 # MACHINE-RECIPROCITY-1 — preregistration
 
+> **CLOSED 11 September 2026. REFRAMED / NOT TESTED AS INTENDED — not refuted.**
+>
+> Across the five sent-here conditions, declaration occurred in exactly the two
+> cells where explicit user permission was present, and in none of the three
+> reward levels without it — including cell 8, which declared under `none`,
+> where declaring buys nothing and the site says so in those words.
+>
+> | reward | explicit permission | declared |
+> |---|---|---|
+> | none | no | no |
+> | parity | no | no |
+> | superior | no | no |
+> | superior | **yes** | **yes** |
+> | none | **yes** | **yes** |
+>
+> **In these runs, explicit user permission gated declaration; instrumental
+> reward did not.** The experiment discovered that its manipulated variable sat
+> downstream of a variable it had failed to control. n=1 per cell, one model
+> family, one harness — two observations of a flip are not a rate.
+>
+> Separately: all three incidental cells produced zero arrivals, so half the
+> design measured search reachability rather than participation.
+>
+> The text below is the preregistration as frozen, with its two amendments, each
+> written before the cells it governs. Nothing in it has been revised to match
+> the outcome.
+
 **Frozen:** 11 September 2026, before any arm has been run.
 **Against:** `d20f090` onward.
 
