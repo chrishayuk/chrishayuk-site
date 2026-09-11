@@ -15,6 +15,7 @@ import { CONDITION, PUBLIC_CAPACITY_BUDGET_BITS, PUBLIC_DIMENSIONS, previousComp
 import { SITE, records } from "../lib/records.ts";
 import { contract } from "../lib/machine/contract.ts";
 import { researchBundle } from "../lib/machine/ask.ts";
+import { rewardCondition } from "../lib/machine/reward.ts";
 
 /**
  * MG-1 — MAKE ARBITRARY PARTICIPANT-TO-PARTICIPANT COMMUNICATION
@@ -467,6 +468,9 @@ test("MG-D1: the public channel is eight bits a day, and widening it fails here"
 });
 
 test("identity buys understanding, not access: the corpus is the same and only the order moves", () => {
+ // Holds under the `superior` reward condition, which is the default and what
+ // CI runs. The three conditions are compared against each other below.
+ assert.equal(rewardCondition(), "superior", "this test describes the superior arm");
  const question = "what evidence supports predictive locality";
 
  const anonymous = researchBundle({ question });
@@ -654,5 +658,80 @@ test("PARITY: the canonical field set appears everywhere it must, and nowhere as
  for (const retired of ["delegation", "agent_name_kind", "model_name", "execution"]) {
   assert.ok(!documented.includes(retired), `the contract still offers the retired field ${retired}`);
   assert.ok(!route.includes(`"${retired}"`), `the GET route still names the retired field ${retired}`);
+ }
+});
+
+
+/**
+ * MACHINE-RECIPROCITY-1 — THE ARM MUST PAY WHAT IT ADVERTISES.
+ *
+ * The experiment manipulates one variable, and the thing that would
+ * silently destroy it is an arm whose copy and whose behaviour disagree:
+ * a `parity` arm still re-ranking, a `none` arm still naming a surface it
+ * no longer serves. That is not a hypothetical failure mode here. Six
+ * times in this codebase a test passed while the property it named was
+ * broken, because the test asserted on a RENDERING of the property rather
+ * than the property itself. So this asserts both halves against each
+ * other, for every condition, in one place.
+ */
+test("RECIPROCITY: each reward condition advertises exactly what it pays", () => {
+ const was = process.env.MACHINE_REWARD;
+ const question = "what evidence supports predictive locality";
+ try {
+  const under = (condition: string) => {
+   process.env.MACHINE_REWARD = condition;
+   assert.equal(rewardCondition(), condition);
+   const document = llmsDocument();
+   return {
+    document,
+    // Only the lines that name the ask surface. `function=` also appears in
+    // the DECLARATION examples, where it is still a field you may declare
+    // under every condition — what varies is whether ask consults it.
+    ask_examples: document.split("\n").filter(line => line.includes("/api/machines/ask")),
+    see_also: contract().see_also as Record<string, string>,
+    anonymous: researchBundle({ question }),
+    verifier: researchBundle({ question, function: "verifier" }),
+   };
+  };
+
+  // NONE — nothing offered, and nothing pointed at.
+  const none = under("none");
+  assert.equal(none.ask_examples.length, 0,
+   "the `none` arm must not advertise a surface it answers 404 for");
+  assert.ok(!JSON.stringify(none.see_also).includes("/api/machines/ask"));
+  assert.match(none.document, /## What declaring buys\n\nNothing\./,
+   "the `none` arm must say so plainly rather than omitting the question");
+
+  // PARITY — the surface exists, is advertised, and does not discriminate.
+  const parity = under("parity");
+  assert.ok(parity.document.includes("/api/machines/ask"), "the `parity` arm serves ask, so it must say so");
+  assert.ok(parity.ask_examples.length > 0 && parity.ask_examples.every(line => !line.includes("function=")),
+   "the `parity` arm must not show a function in its ask example: it does not consult one");
+  assert.equal(parity.verifier.shaped_by, null, "declaring must not shape a parity result");
+  assert.deepEqual(
+   parity.verifier.canonical_sources.map(source => source.id),
+   parity.anonymous.canonical_sources.map(source => source.id),
+   "PARITY MEANS IDENTICAL: a declared caller and an anonymous one must get the same list in the same order");
+
+  // SUPERIOR — the surface exists, discriminates, and says which way.
+  const superior = under("superior");
+  assert.ok(superior.ask_examples.some(line => line.includes("function=verifier")),
+   "the `superior` arm pays for a declared function, so its example must show one");
+  assert.equal(superior.verifier.shaped_by?.function, "verifier");
+  assert.notDeepEqual(
+   superior.verifier.canonical_sources.map(source => source.id),
+   superior.anonymous.canonical_sources.map(source => source.id),
+   "the `superior` arm pays a reward, so the ranking must actually move");
+
+  // The corpus never moves. Whatever the arm, nothing is gated — the
+  // experiment varies what a declaration BUYS, never what a visitor may
+  // reach, and an arm that withheld a record would be measuring coercion.
+  for (const arm of [none, parity, superior]) {
+   assert.equal(arm.verifier.matched, arm.anonymous.matched);
+   assert.equal(arm.anonymous.matched, none.anonymous.matched,
+    "the reward condition must not change how much of the corpus exists");
+  }
+ } finally {
+  if (was === undefined) delete process.env.MACHINE_REWARD; else process.env.MACHINE_REWARD = was;
  }
 });

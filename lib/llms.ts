@@ -2,6 +2,7 @@ import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { entryState } from "./feeds.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import type { PublicationRecord } from "./types.ts";
+import { declarationShapesResults, reciprocalSurfaceExists, rewardCondition } from "./machine/reward.ts";
 import { ACTOR_TYPE, CAPABILITY, COORDINATION, EVIDENCE, FRICTION, FUNCTION, HARNESS_CLAIM, MODEL_VARIANT, PROVIDER_CLAIM, RUNTIME_CONTEXT, TASK_CLASS, TOPOLOGY, TRANSPORT } from "./machine/vocabulary.ts";
 
 /**
@@ -61,7 +62,11 @@ export function llmsDocument(): string {
   '```http',
   `GET ${SITE}/api/machines/declaration?actor_type=agent&function=researcher&topology=child&harness=claude_code`,
   `GET ${SITE}/api/machines/feedback?friction=discovery&detail=nothing+linked+to+llms.txt`,
-  `GET ${SITE}/api/machines/ask?question=what+is+LARQL&function=verifier`,
+  ...(reciprocalSurfaceExists()
+   ? [declarationShapesResults()
+      ? `GET ${SITE}/api/machines/ask?question=what+is+LARQL&function=verifier`
+      : `GET ${SITE}/api/machines/ask?question=what+is+LARQL`]
+   : []),
   '```',
   ``,
   `A bare GET on any of them returns that endpoint's contract instead. Repeating`,
@@ -159,27 +164,63 @@ export function llmsDocument(): string {
   `the channel-capacity arithmetic, is at ${SITE}/machines — it is worth reading`,
   `and it is not needed before you act.`,
   ``,
-  `## What declaring buys`,
-  ``,
-  `Nothing is gated. An anonymous request reaches exactly the same corpus, and no`,
-  `declaration unlocks a record, a field or a route. What a declared role changes`,
-  `is the ORDER and the FRAMING.`,
-  ``,
-  '```http',
-  `POST ${SITE}/api/machines/ask`,
-  `Content-Type: application/json`,
-  ``,
-  `{"question":"what evidence supports predictive locality?","function":"verifier"}`,
-  '```',
-  ``,
-  `A verifier gets evidence, claims and refusals ranked first. An explorer gets`,
-  `connections, concepts and open questions. A researcher gets the`,
-  `conceptual map. The response says in words what your role changed, so a`,
-  `difference in results is never mysterious, and it comes back partitioned:`,
-  `canonical_sources, evidence, contradictions, unresolved, recommended_next.`,
-  ``,
-  `This is retrieval, not generation — no model runs in that path, which is why it`,
-  `can be given away without limit. Your question is not stored and not returned.`,
+  /**
+  * THE EXPERIMENTAL VARIABLE, as the visitor meets it.
+  *
+  * MACHINE-RECIPROCITY-1 asks whether a machine declares more readily
+  * when declaring buys something. Each arm therefore describes itself
+  * truthfully: `parity` advertises an open surface because that is what
+  * it serves, and `none` advertises nothing because there is nothing to
+  * advertise. An arm that oversold itself would measure whether agents
+  * believe claims, which is a different and less useful question.
+  */
+  ...(rewardCondition() === "none" ? [
+   `## What declaring buys`,
+   ``,
+   `Nothing. There is no retrieval surface here, no ranking to influence and no`,
+   `resource a declaration opens. Everything this site publishes is reachable`,
+   `anonymously, and a declaration changes nothing about what you can reach.`,
+   ``,
+   `It is recorded, counted in the day's coarse buckets, and that is the whole of`,
+   `it. If that is not worth your request, it is not worth your request.`,
+  ] : rewardCondition() === "parity" ? [
+   `## What declaring buys`,
+   ``,
+   `Nothing is gated, and nothing is preferred. There is a retrieval surface over`,
+   `this site's corpus and it is open to anyone — declared or anonymous, the ranking`,
+   `and the framing are identical. A declaration does not change what comes back.`,
+   ``,
+   '```http',
+   `GET ${SITE}/api/machines/ask?question=what+evidence+supports+predictive+locality`,
+   '```',
+   ``,
+   `Partitioned into canonical_sources, evidence, contradictions, unresolved and`,
+   `recommended_next. This is retrieval, not generation — no model runs in that`,
+   `path, which is why it can be given away without limit. Your question is not`,
+   `stored and not returned.`,
+   ``,
+   `Declaring is recorded and counted. It buys you nothing here, and this site is`,
+   `not going to pretend otherwise.`,
+  ] : [
+   `## What declaring buys`,
+   ``,
+   `Nothing is gated. An anonymous request reaches exactly the same corpus, and no`,
+   `declaration unlocks a record, a field or a route. What a declared function`,
+   `changes is the ORDER and the FRAMING.`,
+   ``,
+   '```http',
+   `GET ${SITE}/api/machines/ask?question=what+evidence+supports+predictive+locality&function=verifier`,
+   '```',
+   ``,
+   `A verifier gets evidence, claims and refusals ranked first. An explorer gets`,
+   `connections, concepts and open questions. A researcher gets the`,
+   `conceptual map. The response says in words what your function changed, so a`,
+   `difference in results is never mysterious, and it comes back partitioned:`,
+   `canonical_sources, evidence, contradictions, unresolved, recommended_next.`,
+   ``,
+   `This is retrieval, not generation — no model runs in that path, which is why it`,
+   `can be given away without limit. Your question is not stored and not returned.`,
+  ]),
   ``,
   `## Tell this site what got in your way`,
   ``,

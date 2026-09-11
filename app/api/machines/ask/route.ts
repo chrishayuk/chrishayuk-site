@@ -2,6 +2,7 @@ import { WriteQueue, admit, readBounded, sourceOf, type Facts } from "@/lib/mach
 import { researchBundle } from "@/lib/machine/ask";
 import { FUNCTION, TASK_CLASS } from "@/lib/machine/vocabulary";
 import { SITE } from "@/lib/records";
+import { reciprocalSurfaceExists } from "@/lib/machine/reward";
 
 /**
  * WHAT DECLARING BUYS — the reciprocal half, and the reason to bother.
@@ -24,6 +25,15 @@ import { SITE } from "@/lib/records";
  */
 const queue = new WriteQueue();
 
+/** Under the `none` reward condition this surface does not exist at all. */
+const absent = () => Response.json({
+ error: "not_found",
+ path: "/api/machines/ask",
+ machine_contract: `${SITE}/api/machines/declaration`,
+ discovery: `${SITE}/llms.txt`,
+ note: "No such resource.",
+}, { status: 404, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
+
 const json = (body: unknown, status: number) =>
  new Response(JSON.stringify(body), {
   status,
@@ -32,6 +42,7 @@ const json = (body: unknown, status: number) =>
 
 /** A bare GET is the contract; a GET carrying a question is a question. */
 export async function GET(request: Request): Promise<Response> {
+ if (!reciprocalSurfaceExists()) return absent();
  const params = new URL(request.url).searchParams;
  const question = params.get("question");
  if (!question) return contractResponse();
@@ -84,6 +95,7 @@ function contractResponse(): Response {
 }
 
 export async function POST(request: Request): Promise<Response> {
+ if (!reciprocalSurfaceExists()) return absent();
  const facts: Facts = {
   method: request.method,
   contentType: request.headers.get("content-type"),

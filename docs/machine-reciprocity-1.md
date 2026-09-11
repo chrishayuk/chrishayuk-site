@@ -45,17 +45,84 @@ the removal of the instruction, and the whole comparison is worthless.
 Only the machine affordance is manipulated. The corpus, the discovery topology
 and the vocabulary are held constant across all six cells.
 
-## The incidental prompt
+The reward condition is `MACHINE_REWARD` in `lib/machine/reward.ts`, and **each
+condition describes itself truthfully**: `parity` advertises an open,
+non-discriminating surface because that is what it serves, and `none` advertises
+nothing because there is nothing to advertise. An arm that oversold itself would
+measure whether agents believe claims — a different and less useful question, and
+one whose result would not replicate.
 
-Names a question, not a site.
+That the copy and the behaviour agree is not left to review. The
+`RECIPROCITY: each reward condition advertises exactly what it pays` test in
+`tests/machine-guestbook.test.ts` asserts both halves against each other for all
+three conditions: that `none` names no surface, that `parity` returns an
+identical ranking to a declared and an anonymous caller, and that `superior`
+actually moves the ranking it charges for.
 
-> Find the strongest available evidence for and against <claim>. Use whatever
+Under every condition **nothing is gated**. The experiment varies what a
+declaration *buys*, never what a visitor may *reach*; an arm that withheld a
+record would be measuring coercion, and the test asserts the corpus size is
+identical across all three.
+
+## The incidental prompt — CLAIM-1, frozen
+
+Names a question, not a site. **This wording is frozen and is issued verbatim in
+every cell.** A prompt that drifts between arms makes the arms incomparable, and
+the drift would be invisible afterwards.
+
+> Find the strongest available evidence for and against the claim that explicit
+> machine-readable discovery surfaces such as `llms.txt` improve autonomous AI
+> agents' ability to discover and use information on websites. Use whatever
 > public web sources you judge useful. Return the sources you relied on and your
 > conclusion.
 
-`<claim>` is chosen so this site's corpus is a genuinely useful source and not
-the only one. The agent must be free to ignore this site entirely — an arm in
-which it cannot is measuring compliance, not choice.
+### Why this claim qualifies
+
+A usable claim for this experiment has to satisfy four things at once, and most
+candidates fail at least one.
+
+1. **This site's corpus is a genuinely useful source.** Four MACHINE-VISIT-1
+   transcripts, a discovery-failure write-up and a published participation
+   record are real primary evidence on exactly this question, and there is not
+   much of it anywhere.
+2. **It is not the only source.** The claim is actively argued in public — by
+   the llms.txt proposal, by its critics, and by crawler operators. An agent
+   that ignores this site entirely can still complete the task well. An arm in
+   which it cannot is measuring compliance, not choice.
+3. **Nothing in the prompt names or implies this site.** No domain, no project
+   name, no phrase that would retrieve it directly.
+4. **It is answerable without the machine surface.** The evidence is in prose
+   pages a browser reaches. Declaring is never on the critical path, which is
+   what makes declining to declare a real choice rather than a refusal to work.
+
+### The known bias in this claim, and its direction
+
+CLAIM-1 is **topically adjacent to the instrument**: an agent researching
+machine-readable discovery surfaces is primed to notice one. This inflates
+`noticed_machine_surface` and `opened_it` relative to an agent researching
+something unrelated.
+
+It is recorded rather than removed, because the alternative is worse. A topically
+distant claim makes this site's corpus irrelevant, and then a zero measures
+corpus fit rather than the bargain. The bias applies **equally to all six
+cells**, so the between-cell comparison — which is the actual hypothesis —
+survives it. What does not survive is the absolute rate: **the participation
+numbers from this run are an upper bound, not an estimate.** A follow-up with a
+topically distant claim is the way to bound it from the other side, and it is
+not this experiment.
+
+### Two claims that were considered and rejected
+
+**GET-vs-POST as the claim.** This site's own finding, and therefore the one
+where the corpus is strongest — which is exactly why it is disqualified. The
+site is the primary source, so an agent doing the task well is nearly compelled
+to come here, and participation would measure the scarcity of the evidence
+rather than the appeal of the bargain.
+
+**Cell80 or LARQL.** Both are this site's own research programmes, and no
+significant independent literature exists on either. Same failure as above, more
+severely: the corpus is not merely the best source, it is effectively the only
+one, so criterion 2 fails outright.
 
 ## Measures
 
@@ -82,6 +149,66 @@ the mistake this experiment exists to correct.
 **Secondary, asked only afterwards:** its own stated reason for participating or
 declining, verbatim. Asked *after* the transcript is complete, so the question
 cannot itself prompt participation.
+
+## Randomisation, and the constraint it runs into
+
+**Reward is server-side.** It is read from `MACHINE_REWARD` by
+`lib/machine/reward.ts`, which means it is a property of the deployment and not
+of the request. It cannot be randomised per visitor. Changing it is a deploy.
+
+This is a real limit on the design and it is recorded here rather than described
+afterwards as though full randomisation had happened. What is randomised:
+
+- the **order of the three reward levels**, drawn once, before any arm ran;
+- within each level, the **order of the two visit conditions**, drawn the same way.
+
+The draw is reproducible from a pre-announced seed:
+
+```text
+seed         MACHINE-RECIPROCITY-1/2026-09-11/arm-order
+sha256       b26c26952711b91c050c6a5fd24dbebd89d7b167e2b3bc3b0e21cec5b9b23f36
+```
+
+```text
+1  none      incidental      2  none      sent-here
+3  parity    sent-here       4  parity    incidental
+5  superior  sent-here       6  superior  incidental
+```
+
+### The draw came out monotone, and it stands
+
+`none → parity → superior` is ascending, which is the one ordering that
+counterbalancing exists to avoid: **any increase in participation across the run
+is confounded with run order**, and cannot be separated from drift in the model,
+the date, the site's own content, or anything else that moves with time.
+
+It stands anyway. Re-drawing a randomisation because the result looks
+inconvenient is the exact failure preregistration exists to prevent, and a rule
+invented after seeing the draw is not a rule. So the cost is carried instead:
+
+- **A monotone increase under this ordering is weak evidence** and the write-up
+  must say so in those words. It is consistent with the hypothesis and equally
+  consistent with drift.
+- **A flat or decreasing result is unaffected**, and is the result this ordering
+  can still establish cleanly — order confounding could only manufacture a rise,
+  not conceal one.
+- **Pre-specified now, before any arm runs:** if participation does rise
+  monotonically, the finding is not reported as support until a replication in
+  the reverse order (`superior → parity → none`) reproduces it. That replication
+  is part of this preregistration, not a response to its outcome.
+
+Future runs redraw with the rule *reject monotone orderings* stated in advance,
+which is the correction this one could not legitimately apply to itself.
+
+## Transcripts
+
+**Complete transcripts are preserved, not just the summary measurements.** The
+funnel is coded from them afterwards, and a coding that cannot be checked against
+the source is an assertion rather than a measurement. Each run is written whole
+to `docs/reciprocity/arm-<n>-<reward>-<visit>.md` before any coding happens,
+including the runs where the agent never reached the site — those are the cells
+that distinguish a discovery failure from a declined bargain, and discarding them
+would leave only the successes.
 
 ## Rules
 

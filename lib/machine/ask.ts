@@ -1,5 +1,6 @@
 import { searchGraph, type GraphScope, type SearchResult } from "../graph.ts";
 import { FUNCTION, TASK_CLASS, ordinalOf, wordOf, type AgentFunction, type TaskClass } from "./vocabulary.ts";
+import { declarationShapesResults, rewardCondition } from "./reward.ts";
 
 /**
  * WHAT DECLARING BUYS.
@@ -193,7 +194,10 @@ export function researchBundle(input: AskRequest): ResearchBundle {
  const scope = (["records", "films", "concepts", "all"].includes(String(input.scope)) ? input.scope : "all") as GraphScope;
 
  const { results, usedTerms } = retrieve(String(input.question ?? "").slice(0, 500), scope);
- const weights = WEIGHTS[fn];
+ // The experimental variable. Under `parity` the endpoint works exactly as
+ // well for a declared caller as for an anonymous one, and says so — an arm
+ // that claimed otherwise would measure credulity rather than reciprocity.
+ const weights = declarationShapesResults() ? WEIGHTS[fn] : undefined;
 
  const ranked = weights
   ? [...results].sort((a, b) =>
@@ -209,7 +213,9 @@ export function researchBundle(input: AskRequest): ResearchBundle {
   shaping: [
    ...(weights
     ? SHAPING[fn] ?? []
-    : ["No function was declared, or it was not one this site knows, so results are in the site's ordinary order."]),
+    : [rewardCondition() === "parity"
+      ? "This retrieval is open to anyone, declared or not, and a declared function does not change it. Results are in the site's ordinary order."
+      : "No function was declared, or it was not one this site knows, so results are in the site's ordinary order."]),
    // Say when the question was not answerable as asked. A caller that
    // cannot tell the difference between "nothing matched" and "matched
    // something else" cannot correct its next question.
@@ -249,7 +255,9 @@ export function researchBundle(input: AskRequest): ResearchBundle {
    "This is retrieval, not generation. Nothing here was written to answer your question; every item is a source that already existed.",
    "Matching is AND across a single record: every term must appear in the same item. A natural-language question is narrowed to the terms this corpus contains, and `shaping` says when that happened and to what.",
    "Editorial state travels with every item. A draft is not a finding, and quoting one as a finding misrepresents it.",
-   "Declaring a role changes ranking and framing only. Nothing on this site is gated on a declaration, and an anonymous request reaches exactly the same corpus.",
+   declarationShapesResults()
+    ? "Declaring a function changes ranking and framing only. Nothing on this site is gated on a declaration, and an anonymous request reaches exactly the same corpus."
+    : "This surface is open to anyone. Declaring changes nothing about what you get back, and nothing here is gated on it.",
    "Your question was not stored. It is not returned either, except that a narrowed query reports which of its terms this corpus contains — those are words from the corpus, not from you.",
   ],
  };

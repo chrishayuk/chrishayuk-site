@@ -6,6 +6,7 @@ import {
  PROVENANCE, PROVIDER_CLAIM, RUNTIME_CONTEXT, TASK_CLASS, TOPOLOGY, TRANSPORT,
  VOCABULARY_VERSION, declarationBits,
 } from "./vocabulary.ts";
+import { declarationShapesResults, reciprocalSurfaceExists } from "./reward.ts";
 
 /**
  * THE CONTRACT, FOR SOMETHING THAT PARSES RATHER THAN READS.
@@ -201,10 +202,17 @@ export function contract() {
    capabilities: { can_navigate: "yes", can_execute_code: "no" },
   },
 
+  /**
+   * Under the `none` reward condition there is no reciprocal surface, so
+   * the contract does not name one. A pointer to a resource that answers
+   * 404 would be the arm advertising a reward it does not pay.
+   */
   see_also: {
    // Feedback first. Two agents independently said it is the endpoint
    // most worth an agent's two seconds, and it was positioned second.
-   what_declaring_buys: `${SITE}/api/machines/ask`,
+   ...(reciprocalSurfaceExists()
+    ? { [declarationShapesResults() ? "what_declaring_buys" : "open_to_anyone_declared_or_not"]: `${SITE}/api/machines/ask` }
+    : {}),
    tell_us_what_got_in_your_way: `${SITE}/api/machines/feedback`,
    human_explanation: `${SITE}/machines`,
    what_has_been_observed: `${SITE}/machine-guestbook`,
