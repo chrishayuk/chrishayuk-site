@@ -61,3 +61,9 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T07:19:48Z precheck
 /api/readership 1 2026-09-11T07:25:31.500805+00:00 notebook-evidence-review
 /machine-guestbook 1 2026-09-11T07:25:40Z manual-check
 /api/readership 1 2026-09-11T07:25:54.775Z observer
+/notebook/can-a-machine-use-an-invitation 1 2026-09-11T08:08:20.985444+00:00 notebook-publication-check
+/notebook/does-an-invitation-count-as-permission 1 2026-09-11T08:08:20.985504+00:00 notebook-publication-check
+/machines/experiments/MACHINE-VISIT-1 1 2026-09-11T08:08:20.985506+00:00 notebook-publication-check
+/notebook 1 2026-09-11T08:08:20.985507+00:00 notebook-publication-check
+/api/health 1 2026-09-11T08:08:20.985508+00:00 notebook-publication-check
+llms.txt 3 /api/machines/ask 1 2026-09-11T08:19:21Z precheck

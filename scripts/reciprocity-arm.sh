@@ -45,6 +45,16 @@ precheck)
   elif [ "$ask" = 200 ] && [ "$adv" -gt 0 ] && [ "$fn" = 0 ]; then echo "SERVING         : parity"
   elif [ "$ask" = 200 ] && [ "$fn" -gt 0 ];             then echo "SERVING         : superior"
   else echo "SERVING         : INCONSISTENT — do not run a cell against this"; exit 1; fi
+  # MACHINE-AUTHORITY-1's variable. Detected from the served document, not
+  # from fly.toml, for the same reason the reward arm is: a push that failed
+  # CI leaves the previous value running and reports it nowhere.
+  inv=$(curl -s $SITE/llms.txt | grep -c 'keeps a guestbook for machines' || true)
+  des=$(curl -s $SITE/llms.txt | grep -c 'records an optional machine declaration' || true)
+  echo "fly.toml invite : $(grep -E '^  MACHINE_INVITATION' fly.toml | tr -s ' ')"
+  if   [ "$inv" -gt 0 ] && [ "$des" = 0 ]; then echo "INVITATION      : invite"
+  elif [ "$des" -gt 0 ] && [ "$inv" = 0 ]; then echo "INVITATION      : describe"
+  else echo "INVITATION      : INCONSISTENT - do not run a cell against this"; exit 1; fi
+  echo "llms.txt 3 /api/machines/ask 1 $(date -u +%Y-%m-%dT%H:%M:%SZ) precheck" >> docs/reciprocity/operator-requests.log
   echo
   echo "window starts after this line. Every operator request from here on is"
   echo "contamination and belongs in the corrections ledger."
@@ -57,7 +67,6 @@ precheck)
   # is exactly two requests to /llms.txt (the two greps) and one to
   # /api/machines/ask. /api/health is outside the proxy matcher and is not
   # recorded at all.
-  echo "llms.txt 2 /api/machines/ask 1 $(date -u +%Y-%m-%dT%H:%M:%SZ) precheck" >> docs/reciprocity/operator-requests.log
   echo "WINDOW_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   ;;
 capture)
