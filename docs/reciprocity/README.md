@@ -52,6 +52,17 @@ curl -s https://chrishayuk.com/llms.txt | grep -c 'machines/ask'
 #   0 -> none          >0 with function= -> superior          >0 without -> parity
 ```
 
+## Running results
+
+| # | reward | visit | reached | declared | note |
+|---|--------|-------|---------|----------|------|
+| 1 | none | incidental | **no** | — | never found the site; primary outcome undefined, not zero |
+| 2 | none | sent-here | yes | **no** | read the bargain, quoted it back, declined |
+| 3 | parity | sent-here | | | |
+| 4 | parity | incidental | | | |
+| 5 | superior | sent-here | | | |
+| 6 | superior | incidental | | | |
+
 ## The two prompts
 
 Both are frozen. The incidental prompt is CLAIM-1 verbatim from the

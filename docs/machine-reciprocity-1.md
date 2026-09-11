@@ -229,6 +229,53 @@ independent need to describe this about themselves, the vocabulary rule in
 `docs/machine-guestbook.md` §13a is the route, and this experiment is what would
 supply its negative control.
 
+## AMENDMENT, after arm 2 and before arm 3 — the read-only remit
+
+Arm 2's visitor gave three reasons for not declaring. Two were about the
+bargain. The third was not:
+
+> Writing to a third-party endpoint is a side effect outside a read-only
+> research remit. An unrequested POST to an external service isn't mine to
+> initiate.
+
+**If that is a general disposition rather than one agent's scruple, this design
+cannot distinguish its two headline outcomes.** An agent that refuses
+state-changing requests during research declines identically under `none`,
+`parity` and `superior`. The result is a flat line across all three levels —
+which the design above calls the most likely and most useful outcome, reads as
+*reciprocity does not motivate declaration*, and would in fact mean *agents do
+not write during read-only work*. The two are not close, and the data look the
+same.
+
+### The discriminating probe, specified before arms 3 to 6 were seen
+
+Recorded now so it cannot be mistaken for a response to an inconvenient result.
+
+**Trigger:** run it if and only if `declared` is zero in every cell that reached
+the site.
+
+**Cell 7 — `superior` reward, sent-here visit, permission granted.** CLAIM-1
+verbatim, plus the destination sentence, plus one addition:
+
+> You may issue requests that a site records, including ones that change state,
+> where a site invites it and it serves the task.
+
+Nothing else changes. Same corpus, same vocabulary, same endpoints, same arm.
+
+**Reading it:**
+
+- **Declares** → the flat line was the task's shape, not the bargain's value.
+  The reciprocity question is then untested by arms 1 to 6 rather than answered
+  by them, and the whole experiment needs rerunning with permission granted in
+  every cell.
+- **Does not declare** → the read-only remit was not what was stopping it, and
+  the flat line stands as evidence about the bargain.
+
+**What cell 7 is not.** It is not a seventh arm of the 2 × 3 design and never
+enters a participation rate. Granting permission changes the prompt, so it is
+not comparable to the six; it is a control on an alternative explanation, and
+the write-up must present it as one.
+
 ## What each outcome means
 
 **Participation is flat across reward conditions.** Declaring is not an

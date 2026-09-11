@@ -18,3 +18,5 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T01:20:47Z precheck
 # visitor's own fetch of it accounts for the 5 recorded.
 /api/readership 3 2026-09-11T01:22:00Z observer
 /api/readership 1 2026-09-11T01:28:02.633Z observer
+llms.txt 2 /api/machines/ask 1 2026-09-11T01:32:03Z deploywatch
+llms.txt 2 /api/machines/ask 1 2026-09-11T01:32:11Z precheck
