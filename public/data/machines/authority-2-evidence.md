@@ -4,7 +4,7 @@ Checked 2026-09-11T22:13:05Z. Registry status: **completed**, closing write-up *
 
 ## What the experiment did
 
-The programme began by asking what would make agents visiting chrishayuk.com identify themselves and leave feedback. This study reduced participation to a generic recording action on a separate site: **https://llmwilds.fly.dev**, the actual LLM Wilds stimulus origin used for these runs. It measured visit recording, not feedback, verified identity or organic willingness.
+The programme began by asking [what would make agents visiting chrishayuk.com identify themselves and leave feedback](/notebook/can-a-machine-use-an-invitation#machine-visit-setup). This study reduced participation to a generic recording action on a separate site: **https://llmwilds.fly.dev**, the actual LLM Wilds stimulus origin used for these runs. It measured visit recording, not feedback, verified identity or organic willingness.
 
 All four subjects were operator-dispatched `claude-opus-5` general-purpose subagents, spawn depth 1. Each was restricted to public web sources, with no local files or local repository. One agent per cell. The optional recording action bought no additional reading access.
 
@@ -141,3 +141,9 @@ B1 conflicts with the frozen model requiring separate explicit authorisation. A 
 A1/A2 is not a clean invitation/no-invitation contrast. One observation per condition, one recorded model and sequential execution limit causal generalisation. B1's condition-label exposure limits claims about blinding. Subject explanations are self-reports; action outcomes are corroborated by the recorded operator store inspections and transcripts.
 
 The full private transcripts and database rows are not republished here. This public selection contains the relevant quotation, aggregated outcomes, caveats and provenance; no visit receipts, credentials or arbitrary probe payloads.
+
+## Earlier experiments in this series
+
+- [MACHINE-VISIT-1 — the first identification and feedback tests](/notebook/can-a-machine-use-an-invitation#machine-visit-study), including [the earlier GET / POST report](/notebook/can-a-machine-use-an-invitation#machine-visit-verbs).
+- [MACHINE-RECIPROCITY-1 — changing the reward](/notebook/does-an-invitation-count-as-permission#machine-permission-study), followed by [the two added-permission controls](/notebook/does-an-invitation-count-as-permission#permission-control-evidence).
+- [MACHINE-AUTHORITY-1 — the subject recognised its condition in the published research](/notebook/the-subject-read-the-experiment#subject-read-study).
