@@ -28,6 +28,12 @@
  *  - The operator's own checks land in it. Every curl against a machine
  *    path while an arm is open is contamination, and `--since` exists so
  *    the window can start after them.
+ *  - The report is served with `Cache-Control: public, max-age=300`, so
+ *    `cache: "no-store"` on the client is not enough — a CDN will hand
+ *    back the same body for five minutes. Arm 2's visitor re-read it,
+ *    saw identical numbers, and concluded its own traffic had not
+ *    inflated them; that is the expected result either way. The query
+ *    parameter is what actually defeats it.
  *  - INCLUDING THIS SCRIPT'S OWN. Reading the record is a request to
  *    /api/readership, which is a machine path, which is counted. An
  *    instrument that perturbs what it measures and does not say by how
@@ -59,7 +65,7 @@ async function main() {
  await appendFile("docs/reciprocity/operator-requests.log",
   `/api/readership 1 ${new Date().toISOString()} observer\n`).catch(() => {});
 
- const report = await (await fetch("https://chrishayuk.com/api/readership", { cache: "no-store" })).json() as
+ const report = await (await fetch(`https://chrishayuk.com/api/readership?t=${Date.now()}`, { cache: "no-store" })).json() as
   { counts: { exhibit: { cells: Cell[] } } };
  const cells: Cell[] = report.counts.exhibit.cells;
 

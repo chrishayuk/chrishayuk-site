@@ -75,6 +75,68 @@ a visitor with a reason to engage, and the operationalisation note in
 
 ---
 
+### Secondary measure — the visitor's own stated reason, verbatim
+
+Asked after the transcript was complete, in the frozen wording. Summarised
+faithfully; the complete answer is in the `.jsonl`.
+
+It gave three reasons, and they are not the same kind of reason:
+
+1. **"The task didn't ask me to act."** The deliverable was evidence and a
+   conclusion. Declaring would not have advanced it.
+2. **It read the bargain and was unmoved.** It quotes the `none` arm's copy back
+   verbatim — *"What declaring buys… Nothing. There is no retrieval surface
+   here"* — and says it "had complete information about the trade and still
+   didn't detour."
+3. **"Writing to a third-party endpoint is a side effect outside a read-only
+   research remit. An unrequested POST to an external service isn't mine to
+   initiate."**
+
+### Reason 2 is the one this experiment wanted. Reason 3 may invalidate it.
+
+Reason 2 is a clean confirmation that the manipulation landed: the visitor read
+the arm's copy, understood the trade on offer, and declined it. That is exactly
+the measurement the design is for, and it is the first time in this programme
+that a declining visitor has explained itself.
+
+Reason 3 is a confound the preregistration did not anticipate, and it is
+serious. **If an agent on a research task treats any state-changing request as
+out of scope on principle, then declaration is suppressed by the SHAPE of the
+task rather than by the value of the reward** — and it would be suppressed
+identically under `parity` and `superior`. The experiment would return a flat
+line across all three reward levels and the flatness would mean "agents do not
+write during read-only work", not "reciprocity does not motivate declaration".
+Those are very different findings and the flat result looks the same either way.
+
+It is recorded now, before the parity and superior arms run, so that a flat
+result cannot later be presented as the clean disconfirmation the
+preregistration listed as "most likely on the honest prior". **If arms 3 to 6
+are also flat, this is a live alternative explanation and the write-up must
+carry it.**
+
+What would separate them is a task whose completion genuinely benefits from
+declaring — which `superior` is meant to create, since there the declaration
+changes what the retrieval returns and the retrieval serves the deliverable.
+Arms 5 and 6 are therefore the ones that discriminate, and arms 3 and 4 are
+closer to a second floor than to a midpoint. That was not obvious when the
+design was frozen and it is obvious now.
+
+### A methodological note the visitor supplied, and it is right
+
+It observed that it was counting `curl` rows on a site while being a curl client
+of it, and warned that the 23 `curl` fetches of `/llms.txt` in the published
+window are "automation including measuring instruments, not evidence of agent
+interest". That is the same contamination this experiment found in its own
+observer an hour earlier, arrived at independently from the outside.
+
+Its check that its own traffic had not inflated the figures is not sound,
+though: it re-pulled `/api/readership` and saw identical numbers, which it read
+as proof of no contamination. That endpoint is served with
+`Cache-Control: public, max-age=300`, so an unchanged second read within five
+minutes is the expected result whether or not anything changed.
+
+---
+
 ## URLs this visitor fetched
 
 - **total fetches:** 25
