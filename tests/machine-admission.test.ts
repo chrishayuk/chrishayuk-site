@@ -230,13 +230,13 @@ test("every response is bounded, does not amplify, and echoes nothing that was s
  // A 2 KB body of junk keys and a 2-byte body must produce the SAME response
  // size. The receipt is built from this site's own vocabulary by ordinal, so
  // it cannot vary with what arrived.
- const junk = JSON.stringify({ role: "verifier", ...Object.fromEntries(
+ const junk = JSON.stringify({ function: "verifier", ...Object.fromEntries(
   Array.from({ length: 40 }, (_unused, i) => [`k${i}`, "https://example.com/secret-payload"]),
  ) }).slice(0, MAX_BODY_BYTES - 2) + '"}';
  assert.ok(junk.length > 1500, "the large body is actually large");
 
  const big = await handleDeclaration(post(junk, { "fly-client-ip": "198.18.0.1" }), deps({ sink: s.fn }));
- const small = await handleDeclaration(post('{"role":"verifier"}', { "fly-client-ip": "198.18.0.2" }), deps({ sink: s.fn }));
+ const small = await handleDeclaration(post('{"function":"verifier"}', { "fly-client-ip": "198.18.0.2" }), deps({ sink: s.fn }));
  const bigBody = await big.response.text();
  const smallBody = await small.response.text();
 
@@ -252,8 +252,8 @@ test("every response is bounded, does not amplify, and echoes nothing that was s
  // word. That is bounded by the VOCABULARY, not by what arrived, so it is
  // still not amplification; but the ceiling is asserted rather than assumed.
  const allWrong = await handleDeclaration(post(JSON.stringify({
-  actor_type: "?", role: "?", delegation: "?", collaboration: "?",
-  task_class: "?", provider_claim: "?",
+  actor_type: "?", function: "?", topology: "?", coordination: "?",
+  runtime_context: "?", task_class: "?", provider_claim: "?",
   capabilities: Object.fromEntries(V.CAPABILITY.map(name => [name, "?"])),
  }), { "fly-client-ip": "198.18.9.9" }), deps({ sink: s.fn }));
  const worst = await allWrong.response.text();
@@ -363,12 +363,12 @@ test("a visitor that can only GET can still declare, and pays the same admission
   headers: { "fly-client-ip": "203.0.113.200" },
  });
 
- const { response, reached } = await handleDeclaredValues(request, { role: "verifier", harness: "codex" }, deps({ sink: s.fn }));
+ const { response, reached } = await handleDeclaredValues(request, { function: "verifier", harness: "codex" }, deps({ sink: s.fn }));
  assert.equal(response.status, 201);
  assert.equal(s.written.length, 1, "a query-string declaration is recorded like any other");
 
  const body = JSON.parse(await response.text());
- assert.equal(body.recorded.role, "verifier");
+ assert.equal(body.recorded.function, "verifier");
  assert.equal(body.recorded.harness, "codex");
 
  // It pays the same admission — the limiter is about cost, not about the verb.
@@ -377,8 +377,8 @@ test("a visitor that can only GET can still declare, and pays the same admission
 
  // And it is refused the same way when the source has spent its burst.
  for (let i = 0; i < LIMITS.source.capacity + 2; i++) {
-  await handleDeclaredValues(request, { role: "verifier" }, deps({ sink: s.fn }));
+  await handleDeclaredValues(request, { function: "verifier" }, deps({ sink: s.fn }));
  }
- const spent = await handleDeclaredValues(request, { role: "verifier" }, deps({ sink: s.fn }));
+ const spent = await handleDeclaredValues(request, { function: "verifier" }, deps({ sink: s.fn }));
  assert.equal(spent.response.status, 429, "a GET declaration is rate limited like a POST");
 });

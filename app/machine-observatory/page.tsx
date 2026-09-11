@@ -63,20 +63,22 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
     : !declarations?.length
      ? <p>No declarations yet. That is a result, not an empty state.</p>
      : <table className="machine-table"><thead><tr>
-        <th>#</th><th>hour</th><th>actor</th><th>role</th><th>acting for</th>
-        <th>working as</th><th>task</th><th>claimed</th><th>seen</th><th>request</th><th>claim check</th><th>class</th>
+        <th>#</th><th>hour</th><th>actor</th><th>function</th><th>topology</th>
+        <th>coordination</th><th>context</th><th>task</th><th>claimed</th><th>variant</th><th>harness</th><th>seen</th><th>claim check</th><th>class</th>
        </tr></thead><tbody>
         {declarations.map(row => <tr key={row.visit}>
          <td>{row.visit}</td>
          <td>{hourLabel(row.hour)}</td>
          <td>{row.declared.actor_type}</td>
-         <td>{row.declared.role}</td>
-         <td>{row.declared.delegation}</td>
-         <td>{row.declared.collaboration}</td>
+         <td>{row.declared.function}</td>
+         <td>{row.declared.topology}</td>
+         <td>{row.declared.coordination}</td>
+         <td>{row.declared.runtime_context}</td>
          <td>{row.declared.task_class}</td>
          <td>{row.declared.provider_claim}</td>
+         <td>{row.declared.model_variant}</td>
+         <td>{row.declared.harness}</td>
          <td>{row.observed.provider}</td>
-         <td>{row.observed.evidence}</td>
          <td>{row.observed.claimChecked}</td>
          <td title={row.klassMeaning}>{row.klass}</td>
         </tr>)}

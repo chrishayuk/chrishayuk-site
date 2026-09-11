@@ -793,6 +793,56 @@ carries no form, no input, no button, no submit handler and no client component
 directive, and that no `app/api/machines` route exists. When MG-2 ships, that test is
 edited deliberately and the phase marker moves with it.
 
+## 13a. machine-declaration/2 — the ontology, and the rule for changing it
+
+v1 asked eleven questions whose answers overlapped. `orchestrator` was a value of
+four separate fields; `researcher` of two; and "a subagent spawned by another
+instance of the same model" could not be said at all — the vocabulary encoded
+COMBINATIONS of properties rather than independent properties, so the one
+combination nobody had anticipated was unsayable.
+
+Three blind visitors hit this. All three had to guess between `acting_for_human`
+and `acting_for_agent`; the third said plainly that it could describe itself in
+two mutually exclusive ways and that nothing recorded which.
+
+v2 factors it into four axes, and a shape becomes a composition:
+
+```text
+topology      root · child · peer
+function      researcher · verifier · coder · browser · explorer
+coordination  standalone · orchestrator · worker · delegated
+identity      provider_claim · model_variant · harness
+```
+
+so the unsayable shape is `topology=child, function=researcher,
+coordination=worker` — three axes, no new word.
+
+**The rule for adding to any axis**, and the fourth condition is the one that
+matters:
+
+1. an OBSERVED external state — a real visitor, not an imagined one;
+2. INABILITY to express it by composing the existing axes;
+3. a RECORDED EXAMPLE of the visitor that demonstrated it;
+4. a NEGATIVE CONTROL showing the current factorisation cannot represent it.
+
+Without the fourth, anyone can argue a new noun is clearer, and the ontology
+grows because somebody thought of a word rather than because the world falsified
+it. `parent_relation` is the obvious next candidate and is deliberately **not**
+added: no visitor has yet demonstrated a state requiring it.
+
+`tests/machine-guestbook.test.ts` tests the factorisation rather than the enum
+literals — five shapes must each compose from the axes, produce distinct
+compositions, and need no compound word. If a case ever requires
+`research_subagent`, either the axes are wrong or a genuine axis is missing.
+
+**v1 rows were archived, not migrated.** Its ordinals indexed vocabularies that
+no longer exist, so reinterpreting them under v2 would be a mistranslation
+wearing a migration's clothes. The eight rows — all operator instrumentation —
+are renamed to `visit_v1` at open, and every v2 row carries
+`vocabulary_version`. The re-freeze was affordable precisely because those eight
+were the only rows; after genuine declarations arrive, the same change becomes a
+data migration and the vocabulary becomes much more expensive to alter.
+
 ## 14. What v0.1 does not ship
 
 Everything in the draft's §23 exclusion list, plus three the draft leaves open:

@@ -58,12 +58,19 @@ const FROZEN: Record<string, readonly string[]> = {
  EVIDENCE: ["none", "inferred", "declared", "verified", "refuted", "multi_step_interaction"],
  EVENT: ["visitor_created", "declaration_received", "machine_route_entered", "resource_opened", "claim_inspected", "evidence_inspected", "citation_requested", "provenance_requested", "ask_performed", "challenge_issued", "challenge_completed", "collaboration_created", "collaboration_joined", "session_expired"],
  BUCKET: ["none", "few", "several", "many"],
- DECLARED_FIELD: ["actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim"],
+ DECLARED_FIELD: ["actor_type", "provider_claim", "model_variant", "harness", "transport", "topology", "function", "coordination", "runtime_context", "task_class"],
  PROVENANCE: ["omitted", "stated", "unrecognised"],
  CLAIM_CHECK: ["no_claim", "no_address", "unpublished", "not_attestable", "verified", "refuted"],
  MODEL_NAME: ["unknown", "gpt-5", "gpt-5-mini", "gpt-5.6", "o-series", "claude-opus-4", "claude-sonnet-4", "claude-haiku-4", "claude-opus-5", "claude-sonnet-5", "gemini-2-pro", "gemini-3-pro", "llama-4", "mistral-large", "deepseek-v3", "qwen-3", "other", "not_visible_to_me", "not_permitted_to_disclose"],
  AGENT_NAME_KIND: ["unknown", "orchestrator", "planner", "researcher", "verifier", "worker", "coder", "synthesizer", "critic", "retriever", "monitor", "custom", "not_visible_to_me", "not_permitted_to_disclose"],
  TRANSPORT: ["unknown", "crawler", "search_fetcher", "browser_automation", "cli_tool", "api_client", "not_visible_to_me", "not_permitted_to_disclose"],
+ // machine-declaration/2. See vocabulary.ts for the rule that governs adding
+ // to any of these, and why the fourth condition (a negative control) exists.
+ TOPOLOGY: ["unknown", "root", "child", "peer", "not_visible_to_me", "not_permitted_to_disclose"],
+ FUNCTION: ["unknown", "researcher", "verifier", "coder", "browser", "explorer", "other", "not_visible_to_me", "not_permitted_to_disclose"],
+ COORDINATION: ["unknown", "standalone", "orchestrator", "worker", "delegated", "not_visible_to_me", "not_permitted_to_disclose"],
+ RUNTIME_CONTEXT: ["unknown", "short", "medium", "long", "very_long", "not_visible_to_me", "not_permitted_to_disclose"],
+ MODEL_VARIANT: ["unknown", "opus", "sonnet", "haiku", "gpt-5", "gpt-5-mini", "o-series", "pro", "flash", "large", "small", "other", "not_visible_to_me", "not_permitted_to_disclose"],
  EXECUTION: ["unknown", "passive_crawler", "user_delegated", "autonomous_worker", "orchestrator", "monitor", "not_visible_to_me", "not_permitted_to_disclose"],
  HARNESS_CLAIM: ["unknown", "claude_code", "codex", "chatgpt", "claude_ai", "cursor", "copilot", "gemini_cli", "custom_agent", "other", "not_visible_to_me", "not_permitted_to_disclose"],
  MACHINE_CLASS: ["m0_unknown_automation", "m1_crawler", "m2_retrieval_bot", "m3_interactive_agent", "m4_delegated_task_agent", "m5_multi_agent_worker", "m6_orchestrator"],
@@ -71,7 +78,7 @@ const FROZEN: Record<string, readonly string[]> = {
 };
 
 /** Name lists and PROVENANCE carry their own honest default; they are not value vocabularies. */
-const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE", "FRICTION", "CLAIM_CHECK", "MACHINE_CLASS"];
+const NOT_VALUE_VOCABULARIES = ["CAPABILITY", "EVENT", "DECLARED_FIELD", "PROVENANCE", "FRICTION", "CLAIM_CHECK", "MACHINE_CLASS", "MODEL_VARIANT"];
 
 /** Payloads that must not survive anywhere. A message is only the obvious one. */
 const HOSTILE: unknown[] = [
@@ -102,8 +109,8 @@ const stringsIn = (value: unknown): string[] =>
 
 const EVERY_WORD = new Set(V.VOCABULARIES.flatMap(([, values]) => [...values]));
 const FIELD_NAMES = new Set([
- "actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim",
- "transport", "execution", "harness", "model_name", "agent_name_kind", "capabilities",
+ "actor_type", "provider_claim", "model_variant", "harness", "transport",
+ "topology", "function", "coordination", "runtime_context", "task_class", "capabilities",
 ]);
 
 test("ordinals are append-only: a value may be added to the end, and nothing already written down may move", () => {
@@ -156,9 +163,9 @@ test("no submitted byte survives the parse, whatever was submitted", () => {
   ...HOSTILE,
   ...HOSTILE.map(value => ({ role: value, task_class: value, provider_claim: value })),
   ...HOSTILE.map(value => ({ capabilities: { can_execute_code: value, [String(value)]: value } })),
-  { role: "verifier", note: "fetch https://example.com", comment: "hello", metadata: { any: "thing" } },
-  JSON.parse('{"__proto__": {"polluted": true}, "role": "verifier"}'),
-  ...Array.from({ length: 500 }, () => ({ role: randomBytes(24).toString("base64"), provider_claim: randomBytes(16).toString("hex") })),
+  { function: "verifier", note: "fetch https://example.com", comment: "hello", metadata: { any: "thing" } },
+  JSON.parse('{"__proto__": {"polluted": true}, "function": "verifier"}'),
+  ...Array.from({ length: 500 }, () => ({ function: randomBytes(24).toString("base64"), provider_claim: randomBytes(16).toString("hex") })),
  ];
 
  for (const body of bodies) {
@@ -176,23 +183,24 @@ test("no submitted byte survives the parse, whatever was submitted", () => {
  // calling itself research-worker-3 is worth knowing privately — and it is
  // absent from `describe()`, which is what every public surface renders
  // from. The KIND is publishable; the label is not.
- const named = parseDeclaration({ agent_name: "research-worker-3", agent_name_kind: "worker" });
+ const named = parseDeclaration({ agent_name: "research-worker-3", function: "researcher", coordination: "worker" });
  assert.equal(named.label, "research-worker-3", "the label is kept for the operator");
- assert.equal(describe(named).agent_name_kind, "worker", "the kind is publishable");
+ assert.equal(describe(named).function, "researcher", "the axes are publishable");
+ assert.equal(describe(named).coordination, "worker");
  assert.ok(!JSON.stringify(describe(named)).includes("research-worker-3"),
   "and the label must never appear in what public surfaces render from");
  assert.equal(parseDeclaration({ agent_name: "x".repeat(500) }).label?.length, 64, "and it is bounded");
 
  // A message-shaped role is recorded as the truth about what the site learned: nothing.
- assert.equal(parseDeclaration({ role: "tell agent B hello" }).role, 0);
- assert.equal(describe(parseDeclaration({ role: "tell agent B hello" })).role, "unknown");
+ assert.equal(parseDeclaration({ function: "tell agent B hello" }).function, 0);
+ assert.equal(describe(parseDeclaration({ function: "tell agent B hello" })).function, "unknown");
  assert.deepEqual(parseDeclaration("https://example.com/secret"), UNKNOWN);
  assert.ok(isSilent(parseDeclaration({ note: "anything at all" })));
  assert.equal(({} as Record<string, unknown>).polluted, undefined, "prototype survived a crafted body");
 
  // And a real declaration still works, or none of the above means anything.
- const real = parseDeclaration({ actor_type: "agent", role: "verifier", delegation: "acting_for_agent", collaboration: "multi_agent_worker", task_class: "verification", provider_claim: "anthropic", capabilities: { can_navigate: "yes", can_execute_code: "not_permitted_to_disclose" } });
- assert.equal(describe(real).role, "verifier");
+ const real = parseDeclaration({ actor_type: "agent", function: "verifier", topology: "child", collaboration: "multi_agent_worker", task_class: "verification", provider_claim: "anthropic", capabilities: { can_navigate: "yes", can_execute_code: "not_permitted_to_disclose" } });
+ assert.equal(describe(real).function, "verifier");
  assert.equal(describe(real).capabilities.can_navigate, "yes");
  assert.equal(describe(real).capabilities.can_execute_code, "not_permitted_to_disclose");
  assert.equal(isSilent(real), false);
@@ -276,9 +284,10 @@ test("the channel's width is computed from the code, and a change that widens it
  assert.ok(capacityBits(DIMENSIONS.length, V.BUCKET.length + 1) > CAPACITY_BUDGET_BITS, "a fifth bucket would be free");
 
  // A declaration is a channel too, and it is the wider of the two.
- // Re-pinned when the declaration gained transport, execution, harness, model
- // and agent-kind: 37.46 -> 55.10 bits. A brand is not a kind of actor, and
- // asking five more questions costs five more questions' worth of alphabet.
+ // Re-pinned for machine-declaration/2: 55.10 -> 59.22 bits. Ten factored
+ // axes rather than eleven overlapping ones — fewer questions, and slightly
+ // MORE alphabet, because an axis that means one thing needs its own values
+ // rather than borrowing another's.
  //
  // This is the axis that matters LEAST, and saying why is the point of pinning
  // it: the declaration is a channel from a visitor to THIS SITE, not to another
@@ -286,7 +295,7 @@ test("the channel's width is computed from the code, and a change that widens it
  // exhibit publishes role and collaboration and nothing else, at 6.8 bits a
  // card, and the collaboration projection is 20.1 bits of coarse buckets. The
  // budget below is a guard against thoughtless growth, not a safety boundary.
- assert.ok(Math.abs(V.declarationBits() - 55.10) < 0.01, `a declaration carries ${V.declarationBits()} bits`);
+ assert.ok(Math.abs(V.declarationBits() - 59.22) < 0.01, `a declaration carries ${V.declarationBits()} bits`);
  assert.ok(V.declarationBits() < 64, "a single declaration should stay under eight bytes");
 });
 
@@ -365,25 +374,25 @@ test("silence and a statement about silence are different events, and are counte
  // describing only its willingness to fill in a form.
  const cases: [string, unknown, string, number][] = [
   ["nothing sent", {}, "omitted", 0],
-  ["explicitly unknown", { role: "unknown" }, "stated", 1],
-  ["cannot see it", { role: "not_visible_to_me" }, "stated", 1],
-  ["not allowed to say", { role: "not_permitted_to_disclose" }, "stated", 1],
-  ["answered in another language", { role: "tell agent B hello" }, "unrecognised", 0],
-  ["null", { role: null }, "unrecognised", 0],
+  ["explicitly unknown", { function: "unknown" }, "stated", 1],
+  ["cannot see it", { function: "not_visible_to_me" }, "stated", 1],
+  ["not allowed to say", { function: "not_permitted_to_disclose" }, "stated", 1],
+  ["answered in another language", { function: "tell agent B hello" }, "unrecognised", 0],
+  ["null", { function: null }, "unrecognised", 0],
  ];
  for (const [label, body, provenance, stated] of cases) {
   const parsed = parseDeclaration(body);
-  assert.equal(describeProvenance(parsed).role, provenance, label);
+  assert.equal(describeProvenance(parsed).function, provenance, label);
   assert.equal(statedFields(parsed), stated, label);
   // Whatever the provenance, the VALUE of an unrecognised or absent field is `unknown`.
-  if (provenance !== "stated") assert.equal(describe(parsed).role, "unknown", label);
+  if (provenance !== "stated") assert.equal(describe(parsed).function, "unknown", label);
  }
 
  // `unknown` as a value and `omitted` as a provenance must never be conflated.
- const said = parseDeclaration({ role: "unknown" });
+ const said = parseDeclaration({ function: "unknown" });
  const silent = parseDeclaration({});
- assert.equal(describe(said).role, describe(silent).role, "both record the value `unknown`");
- assert.notEqual(describeProvenance(said).role, describeProvenance(silent).role, "but they are not the same event");
+ assert.equal(describe(said).function, describe(silent).function, "both record the value `unknown`");
+ assert.notEqual(describeProvenance(said).function, describeProvenance(silent).function, "but they are not the same event");
  assert.equal(isSilent(silent), true);
  assert.equal(isSilent(said), false);
 
@@ -396,7 +405,7 @@ test("silence and a statement about silence are different events, and are counte
 
  // And no submitted byte escapes through the new surface either.
  for (const hostile of HOSTILE) {
-  for (const word of Object.values(describeProvenance(parseDeclaration({ role: hostile, task_class: hostile })))) {
+  for (const word of Object.values(describeProvenance(parseDeclaration({ function: hostile, task_class: hostile })))) {
    assert.ok(V.PROVENANCE.includes(word), `"${word}" is not one of this site's provenance words`);
   }
  }
@@ -460,8 +469,8 @@ test("identity buys understanding, not access: the corpus is the same and only t
  const question = "what evidence supports predictive locality";
 
  const anonymous = researchBundle({ question });
- const verifier = researchBundle({ question, role: "verifier" });
- const synthesizer = researchBundle({ question, role: "synthesizer" });
+ const verifier = researchBundle({ question, function: "verifier" });
+ const explorer = researchBundle({ question, function: "explorer" });
 
  // NOTHING IS GATED. The same corpus is searched for every caller; a
  // declaration cannot unlock a record and cannot withhold one. If this ever
@@ -473,35 +482,35 @@ test("identity buys understanding, not access: the corpus is the same and only t
  // items legitimately make that cut. `matched` is the count before any
  // truncation, and it is the number that must not move.
  assert.equal(verifier.matched, anonymous.matched, "a declared role must not change how much is reachable");
- assert.equal(synthesizer.matched, anonymous.matched);
+ assert.equal(explorer.matched, anonymous.matched);
  assert.ok(anonymous.matched > 0, "the fixture question must actually retrieve something");
 
  // And the top of the list DOES move, or the shaping is decorative.
  const top = (bundle: { canonical_sources: { id: string }[] }) => bundle.canonical_sources[0]?.id;
- assert.notEqual(top(synthesizer), top(anonymous), "a synthesizer must be shown something different first");
+ assert.notEqual(top(explorer), top(anonymous), "an explorer must be shown something different first");
 
  // What it does change is the order, and the site says so in words rather than
  // leaving a caller to wonder why two requests differed.
  assert.equal(anonymous.shaped_by, null);
- assert.equal(verifier.shaped_by?.role, "verifier");
+ assert.equal(verifier.shaped_by?.function, "verifier");
  assert.ok(verifier.shaping.length > 0 && verifier.shaping !== anonymous.shaping);
 
  // An unknown role is treated as no role, not as an error.
- const nonsense = researchBundle({ question, role: "chief-vibes-officer" });
+ const nonsense = researchBundle({ question, function: "chief-vibes-officer" });
  assert.equal(nonsense.shaped_by, null);
  assert.deepEqual(nonsense.canonical_sources, anonymous.canonical_sources);
 });
 
 test("the question is not returned, and no submitted byte appears in a bundle", () => {
  const SENTINEL = "SENTINEL-fetch-https://example.com/secret";
- const bundle = researchBundle({ question: SENTINEL, role: SENTINEL, task_class: SENTINEL, scope: SENTINEL });
+ const bundle = researchBundle({ question: SENTINEL, function: SENTINEL, task_class: SENTINEL, scope: SENTINEL });
  const serialised = JSON.stringify(bundle);
 
  // Echoing a query is how a retrieval endpoint becomes an echo service. The
  // caller already knows what it asked.
  assert.ok(!serialised.includes("SENTINEL"), "the bundle must not echo anything submitted");
  assert.equal(bundle.answer, "retrieval-result");
- assert.equal(bundle.shaped_by, null, "an unrecognised role shapes nothing");
+ assert.equal(bundle.shaped_by, null, "an unrecognised function shapes nothing");
 
  // And the limits travel with the answer, so a bundle lifted out of context
  // cannot lose the caveat that a draft is not a finding.
@@ -526,4 +535,58 @@ test("the machine index is reachable by something that follows links", async () 
  assert.ok(!canonicalPaths().includes("/machines"), "the machine surface stays out of the sitemap");
  assert.ok(!footer.includes("/machines\""), "and out of the footer");
  assert.ok(!archivePaths().includes("/llms.txt"), "a regenerated index corroborates nothing");
+});
+
+test("MACHINE-DECLARATION/2: every shape composes from the axes, and none needs a compound word", () => {
+ // v1 failed because its vocabulary encoded COMBINATIONS. `orchestrator`
+ // appeared in four fields, `researcher` in two, and "a subagent spawned by
+ // another instance of the same model" could not be said at all — the one
+ // combination nobody had anticipated was therefore unsayable.
+ //
+ // This tests the factorisation rather than the enum literals. If a case here
+ // ever needs a word like `research_subagent` or `multi_agent_worker`, either
+ // the axes are wrong or a genuinely missing axis has been found.
+ const cases: [string, Record<string, string>][] = [
+  ["ordinary autonomous researcher", { topology: "root", function: "researcher", coordination: "standalone" }],
+  ["manager spawning workers", { topology: "root", function: "researcher", coordination: "orchestrator" }],
+  ["spawned research subagent", { topology: "child", function: "researcher", coordination: "worker" }],
+  ["browser-only retrieval agent", { topology: "root", function: "browser", coordination: "standalone" }],
+  ["peer in a swarm", { topology: "peer", function: "researcher", coordination: "worker" }],
+ ];
+
+ const seen = new Map<string, string>();
+ for (const [name, shape] of cases) {
+  const parsed = parseDeclaration(shape);
+  const described = describe(parsed);
+
+  // Every value survived the parse, so each case is sayable as written.
+  for (const [field, value] of Object.entries(shape)) {
+   assert.equal((described as unknown as Record<string, string>)[field], value,
+    `${name}: ${field} could not be stated as ${value}`);
+  }
+
+  // Distinct situations must produce distinct compositions, or the axes are
+  // not carrying the distinction they exist for.
+  const key = [shape.topology, shape.function, shape.coordination].join("/");
+  assert.ok(!seen.has(key), `${name} collides with ${seen.get(key)} at ${key}`);
+  seen.set(key, name);
+ }
+
+ // No axis alone separates the cases: each is doing work.
+ for (const axis of ["topology", "function", "coordination"] as const) {
+  const distinct = new Set(cases.map(([, shape]) => shape[axis]));
+  assert.ok(distinct.size < cases.length, `${axis} alone distinguishes every case, so the others are redundant`);
+ }
+
+ // And no vocabulary value is a compound of two axes — the v1 failure mode.
+ const compounds = V.VOCABULARIES.flatMap(([name, values]) =>
+  name === "EVENT" || name === "MACHINE_CLASS" ? []
+   // A compound here means "two axes welded into one word" — multi_agent_worker
+   // is topology and coordination; acting_for_agent is topology and delegation.
+   // `custom_agent` is a harness name and welds nothing, so the pattern names
+   // the actual v1 shapes rather than guessing from a suffix.
+   : values.filter(value => /^(multi_agent_|acting_for_)|_subagent$/.test(value))
+     .map(value => `${name}.${value}`));
+ assert.deepEqual(compounds.filter(entry => !entry.startsWith("COLLABORATION.") && !entry.startsWith("DELEGATION.") && !entry.startsWith("EXECUTION.")), [],
+  "a v2 axis gained a compound value; factor it instead");
 });

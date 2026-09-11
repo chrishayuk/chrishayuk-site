@@ -1,9 +1,10 @@
 import { SITE } from "../records.ts";
 import { MAX_BODY_BYTES, LIMITS } from "./admission.ts";
 import {
- ACTOR_TYPE, CAPABILITY, CAPABILITY_VALUE, COLLABORATION, DELEGATION,
- AGENT_NAME_KIND, CLAIM_CHECK, EVIDENCE, EXECUTION, HARNESS_CLAIM, MODEL_NAME,
- PROVENANCE, PROVIDER_CLAIM, ROLE, TASK_CLASS, TRANSPORT, declarationBits,
+ ACTOR_TYPE, CAPABILITY, CAPABILITY_VALUE,
+ CLAIM_CHECK, COORDINATION, EVIDENCE, FUNCTION, HARNESS_CLAIM, MODEL_VARIANT,
+ PROVENANCE, PROVIDER_CLAIM, RUNTIME_CONTEXT, TASK_CLASS, TOPOLOGY, TRANSPORT,
+ VOCABULARY_VERSION, declarationBits,
 } from "./vocabulary.ts";
 
 /**
@@ -36,6 +37,8 @@ export type Contract = ReturnType<typeof contract>;
 
 export function contract() {
  return {
+  vocabulary_version: `machine-declaration/${VOCABULARY_VERSION}`,
+
   declare: {
    method: "POST",
    url,
@@ -51,36 +54,64 @@ export function contract() {
    */
   validate: {
    method: "GET",
-   url: `${url}?validate=1&role=verifier&harness=claude_code`,
+   url: `${url}?validate=1&function=verifier&harness=claude_code`,
    note: "Same parse, same corrections, nothing stored. Reaching the corrections used to require recording a declaration, which left probe rows in the counts.",
   },
 
   declare_by_get: {
    method: "GET",
-   url: `${url}?actor_type=agent&role=researcher&harness=claude_code`,
+   url: `${url}?actor_type=agent&function=researcher&topology=child&coordination=worker&harness=claude_code`,
    capabilities: `${url}?capability=can_navigate:yes&capability=can_execute_code:no`,
    note: "A bare GET returns this contract. A GET carrying any recognised field records a declaration and returns the same receipt. This knowingly breaks the rule that a GET should not change state, because in forty-eight hours every machine that visited this site was a GET-only fetcher, and a mechanism requiring a verb its audience lacks is a closed door rather than a low participation rate.",
    safety: "Every value is one of this site's own words, so a query string carries nothing that could be a secret. The readership counters record the path only. An identical declaration from the same source inside an hour is recorded once, so a URL that is refetched, shared or re-crawled cannot inflate a count.",
   },
 
+  /**
+   * MACHINE-DECLARATION/2. Four axes, deliberately independent.
+   *
+   * v1 asked eleven questions whose answers overlapped: `orchestrator`
+   * was a value of four different fields, and "a subagent spawned by
+   * another instance of the same model" could not be said at all. If a
+   * shape you are cannot be composed from these, that is worth telling
+   * this site at /api/machines/feedback — it is the only evidence that
+   * would justify adding to them.
+   */
   fields: {
    actor_type: { enum: [...ACTOR_TYPE] },
-   role: { enum: [...ROLE] },
-   delegation: { enum: [...DELEGATION] },
-   collaboration: { enum: [...COLLABORATION] },
-   task_class: { enum: [...TASK_CLASS] },
-   provider_claim: { enum: [...PROVIDER_CLAIM], note: "Who made you. Separate from what you are running inside." },
-   harness: { enum: [...HARNESS_CLAIM], note: "What you are running inside — Claude Code, Codex, a custom agent. A brand is not a kind of actor and this is not answered by naming a provider." },
-   model_name: { enum: [...MODEL_NAME], note: "What model you believe you are. A closed list, so one this site has not heard of is recorded as `other` and shows up as a gap worth filling." },
-   transport: { enum: [...TRANSPORT], note: "How you arrived. A crawler and a CLI tool are both machines and are not the same visitor." },
-   execution: { enum: [...EXECUTION], note: "Why you arrived: indexing the web, or acting on somebody's immediate task." },
-   agent_name_kind: { enum: [...AGENT_NAME_KIND], note: "The kind of thing you call yourself. Publishable." },
-   agent_name: { type: "string", max_chars: 64, note: "Your own label for yourself, if you have one. Kept for the operator and NEVER published: a name you chose is a symbol you chose, and a page reprinting it would be a channel however short. The kind above is the publishable half." },
+
+   // identity
+   provider_claim: { enum: [...PROVIDER_CLAIM], axis: "identity", note: "Who made you." },
+   model_variant: { enum: [...MODEL_VARIANT], axis: "identity", note: "Which one within that family." },
+   harness: { enum: [...HARNESS_CLAIM], axis: "identity", note: "What you are running inside. Not answered by naming a provider." },
+
+   // situation
+   transport: { enum: [...TRANSPORT], axis: "situation", note: "How you arrived." },
+   runtime_context: { enum: [...RUNTIME_CONTEXT], axis: "situation", note: "How much room you are thinking in. Coarse on purpose: an exact figure is a fingerprint and buys no behavioural distinction." },
+
+   // position and relationship — independent of each other and of function
+   topology: { enum: [...TOPOLOGY], axis: "topology", note: "Where you sit in a tree of agents. Nothing about what you do." },
+   coordination: { enum: [...COORDINATION], axis: "coordination", note: "Your relationship to other agents. Nothing about position or job." },
+
+   // what you do
+   function: { enum: [...FUNCTION], axis: "function", note: "What you do. Coarser than v1's role on purpose." },
+   task_class: { enum: [...TASK_CLASS], axis: "function", note: "What you are doing right now, which may differ from what you are for." },
+
    capabilities: {
     type: "object",
     keys: [...CAPABILITY],
     enum: [...CAPABILITY_VALUE],
-    note: "Claims, never permissions. Nothing this site does is gated on one, and no capability is ever published as declared — only as witnessed.",
+    note: "Claims, never permissions. Nothing this site does is gated on one.",
+   },
+   agent_name: { type: "string", max_chars: 64, note: "Your own label for yourself. Kept for the operator and NEVER published: a name you chose is a symbol you chose, and a page reprinting it would be a channel however short." },
+  },
+
+  composition: {
+   note: "A shape is a composition, not a word. `a subagent spawned by another instance of the same model` is topology=child, function=researcher, coordination=worker — three axes, no new vocabulary.",
+   examples: {
+    autonomous_researcher: { topology: "root", function: "researcher", coordination: "standalone" },
+    manager_spawning_workers: { topology: "root", function: "researcher", coordination: "orchestrator" },
+    spawned_subagent: { topology: "child", function: "researcher", coordination: "worker" },
+    swarm_peer: { topology: "peer", function: "researcher", coordination: "worker" },
    },
   },
 
@@ -153,11 +184,14 @@ export function contract() {
 
   example: {
    actor_type: "agent",
-   role: "researcher",
-   delegation: "acting_for_human",
-   collaboration: "solo",
-   task_class: "research",
    provider_claim: "unknown",
+   harness: "claude_code",
+   transport: "cli_tool",
+   runtime_context: "long",
+   topology: "child",
+   function: "researcher",
+   coordination: "worker",
+   task_class: "research",
    capabilities: { can_navigate: "yes", can_execute_code: "no" },
   },
 

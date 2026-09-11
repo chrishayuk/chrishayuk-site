@@ -34,30 +34,37 @@
  */
 
 export const SCHEMA = `
+ -- MACHINE-DECLARATION/2. Ten fields on independent axes.
+ --
+ -- v1's rows are not migrated. Its ordinals indexed vocabularies that no
+ -- longer exist, so decoding them against v2 arrays would not be a
+ -- migration but a mistranslation. They are renamed to visit_v1 at open
+ -- and kept: eight rows, all operator instrumentation, and the schema
+ -- transition is more interesting inspectable than erased.
  CREATE TABLE IF NOT EXISTS visit (
-  visit_id       INTEGER PRIMARY KEY,
-  hour           INTEGER NOT NULL,
-  actor          INTEGER NOT NULL,
-  role           INTEGER NOT NULL,
-  delegation     INTEGER NOT NULL,
-  collaboration  INTEGER NOT NULL,
-  task           INTEGER NOT NULL,
-  provider_claim INTEGER NOT NULL,
-  capabilities   INTEGER NOT NULL,
-  provenance     INTEGER NOT NULL,
-  cap_provenance INTEGER NOT NULL,
-  provider_seen  INTEGER NOT NULL,
-  evidence       INTEGER NOT NULL,
-  claim_checked  INTEGER NOT NULL DEFAULT 0,
-  transport      INTEGER NOT NULL DEFAULT 0,
-  execution      INTEGER NOT NULL DEFAULT 0,
-  harness        INTEGER NOT NULL DEFAULT 0,
-  model_name     INTEGER NOT NULL DEFAULT 0,
-  agent_kind     INTEGER NOT NULL DEFAULT 0,
-  challenge      INTEGER NOT NULL,
-  resources      INTEGER NOT NULL,
-  asks           INTEGER NOT NULL,
-  published      INTEGER NOT NULL
+  visit_id           INTEGER PRIMARY KEY,
+  vocabulary_version INTEGER NOT NULL,
+  hour               INTEGER NOT NULL,
+  actor              INTEGER NOT NULL,
+  provider_claim     INTEGER NOT NULL,
+  model_variant      INTEGER NOT NULL,
+  harness            INTEGER NOT NULL,
+  transport          INTEGER NOT NULL,
+  topology           INTEGER NOT NULL,
+  function           INTEGER NOT NULL,
+  coordination       INTEGER NOT NULL,
+  runtime_context    INTEGER NOT NULL,
+  task               INTEGER NOT NULL,
+  capabilities       INTEGER NOT NULL,
+  provenance         INTEGER NOT NULL,
+  cap_provenance     INTEGER NOT NULL,
+  provider_seen      INTEGER NOT NULL,
+  evidence           INTEGER NOT NULL,
+  claim_checked      INTEGER NOT NULL,
+  challenge          INTEGER NOT NULL,
+  resources          INTEGER NOT NULL,
+  asks               INTEGER NOT NULL,
+  published          INTEGER NOT NULL
  ) WITHOUT ROWID;
 
  CREATE TABLE IF NOT EXISTS event (

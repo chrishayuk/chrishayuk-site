@@ -24,16 +24,15 @@ import * as V from "./vocabulary.ts";
 /** Ordinals into the vocabularies of the same name. Never words. */
 export type Declaration = {
  actor: number;
- role: number;
- delegation: number;
- collaboration: number;
- task: number;
  provider: number;
- transport: number;
- execution: number;
+ variant: number;
  harness: number;
- model: number;
- agentKind: number;
+ transport: number;
+ topology: number;
+ function: number;
+ coordination: number;
+ runtimeContext: number;
+ task: number;
  /**
   * The agent's own name for itself, if it gave one. OPERATOR-ONLY, and
   * the second and last free-text field this site accepts: a name a
@@ -59,8 +58,8 @@ export type Declaration = {
 export const MAX_LABEL_CHARS = 64;
 
 export const UNKNOWN: Declaration = {
- actor: 0, role: 0, delegation: 0, collaboration: 0, task: 0, provider: 0,
- transport: 0, execution: 0, harness: 0, model: 0, agentKind: 0, label: null,
+ actor: 0, provider: 0, variant: 0, harness: 0, transport: 0,
+ topology: 0, function: 0, coordination: 0, runtimeContext: 0, task: 0, label: null,
  capabilities: V.CAPABILITY.map(() => 0),
  provenance: V.DECLARED_FIELD.map(() => 0),
  capabilityProvenance: V.CAPABILITY.map(() => 0),
@@ -86,16 +85,15 @@ export function parseDeclaration(input: unknown): Declaration {
  const declared = object(body.capabilities);
  return {
   actor: V.ordinalOf(V.ACTOR_TYPE, body.actor_type),
-  role: V.ordinalOf(V.ROLE, body.role),
-  delegation: V.ordinalOf(V.DELEGATION, body.delegation),
-  collaboration: V.ordinalOf(V.COLLABORATION, body.collaboration),
-  task: V.ordinalOf(V.TASK_CLASS, body.task_class),
   provider: V.ordinalOf(V.PROVIDER_CLAIM, body.provider_claim),
-  transport: V.ordinalOf(V.TRANSPORT, body.transport),
-  execution: V.ordinalOf(V.EXECUTION, body.execution),
+  variant: V.ordinalOf(V.MODEL_VARIANT, body.model_variant),
   harness: V.ordinalOf(V.HARNESS_CLAIM, body.harness),
-  model: V.ordinalOf(V.MODEL_NAME, body.model_name),
-  agentKind: V.ordinalOf(V.AGENT_NAME_KIND, body.agent_name_kind),
+  transport: V.ordinalOf(V.TRANSPORT, body.transport),
+  topology: V.ordinalOf(V.TOPOLOGY, body.topology),
+  function: V.ordinalOf(V.FUNCTION, body.function),
+  coordination: V.ordinalOf(V.COORDINATION, body.coordination),
+  runtimeContext: V.ordinalOf(V.RUNTIME_CONTEXT, body.runtime_context),
+  task: V.ordinalOf(V.TASK_CLASS, body.task_class),
   // The one place a visitor's own string is kept, and it never leaves the
   // operator's view. See the note on `label` above.
   label: typeof body.agent_name === "string" && body.agent_name.trim()
@@ -104,16 +102,15 @@ export function parseDeclaration(input: unknown): Declaration {
   capabilities: V.CAPABILITY.map(name => V.ordinalOf(V.CAPABILITY_VALUE, declared[name])),
   provenance: [
    provenanceOf(body, "actor_type", V.ACTOR_TYPE),
-   provenanceOf(body, "role", V.ROLE),
-   provenanceOf(body, "delegation", V.DELEGATION),
-   provenanceOf(body, "collaboration", V.COLLABORATION),
-   provenanceOf(body, "task_class", V.TASK_CLASS),
    provenanceOf(body, "provider_claim", V.PROVIDER_CLAIM),
-   provenanceOf(body, "transport", V.TRANSPORT),
-   provenanceOf(body, "execution", V.EXECUTION),
+   provenanceOf(body, "model_variant", V.MODEL_VARIANT),
    provenanceOf(body, "harness", V.HARNESS_CLAIM),
-   provenanceOf(body, "model_name", V.MODEL_NAME),
-   provenanceOf(body, "agent_name_kind", V.AGENT_NAME_KIND),
+   provenanceOf(body, "transport", V.TRANSPORT),
+   provenanceOf(body, "topology", V.TOPOLOGY),
+   provenanceOf(body, "function", V.FUNCTION),
+   provenanceOf(body, "coordination", V.COORDINATION),
+   provenanceOf(body, "runtime_context", V.RUNTIME_CONTEXT),
+   provenanceOf(body, "task_class", V.TASK_CLASS),
   ],
   capabilityProvenance: V.CAPABILITY.map(name => provenanceOf(declared, name, V.CAPABILITY_VALUE)),
  };
@@ -162,16 +159,15 @@ export type Correction = { field: V.DeclaredField; problem: "unrecognised"; acce
 
 const VOCABULARY_FOR: Record<V.DeclaredField, V.Vocabulary> = {
  actor_type: V.ACTOR_TYPE,
- role: V.ROLE,
- delegation: V.DELEGATION,
- collaboration: V.COLLABORATION,
- task_class: V.TASK_CLASS,
  provider_claim: V.PROVIDER_CLAIM,
- transport: V.TRANSPORT,
- execution: V.EXECUTION,
+ model_variant: V.MODEL_VARIANT,
  harness: V.HARNESS_CLAIM,
- model_name: V.MODEL_NAME,
- agent_name_kind: V.AGENT_NAME_KIND,
+ transport: V.TRANSPORT,
+ topology: V.TOPOLOGY,
+ function: V.FUNCTION,
+ coordination: V.COORDINATION,
+ runtime_context: V.RUNTIME_CONTEXT,
+ task_class: V.TASK_CLASS,
 };
 
 export const corrections = (declaration: Declaration): Correction[] =>
@@ -240,32 +236,30 @@ export const unpackCapabilities = (packed: number): number[] =>
  */
 export type DescribedDeclaration = {
  actor_type: V.ActorType;
- role: V.Role;
- delegation: V.Delegation;
- collaboration: V.Collaboration;
- task_class: V.TaskClass;
  provider_claim: V.ProviderClaim;
- transport: V.Transport;
- execution: V.Execution;
+ model_variant: V.ModelVariant;
  harness: V.HarnessClaim;
- model_name: V.ModelName;
- agent_name_kind: V.AgentNameKind;
+ transport: V.Transport;
+ topology: V.Topology;
+ function: V.AgentFunction;
+ coordination: V.Coordination;
+ runtime_context: V.RuntimeContext;
+ task_class: V.TaskClass;
  capabilities: Record<V.Capability, V.CapabilityValue>;
 };
 
 export function describe(declaration: Declaration): DescribedDeclaration {
  return {
   actor_type: V.wordOf(V.ACTOR_TYPE, declaration.actor),
-  role: V.wordOf(V.ROLE, declaration.role),
-  delegation: V.wordOf(V.DELEGATION, declaration.delegation),
-  collaboration: V.wordOf(V.COLLABORATION, declaration.collaboration),
-  task_class: V.wordOf(V.TASK_CLASS, declaration.task),
   provider_claim: V.wordOf(V.PROVIDER_CLAIM, declaration.provider),
-  transport: V.wordOf(V.TRANSPORT, declaration.transport),
-  execution: V.wordOf(V.EXECUTION, declaration.execution),
+  model_variant: V.wordOf(V.MODEL_VARIANT, declaration.variant),
   harness: V.wordOf(V.HARNESS_CLAIM, declaration.harness),
-  model_name: V.wordOf(V.MODEL_NAME, declaration.model),
-  agent_name_kind: V.wordOf(V.AGENT_NAME_KIND, declaration.agentKind),
+  transport: V.wordOf(V.TRANSPORT, declaration.transport),
+  topology: V.wordOf(V.TOPOLOGY, declaration.topology),
+  function: V.wordOf(V.FUNCTION, declaration.function),
+  coordination: V.wordOf(V.COORDINATION, declaration.coordination),
+  runtime_context: V.wordOf(V.RUNTIME_CONTEXT, declaration.runtimeContext),
+  task_class: V.wordOf(V.TASK_CLASS, declaration.task),
   capabilities: Object.fromEntries(V.CAPABILITY.map((name, index) =>
    [name, V.wordOf(V.CAPABILITY_VALUE, declaration.capabilities[index] ?? 0)],
   )) as Record<V.Capability, V.CapabilityValue>,

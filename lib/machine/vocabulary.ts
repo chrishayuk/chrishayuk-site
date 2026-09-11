@@ -141,12 +141,19 @@ export const BUCKET = ["none", "few", "several", "many"] as const;
  * The declared scalar fields, in a frozen order, so that a per-field
  * provenance can be packed positionally rather than by name.
  */
+/**
+ * MACHINE-DECLARATION/2. Ten fields on independent axes.
+ *
+ * Retired from v1 because each encoded a combination: `role` (function
+ * and coordination), `delegation` (topology and coordination),
+ * `collaboration` (topology and coordination), `execution` (coordination
+ * and transport), `agent_name_kind` (a second function list),
+ * `model_name` (family and variant in one string).
+ */
 export const DECLARED_FIELD = [
- "actor_type", "role", "delegation", "collaboration", "task_class", "provider_claim",
- // Appended: a brand is not a kind of actor. Transport says how it
- // arrived, execution says why, harness says what it is running inside,
- // and none of the three is answered by naming a provider.
- "transport", "execution", "harness", "model_name", "agent_name_kind",
+ "actor_type", "provider_claim", "model_variant", "harness",
+ "transport", "topology", "function", "coordination",
+ "runtime_context", "task_class",
 ] as const;
 
 /**
@@ -258,6 +265,84 @@ export const MACHINE_CLASS = [
  "m5_multi_agent_worker", "m6_orchestrator",
 ] as const;
 
+/* ─────────────────────────────────────────────────────────────────────
+ * MACHINE-DECLARATION/2 — FOUR AXES, FACTORED
+ *
+ * v1 asked eleven questions whose answers overlapped. `orchestrator`
+ * appeared in four of them; `researcher` in two; "a subagent spawned by
+ * another instance of the same model" could not be said at all, because
+ * the vocabulary encoded COMBINATIONS of properties rather than
+ * independent properties, and the one combination nobody had thought of
+ * was therefore unsayable.
+ *
+ * The fix is not another word. It is factoring, so that the missing
+ * state becomes a composition of axes that already exist:
+ *
+ *   topology = child · function = researcher · coordination = worker
+ *
+ * THE RULE FOR ADDING TO ANY OF THESE, and it is deliberately hard:
+ *
+ *   1. an OBSERVED external state — a real visitor, not an imagined one;
+ *   2. INABILITY to express it by composing the existing axes;
+ *   3. a RECORDED EXAMPLE of the visitor that demonstrated it;
+ *   4. a NEGATIVE CONTROL showing the current factorisation cannot
+ *      represent it.
+ *
+ * Four exists because of the fourth. Without it anyone can argue a new
+ * noun is clearer, and an ontology grows because someone thought of a
+ * word rather than because the world falsified it.
+ * ──────────────────────────────────────────────────────────────────── */
+
+/** WHERE IT SITS in a tree of agents. Nothing about what it does. */
+export const TOPOLOGY = [
+ "unknown", "root", "child", "peer", "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/** WHAT IT DOES. Deliberately coarser than v1's fourteen-value role. */
+export const FUNCTION = [
+ "unknown", "researcher", "verifier", "coder", "browser", "explorer",
+ "other", "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/** ITS RELATIONSHIP TO OTHER AGENTS. Nothing about position or job. */
+export const COORDINATION = [
+ "unknown", "standalone", "orchestrator", "worker", "delegated",
+ "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/**
+ * HOW MUCH ROOM IT IS THINKING IN.
+ *
+ * Coarse on purpose. An agent reported that its honest model name drops
+ * the part that most changes how it behaves — the context window — but
+ * an exact figure is a fingerprint and widens the declaration channel
+ * for no behavioural gain. Four buckets carry the distinction that
+ * matters and little else.
+ */
+export const RUNTIME_CONTEXT = [
+ "unknown", "short", "medium", "long", "very_long",
+ "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/** WHICH ONE. The family is `provider_claim`; this is the variant within it. */
+export const MODEL_VARIANT = [
+ "unknown", "opus", "sonnet", "haiku", "gpt-5", "gpt-5-mini", "o-series",
+ "pro", "flash", "large", "small", "other",
+ "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/**
+ * The vocabulary this site is currently speaking. Stored with every row,
+ * so a v1 ordinal is never decoded against a v2 array — the facts
+ * persist and only the interpretation is versioned.
+ *
+ *   machine-declaration/1  frozen 2026-09-10, retired 2026-09-11
+ *     axes overlapped; orchestrator and delegation encoded combinations
+ *   machine-declaration/2  frozen 2026-09-11
+ *     identity · topology · function · coordination · runtime
+ */
+export const VOCABULARY_VERSION = 2;
+
 export const CLAIM_CHECK = [
  "no_claim", "no_address", "unpublished", "not_attestable", "verified", "refuted",
 ] as const;
@@ -288,6 +373,11 @@ export type HarnessClaim = typeof HARNESS_CLAIM[number];
 export type MachineClass = typeof MACHINE_CLASS[number];
 export type ModelName = typeof MODEL_NAME[number];
 export type AgentNameKind = typeof AGENT_NAME_KIND[number];
+export type Topology = typeof TOPOLOGY[number];
+export type AgentFunction = typeof FUNCTION[number];
+export type Coordination = typeof COORDINATION[number];
+export type RuntimeContext = typeof RUNTIME_CONTEXT[number];
+export type ModelVariant = typeof MODEL_VARIANT[number];
 
 /**
  * Readership's confidence vocabulary must remain a subset of this one.
@@ -325,6 +415,8 @@ export const VOCABULARIES: readonly (readonly [string, Vocabulary])[] = [
  ["FRICTION", FRICTION], ["CLAIM_CHECK", CLAIM_CHECK],
  ["MODEL_NAME", MODEL_NAME], ["AGENT_NAME_KIND", AGENT_NAME_KIND],
  ["TRANSPORT", TRANSPORT], ["EXECUTION", EXECUTION],
+ ["TOPOLOGY", TOPOLOGY], ["FUNCTION", FUNCTION], ["COORDINATION", COORDINATION],
+ ["RUNTIME_CONTEXT", RUNTIME_CONTEXT], ["MODEL_VARIANT", MODEL_VARIANT],
  ["HARNESS_CLAIM", HARNESS_CLAIM], ["MACHINE_CLASS", MACHINE_CLASS],
 ];
 
@@ -340,6 +432,6 @@ export const vocabularyHash = () =>
  */
 export const declarationBits = () =>
  [ACTOR_TYPE, ROLE, DELEGATION, COLLABORATION, TASK_CLASS, PROVIDER_CLAIM,
-  TRANSPORT, EXECUTION, HARNESS_CLAIM, MODEL_NAME, AGENT_NAME_KIND]
+  TRANSPORT, TOPOLOGY, FUNCTION, COORDINATION, RUNTIME_CONTEXT, MODEL_VARIANT, HARNESS_CLAIM]
   .reduce((bits, vocabulary) => bits + Math.log2(vocabulary.length), 0)
  + CAPABILITY.length * Math.log2(CAPABILITY_VALUE.length);

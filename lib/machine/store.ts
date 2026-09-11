@@ -1,7 +1,7 @@
 import { SCHEMA } from "./schema.ts";
 import type { StoredDeclaration } from "./handler.ts";
 import { describe, describeProvenance, unpackCapabilities, unpackProvenance, type DescribedDeclaration } from "./declaration.ts";
-import { CAPABILITY, CLAIM_CHECK, DECLARED_FIELD, EVIDENCE, PROVIDER_CLAIM, wordOf } from "./vocabulary.ts";
+import { CAPABILITY, CLAIM_CHECK, DECLARED_FIELD, EVIDENCE, PROVIDER_CLAIM, VOCABULARY_VERSION, wordOf } from "./vocabulary.ts";
 
 /** Provenance is packed positionally, so unpacking must use the current width. */
 const V_DECLARED_FIELDS = DECLARED_FIELD.length;
@@ -63,6 +63,16 @@ function open(): Promise<Database | null> {
    if (!runtime) { console.error("machine: no node:sqlite in this runtime; declarations will not be stored"); return null; }
    const db = new runtime.DatabaseSync(file);
    db.exec("PRAGMA journal_mode = WAL; PRAGMA synchronous = NORMAL; PRAGMA busy_timeout = 2000;");
+   // A v1 table has no `topology` column. Rename rather than migrate: its
+   // ordinals indexed vocabularies that no longer exist, so reinterpreting
+   // them under v2 would be a mistranslation wearing a migration's clothes.
+   try {
+    const columns = db.prepare("PRAGMA table_info(visit)").all() as { name: string }[];
+    if (columns.length > 0 && !columns.some(column => column.name === "topology")) {
+     db.exec("ALTER TABLE visit RENAME TO visit_v1");
+     console.error("machine: archived machine-declaration/1 rows as visit_v1");
+    }
+   } catch { /* no table yet */ }
    db.exec(SCHEMA);
    // A column added after rows existed. CREATE TABLE IF NOT EXISTS will not
    // add it to a table that is already there, and the evidence comparison is
@@ -79,10 +89,12 @@ function open(): Promise<Database | null> {
     try { db.exec(`ALTER TABLE visit ADD COLUMN ${column}`); } catch { /* already present */ }
    }
    insert = db.prepare(`INSERT INTO visit
-    (visit_id, hour, actor, role, delegation, collaboration, task, provider_claim,
+    (visit_id, vocabulary_version, hour, actor, provider_claim, model_variant, harness,
+     transport, topology, function, coordination, runtime_context, task,
      capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked,
-     transport, execution, harness, model_name, agent_kind, challenge, resources, asks, published)
-    VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0)`);
+     challenge, resources, asks, published)
+    VALUES ((SELECT IFNULL(MAX(visit_id), 0) + 1 FROM visit), ${VOCABULARY_VERSION},
+     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0)`);
    labelInsert = db.prepare("INSERT OR REPLACE INTO visit_label (visit_id, label) VALUES ((SELECT MAX(visit_id) FROM visit), ?)");
    return db;
   } catch (error) {
@@ -124,10 +136,11 @@ export async function writeDeclaration(record: StoredDeclaration): Promise<void>
   return;
  }
  insert.run(
-  record.hour, record.actor, record.role, record.delegation, record.collaboration,
-  record.task, record.provider, record.capabilities, record.provenance,
-  record.capabilityProvenance, record.providerSeen, record.evidence, record.claimChecked,
-  record.transport, record.execution, record.harness, record.model, record.agentKind,
+  record.hour, record.actor, record.provider, record.variant, record.harness,
+  record.transport, record.topology, record.function, record.coordination,
+  record.runtimeContext, record.task,
+  record.capabilities, record.provenance, record.capabilityProvenance,
+  record.providerSeen, record.evidence, record.claimChecked,
  );
  // The visitor's own label, in its own table, read only by the
  // authenticated page. Written after the row so it can attach to it.
@@ -152,7 +165,7 @@ export async function declarationCounts(fromHour: number, toHour: number): Promi
  try {
   const rows = db.prepare(`SELECT
     COUNT(*) AS declarations,
-    SUM(CASE WHEN collaboration IN (2, 3, 4, 5) THEN 1 ELSE 0 END) AS multiAgent,
+    SUM(CASE WHEN coordination IN (2, 3) OR topology IN (2, 3) THEN 1 ELSE 0 END) AS multiAgent,
     SUM(challenge) AS challenges
    FROM visit WHERE hour >= ? AND hour < ?`).all(fromHour, toHour) as
    { declarations: number | null; multiAgent: number | null; challenges: number | null }[];
@@ -189,16 +202,16 @@ export async function recentDeclarations(limit = 100): Promise<DeclarationRow[] 
  const db = await open();
  if (!db) return null;
  try {
-  const rows = db.prepare(`SELECT visit_id, hour, actor, role, delegation, collaboration, task,
-    provider_claim, capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked,
-    transport, execution, harness, model_name, agent_kind
+  const rows = db.prepare(`SELECT visit_id, vocabulary_version, hour, actor, provider_claim,
+    model_variant, harness, transport, topology, function, coordination, runtime_context, task,
+    capabilities, provenance, cap_provenance, provider_seen, evidence, claim_checked
    FROM visit ORDER BY visit_id DESC LIMIT ?`).all(Math.min(Math.max(1, limit), 500)) as Record<string, number>[];
   return rows.map(row => {
    const declaration = {
-    actor: row.actor, role: row.role, delegation: row.delegation,
-    collaboration: row.collaboration, task: row.task, provider: row.provider_claim,
-    transport: row.transport ?? 0, execution: row.execution ?? 0, harness: row.harness ?? 0,
-    model: row.model_name ?? 0, agentKind: row.agent_kind ?? 0, label: null,
+    actor: row.actor, provider: row.provider_claim, variant: row.model_variant,
+    harness: row.harness, transport: row.transport, topology: row.topology,
+    function: row.function, coordination: row.coordination,
+    runtimeContext: row.runtime_context, task: row.task, label: null,
     capabilities: unpackCapabilities(row.capabilities),
     provenance: unpackProvenance(row.provenance, V_DECLARED_FIELDS),
     capabilityProvenance: unpackProvenance(row.cap_provenance, V_CAPABILITIES),

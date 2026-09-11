@@ -20,8 +20,7 @@ import { CLAIM_CHECK, EVIDENCE, PROVIDER_CLAIM, ordinalOf, wordOf } from "./voca
 /** What is handed to storage. Ordinals and integers; no strings from the request. */
 export type StoredDeclaration = {
  hour: number;
- actor: number; role: number; delegation: number; collaboration: number;
- task: number; provider: number;
+ actor: number; task: number; provider: number;
  capabilities: number;
  provenance: number;
  capabilityProvenance: number;
@@ -36,10 +35,12 @@ export type StoredDeclaration = {
  /** CLAIM_CHECK ordinal: the answer to the question the visitor asked. */
  claimChecked: number;
  transport: number;
- execution: number;
+ topology: number;
+ function: number;
+ coordination: number;
+ runtimeContext: number;
+ variant: number;
  harness: number;
- model: number;
- agentKind: number;
  /** Operator-only, and stored in its own table. */
  label: string | null;
 };
@@ -133,13 +134,14 @@ const stored = (
  evidence: observed.evidence,
  claimChecked: ordinalOf(CLAIM_CHECK, observed.claimChecked ?? "no_claim"),
  transport: declaration.transport,
- execution: declaration.execution,
+ topology: declaration.topology,
+ function: declaration.function,
+ coordination: declaration.coordination,
+ runtimeContext: declaration.runtimeContext,
+ variant: declaration.variant,
  harness: declaration.harness,
- model: declaration.model,
- agentKind: declaration.agentKind,
  label: declaration.label,
- actor: declaration.actor, role: declaration.role, delegation: declaration.delegation,
- collaboration: declaration.collaboration, task: declaration.task, provider: declaration.provider,
+ actor: declaration.actor, task: declaration.task, provider: declaration.provider,
  capabilities: packCapabilities(declaration.capabilities),
  provenance: packProvenance(declaration.provenance),
  capabilityProvenance: packProvenance(declaration.capabilityProvenance),

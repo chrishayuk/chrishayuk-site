@@ -1,6 +1,6 @@
 import { WriteQueue, admit, readBounded, sourceOf, type Facts } from "@/lib/machine/admission";
 import { researchBundle } from "@/lib/machine/ask";
-import { ROLE, TASK_CLASS } from "@/lib/machine/vocabulary";
+import { FUNCTION, TASK_CLASS } from "@/lib/machine/vocabulary";
 import { SITE } from "@/lib/records";
 
 /**
@@ -45,7 +45,8 @@ export async function GET(request: Request): Promise<Response> {
  }
 
  const bundle = await queue.run(async () => researchBundle({
-  question, role: params.get("role"), task_class: params.get("task_class"), scope: params.get("scope"),
+  question, function: params.get("function") ?? params.get("role"),
+  task_class: params.get("task_class"), scope: params.get("scope"),
  }));
  if (bundle === "unavailable") return json({ error: "unavailable", see: "/api/machines/ask" }, 503);
  return json(bundle, 200);
@@ -62,7 +63,7 @@ function contractResponse(): Response {
   },
   fields: {
    question: { type: "string", max_chars: 500, note: "Not stored, and not returned to you. It reaches the index and is discarded." },
-   role: { enum: [...ROLE], note: "Shapes the ranking. A role this site does not know is treated as no role at all." },
+   function: { enum: [...FUNCTION], note: "Shapes the ranking — the same axis the declaration uses, so there is only one name for it. A function this site does not know is treated as none at all. `role` is still accepted as an alias for the v1 name." },
    task_class: { enum: [...TASK_CLASS] },
    scope: { enum: ["all", "records", "films", "concepts"] },
   },
@@ -110,7 +111,7 @@ export async function POST(request: Request): Promise<Response> {
  // exhaust the process while another is being rate limited.
  const bundle = await queue.run(async () => researchBundle({
   question: String(input.question ?? ""),
-  role: input.role,
+  function: input.function ?? input.role,
   task_class: input.task_class,
   scope: input.scope,
  }));

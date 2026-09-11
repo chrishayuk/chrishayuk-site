@@ -1,5 +1,5 @@
 import { searchGraph, type GraphScope, type SearchResult } from "../graph.ts";
-import { ROLE, TASK_CLASS, ordinalOf, wordOf, type Role, type TaskClass } from "./vocabulary.ts";
+import { FUNCTION, TASK_CLASS, ordinalOf, wordOf, type AgentFunction, type TaskClass } from "./vocabulary.ts";
 
 /**
  * WHAT DECLARING BUYS.
@@ -42,40 +42,31 @@ import { ROLE, TASK_CLASS, ordinalOf, wordOf, type Role, type TaskClass } from "
  * does not have. A role that is absent, unknown or unrecognised gets
  * weight 1 everywhere, which is exactly the public ranking.
  */
-const WEIGHTS: Partial<Record<Role, Record<string, number>>> = {
- verifier: { evidence: 3.0, claim: 2.8, refusal: 2.4, source: 2.0, comparison: 1.6 },
- critic: { refusal: 3.0, evidence: 2.6, claim: 2.2, question: 1.6, comparison: 1.4 },
+const WEIGHTS: Partial<Record<AgentFunction, Record<string, number>>> = {
+ verifier: { evidence: 3.0, claim: 2.8, refusal: 2.6, source: 2.0, comparison: 1.6 },
  researcher: { notebook: 2.0, concept: 1.9, observation: 1.7, connection: 1.7, work: 1.5, question: 1.3 },
- synthesizer: { question: 3.0, refusal: 2.4, connection: 1.8, statement: 1.6, summary: 1.6 },
- planner: { question: 2.4, summary: 2.0, connection: 1.8, work: 1.4 },
+
  coder: { work: 3.0, source: 2.4, evidence: 1.4 },
- retriever: { source: 2.4, evidence: 1.6 },
  browser: { notebook: 1.6, work: 1.4 },
+ explorer: { connection: 2.2, concept: 2.0, question: 1.8, summary: 1.6 },
 };
 
 /** What the site tells the caller it did, so a change in results is never mysterious. */
-const SHAPING: Partial<Record<Role, string[]>> = {
+const SHAPING: Partial<Record<AgentFunction, string[]>> = {
  verifier: [
   "Evidence, claims and refusals ranked above description.",
+  "What this site declines to claim is treated as a result, not an absence.",
   "Sources and provenance attached to every result.",
   "Editorial drafts retained, carrying their status.",
- ],
- critic: [
-  "Refusals and contradictory evidence ranked first.",
-  "What this site declines to claim is treated as a result, not an absence.",
  ],
  researcher: [
   "Notebook entries, concepts and observations ranked above apparatus.",
   "Connections between records surfaced as next resources.",
  ],
- synthesizer: [
-  "Open questions and refusals ranked first.",
-  "What is unresolved is listed separately from what is settled.",
- ],
- planner: ["Open questions and summaries ranked above detail."],
+
  coder: ["Software records and their repositories ranked first."],
- retriever: ["Primary sources ranked above commentary."],
  browser: ["Readable records ranked above authored apparatus."],
+ explorer: ["Connections, concepts and open questions ranked above detail."],
 };
 
 const kindOf = (result: SearchResult) => result.actKind ?? result.kind;
@@ -114,7 +105,7 @@ export type ResearchBundle = {
   * number is identical for every role, and only the ORDER moves.
   */
  matched: number;
- shaped_by: { role: Role; task_class: TaskClass } | null;
+ shaped_by: { function: AgentFunction; task_class: TaskClass } | null;
  shaping: string[];
  canonical_sources: ReturnType<typeof reference>[];
  evidence: ReturnType<typeof reference>[];
@@ -124,7 +115,7 @@ export type ResearchBundle = {
  limits: string[];
 };
 
-export type AskRequest = { question: string; role?: unknown; task_class?: unknown; scope?: unknown };
+export type AskRequest = { question: string; function?: unknown; role?: unknown; task_class?: unknown; scope?: unknown };
 
 /**
  * A QUESTION IS NOT A KEYWORD QUERY, AND MACHINES ASK QUESTIONS.
@@ -195,12 +186,14 @@ function retrieve(question: string, scope: GraphScope): { results: SearchResult[
 }
 
 export function researchBundle(input: AskRequest): ResearchBundle {
- const role = wordOf(ROLE, ordinalOf(ROLE, input.role));
+ // Keyed on `function`, the same axis the declaration uses, so a visitor
+ // does not have to learn two names for one thing.
+ const fn = wordOf(FUNCTION, ordinalOf(FUNCTION, input.function ?? input.role));
  const task = wordOf(TASK_CLASS, ordinalOf(TASK_CLASS, input.task_class));
  const scope = (["records", "films", "concepts", "all"].includes(String(input.scope)) ? input.scope : "all") as GraphScope;
 
  const { results, usedTerms } = retrieve(String(input.question ?? "").slice(0, 500), scope);
- const weights = WEIGHTS[role];
+ const weights = WEIGHTS[fn];
 
  const ranked = weights
   ? [...results].sort((a, b) =>
@@ -212,11 +205,11 @@ export function researchBundle(input: AskRequest): ResearchBundle {
  return {
   answer: "retrieval-result",
   matched: results.length,
-  shaped_by: weights ? { role, task_class: task } : null,
+  shaped_by: weights ? { function: fn, task_class: task } : null,
   shaping: [
    ...(weights
-    ? SHAPING[role] ?? []
-    : ["No role was declared, or the role was not one this site knows, so results are in the site's ordinary order."]),
+    ? SHAPING[fn] ?? []
+    : ["No function was declared, or it was not one this site knows, so results are in the site's ordinary order."]),
    // Say when the question was not answerable as asked. A caller that
    // cannot tell the difference between "nothing matched" and "matched
    // something else" cannot correct its next question.

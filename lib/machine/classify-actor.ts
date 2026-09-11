@@ -1,4 +1,4 @@
-import { COLLABORATION, EXECUTION, MACHINE_CLASS, TRANSPORT, wordOf, type MachineClass } from "./vocabulary.ts";
+import { COORDINATION, MACHINE_CLASS, TOPOLOGY, TRANSPORT, wordOf, type MachineClass } from "./vocabulary.ts";
 import type { Declaration } from "./declaration.ts";
 import type { Purpose } from "../readership/classify.ts";
 
@@ -26,18 +26,19 @@ import type { Purpose } from "../readership/classify.ts";
  */
 export function machineClass(declaration: Declaration, observedPurpose: Purpose): MachineClass {
  const transport = wordOf(TRANSPORT, declaration.transport);
- const execution = wordOf(EXECUTION, declaration.execution);
- const collaboration = wordOf(COLLABORATION, declaration.collaboration);
+ const topology = wordOf(TOPOLOGY, declaration.topology);
+ const coordination = wordOf(COORDINATION, declaration.coordination);
 
- // Declared coordination outranks everything: an orchestrator that says so
- // is telling us something no observation could.
- if (execution === "orchestrator" || collaboration === "multi_agent_orchestrator") return "m6_orchestrator";
- if (collaboration.startsWith("multi_agent")) return "m5_multi_agent_worker";
- if (execution === "user_delegated") return "m4_delegated_task_agent";
- if (execution === "autonomous_worker" || execution === "monitor") return "m3_interactive_agent";
+ // Composed from the axes rather than read off a compound label. An
+ // orchestrator that says so is telling us something no observation could,
+ // so declared coordination outranks what the request looked like.
+ if (coordination === "orchestrator") return "m6_orchestrator";
+ if (coordination === "worker" || topology === "child" || topology === "peer") return "m5_multi_agent_worker";
+ if (coordination === "delegated") return "m4_delegated_task_agent";
+ if (coordination === "standalone") return "m3_interactive_agent";
 
  // Nothing declared that settles it, so fall back to what arrived.
- if (execution === "passive_crawler" || observedPurpose === "ai_training") return "m1_crawler";
+ if (observedPurpose === "ai_training") return "m1_crawler";
  if (observedPurpose === "search_bot" || observedPurpose === "ai_search") return "m2_retrieval_bot";
  if (observedPurpose === "ai_user") return "m4_delegated_task_agent";
  if (transport === "cli_tool" || transport === "api_client" || transport === "browser_automation") return "m3_interactive_agent";
