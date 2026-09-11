@@ -67,3 +67,29 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T07:19:48Z precheck
 /notebook 1 2026-09-11T08:08:20.985507+00:00 notebook-publication-check
 /api/health 1 2026-09-11T08:08:20.985508+00:00 notebook-publication-check
 llms.txt 3 /api/machines/ask 1 2026-09-11T08:19:21Z precheck
+/notebook 2 2026-09-11T08:25:30Z manual-check
+/notebook/the-subject-read-the-experiment 1 2026-09-11T11:36:02.902040+00:00 self-read-publication-check
+/notebook 1 2026-09-11T11:36:02.902097+00:00 self-read-publication-check
+/notebook/does-an-invitation-count-as-permission 1 2026-09-11T11:36:02.902098+00:00 self-read-publication-check
+/api/health 1 2026-09-11T11:36:02.902099+00:00 self-read-publication-check
+/notebook/the-subject-read-the-experiment 1 2026-09-11T12:20:47.810669+00:00 self-read-visual-publication-check
+/api/health 1 2026-09-11T12:20:47.810727+00:00 self-read-visual-publication-check
+/notebook/can-a-machine-use-an-invitation 1 2026-09-11T12:43:20.617708+00:00 machine-setup-publication-check
+/notebook/does-an-invitation-count-as-permission 1 2026-09-11T12:43:20.617764+00:00 machine-setup-publication-check
+/notebook/the-subject-read-the-experiment 1 2026-09-11T12:43:20.617765+00:00 machine-setup-publication-check
+/api/health 1 2026-09-11T12:43:20.617766+00:00 machine-setup-publication-check
+/api/readership 1 2026-09-11T12:51:28Z manual-check
+/api/readership 1 2026-09-11T12:58:20Z manual-check
+/machine-guestbook 1 / 1 /machines 1 2026-09-11T12:59:15Z manual-check
+/notebook/can-a-machine-use-an-invitation 1 2026-09-11T13:02:16.338144+00:00 machine-verb-quote-publication-check
+/notebook/does-an-invitation-count-as-permission 1 2026-09-11T13:02:16.338212+00:00 machine-verb-quote-publication-check
+/notebook/the-subject-read-the-experiment 1 2026-09-11T13:02:16.338214+00:00 machine-verb-quote-publication-check
+/data/machines/visitor-verb-evidence.md 1 2026-09-11T13:02:16.338215+00:00 machine-verb-quote-publication-check
+/api/health 1 2026-09-11T13:02:16.338216+00:00 machine-verb-quote-publication-check
+/api/readership 1 2026-09-11T15:39:35Z manual-check
+# ---- CHATGPT OBSERVATION WINDOW OPENS 2026-09-11T15:42:26Z ----
+# Operator to send ChatGPT to the site. From here until it is closed, the
+# operator makes NO requests to chrishayuk.com, so anything in the window that
+# is not classified ChatGPT-User is either an organic fleet or unattributed.
+# ChatGPT-User is verified and classified distinctly, so unlike every blind
+# agent so far it needs no contamination arithmetic at all.
