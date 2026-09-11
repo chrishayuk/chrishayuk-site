@@ -33,37 +33,42 @@
  */
 const MACHINE_PATHS = ["/llms.txt", "/api/machines/declaration", "/api/machines/ask", "/api/machines/feedback", "/machines", "/machine-guestbook", "/robots.txt"];
 
-type Cell = { hour: number; path: string; agent: string; provider: string; confidence: string; purpose: string; n: number };
+export type Cell = { hour: number; path: string; agent: string; provider: string; confidence: string; purpose: string; n: number };
 
-const sinceArg = process.argv.indexOf("--since");
-const since = sinceArg > -1 ? new Date(process.argv[sinceArg + 1]) : new Date(Date.now() - 3600_000);
-const sinceHour = Math.floor(since.getTime() / 3_600_000);
+async function main() {
+ const sinceArg = process.argv.indexOf("--since");
+ const since = sinceArg > -1 ? new Date(process.argv[sinceArg + 1]) : new Date(Date.now() - 3600_000);
+ const sinceHour = Math.floor(since.getTime() / 3_600_000);
 
-const report = await (await fetch("https://chrishayuk.com/api/readership", { cache: "no-store" })).json();
-const cells: Cell[] = report.counts.exhibit.cells;
+ const report = await (await fetch("https://chrishayuk.com/api/readership", { cache: "no-store" })).json() as
+  { counts: { exhibit: { cells: Cell[] } } };
+ const cells: Cell[] = report.counts.exhibit.cells;
 
-const window = cells.filter(cell => cell.hour >= sinceHour);
-const machine = window.filter(cell => MACHINE_PATHS.some(path => cell.path === path || cell.path.startsWith(path + "?")));
+ const window = cells.filter(cell => cell.hour >= sinceHour);
+ const machine = window.filter(cell => MACHINE_PATHS.some(path => cell.path === path || cell.path.startsWith(path + "?")));
 
-const stamp = (hour: number) => new Date(hour * 3_600_000).toISOString().slice(0, 13) + ":00Z";
+ const stamp = (hour: number) => new Date(hour * 3_600_000).toISOString().slice(0, 13) + ":00Z";
 
-console.log(`window from ${stamp(sinceHour)} (hour ${sinceHour}), ${window.length} cells, ${machine.length} on machine paths\n`);
+ console.log(`window from ${stamp(sinceHour)} (hour ${sinceHour}), ${window.length} cells, ${machine.length} on machine paths\n`);
 
-if (!machine.length) console.log("  no contact with any machine surface in this window");
-for (const cell of machine.sort((a, b) => a.hour - b.hour || a.path.localeCompare(b.path))) {
- console.log(`  ${stamp(cell.hour)}  ${cell.path.padEnd(34)} ${String(cell.n).padStart(3)}  ${cell.agent} (${cell.provider}/${cell.confidence}/${cell.purpose})`);
+ if (!machine.length) console.log("  no contact with any machine surface in this window");
+ for (const cell of machine.sort((a, b) => a.hour - b.hour || a.path.localeCompare(b.path))) {
+  console.log(`  ${stamp(cell.hour)}  ${cell.path.padEnd(34)} ${String(cell.n).padStart(3)}  ${cell.agent} (${cell.provider}/${cell.confidence}/${cell.purpose})`);
+ }
+
+ // The funnel, as far as a path can carry it. `declared` is deliberately
+ // absent: this store cannot distinguish it from a validation, and inventing
+ // the distinction here is how a measurement becomes a claim.
+ const hit = (path: string) => machine.filter(cell => cell.path.startsWith(path)).reduce((sum, cell) => sum + cell.n, 0);
+ console.log(`\nfunnel, server side only:
+   reached_the_site         ${window.length > 0 ? "yes" : "no"}  (${window.reduce((s, c) => s + c.n, 0)} requests, any path)
+   opened_the_machine_index ${hit("/llms.txt")} fetches of /llms.txt
+   touched_declaration      ${hit("/api/machines/declaration")}  (validate and declare are indistinguishable here)
+   touched_ask              ${hit("/api/machines/ask")}
+   touched_feedback         ${hit("/api/machines/feedback")}`);
+
+ const agents = [...new Set(machine.map(cell => cell.agent))];
+ if (agents.length) console.log(`\n  agents on machine paths: ${agents.join(", ")}`);
 }
 
-// The funnel, as far as a path can carry it. `declared` is deliberately
-// absent: this store cannot distinguish it from a validation, and inventing
-// the distinction here is how a measurement becomes a claim.
-const hit = (path: string) => machine.filter(cell => cell.path.startsWith(path)).reduce((sum, cell) => sum + cell.n, 0);
-console.log(`\nfunnel, server side only:
-  reached_the_site         ${window.length > 0 ? "yes" : "no"}  (${window.reduce((s, c) => s + c.n, 0)} requests, any path)
-  opened_the_machine_index ${hit("/llms.txt")} fetches of /llms.txt
-  touched_declaration      ${hit("/api/machines/declaration")}  (validate and declare are indistinguishable here)
-  touched_ask              ${hit("/api/machines/ask")}
-  touched_feedback         ${hit("/api/machines/feedback")}`);
-
-const agents = [...new Set(machine.map(cell => cell.agent))];
-if (agents.length) console.log(`\n  agents on machine paths: ${agents.join(", ")}`);
+void main();
