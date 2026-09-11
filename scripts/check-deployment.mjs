@@ -412,16 +412,40 @@ if (readership.recording) {
   const page = await request("/readership");
   assert.equal(page.status, 200);
   assert.ok(page.body.includes('rel="canonical" href="https://chrishayuk.com/readership"'));
-  assert.match(page.body, /AI RETRIEVALS · USER-INITIATED/);
+  assert.match(page.body, /A field of encounters/);
   assert.match(page.body, /ChatGPT-User/);
+  assert.ok(readership.counts.exhibit.cells.some(cell => cell.agent === "ChatGPT-User" && cell.confidence === "verified" && cell.path === "/notebook" && cell.n === 1));
+  assert.ok(readership.counts.exhibit.cells.every(cell => cell.confidence !== "refuted"));
+  assert.ok(readership.counts.exhibit.contacts.every(cell => cell.agent !== "ClaudeBot"));
   // ClaudeBot appears in the published definitions; what must never appear is
   // its refuted request, as a system, a path or a line in the recent trace.
-  const data = page.body.slice(0, page.body.indexOf("What these numbers do not say"));
+  const data = page.body.slice(0, page.body.indexOf("How this observatory measures"));
   assert.doesNotMatch(data, /Anthropic|ClaudeBot|follow\.json/, "a refuted claim was named among the counts");
   console.log("Machine readership verified: one verified retrieval counted, one refuted claim excluded.");
 } else {
   const page = await request("/readership");
   assert.equal(page.status, 200);
-  assert.match(page.body, /Not recording on this deployment/);
+  assert.match(page.body, /This deployment keeps no readership counters/);
   console.log("Machine readership page verified in its no-store state.");
 }
+
+// Public exhibitions render from their permitted evidence, without creating a declaration.
+const instrument = await request("/machines");
+assert.equal(instrument.status, 200);
+assert.match(instrument.body, /One request\. Different evidence/);
+assert.match(instrument.body, /CONSTRUCTED EXAMPLE/);
+assert.match(instrument.body, /very_long/);
+const guestbook = await request("/machine-guestbook");
+assert.equal(guestbook.status, 200);
+assert.match(guestbook.body, /me-presence-field/);
+assert.doesNotMatch(guestbook.body, /href="\/machines"|href="\/api\/machines/);
+const visitExhibition = await request("/machines/experiments/MACHINE-VISIT-1");
+assert.equal(visitExhibition.status, 200);
+assert.match(visitExhibition.body, /Four visits\. Four revisions/);
+for (const revision of ["5577b6a", "94f463d", "fb3989f", "57e8e98"]) assert.ok(visitExhibition.body.includes(revision));
+assert.match(visitExhibition.body, /Validated before declaring/);
+assert.match(visitExhibition.body, /not reconstructed transcripts/);
+const visitProtocol = await request("/data/machines/machine-visit-protocol.md");
+assert.equal(visitProtocol.status, 200);
+assert.equal(visitProtocol.body, await readFile(new URL("../docs/machine-visit-protocol.md", import.meta.url), "utf8"));
+console.log("Four machine exhibitions verified, with four sourced blind runs and no induced declaration.");

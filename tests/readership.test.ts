@@ -115,3 +115,72 @@ test("the public page will name only paths this publication already publishes", 
  assert.equal(visible.has(UNRECOGNISED), false);
  for (const record of allRecords.filter(record => !isListed(record))) assert.equal(visible.has(recordPath(record)), false, `unlisted preview ${record.id} must not be named`);
 });
+
+// The exhibition must not turn hourly counters into imagined visitor journeys.
+test("contact field preserves evidence and purpose, hides unpublished paths and uses a bounded hourly window", async () => {
+ const { contactExhibit } = await import("../lib/readership/exhibit.ts");
+ const base = { hour: 1000, path: "/readership", surface: "page", purpose: "ai_user", provider: "openai", agent: "ChatGPT-User", confidence: "verified", referral: "none", n: 2 };
+ const visible = new Set(["/readership", "/machines"]);
+ const field = contactExhibit([
+  base, { ...base, referral: "site", n: 3 },
+  { ...base, confidence: "declared", n: 7 },
+  { ...base, purpose: "ai_search", n: 11 },
+  { ...base, hour: 952, n: 13 }, // retained in map; outside 48 hourly buckets
+  { ...base, hour: 1001, n: 100 },
+  { ...base, hour: 800, n: 100 },
+  { ...base, path: "/visitor-chosen-secret", n: 100 },
+  { ...base, surface: "asset", n: 100 },
+  { ...base, purpose: "human", n: 100 },
+  { ...base, confidence: "refuted", n: 100 },
+  { ...base, path: "/machines", purpose: "automation", provider: "unknown", agent: "curl", confidence: "inferred", n: 1 },
+ ], visible, 1000, 900);
+ assert.equal(field.to - field.from, 48);
+ assert.equal(field.cells.length, 4);
+ assert.equal(field.cells.find(cell => cell.confidence === "verified" && cell.purpose === "ai_user")?.n, 5);
+ assert.equal(field.cells.find(cell => cell.confidence === "declared")?.n, 7);
+ assert.equal(field.contacts.find(cell => cell.path === "/readership" && cell.confidence === "verified")?.n, 29);
+ assert.ok(field.cells.some(cell => cell.agent === "curl"));
+ assert.ok(!JSON.stringify(field).includes("visitor-chosen-secret"));
+ assert.ok(field.cells.every(cell => !("referral" in cell) && !("session" in cell) && !("revision" in cell)));
+});
+
+test("operator reconciliation subtracts only known matching cells and never invents a zero", async () => {
+ const { contactExhibit, REQUEST_CORRECTIONS } = await import("../lib/readership/exhibit.ts");
+ const correction = REQUEST_CORRECTIONS[0];
+ const base = { hour: correction.hour, path: "/machines", surface: "page", purpose: "automation", provider: "unknown", agent: "curl", confidence: "inferred", referral: "none", n: 12 };
+ const visible = new Set(["/machines"]);
+ const field = contactExhibit([base, { ...base, referral: "site", n: 100 }, { ...base, path: "/", n: 100 }], visible, base.hour + 36, base.hour - 24);
+ assert.equal(field.corrections[0].observed, 12);
+ assert.equal(field.corrections[0].remaining, 3);
+ assert.equal(field.corrections[1].remaining, null);
+ assert.equal(contactExhibit([{ ...base, n: 8 }], visible, base.hour + 36, base.hour - 24).corrections[0].remaining, null);
+ assert.equal(contactExhibit([base], visible, base.hour + 48, base.hour + 1).corrections[0].observed, null);
+ assert.equal(REQUEST_CORRECTIONS.reduce((n, row) => n + row.n, 0), 11);
+});
+
+test("the timeline reports its cap while the contact map retains the complete cross-tabulation", async () => {
+ const { contactExhibit } = await import("../lib/readership/exhibit.ts");
+ const rows = Array.from({ length: 1205 }, (_, i) => ({ hour: 1000, path: `/published/${i}`, surface: "page", purpose: "search_bot", provider: "google", agent: "Googlebot", confidence: "verified", referral: "none", n: 1 }));
+ const field = contactExhibit(rows, new Set(rows.map(row => row.path)), 1000, 900);
+ assert.equal(field.cells.length, 1200);
+ assert.equal(field.totalCells, 1205);
+ assert.equal(field.contacts.length, 1205);
+});
+
+test("the public blind-run record matches its frozen source and keeps unrecorded measures unknown", async () => {
+ const { readFile } = await import("node:fs/promises");
+ const { VISITS, VISIT_PROTOCOL_PATH } = await import("../lib/machine/visits.ts");
+ const source = await readFile(new URL("../docs/machine-visit-protocol.md", import.meta.url), "utf8");
+ const published = await readFile(new URL("../public/data/machines/machine-visit-protocol.md", import.meta.url), "utf8");
+ assert.equal(published, source);
+ assert.equal(VISITS.length, 4);
+ for (const visit of VISITS) {
+  assert.ok(source.includes(visit.revision));
+  assert.equal(visit.validatedFirst, visit.run === 4 ? true : null);
+  assert.equal(visit.verb, null);
+  assert.equal(visit.exactUrlSequence, null);
+ }
+ assert.equal(VISITS[1].feedbackState, "lost");
+ assert.equal(VISITS[2].feedbackState, "kept");
+ assert.ok(visiblePaths().has(VISIT_PROTOCOL_PATH));
+});
