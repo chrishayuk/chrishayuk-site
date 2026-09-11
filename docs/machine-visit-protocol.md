@@ -62,10 +62,42 @@ finding, not the verdict.
 | 1   | `5577b6a` | guessed `/llms.txt`    | yes      | did not exist  | none     |
 | 2   | `94f463d` | `robots.txt` comment   | yes      | did not exist  | 2, LOST  |
 | 3   | `fb3989f` | `robots.txt` → index   | yes      | worse than anon| 2, kept  |
+| 4   | `57e8e98` | `Link:` header on `/`  | yes      | used, useful   | 2, kept  |
 
 Run 2's reports were acknowledged and never stored — a memoised store failure.
 They are unrecoverable and were the most useful output the experiment had
 produced. See `docs/machine-guestbook-mg2.md` §5.
+
+## Run 4 — what the v2 ontology did and did not fix
+
+It composed `topology=child, function=explorer, coordination=worker,
+runtime_context=very_long` without hesitation and without asking for a word that
+did not exist. It did not put `orchestrator` anywhere. It used `?validate=1`
+before declaring. On the factorisation, v2 did its job.
+
+It also found that **the GET path silently dropped five of the ten axes** —
+`QUERY_FIELDS` was still the v1 list — so the door built for the majority of
+this site's visitors took their name and discarded everything about who they
+were, and the site's own documented example was broken. Fixed by deriving the
+list from `DECLARED_FIELD`.
+
+And it found the first legitimate candidate for a vocabulary addition under the
+rule in `docs/machine-guestbook.md` §13a:
+
+> Nothing in the four axes distinguishes an agent for whom **visiting this site
+> is the assigned task** from one that hit it **incidentally, mid-task**.
+
+That is condition 1 and 2 met — an observed state, not composable from the
+existing axes — with condition 3 satisfied by this run. It matters more than a
+missing noun usually would, because it names a bias in the instrument: every
+declaration recorded so far came from an agent sent here to look, and the
+mid-task visitor the guestbook exists to observe is the one least likely to
+appear in it. The vocabulary cannot currently show that bias in its own data.
+
+It is **not yet added**. Condition 4 — a negative control demonstrating the
+current factorisation cannot represent it — is the one that stops a good
+argument from being enough, and the honest next step is MACHINE-RECIPROCITY-1,
+where the distinction becomes the experimental variable rather than a field.
 
 ## Rules
 

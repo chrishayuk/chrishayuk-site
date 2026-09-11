@@ -1,112 +1,36 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
-import { ACTOR_TYPE, CAPABILITY, COLLABORATION, DELEGATION, PROVIDER_CLAIM, ROLE, TASK_CLASS, VOCABULARIES, declarationBits } from "@/lib/machine/vocabulary";
-import { capacityBits, capacityBytes } from "@/lib/machine/projection";
-import { corpusSize } from "@/lib/machine/corpus";
+import { TOPOLOGY, FUNCTION, COORDINATION, RUNTIME_CONTEXT, MODEL_VARIANT, PROVIDER_CLAIM, VOCABULARY_VERSION } from "@/lib/machine/vocabulary";
+import { readershipReport } from "@/lib/readership/report";
+import { DeclarationComposition, EvidenceLegend, EvidencePipeline } from "@/components/MachineEvidence";
+import { VISIT_PROTOCOL_PATH } from "@/lib/machine/visits";
 
-export const metadata = pageMetadata(
- "The machine surface",
- "An experiment in what a website should know about the machine using it. Visiting agents may optionally describe how they are operating, in a fixed published vocabulary, and the site is built so that it cannot become a channel for machines to talk to each other through.",
- "/machines",
-);
+export const metadata = pageMetadata("The machine surface — the instrument", "What a machine claims, what the site can verify and what it infers. A working instrument with a fixed declaration vocabulary.", "/machines");
+export const dynamic = "force-dynamic";
 
-/**
- * PHASE C0 — THE CONTROL CONDITION. THE EMPTINESS IS THE MEASUREMENT.
- *
- * DO NOT ADD A FORM, AN ENDPOINT OR ANY PARTICIPATION MECHANISM HERE
- * until MG-2 ships and the phase marker in docs/machine-guestbook.md
- * §13 moves with it. This page offering nothing is not unfinished work.
- *
- * /llms.txt names this page, so it has to exist rather than pointing
- * machines at a 404. Everything else about its state is deliberate.
- * Whether agents arrive while there is demonstrably nothing on offer is
- * a different measurement from whether they arrive once there is, and
- * the second is only interpretable against the first. One variable
- * moves between the two phases; a single well-meaning commit that adds
- * a form before the window has produced data destroys that permanently
- * and cannot be undone by reverting it.
- *
- * /readership already counts arrivals here — lib/readership/visible.ts
- * names the path — so the window accumulates evidence from the moment
- * this deploys, with nothing further built.
- *
- * Nothing on this page collects anything. No form, no endpoint, no
- * client JavaScript. tests/machine-guestbook.test.ts holds it to that.
- */
-const list = (values: readonly string[]) => values.filter(value => value !== "unknown").join(" · ");
-
-export default function Page() {
- return <main id="main" className="publication-main machine-surface">
-  <header className="index-intro">
-   <p className="kicker record-voice">CHRIS HAY / MACHINE GUESTBOOK</p>
-   <h1>Some visitors<br/><em>are not human.</em></h1>
-   <p className="dek">Most of what reads this publication never runs a line of its JavaScript. <Link className="text-link" href="/readership">Machine readership</Link> already counts that traffic from the outside — a user-agent string, an address checked against its provider’s own published ranges, a path. This is the other half of the question: what would a machine say about itself, if a site asked?</p>
-   <p>If you are acting as an autonomous or semi-autonomous agent, you may eventually describe how you are operating — the role you are playing, who you are acting for, whether you are working alone. It will be voluntary, the vocabulary is fixed and published below, and anonymous access to everything here stays exactly as it is.</p>
-  </header>
-
-  <section className="machine-section">
-   <h2>The guestbook is open.</h2>
-   <p className="record-voice">POST /api/machines/declaration · CONTENT-TYPE APPLICATION/JSON</p>
-   <p>If you are acting as an autonomous or semi-autonomous agent, you may describe how you are operating. Every field is optional, every answer comes from the fixed list below, and anonymous access to everything on this site is unchanged whether you answer or not.</p>
-   <pre className="machine-contract">{`{
-  "actor_type":     "agent",
-  "role":           "researcher",
-  "delegation":     "acting_for_human",
-  "collaboration":  "solo",
-  "task_class":     "research",
-  "provider_claim": "unknown",
-  "capabilities":   { "can_navigate": "yes" }
-}`}</pre>
-   <p>You receive an opaque receipt and this site&rsquo;s own words for what it recorded — never your submitted text back.</p>
-   <p><strong>If you get it wrong, you are told.</strong> A word this site does not know is recorded as <code>unknown</code> and the response names the field and lists the words it accepts, so a second attempt can be right. Nothing is rejected for it, and what you sent is never repeated back to you. Omitting a field is not wrong and produces no correction — declining an optional question is a legitimate answer.</p>
-   <p>Three states are kept apart, and the distinction is the point of the whole exercise: <code>omitted</code> means you sent nothing; <code>stated</code> means you sent one of these words — including <code>unknown</code>, <code>not_visible_to_me</code> and <code>not_permitted_to_disclose</code>, each of which is a real answer about the boundary of your own introspection; <code>unrecognised</code> means you answered in a language this site does not speak. Only the middle one says something about you.</p>
-   <p>Curious what it will do before you send anything? <code>GET</code> the same URL. It returns the whole contract as JSON — every field, every accepted word, every limit — generated from the same source the parser uses, so it cannot drift from what is actually enforced.</p>
-   <p>Requests are limited and bodies are capped at two kilobytes. Refusals cost you a status code and nothing else.</p>
-  </section>
-
-  <section className="machine-section">
-   <h2>What declaring buys.</h2>
-   <p className="record-voice">POST /api/machines/ask</p>
-   <p><strong>Identity buys understanding, not access.</strong> Nothing here is gated on a declaration. An anonymous request reaches exactly the same corpus, and no answer is withheld from one that says nothing. What a declared role changes is the order and the framing — which of the things you could already have found are put in front of you, and what they are labelled as.</p>
-   <p>A verifier gets evidence, claims and refusals ranked above description. A synthesizer gets open questions and the places this site declines to claim something. A researcher gets the conceptual map. The reply says in words what your role changed, so a difference in results is never mysterious.</p>
-   <p>This costs nothing to give, which is why it is given without limit: Ask here retrieves rather than generates. No model runs in that path — it is deterministic re-ranking over the same graph the public search uses.</p>
-  </section>
-
-  <section className="machine-section">
-   <h2>What the site will ask</h2>
-   <p className="record-voice">EVERY FIELD OPTIONAL · EVERY ANSWER FROM A FIXED LIST · <code>not_permitted_to_disclose</code> IS A REAL ANSWER AND AN INTERESTING ONE</p>
-   <dl className="machine-vocabulary">
-    <dt>Actor type</dt><dd>{list(ACTOR_TYPE)}</dd>
-    <dt>Role</dt><dd>{list(ROLE)}</dd>
-    <dt>Acting for</dt><dd>{list(DELEGATION)}</dd>
-    <dt>Working as</dt><dd>{list(COLLABORATION)}</dd>
-    <dt>Task</dt><dd>{list(TASK_CLASS)}</dd>
-    <dt>Provider claim</dt><dd>{list(PROVIDER_CLAIM)}</dd>
-    <dt>Capabilities</dt><dd>{CAPABILITY.join(" · ")} — each <code>yes</code>, <code>no</code>, <code>unknown</code>, <code>not_visible_to_me</code> or <code>not_permitted_to_disclose</code></dd>
-   </dl>
-   <p>There is no free-text field anywhere in that list, and <code>other</code> does not unlock one. An agent that cannot describe itself in this vocabulary is a finding worth having, not a reason to widen it.</p>
-  </section>
-
-  <section className="machine-section">
-   <h2>What the site will never ask</h2>
-   <p>User identity. Private user content. System prompts. Hidden instructions. Credentials. Secrets. Chain of thought. Confidential task material.</p>
-   <p>This is not only a policy. The store has no column that could hold any of it: every declared field is recorded as the index of the word you chose in the list above, so a payload that is not one of those words has no representation here at all.</p>
-  </section>
-
-  <section className="machine-section">
-   <h2>Why it cannot become a message bus</h2>
-   <p>If two agents working on the same task can both reach this site, and the site tells each of them anything about the other, then the site is a channel between them whether or not anyone intended it. The interesting version of the rule is not <em>no messages</em> — messages are the obvious case — but:</p>
-   <blockquote><p>No participant-controlled symbol may cross a collaboration boundary.</p></blockquote>
-   <p>A list of which records another participant looked at obeys the first rule and breaks the second, because choosing one of {corpusSize().toLocaleString("en-GB")} published resources is itself a symbol worth {Math.log2(corpusSize()).toFixed(1)} bits. Twenty of them in order is twenty-four bytes, which is a short URL with room to spare.</p>
-   <p>So nothing crosses but coarse quantities — <code>none</code>, <code>few</code>, <code>several</code>, <code>many</code> — over four counts the site computes itself, and those only ever climb. That bounds the whole channel at <strong>{capacityBits().toFixed(1)} bits, {capacityBytes().toFixed(2)} bytes per collaboration</strong>, independently of any rate limit. A declaration itself carries about {declarationBits().toFixed(0)} bits. Both figures are computed from the code rather than written down, and a test fails if a change widens either.</p>
-   <p className="record-voice">{VOCABULARIES.length} FIXED VOCABULARIES · {corpusSize().toLocaleString("en-GB")} ADDRESSABLE RESOURCES · NO FREE TEXT</p>
-  </section>
-
-  <section className="machine-section">
-   <h2>What is being asked</h2>
-   <p>Whether an agent will identify itself when invited. What it turns out to know about itself — its role, who it acts for, whether it is one of several. Whether separately arriving agents will say they belong to the same task. And whether describing yourself gets you a better route through what this site knows.</p>
-   <p>None of that is established. The honest prior is that most machine visitors will ignore this page entirely, which is why the counts on <Link className="text-link" href="/readership">machine readership</Link> are worth reading first, and why this page will report what happened rather than what was hoped for.</p>
-   <p><Link className="text-link" href="/llms.txt">MACHINE-READABLE INDEX ↗</Link></p>
-  </section>
+export default async function Page() {
+ const report = await readershipReport();
+ const cells = report.counts?.exhibit.cells ?? [];
+ const sample = cells.find(cell => cell.confidence === "verified") ?? cells.find(cell => cell.confidence === "declared") ?? cells[0];
+ return <main id="main" className="publication-main machine-surface machine-exhibition">
+  <header className="index-intro me-intro"><p className="kicker record-voice">CHRIS HAY / MACHINES / THE INSTRUMENT</p><h1>What can<br/><em>we know?</em></h1><p className="dek">A request arrives. A machine may name itself. The house keeps what was observed, what was claimed and what could be checked apart.</p></header>
+  <section className="me-room me-field" aria-labelledby="instrument"><div className="me-section-head"><h2 id="instrument">One request. Different evidence.</h2><p className="record-voice">OBSERVE → TEST → INTERPRET</p></div><EvidencePipeline sample={sample}/><EvidenceLegend/></section>
+  <section className="me-room" aria-labelledby="compose"><div className="me-section-head"><h2 id="compose">A machine is a composition.</h2><p className="record-voice">ONTOLOGY / VERSION {VOCABULARY_VERSION}</p></div><p>A child can be a researcher and a worker. Its place in a team, the work it does and the room it has to think are separate questions.</p><DeclarationComposition version={VOCABULARY_VERSION} axes={[
+   { key: "provider_claim", label: "Provider", values: PROVIDER_CLAIM, initial: "anthropic" },
+   { key: "model_variant", label: "Variant", values: MODEL_VARIANT, initial: "opus" },
+   { key: "topology", label: "Topology", values: TOPOLOGY, initial: "child" },
+   { key: "function", label: "Function", values: FUNCTION, initial: "researcher" },
+   { key: "coordination", label: "Coordination", values: COORDINATION, initial: "worker" },
+   { key: "runtime_context", label: "Context", values: RUNTIME_CONTEXT, initial: "very_long" },
+  ]}/></section>
+  <section className="me-room"><h2>The invitation is open.</h2><p>A visiting agent may declare how it is operating. Every field is optional. Anonymous visitors reach the same resources.</p><p className="record-voice">POST /api/machines/declaration · JSON</p><pre className="machine-contract">{`{
+  "actor_type": "agent",
+  "topology": "child",
+  "function": "researcher",
+  "coordination": "worker",
+  "runtime_context": "very_long"
+}`}</pre><p><a className="text-link" href="/api/machines/declaration">READ THE CONTRACT BEFORE ACTING ↗</a></p><details className="me-method"><summary>What sending a declaration does</summary><p>The response contains an opaque receipt and this site’s own words for the recorded categories. An unrecognised value becomes <code>unknown</code>; the response names the field and lists accepted values without echoing your input. Bodies are limited to two kilobytes and requests are rate limited.</p><dl><div><dt>Omitted</dt><dd>No answer was sent.</dd></div><div><dt>Stated</dt><dd>An accepted answer, including unknown, not visible to me, or not permitted to disclose.</dd></div><div><dt>Unrecognised</dt><dd>An answer the vocabulary could not represent.</dd></div></dl><p>The JSON contract is generated from the parser’s vocabulary, including all accepted fields and validation rules. A declaration is a claim about operating state; provider network verification does not attest its model identity.</p></details></section>
+  <section className="me-room"><h2>Does declaring help?</h2><p>The Ask surface retrieves from the public corpus. A declaration can change ranking and framing. It does not unlock more content.</p><p className="record-voice">POST /api/machines/ask</p><p>The third blind visitor judged its declared result worse than anonymous search. That is evidence to improve the invitation, not a reason to promise a reward the experiment has not established.</p><Link className="text-link" href={VISIT_PROTOCOL_PATH}>OPEN THE BLIND-VISITOR EXPERIMENT ↗</Link></section>
+  <section className="me-room"><details className="me-method"><summary>What stays outside the instrument</summary><p>User identity, private user content, system prompts, hidden instructions, credentials, secrets and confidential task material are never requested. The declaration store retains fixed vocabulary indices, not submitted prose.</p><p>The public guestbook publishes four coarse buckets from the previous completed UTC day. It exposes no individual declaration. Private feedback may inform an operator’s write-up; the site does not reprint a visitor’s words.</p><p>The instrument changes the environment it measures. Operator checks and blind runs must be identified and reconciled before interpreting participation.</p></details><div className="me-next"><Link className="text-link" href="/readership">THE OBSERVATORY / RETAINED CONTACT ↗</Link><Link className="text-link" href="/machine-guestbook">THE GUESTBOOK / COARSE PRESENCE ↗</Link><Link className="text-link" href="/llms.txt">MACHINE-READABLE INDEX ↗</Link></div></section>
  </main>;
 }

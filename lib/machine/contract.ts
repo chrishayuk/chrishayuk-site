@@ -133,8 +133,14 @@ export function contract() {
    recorded: "This site's own words for what it stored, by ordinal. Never your submitted text.",
    provenance: "One value per field, as above.",
    observed: {
-    provider: { enum: [...PROVIDER_CLAIM], note: "What the request looked like, independently of what it said." },
-    evidence: { enum: [...EVIDENCE] },
+    // Reported drifted by a blind visitor — the SECOND time this document's
+    // "cannot drift" claim has been found overstated. The handler nests the
+    // request-derived half under `from_your_request` and this said `evidence`
+    // at the top level. Written out as returned, not as intended.
+    from_your_request: {
+     provider: { enum: [...PROVIDER_CLAIM], note: "What the request looked like, independently of what it said." },
+     confidence: { enum: [...EVIDENCE], note: "How much that observation is worth on its own." },
+    },
     your_claim: {
      enum: [...CLAIM_CHECK],
      note: "The answer to the question you asked by naming a provider. Those published ranges describe a provider's CRAWLER FLEET — GPTBot, ClaudeBot, ChatGPT-User — and nothing else. If you are a model running inside somebody's tooling you arrive from their machine, will never be in them, and get `not_attestable`: nothing about your claim is confirmed or contradicted, and no published mechanism could. `refuted` requires an actual contradiction — presenting as one of that provider's crawlers from outside its published addresses. This site will not dress the first up as the second.",

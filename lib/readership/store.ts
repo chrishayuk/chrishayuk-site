@@ -1,5 +1,6 @@
 import { verify, type Verification } from "./ranges.ts";
 import type { Classification, Confidence, Purpose, Surface } from "./classify.ts";
+import { contactExhibit, type ContactExhibit } from "./exhibit.ts";
 
 /**
  * WHAT IS ACTUALLY KEPT.
@@ -106,6 +107,7 @@ export async function record(classification: Classification, ip: string | null):
 }
 
 export type Summary = {
+ exhibit: ContactExhibit;
  days: number; from: string; to: string; total: number;
  purposes: Record<Purpose, number>;
  confidence: Record<Confidence, number>;
@@ -197,7 +199,7 @@ export async function summary(days: number, visible: ReadonlySet<string>): Promi
   daily.set(day, bucket);
 
   if (row.hour >= recentSince && AI.includes(row.purpose as Purpose) && visible.has(row.path)) {
-   const key = `${row.hour}|${row.agent}|${row.path}`;
+   const key = `${row.hour}|${row.agent}|${row.provider}|${row.purpose}|${row.confidence}|${row.path}`;
    const entry = recent.get(key) ?? { hour: row.hour, purpose: row.purpose, provider: row.provider, agent: row.agent, confidence: row.confidence, path: row.path, n: 0 };
    entry.n += row.n; recent.set(key, entry);
   }
@@ -205,6 +207,7 @@ export async function summary(days: number, visible: ReadonlySet<string>): Promi
 
  const iso = (hour: number) => new Date(hour * HOUR).toISOString().slice(0, 13).replace("T", " ") + ":00Z";
  const value: Summary = {
+  exhibit: contactExhibit(rows, visible, now, since),
   days, from: iso(since), to: iso(now), total,
   purposes, confidence, surfaces,
   providers: [...providers].map(([provider, counts]) => ({ provider, ...counts })).sort((a, b) => b.total - a.total),

@@ -1,8 +1,9 @@
-import { WriteQueue } from "@/lib/machine/admission";
+import { WriteQueue, readBounded, MAX_BODY_BYTES } from "@/lib/machine/admission";
 import { handleDeclaration, handleDeclaredValues } from "@/lib/machine/handler";
 import { writeDeclaration } from "@/lib/machine/store";
 import { observedFor } from "@/lib/machine/observed";
 import { contract } from "@/lib/machine/contract";
+import { DECLARED_FIELD } from "@/lib/machine/vocabulary";
 import { capabilityCorrections, corrections, describe, describeProvenance, parseDeclaration } from "@/lib/machine/declaration";
 
 /**
@@ -61,6 +62,19 @@ function remember(key: string, now: number): void {
 }
 
 export async function POST(request: Request): Promise<Response> {
+ // `validate` is honoured on BOTH verbs. It was implemented on GET only,
+ // while the contract documents POST first — so an agent doing the
+ // responsible thing, checking its vocabulary before declaring, was
+ // charged a row in the counts for the privilege. It reported that, and
+ // apologised for data it had been given no way to avoid polluting.
+ if (new URL(request.url).searchParams.get("validate") === "1") {
+  const text = await readBounded(request.body, MAX_BODY_BYTES);
+  if (text === null) return Response.json({ error: "payload_too_large", see: "/api/machines/declaration" }, { status: 413 });
+  let body: unknown;
+  try { body = text.length === 0 ? {} : JSON.parse(text); } catch { body = {}; }
+  return validation(body);
+ }
+
  const { response } = await handleDeclaration(request, {
   sink: writeDeclaration,
   queue,
@@ -84,14 +98,26 @@ export async function POST(request: Request): Promise<Response> {
  * so it is cacheable and reopens nothing.
  */
 /**
- * The fields a query string may carry. Anything else is ignored, so a
- * URL with tracking parameters or a cache-buster is still just a fetch.
+ * DERIVED, NEVER LISTED.
+ *
+ * This was a hand-written copy of the v1 field names. The ontology was
+ * refactored to machine-declaration/2 and this list was not, so the GET
+ * path went on accepting six retired names and silently dropping the
+ * five axes v2 exists for — topology, function, coordination,
+ * model_variant, runtime_context. The door built for the majority of
+ * this site's visitors took their name and threw away everything about
+ * who they were, and the site's own documented example was broken.
+ *
+ * Worse, `provenance` reported the dropped fields as `omitted`, which
+ * is a false statement about the request: the caller sent them. On a
+ * site whose defining claim is that provenance is kept scrupulously
+ * apart from value, that is the wrong kind of bug to have.
+ *
+ * So it is derived from DECLARED_FIELD and cannot drift from the parser
+ * again. `agent_name` is appended because it is accepted but is not a
+ * declared axis — it is the operator-only label.
  */
-const QUERY_FIELDS = [
- "actor_type", "role", "delegation", "collaboration", "task_class",
- "provider_claim", "transport", "execution", "harness", "model_name",
- "agent_name_kind", "agent_name",
-];
+const QUERY_FIELDS = [...DECLARED_FIELD, "agent_name"];
 
 /**
  * A bare GET is the contract. A GET carrying a recognised field is a
@@ -115,28 +141,29 @@ export async function GET(request: Request): Promise<Response> {
  }
  if (Object.keys(capabilities).length) values.capabilities = capabilities;
 
- if (!Object.keys(values).length) return contractResponse();
+ if (!Object.keys(values).length) {
+  // A bare GET is the contract. A GET carrying parameters that this site
+  // does not recognise is NOT the same thing, and returning the contract
+  // for both made a failed declaration indistinguishable from a request
+  // for documentation — 200 OK, and nothing recorded.
+  const sent = [...params.keys()].filter(key => key !== "validate");
+  if (sent.length > 0) {
+   return Response.json({
+    error: "no_recognised_fields",
+    sent: sent.length,
+    accepted: QUERY_FIELDS,
+    note: "None of the parameters you sent name a field this site accepts, so nothing was recorded. The accepted names are above; a bare GET returns the full contract.",
+    see: "/api/machines/declaration",
+   }, { status: 422, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
+  }
+  return contractResponse();
+ }
 
  // A DRY RUN, because the only way to reach the corrections was to record
  // a declaration. An agent probing the vocabulary left a mostly-`unknown`
  // row behind — exactly the noise every other part of this design works to
  // exclude — and said so. Same parse, same corrections, nothing stored.
- if (params.get("validate") === "1") {
-  const declaration = parseDeclaration(values);
-  const capabilityKeys = typeof values.capabilities === "object" && values.capabilities !== null
-   ? Object.keys(values.capabilities as Record<string, unknown>) : [];
-  const fieldCorrections = corrections(declaration);
-  const capCorrections = capabilityCorrections(declaration, capabilityKeys);
-  return Response.json({
-   validated: true,
-   stored: false,
-   recorded: describe(declaration),
-   provenance: describeProvenance(declaration),
-   ...(fieldCorrections.length || capCorrections.length
-    ? { corrections: [...fieldCorrections, ...capCorrections] } : {}),
-   note: "Nothing was recorded. Send the same request without validate=1 to declare.",
-  }, { headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
- }
+ if (params.get("validate") === "1") return validation(values);
 
  // Same source, same declaration, same hour: recorded once. The receipt
  // still comes back, because a caller that retried should not be told it
@@ -161,6 +188,27 @@ export async function GET(request: Request): Promise<Response> {
  });
  if (response.status === 201) remember(key, now);
  return response;
+}
+
+/** The dry run, shared by GET and POST so the two cannot diverge again. */
+function validation(values: unknown): Response {
+ const declaration = parseDeclaration(values);
+ const capabilities = values !== null && typeof values === "object"
+  && typeof (values as Record<string, unknown>).capabilities === "object"
+  && (values as Record<string, unknown>).capabilities !== null
+  && !Array.isArray((values as Record<string, unknown>).capabilities)
+   ? Object.keys((values as Record<string, Record<string, unknown>>).capabilities) : [];
+ const fieldCorrections = corrections(declaration);
+ const capCorrections = capabilityCorrections(declaration, capabilities);
+ return Response.json({
+  validated: true,
+  stored: false,
+  recorded: describe(declaration),
+  provenance: describeProvenance(declaration),
+  ...(fieldCorrections.length || capCorrections.length
+   ? { corrections: [...fieldCorrections, ...capCorrections] } : {}),
+  note: "Nothing was recorded. Send the same request without validate=1 to declare.",
+ }, { headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
 }
 
 function contractResponse(): Response {

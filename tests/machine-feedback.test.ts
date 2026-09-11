@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile, readdir } from "node:fs/promises";
 import * as V from "../lib/machine/vocabulary.ts";
-import { MAX_DETAIL_BYTES, describeFeedback, parseFeedback } from "../lib/machine/feedback.ts";
+import { MAX_DETAIL_CHARS, describeFeedback, parseFeedback } from "../lib/machine/feedback.ts";
 import { observatoryAdmits, observatoryEnabled } from "../lib/machine/access.ts";
 import { PUBLIC_DIMENSIONS } from "../lib/machine/guestbook.ts";
 
@@ -32,7 +32,8 @@ test("feedback is a closed category, a closed task, and prose that is never echo
 
  // The response shape says WHETHER detail was recorded, never what it was.
  const described = describeFeedback(parsed);
- assert.deepEqual(Object.keys(described).sort(), ["detail_recorded", "friction", "task_class"]);
+ assert.deepEqual(Object.keys(described).sort(),
+  ["detail_chars", "detail_recorded", "friction", "max_chars", "task_class"]);
  assert.equal(described.detail_recorded, true);
  assert.ok(!JSON.stringify(described).includes("SENTINEL"), "the acknowledgement must not echo the prose");
 
@@ -50,8 +51,13 @@ test("feedback is a closed category, a closed task, and prose that is never echo
 
  // Long prose is trimmed rather than rejected — an agent writing a real
  // report should not lose all of it to a limit it could not see.
- const long = parseFeedback({ detail: "x".repeat(MAX_DETAIL_BYTES * 3) });
- assert.equal(long.detail?.length, MAX_DETAIL_BYTES);
+ const long = parseFeedback({ detail: "x".repeat(MAX_DETAIL_CHARS * 3) });
+ assert.equal(long.detail?.length, MAX_DETAIL_CHARS);
+ // And the sender is TOLD. Silent truncation cost an agent its closing
+ // sentence on the one field a person actually reads.
+ assert.equal(long.truncated, true);
+ assert.equal(parseFeedback({ detail: "short" }).truncated, false);
+ assert.ok(String(JSON.stringify(describeFeedback(long))).includes("truncated"));
  assert.equal(parseFeedback({ detail: "   " }).detail, null, "whitespace is not a report");
 });
 
@@ -96,8 +102,12 @@ test("the public guestbook can show the operator's sentences and never the agent
  // is the agent's own bytes and may not, because a page reprinting what one
  // visitor wrote for another to read is a message board however it is worded.
  const guestbook = await readFile(new URL("../app/machine-guestbook/page.tsx", import.meta.url), "utf8");
- for (const forbidden of ["recentFeedback", "detail", "observatorySnapshot"]) {
-  assert.ok(!guestbook.includes(forbidden), `the public exhibit references ${forbidden}`);
+ // Names the DATA ACCESS, not the letters. An earlier version forbade the
+ // substring "detail" and began failing when the page gained <details>
+ // elements — a test that fails on an HTML tag is measuring the wrong thing
+ // and will eventually be silenced rather than believed.
+ for (const forbidden of ["recentFeedback", "observatorySnapshot", ".detail", "detail:"]) {
+  assert.ok(!guestbook.includes(forbidden), `the public exhibit reaches ${forbidden}`);
  }
 
  // The reader it does use selects the operator's column and nothing else.

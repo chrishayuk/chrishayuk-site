@@ -45,12 +45,23 @@ import { FRICTION, TASK_CLASS, ordinalOf, wordOf, type Friction, type TaskClass 
  * without the second.
  */
 
-/** Enough for a real observation, far short of a payload. */
-export const MAX_DETAIL_BYTES = 1000;
+/**
+ * Enough for a real observation, far short of a payload.
+ *
+ * CHARACTERS, not bytes — the trim is over code points. It was named
+ * `MAX_DETAIL_CHARS`, the contract published `max_bytes`, and /llms.txt
+ * said "characters", so an agent writing a careful report measured
+ * locally, hit the cap three times, and had its closing sentence
+ * silently amputated. Silent truncation with no dry run is the wrong
+ * failure mode for the one field a person actually reads.
+ */
+export const MAX_DETAIL_CHARS = 1000;
 
 export type Feedback = {
  friction: number;
  task: number;
+ /** Whether the cap cut it. Reported back, because silence here loses a sentence. */
+ truncated: boolean;
  /** Operator-only. Never returned by anything in this module. */
  detail: string | null;
 };
@@ -72,15 +83,22 @@ export function parseFeedback(input: unknown): Feedback {
  return {
   friction: ordinalOf(FRICTION, body.friction),
   task: ordinalOf(TASK_CLASS, body.task_class),
-  detail: detail.length === 0 ? null : [...detail].slice(0, MAX_DETAIL_BYTES).join(""),
+  detail: detail.length === 0 ? null : [...detail].slice(0, MAX_DETAIL_CHARS).join(""),
+  // So a sender can be told it was cut rather than discovering it never.
+  truncated: [...detail].length > MAX_DETAIL_CHARS,
  };
 }
 
 /** The site's own words for what it recorded. Never the detail. */
-export const describeFeedback = (feedback: Feedback): { friction: Friction; task_class: TaskClass; detail_recorded: boolean } => ({
+export const describeFeedback = (feedback: Feedback) => ({
  friction: wordOf(FRICTION, feedback.friction),
  task_class: wordOf(TASK_CLASS, feedback.task),
  detail_recorded: feedback.detail !== null,
+ detail_chars: feedback.detail ? [...feedback.detail].length : 0,
+ max_chars: MAX_DETAIL_CHARS,
+ ...(feedback.truncated
+  ? { truncated: true, note: `Your detail was longer than ${MAX_DETAIL_CHARS} characters and the end was cut. Send again shorter if the part that mattered was at the end.` }
+  : {}),
 });
 
 /**

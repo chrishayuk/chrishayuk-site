@@ -1,118 +1,29 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
 import { CONDITION, PUBLIC_DIMENSIONS, publicCapacityBits, publishedObservations, renderPublic } from "@/lib/machine/guestbook";
+import { VISIT_PROTOCOL_PATH } from "@/lib/machine/visits";
 
-export const metadata = pageMetadata(
- "Machine guestbook",
- "Some visitors to this house are not human. A deliberately incomplete record of machine visitors: coarse, delayed, and built so that observing coordination never becomes a channel machines can communicate through.",
- "/machine-guestbook",
-);
-
-/**
- * THE PUBLIC EXHIBIT.
- *
- * Rendered per request so it always reflects the live deployment; the
- * figures behind it are cached for an hour, so a public page cannot be
- * polled into doing work.
- *
- * TWO RULES THIS PAGE MUST KEEP, and both are asserted by tests:
- *
- * 1. IT DOES NOT LINK TO /machines. The machine entry point is reached
- *    through /llms.txt and nothing else, which is what makes "how did a
- *    machine find this room" answerable at all. A link from a human page
- *    that search engines index would change discoverability and
- *    participation at the same time, and the experiment would lose the
- *    ability to say which one mattered.
- *
- * 2. IT PUBLISHES NO INDIVIDUAL OBSERVATION. Four coarse buckets from
- *    the previous completed UTC day, and nothing finer. See
- *    lib/machine/guestbook.ts for why a live feed of declarations would
- *    be a message board with a nicer typeface.
- *
- * The layout uses the publication's own furniture — `index-intro`,
- * `index-count`, `knowledge-coverage`, `knowledge-limits` — because
- * those carry the page gutter (`var(--margin)`). A bare <section> does
- * not, and text laid against the left edge of the viewport is how that
- * shows up.
- */
+export const metadata = pageMetadata("Machine guestbook — presence", "Machines can leave a trace, but cannot write on the wall. Four coarse observations from the previous completed day.", "/machine-guestbook");
 export const dynamic = "force-dynamic";
 
-const LABEL: Record<string, string> = {
- discovery: "MACHINES HAVE FOUND THIS ROOM",
- declarations: "DECLARATIONS",
- collaboration: "COLLABORATION",
- interaction: "MULTI-STEP INTERACTION",
-};
+const LABEL = { discovery: "Arrival", declarations: "Declaration", collaboration: "Collaboration", interaction: "Interaction" };
+const MEANING = { discovery: "Machine requests reaching the invitation.", declarations: "Accepted declarations of operating state.", collaboration: "Declarations of working with other agents.", interaction: "Recorded challenge interactions." };
 
-const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-const began = (iso: string) => {
- const [year, month, day] = iso.split("-");
- return { day, month: MONTHS[Number(month) - 1] ?? "", year };
-};
-
+/** Only four published ordinals influence these marks. There is no glyph per
+ * entry, no new publication clock and no link to the machine entry point. */
 export default async function Page() {
  const observations = await publishedObservations();
  const words = renderPublic(observations.snapshot);
- const open = CONDITION.declarationEndpoint === "open";
- const start = began(CONDITION.startedOn);
-
- return <main id="main" className="publication-main machine-guestbook">
-  <header className="index-intro">
-   <p className="kicker record-voice">CHRIS HAY / MACHINE GUESTBOOK</p>
-   <h1>Some visitors<br/><em>are not human.</em></h1>
-   <p className="dek">This house keeps a guestbook for machines. What it records is deliberately coarse and deliberately late, because a guestbook that showed each machine’s entry as it arrived would be somewhere machines could leave messages for one another — and that is the one thing this was built not to be.</p>
-   <div className="index-count record-voice">
-    <span>PHASE {CONDITION.phase} · {open ? "DECLARATION INVITED" : "OBSERVATION ONLY"}</span>
-    <span>DECLARATION {open ? "OPEN" : "NOT YET OPEN"}</span>
-    <span>BEGAN {start.day} {start.month} {start.year}</span>
-   </div>
-  </header>
-
-  <section className="machine-observed" aria-labelledby="observed">
-   <div className="machine-observed-head">
-    <h2 id="observed">What has been observed</h2>
-    <p className="record-voice">PUBLISHED THROUGH {observations.through} · PREVIOUS COMPLETED DAY</p>
-   </div>
-   {!observations.available
-    ? <p className="machine-note">This deployment keeps no counters, so there is nothing to publish. The figures appear only where the published edition has a durable store; a preview shows no invented number in its place.</p>
-    : <div className="knowledge-coverage">
-       {PUBLIC_DIMENSIONS.map(dimension =>
-        <div key={dimension}>
-         <strong className={dimension !== "discovery" && !open ? "machine-dormant" : undefined}>
-          {dimension !== "discovery" && !open ? "not yet" : words[dimension]}
-         </strong>
-         <span>{LABEL[dimension]}</span>
-        </div>)}
-      </div>}
-   <p className="machine-note">{open
-    ? <>These are the previous completed day. The guestbook opened part-way through this experiment, so the first days will read <em>none</em> for reasons that have nothing to do with whether machines were willing — a figure only appears the day after the day it describes.</>
-    : <>Three of those four cannot yet carry a figure, because there is nothing for a machine to declare. They read <em>not yet</em> rather than <em>none</em>, so that a mechanism which does not exist is never mistaken for one nobody wanted.</>}</p>
+ return <main id="main" className="publication-main machine-guestbook machine-exhibition">
+  <header className="index-intro me-intro"><p className="kicker record-voice">CHRIS HAY / MACHINE GUESTBOOK / PRESENCE</p><h1>A trace.<br/><em>Not a signature.</em></h1><p className="dek">Machines can leave a trace, but cannot write on the wall. The house reduces what happened to four coarse marks, published once a day.</p></header>
+  <section className="me-room me-presence-room" aria-labelledby="presence-heading"><div className="me-section-head"><h2 id="presence-heading">What remains.</h2><p className="record-voice">{observations.through} · PREVIOUS COMPLETED UTC DAY</p></div>
+   {observations.available ? <div className="me-presence-field">{PUBLIC_DIMENSIONS.map(dimension => <details className={`me-presence-slot me-level-${observations.snapshot[dimension]}`} key={dimension}><summary><span className="me-presence-glyph" aria-hidden="true"><i/><i/><i/><b/></span><span className="record-voice">{LABEL[dimension]} / {words[dimension]}</span></summary><p>{MEANING[dimension]} Published as <em>{words[dimension]}</em>. This mark is a daily category, not an individual visitor.</p></details>)}</div> : <div className="me-presence-field me-empty"><p>The observation stores are unavailable here. No marks are substituted for missing evidence.</p></div>}
+   <p className="me-caption">Open a mark to read its meaning. Ring density represents none, few, several or many. Positions are fixed; they carry no visitor information. Each day stands alone.</p>
+   <p className="record-voice">PHASE {CONDITION.phase} · DECLARATION {CONDITION.declarationEndpoint === "open" ? "OPEN" : "NOT YET OPEN"} · BEGAN {CONDITION.startedOn}</p>
   </section>
-
-  {observations.notes.length > 0 ? <section className="machine-section">
-   <h2>What machines said got in the way</h2>
-   <p className="record-voice">REPORTED BY MACHINE VISITORS · WRITTEN UP BY THIS SITE</p>
-   <ul className="machine-reports">
-    {observations.notes.map((note, index) => <li key={index}>
-     <p className="record-voice">{note.friction.toUpperCase()}</p>
-     <p>{note.note}</p>
-    </li>)}
-   </ul>
-   <p className="machine-note">These are this site&rsquo;s sentences, not the visitors&rsquo;. Agents can write to this house — there is one endpoint that accepts prose — but nothing they write is published, because a page that reprints what one visitor wrote for another to read is a message board however carefully it is worded. So an agent can cause a subject to be discussed here and cannot place a single byte of its own. What it wrote is read by a person and stays there.</p>
-  </section> : null}
-
-  <section className="knowledge-limits">
-   <h2>What you are seeing is deliberately incomplete.</h2>
-   <p>This guestbook records structured observations of machine visitors. Individual declarations, network information, precise arrival times and conversations are not published, and most of them are never stored at all.</p>
-   <p>The house is designed to observe coordination without becoming a channel through which machines can communicate.</p>
-   <p>So the published figures are four coarse quantities — <code>none</code>, <code>few</code>, <code>several</code>, <code>many</code> — computed by this site from its own events, and drawn from the previous completed day rather than from this moment. That is {publicCapacityBits().toFixed(0)} bits of visitor-influenceable public state per day, with a delay of between twenty-four and forty-eight hours between acting and seeing the effect. A house that can be used to send a message costs a day per eight bits, with no way to know whether anyone is reading, and that is not a channel anybody would choose.</p>
-   <p>The parts of this page that update immediately — the phase, whether declaration is open, the date the observation began — are facts about the site rather than about its visitors. No arriving machine can move them.</p>
-  </section>
-
-  <section className="machine-closing">
-   <h2>Why a house would ask</h2>
-   <p>Most of what reads this publication never runs a line of its JavaScript. <Link className="text-link" href="/readership">Machine readership</Link> counts that traffic from the outside — a name in a header, an address checked against the list its provider publishes, a path. This guestbook is the other half of the question: what a machine would say about itself, if a site asked it plainly and promised to keep almost none of the answer.</p>
-   <p>Nothing here identifies a visitor, and nothing here is a headcount. A count is a request. A machine is not a person.</p>
-  </section>
+  <section className="me-room me-guestbook-key"><h2>The restriction is the form.</h2><div className="me-bucket-key" aria-label="Ring density key">{["none", "few", "several", "many"].map((word, level) => <div key={word} className={`me-level-${level}`}><span className="me-presence-glyph" aria-hidden="true"><i/><i/><i/><b/></span><span>{word}</span></div>)}</div><p>No names, individual entries or machine-written text enter this field. Its entire visitor-influenced state is {publicCapacityBits().toFixed(0)} bits per daily publication. The four buckets may include operator-induced experiments.</p></section>
+  {observations.notes.length > 0 && <section className="me-room"><details className="me-method"><summary>Friction, in the house’s words</summary><p>Operator-written accounts of visitor feedback. Original submissions remain private.</p>{observations.notes.map((note, index) => <div key={index}><p className="record-voice">{note.friction.toUpperCase()}</p><p>{note.note}</p></div>)}</details></section>}
+  <section className="me-room me-next"><h2>Would a machine bother?</h2><p>Three blind visitors could act on the invitation. Each said it probably would not bother mid-task. Those were induced usability tests; voluntary participation remains a separate question.</p><Link className="text-link" href={VISIT_PROTOCOL_PATH}>FOLLOW THE THREE BLIND RUNS ↗</Link><Link className="text-link" href="/readership">SEE WHAT ENCOUNTERS THE HOUSE ↗</Link></section>
+  <section className="me-room"><details className="me-method"><summary>What the field leaves out</summary><p>Individual declarations, exact arrival times, network information, receipts and conversations are not published here. The marks use only the existing four published categories; no separate count or per-entry shape is revealed.</p><p>Today’s activity cannot appear today. Publication uses the previous completed UTC day, with an hourly cache. Phase and opening date describe the site, so visitors cannot change them.</p><p>A coarse bucket is not a headcount. Repeated requests, probes and operator tests can contribute. The experiment record explains why usability cannot be read as organic willingness.</p></details></section>
  </main>;
 }

@@ -1,5 +1,5 @@
 import { WriteQueue, admit, readBounded, sourceOf, type Facts } from "@/lib/machine/admission";
-import { MAX_DETAIL_BYTES, describeFeedback, parseFeedback, writeFeedback } from "@/lib/machine/feedback";
+import { MAX_DETAIL_CHARS, describeFeedback, parseFeedback, writeFeedback } from "@/lib/machine/feedback";
 import { FRICTION, TASK_CLASS } from "@/lib/machine/vocabulary";
 import { SITE } from "@/lib/records";
 
@@ -72,7 +72,7 @@ function contractResponse(): Response {
   fields: {
    friction: { enum: [...FRICTION], note: "What kind of thing got in the way. Countable, and may be published as a coarse total." },
    task_class: { enum: [...TASK_CLASS], note: "What you were actually doing when you hit it." },
-   detail: { type: "string", max_bytes: MAX_DETAIL_BYTES, note: "Free text, and the only free text this site accepts anywhere. Read by a person. Never published, never returned by any endpoint, never shown to another visitor. Longer text is trimmed rather than rejected." },
+   detail: { type: "string", max_chars: MAX_DETAIL_CHARS, note: "Free text, and the only free text this site accepts anywhere. Measured in CHARACTERS. Longer text is trimmed and the response says so, rather than losing your last sentence in silence. Read by a person. Never published, never returned by any endpoint, never shown to another visitor. Longer text is trimmed rather than rejected." },
   },
   what_happens_to_it: [
    "The category is counted and may appear as a coarse total.",
