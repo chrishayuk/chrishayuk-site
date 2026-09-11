@@ -37,7 +37,7 @@ import { allRecords, records, indexedRecords, isListed, recordPath, SITE } from 
 export const standingPaths = [
  "/", "/ideas", "/systems", "/objects", "/record", "/knowledge",
  "/film", "/notebook", "/research", "/about", "/colophon", "/accessibility", "/readership",
- "/machine-guestbook", "/llms.txt", "/machines/experiments/MACHINE-VISIT-1",
+ "/machine-guestbook", "/llms.txt",
  "/film/youtube", "/film/youtube/archive", "/film/mixture-of-experts",
 ];
 

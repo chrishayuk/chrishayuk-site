@@ -166,3 +166,24 @@ itself: the layer rail with the gate marked, and both recorded outcomes side by 
 7431 while eight reads are open, 5824 once one is retired. Both states are always drawn, so
 the still frame carries the whole argument and motion only moves the emphasis between them.
 It registers with the shared motion coordinator and has its own play/pause control.
+
+## Machine experiments belong in the notebook / 11 September 2026
+
+Machine experiment write-ups use the same `PublicationRecord` notebook model as
+Cell80, with a plain-language title, short opening, HAUSE study rooms, interactive
+recorded evidence, source disclosures and draft references. Protocol identifiers
+belong in the provenance, not in a separate public experiments hierarchy.
+
+`N-MACHINE-VISIT` lives at `/notebook/can-a-machine-use-an-invitation`. Its four
+visitors can be selected in the opening study; later rooms distinguish feedback
+acknowledgement from retention, show the fourth visitor's composed declaration,
+and keep usability separate from voluntary participation. Missing URL sequences
+are not animated or reconstructed. The full record remains available through
+anchored acts for catalogue, graph and reference consumers.
+
+The old `/machines/experiments/MACHINE-VISIT-1` URL permanently redirects to the
+note. It is removed from the canonical and archive lists, while the notebook
+record enters both through the standard publication policy. The notebook has an
+illustrated card; Home retains its existing Cell80 feature independently of the
+notebook's editorial order. Preregistered future experiments do not acquire
+result pages merely because their protocols exist.

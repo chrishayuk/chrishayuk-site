@@ -169,7 +169,7 @@ test("the timeline reports its cap while the contact map retains the complete cr
 
 test("the public blind-run record matches its frozen source and keeps unrecorded measures unknown", async () => {
  const { readFile } = await import("node:fs/promises");
- const { VISITS, VISIT_PROTOCOL_PATH } = await import("../lib/machine/visits.ts");
+ const { VISITS, VISIT_NOTE_PATH } = await import("../lib/machine/visits.ts");
  const source = await readFile(new URL("../docs/machine-visit-protocol.md", import.meta.url), "utf8");
  const published = await readFile(new URL("../public/data/machines/machine-visit-protocol.md", import.meta.url), "utf8");
  assert.equal(published, source);
@@ -182,5 +182,5 @@ test("the public blind-run record matches its frozen source and keeps unrecorded
  }
  assert.equal(VISITS[1].feedbackState, "lost");
  assert.equal(VISITS[2].feedbackState, "kept");
- assert.ok(visiblePaths().has(VISIT_PROTOCOL_PATH));
+ assert.ok(visiblePaths().has(VISIT_NOTE_PATH));
 });

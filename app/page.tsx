@@ -5,7 +5,7 @@ import { Cell80Card } from "@/components/Cell80Notebook";
 import { cell80Part } from "@/lib/cell80";
 import { AddressBuildCard } from "@/components/AddressBuildCard";
 import { AgentAttributionCard } from "@/components/AgentAttributionNotebook";
-import { latestNotebook } from "@/lib/notebook-selection";
+import { featuredNotebook } from "@/lib/notebook-selection";
 import { mapThread, cell80Thread, resolveThreadStep } from "@/lib/threads";
 import { Media } from "@/components/Media";
 import { FilmPlayer } from "@/components/FilmPlayer";
@@ -19,7 +19,7 @@ const Kicker = ({ children }: { children: React.ReactNode }) => <p className="ki
 const TextLink = ({ href, children }: { href: string; children: React.ReactNode }) => <Link className="text-link" href={href}>{children}<span aria-hidden="true">↗</span></Link>;
 
 export default function Home() {
- const notebook = latestNotebook;
+ const notebook = featuredNotebook;
  const notebookPath = recordPath(notebook);
  const selectedFilms = [featuredVideo, popularMoe];
  const notes = [getRecord("N-ADDRESS-BUILD")!, getRecord("N-MAP")!];

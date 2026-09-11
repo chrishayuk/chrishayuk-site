@@ -439,3 +439,26 @@ test("the attribution note has reviewed native-image copy with its link in the f
  assert.match(draft.linkedin_comment,/The strange part isn't the trailer\. It's which instruction won\./);
  assert.doesNotMatch(draft.linkedin,/https:|DRAFT ·|LARQL’s required pull-request check/);assert.ok(draft.linkedin_comment.endsWith(draft.canonical_url));
 });
+
+test("the blind-visitor study belongs to the notebook record, index and archive", async () => {
+ const { canonicalPaths } = await import("../lib/canonical.ts");
+ const { notebookSelection, featuredNotebook } = await import("../lib/notebook-selection.ts");
+ const { VISITS, VISIT_NOTE_PATH } = await import("../lib/machine/visits.ts");
+ const note = getRecord("N-MACHINE-VISIT");
+ assert.ok(note);
+ assert.equal(note.kind, "notebook");
+ assert.equal(note.publication, "draft");
+ assert.equal(recordPath(note), VISIT_NOTE_PATH);
+ assert.equal(notebookSelection[0], note);
+ assert.equal(featuredNotebook.id, "N-CELL80-01", "Home keeps its existing featured entrance");
+ assert.ok(canonicalPaths().includes(VISIT_NOTE_PATH));
+ assert.ok(!canonicalPaths().includes("/machines/experiments/MACHINE-VISIT-1"));
+ assert.ok(archiveUrls().includes(`${SITE}${VISIT_NOTE_PATH}`));
+ assert.ok(!archiveUrls().includes(`${SITE}/machines/experiments/MACHINE-VISIT-1`));
+ const text = JSON.stringify(note.body);
+ for (const visit of VISITS) assert.ok(text.includes(visit.revision));
+ for (const source of note.sources) {
+  assert.ok(source.url?.startsWith("/data/machines/"));
+  assert.ok((await readFile(new URL(`../public${source.url}`, import.meta.url))).length > 0);
+ }
+});
