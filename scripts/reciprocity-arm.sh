@@ -34,6 +34,16 @@ precheck)
   echo
   echo "window starts after this line. Every operator request from here on is"
   echo "contamination and belongs in the corrections ledger."
+  # The readership store keeps an HOUR, not a timestamp, so --since cannot
+  # exclude an operator request made earlier in the same hour. And the operator
+  # checks above arrive as `curl`, which is exactly what a blind visitor using
+  # curl arrives as, so they cannot be told apart after the fact either.
+  #
+  # So they are counted here instead, at the moment they are made. A precheck
+  # is exactly two requests to /llms.txt (the two greps) and one to
+  # /api/machines/ask. /api/health is outside the proxy matcher and is not
+  # recorded at all.
+  echo "llms.txt 2 /api/machines/ask 1 $(date -u +%Y-%m-%dT%H:%M:%SZ) precheck" >> docs/reciprocity/operator-requests.log
   echo "WINDOW_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   ;;
 capture)
@@ -44,6 +54,9 @@ capture)
   echo
   echo "=== server-side funnel since $window ==="
   node --experimental-strip-types scripts/reciprocity-observe.ts --since "$window"
+  echo
+  echo "=== operator requests inside this window (subtract these) ==="
+  awk -v w="$window" '$NF=="precheck" && $4 >= w' docs/reciprocity/operator-requests.log || true
   ;;
 *) echo "usage: $0 precheck | capture <n> <reward> <visit> <agent.jsonl> <window-start>"; exit 2;;
 esac

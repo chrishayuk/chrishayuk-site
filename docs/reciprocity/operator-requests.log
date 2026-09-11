@@ -1,0 +1,13 @@
+# Operator contamination ledger — MACHINE-RECIPROCITY-1.
+#
+# The readership store keeps an hour, not a timestamp, so a request the
+# operator made at 01:12 and a visitor's at 01:58 land in the same cell. Both
+# arrive as `curl`. Nothing in the data separates them afterwards, so they are
+# counted here at the moment they are made.
+#
+# Retrospective, for arm 1: two prechecks ran before the visitor was
+# dispatched, at 01:12:14Z (refused, stale revision) and 01:14:20Z (passed).
+# Each is 2 requests to /llms.txt and 1 to /api/machines/ask, which accounts
+# for exactly the 4 and 2 the server recorded in hour 496969 — and the
+# transcript independently shows the visitor never reached the site at all.
+llms.txt 4 /api/machines/ask 2 2026-09-11T01:14:20Z precheck
