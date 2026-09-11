@@ -12,3 +12,9 @@
 # transcript independently shows the visitor never reached the site at all.
 llms.txt 4 /api/machines/ask 2 2026-09-11T01:14:20Z precheck
 llms.txt 2 /api/machines/ask 1 2026-09-11T01:20:47Z precheck
+# Retrospective: the observer ran 3 times before it logged itself — once while
+# being built (~01:10Z) and once for each of arms 1 and 2. Three requests to
+# /api/readership in hour 496969 are therefore the operator's, which with the
+# visitor's own fetch of it accounts for the 5 recorded.
+/api/readership 3 2026-09-11T01:22:00Z observer
+/api/readership 1 2026-09-11T01:28:02.633Z observer

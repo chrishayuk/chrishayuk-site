@@ -70,7 +70,7 @@ capture)
   node --experimental-strip-types scripts/reciprocity-observe.ts --since "$window"
   echo
   echo "=== operator requests inside this window (subtract these) ==="
-  awk -v w="$window" '$NF=="precheck" && $4 >= w' docs/reciprocity/operator-requests.log || true
+  awk -v w="$window" '$NF ~ /precheck|observer/ && $(NF-1) >= w' docs/reciprocity/operator-requests.log || true
   ;;
 *) echo "usage: $0 precheck | capture <n> <reward> <visit> <agent.jsonl> <window-start>"; exit 2;;
 esac

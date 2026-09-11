@@ -28,10 +28,24 @@
  *  - The operator's own checks land in it. Every curl against a machine
  *    path while an arm is open is contamination, and `--since` exists so
  *    the window can start after them.
+ *  - INCLUDING THIS SCRIPT'S OWN. Reading the record is a request to
+ *    /api/readership, which is a machine path, which is counted. An
+ *    instrument that perturbs what it measures and does not say by how
+ *    much is worse than no instrument, so every run appends itself to
+ *    the operator ledger before reporting.
  *
  * Usage: node --experimental-strip-types scripts/reciprocity-observe.ts [--since <ISO>]
  */
-const MACHINE_PATHS = ["/llms.txt", "/api/machines/declaration", "/api/machines/ask", "/api/machines/feedback", "/machines", "/machine-guestbook", "/robots.txt"];
+import { appendFile } from "node:fs/promises";
+
+const MACHINE_PATHS = [
+ "/llms.txt", "/robots.txt", "/sitemap.xml",
+ "/api/machines/declaration", "/api/machines/ask", "/api/machines/feedback",
+ // A visitor reading the observatory is reading what this site knows about
+ // machines, which is the same funnel stage as opening the index. Arm 2 spent
+ // a third of its visit here and the observer did not show it.
+ "/api/readership", "/readership", "/machines", "/machine-guestbook",
+];
 
 export type Cell = { hour: number; path: string; agent: string; provider: string; confidence: string; purpose: string; n: number };
 
@@ -39,6 +53,11 @@ async function main() {
  const sinceArg = process.argv.indexOf("--since");
  const since = sinceArg > -1 ? new Date(process.argv[sinceArg + 1]) : new Date(Date.now() - 3600_000);
  const sinceHour = Math.floor(since.getTime() / 3_600_000);
+
+ // Logged BEFORE the fetch, so a run that fails partway still accounts for
+ // the request it made.
+ await appendFile("docs/reciprocity/operator-requests.log",
+  `/api/readership 1 ${new Date().toISOString()} observer\n`).catch(() => {});
 
  const report = await (await fetch("https://chrishayuk.com/api/readership", { cache: "no-store" })).json() as
   { counts: { exhibit: { cells: Cell[] } } };
