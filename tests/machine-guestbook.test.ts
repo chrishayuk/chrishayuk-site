@@ -423,14 +423,19 @@ test("MG-D1: the public exhibit publishes a projection, never an entry, and neve
  // would move discoverability at the same moment MG-2B moves participation,
  // and the experiment would lose the ability to say which one mattered.
  assert.ok(canonicalPaths().includes("/machine-guestbook"), "the exhibit belongs in the sitemap");
- assert.ok(!canonicalPaths().includes("/machines"), "the machine entry point does not");
+ // /machines JOINED the canonical surface on 2026-09-11, after the topology
+ // it was withheld from measured what it was there to measure. The rule the
+ // exhibit still keeps is narrower and unchanged: the guestbook publishes a
+ // projection, and is not a second route to an individual declaration.
+ assert.ok(canonicalPaths().includes("/machines"),
+  "the machine entry point is now indexed; see docs/machine-discovery-baseline.md");
  assert.ok(visiblePaths().has("/machine-guestbook"), "arrivals at the exhibit are countable");
  assert.ok(!archivePaths().includes("/machine-guestbook"),
   "a live daily counter corroborates no claim and does not belong in a third-party archive");
 
  const page = await readFile(new URL("../app/machine-guestbook/page.tsx", import.meta.url), "utf8");
- assert.ok(!/href=\{?"\/machines"/.test(page), "the exhibit must not link to /machines");
- assert.ok(!page.includes("api/machines"), "the exhibit must not advertise a declaration endpoint");
+ assert.ok(!page.includes("api/machines"),
+  "the exhibit must still not advertise an endpoint: it is a published projection, and a page that both publishes counts and takes declarations invites a visitor to read its own contribution back");
 
  // PROJECTION. Ordinals across the boundary; this site's own four words at
  // render. The same rule as the collaboration projection, for the same reason.
@@ -541,8 +546,17 @@ test("the machine index is reachable by something that follows links", async () 
 
  // The topology it exists to preserve is unchanged: pointing at the index is
  // not pointing at the machine surface, and /machines keeps its single route.
- assert.ok(!canonicalPaths().includes("/machines"), "the machine surface stays out of the sitemap");
- assert.ok(!footer.includes("/machines\""), "and out of the footer");
+ // REVERSED 2026-09-11, deliberately and with the baseline recorded.
+ //
+ // The surface was withheld from the sitemap and the footer so that arrivals
+ // would measure discovery through the machine index alone. Thirty days of
+ // that measurement: 48 fetches of /llms.txt, one from a provider crawler,
+ // while the only live-agent population on the site read nineteen pages
+ // including the guestbook and never followed a link that was on every one of
+ // them. The question was answered, and withholding the surface any longer
+ // preserves an answered question at the cost of an unreachable interface.
+ assert.ok(canonicalPaths().includes("/machines"), "the machine surface is now in the sitemap");
+ assert.ok(footer.includes("/machines\""), "and in the footer, so an HTML reader has a route at all");
  assert.ok(!archivePaths().includes("/llms.txt"), "a regenerated index corroborates nothing");
 });
 

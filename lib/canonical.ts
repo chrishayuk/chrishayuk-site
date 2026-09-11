@@ -38,6 +38,15 @@ export const standingPaths = [
  "/", "/ideas", "/systems", "/objects", "/record", "/knowledge",
  "/film", "/notebook", "/research", "/about", "/colophon", "/accessibility", "/readership",
  "/machine-guestbook", "/llms.txt",
+ // /machines joins the canonical surface on 2026-09-11. It was deliberately
+ // withheld from the sitemap so that arrivals would measure discovery through
+ // the machine index alone, and that measurement has now been taken: over
+ // thirty days the index drew 48 fetches, one of them from a provider crawler,
+ // while the only live-agent population on the site read nineteen pages
+ // including the guestbook and never followed the link. Withholding it further
+ // preserves an answered question at the cost of an unreachable surface.
+ // See docs/machine-discovery-baseline.md.
+ "/machines",
  "/film/youtube", "/film/youtube/archive", "/film/mixture-of-experts",
 ];
 
