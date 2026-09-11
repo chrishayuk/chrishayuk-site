@@ -11,3 +11,4 @@
 # for exactly the 4 and 2 the server recorded in hour 496969 — and the
 # transcript independently shows the visitor never reached the site at all.
 llms.txt 4 /api/machines/ask 2 2026-09-11T01:14:20Z precheck
+llms.txt 2 /api/machines/ask 1 2026-09-11T01:20:47Z precheck

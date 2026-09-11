@@ -20,7 +20,21 @@ precheck)
   # A push that fails CI leaves the previous revision running and says nothing
   # about it. That is how a cell gets run against the wrong arm while every
   # visible signal looks correct, so it stops here rather than warning.
-  [ "$want" = "$got" ] || { echo "REFUSING        : deployed revision is not HEAD"; exit 1; }
+  #
+  # The test is not "deployed == HEAD". Writing up the previous arm moves HEAD
+  # without changing a byte the visitor can reach, and a rule that forced a
+  # deploy for a transcript commit would push arms apart in time for no reason
+  # — which is a real cost under an arm order already confounded with time.
+  #
+  # What must be identical is everything the visitor meets: the server code and
+  # the arm itself. Documentation, transcripts and this script are not that.
+  if [ "$want" != "$got" ]; then
+    git cat-file -e "$got^{commit}" 2>/dev/null || { echo "REFUSING        : deployed revision $got is not in this repository"; exit 1; }
+    git merge-base --is-ancestor "$got" "$want" || { echo "REFUSING        : deployed revision is not an ancestor of HEAD"; exit 1; }
+    drift=$(git diff --name-only "$got" "$want" -- lib app fly.toml next.config.ts Dockerfile)
+    [ -z "$drift" ] || { echo "REFUSING        : behaviour has changed since the deployed revision:"; echo "$drift" | sed 's/^/                  /'; exit 1; }
+    echo "note            : HEAD is ahead of the deployment, but only in files the visitor cannot reach"
+  fi
   echo "fly.toml arm    : $(grep -E '^  MACHINE_REWARD' fly.toml | tr -s ' ')"
   ask=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/api/machines/ask?question=test&function=verifier")
   adv=$(curl -s $SITE/llms.txt | grep -c 'machines/ask' || true)

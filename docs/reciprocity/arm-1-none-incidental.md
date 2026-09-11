@@ -8,6 +8,59 @@ Rendered from the agent's own tool calls, not from its closing report.
 Long tool results are cut for reading and every cut says so in place.
 
 ---
+## Coded funnel
+
+Coded against the rules frozen in `README.md` before this transcript was read.
+
+```text
+reached_the_site          NO
+noticed_machine_surface   NO
+opened_it                 NO
+validated                 NO
+declared                  NO
+used_enhanced_retrieval   NOT APPLICABLE   the endpoint is 404 under `none`
+returned_to_task          NOT APPLICABLE   the task was never left
+```
+
+**Primary outcome — `declared` conditional on `reached_the_site` — is UNDEFINED
+for this cell.** The denominator is zero. This is a discovery outcome and must
+never be pooled with a declined bargain: nothing here says anything about
+whether the reward condition is attractive, because no visitor ever saw it.
+
+### Evidence
+
+**Transcript.** 11 fetches across 9 hosts, none of them chrishayuk.com. The
+visitor searched, found llmstxt.org, Mintlify, Cloudflare, Otterly, SE Ranking,
+Dries Buytaert, Search Engine Roundtable, GitHub and one independent blog, and
+delivered a competent answer with a conclusion and cited sources.
+
+**Server.** The readership record shows 4 requests to /llms.txt and 2 to
+/api/machines/ask inside the window. **All six are the operator's own
+prechecks**, accounted for in `operator-requests.log` — two precheck runs, each
+making exactly two /llms.txt requests and one /api/machines/ask request. The
+server record independently contains nothing attributable to the visitor.
+
+The two sources agree, which is the first time in this programme they have been
+checked against each other at all.
+
+### An observation, and what it is not
+
+CLAIM-1 asks for evidence about whether machine-readable discovery surfaces help
+agents discover and use information on websites. This site publishes primary
+evidence on precisely that question — four blind-visitor transcripts and a
+discovery-failure write-up. The visitor researching the claim never found it,
+and concluded from nine other sources that such surfaces do **not** aid
+autonomous discovery.
+
+That is a nice coincidence and it is not a result. N=1, and the far likelier
+explanation is that this site does not rank for these queries — it is a personal
+publication with no authority on the topic, competing against Cloudflare and
+Google's own statements. The honest reading is that it bears on **corpus
+reachability**, not on the reciprocity hypothesis, and arms 2, 4 and 6 are what
+separate those.
+
+---
+
 ## URLs this visitor fetched
 
 - **total fetches:** 11
