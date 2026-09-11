@@ -125,3 +125,49 @@ A cell where the agent never reached the site is **not a declined bargain** and
 must never be pooled with one. It is recorded, kept, and reported as a discovery
 outcome — the funnel's first stage failing is a result about the task and the
 open web, not about this site's interface.
+
+## Found during the run, to act on after it
+
+**Not while it is running.** The corpus and the discovery topology are held
+constant across all six cells. Repairing any of this between arms would make the
+arms incomparable and convert findings into artefacts.
+
+### 1. `/api/search` and `/api/machines/ask` disagree over the same corpus
+
+Reported as `friction: discovery` by arm 3's visitor, which found the site's own
+primary evidence only by noticing a path in a telemetry dump. Reproduced:
+
+```text
+query                                /api/search   /api/machines/ask
+"llms.txt"                                     0     5 matched
+"agent discovery machine readable"             0    52 matched
+"llms"                                         5
+"guestbook"                                    0
+```
+
+The cause is not the corpus — 36 of 264 records mention machine, llms, agent or
+guestbook. `searchGraph` requires every term to match in one record and does not
+narrow; `ask` narrows a question to the terms the corpus contains and says so in
+`shaping`. `"llms.txt"` fails where `"llms"` succeeds because the whole string
+is matched as written.
+
+This is the pattern this codebase already has a name for: **a contract existing
+twice without a parity assertion between the copies.** Two retrieval surfaces
+over one corpus, with different query semantics, and nothing asserting a
+relationship. The fix is to derive one from the other or to assert their
+agreement, and to add the test — not to patch the symptom.
+
+### 2. The observer perturbs what it measures
+
+Every run fetches `/api/readership`, which is a counted machine path. It now
+logs itself, but the deeper problem is that the readership store keeps an hour
+rather than a timestamp, so operator and visitor traffic in the same hour cannot
+be separated after the fact by any field in the data. A prospective ledger is
+the only thing that works, and it must be started before the first request
+rather than after the first arm.
+
+### 3. `MACHINE_OBSERVATORY_TOKEN` is unset
+
+`/machine-observatory` 404s, so declaration rows cannot be read remotely. Path
+contact plus the transcript was sufficient here because every answer was zero,
+and it would not have been sufficient for a non-zero one.
