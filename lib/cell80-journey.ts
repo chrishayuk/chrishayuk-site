@@ -1,0 +1,9 @@
+/** Reading connections, not a claim that these different assays form one run. */
+export const cell80Journey = [
+  { id: "N-CELL80-01", short: "Replay", experiment: "EX-0–4", question: "What changed history?", finding: "One birth explains a population shift.", bridge: "A replay can isolate a cause. Next, give evolution a world that keeps going." },
+  { id: "N-CELL80-02", short: "Survival", experiment: "EX-9 + earlier controls", question: "What keeps it alive?", finding: "11 of 12 worlds kept both species alive; no detected arms race.", bridge: "Survival gives evolution time. It leaves open what evolution can build." },
+  { id: "N-CELL80-03", short: "Improvement", experiment: "EX-10", question: "Does one advance enable another?", finding: "Eight helpful changes; neither later sequence passed dependence.", bridge: "The movement test found no reliable dependence. A new food-processing world gives a capability something to unlock." },
+  { id: "N-CELL80-BARRIER", short: "Capability", experiment: "EX-11", question: "Can the pieces make something new?", finding: "One combination crossed the resource barrier; the later test had no eligible case.", bridge: "A capability appeared. Next, ask whether a useful change gets the chance to reach descendants." },
+  { id: "N-CELL80-HISTORY", short: "Inheritance", experiment: "EX-12–14", question: "Can an advantage become history?", finding: "Both changes reached descendants. One family was eventually lost.", bridge: "Inheritance and conditional benefit were observed. The closing note asks how much of the opportunity the experimenter designed." },
+  { id: "N-CELL80-BOUND", short: "Controls", experiment: "AP-0–2 / NC", question: "Who made the next step possible?", finding: "The controls explained the apparent expansion in these worlds.", bridge: "The next question is what a world would need for usefulness to emerge from its own regularities. That programme has not been registered." },
+] as const;

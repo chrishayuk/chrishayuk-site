@@ -1,0 +1,82 @@
+{
+  "source": "/data/cell80/bound/ap2-encapsulation.json.gz",
+  "enzyme": {
+    "image": 22,
+    "image_matched": {
+      "ceiling": false,
+      "delta": 1,
+      "fraction_below": 0.4868421052631579,
+      "modules": 304,
+      "q90": 38811,
+      "unusually_valuable": false
+    },
+    "module": "add_sat(a,mask_xor(a,b))",
+    "outcome": "stop: not unusually valuable",
+    "programs_in_p_m": 56699,
+    "shape_class": {
+      "ceiling": false,
+      "fraction_below": 0.7568498063405538,
+      "modules_excluding_enzyme": 6971,
+      "q90": 37099,
+      "unusually_valuable": false
+    },
+    "v1": 39416,
+    "v2": 33197
+  },
+  "controls": [
+    {
+      "module": "add_sat(a,mask_xor(a,b))",
+      "role": "enzyme",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 17962
+    },
+    {
+      "module": "safe_mod(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 15635
+    },
+    {
+      "module": "hash_pair(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 19608
+    },
+    {
+      "module": "snap_down(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 15156
+    },
+    {
+      "module": "lcm(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 19809
+    },
+    {
+      "module": "is_gt(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 4119
+    },
+    {
+      "module": "sum_digit_powers(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 12786
+    },
+    {
+      "module": "unit_mul_check(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 1472
+    },
+    {
+      "module": "avg2(a,mask_xor(a,b))",
+      "role": "structure-matched control",
+      "built_on_unreachable_before": 27888,
+      "newly_reachable_within_3": 15465
+    }
+  ]
+}

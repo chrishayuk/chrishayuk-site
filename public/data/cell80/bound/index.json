@@ -1,0 +1,72 @@
+{
+ "note": "CELL80 / 06 evidence: plans hashed before execution, findings and raw outputs.",
+ "checked": "2026-09-11",
+ "provenance": [
+  {
+   "file": "bound/ap0-findings.md",
+   "sha256": "f9aaa99dd29af1f478626cb41656b5715c93eb9b4d5dcf7279cd10bc4c753d25",
+   "bytes": 4895
+  },
+  {
+   "file": "bound/ap1-chain-accessibility.json",
+   "sha256": "c19e4152b457812e9fb89d0b02157682ce6034a1845f0b1046c8b2c09f34dfec",
+   "bytes": 215446
+  },
+  {
+   "file": "bound/ap1-findings.md",
+   "sha256": "bff9c2c601bebe8799667ded9c1c0823e06774255ac86455b8cb518e35a2c4aa",
+   "bytes": 6037
+  },
+  {
+   "file": "bound/ap1-plan.md",
+   "sha256": "0bcc2e8169241421c0a4e22848efaf9772cbc50efec617b48a7fa7c0c6112524",
+   "bytes": 3766
+  },
+  {
+   "file": "bound/ap2-encapsulation.json.gz",
+   "sha256": "e7cdbede79a176967070a5a0cde8de468e51c1cec52306bab7c762128e786be3",
+   "bytes": 178231,
+   "rawSha256": "d5a9b7f137cf335960824e722fcaebd4fdbde96968a214d485014b0070aa89a6"
+  },
+  {
+   "file": "bound/ap2-findings.md",
+   "sha256": "0eb2ea4060130eab61e09afcedb926a17608c6e72da88b2e467f2e112d54fe4e",
+   "bytes": 8117
+  },
+  {
+   "file": "bound/ap2-plan.md",
+   "sha256": "a9b59477333b42640ff1733d6abd6f150250b7debcbb19700c319f9abdab00d7",
+   "bytes": 9517
+  },
+  {
+   "file": "bound/design-notes.md",
+   "sha256": "3cf0bdedcb58693b5f199c2ba6807ef033f73bd76f387dfba091655207a5b044",
+   "bytes": 15782
+  },
+  {
+   "file": "bound/nc0b-findings.md",
+   "sha256": "5ef13b81f9f3dd6dc1340f2ca1ecfabd54e4e48fc5806d34735b15acc9446df9",
+   "bytes": 3947
+  },
+  {
+   "file": "bound/nc0c-findings.md",
+   "sha256": "be98d760c182b7b2893a7bf42e7782cc13b1e269578ae0561fe3920983aa0e9d",
+   "bytes": 5509
+  },
+  {
+   "file": "bound/nc0c-plan.md",
+   "sha256": "ac2f38fc89fed0eaccab5a8242082ba35ce2fe92eea742dfe8b646500d9d302b",
+   "bytes": 3976
+  },
+  {
+   "file": "bound/nc0c-spontaneous.json",
+   "sha256": "e80fd82e7b5d8fcf6b17e9ff665d5b32d56f66ee0078201e026bfccfe7998268",
+   "bytes": 299662
+  },
+  {
+   "file": "bound/nc1-pilot-findings.md",
+   "sha256": "ee90591ad2bdaa369dad5c29551101fad3d3ca27dac4794c3b7a3c1a28b54e47",
+   "bytes": 5733
+  }
+ ]
+}

@@ -1,3 +1,5 @@
+import { Cell80SurvivalGate } from "./Cell80EvidencePath";
+import { Cell80Journey, Cell80Connection } from "./Cell80Journey";
 import Link from "next/link";
 import { StudyRoom, StudySequence, StudyMeasures } from "@chrishayuk/hause/components/exhibition/Study";
 import { Statement } from "@chrishayuk/hause/components/forms/Statement";
@@ -32,13 +34,14 @@ function ReplayNotebook() {
     <StudyRoom id="cell80-study" label="01 / THE BIRTH" title={<>One world.<br/><em>Two histories.</em></>} tone="dark" description="Organisms in this digital world eat, move and inherit programs. I replayed one birth twice, keeping its program change in one world and undoing it in the other. Then I compared which program became most common.">
       <Cell80WorldReplay kind="lineage"/>
       <div className="cell80-scenario-learning cell80-prose"><h3>One birth changed what followed.</h3><p>Program 33 became the most common reproduction program: 35.3% of the population at tick 1,080. Undoing its change at birth removed that sustained shift.</p><p className="cell80-scenario-limit">One mutation explained one event. This does not make the program better everywhere.</p></div>
-      <FieldNotes label="The intervention, field by field" detail="OPEN +"><Cell80Replay/></FieldNotes></StudyRoom>
+      </StudyRoom>
     <div className="notebook-threshold"><Statement text="If a world can be replayed," continuation="evolution can become an experiment." presentation="room"/></div>
     <StudyRoom label="02 / BEFORE THE INTERVENTION" title={<>First, make history<br/><em>repeat itself.</em></>} description="The replay test came before the causal claim. Without identical histories, I could not isolate what the intervention changed.">
       <StudySequence label="EX-0 → EX-4 / THE EXPERIMENTAL CHAIN" steps={[{label:"REPEAT",value:"Same seed.",detail:"Identical histories in the replay test."},{label:"COMPARE",value:"Same states.",detail:"CPU and GPU agree at every tested tick."},{label:"INTERVENE",value:"One field.",detail:"Change one birth, then measure what follows."}]} note="Both implementations matched at every tested tick. A seed fixes the starting randomness, so the same setup can be replayed."/>
       <div className="cell80-prose"><p>Each organism inherits programs and settings. A mutation changes one of them at birth; the consequences unfold as organisms compete for food.</p><p>Random choices are tied to the <Meaning term="seed">seed</Meaning>, tick, organism and purpose. Repeating the setup repeats those choices, including every tick before the birth I change.</p></div>
     </StudyRoom>
     <StudyRoom label="03 / FOLLOW THE LINEAGE" title={<>A change became common.<br/><em>Which birth mattered?</em></>} tone="accent">
+      <Cell80Replay/>
       <StudySequence label="EX-4 / RECORDED ANCESTRY" steps={[{label:"PARENT",value:"2059",detail:"Reproduction setting 198 · program 37."},{label:"BIRTH / TICK 994",value:"2231",detail:"Reproduction setting 192 · program 33."},{label:"SHIFT / TICK 1080",value:"35.3%",detail:"Program 33 becomes the most common."}]} note="Program numbers are labels, not scores. Program 33 peaked at 41.6% during the 100-tick check: the largest group, still less than half the population."/>
       <div className="cell80-prose"><p>The detector sampled every twenty ticks and required the new leader to persist for five further samples. Tracing their <Meaning term="lineage">lineage</Meaning> backward led to one birth with two mutations.</p><p>Undoing both changes would leave the explanation ambiguous. The comparison keeps the new reproduction <Meaning term="threshold">setting</Meaning> in both histories and changes only the inherited reproduction program. The detected shift no longer occurs.</p></div>
     </StudyRoom>
@@ -65,6 +68,7 @@ function SurvivalNotebook() {
     </StudyRoom>
     <div className="notebook-threshold"><Statement text="Living together" continuation="doesn’t prove an arms race." presentation="room"/></div>
     <StudyRoom label="03 / LOOK FOR A RESPONSE" title={<>Two populations change.<br/><em>Are they answering each other?</em></>} tone="accent">
+      <Cell80SurvivalGate/>
       <StudySequence label="THE REGISTERED ARMS-RACE TEST" steps={[{label:"OBSERVE",value:"Programs change.",detail:"Look for lasting shifts in the programs each species carries."},{label:"COMPARE",value:"Could it be chance?",detail:"Compare with shuffled labels and shifted event timings."},{label:"IF BOTH PASS",value:"Causal replay.",detail:"Disrupt the proposed response at a traced birth."}]} note="Neither statistical check passed in any of the eleven surviving worlds, so the proposed response was not tested by replay."/>
       <div className="cell80-prose"><p>A population curve rises and falls for many reasons. An arms-race claim needs evidence that one side’s evolutionary change provokes a response on the other.</p><p>The original coupling screen failed. Removing program swaps could not test whether a high swap rate was obscuring a response, because it also removed the predators. The lower, nonzero rates supplied surviving worlds in which the same question could be asked.</p></div>
     </StudyRoom>
@@ -100,7 +104,7 @@ function InventionNotebook() {
 
 export function Cell80Notebook({ record }: { record: PublicationRecord }) {
   const part = cell80Part(record.id);
-  return <NotebookFieldNotes><div className="cell80-notebook cinematic-notebook"><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↓</a><a href="#cell80-record">READ THE FULL NOTE ↓</a><Link href="/thread/cell80">THE THREE QUESTIONS ↗</Link></nav><p className="cell80-reading-key">Dotted terms have short explanations.</p>{part === 1 ? <ReplayNotebook/> : part === 2 ? <SurvivalNotebook/> : <InventionNotebook/>}<PriorWork part={part}/><ReadingRecord record={record}/></div></NotebookFieldNotes>;
+  return <NotebookFieldNotes><div className="cell80-notebook cinematic-notebook"><Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↓</a><a href="#cell80-record">READ THE FULL NOTE ↓</a><Link href="/thread/cell80">ALL SIX NOTES ↗</Link></nav><p className="cell80-reading-key">Dotted terms have short explanations.</p>{part === 1 ? <ReplayNotebook/> : part === 2 ? <SurvivalNotebook/> : <InventionNotebook/>}<Cell80Connection id={record.id}/><PriorWork part={part}/><ReadingRecord record={record}/></div></NotebookFieldNotes>;
 }
 
 export function Cell80Card({ part, compact = false }: { part: number; compact?: boolean }) {

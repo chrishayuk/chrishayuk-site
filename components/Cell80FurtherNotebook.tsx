@@ -1,7 +1,9 @@
+import { Cell80TimingGate, Cell80InheritanceGate } from "./Cell80EvidencePath";
+import { Cell80Journey, Cell80Connection } from "./Cell80Journey";
 import Link from "next/link";
 import barrierIndex from "@/lib/data/cell80-barrier-index.json";
 import inheritedHistory from "@/lib/data/cell80-inherited-history.json";
-import { StudyRoom, StudySequence, StudyMeasures } from "@chrishayuk/hause/components/exhibition/Study";
+import { StudyRoom, StudyMeasures } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { Question } from "@chrishayuk/hause/components/forms/Question";
 import { EvidenceTable } from "@chrishayuk/hause/components/EvidenceTable";
@@ -29,7 +31,7 @@ function Barrier() {
       <div className="cell80-prose"><p>The same program could appear with or without the nutrient. But without that food, it never became established. The later mutation tested here changes <Meaning term="uptake">food intake</Meaning>, which also carries an energy cost.</p></div>
     </StudyRoom>
     <StudyRoom label="THE NEXT CHANGE ARRIVED EARLY" title={<>Evolution moved.<br/><em>The test was not ready.</em></>} tone="accent">
-      <StudySequence label="TWO WORLDS / INCREASED FOOD INTAKE → CAPABILITY ESTABLISHED" steps={[{label:"SEED OFFSET +5",value:"2,050 → 2,069",detail:"The food-intake change arrived 19 ticks before establishment."},{label:"SEED OFFSET +6",value:"560 → 564",detail:"The food-intake change arrived four ticks before establishment."}]} note="Established meant occupying at least 20% of the 256 places for 50 consecutive time steps. The rule required the food-intake change to come after that point. Both arrived too early."/>
+      <Cell80TimingGate/>
       <StudyMeasures label="THE REGISTERED DEPENDENCE TEST" items={[{value:"0",label:"sequences that met the timing rule"},{value:"0",label:"dependence tests run"}]} note="With no qualifying sequence, I could not test whether the later change needed the earlier capability. That question remained untested."/>
       <div className="cell80-prose"><p>The new capability appeared, but the <Meaning term="gate">pass conditions</Meaning> were not met. The next experiment asked whether a capability could support another useful change before becoming established.</p></div>
       <Link className="text-link" href="/notebook/an-advantage-needs-a-chance-to-become-history">FOLLOW THE OPPORTUNITY ↗</Link>
@@ -54,6 +56,7 @@ function InheritedHistory() {
       <FieldNotes label="How did I test whether the changes helped?" detail="READ +"><div className="cell80-prose"><p>Four versions: neither change, resource-processing capability alone, high uptake alone, and both. Each candidate was tested in its actual birth-time ecology and in standardized worlds. Ten paired futures per context, with further mutation off.</p><p>The passing EX-12 case showed capability benefit in 9/10 futures and later uptake benefit with that capability in 10/10, in both contexts. Uptake alone did no better than the ancestor in 10/10. Required interaction counts and mean signs also passed. The two contexts remain separate; shared standardized cases are not independent discoveries.</p></div></FieldNotes>
     </StudyRoom>
     <StudyRoom label="BACK TO THE DESCENDANT / EX-13" title={<>Six wins.<br/><em>Four empty futures.</em></>} tone="accent">
+      <Cell80InheritanceGate/>
       <StudyMeasures label="200 STEPS AFTER BIRTH / TEN MATCHED COMPARISONS" items={[{value:"6",label:"comparisons supported dependence"},{value:"4",label:"comparisons produced no offspring"},{value:"8",label:"wins required"}]} note="I chose the living descendant with the lowest ID before running its tests. All four versions produced zero offspring in each of the four tied comparisons."/>
       <div className="cell80-prose"><p>The changes had been inherited. The later test still failed: it needed eight successful comparisons, and got six. In the other four, every version left no offspring.</p></div>
     </StudyRoom>
@@ -61,8 +64,8 @@ function InheritedHistory() {
       <Cell80Realization/>
       <div className="cell80-prose"><p>When either version reproduced, the later change helped often enough to pass the new test’s 80% requirement. That does not erase the futures where neither reproduced, or change the earlier test’s result.</p></div>
     </StudyRoom>
-    <StudyRoom label="EX-15 / REPLICATION PENDING" title={<>One history.<br/><em>Can it happen again?</em></>}>
-      <Question text="Can evolution produce this whole sequence again?" status="OPEN" detail="EX-15 seeks at least three independently evolved cases: a useful capability, a later change that needs it, descendants carrying both, and a benefit that still appears in later tests. As checked on 10 September 2026, it has no reported outcome."/>
+    <StudyRoom label="THE NEXT QUESTION IN THIS RECORD / EX-15" title={<>One history.<br/><em>Can it happen again?</em></>}>
+      <Question text="Can evolution produce this whole sequence again?" status="OPEN" detail="EX-15 seeks at least three independently evolved cases: a useful capability, a later change that needs it, descendants carrying both, and a benefit that still appears in later tests. The source snapshot checked on 10 September 2026 records no outcome; these assays do not establish independent replication."/>
       <div className="cell80-prose"><p>I have not tested whether these descendants can add a third change that depends on the first two. Nor have I shown that the first capability was the only historical route to this outcome. Those are further questions.</p></div>
     </StudyRoom>
   </>;
@@ -70,9 +73,9 @@ function InheritedHistory() {
 
 export function Cell80FurtherNotebook({record}:{record:PublicationRecord}) {
   return <NotebookFieldNotes><div className="cell80-notebook cinematic-notebook">
-    <nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↓</a><a href="#cell80-record">READ THE FULL NOTE ↓</a><Link href="/thread/cell80#further-notes">CELL80 / FURTHER NOTES ↗</Link></nav><p className="cell80-reading-key">Dotted terms have short explanations.</p>
+    <Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↓</a><a href="#cell80-record">READ THE FULL NOTE ↓</a><Link href="/thread/cell80#further-notes">ALL SIX NOTES ↗</Link></nav><p className="cell80-reading-key">Dotted terms have short explanations.</p>
     {cell80FurtherPart(record.id) === 1 ? <Barrier/> : <InheritedHistory/>}
-    <section className="cell80-reading-record" id="cell80-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
+    <Cell80Connection id={record.id}/><section className="cell80-reading-record" id="cell80-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
   </div></NotebookFieldNotes>;
 }
 

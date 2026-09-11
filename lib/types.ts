@@ -1,4 +1,4 @@
-export type Status = "OPEN" | "PROPOSED" | "TESTING" | "ONGOING" | "SUPPORTED" | "PARTIALLY SUPPORTED" | "NOT SUPPORTED" | "REFUTED" | "SUPERSEDED" | "ARCHIVED";
+export type Status = "OPEN" | "PROPOSED" | "TESTING" | "ONGOING" | "SUPPORTED" | "PARTIALLY SUPPORTED" | "NOT SUPPORTED" | "BOUND" | "REFUTED" | "SUPERSEDED" | "ARCHIVED";
 export type Act =
   | { kind: "statement"; text: string }
   | { kind: "observation"; label?: string; text: string; references?: { label: string; url: string }[] }

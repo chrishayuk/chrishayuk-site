@@ -74,16 +74,21 @@ test("survival and coupling remain separate endpoints",()=>{
   assert.equal(extinction.label_p,null);
 });
 
-test("three drafts resolve in reading order without becoming published snapshots",()=>{
-  const ids=['N-CELL80-01','N-CELL80-02','N-CELL80-03'];
+test("six drafts resolve in reading order without becoming published snapshots",()=>{
+  const ids=['N-CELL80-01','N-CELL80-02','N-CELL80-03','N-CELL80-BARRIER','N-CELL80-HISTORY','N-CELL80-BOUND'];
   assert.deepEqual(cell80Thread.steps.map(s=>s.id),ids);
   assert.equal(threadPosition(ids[0])?.previous,undefined);
   assert.equal(threadPosition(ids[0])?.next?.id,ids[1]);
-  assert.equal(threadPosition(ids[2])?.next,undefined);
+  assert.equal(threadPosition(ids[5])?.next,undefined);
+  for (let i = 0; i < ids.length; i++) {
+    assert.equal(threadPosition(ids[i])?.previous?.id, ids[i-1]);
+    assert.equal(threadPosition(ids[i])?.next?.id, ids[i+1]);
+  }
   for(const id of ids){
     const record=getRecord(id)!;
     assert.equal(record.publication,'draft');
-    assert.ok(record.sources.some(s=>s.url?.startsWith('https://')));
+    assert.ok(record.sources.some(s=>s.url?.startsWith('/data/cell80/')));
+    if (ids.indexOf(id) < 3) assert.ok(record.sources.some(s=>s.url?.startsWith('https://')));
     assert.ok(!publishedRecords().some(r=>r.id===id));
   }
 });
@@ -231,4 +236,25 @@ test("EX-13 family playback preserves every recorded step and distinguishes a fa
   assert.deepEqual([endOfFamily[2],endOfFamily[4],endOfFamily[5],endOfFamily[3]],[0,0,0,239]);
   assert.deepEqual([inheritedHistory.frames.at(-1)![2],inheritedHistory.frames.at(-1)![3]],[0,235]);
   assert.deepEqual(JSON.parse(await readFile(new URL('../public/data/cell80/inherited-history.json',import.meta.url),'utf8')),inheritedHistory);
+});
+
+
+test("AP-2 control charts retain the raw measurements and archived hashes", async () => {
+  const read = async (file: string) => readFile(new URL(`../${file}`, import.meta.url));
+  const raw = JSON.parse(gunzipSync(await read('public/data/cell80/bound/ap2-encapsulation.json.gz')).toString());
+  const chart = JSON.parse((await read('lib/data/cell80-bound-controls.json')).toString());
+  assert.deepEqual(chart.enzyme, raw.enzyme_test);
+  const rows = raw.flux_from_ancestor.modules.filter((row: {role: string}) => ['enzyme', 'structure-matched control'].includes(row.role));
+  assert.equal(chart.controls.length, 9);
+  for (const [i, row] of chart.controls.entries()) {
+    for (const [key, value] of Object.entries(row)) assert.deepEqual(value, rows[i][key]);
+    assert.equal(row.built_on_unreachable_before, 27888);
+  }
+  assert.equal(chart.controls.filter((r: {newly_reachable_within_3: number}) => r.newly_reachable_within_3 > chart.controls[0].newly_reachable_within_3).length, 2);
+  const index = JSON.parse((await read('public/data/cell80/bound/index.json')).toString());
+  for (const source of index.provenance) {
+    const bytes = await read(`public/data/cell80/${source.file}`);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), source.sha256, source.file);
+    if (source.rawSha256) assert.equal(createHash('sha256').update(gunzipSync(bytes)).digest('hex'), source.rawSha256);
+  }
 });

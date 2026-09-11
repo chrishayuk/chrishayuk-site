@@ -1,3 +1,4 @@
+import { cell80Journey } from "./cell80-journey.ts";
 import { getRecord, recordPath, isListed } from "./records.ts";
 
 export const memoryStudy = {
@@ -45,14 +46,10 @@ const listedStep = (step: ThreadStep) => {
 export const mapThread = { ...composedThread, steps: composedThread.steps.filter(listedStep) };
 export const cell80Thread = {
   id: "THREAD-CELL80", slug: "cell80", title: "A world that can be questioned.",
-  path: "/thread/cell80", version: "0.2", created: "2026-09-09",
-  abstract: "Three questions asked of a small evolutionary world: what changed its history, what keeps it alive, and whether one advance can make another possible.",
-  context: "Personal experiments around established artificial-life questions. Follow the recorded interventions, read the limits, and see what remains open.",
-  steps: ([
-    { id: "N-CELL80-01", label: "REPLAY THE WORLD", text: "One birth changes two inherited fields. Undo only the reproduction-program change, then examine the recorded outcome." },
-    { id: "N-CELL80-02", label: "KEEP IT ALIVE", text: "Program variation sustains predators and grazers in the tested conditions. Survival and a detected arms race remain separate claims." },
-    { id: "N-CELL80-03", label: "ASK WHAT IT CAN BUILD", text: "Compare useful programs, new movement choices, and whether one improvement makes the next more useful. Follow the later experiments in two further notes." },
-  ] as ThreadStep[]).filter(listedStep),
+  path: "/thread/cell80", version: "0.3", created: "2026-09-09",
+  abstract: "Six connected notes from a small evolutionary world: replay a birth, keep an ecology alive, test an improvement, follow an inheritance, and ask what survives the controls.",
+  context: "Start with any question, or follow the whole experiment. The first three notes study movement and ecology; the next two use a new food-processing world. The closing note tests what the design itself made possible. These are different assays, not one continuous simulation.",
+  steps: cell80Journey.map<ThreadStep>(step => ({ id: step.id, label: step.question.toUpperCase(), text: `${step.finding} ${step.bridge}` })).filter(listedStep),
 };
 export const threads = [mapThread, cell80Thread];
 export function resolveThreadStep(step: ThreadStep) {
