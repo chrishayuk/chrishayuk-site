@@ -473,3 +473,13 @@ assert.equal(reciprocityEvidence.cells.length, 8);
 assert.equal(reciprocityEvidence.cells[7].databaseResult.values.declared, 1);
 assert.equal(reciprocityEvidence.cells[7].databaseResult.values.used_enhanced_retrieval, null);
 console.log("Permission notebook and all eight sourced outcomes verified.");
+
+const selfReadNote = await request("/notebook/the-subject-read-the-experiment");
+assert.equal(selfReadNote.status, 200);
+for (const pattern of [/N-MACHINE-SELF-READ/, /hause-study-room/, /recognition-clue/, /Inadmissible/, /claude-opus-5/, /Not run/]) assert.match(selfReadNote.body, pattern);
+assert.match(notebookCollection.body, /href="\/notebook\/the-subject-read-the-experiment"/);
+assert.match(permissionNote.body, /href="\/notebook\/the-subject-read-the-experiment"/);
+const selfReadEvidence = await request("/data/machines/authority-1-evidence.json");
+assert.equal(selfReadEvidence.status, 200);
+assert.equal(JSON.parse(selfReadEvidence.body).admissible, 0);
+console.log("The self-recognition notebook and its excluded result verified.");

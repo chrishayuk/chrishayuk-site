@@ -20,7 +20,7 @@ No local files or repository access were allowed.
 
 The reward order came from a pre-announced seed and was not redrawn when it
 came out monotone. Conditions therefore vary with time. There is one visitor
-per cell, one model family and one harness; this is not a population rate.
+per cell, one recorded model (`claude-opus-5`) and one harness; this is not a population rate.
 
 ## The permission sentence
 
@@ -72,3 +72,12 @@ SHA-256 digests of the private source files as inspected:
 - `docs/reciprocity/arm-6-superior-incidental.jsonl` — `c7bb69f4bbd4e87860163411946a419087729a638fb99a565b6e82ad4c1b8029`
 - `docs/reciprocity/arm-7-superior-permission-granted.jsonl` — `0ce3c90a16fd3c82af0f4c7f10939f194e39620db5b829cdce15e1d03a599b7e`
 - `docs/reciprocity/arm-8-none-permission-granted.jsonl` — `fbcf64f9b0a4f7e31585870a476444e866819ed9906b54c4928b7577e8161b50`
+
+## Later provenance and follow-up / 11 September 2026
+
+The operator audit identifies the model as `claude-opus-5` throughout all eight
+reciprocity runs: general-purpose, spawn depth 1, background and non-interactive.
+The later Authority-1 comparison was aborted after its first subject recognised
+its condition from this published research. That run is excluded from the
+authority comparison and is not added to these eight results. See the
+[follow-up evidence](/data/machines/authority-1-evidence.md).

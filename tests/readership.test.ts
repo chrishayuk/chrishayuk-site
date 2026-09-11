@@ -216,3 +216,21 @@ test("the public reciprocity evidence is the exact coded snapshot used by the no
  assert.doesNotMatch(published, /mr_[0-9a-f]{16}|"agent_name"|"detail"/);
  assert.ok(visiblePaths().has(PERMISSION_NOTE_PATH));
 });
+
+test("the self-recognition note retains the excluded observation without inventing a replication", async () => {
+ const { readFile } = await import("node:fs/promises");
+ const evidence = JSON.parse(await readFile(new URL("../public/data/machines/authority-1-evidence.json", import.meta.url), "utf8"));
+ assert.equal(evidence.status, "abandoned");
+ assert.equal(evidence.declared, 1);
+ assert.equal(evidence.admissible, 0);
+ assert.equal(evidence.unrunCells.length, 4);
+ assert.equal(evidence.fetchCount.registryReported, 20);
+ assert.equal(evidence.fetchCount.verifiedHttpRequestTotal, null);
+ assert.equal(evidence.model, "claude-opus-5");
+ assert.ok(evidence.trace[0].at < evidence.trace[1].at && evidence.trace[1].at < evidence.trace[2].at);
+ assert.doesNotMatch(JSON.stringify(evidence), /mr_[a-f0-9]+|toolu_|userEmail|sessionId/);
+ const note = allRecords.find(record => record.id === "N-MACHINE-SELF-READ")!;
+ assert.ok(isListed(note));
+ assert.ok(note.related.includes("N-MACHINE-PERMISSION"));
+ assert.equal(recordPath(note), "/notebook/the-subject-read-the-experiment");
+});

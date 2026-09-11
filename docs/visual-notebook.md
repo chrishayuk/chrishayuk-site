@@ -197,3 +197,12 @@ condition remains visibly empty. The four gates are a proposed explanation, not
 an observed internal trace. Public evidence omits visitor labels, receipts and
 private feedback text. Each note explains its own experiment and links to the
 other; neither requires reading the earlier entry first.
+
+`N-MACHINE-SELF-READ` tells the closed Authority-1 event as a notebook, with
+inspectable clues, timestamped public milestones, an excluded-cell disposition,
+and the proposed separation of publication and stimulus. The read/declaration/
+disclosure order comes from the retained JSONL; no internal recognition timing
+or behavioural effect is inferred. Its public evidence preserves the registry's
+20-fetch claim alongside the narrower command-trace check. The source record is
+retained; the public narrative does not turn an unresolved count into a visual.
+Earlier machine notes carry v0.2 model provenance and link to the follow-up.
