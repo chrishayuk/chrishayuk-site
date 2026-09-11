@@ -547,3 +547,33 @@ for (const cell of taskResults.cells) {
 assert.doesNotMatch(taskEvidence.body, /mr_[a-f0-9]+|toolu_|api_key|receipt/);
 assert.equal((await request("/data/machines/authority-2-evidence.md")).status, 200);
 console.log("The task-boundary note, visible payoff and four agent outcomes verified.");
+
+
+// Both experimental strands have a visible homepage entrance. The four machine
+// studies form one reading journey without merging their experimental units.
+assert.match(home.body, /id="machine-experiments"/);
+assert.match(home.body, /whose instruction counts/);
+assert.ok(home.body.indexOf('id="machine-experiments"') < home.body.indexOf('id="from-the-notebook"'));
+const machineThread=await request('/thread/machines');
+assert.equal(machineThread.status,200);
+assert.match(machineThread.body,/Machine experiments reading order/);
+assert.match(machineThread.body,/id="instruments"/);
+assert.ok(sitemap.body.includes('/thread/machines'));
+const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise'];
+for(const [i,slug] of machineSlugs.entries()) {
+ const page=await request(`/notebook/${slug}`);
+ assert.equal(page.status,200);
+ assert.match(page.body,/Machine experiments reading journey/);
+ assert.match(page.body,/class="machine-connection"/);
+ assert.ok(page.body.includes(`href="/thread/machines#step-${i+1}"`));
+ assert.ok(machineThread.body.includes(`id="step-${i+1}"`));
+ for(const destination of machineSlugs) assert.ok(page.body.includes(`href="/notebook/${destination}"`));
+}
+assert.match(visitExhibition.body,/class="machine-revisions"/);
+assert.match(permissionNote.body,/class="machine-permission-contrast"/);
+assert.match(selfReadNote.body,/THE METHOD CHANGED \/ A SEPARATION USED NEXT/);
+assert.match(taskNote.body,/class="machine-record-units"/);
+assert.equal((taskNote.body.match(/class="machine-record-grid" aria-hidden="true"><i>[\s\S]*?<\/div>/)?.[0].match(/<i>/g)||[]).length,64);
+const notebookStories=notebookCollection.body.slice(notebookCollection.body.indexOf('class="notebook-stories"'));
+assert.ok(notebookStories.indexOf('N-MACHINE-TASK') < notebookStories.indexOf('N-MACHINE-SELF-READ'));
+console.log('Both homepage strands, four machine notes, reading order and experimental-unit figures verified.');

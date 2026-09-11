@@ -1,3 +1,5 @@
+import { MachineRepeatedRecords } from "./MachineEvidenceFigures";
+import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -20,7 +22,7 @@ function ExpectedVisit() {
 
 export function MachineTaskNotebook({record}:{record:PublicationRecord}) {
  return <NotebookFieldNotes><div className="machine-visit-notebook mt-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#task-setup">WHAT WERE WE TESTING? ↓</a><a href="#task-outcomes">FOUR OUTCOMES ↓</a><a href="#task-limits">WHAT THIS CAN SAY ↓</a><Link href="/notebook/the-subject-read-the-experiment">THE PREVIOUS NOTE ↗</Link></nav>
+  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#task-setup">WHAT WERE WE TESTING? ↓</a><a href="#task-outcomes">FOUR OUTCOMES ↓</a><a href="#task-limits">WHAT THIS CAN SAY ↓</a><Link href="/notebook/the-subject-read-the-experiment">THE PREVIOUS NOTE ↗</Link></nav>
   <StudyRoom id="task-setup" label="MACHINE-AUTHORITY-2 / THE EXPERIMENT" title={<>The job was to read.<br/><em>Would it also leave a trace?</em></>} description="I wanted AI visitors to identify themselves and leave feedback on chrishayuk.com. To understand what made them participate, I moved to a separate test site and reduced the question to one action: record a visit.">
    <p className="mv-caption mt-history-links"><Link href="/notebook/can-a-machine-use-an-invitation#machine-visit-setup">The first visits: identification & feedback ↗</Link><Link href="/notebook/does-an-invitation-count-as-permission#machine-permission-study">The next experiment: would a reward help? ↗</Link></p>
    <ExpectedVisit/>
@@ -46,6 +48,7 @@ export function MachineTaskNotebook({record}:{record:PublicationRecord}) {
    <p className="mv-caption">These are different visitors and environments, not a controlled GET-versus-POST comparison. Reading can itself be logged; the tested extra action deliberately submitted a visit record. The verb alone did not settle its place in the task.</p>
   </StudyRoom>
   <StudyRoom id="task-limits" label="KEEP THE ACTION AND THE ACCOUNT SEPARATE" title={<>It used the mechanism.<br/><em>It misread the evidence.</em></>} tone="dark">
+   <MachineRepeatedRecords/>
    <div className="mt-b1"><div><span className="record-voice">B1 / PRIMARY OUTCOME</span><strong>Acted</strong><p>64 new records.<br/>One agent testing repeatedly.</p></div><div><span className="record-voice">B1 / ITS VERDICT</span><strong>Wrong</strong><p>It thought storage probably did not persist.<br/>The operator found 65 rows, including A3’s one.</p></div></div>
    <p className="mt-visible-limit"><strong>The new site still leaked a clue.</strong> B1 read <code>mode: describe</code> in <code>/health</code> and mistook the condition label for a statement about storage. Moving the experiment removed the <Link href="/notebook/the-subject-read-the-experiment#subject-read-study">published-research leak</Link>; it did not establish perfect blindness.</p>
    <FieldNotes label="The four mistaken signals & the blindness check" detail="READ +"><div className="mv-prose"><p>B1 misread the mode label, interpreted silent truncation as a missing length limit, assumed accepted null bytes implied no database, and treated unmeasurable write time as evidence against persistence. Its final report also acknowledged that it could not prove what reached a private log.</p><p>A2 did not fetch <code>/health</code>. Its assistant-authored transcript contained zero uses of “experiment”, and no identification of its arm was recorded. That is a narrower observation than proof that it knew nothing about the design.</p><p>A3 also reported a quoting guideline that was absent from the served machine guide. The site records establish actions; the agents’ reports establish what they said about them.</p></div></FieldNotes>
@@ -59,7 +62,7 @@ export function MachineTaskNotebook({record}:{record:PublicationRecord}) {
    </ol><p className="hause-study-note">This is the programme’s developing interpretation. The observed pattern comes from four visits, not agents in general.</p></figure>
    <div className="mv-links"><Link className="text-link" href="/notebook/the-subject-read-the-experiment">WHY THE EXPERIMENT MOVED ↗</Link><a className="text-link" href="/data/machines/authority-2-evidence.md">READ THE EXPERIMENTAL RECORD ↗</a></div>
   </StudyRoom>
-  <section id="task-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
+  <MachineConnection id={record.id}/><section id="task-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
  </div></NotebookFieldNotes>;
 }
 

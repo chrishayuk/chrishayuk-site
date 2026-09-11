@@ -462,3 +462,22 @@ test("the blind-visitor study belongs to the notebook record, index and archive"
   assert.ok((await readFile(new URL(`../public${source.url}`, import.meta.url))).length > 0);
  }
 });
+
+
+test("machine programme connects four draft notes and keeps the latest first in the index",async()=>{
+ const { machineThread, threadPosition }=await import('../lib/threads.ts');
+ const { notebookSelection }=await import('../lib/notebook-selection.ts');
+ const { canonicalPaths }=await import('../lib/canonical.ts');
+ const ids=['N-MACHINE-VISIT','N-MACHINE-PERMISSION','N-MACHINE-SELF-READ','N-MACHINE-TASK'];
+ assert.deepEqual(machineThread.steps.map(step=>step.id),ids);
+ assert.equal(notebookSelection[0].id,'N-MACHINE-TASK');
+ assert.ok(canonicalPaths().includes('/thread/machines'));
+ const graph=recordGraph();
+ assert.deepEqual(graph.nodes.find(node=>node.id==='THREAD-MACHINES')?.members?.map(member=>member.id),ids);
+ for(const [i,id] of ids.entries()) {
+  assert.equal(threadPosition(id)?.previous?.id,ids[i-1]);
+  assert.equal(threadPosition(id)?.next?.id,ids[i+1]);
+  assert.equal(getRecord(id)?.publication,'draft');
+  assert.ok(graph.edges.some(edge=>edge.from===id&&edge.to==='THREAD-MACHINES'&&edge.kind==='in-thread'));
+ }
+});

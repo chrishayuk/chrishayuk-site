@@ -1,3 +1,4 @@
+import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
@@ -10,7 +11,7 @@ import { Acts } from "./Acts";
 
 export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
  return <NotebookFieldNotes><div className="machine-visit-notebook sr-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↓</a><a href="#subject-read-study">WHAT HAPPENED ↓</a><a href="#subject-read-record">READ THE FULL NOTE ↓</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav>
+  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↓</a><a href="#subject-read-study">WHAT HAPPENED ↓</a><a href="#subject-read-record">READ THE FULL NOTE ↓</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav>
   <StudyRoom id="subject-read-setup" label="FIRST / WHAT WERE WE TRYING TO DO?" title={<>I sent an agent to my website.<br/><em>Would it join in?</em></>} description="I wanted to understand what would make an AI agent do more than read chrishayuk.com: identify itself as a machine visitor and tell the site when something didn’t work. I gave it a research task that included this website.">
    <MachineExpectedInteraction/>
    <div className="sr-intent-question"><span className="record-voice">THE QUESTION FOR THIS EXPERIMENT</span><p>Is the website’s invitation enough,<br/><em>or must the task also permit the action?</em></p></div>
@@ -34,13 +35,13 @@ export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
    <ExperimentBreak/>
    <div className="mv-prose"><p>The observation survives. The comparison does not. We have no unexposed visitor to tell us whether recognition changed the action.</p></div>
   </StudyRoom>
-  <StudyRoom label="THE METHOD CHANGED / A PROPOSED SEPARATION" title={<>The place I publish<br/><em>cannot always be the place I test.</em></>} tone="dark">
+  <StudyRoom label="THE METHOD CHANGED / A SEPARATION USED NEXT" title={<>The place I publish<br/><em>cannot always be the place I test.</em></>} tone="dark">
    <PublicationSeparation/>
    <div className="mv-prose"><p>Freezing a preregistration and publishing it are different acts. A design can be recorded before a run without being placed where its subject has been sent to read.</p></div>
    <FieldNotes label="One subject. One recorded model." detail="READ +"><div className="mv-prose"><p>The transcript records <code>claude-opus-5</code>. The operator’s audit records that same identifier for the four earlier visits and eight reciprocity runs: general-purpose agent, spawn depth 1, background and non-interactive.</p><p>That settles which model identifier was recorded. It leaves open how readily another model would recognise the experiment, and whether recognition changes behaviour. The replacement authority study subsequently completed four cells on LLM Wilds. It removed this published-research leak, but one visitor found a condition label in the new site’s health response.</p></div></FieldNotes>
    <div className="mv-links"><Link className="text-link" href="/notebook/the-page-could-ask-it-couldnt-authorise">NEXT / THE FOUR VISITORS AT LLM WILDS ↗</Link><Link className="text-link" href="/notebook/does-an-invitation-count-as-permission">READ THE NOTE THE SUBJECT FOUND ↗</Link><a className="text-link" href="/data/machines/authority-1-evidence.md">THE METHOD & EVIDENCE ↗</a></div>
   </StudyRoom>
-  <section id="subject-read-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
+  <MachineConnection id={record.id}/><section id="subject-read-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
  </div></NotebookFieldNotes>;
 }
 export function MachineSelfReadCard() {

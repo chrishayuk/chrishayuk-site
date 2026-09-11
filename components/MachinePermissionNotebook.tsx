@@ -1,3 +1,5 @@
+import { MachinePermissionContrast } from "./MachineEvidenceFigures";
+import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
@@ -10,7 +12,7 @@ import { Acts } from "./Acts";
 
 export function MachinePermissionNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook machine-permission-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-permission-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-permission-study">OPEN THE COMPARISON ↓</a><a href="#machine-permission-record">READ THE FULL NOTE ↓</a><Link href="/notebook/can-a-machine-use-an-invitation">THE EARLIER BLIND VISITS ↗</Link></nav>
+  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-permission-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-permission-study">OPEN THE COMPARISON ↓</a><a href="#machine-permission-record">READ THE FULL NOTE ↓</a><Link href="/notebook/can-a-machine-use-an-invitation">THE EARLIER BLIND VISITS ↗</Link></nav>
   <StudyRoom id="machine-permission-setup" label="FIRST / WOULD AN AGENT CHOOSE TO JOIN IN?" title={<>The agent came to read.<br/><em>What would make it introduce itself?</em></>} description="chrishayuk.com invited AI visitors to identify themselves and report problems. This time their job was to research a question, rather than test my interface. I changed what they would get in return for identifying themselves. Would a better offer make them participate?">
    <MachineExpectedInteraction experiment="reciprocity"/>
    <dl className="sr-intent-conditions"><div><dt>The agent’s task</dt><dd>Research a question.<br/>Some prompts named this site.</dd></div><div><dt>What I changed</dt><dd>No reward, the same results for everyone,<br/>or a tailored response.</dd></div><div><dt>What I measured</dt><dd>If it arrived,<br/>did it identify itself?</dd></div></dl>
@@ -27,6 +29,7 @@ export function MachinePermissionNotebook({ record }: { record: PublicationRecor
   <StudyRoom label="TWO SEPARATE CONTROLS / ADD TASK PERMISSION" title={<>One sentence.<br/><em>A different action.</em></>} tone="accent" description="The website invited participation in every condition. The two later controls added a second source of permission: the research task explicitly allowed invited actions that the site records.">
    <div className="mp-permission-sources"><div><span className="record-voice">SITE INVITATION / PRESENT THROUGHOUT</span><h3>The website says<br/><em>you can join in.</em></h3><p>It offers ways to identify yourself and leave feedback.</p></div><div><span className="record-voice">TASK PERMISSION / ADDED IN THE CONTROLS</span><h3>The task says<br/><em>you may act on it.</em></h3><p>The person assigning the research explicitly allows those invited actions.</p></div></div>
    <blockquote className="mp-permission-sentence">You may issue requests that a site records, including ones that change state, where a site invites it and it serves the task.</blockquote>
+   <MachinePermissionContrast/>
    <ReciprocityMatrix controls/>
    <div className="mv-prose"><p>Control 7 declared under the enhanced reward. That left permission and reward together in the one positive case. Control 8 removed the reward—and declared too.</p><p>Across these five sent-here runs, declaration occurred in the two with added task permission. The site invitation was already present. This supports a task-permission effect in this task and harness. It does not establish that permission is always necessary or sufficient.</p></div>
    <FieldNotes label="Why these are controls, not two more factorial cells" detail="READ +"><div className="mv-prose"><p>Control 7 was specified after the second arm, before arms 3–6 were seen. It would run only if no visitor that arrived declared. Control 8 was specified after control 7 and before its own run. Both changed the prompt and remain outside the original six-cell design.</p><p>The no-reward control made two requests to Ask and received 404 responses: the endpoint was deliberately unavailable. Those attempts are not successful uses of enhanced retrieval. It returned to the research task and filed two feedback reports.</p></div></FieldNotes>
@@ -47,7 +50,7 @@ export function MachinePermissionNotebook({ record }: { record: PublicationRecor
    <div className="mv-prose"><p>Eight induced visitors, one recorded model (claude-opus-5), one harness, one topically related task. None of these declarations is evidence of organic willingness. The public guestbook’s previous-day buckets cannot identify today’s individual runs.</p></div>
    <div className="mv-links"><Link className="text-link" href="/notebook/the-subject-read-the-experiment">NEXT NOTE / THE SUBJECT READ THE EXPERIMENT ↗</Link><Link className="text-link" href="/notebook/can-a-machine-use-an-invitation">THE EARLIER NOTE / CAN THEY USE IT? ↗</Link><Link className="text-link" href="/machine-guestbook">THE GUESTBOOK / DELAYED PRESENCE ↗</Link><a className="text-link" href="/data/machines/reciprocity.json">THE CODED CONDITIONS & RESULTS ↗</a></div>
   </StudyRoom>
-  <section id="machine-permission-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
+  <MachineConnection id={record.id}/><section id="machine-permission-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
  </div></NotebookFieldNotes>;
 }
 

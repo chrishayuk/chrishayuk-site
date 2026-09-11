@@ -1,0 +1,72 @@
+/* Closed experiment records and entrances to the live instruments. */
+.machine-journey{margin:12px 0 30px;border-block:1px solid var(--rule)}
+.machine-journey>div{display:flex;justify-content:space-between;gap:15px;padding:16px 0;font-size:9px;color:var(--muted)}
+.machine-journey ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0}
+.machine-journey li+li{border-left:1px solid var(--rule)}
+.machine-journey li>a{display:block;padding:16px 20px 22px;height:100%;text-decoration:none}
+.machine-journey li .record-voice{display:flex;justify-content:space-between;font-size:10px}
+.machine-journey strong{display:block;font:clamp(20px,2.2vw,28px)/1.3 var(--font-fraunces);margin-top:14px}
+.machine-journey [aria-current=page]{background:var(--fg);color:var(--bg)}
+.machine-journey a:focus-visible,.machine-journey a:hover{outline:2px solid var(--accent);outline-offset:-2px}
+.machine-connection{margin:40px 0 60px;padding:30px clamp(20px,4vw,50px);border-left:3px solid var(--accent);background:var(--rule)}
+.machine-connection>p{font:clamp(23px,3vw,36px)/1.4 var(--font-fraunces);max-width:44ch;margin:22px 0}
+.machine-connection>a{font-size:12px;line-height:1.7}
+.machine-home-feature{padding:clamp(45px,7vw,100px) var(--margin);border-block:1px solid var(--rule);background:var(--bg);color:var(--fg)}
+.machine-home-heading{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(25px,6vw,90px);align-items:end}
+.machine-home-heading h2{font:clamp(36px,5.3vw,78px)/1.06 var(--font-fraunces);letter-spacing:-.04em;max-width:23ch;margin-top:28px}
+.machine-home-heading>div>p:not(.kicker){font:17px/1.8 var(--font-inter);max-width:48ch;margin:18px 0}
+.machine-home-heading .inline-links{margin-top:26px;gap:20px}
+.machine-home-places{display:flex;flex-wrap:wrap;gap:10px 30px;border-top:1px solid var(--rule);padding-top:22px;font-size:10px}
+.machine-home-places>a{display:inline-flex;align-items:center;min-height:44px}
+.machine-outcome-strip{margin:45px 0 30px}
+.machine-outcome-strip>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:24px;border-block:1px solid var(--rule)}
+.machine-outcome-strip>div>a{padding:24px;display:flex;flex-direction:column;align-items:flex-start;gap:14px;text-decoration:none;min-width:0}
+.machine-outcome-strip>div>a+a{border-left:1px solid var(--rule)}
+.machine-outcome-strip a:hover,.machine-outcome-strip a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.machine-outcome-strip .record-voice{font-size:10px;line-height:1.7}
+.machine-subject-mark{display:block;width:38px;height:38px;border-radius:50%;border:2px solid currentColor;background:none;flex-shrink:0}
+.machine-subject-mark[data-acted=true]{background:currentColor}
+.machine-outcome-strip strong{font:clamp(21px,2.5vw,34px)/1.2 var(--font-fraunces)}
+.machine-outcome-strip small{font:12px var(--font-geist-mono);color:var(--muted)}
+.machine-outcome-strip .mv-caption{max-width:85ch;margin-top:20px}
+.machine-instruments{padding:65px var(--margin);border-block:1px solid var(--rule);scroll-margin-top:100px}
+.machine-instruments h2{font:clamp(35px,5vw,65px)/1.1 var(--font-fraunces);margin:24px 0 40px}
+.machine-instruments>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px}
+.machine-instruments>div>a{display:block;border-top:1px solid var(--rule);padding:24px 0}
+.machine-instruments>div>a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.machine-instruments h3{font:25px/1.25 var(--font-fraunces);margin:18px 0}
+.machine-instruments .record-voice{font-size:10px}
+.machine-instruments a>p{font:14px/1.8 var(--font-inter);color:var(--muted)}
+.machine-thread-latest{padding:0 var(--margin)}
+.machine-thread .thread-intro h1{max-width:20ch}
+.machine-thread .thread-ending h2{font:clamp(38px,6vw,82px)/1.1 var(--font-fraunces);margin:28px 0}
+.machine-revisions{margin:30px 0 45px}
+.machine-revisions ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;list-style:none;padding:0;margin:28px 0}
+.machine-revisions li{min-width:0}
+.machine-revisions .record-voice{font-size:9px}
+.machine-revision-mark{display:flex;align-items:center;gap:18px;margin:24px 0}
+.machine-revision-mark>i{display:block;width:30px;height:30px;border:1px solid currentColor;border-radius:50%;flex-shrink:0}
+.machine-revision-mark>span{flex:1;border-bottom:1px solid var(--rule);text-align:right}
+.machine-revisions strong{font:24px/1.3 var(--font-fraunces)}
+.machine-revisions li>p{font:14px/1.7 var(--font-inter);color:var(--muted);margin-top:14px}
+.machine-permission-contrast{margin:35px 0}
+.machine-permission-contrast>div{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;margin:25px 0}
+.machine-permission-contrast>div>div{padding-top:22px;border-top:1px solid var(--fg)}
+.machine-permission-contrast h3{font:26px/1.3 var(--font-fraunces);margin-bottom:12px}
+.machine-permission-contrast p{font:14px/1.7 var(--font-inter)}
+.machine-contrast-subjects{display:flex;gap:16px;margin-top:28px}
+.machine-contrast-subjects>div{flex:1;min-width:0}
+.machine-contrast-subjects strong{display:block;font:16px/1.5 var(--font-inter);margin:12px 0 6px}
+.machine-contrast-subjects small{font:10px/1.5 var(--font-geist-mono)}
+.machine-record-units{margin:30px 0 50px}
+.machine-record-units>div{display:grid;grid-template-columns:1fr 50px 1.5fr;gap:30px;align-items:center;margin:30px 0}
+.machine-unit-subject{display:flex;flex-direction:column;gap:15px;align-items:flex-start}
+.machine-unit-subject>strong{font:clamp(70px,10vw,140px)/1 var(--font-fraunces)}
+.machine-unit-subject>span:last-child{font:18px/1.6 var(--font-inter);max-width:20ch}
+.machine-unit-arrow{font-size:36px}
+.machine-record-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:7px;border:1px solid var(--rule);padding:16px;max-width:420px}
+.machine-record-grid>i{aspect-ratio:1;background:var(--accent)}
+.machine-record-grid+p{font:16px/1.7 var(--font-inter);margin:16px 0 0}
+.machine-record-grid+p>strong{font:34px var(--font-fraunces);color:var(--accent)}
+@media(max-width:800px){.machine-home-heading{grid-template-columns:1fr;gap:15px}.machine-home-heading h2{max-width:24ch}.machine-instruments>div{grid-template-columns:1fr 1fr}.machine-outcome-strip>div>a{padding:20px 14px}.machine-revisions ol{grid-template-columns:1fr 1fr;gap:25px}.machine-permission-contrast>div{grid-template-columns:1fr}.machine-journey strong{font-size:20px}.machine-journey li>a{padding:16px 12px}}
+@media(max-width:520px){.machine-journey>div{flex-wrap:wrap}.machine-journey ol{grid-template-columns:1fr 1fr}.machine-journey li:nth-child(3){border-left:0}.machine-journey li:nth-child(n+3){border-top:1px solid var(--rule)}.machine-outcome-strip>div{grid-template-columns:1fr 1fr}.machine-outcome-strip>div>a:nth-child(3){border-left:0}.machine-outcome-strip>div>a:nth-child(n+3){border-top:1px solid var(--rule)}.machine-instruments>div{gap:20px}.machine-instruments h3{font-size:23px}.machine-record-units>div{grid-template-columns:1fr 22px 1.3fr;gap:12px}.machine-unit-arrow{font-size:22px}.machine-unit-subject>span:last-child{font-size:14px}.machine-record-grid{gap:4px;padding:8px}.machine-record-grid+p{font-size:12px}.machine-record-grid+p>strong{font-size:28px}.machine-contrast-subjects strong{font-size:14px}}

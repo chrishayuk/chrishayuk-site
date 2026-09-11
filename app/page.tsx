@@ -1,3 +1,4 @@
+import { MachineHomeFeature } from "@/components/MachineProgramme";
 import Link from "next/link";
 import { Cell80HomePreview } from "@/components/Cell80HomePreview";
 import { Cell80Card } from "@/components/Cell80Notebook";
@@ -38,6 +39,8 @@ export default function Home() {
    <div className="home-moe-introduction"><Kicker>LATEST APPEARANCE / IBM</Kicker><h2 id="latest-moe-heading">Mixture<br/>{" "}<em>of Experts.</em></h2><p className="record-voice">WITH CHRIS HAY AS A PANELIST</p><TextLink href="/film/mixture-of-experts">THE COLLECTION</TextLink></div>
    <div className="home-moe-film"><p className="record-voice home-episode-meta">EPISODE {latestMoe.episode} · {latestMoe.published} · {durationLabel(latestMoe.duration)}</p><FilmPlayer video={latestMoe}/><h3><Link href={videoPath(latestMoe)}>{latestMoe.title}</Link></h3></div>
   </section>
+
+  <MachineHomeFeature/>
 
   <section id="from-the-notebook" className="notebook-scene notebook-feature" data-scene="latest-notebook" data-hause-act="connection" aria-labelledby="notebook-feature-heading">
    <div className="notebook-feature-visual">{notebook.id === "N-CELL80-01" ? <Cell80HomePreview href={notebookPath}/> : cell80Part(notebook.id) ? <Cell80Card part={cell80Part(notebook.id)}/> : notebook.id === "N-EXHIBITION" ? <Media id="notebook-exhibition"/> : notebook.id === "N-ATTRIBUTION" ? <AgentAttributionCard/> : notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{cell80Part(notebook.id) ? "CELL80 / TWO RECORDED WORLDS · OPEN THE NOTE TO PLAY" : notebook.id === "N-EXHIBITION" ? "FROM THE EXHIBITION / THE SPACE AROUND AN IDEA" : notebook.id === "N-ATTRIBUTION" ? "FROM THE REPOSITORY / ONE REQUIRED AUTHORITY GATE" : notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>

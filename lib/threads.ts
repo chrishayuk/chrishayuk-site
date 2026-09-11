@@ -1,3 +1,4 @@
+import { machineJourney } from "./machine-journey.ts";
 import { cell80Journey } from "./cell80-journey.ts";
 import { getRecord, recordPath, isListed } from "./records.ts";
 
@@ -51,7 +52,14 @@ export const cell80Thread = {
   context: "Start with any question, or follow the whole experiment. The first three notes study movement and ecology; the next two use a new food-processing world. The closing note tests what the design itself made possible. These are different assays, not one continuous simulation.",
   steps: cell80Journey.map<ThreadStep>(step => ({ id: step.id, label: step.question.toUpperCase(), text: `${step.finding} ${step.bridge}` })).filter(listedStep),
 };
-export const threads = [mapThread, cell80Thread];
+export const machineThread = {
+  id: "THREAD-MACHINES", slug: "machines", title: "The website asks. Whose instruction counts?",
+  path: "/thread/machines", version: "0.1", created: "2026-09-12",
+  abstract: "An invitation became a usability test, then a question about rewards, permission and task scope. Follow four experiments in which AI visitors helped change the site—and sometimes recognised the research itself.",
+  context: "Four recorded studies, one recorded model, different tasks and site revisions. Follow the experiments in reading order, or start with the latest comparison. Declarations, stored visits, reported reasons and HTTP contacts remain different kinds of evidence.",
+  steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.finding} ${step.bridge}` })).filter(listedStep),
+};
+export const threads = [mapThread, cell80Thread, machineThread];
 export function resolveThreadStep(step: ThreadStep) {
   const study = demoStudies.find(s => s.id === step.id);
   if (study) return { ...step, title: study.title, url: study.url, kind: "interactive study",

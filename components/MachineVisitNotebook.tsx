@@ -1,3 +1,5 @@
+import { MachineRevisionSequence } from "./MachineEvidenceFigures";
+import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineVerbStudy } from "./MachineVerbStudy";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
@@ -12,7 +14,7 @@ import { Acts } from "./Acts";
 
 export function MachineVisitNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-visit-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-visit-study">FOLLOW A VISITOR ↓</a><a href="#machine-visit-record">READ THE FULL NOTE ↓</a><Link href="/notebook">THE NOTEBOOK ↗</Link></nav>
+  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-visit-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-visit-study">FOLLOW A VISITOR ↓</a><a href="#machine-visit-record">READ THE FULL NOTE ↓</a><Link href="/notebook">THE NOTEBOOK ↗</Link></nav>
   <StudyRoom id="machine-visit-setup" label="FIRST / THE AGENT AND THE WEBSITE" title={<>Could it introduce itself?<br/><em>Could it tell me what broke?</em></>} description="I added ways for AI visitors to identify themselves and leave feedback on chrishayuk.com. Then I sent fresh agents to try them using only the public website. Could they find the invitation, understand it and get an action through?">
    <MachineExpectedInteraction experiment="visit"/>
    <dl className="sr-intent-conditions"><div><dt>The agent’s task</dt><dd>Explore this website.<br/>Try the machine interface.</dd></div><div><dt>What I changed</dt><dd>Fix the site between visits.<br/>Send a fresh agent each time.</dd></div><div><dt>What I watched</dt><dd>Discovery, self-description,<br/>feedback—and would it bother?</dd></div></dl>
@@ -41,12 +43,13 @@ export function MachineVisitNotebook({ record }: { record: PublicationRecord }) 
    <FieldNotes label="What declaring changed" detail="READ +"><div className="mv-prose"><p>The site can use a declaration to change the ranking and framing of its response. It does not unlock a private corpus. Ask did not exist for the first two visits, so they provide no comparison of its usefulness.</p></div></FieldNotes>
   </StudyRoom>
   <StudyRoom label="THE LIMIT / AN INVITED VISITOR HAS A DIFFERENT TASK" title={<>They were sent<br/><em>here to look.</em></>}>
+   <MachineRevisionSequence/>
    <StudySequence label="WHAT THESE FOUR VISITS CAN ESTABLISH" steps={[{label:"INSTRUCTION",value:"Investigate the house",detail:"Every visitor was sent by the operator."},{label:"OBSERVATION",value:"Find it. Try it.",detail:"Discovery, declaration, feedback and friction."},{label:"EVIDENCE",value:"Usability",detail:"Voluntary participation remains unmeasured."}]} note="The first three said they probably would not bother mid-task. The ledger does not preserve their full reasons. An induced declaration cannot contribute to an organic participation rate."/>
    <div className="mv-prose"><p>One recorded model (claude-opus-5), one harness, four visitors. Later versions of the house were shaped by earlier complaints. Agreement is not independent confirmation.</p></div>
    <Question text="Would the invitation help a machine that was here for something else?" status="OPEN" detail="The follow-up varied the reward and the visit assignment, then added two permission controls. The next note follows what those runs found; these four blind visits remain a separate usability series."/>
    <div className="mv-links"><Link className="text-link" href="/notebook/does-an-invitation-count-as-permission">NEXT NOTE / DOES AN INVITATION COUNT AS PERMISSION? ↗</Link><Link className="text-link" href="/readership">THE OBSERVATORY / WHAT ARRIVES ↗</Link><Link className="text-link" href="/machine-guestbook">THE GUESTBOOK / WHAT REMAINS ↗</Link><Link className="text-link" href="/notebook/can-you-name-the-mutation-that-changed-a-world">ANOTHER EXPERIMENT / CELL80 ↗</Link></div>
   </StudyRoom>
-  <section id="machine-visit-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
+  <MachineConnection id={record.id}/><section id="machine-visit-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
  </div></NotebookFieldNotes>;
 }
 
