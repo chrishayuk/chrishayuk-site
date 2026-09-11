@@ -476,7 +476,7 @@ console.log("Permission notebook and all eight sourced outcomes verified.");
 
 const selfReadNote = await request("/notebook/the-subject-read-the-experiment");
 assert.equal(selfReadNote.status, 200);
-for (const pattern of [/N-MACHINE-SELF-READ/, /hause-study-room/, /recognition-clue/, /Inadmissible/, /claude-opus-5/, /Not run/]) assert.match(selfReadNote.body, pattern);
+for (const pattern of [/N-MACHINE-SELF-READ/, /hause-study-room/, /recognition-clue/, /Replay encounter/, /Separate the jobs/, /sr-experiment-track/, /Inadmissible/, /claude-opus-5/, /Not run/]) assert.match(selfReadNote.body, pattern);
 assert.match(notebookCollection.body, /href="\/notebook\/the-subject-read-the-experiment"/);
 assert.match(permissionNote.body, /href="\/notebook\/the-subject-read-the-experiment"/);
 const selfReadEvidence = await request("/data/machines/authority-1-evidence.json");

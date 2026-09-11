@@ -206,3 +206,12 @@ or behavioural effect is inferred. Its public evidence preserves the registry's
 20-fetch claim alongside the narrower command-trace check. The source record is
 retained; the public narrative does not turn an unresolved count into a visual.
 Earlier machine notes carry v0.2 model provenance and link to the follow-up.
+
+The self-reading note's v0.2 follows Cell80's instrument-first treatment: a
+HAUSE-coordinated four-stage encounter (with a complete still state), matching
+excerpts on facing pages, selectable positions in the aborted experiment, and
+a switch between the observed publication collision and the proposed separation.
+Playback compresses recorded event order, never inventing a recognition timestamp.
+The provenance timeline and unresolved request count remain in field notes.
+Reduced-motion readers retain the final encounter state and all manual controls;
+motion stops when the page is hidden or another HAUSE instrument takes ownership.

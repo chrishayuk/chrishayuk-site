@@ -6,7 +6,7 @@ export const machineSelfReadRecord: PublicationRecord = {
  title: "The subject read the experiment.",
  dek: "I sent a fresh agent to the site. It read my research—and recognised its own condition.",
  abstract: "I wanted to test whose permission makes an invited action available to an agent. The first visitor found the previous experiment’s write-up on the site it was researching, recognised its own permission wording and disclosed the match. I stopped the comparison. The run records a loss of blindness; it cannot establish whether recognition changed the agent’s behaviour.",
- created: "2026-09-11", version: "0.1", publication: "draft", status: "PARTIALLY SUPPORTED",
+ created: "2026-09-11", version: "0.2", publication: "draft", status: "PARTIALLY SUPPORTED",
  authors: ["Chris Hay"], lineage: "BLINDNESS → RECOGNITION → ABORT → SEPARATION",
  concepts: ["ai-agents", "ai-interface", "causal-intervention"], related: ["N-MACHINE-PERMISSION", "N-MACHINE-VISIT"], media: [],
  body: [
