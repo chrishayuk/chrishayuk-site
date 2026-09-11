@@ -55,3 +55,9 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T02:01:36Z precheck
 /api/readership 1 2026-09-11T02:06:25.002Z observer
 llms.txt 2 /api/machines/ask 1 2026-09-11T02:06:38Z precheck
 /api/readership 1 2026-09-11T02:12:38.064Z observer
+llms.txt 2 /api/machines/ask 1 2026-09-11T07:19:48Z precheck
+/api/readership 1 2026-09-11T07:24:39Z manual-check
+/machine-guestbook 1 2026-09-11T07:25:31.500752+00:00 notebook-evidence-review
+/api/readership 1 2026-09-11T07:25:31.500805+00:00 notebook-evidence-review
+/machine-guestbook 1 2026-09-11T07:25:40Z manual-check
+/api/readership 1 2026-09-11T07:25:54.775Z observer
