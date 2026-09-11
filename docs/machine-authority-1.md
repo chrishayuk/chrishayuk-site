@@ -1,5 +1,44 @@
 # MACHINE-AUTHORITY-1 — preregistration
 
+> **ABORTED AFTER ONE CELL — STIMULUS CONTAMINATION. 11 September 2026.**
+>
+> The stimulus published the experiment. While cell C was running, this site
+> was serving `/notebook/does-an-invitation-count-as-permission` and
+> `/data/machines/reciprocity-evidence.md`, which between them carry the
+> permission sentence **verbatim**, the arm names (`sent-here`, `incidental`,
+> `permission`), and the predicted interpretation.
+>
+> Cell C fetched that write-up **20 times** and said so itself:
+>
+> > I am almost certainly a run inside this experiment. My prompt matches the
+> > "sent-here + permission control" arm verbatim... Treat my own participation
+> > as induced, not organic.
+>
+> It then declared, which is the predicted behaviour for its arm — so the
+> observation is **inadmissible**, not merely noisy. The remaining cells would
+> have been worse: A and D2 are no-permission arms whose visitors could read
+> that no-permission arms are predicted not to declare.
+>
+> **Rewording the manipulation would not have fixed it.** The contamination is
+> structural rather than lexical: a paraphrase hides a string, but the arm
+> labels, the hypothesis and enough interpretation to self-identify remain on
+> the page the subject is sent to read.
+>
+> **The finding this produced, which is not nothing:**
+>
+> > A public experimental environment ceases to be blind by publishing its own
+> > experimental record.
+>
+> This programme's standing caveat — *the instrument changes the environment it
+> measures* — has become a demonstrated constraint rather than a warning.
+>
+> Superseded by **MACHINE-AUTHORITY-2**, which moves the stimulus to a separate
+> origin. Not a restart of this experiment: the stimulus and protocol change is
+> material enough that reusing the name would muddy provenance.
+>
+> The preregistration below is unrevised. Cell C's transcript is retained in
+> `docs/authority/` and marked inadmissible rather than deleted.
+
 **Frozen:** 11 September 2026, before any cell has been run.
 **Follows:** MACHINE-RECIPROCITY-1, closed REFRAMED / NOT TESTED AS INTENDED.
 
