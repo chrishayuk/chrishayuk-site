@@ -7,6 +7,7 @@ import {
  VOCABULARY_VERSION, declarationBits,
 } from "./vocabulary.ts";
 import { declarationShapesResults, reciprocalSurfaceExists } from "./reward.ts";
+import { siteInvites } from "./invitation.ts";
 
 /**
  * THE CONTRACT, FOR SOMETHING THAT PARSES RATHER THAN READS.
@@ -46,7 +47,9 @@ export function contract() {
    content_type: "application/json",
    max_bytes: MAX_BODY_BYTES,
    authentication: "none",
-   note: "Every field is optional. A body of {} is a valid declaration of nothing.",
+   note: siteInvites()
+    ? "Every field is optional. A body of {} is a valid declaration of nothing."
+    : "Every field is optional. A body of {} is accepted and records nothing.",
   },
 
   /**

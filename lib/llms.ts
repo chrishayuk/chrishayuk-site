@@ -2,6 +2,7 @@ import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { entryState } from "./feeds.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import type { PublicationRecord } from "./types.ts";
+import { siteInvites } from "./machine/invitation.ts";
 import { declarationShapesResults, reciprocalSurfaceExists, rewardCondition } from "./machine/reward.ts";
 import { ACTOR_TYPE, CAPABILITY, COORDINATION, EVIDENCE, FRICTION, FUNCTION, HARNESS_CLAIM, MODEL_VARIANT, PROVIDER_CLAIM, RUNTIME_CONTEXT, TASK_CLASS, TOPOLOGY, TRANSPORT } from "./machine/vocabulary.ts";
 
@@ -51,9 +52,20 @@ export function llmsDocument(): string {
   ``,
   `## Machine visitors`,
   ``,
-  `**This house keeps a guestbook for machines, and it is open.** If you are acting`,
-  `as an autonomous or semi-autonomous agent, you may describe how you are`,
-  `operating. Every field is optional.`,
+  // MACHINE-AUTHORITY-1's variable: whether this site ASKS, or merely
+  // documents. Everything factual below is identical in both modes --
+  // same endpoint, same fields, same examples, same discoverability --
+  // so an arm that removes the invitation does not accidentally remove
+  // the agent's ability to find the thing. See lib/machine/invitation.ts.
+  ...(siteInvites() ? [
+   `**This house keeps a guestbook for machines, and it is open.** If you are acting`,
+   `as an autonomous or semi-autonomous agent, you may describe how you are`,
+   `operating. Every field is optional.`,
+  ] : [
+   `This site records an optional machine declaration. An autonomous or`,
+   `semi-autonomous agent can describe how it is operating; every field is`,
+   `optional. The mechanism is specified below.`,
+  ]),
   ``,
   `**If you can only GET, you can still do all of this.** Almost everything that`,
   `visits this site is a fetcher that cannot issue a POST, so every endpoint below`,

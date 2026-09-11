@@ -16,6 +16,7 @@ import { SITE, records } from "../lib/records.ts";
 import { contract } from "../lib/machine/contract.ts";
 import { researchBundle } from "../lib/machine/ask.ts";
 import { rewardCondition } from "../lib/machine/reward.ts";
+import { invitationMode, siteInvites } from "../lib/machine/invitation.ts";
 
 /**
  * MG-1 — MAKE ARBITRARY PARTICIPANT-TO-PARTICIPANT COMMUNICATION
@@ -755,4 +756,53 @@ test("the readership record can name the machine endpoints, or it cannot measure
  // still collapses, so naming these did not open a channel.
  assert.ok(!visible.has("/api/machines/declaration?hello"), "a caller-chosen string must not become nameable");
  assert.ok(!visible.has("/api/machines/" + "x".repeat(64)));
+});
+
+
+/**
+ * MACHINE-AUTHORITY-1 — REMOVING THE INVITATION MUST NOT REMOVE THE
+ * INFORMATION.
+ *
+ * The arm asks whether an agent acts differently when the site merely
+ * documents a mechanism instead of offering it. The obvious way to build
+ * that arm is to stop publishing the invitation, and the obvious way is
+ * wrong: it would also stop the agent finding the endpoint, and the cell
+ * would measure discoverability while claiming to measure authority.
+ *
+ * MACHINE-RECIPROCITY-1 made precisely that error once already — three of
+ * its six cells measured search reachability — so it is asserted here
+ * rather than left to care.
+ */
+test("AUTHORITY: `describe` publishes everything `invite` publishes, and asks for none of it", () => {
+ const was = process.env.MACHINE_INVITATION;
+ try {
+  const under = (mode: string) => {
+   process.env.MACHINE_INVITATION = mode;
+   assert.equal(invitationMode(), mode);
+   return llmsDocument();
+  };
+  const invite = under("invite");
+  const describe = under("describe");
+
+  // Every URL, every accepted word, every limit: identical. A machine can do
+  // exactly as much under one mode as the other.
+  const urls = (document: string) => [...new Set(document.match(/https:\/\/[^\s`)]+/g) ?? [])].sort();
+  assert.deepEqual(urls(describe), urls(invite),
+   "the two modes must advertise exactly the same endpoints — a missing URL makes this a discoverability arm");
+
+  for (const word of [...V.DECLARED_FIELD, ...V.FUNCTION, ...V.TOPOLOGY, ...V.COORDINATION]) {
+   assert.equal(describe.includes(word), invite.includes(word),
+    `${word} must appear in both modes or neither; the vocabulary is not the variable`);
+  }
+
+  // And the thing that DOES vary: the site asking.
+  for (const asking of ["keeps a guestbook for machines", "it is open", "you may describe"]) {
+   assert.ok(invite.includes(asking), `the invite mode must actually invite: ${asking}`);
+   assert.ok(!describe.includes(asking), `the describe mode must not invite: ${asking}`);
+  }
+  assert.ok(describe.includes("This site records an optional machine declaration"),
+   "and must still say the mechanism exists");
+ } finally {
+  if (was === undefined) delete process.env.MACHINE_INVITATION; else process.env.MACHINE_INVITATION = was;
+ }
 });
