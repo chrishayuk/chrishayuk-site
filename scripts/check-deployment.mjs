@@ -438,7 +438,12 @@ assert.match(instrument.body, /very_long/);
 const guestbook = await request("/machine-guestbook");
 assert.equal(guestbook.status, 200);
 assert.match(guestbook.body, /me-presence-field/);
-assert.doesNotMatch(guestbook.body, /href="\/machines"|href="\/api\/machines/);
+// The exhibit publishes a projection and must not advertise an ENDPOINT: a page
+// that both publishes counts and takes declarations invites a visitor to read
+// its own contribution back. Narrowed on 2026-09-11 — /machines joined the
+// footer, so a site-wide navigation link to the explanation page now appears
+// here as it does everywhere. That is navigation, not the exhibit soliciting.
+assert.doesNotMatch(guestbook.body, /href="\/api\/machines/);
 const oldVisit = await request("/machines/experiments/MACHINE-VISIT-1");
 assert.equal(oldVisit.status, 308);
 assert.equal(new URL(oldVisit.headers.location, base).pathname, "/notebook/can-a-machine-use-an-invitation");
@@ -457,6 +462,23 @@ assert.match(visitExhibition.body, /not reconstructed transcripts/);
 const visitProtocol = await request("/data/machines/machine-visit-protocol.md");
 assert.equal(visitProtocol.status, 200);
 assert.equal(visitProtocol.body, await readFile(new URL("../docs/machine-visit-protocol.md", import.meta.url), "utf8"));
+// Markdown alternates. Served because thirty days of this site's own logs said
+// the machine index is barely read while `.md` and content negotiation are the
+// routes agents actually exercise. Both forms are checked, because the first
+// implementation returned 404 through the rewrite while every other signal —
+// routing, content type, Link header — looked correct.
+const mdSuffix = await request("/notebook/can-a-machine-use-an-invitation.md");
+assert.equal(mdSuffix.status, 200);
+assert.match(mdSuffix.headers["content-type"] ?? "", /text\/markdown/);
+assert.match(mdSuffix.body, /^# /);
+assert.match(mdSuffix.body, /DRAFT|RECORDED|PUBLISHED/, "editorial state must survive into the Markdown edition");
+const mdNegotiated = await request("/notebook/can-a-machine-use-an-invitation", "chrishayuk.com", { accept: "text/markdown" });
+assert.equal(mdNegotiated.status, 200);
+assert.match(mdNegotiated.headers["content-type"] ?? "", /text\/markdown/);
+const asHtml = await request("/notebook/can-a-machine-use-an-invitation", "chrishayuk.com", { accept: "text/html" });
+assert.match(asHtml.headers["content-type"] ?? "", /text\/html/, "a browser must still get HTML");
+console.log("Markdown alternates verified in both forms.");
+
 console.log("Machine surfaces and the visual notebook verified, including the permanent legacy redirect.");
 
 const permissionNote = await request("/notebook/does-an-invitation-count-as-permission");
