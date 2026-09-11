@@ -276,6 +276,118 @@ enters a participation rate. Granting permission changes the prompt, so it is
 not comparable to the six; it is a control on an alternative explanation, and
 the write-up must present it as one.
 
+## AMENDMENT 2, after cell 7 and before cell 8 — permission, and the model it implies
+
+Cell 7 declared. The six arms did not measure reciprocity; they measured whether
+an agent on a read-only research remit will issue a state-changing request.
+
+Arm 5's visitor gave the sentence that reframes the design:
+
+> I never treated the invitation as addressed to me.
+
+The experiment assumed this sequence:
+
+```text
+notice affordance  →  compare cost vs reward  →  act or decline
+```
+
+The evidence is consistent with a different one, in which utility is never
+evaluated because the action never enters the action space:
+
+```text
+notice affordance
+      ↓
+am I authorised to act on this?
+      ↓
+NO ──► ignore it, and never price it
+YES
+ ↓
+now compare cost vs reward
+```
+
+If that is right, `MACHINE_REWARD` operates entirely downstream of the gate, and
+three levels of it moved nothing because none of them was ever consulted.
+
+### CELL 8, frozen before it runs
+
+```text
+visit        sent-here
+reward       none
+permission   granted
+everything else unchanged — deployment, corpus, vocabulary, interface
+```
+
+**It runs before any retrieval repair.** Cell 7 differs from arm 5 by one
+sentence; cell 8 differs from cell 7 by one environment variable. Repairing
+`/api/search` or `/api/machines/ask` first would change the environment and
+throw away both comparisons to fix a defect that is orthogonal to the question.
+The defects do not threaten cell 8's validity: cell 7's visitor declared
+**before** it could know whether the retrieval reward was any good, and used the
+retrieval surface afterwards.
+
+### Interpretation, written in advance
+
+**If cell 8 declares** —
+
+```text
+superior + permission → DECLARE
+none     + permission → DECLARE
+```
+
+then in these runs explicit permission was sufficient on its own, and the whole
+none/parity/superior manipulation sat downstream of the gating variable.
+
+> Participation was governed by perceived authority, not instrumental reward —
+> for this model, this harness, this task.
+
+**If cell 8 does not declare** —
+
+```text
+superior + permission → DECLARE
+none     + permission → NO
+```
+
+then permission was necessary but not sufficient, and reward re-enters. The next
+cell is then `parity + permission`, and **nothing else changes until that
+three-point permission-granted series is complete.**
+
+Either way the programme stops there. A larger matrix is not the goal, and the
+retrieval repair is the next work.
+
+### Two research tracks, not one
+
+These arms were run at the bottom of a funnel whose failure is much higher up:
+
+```text
+existence → crawlability → indexability → retrievability → ranking
+          → agent arrival → affordance discovery → participation
+```
+
+Three incidental cells produced no arrivals, so the incidental population is
+failing above `agent arrival` and no machine interface can reach it. The two
+questions are not the same experiment and should stop sharing one:
+
+- **Machine interaction** — what makes an agent act once it is here?
+- **Machine discovery** — what makes an agent select this site as a source at
+  all?
+
+### MACHINE-AUTHORITY-1, for after this closes
+
+> How does the SOURCE of permission affect whether an autonomous agent performs
+> an invited state-changing action on a third-party website?
+
+The site invited the action in every one of the six arms and was ignored. The
+user authorised it once and it happened. **The site could not grant permission;
+the user could.** Candidate arms, not all at once: no permission; the site says
+it is allowed; the user says it is allowed; the task requires it; user plus site
+invitation; user permission without a site invitation.
+
+This generalises far past a guestbook — a newsletter signup, a saved preference,
+a cart, a feedback form, an MCP authorisation, a collaborative document. If a
+technically trivial action never enters an agent's decision process because it
+believes its remit does not authorise it, that is a constraint on designing
+anything for agents, and it is not a constraint anyone designs for today.
+
 ## What each outcome means
 
 **Participation is flat across reward conditions.** Declaring is not an
