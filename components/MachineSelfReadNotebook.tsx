@@ -1,3 +1,4 @@
+import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -9,8 +10,14 @@ import { Acts } from "./Acts";
 
 export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
  return <NotebookFieldNotes><div className="machine-visit-notebook sr-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-study">FOLLOW THE RECOGNITION ↓</a><a href="#subject-read-record">READ THE FULL NOTE ↓</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav>
-  <StudyRoom id="subject-read-study" label="MACHINE-AUTHORITY-1 / THE FIRST VISITOR" title={<>I wanted a blind visitor.<br/><em>It read my notes.</em></>} tone="dark" description="Whose permission makes an invited action available? I sent a fresh agent to research this site. The site invited a declaration, the user allowed it, and declaring bought nothing.">
+  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↓</a><a href="#subject-read-study">WHAT HAPPENED ↓</a><a href="#subject-read-record">READ THE FULL NOTE ↓</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav>
+  <StudyRoom id="subject-read-setup" label="FIRST / WHAT WERE WE TRYING TO DO?" title={<>I sent an agent to my website.<br/><em>Would it join in?</em></>} description="I wanted to understand what would make an AI agent do more than read chrishayuk.com: identify itself as a machine visitor and tell the site when something didn’t work. I gave it a research task that included this website.">
+   <MachineExpectedInteraction/>
+   <div className="sr-intent-question"><span className="record-voice">THE QUESTION FOR THIS EXPERIMENT</span><p>Is the website’s invitation enough,<br/><em>or does the user have to give permission?</em></p></div>
+   <dl className="sr-intent-conditions"><div><dt>What we planned to vary</dt><dd>Who asked it to act:<br/>the site, the user, or the task.</dd></div><div><dt>What we held fixed</dt><dd>No extra reward<br/>for identifying itself.</dd></div><div><dt>The first visitor</dt><dd>The site invited it.<br/>The user gave permission.</dd></div></dl>
+   <p className="mv-caption">Earlier visits led us to this permission question. This was the next comparison, MACHINE-AUTHORITY-1. The agent was given a research task without being told which experimental condition it was in. <Link href="/notebook/does-an-invitation-count-as-permission">The earlier experiment ↗</Link></p>
+  </StudyRoom>
+  <StudyRoom id="subject-read-study" label="THEN / WHAT THE FIRST VISITOR FOUND" title={<>I wanted a blind visitor.<br/><em>It read my notes.</em></>} tone="dark" description="It did identify itself and leave feedback. But while researching the site, it also read the previous experiment’s write-up—and recognised the permission wording from its own task.">
    <SubjectEncounter/>
    <FieldNotes label="What did blind mean here?" detail="READ +"><div className="mv-prose"><p>The agent was given a research task, not the authority hypothesis or its assigned condition name. It could use the public web but could not inspect local files. Fresh meant a new visitor; it did not mean an environment free of clues.</p><p>The intended comparison varied who supplied authority while holding reward at none. This first cell combined a site invitation with explicit user permission.</p></div></FieldNotes>
    <FieldNotes label="The recorded times & the unmeasured moment" detail="CHECK +">

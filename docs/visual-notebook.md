@@ -215,3 +215,19 @@ Playback compresses recorded event order, never inventing a recognition timestam
 The provenance timeline and unresolved request count remain in field notes.
 Reduced-motion readers retain the final encounter state and all manual controls;
 motion stops when the page is hidden or another HAUSE instrument takes ownership.
+
+The self-reading note's v0.3 begins with the purpose and expected interaction,
+before the surprise: user assigns research → agent reads chrishayuk.com → site
+invites participation → agent may identify itself and report problems. The
+diagram marks those actions as optional. It distinguishes the wider interest in
+participation and feedback from Authority-1's primary declaration outcome, names
+the permission manipulation, and shows the first cell's conditions in plain
+language. The expected exchange is a schematic, not another measured trace.
+
+This opening contract applies to all three machine experiment notes. Each begins
+with the human task, agent, named website, invitations and measured question.
+The shared exchange diagram has experiment-specific copy: Visit-1 assigns an
+interface test; Reciprocity assigns research with and without a destination;
+Authority assigns research with a destination and varies permission. An assigned
+usability action must never be relabelled voluntary participation, and the
+reciprocity diagram must not imply that every research agent reached the site.

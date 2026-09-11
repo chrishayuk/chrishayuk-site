@@ -476,10 +476,18 @@ console.log("Permission notebook and all eight sourced outcomes verified.");
 
 const selfReadNote = await request("/notebook/the-subject-read-the-experiment");
 assert.equal(selfReadNote.status, 200);
-for (const pattern of [/N-MACHINE-SELF-READ/, /hause-study-room/, /recognition-clue/, /Replay encounter/, /Separate the jobs/, /sr-experiment-track/, /Inadmissible/, /claude-opus-5/, /Not run/]) assert.match(selfReadNote.body, pattern);
+for (const pattern of [/N-MACHINE-SELF-READ/, /hause-study-room/, /recognition-clue/, /Replay encounter/, /Separate the jobs/, /sr-experiment-track/, /sr-intent-network/, /Identify itself/, /Leave feedback/, /Inadmissible/, /claude-opus-5/, /Not run/]) assert.match(selfReadNote.body, pattern);
 assert.match(notebookCollection.body, /href="\/notebook\/the-subject-read-the-experiment"/);
 assert.match(permissionNote.body, /href="\/notebook\/the-subject-read-the-experiment"/);
 const selfReadEvidence = await request("/data/machines/authority-1-evidence.json");
 assert.equal(selfReadEvidence.status, 200);
 assert.equal(JSON.parse(selfReadEvidence.body).admissible, 0);
 console.log("The self-recognition notebook and its excluded result verified.");
+
+for (const page of [visitExhibition, permissionNote, selfReadNote]) {
+ assert.match(page.body, /sr-intent-network/);
+ assert.match(page.body, /WHAT WERE WE TESTING/);
+ assert.match(page.body, /IDENTIFY YOURSELF/);
+ assert.match(page.body, /LEAVE FEEDBACK/);
+}
+console.log("All three machine notes explain the user, agent and website interaction.");

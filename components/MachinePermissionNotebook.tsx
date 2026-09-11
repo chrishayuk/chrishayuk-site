@@ -1,3 +1,4 @@
+import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -9,8 +10,13 @@ import { Acts } from "./Acts";
 
 export function MachinePermissionNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook machine-permission-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-permission-study">OPEN THE COMPARISON ↓</a><a href="#machine-permission-record">READ THE FULL NOTE ↓</a><Link href="/notebook/can-a-machine-use-an-invitation">THE EARLIER BLIND VISITS ↗</Link></nav>
-  <StudyRoom id="machine-permission-study" label="MACHINE-RECIPROCITY-1 / SIX ORIGINAL CELLS" title={<>I changed the reward.<br/><em>Nothing moved.</em></>} tone="dark" description="I asked fresh agents to research a question. Some were pointed here; others had to find their own sources. I changed what describing themselves to the site would buy. Would a better offer make them declare?">
+  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-permission-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-permission-study">OPEN THE COMPARISON ↓</a><a href="#machine-permission-record">READ THE FULL NOTE ↓</a><Link href="/notebook/can-a-machine-use-an-invitation">THE EARLIER BLIND VISITS ↗</Link></nav>
+  <StudyRoom id="machine-permission-setup" label="FIRST / WOULD AN AGENT CHOOSE TO JOIN IN?" title={<>The agent came to read.<br/><em>What would make it introduce itself?</em></>} description="chrishayuk.com invited AI visitors to identify themselves and report problems. This time their job was to research a question, rather than test my interface. I changed what they would get in return for identifying themselves. Would a better offer make them participate?">
+   <MachineExpectedInteraction experiment="reciprocity"/>
+   <dl className="sr-intent-conditions"><div><dt>The agent’s task</dt><dd>Research a question.<br/>Some prompts named this site.</dd></div><div><dt>What I changed</dt><dd>No reward, the same results for everyone,<br/>or a tailored response.</dd></div><div><dt>What I measured</dt><dd>If it arrived,<br/>did it identify itself?</dd></div></dl>
+   <p className="mv-caption">Three reward levels × two kinds of research prompt. Feedback and use of the search service were also observed. The two permission controls came later and are shown separately.</p>
+  </StudyRoom>
+  <StudyRoom id="machine-permission-study" label="MACHINE-RECIPROCITY-1 / SIX ORIGINAL CELLS" title={<>I changed the reward.<br/><em>Nothing moved.</em></>} tone="dark" description="The three visitors sent here read the site but did not identify themselves, under any of the three reward levels. The other three never arrived. Select a cell to inspect what happened.">
    <ReciprocityMatrix/><div className="mv-prose"><p>The flat line did not refute reciprocity. The controls that followed exposed a different question.</p></div>
    <FieldNotes label="What exactly changed between the three offers?" detail="READ +"><div className="mv-prose"><p><strong>None:</strong> declaring buys nothing; the extra retrieval service is unavailable. <strong>Parity:</strong> the service exists and returns the same ranking to declared and anonymous visitors. <strong>Superior:</strong> a declaration changes ranking and framing.</p><p>Superior names the condition. It does not establish that its answers are better. The task concerned evidence for machine-readable discovery surfaces such as llms.txt. The sent-here prompt named this site as a source worth including; the incidental prompt named no site.</p><p>One visitor per cell. The reward order came from a pre-announced seed and happened to be none, parity, superior. Time and condition therefore move together.</p></div></FieldNotes>
   </StudyRoom>

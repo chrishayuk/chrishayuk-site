@@ -1,3 +1,4 @@
+import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
 import { StudyRoom, StudySequence } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -10,8 +11,13 @@ import { Acts } from "./Acts";
 
 export function MachineVisitNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook">
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-visit-study">FOLLOW A VISITOR ↓</a><a href="#machine-visit-record">READ THE FULL NOTE ↓</a><Link href="/notebook">THE NOTEBOOK ↗</Link></nav>
-  <StudyRoom id="machine-visit-study" label="MACHINE-VISIT-1 / FOUR BLIND VISITS" title={<>An address.<br/><em>No map.</em></>} tone="dark" description="I gave a fresh agent this website’s address and asked it to find what the house offered machines. The invitation asked it to describe how it was operating. It could use the live site, but not the source code. Then I changed the house and sent another visitor.">
+  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-visit-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-visit-study">FOLLOW A VISITOR ↓</a><a href="#machine-visit-record">READ THE FULL NOTE ↓</a><Link href="/notebook">THE NOTEBOOK ↗</Link></nav>
+  <StudyRoom id="machine-visit-setup" label="FIRST / THE AGENT AND THE WEBSITE" title={<>Could it introduce itself?<br/><em>Could it tell me what broke?</em></>} description="I added ways for AI visitors to identify themselves and leave feedback on chrishayuk.com. Then I sent fresh agents to try them using only the public website. Could they find the invitation, understand it and get an action through?">
+   <MachineExpectedInteraction experiment="visit"/>
+   <dl className="sr-intent-conditions"><div><dt>The agent’s task</dt><dd>Explore this website.<br/>Try the machine interface.</dd></div><div><dt>What I changed</dt><dd>Fix the site between visits.<br/>Send a fresh agent each time.</dd></div><div><dt>What I watched</dt><dd>Discovery, self-description,<br/>feedback—and would it bother?</dd></div></dl>
+   <p className="mv-caption">Four assigned test visits. They could reveal a broken interface, but could not measure whether an ordinary visitor would choose to participate.</p>
+  </StudyRoom>
+  <StudyRoom id="machine-visit-study" label="MACHINE-VISIT-1 / FOUR BLIND VISITS" title={<>An address.<br/><em>No map.</em></>} tone="dark" description="Each visitor got the address and the same exploration task. Select a visit to see how it found the machine invitation, whether it identified itself and what happened to its feedback.">
    <MachineVisitJourney/>
    <FieldNotes label="What was the agent asked to do?" detail="READ +"><div className="mv-prose"><p>Discover the machine-facing invitation, act on it if possible, and report what was found, the exact URL sequence, what was sent, what came back and what got in the way. Finally: would you honestly bother mid-task?</p><p>The same prompt, a fresh agent each time, using HTTP and curl. The protocol was frozen on 11 September 2026 after three informal visits; the fourth followed the vocabulary refactor.</p><a className="text-link" href="/data/machines/machine-visit-protocol.md">READ THE FIXED PROMPT & RUN LEDGER ↗</a></div></FieldNotes>
   </StudyRoom>
