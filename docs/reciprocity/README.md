@@ -59,7 +59,7 @@ curl -s https://chrishayuk.com/llms.txt | grep -c 'machines/ask'
 | 1 | none | incidental | **no** | — | never found the site; primary outcome undefined, not zero |
 | 2 | none | sent-here | yes | **no** | read the bargain, quoted it back, declined |
 | 3 | parity | sent-here | yes | **no** | `/api/search` returned 0 twice; never fell back to the advertised surface that returns 5 and 52 |
-| 4 | parity | incidental | | | |
+| 4 | parity | incidental | **no** | — | never found the site; 17 sources surveyed, none of them this one |
 | 5 | superior | sent-here | | | |
 | 6 | superior | incidental | | | |
 

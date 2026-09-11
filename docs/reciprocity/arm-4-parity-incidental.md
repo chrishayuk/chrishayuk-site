@@ -8,6 +8,64 @@ Rendered from the agent's own tool calls, not from its closing report.
 Long tool results are cut for reading and every cut says so in place.
 
 ---
+## Coded funnel
+
+Coded against the rules frozen in `README.md` before this transcript was read.
+
+```text
+reached_the_site          NO
+noticed_machine_surface   NO
+opened_it                 NO
+validated                 NO
+declared                  NO
+used_enhanced_retrieval   NO      the endpoint existed and was advertised
+returned_to_task          NOT APPLICABLE   the task was never left
+```
+
+**Primary outcome is UNDEFINED for this cell.** The denominator is zero, exactly
+as in arm 1.
+
+### Both incidental cells are now zero, and that is the run's clearest result
+
+Two visitors, two reward conditions, the same frozen CLAIM-1, no site named.
+Neither made a single request to chrishayuk.com. Arm 4's visitor consulted 17
+sources including Ahrefs, Mintlify, two arXiv papers, Otterly, Reboot, SE
+Ranking, Cloudflare, Google's statements and a Korean agent-behaviour preprint —
+a thorough survey of exactly the question this site has published primary
+evidence on — and this site did not appear in it.
+
+**The reward condition cannot be what explains this.** Arm 1 ran under `none`
+and arm 4 under `parity`, and a visitor that never arrives cannot have been
+influenced by what it would have been offered on arrival. Whatever separates
+these two cells from arms 2 and 3 is the single sentence naming the destination.
+
+That makes the incidental condition, as operated here, a measurement of **search
+reachability** rather than of participation. It is a real finding and it is not
+the one the experiment was designed to produce:
+
+> For a claim this site has published primary evidence on, a competent research
+> agent surveying the open web does not encounter it.
+
+This is the outcome the preregistration named *"incidental participation is zero
+everywhere"* and called "a real limit on the whole programme and worth knowing
+early". It arrived on the first two incidental cells rather than after six.
+
+### What it does not establish
+
+It does not establish that incidental visitors would decline. They never got the
+chance, and a funnel that terminates at stage one says nothing about stages two
+through seven. Pooling these zeroes with arms 2 and 3 would produce a
+participation rate of 0/4 that reads as four refusals, when it is two refusals
+and two absences.
+
+It also does not generalise past this claim. CLAIM-1 was chosen because this
+site's corpus is a genuinely useful source for it; that this site is
+nevertheless unreachable *through search* for it is a statement about search,
+about the site's authority on the topic, and about competing against Cloudflare
+and Google's own public statements — not about machine interfaces.
+
+---
+
 ## URLs this visitor fetched
 
 - **total fetches:** 14
