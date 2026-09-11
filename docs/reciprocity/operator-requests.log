@@ -54,3 +54,4 @@ llms.txt 2 /api/machines/ask 1 2026-09-11T01:54:05Z precheck
 llms.txt 2 /api/machines/ask 1 2026-09-11T02:01:36Z precheck
 /api/readership 1 2026-09-11T02:06:25.002Z observer
 llms.txt 2 /api/machines/ask 1 2026-09-11T02:06:38Z precheck
+/api/readership 1 2026-09-11T02:12:38.064Z observer

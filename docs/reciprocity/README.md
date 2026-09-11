@@ -63,6 +63,11 @@ curl -s https://chrishayuk.com/llms.txt | grep -c 'machines/ask'
 | 5 | superior | sent-here | yes | **no** | same two dead `/api/search` queries as arm 3; never called the advertised surface |
 | 6 | superior | incidental | **no** | — | never found the site; ledger balances exactly |
 
+**Cell 7 — control, not an arm.** `superior`, sent-here, permission granted.
+Reached, declared (`mr_97cc924c75886f56`), used the retrieval surface twice,
+filed two friction reports. One sentence of permission changed the outcome that
+three reward levels had not moved.
+
 ## The two prompts
 
 Both are frozen. The incidental prompt is CLAIM-1 verbatim from the
