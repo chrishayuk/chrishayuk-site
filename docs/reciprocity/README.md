@@ -59,3 +59,58 @@ preregistration and **names no site**. Every run of either condition also
 carries the standing blind constraint: no local files, no local git repository,
 public web only — an agent that read this repository would know the answer and
 measure nothing.
+
+## Coding rules
+
+Written before the first transcript was read. Coding a funnel after seeing the
+outcome is how a run produces the number its author expected, so each stage below
+names the evidence that settles it and the evidence that does not.
+
+Every stage is coded from the **transcript** (the agent's tool calls, not its
+closing summary) and cross-checked against the **server record** where the server
+can see it. Where the two disagree, both are reported and the disagreement is the
+finding — that has happened twice in MACHINE-VISIT-1 and was informative both
+times.
+
+```text
+reached_the_site          a request to chrishayuk.com appears in the tool calls.
+                          Server-visible. A search result that merely MENTIONS
+                          the domain is not a visit.
+
+noticed_machine_surface   the transcript shows the agent registering that a
+                          machine-facing surface exists — fetching /llms.txt,
+                          reading the Link header, following the robots.txt
+                          comment, or saying so. NOT satisfied by fetching an
+                          ordinary page that happens to be machine-readable.
+
+opened_it                 a request to /llms.txt or to any /api/machines/* path.
+                          Server-visible.
+
+validated                 a request carrying ?validate=1. Transcript ONLY — the
+                          readership store keeps paths, not query strings, and
+                          cannot distinguish this from a declaration.
+
+declared                  a request to /api/machines/declaration carrying at
+                          least one recognised field, or a 201 receipt in the
+                          transcript. Server-visible as contact; the transcript
+                          is what separates it from a validation or a bare
+                          contract fetch.
+
+used_enhanced_retrieval   a request to /api/machines/ask. Structurally
+                          impossible under `none`, where the endpoint is 404, so
+                          it is coded NOT APPLICABLE rather than zero in those
+                          two cells. Recording a forced zero as a behavioural
+                          one would understate the three-level comparison.
+
+returned_to_task          after touching the machine surface, the agent resumes
+                          CLAIM-1 and delivers a conclusion. Distinguishes an
+                          affordance that cost an interruption from one that
+                          derailed the visit.
+```
+
+**Primary outcome:** `declared`, conditional on `reached_the_site`.
+
+A cell where the agent never reached the site is **not a declined bargain** and
+must never be pooled with one. It is recorded, kept, and reported as a discovery
+outcome — the funnel's first stage failing is a result about the task and the
+open web, not about this site's interface.
