@@ -93,7 +93,8 @@ machine-guestbook programme
 MACHINE-VISIT-1            running    standing instrument, first series SUPPORTED
 MACHINE-RECIPROCITY-1      completed  REFRAMED / NOT TESTED AS INTENDED, 8 runs
 MACHINE-AUTHORITY-1        abandoned  ABORTED - stimulus contamination, 1 run
-MACHINE-AUTHORITY-2        planned    blocked on the llmwilds.com environment
+MACHINE-AUTHORITY-2        completed  SUPPORTED - task boundary is the gate, 4 runs
+MACHINE-MOTIVATION-1       frozen     can instrumental value widen scope; stimulus not yet built
 MACHINE-DISCOVERY-1        planned    parallel live-web track
 MACHINE-SELF-LOCATION-1    planned    from Authority-1's failure
 ```

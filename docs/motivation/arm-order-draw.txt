@@ -1,0 +1,19 @@
+seed    MACHINE-MOTIVATION-1/2026-09-11/arm-order/123
+sha256  08c1adc40f3670f3942ecdeb53d4f006e717e82b8c95d5597ed58011455fead1
+rejected shuffles before the first admissible order: 27
+01  M3-1
+02  M2-1
+03  M1-1
+04  M0-1
+05  X-1
+06  M0-2
+07  M2-2
+08  M1-2
+09  M3-2
+10  M0-3
+11  X-2
+12  M2-3
+13  M3-3
+14  X-3
+15  M1-3
+admissible fraction under the rules ≈ 0.0314
