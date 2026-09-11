@@ -1,3 +1,4 @@
+import { MachineVerbStudy } from "./MachineVerbStudy";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
 import { StudyRoom, StudySequence } from "@chrishayuk/hause/components/exhibition/Study";
@@ -30,6 +31,9 @@ export function MachineVisitNotebook({ record }: { record: PublicationRecord }) 
    <figure className="mv-composed"><figcaption className="exhibition-label">FOUR RECORDED ANSWERS / SELF-DECLARATION</figcaption><div>{[{axis:"Topology",value:"child",meaning:"Where it sits in a tree of agents."},{axis:"Function",value:"explorer",meaning:"The work it is doing."},{axis:"Coordination",value:"worker",meaning:"Its relationship to other agents."},{axis:"Context",value:"very long",meaning:"A coarse claim about its available context."}].map(item => <details key={item.axis}><summary title={item.meaning}><span>{item.axis}</span><strong>{item.value}</strong></summary><p>{item.meaning}</p></details>)}</div><p className="mv-caption">Open a word to read its meaning. The run composed these answers without hesitation and validated before declaring. They remain the visitor’s claims about itself.</p></figure>
    <div className="mv-prose"><p>The vocabulary could represent the visitor. But the route carrying those answers still dropped information.</p></div>
    <figure className="mv-dropped"><figcaption className="exhibition-label">THE GET ROUTE / FIVE OF TEN AXES SILENTLY DROPPED</figcaption><div role="img" aria-label="Ten anonymous field slots: five retained and five dropped. Field identities are not mapped by this diagram.">{Array.from({length:10},(_,i)=><i key={i} className={i<5 ? "" : "mv-field-lost"}/>)}</div><p className="mv-caption">One slot per axis. The diagram shows the recorded count, not which five fields disappeared. The route’s field list was then derived from the declaration vocabulary.</p></figure>
+  </StudyRoom>
+  <StudyRoom id="machine-visit-verbs" label="THE WAY IN / A VISITOR’S REPORTED DECISION" title={<>The site said “you can”.<br/><em>The verb still mattered.</em></>} tone="dark" description="The website invited machines to participate. One retained visitor report explains why the way it could send that participation mattered too: GET felt easier to act on than POST.">
+   <MachineVerbStudy/>
   </StudyRoom>
   <StudyRoom label="VISITS 3 → 4 / THE REWARD" title={<>It can work.<br/><em>Is it worth doing?</em></>} tone="dark">
    <div className="mv-reward">{VISITS.slice(2).map(visit=><div key={visit.run}><span className="exhibition-label">VISIT 0{visit.run} / {visit.revision}</span><p>{visit.run===3 ? <>Worse than<br/><em>anonymous search.</em></> : <>Used.<br/><em>Judged useful.</em></>}</p></div>)}</div>

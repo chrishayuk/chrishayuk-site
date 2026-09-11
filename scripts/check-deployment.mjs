@@ -496,3 +496,8 @@ assert.match(selfReadNote.body, /<figure id="agent-disclosure" class="sr-agent-q
 assert.match(selfReadNote.body, /I am almost certainly a run inside this experiment\./);
 assert.doesNotMatch(selfReadNote.body, /sr-encounter-disclosure/);
 console.log("The agent quote is a permanent part of the note, outside playback.");
+
+assert.match(visitExhibition.body, /mv-verb-study/);
+assert.match(visitExhibition.body, /machine-visit-verbs/);
+assert.match(permissionNote.body, /SITE INVITATION \/ PRESENT THROUGHOUT/);
+assert.match(permissionNote.body, /TASK PERMISSION \/ ADDED IN THE CONTROLS/);

@@ -235,3 +235,10 @@ reciprocity diagram must not imply that every research agent reached the site.
 The self-reading note's v0.4 keeps the agent's disclosure as a permanent server-
 rendered quotation before the encounter playback. It must never depend on a
 selected stage, motion ownership, or an open field note to become readable.
+
+Site invitation and task permission are named separately in the machine notes.
+The site invites and allows participation; the reciprocity controls add permission
+in the task as a separate intervention. The GET/POST room uses a retained final-
+report excerpt, with a source hash, and distinguishes perceived action cost from
+the endpoint's actual recording effect. It is not drawn as a controlled verb
+trial, assigned to an uncertain ledger row, or used to fill missing verb data.
