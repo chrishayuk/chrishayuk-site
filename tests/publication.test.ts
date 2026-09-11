@@ -449,7 +449,7 @@ test("the blind-visitor study belongs to the notebook record, index and archive"
  assert.equal(note.kind, "notebook");
  assert.equal(note.publication, "draft");
  assert.equal(recordPath(note), VISIT_NOTE_PATH);
- assert.equal(notebookSelection[0], note);
+ assert.ok(notebookSelection.includes(note));
  assert.equal(featuredNotebook.id, "N-CELL80-01", "Home keeps its existing featured entrance");
  assert.ok(canonicalPaths().includes(VISIT_NOTE_PATH));
  assert.ok(!canonicalPaths().includes("/machines/experiments/MACHINE-VISIT-1"));

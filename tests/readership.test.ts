@@ -184,3 +184,35 @@ test("the public blind-run record matches its frozen source and keeps unrecorded
  assert.equal(VISITS[2].feedbackState, "kept");
  assert.ok(visiblePaths().has(VISIT_NOTE_PATH));
 });
+
+test("reciprocity keeps non-arrivals undefined and permission controls outside the factorial", async () => {
+ const { reciprocityCells, reciprocitySnapshot } = await import("../lib/machine/reciprocity.ts");
+ const original = reciprocityCells.filter(cell => cell.phase === "factorial");
+ const controls = reciprocityCells.filter(cell => cell.phase === "control");
+ assert.equal(original.length, 6);
+ assert.equal(controls.length, 2);
+ assert.equal(new Set(reciprocityCells.map(cell => cell.runId)).size, 8);
+ assert.deepEqual(original.filter(cell => !cell.reached).map(cell => cell.cell), [1, 4, 6]);
+ for (const cell of original.filter(cell => !cell.reached)) {
+  assert.equal(cell.declared, null);
+  assert.equal(cell.usedRetrieval, null);
+ }
+ assert.ok(original.filter(cell => cell.reached).every(cell => cell.declared === false && !cell.permission));
+ assert.deepEqual(controls.map(cell => [cell.cell, cell.reward, cell.permission, cell.declared]), [[7,"superior",true,true],[8,"none",true,true]]);
+ assert.ok(reciprocityCells.filter(cell => cell.reward === "none").every(cell => cell.usedRetrieval === null));
+ assert.ok(!reciprocityCells.some(cell => cell.reward === "parity" && cell.permission));
+ assert.equal(reciprocitySnapshot.databaseStatus, "completed");
+ assert.ok(reciprocitySnapshot.cells.every(cell => cell.databaseResult && cell.status === "completed"));
+ // Two endpoint requests in a control do not become two declaring visitors.
+ assert.equal(reciprocitySnapshot.cells[7].databaseResult.values.declaration_requests_server_side, 2);
+ assert.equal(controls.filter(cell => cell.cell === 8 && cell.declared).length, 1);
+});
+
+test("the public reciprocity evidence is the exact coded snapshot used by the notebook", async () => {
+ const { readFile } = await import("node:fs/promises");
+ const { reciprocitySnapshot, PERMISSION_NOTE_PATH } = await import("../lib/machine/reciprocity.ts");
+ const published = await readFile(new URL("../public/data/machines/reciprocity.json", import.meta.url), "utf8");
+ assert.deepEqual(JSON.parse(published), reciprocitySnapshot);
+ assert.doesNotMatch(published, /mr_[0-9a-f]{16}|"agent_name"|"detail"/);
+ assert.ok(visiblePaths().has(PERMISSION_NOTE_PATH));
+});

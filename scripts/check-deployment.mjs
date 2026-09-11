@@ -458,3 +458,18 @@ const visitProtocol = await request("/data/machines/machine-visit-protocol.md");
 assert.equal(visitProtocol.status, 200);
 assert.equal(visitProtocol.body, await readFile(new URL("../docs/machine-visit-protocol.md", import.meta.url), "utf8"));
 console.log("Machine surfaces and the visual notebook verified, including the permanent legacy redirect.");
+
+const permissionNote = await request("/notebook/does-an-invitation-count-as-permission");
+assert.equal(permissionNote.status, 200);
+assert.match(permissionNote.body, /N-MACHINE-PERMISSION/);
+assert.match(permissionNote.body, /hause-study-room/);
+assert.match(permissionNote.body, /Not run/);
+assert.match(permissionNote.body, /Never arrived/);
+assert.match(permissionNote.body, /permission-control-evidence/);
+assert.match(permissionNote.body, /href="\/notebook\/can-a-machine-use-an-invitation"/);
+assert.match(notebookCollection.body, /href="\/notebook\/does-an-invitation-count-as-permission"/);
+const reciprocityEvidence = JSON.parse((await request("/data/machines/reciprocity.json")).body);
+assert.equal(reciprocityEvidence.cells.length, 8);
+assert.equal(reciprocityEvidence.cells[7].databaseResult.values.declared, 1);
+assert.equal(reciprocityEvidence.cells[7].databaseResult.values.used_enhanced_retrieval, null);
+console.log("Permission notebook and all eight sourced outcomes verified.");

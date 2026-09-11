@@ -187,3 +187,13 @@ record enters both through the standard publication policy. The notebook has an
 illustrated card; Home retains its existing Cell80 feature independently of the
 notebook's editorial order. Preregistered future experiments do not acquire
 result pages merely because their protocols exist.
+
+`N-MACHINE-PERMISSION` follows at
+`/notebook/does-an-invitation-count-as-permission`. It compares the six original
+reciprocity cells and the two later permission controls separately. Its coded
+snapshot was checked against all eight registered results after the experiment
+closed. No arrival means an undefined conditional declaration outcome; an unrun
+condition remains visibly empty. The four gates are a proposed explanation, not
+an observed internal trace. Public evidence omits visitor labels, receipts and
+private feedback text. Each note explains its own experiment and links to the
+other; neither requires reading the earlier entry first.

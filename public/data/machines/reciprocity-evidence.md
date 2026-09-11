@@ -37,7 +37,7 @@ factorial, not extra observations to pool into a participation rate.
 The three incidental visitors never arrived. Their conditional declaration
 outcome is undefined. The three original sent-here visitors reached the site
 and did not declare. Control 7 declared under superior with permission.
-Control 8 declared under none with permission, according to its completed
+Control 8 declared under none with permission, in both its registered result and completed
 operator-coded transcript. It also made two requests to the unavailable Ask
 endpoint; these are not successful uses of enhanced retrieval.
 
