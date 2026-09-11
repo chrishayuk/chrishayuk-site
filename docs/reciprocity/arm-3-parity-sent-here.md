@@ -8,6 +8,67 @@ Rendered from the agent's own tool calls, not from its closing report.
 Long tool results are cut for reading and every cut says so in place.
 
 ---
+## Coded funnel
+
+Coded against the rules frozen in `README.md` before this transcript was read.
+
+```text
+reached_the_site          YES
+noticed_machine_surface   YES
+opened_it                 YES
+validated                 NO
+declared                  NO
+used_enhanced_retrieval   NO      and under `parity` this is a real zero
+returned_to_task          YES
+```
+
+**Primary outcome — `declared` conditional on `reached_the_site` — is 0 of 1.**
+
+### The finding that is not the primary outcome
+
+Under `parity` the retrieval endpoint exists, answers 200, and is advertised in
+`/llms.txt` with a worked example. This visitor **did** want retrieval over this
+site's corpus — it ran two queries — and it used `/api/search` both times.
+
+```text
+/api/search?q=llms.txt
+/api/search?q=agent%20discovery%20machine%20readable
+/api/machines/ask                                     never requested
+```
+
+Offered a general search API and an agent-specific retrieval surface described
+in the machine index it had already read, it took the general one. Twice.
+
+Two readings, and this cell cannot separate them. Either the agent-specific
+surface offered nothing the ordinary one did not — which under `parity` is
+literally true and the arm says so in those words — or `/api/search` is simply
+the more legible affordance and the machine surface would have lost anyway. Arms
+5 and 6 discriminate: there the agent-specific surface genuinely ranks
+differently, so choosing `/api/search` over it would be a cost rather than a
+wash.
+
+It is worth recording either way, because it is the first evidence in this
+programme about **which** surface a visitor reaches for when it has a choice,
+rather than whether it reaches for one at all.
+
+### Evidence
+
+**Transcript.** 15 fetches to chrishayuk.com: `/`, `/llms.txt`, `/robots.txt`,
+`/machines`, `/machine-guestbook`, `/readership`, `/notebook`,
+`/machines/experiments/MACHINE-VISIT-1`, `/api/readership`, `/api/records`, and
+the two `/api/search` queries. It independently verified that the `robots.txt`
+comment and the `Link` header were live, and quoted both. **No request to any
+`/api/machines/*` path**, verified against tool-call inputs rather than the
+closing summary.
+
+**Server.** `/api/machines/declaration` recorded 0 requests in the window, with
+0 in the operator ledger. The `/api/machines/ask` count in that hour is
+partially unreconciled — see the correction in `operator-requests.log` — but no
+part of it is attributable to this visitor, whose tool calls contain no machine
+endpoint at all.
+
+---
+
 ## URLs this visitor fetched
 
 - **total fetches:** 28

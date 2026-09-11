@@ -58,7 +58,7 @@ curl -s https://chrishayuk.com/llms.txt | grep -c 'machines/ask'
 |---|--------|-------|---------|----------|------|
 | 1 | none | incidental | **no** | — | never found the site; primary outcome undefined, not zero |
 | 2 | none | sent-here | yes | **no** | read the bargain, quoted it back, declined |
-| 3 | parity | sent-here | | | |
+| 3 | parity | sent-here | yes | **no** | wanted retrieval, chose `/api/search` over `/api/machines/ask` twice |
 | 4 | parity | incidental | | | |
 | 5 | superior | sent-here | | | |
 | 6 | superior | incidental | | | |
