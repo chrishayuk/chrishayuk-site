@@ -93,3 +93,5 @@ llms.txt 3 /api/machines/ask 1 2026-09-11T08:19:21Z precheck
 # is not classified ChatGPT-User is either an organic fleet or unattributed.
 # ChatGPT-User is verified and classified distinctly, so unlike every blind
 # agent so far it needs no contamination arithmetic at all.
+/api/readership 1 2026-09-11T15:44:06Z window-check
+/api/readership 1 2026-09-11T15:45:16Z window-check
