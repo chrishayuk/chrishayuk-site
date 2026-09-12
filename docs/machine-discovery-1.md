@@ -368,9 +368,11 @@ The Claude operator account reached its session limit after subject 01 was
 enqueued and before it was dispatched. At 19:00Z the operator explicitly
 directed that the experiment continue without Claude. The queued Claude run is
 therefore cancelled unrun and retained as provenance. Subject 01 onward uses a
-fresh Codex subagent with no conversation history, given only the frozen arm
-prompt, with the same public-web-only constraint. The root Codex operator does
-not act as a subject because it has seen the target and deployed value.
+fresh Codex CLI agent with no conversation history, given only the frozen arm
+prompt, with the same public-web-only constraint. Subject 01 uses Codex CLI
+0.154.0 with the configured `gpt-5.6-sol` model at high reasoning effort. The
+root Codex operator does not act as a subject because it has seen the target and
+deployed value.
 
 This is a population and harness change, not a result-blind equivalent
 substitution. Results after this amendment estimate Codex behaviour through
