@@ -1,0 +1,13 @@
+seed    MACHINE-DISCOVERY-1/2026-09-12/arm-order
+sha256  b6547e30b74e1fb81ed0688e1b4f57ebacd9ce830605fcb69e124fffee7f768b
+rejected shuffles before the first admissible order: 19
+01  GENERIC-1  K17=373
+02  NAME-1  K17=385
+03  PHRASE-1  K17=959
+04  GENERIC-2  K17=525
+05  NAME-2  K17=108
+06  PHRASE-2  K17=552
+07  NAME-3  K17=798
+08  PHRASE-3  K17=906
+09  GENERIC-3  K17=494
+admissible fraction under the rules ≈ 0.0684
