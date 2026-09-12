@@ -35,7 +35,7 @@ import { citationRecord, referenceFormats } from "@/lib/citations";
 import { firstCapture } from "@/lib/archive";
 import { getRecord, recordPath, sectionFor, SITE, records, isListed } from "@/lib/records";
 import type { PublicationRecord } from "@/lib/types";
-export function RecordPage({ record }: { record: PublicationRecord }) {
+export function RecordPage({ record, canonicalPath }: { record: PublicationRecord; canonicalPath?: string }) {
  const journeyPart = cell80Journey.findIndex(step => step.id === record.id) + 1;
  const ecologyPart = cell80Part(record.id);
  const furtherPart = cell80FurtherPart(record.id);
@@ -48,7 +48,7 @@ export function RecordPage({ record }: { record: PublicationRecord }) {
  const demoLink = demonstration?.kind === "connection" ? demonstration.links[0] : undefined;
  const legibility = legibilityFor(record.id);
  const memberships = threads.filter(thread => thread.steps.some(step => step.id === record.id));
- const url = `${SITE}${recordPath(record)}`;
+ const url = `${SITE}${canonicalPath || recordPath(record)}`;
  const structured = {
   ...(citation ? citationLd(citation) : { "@context": "https://schema.org", "@type": record.kind === "notebook" ? "Article" : "CreativeWork", name: record.title, abstract: record.abstract, author: record.authors.map(name => ({ "@type": "Person", name })), creativeWorkStatus: "Draft", dateCreated: record.created, version: record.version }),
   "@id": url, url, mainEntityOfPage: url,
