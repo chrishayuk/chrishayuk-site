@@ -13,7 +13,7 @@ export function publicationHistory(id: string) {
   .map((snapshot, index, snapshots) => {
    const { record } = snapshot, provenance = provenanceFor(record.id, record.version);
    return {
-    version: record.version, url: versionUrl(record.id, record.version),
+    version: record.version, title: record.title, abstract: record.abstract, authors: record.authors, url: versionUrl(record.id, record.version),
     published: record.published, revised: record.revised,
     publication: record.publication, scientificStatus: record.status,
     experiments: record.experiments,

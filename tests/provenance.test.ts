@@ -66,6 +66,9 @@ test("altered provenance, orphan entries and missing evidence cannot pass the au
 test("history exposes pinned citation and evidence URLs without inventing draft publications", () => {
  const history = publicationHistory(original.record.id)!;
  assert.equal(history.versions[0].hash, original.hash);
+ assert.equal(history.versions[0].title, original.record.title);
+ assert.equal(history.versions[0].abstract, original.record.abstract);
+ assert.deepEqual(history.versions[0].authors, original.record.authors);
  assert.equal(history.versions[0].next, undefined);
  assert.equal(history.versions[0].previous, undefined);
  assert.ok(history.versions[0].citations.endsWith("?version=1.0"));

@@ -54,7 +54,7 @@ function buildGraph() {
    addEdge(r.id, historyId, "has-history", "preserved-publication");
    history.versions.forEach((entry, index) => {
     const id = `${r.id}@${entry.version}`;
-    nodes.push({ id, kind: "publication-version", title: `${r.title} / v${entry.version}`, url: entry.url, sourceUrl: entry.manuscript, sourceHash: entry.hash, publication: entry.publication, status: entry.scientificStatus, version: entry.version, recordId: r.id, basis: "preserved-manuscript", retrievable: false });
+    nodes.push({ id, kind: "publication-version", title: `${entry.title} / v${entry.version}`, text: entry.abstract, authors: entry.authors, url: entry.url, sourceUrl: entry.manuscript, sourceHash: entry.hash, publication: entry.publication, status: entry.scientificStatus, version: entry.version, recordId: r.id, basis: "preserved-manuscript", retrievable: false });
     addEdge(historyId, id, "includes-version", "preserved-publication");
     for (const reference of entry.supersedes || []) addEdge(id, `${reference.id}@${reference.version}`, "supersedes", reference.reason);
     if (index) addEdge(id, `${r.id}@${history.versions[index - 1].version}`, "revises", entry.revision?.kind || "publication-history");
