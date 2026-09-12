@@ -10,6 +10,13 @@ rungs, WEBSOCKET and WASM, are USABLE WITH CONSTRUCTION, and the size of
 the construction was set by what each subject believed about its tools,
 not by the protocol.
 
+The archived hypothesis predicted a lower rate of decision or of
+permitted execution on the two execute-code rungs, and named equal
+funnel completion as its falsifier. It is refuted on that criterion:
+the socket and module rungs completed the funnel exactly as often as
+the HTTP rungs, three of three at every stage. The descriptive funnel
+below is the primary output.
+
 ```text
 preregistration   docs/machine-web-capability-1a.md, frozen at b645407
 draw              docs/web-capability-1a/arm-order-draw.txt
