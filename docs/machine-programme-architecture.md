@@ -96,6 +96,7 @@ MACHINE-AUTHORITY-1        abandoned  ABORTED - stimulus contamination, 1 run
 MACHINE-AUTHORITY-2        completed  SUPPORTED - task boundary is the gate, 4 runs
 MACHINE-MOTIVATION-1       superseded Phase 0 only: the runtime vetoed a self-record; 2 runs
 MACHINE-MOTIVATION-2       completed  MIXED - value widens scope (M2 3/3), a stated beneficiary moves (S 2/3), 18 runs
+MACHINE-DISCLOSURE-1       completed  NO WALL - M2 3/3 under MARK, KIND and NOTE at both layers; S 2/3, 3/3; no runtime denial in 16 requests; 15 runs + 1 aborted
 MACHINE-DISCOVERY-1        planned    parallel live-web track
 MACHINE-SELF-LOCATION-1    planned    from Authority-1's failure
 ```
