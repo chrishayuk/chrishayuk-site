@@ -44,3 +44,23 @@ HAUSE effects. All five locally served pages have unchanged act anchors, valid
 fragment targets, no nested buttons and annotated terms. The browser connector
 reported no available browser, so hover, keyboard and touch behaviour have not
 been visually verified in a browser.
+
+## 13 September: learn from the machine notes
+
+All six notes now introduce the comparison before its main figure, with a short
+instruction about what to watch or select. Permanent takeaways explain the
+outcome without requiring playback. Reproduction-program IDs are identified as
+catalogue labels; reproduction-setting selectors use words before IDs. The final
+note introduces a module as a program packaged into one reusable instruction,
+then separates counts of programs from counts of distinct computations.
+
+The inheritance note keeps the 36 non-reproductive futures beside the 63/64
+conditional result and exposes the unresolved raw/report discrepancy outside the
+disclosure. Replays, source data, record bodies and publication states are preserved.
+This is an explanatory layer over the existing evidence, not a new interpretation
+or experiment. The matching Agent Ecology pass follows the same pattern.
+
+Validation for this pass: repository tests, TypeScript, changed-file lint, the
+Next.js production build and full local deployment checks passed. The deployment
+checks include all 24 Notebook graph/Ask routes and four thread projections.
+Browser inspection remains unavailable; visual and click testing are unverified.

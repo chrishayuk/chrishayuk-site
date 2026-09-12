@@ -41,3 +41,17 @@ python3 scripts/build-ecology-replays.py /path/to/ecology-culture-results
 The exporter rejects changed source hashes and copies observed boundaries only. `tests/ecology.test.ts` checks report hashes, replay-source hashes, world continuity/reset, counts against registry metrics, memory clearing, withdrawal, the late memory-only POST, unobserved transmission denominators and graph/Ask membership.
 
 The browser integration reported no available browser during implementation. Markup, data, compilation and deployment checks can run; visual and click-based browser QA remain unverified.
+
+## Readability pass, 13 September
+
+Each note introduces the world and defines WORK, POST and READ before showing
+results. Short guides explain what to compare; permanent takeaways retain the
+finding when playback is paused. Main replay actions use plain language while
+inspectors preserve the exact action and input. The memory note distinguishes
+the supplied example from actual own-action history before showing their removal.
+The A1B4 mechanism remains explicitly scripted, with no model in that check.
+
+Validation for this pass: repository tests, TypeScript, changed-file lint, the
+Next.js production build and full local deployment checks passed. The deployment
+checks include all 24 Notebook graph/Ask routes and four thread projections.
+Browser inspection remains unavailable; visual and click testing are unverified.

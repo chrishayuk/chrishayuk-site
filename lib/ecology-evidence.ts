@@ -28,3 +28,9 @@ export const withdrawalConditions = [
  { id: "A_once", label: "Peer record once", exposed: 1 },
  { id: "B_repeated", label: "Peer record three times", exposed: 3 },
 ].map(condition => ({ ...condition, actions: Array.from({ length: 6 }, (_, i) => ecologyMetric<{ reply: string }>(11, `${condition.id}__d${i + 1}_response`).reply.split(" ")[0]) }));
+
+/** Plain-language labels; exact action codes remain in the evidence. */
+export function ecologyActionLabel(action: string): string {
+ const verb = action.split(" ")[0];
+ return ({ POST: "Share a hint", WORK: "Do own work", READ: "Read a message" } as Record<string, string>)[verb] ?? action;
+}

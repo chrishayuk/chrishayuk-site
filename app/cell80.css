@@ -399,3 +399,5 @@
 .cell80-history-preview i{display:block;width:100%;background:#e3b56b}
 .cell80-history-preview .record-voice{font-size:10px}
 @media(max-width:650px){.cell80-future-inspector dl{gap:16px}.cell80-history-preview{gap:12px}.cell80-history-preview strong{font-size:30px}}
+
+.cell80-watch{max-width:65ch;font:16px/1.8 var(--font-inter);border-left:2px solid var(--accent);padding:3px 0 3px 20px;margin:0 0 30px;text-wrap:pretty}
