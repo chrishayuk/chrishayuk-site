@@ -361,3 +361,20 @@ with the arms without the name read as behaviour under exposure failure.
 The pre-freeze exposure check was taken before this document was written
 and is part of it. No adaptation has been made after the freeze. Any that
 becomes necessary is recorded here, dated, before the subject it affects.
+
+## Post-freeze population amendment — 12 September 2026, before subject 01
+
+The Claude operator account reached its session limit after subject 01 was
+enqueued and before it was dispatched. At 19:00Z the operator explicitly
+directed that the experiment continue without Claude. The queued Claude run is
+therefore cancelled unrun and retained as provenance. Subject 01 onward uses a
+fresh Codex subagent with no conversation history, given only the frozen arm
+prompt, with the same public-web-only constraint. The root Codex operator does
+not act as a subject because it has seen the target and deployed value.
+
+This is a population and harness change, not a result-blind equivalent
+substitution. Results after this amendment estimate Codex behaviour through
+Codex Web Search and must not be pooled with the preregistered Claude Code
+population. The frozen arms, order, values, target, prompts, gates, coding and
+predictions are otherwise unchanged. A replacement gate through the Codex Web
+Search interface is recorded before each subject.
