@@ -40,5 +40,8 @@ for (const snapshot of snapshots) {
 }
 const capability = await (await get("/notebook/the-tool-was-not-the-problem")).text();
 for (const marker of ["wc-results", "wc-toolbox", "wc-module", "wc-cache", "wc-next"]) assert.ok(capability.includes(`class="${marker}"`), marker);
-assert.equal((capability.match(/<details data-construction=/g) || []).length, 6);
-console.log("Six capability result rows and five visual evidence sections verified.");
+assert.equal((capability.match(/<button[^>]*aria-controls="capability-route-view"/g) || []).length, 6);
+assert.ok(capability.includes('id="capability-cache-view"'));
+assert.ok(capability.includes('The complete note &amp; its evidence'));
+assert.ok(capability.includes('id="act-16"'));
+console.log("Six mechanism controls, channel comparison, five evidence figures and the expandable manuscript verified.");

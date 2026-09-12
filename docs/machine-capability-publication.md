@@ -11,3 +11,9 @@ Public evidence is the selected structured outcome export and exact copies of th
 The framing is a change in question, not a claimed discoverability result. The prompt supplied the task URL; front-door discovery and optional use were not tested. The web-fetcher cache leak is preserved as an apparatus finding. Empty imports and a same-site hash describe the subjects' checks, not proof that arbitrary remote binaries are safe. Equal completion does not imply equal effort.
 
 Six expandable route rows, a three-visitor socket comparison, a WASM inspection sequence and a stale-fetch diagram follow the existing machine-thread composition. The homepage, notebook index and six-note reading journey lead to the new article. Legibility, graph passages, Ask, feeds, version history and citation exports derive from the same publication record.
+
+## Clarification edition, v1.1
+
+Reader feedback identified repetition and diagrams that labelled outcomes without explaining mechanisms. The revised presentation uses four short rooms, a six-route request/response explorer and a switchable replay of the cached-versus-direct fetch. The long manuscript and per-visitor values remain in native disclosures, with automatic opening for cited act anchors. The manuscript clarifies K17, the HTTP mechanisms and the distinction between receiving a number and executing a WASM program locally. No outcomes or interpretations changed; v1.0 remains preserved.
+
+The browser runtime reported no available browser during this review. Verification therefore covers server-rendered controls, anchored text, types, the data used by each route, and the production publication checks; it does not claim a visual browser inspection.

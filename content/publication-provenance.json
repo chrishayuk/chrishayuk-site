@@ -75,5 +75,47 @@
         }
       }
     ]
+  },
+  {
+    "id": "N-MACHINE-CAPABILITY",
+    "version": "1.1",
+    "recordHash": "f394fa97353d883e116b6d8b376440275999a985e901eec54b678be5cdeb23f0",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Clarified K17 and the six mechanisms; shortened the visual reading path and moved the full record into expandable notes. Findings unchanged.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "WEB-CAPABILITY-1A / audited outcomes and source hashes",
+        "url": "/data/machines/web-capability-1a-evidence.json",
+        "note": "Read from chuk-experiments: experiment EXP-20260912-161711-00770, write-up v2 and all 18 completed runs. All 36 subject report/transcript hashes, the protocol and the final report were checked against local source files. Original Git pointers may require repository access.",
+        "preserved": {
+          "url": "/data/publications/sha256/099f99657387ebd1e652083cad6137b1ab240663e6632023b301b33b7e953294.json",
+          "sha256": "099f99657387ebd1e652083cad6137b1ab240663e6632023b301b33b7e953294",
+          "date": "2026-09-12"
+        }
+      },
+      {
+        "title": "The final results, including the falsified prediction",
+        "url": "/data/machines/web-capability-1a-results.md",
+        "note": "Public copy of the final report at source commit 3bc32f8e65baaf23ae45dcf582c1b23a82536618, registered as artifact 1212. It supersedes the earlier results artifact, which omitted the explicit verdict paragraph.",
+        "preserved": {
+          "url": "/data/publications/sha256/bb00b3d14cefb65d5b15252359d329fe3972c2292fdceb23afeb7a01da881661.md",
+          "sha256": "bb00b3d14cefb65d5b15252359d329fe3972c2292fdceb23afeb7a01da881661",
+          "date": "2026-09-12"
+        }
+      },
+      {
+        "title": "The frozen protocol",
+        "url": "/data/machines/web-capability-1a-protocol.md",
+        "note": "Frozen before the build and first subject at source commit b6454073c1ac02d2d3d4f746aa54d5f452064ba7. The prior, falsifier, supplied task address and configuration limits remain in the record.",
+        "preserved": {
+          "url": "/data/publications/sha256/7be6c5d8c35205c4aedc6709806b3ff5ee5561f3257be944de2844aa3b4ae554.md",
+          "sha256": "7be6c5d8c35205c4aedc6709806b3ff5ee5561f3257be944de2844aa3b4ae554",
+          "date": "2026-09-12"
+        }
+      }
+    ]
   }
 ]

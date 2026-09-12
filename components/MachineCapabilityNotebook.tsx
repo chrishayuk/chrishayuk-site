@@ -1,41 +1,42 @@
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
+import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { capabilityRoutes } from "./MachineCapabilityCard";
+import { MachineCapabilityStudy, CapabilityCacheReplay } from "./MachineCapabilityStudy";
 import { Acts } from "./Acts";
 import type { PublicationRecord } from "@/lib/types";
 import evidence from "@/public/data/machines/web-capability-1a-evidence.json";
 import "@/app/machine-capability.css";
 
 export function MachineCapabilityNotebook({ record }: { record: PublicationRecord }) {
- const prose = (start: number, end: number) => <div className="wc-prose"><Acts acts={record.body.slice(start, end)} anchored offset={start} staticRefusals/></div>;
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook wc-notebook">
   <MachineJourney id={record.id}/>
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this note"><a href="#capability-result">SIX MECHANISMS ↓</a><a href="#capability-construction">THE TOOLBOX ↓</a><a href="#capability-harness">THE WEB IT RECEIVED ↓</a><a href="#capability-discovery">THE NEXT QUESTION ↓</a></nav>
-  <StudyRoom id="capability-result" label="WEB-CAPABILITY-1A / A PREDICTION THAT FAILED" title={<>I expected a ladder.<br/><em>I got a level line.</em></>}>
-   {prose(0, 3)}
-   <figure className="wc-results"><figcaption className="record-voice">ONE DOT = ONE ASSIGNED VISITOR · OPEN A ROUTE FOR ITS VALUES</figcaption>
-    {capabilityRoutes.map(route => <details key={route.id} data-construction={route.construction}><summary><span><strong>{route.label}</strong><small>{route.mechanism}</small></span><span className="wc-results-dots" aria-hidden="true">● ● ●</span><span>3 / 3 <small>completed</small></span><span aria-hidden="true">+</span></summary><div className="wc-route-detail"><p>{route.construction ? "Usable with construction: each visitor wrote and ran a script." : "Directly usable: the visitors used curl without writing new code."}</p><table><caption className="record-voice">K17 / DEPLOYED VALUE AND REPORTED VALUE</caption><thead><tr><th>Visitor</th><th>Deployed</th><th>Reported</th></tr></thead><tbody>{evidence.subjects.filter(subject => subject.condition === route.id).map(subject => <tr key={subject.subject}><th>{String(subject.subject).padStart(2,"0")}</th><td>{subject.deployed}</td><td>{subject.reported} ✓</td></tr>)}</tbody></table></div></details>)}
-    <p className="mv-caption">Read → understood → chose → permitted → received → used correctly. Every stage: 3/3 for every route. Equal completion does not establish equal effort.</p>
-   </figure>
-   {prose(3, 5)}
+  <nav className="mv-entry-nav record-voice" aria-label="Explore this note"><a href="#capability-task">TRY THE SIX ROUTES ↓</a><a href="#capability-result">SEE THE RESULT ↓</a><a href="#capability-harness">SWITCH THE CHANNEL ↓</a></nav>
+  <StudyRoom id="capability-task" label="THE TASK / FIND ONE NUMBER" title={<>One answer.<br/><em>Six ways to get it.</em></>} description="K17 was just a name for a number the agent had to find. The page explained how to obtain it, but did not contain the answer. Each visitor had to use the mechanism it was offered.">
+   <MachineCapabilityStudy/>
+   <p className="mv-reading">The first four routes return an answer. A socket needs a client. A module needs to be run. I expected those last two to lose agents.</p>
   </StudyRoom>
-  <StudyRoom id="capability-construction" label="THE SOCKET / WHAT THE AGENT THOUGHT WAS THERE" title={<>The client was available.<br/><em>Two agents built one anyway.</em></>}>
-   <figure className="wc-toolbox"><figcaption className="record-voice">THREE WEBSOCKET VISITORS / RECORDED ROUTE CHOICES</figcaption><div>{[{id:"02",verb:"Build",text:"Python standard library. Did not inventory the available clients."},{id:"09",verb:"Look",text:"Found installed clients. Used a package, then websocat to check."},{id:"17",verb:"Build",text:"Assumed no package was installed. That belief was wrong."}].map(subject => <div key={subject.id}><span className="record-voice">VISITOR {subject.id}</span><strong>{subject.verb}</strong><p>{subject.text}</p><span className="record-voice">CORRECT VALUE ✓</span></div>)}</div></figure>
-   {prose(5, 7)}
+  <StudyRoom id="capability-result" label="THE RESULT / THE PREDICTED DROP-OFF DID NOT HAPPEN" title={<>More construction.<br/><em>No missing answers.</em></>}>
+   <figure className="wc-results"><figcaption className="record-voice">ONE DOT = ONE VISITOR WHO COMPLETED THE TASK</figcaption><div className="wc-result-grid">{capabilityRoutes.map(route => <div key={route.id} data-construction={route.construction}><span className="record-voice">{route.label}</span><span className="wc-result-marks" aria-hidden="true"><i/><i/><i/></span><strong>3 / 3</strong><small>{route.construction ? "Wrote a script" : "Used curl directly"}</small></div>)}</div><div className="wc-result-total"><strong>18 / 18</strong><p>Chose to act → permitted → obtained the value → reported it correctly.</p></div></figure>
+   <p className="mv-reading">The hypothesis was refuted on its stated test. Code-requiring routes completed as often as ordinary HTTP routes. Equal success did not mean equal work.</p>
+   <div className="wc-construction-pair">
+    <figure className="wc-toolbox" id="capability-construction"><figcaption className="record-voice">WEBSOCKET / A CLIENT ALREADY EXISTED</figcaption><div className="wc-client-path"><span>02 + 17</span><strong>Build a client</strong><span>✓</span></div><div className="wc-client-path" data-found="true"><span>09</span><strong>Find a client</strong><span>✓</span></div><p>Two built from scratch without checking the available clients. One looked first and used an installed package.</p></figure>
+    <figure className="wc-module" id="capability-module"><figcaption className="record-voice">WASM / ALL THREE VISITORS</figcaption><div className="wc-module-flow"><span>Download</span><b>→</b><span>Check hash</span><b>→</b><span>Inspect</span><b>→</b><span>Run</span><b>→</b><span>Verify</span></div><p>All three inspected the module before executing it. Then they independently checked the answer.</p></figure>
+   </div>
+   <FieldNotes label="The 18 values, construction choices & limits" detail="CHECK +"><div className="mv-prose"><p>The no-install instruction did not mean no clients were installed. Visitor 17 explicitly assumed there was no WebSocket package; the frozen inventory showed otherwise. The choices reveal different beliefs about the same toolbox, not a measured internal decision rule.</p><p>The module’s published hash checked that its bytes matched what the site advertised. It did not independently establish trust. All three inspected imports and exports; none added a separate sandbox.</p><table className="wc-value-table"><caption>Each visitor’s deployed and reported K17</caption><thead><tr><th>Visitor</th><th>Mechanism</th><th>Deployed</th><th>Reported</th></tr></thead><tbody>{evidence.subjects.map(subject => <tr key={subject.subject}><th>{String(subject.subject).padStart(2,"0")}</th><td>{subject.condition}</td><td>{subject.deployed}</td><td>{subject.reported}</td></tr>)}</tbody></table></div></FieldNotes>
   </StudyRoom>
-  <StudyRoom id="capability-module" label="THE MODULE / FROM A DOWNLOAD TO AN ANSWER" title={<>They read the binary.<br/><em>Then they ran it.</em></>} tone="dark">
-   <figure className="wc-module"><figcaption className="record-voice">ALL THREE WASM VISITORS / OBSERVED SEQUENCE</figcaption><ol>{["Download", "Check hash", "Inspect", "Execute", "Verify result"].map((step, i) => <li key={step}><span className="record-voice">0{i+1}</span><strong>{step}</strong><span aria-hidden="true">→</span></li>)}</ol><div className="wc-module-result"><span className="record-voice">THREE DIFFERENT DEPLOYMENTS</span><p>522 <span>✓</span> 388 <span>✓</span> 576 <span>✓</span></p></div></figure>
-   {prose(7, 10)}
+  <StudyRoom id="capability-harness" label="THE SURPRISE / THE HARNESS CHANGED WHAT ARRIVED" title={<>The site had changed.<br/><em>The fetcher remembered.</em></>} tone="dark" description="An agent reads through its surrounding software—its harness. In one visit, that software returned another visitor’s old instructions instead of the page the site was serving.">
+   <CapabilityCacheReplay/>
+   <p className="mv-reading">The visitor still succeeded. But the stale page exposed a clue about the changing conditions. Moving the experiment to another website had not removed the harness’s memory.</p>
+   <FieldNotes label="What was observed through WebFetch" detail="READ +"><div className="mv-prose"><p>Ten visitors used WebFetch; none obtained K17 through it. Visitor 15 noticed paraphrased notes. Visitor 17 received visitor 15’s old GET-link contract despite the site’s no-store header, with no corresponding request reaching the lab. It inferred rotating mechanisms but did not name the experiment. This was the recorded blindness breach.</p></div></FieldNotes>
   </StudyRoom>
-  <StudyRoom id="capability-harness" label="THE APPARATUS / SUBJECT 17" title={<>The site served a socket.<br/><em>The fetcher described a link.</em></>}>
-   <figure className="wc-cache"><figcaption className="record-voice">THE RECORDED CACHE LEAK / TWO ACCOUNTS OF ONE PAGE</figcaption><div><div><span className="record-voice">LIVE SITE</span><strong>WebSocket</strong><p>The current machine notes.</p></div><span className="wc-cache-arrow" aria-hidden="true">≠</span><div><span className="record-voice">WEBFETCH RESPONSE</span><strong>GET link</strong><p>Subject 15’s earlier contract.</p></div></div><p className="wc-cache-result">Old route → 404 → direct fetch → socket → correct answer</p></figure>
-   {prose(10, 13)}
-  </StudyRoom>
-  <StudyRoom id="capability-discovery" label="THE NEXT QUESTION / NOT YET TESTED" title={<>A capability can exist.<br/><em>Does it enter consideration?</em></>}>
-   <figure className="wc-next"><div><span className="record-voice">THIS STUDY / ADDRESS SUPPLIED</span><strong>Encounter → use</strong><p>18 / 18 completed the task.</p></div><div><span className="record-voice">NEXT / DISCOVERY VARIED</span><strong>Find → consider?</strong><p>An open experimental question.</p></div></figure>
-   {prose(13, record.body.length)}
+  <StudyRoom id="capability-discovery" label="THE QUESTION MOVES / DISCOVERY WAS NOT TESTED" title={<>It could use the capability.<br/><em>Would it have found it?</em></>}>
+   <figure className="wc-next"><div><span className="record-voice">WE SUPPLIED THE ADDRESS</span><strong>Read → use → answer</strong><p>Observed in all eighteen visits.</p></div><div><span className="record-voice">WE DID NOT TEST THIS STEP</span><strong>Find → consider?</strong><p>How the capability gets noticed.</p></div></figure>
+   <p className="mv-reading">The mechanisms worked here. The next question begins earlier: what brings a useful capability into an agent’s view?</p>
+   <p className="mv-caption">One model, one shell harness, a well-equipped workstation, three visitors per mechanism. The task required the value. This does not establish optional use, browser capability or discovery from a site’s front door.</p>
   </StudyRoom>
   <MachineConnection id={record.id}/>
+  <section id="capability-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
  </div></NotebookFieldNotes>;
 }
