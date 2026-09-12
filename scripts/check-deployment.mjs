@@ -711,4 +711,25 @@ for(const thread of graph.nodes.filter(node=>node.kind==='thread')) {
  const page=await request(new URL(thread.url).pathname);
  checkLegibility(thread,page.body);
 }
-console.log('Search metadata, editorial titles, structured subjects and collection relationships verified across 21 notebooks and three threads.');
+console.log(`Search metadata, editorial titles, structured subjects and collection relationships verified across ${notebookNodes.length} notebooks and ${graph.nodes.filter(node=>node.kind==='thread').length} threads.`);
+
+const agentEcologyPage = await request('/thread/agent-ecology');
+assert.equal(agentEcologyPage.status, 200);
+assert.match(agentEcologyPage.body, /Agent ecology reading order/);
+assert.ok(sitemap.body.includes('/thread/agent-ecology'));
+assert.ok(home.body.includes('href="/thread/agent-ecology"'));
+for (const [slug, label] of [
+ ['the-message-board-did-not-create-a-culture', 'REPLAY TWO RECORDED WORLDS'],
+ ['a-successful-behaviour-is-not-necessarily-contagious', 'REPLAY THE RECORDED COMPARISON'],
+ ['the-world-can-remember-for-the-agent', 'REPLAY THE RECORDED COMPARISON'],
+]) {
+ const page = await request(`/notebook/${slug}`);
+ assert.equal(page.status, 200);
+ assert.ok(page.body.includes(label));
+ assert.ok(page.body.includes('type="range"'));
+ assert.ok(page.body.includes('Next recorded frame'));
+ assert.ok(page.body.includes('Reset'));
+ assert.ok(page.body.includes('href="/data/ecology/replays.json"'));
+ assert.ok(page.body.includes('href="/thread/agent-ecology'));
+}
+console.log('Three ecology drafts, playback controls, source downloads and thread entrances verified.');

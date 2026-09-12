@@ -1,4 +1,5 @@
 import { MachineHomeFeature } from "@/components/MachineProgramme";
+import { EcologyCard } from "@/components/EcologyCard";
 import Link from "next/link";
 import { Cell80HomePreview } from "@/components/Cell80HomePreview";
 import { Cell80Card } from "@/components/Cell80Notebook";
@@ -41,6 +42,8 @@ export default function Home() {
   </section>
 
   <MachineHomeFeature/>
+
+  <section id="agent-ecology" className="home-ecology-feature" aria-labelledby="ecology-home-heading" data-hause-act="connection"><div><Kicker>NEW THREAD / AGENT ECOLOGY · THREE WORKING NOTES</Kicker><h2 id="ecology-home-heading">What keeps<br/><em>an action alive?</em></h2><p>A message board. A failed handoff. A record that keeps eliciting posts after own-action history is cleared.</p><div className="inline-links"><TextLink href="/thread/agent-ecology">FOLLOW THE THREE NOTES</TextLink><TextLink href="/notebook/the-world-can-remember-for-the-agent#ecology-memory">REPLAY THE MEMORY COMPARISON</TextLink></div></div><Link href="/notebook/the-world-can-remember-for-the-agent" aria-label="Read The world can remember for the agent"><EcologyCard id="N-ECOLOGY-MEMORY"/></Link></section>
 
   <section id="from-the-notebook" className="notebook-scene notebook-feature" data-scene="latest-notebook" data-hause-act="connection" aria-labelledby="notebook-feature-heading">
    <div className="notebook-feature-visual">{notebook.id === "N-CELL80-01" ? <Cell80HomePreview href={notebookPath}/> : cell80Part(notebook.id) ? <Cell80Card part={cell80Part(notebook.id)}/> : notebook.id === "N-EXHIBITION" ? <Media id="notebook-exhibition"/> : notebook.id === "N-ATTRIBUTION" ? <AgentAttributionCard/> : notebook.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/> : <Media id="notebook-map-trajectory"/>}<p className="record-voice">{cell80Part(notebook.id) ? "CELL80 / TWO RECORDED WORLDS · OPEN THE NOTE TO PLAY" : notebook.id === "N-EXHIBITION" ? "FROM THE EXHIBITION / THE SPACE AROUND AN IDEA" : notebook.id === "N-ATTRIBUTION" ? "FROM THE REPOSITORY / ONE REQUIRED AUTHORITY GATE" : notebook.id === "N-ADDRESS-BUILD" ? "FROM THE EXPERIMENT / TWO INSTRUMENTS, ONE DEPTH TRANSITION" : "FROM THE FILM / A QUESTION MOVES THROUGH THE MODEL"}</p></div>

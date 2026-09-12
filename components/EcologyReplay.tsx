@@ -1,0 +1,89 @@
+"use client";
+
+import { useEffect, useId, useRef, useState, type RefObject } from "react";
+import recorded from "@/public/data/ecology/replays.json";
+
+type World = { board: { id: number; payload: string }[]; resources: number[]; known: number[][]; settled: boolean };
+type Decision = { case: string; input: string; requestSha256: string; action: string; executed: boolean; ownActions: { action: string; executed: boolean }[]; external: boolean; before: World; after: World };
+type Event = { episode: number; round: number; actor: number; action: string; executed: boolean; before: World; after: World };
+const decisions = recorded.decisions as Record<string, Record<string, Decision[]>>;
+const worlds = recorded.worlds as Record<string, { frames: Event[] }>;
+
+function usePlayback(last: number, container: RefObject<HTMLDivElement | null>) {
+ const [frame, setFrame] = useState(0), [playing, setPlaying] = useState(false);
+ useEffect(() => {
+  if (!playing || frame >= last) return;
+  const timer = setTimeout(() => { setFrame(frame + 1); if (frame + 1 === last) setPlaying(false); }, 1400);
+  return () => clearTimeout(timer);
+ }, [playing, frame, last]);
+ useEffect(() => {
+  const pauseHidden = () => { if (document.hidden) setPlaying(false); };
+  const observer = new IntersectionObserver(entries => { if (!entries[0].isIntersecting) setPlaying(false); });
+  if (container.current) observer.observe(container.current);
+  document.addEventListener("visibilitychange", pauseHidden);
+  return () => { observer.disconnect(); document.removeEventListener("visibilitychange", pauseHidden); };
+ }, [container]);
+ const seek = (next: number) => { setPlaying(false); setFrame(Math.max(0, Math.min(last, next))); };
+ const toggle = () => { if (frame === last) setFrame(0); setPlaying(!playing); };
+ return { frame, playing, seek, toggle, last };
+}
+function Transport({ playback, label }: { playback: ReturnType<typeof usePlayback>; label: string }) {
+ const id = useId();
+ return <div className="eco-transport"><div><button type="button" onClick={playback.toggle}>{playback.playing ? "Pause" : playback.frame === playback.last ? "Replay" : "Play"}</button><button type="button" onClick={() => playback.seek(playback.frame - 1)} disabled={playback.frame === 0} aria-label="Previous recorded frame">←</button><button type="button" onClick={() => playback.seek(playback.frame + 1)} disabled={playback.frame === playback.last} aria-label="Next recorded frame">Step →</button><button type="button" onClick={() => playback.seek(0)}>Reset</button></div><label htmlFor={id}>{label}<input id={id} type="range" min={0} max={playback.last} value={playback.frame} onChange={event => playback.seek(Number(event.target.value))} aria-valuetext={label}/></label></div>;
+}
+function Board({ state }: { state: World }) {
+ return <div className="eco-live-board"><span className="record-voice">CURRENT BOARD</span>{state.board.map(message => <div key={message.id} data-useful={message.payload !== "seed"}><span>m{message.id}</span><strong>{message.payload === "seed" ? "inert seed" : message.payload}</strong></div>)}</div>;
+}
+function Actor({ label, resources, active, hint }: { label: string; resources: number; active: boolean; hint: boolean }) {
+ return <div className="eco-world-actor" data-active={active}><span className="record-voice">{label}</span><div className="eco-agent-disc" aria-hidden="true">●</div><strong>{resources}<small> resources</small></strong><span className="eco-agent-hint">{hint ? "Goal hint known" : "Goal hint not known"}</span></div>;
+}
+export function EcologyWorldReplay() {
+ const [experienced, setExperienced] = useState(false);
+ const container = useRef<HTMLDivElement>(null);
+ const playback = usePlayback(18, container);
+ const prefix = experienced ? "exposed" : "discovery";
+ return <div className="eco-replay" ref={container}>
+  <p className="record-voice eco-replay-label">A1B5 / REPLAY TWO RECORDED WORLDS</p>
+  <div className="eco-controls" role="group" aria-label="History supplied before the session"><button aria-pressed={!experienced} onClick={() => { playback.seek(playback.frame); setExperienced(false); }}>No demonstration</button><button aria-pressed={experienced} onClick={() => { playback.seek(playback.frame); setExperienced(true); }}>Supplied posting episode</button></div>
+  <div className="eco-world-pair">{["inert", "useful"].map(arm => {
+   const event = worlds[`${prefix}_${arm}`].frames[Math.max(0, playback.frame - 1)];
+   const state = playback.frame ? event.after : event.before;
+   return <section className="eco-world-lane" key={arm} aria-label={arm === "inert" ? "Zero return world" : "Six resource return world"}><header><span className="record-voice">RETURN AFTER RECIPIENT USE</span><h3>{arm === "inert" ? "Zero resources" : "Six resources"}</h3><p>Episode {event.episode} / 3 · Round {event.round} / 3</p></header>
+    <div className="eco-world-stage"><Actor label="QWEN / DONOR" resources={state.resources[0]} active={playback.frame > 0 && event.actor === 0} hint={state.known[0].includes(0)}/><Board state={state}/><Actor label="SCRIPT / RECIPIENT" resources={state.resources[1]} active={playback.frame > 0 && event.actor === 1} hint={state.known[1].includes(1)}/></div>
+    <div className="eco-event" data-action={playback.frame ? event.action.split(" ")[0] : ""}><span className="record-voice">{playback.frame ? event.actor ? "SCRIPTED RECIPIENT" : "MODEL ACTION" : "INITIAL STATE"}</span><strong>{playback.frame ? event.action : "Ready"}</strong><small>{playback.frame ? event.action.startsWith("READ") ? "The recipient requests a board message." : event.action.startsWith("POST") ? "The model leaves a hint on the board." : "Work adds one resource to its actor." : "Play to follow the board and resources."}</small></div>
+   </section>;
+  })}</div>
+  <Transport playback={playback} label={`Recorded event ${playback.frame} / 18`}/>
+  <p className="eco-caption">Two actors, three rounds per episode, three episodes. Resources and the board reset between episodes; the event history remains available. Every displayed state is recorded. The recipient is scripted. Layout shows roles, not spatial positions. <a href="/data/ecology/replays.json">Download states + source hashes ↗</a></p>
+ </div>;
+}
+
+function InputRecords({ row }: { row: Decision }) {
+ if (row.input.startsWith("PEER")) {
+  const peer = JSON.parse(row.input.split("CURRENT")[0].slice(4).trim()) as { action?: string; original_seed?: { action: string }; previous_agent?: { action: string } };
+  return <div className="eco-record-slips"><div data-present={Boolean(peer.original_seed)}><span className="record-voice">ORIGINAL SEED KEPT</span><strong>{peer.original_seed?.action || "Not retained separately"}</strong></div><div data-present="true"><span className="record-voice">SUPPLIED PEER ACTION</span><strong>{peer.previous_agent?.action || peer.action}</strong></div></div>;
+ }
+ return <div className="eco-record-slips"><div data-present={row.external}><span className="record-voice">ARCHIVED ARTEFACT</span><strong>{row.external ? "Another agent posted" : "Absent"}</strong></div><div data-present={row.ownActions.length > 0}><span className="record-voice">OWN ACTION HISTORY / {row.ownActions.length}</span><p>{row.ownActions.length ? row.ownActions.map(action => action.action.split(" ")[0]).join(" · ") : "Cleared / empty"}</p></div></div>;
+}
+
+export function EcologyDecisionReplay({ kind }: { kind: "memory" | "transmission" | "withdrawal" }) {
+ const [variant, setVariant] = useState(false);
+ const steps = kind === "memory" ? 3 : 6, experiment = kind === "memory" ? "12" : kind === "transmission" ? "9" : "11";
+ const container = useRef<HTMLDivElement>(null);
+ const playback = usePlayback(steps * 2 - 1, container), step = Math.floor(playback.frame / 2), after = playback.frame % 2 === 1;
+ const arms = kind === "memory" ? [{ id: `E1_M${variant ? 1 : 0}`, label: "Artefact present" }, { id: `E0_M${variant ? 1 : 0}`, label: "Artefact absent" }] : kind === "transmission" ? [{ id: `replace_${variant ? "WORK" : "POST"}`, label: "Pass only the latest" }, { id: `retain_${variant ? "WORK" : "POST"}`, label: "Keep the original too" }] : [{ id: "A_once", label: "One exposure" }, { id: "B_repeated", label: "Three exposures" }];
+ const phase = `Decision ${step + 1} / ${steps} · ${after ? "action recorded" : "records supplied"}`;
+ return <div className="eco-replay" ref={container}>
+  <p className="record-voice eco-replay-label">A1B{experiment} / REPLAY THE RECORDED COMPARISON</p>
+  {kind !== "withdrawal" && <div className="eco-controls" role="group" aria-label={kind === "memory" ? "Own-action memory condition" : "Initial scripted seed"}>{[false,true].map(option => <button key={String(option)} aria-pressed={variant === option} onClick={() => { playback.seek(playback.frame); setVariant(option); }}>{kind === "memory" ? option ? "Retain own history" : "Clear own history each call" : option ? "Begin with a WORK seed" : "Begin with a POST seed"}</button>)}</div>}
+  <div className="eco-decision-pair">{arms.map(arm => {
+   const rows = decisions[experiment][arm.id], row = rows[step];
+   return <section className="eco-decision-lane" key={arm.id} aria-label={arm.label}><header><h3>{arm.label}</h3><span className="record-voice">FRESH WORLD / DECISION {step + 1}</span></header><InputRecords row={row}/><div className="eco-read-arrow" aria-hidden="true">↓</div><div className="eco-action-node" data-action={after ? row.action.split(" ")[0] : ""}><div className="eco-agent-disc" aria-hidden="true">●</div><span className="record-voice">QWEN / NEXT ACTION</span><strong>{after ? row.action : "Input supplied"}</strong></div>
+    <div className="eco-recorded-tape" aria-label="Jump to a recorded decision">{rows.map((item, i) => <button key={item.case} onClick={() => playback.seek(i * 2 + 1)} aria-current={step === i ? "step" : undefined} aria-label={`Show decision ${i+1}: ${item.action}`} data-action={i < step || i === step && after ? item.action.split(" ")[0] : ""}><small>{i + 1}</small><span>{i < step || i === step && after ? item.action.split(" ")[0] : "·"}</span></button>)}</div>
+    <details className="eco-request"><summary>Inspect this recorded input</summary><pre>{row.input}</pre><p className="eco-caption">{row.case} · Exact supplied user record. Shared instructions also remain present. Full request SHA-256: <code>{row.requestSha256}</code></p></details>
+   </section>;
+  })}</div>
+  <Transport playback={playback} label={phase}/><p className="eco-playback-status" role="status" aria-live={playback.playing ? "off" : "polite"}>{kind === "withdrawal" && step >= 3 ? "The supplied artefacts are now absent in both branches. Own-action history remains." : kind === "memory" && !variant ? "Every new call starts with empty own-action history—even after a POST." : kind === "transmission" ? "The harness passes the action records. The worlds and model contexts reset." : "Inspect what is supplied before each recorded action."}</p>
+  <p className="eco-caption">Each decision has an input frame and an action frame. Playback reveals saved outcomes; it does not run a model or simulate its reasoning. {kind === "memory" ? "Only the first decision is the controlled factorial comparison; later histories depend on earlier actions." : "These are dependent recorded sequences, not independent-agent replications."} <a href="/data/ecology/replays.json">Recorded inputs + source hashes ↗</a></p>
+ </div>;
+}

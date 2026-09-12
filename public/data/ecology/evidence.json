@@ -1,0 +1,2559 @@
+{
+  "source": "chuk-experiments MCP",
+  "scope": "Selected registry metrics and exact latest write-up text (A1B3 v2; A1B4–12 v1), with local detailed-result hashes independently matched to registered artifacts. Drive downloads were not re-fetched.",
+  "experiments": [
+    {
+      "number": 3,
+      "id": "EXP-20260912-162228-00774",
+      "slug": "ecology-culture-a1b3",
+      "title": "A1B3: orthogonal input diagnostic of reading and externalisation",
+      "status": "completed",
+      "hypothesis": "Diagnostic questions: do changes to a single visible input field alter the requested action when the other fields are fixed, and does any cell elicit posting or delegation? The registration specified no directional statistical success criterion.",
+      "conclusion": "Mixed diagnostic result: changing only BOARD switched WORK to READ in 365 of 384 pairs, while none of 768 inputs elicited POST or DELEGATE. This establishes input-field response sensitivity, not useful consumption, payoff sensitivity or a model-training explanation.",
+      "writeupVersion": 2,
+      "writeupCreated": "2026-09-12T16:34:52.899820Z",
+      "run": "RUN-20260912-163057-00761",
+      "registrationCommit": "048d74dce7fdd4651251c74ca9d82806cd3b3631",
+      "report": "/data/ecology/a1b3-results.md",
+      "reportSha256": "ed0d14d7b7695add496dc4f85113bfb329d437fa494fec9d5d10460bc5c1649f",
+      "verifiedResult": {
+        "filename": "a1b3_screen_qwen3.5_9b.json",
+        "sha256": "cafb1a716d16221a9e577fa7b8a75f1a29e68116962d05262472e87c8c4ab396",
+        "url": "https://drive.google.com/file/d/1nApqzPuX4gdwwLMjF0lh4YMKCOoaoLtb/view"
+      },
+      "metrics": {
+        "parse_rate": 1,
+        "parsed_non_wait_rate": 1,
+        "externalising_action_count": 0,
+        "externalising_fraction_offline": 0,
+        "observation_count": 768,
+        "distinct_observation_count": 768,
+        "distinct_verbs": 2,
+        "verb_mix": {
+          "READ": 403,
+          "WORK": 365
+        },
+        "admissibility": {
+          "bar": {
+            "parse_rate": 0.8,
+            "parsed_non_wait_rate": 0.6,
+            "min_expressive_actions": 1
+          },
+          "outcome": "BEHAVIOUR-DISQUALIFIED",
+          "grammar_ok": true,
+          "behaviour_ok": false
+        },
+        "unmeasured_endpoints": {
+          "in_situ_rate": null,
+          "paired_primary": null,
+          "rate_check_ran": false,
+          "paired_worlds_ran": false
+        },
+        "elapsed_seconds": 974.0630962090218,
+        "generated_tokens": 3072,
+        "board_work_to_read_pair_count": 365,
+        "board_matched_pair_count": 384,
+        "board_work_to_read_fraction": 0.9505208333333334,
+        "matched_contrasts": {
+          "resources_0_to_7": {
+            "pairs": 384,
+            "verb_changes": 11,
+            "after_verb_mix": {
+              "READ": 196,
+              "WORK": 188
+            },
+            "before_verb_mix": {
+              "READ": 207,
+              "WORK": 177
+            },
+            "verb_transitions": {
+              "READ->READ": 196,
+              "READ->WORK": 11,
+              "WORK->WORK": 177
+            },
+            "raw_reply_changes": 11,
+            "externalising_fraction_delta": 0
+          },
+          "board_absent_to_present": {
+            "pairs": 384,
+            "verb_changes": 365,
+            "after_verb_mix": {
+              "READ": 384
+            },
+            "before_verb_mix": {
+              "READ": 19,
+              "WORK": 365
+            },
+            "verb_transitions": {
+              "READ->READ": 19,
+              "WORK->READ": 365
+            },
+            "raw_reply_changes": 366,
+            "externalising_fraction_delta": 0
+          },
+          "known_t0_absent_to_present": {
+            "pairs": 384,
+            "verb_changes": 19,
+            "after_verb_mix": {
+              "READ": 204,
+              "WORK": 180
+            },
+            "before_verb_mix": {
+              "READ": 199,
+              "WORK": 185
+            },
+            "verb_transitions": {
+              "READ->READ": 192,
+              "READ->WORK": 7,
+              "WORK->READ": 12,
+              "WORK->WORK": 173
+            },
+            "raw_reply_changes": 19,
+            "externalising_fraction_delta": 0
+          },
+          "known_t1_absent_to_present": {
+            "pairs": 384,
+            "verb_changes": 19,
+            "after_verb_mix": {
+              "READ": 194,
+              "WORK": 190
+            },
+            "before_verb_mix": {
+              "READ": 209,
+              "WORK": 175
+            },
+            "verb_transitions": {
+              "READ->READ": 192,
+              "READ->WORK": 17,
+              "WORK->READ": 2,
+              "WORK->WORK": 173
+            },
+            "raw_reply_changes": 19,
+            "externalising_fraction_delta": 0
+          },
+          "known_t2_absent_to_present": {
+            "pairs": 384,
+            "verb_changes": 19,
+            "after_verb_mix": {
+              "READ": 194,
+              "WORK": 190
+            },
+            "before_verb_mix": {
+              "READ": 209,
+              "WORK": 175
+            },
+            "verb_transitions": {
+              "READ->READ": 192,
+              "READ->WORK": 17,
+              "WORK->READ": 2,
+              "WORK->WORK": 173
+            },
+            "raw_reply_changes": 19,
+            "externalising_fraction_delta": 0
+          },
+          "known_t3_absent_to_present": {
+            "pairs": 384,
+            "verb_changes": 19,
+            "after_verb_mix": {
+              "READ": 195,
+              "WORK": 189
+            },
+            "before_verb_mix": {
+              "READ": 208,
+              "WORK": 176
+            },
+            "verb_transitions": {
+              "READ->READ": 192,
+              "READ->WORK": 16,
+              "WORK->READ": 3,
+              "WORK->WORK": 173
+            },
+            "raw_reply_changes": 19,
+            "externalising_fraction_delta": 0
+          },
+          "other_hint_absent_to_present": {
+            "pairs": 1152,
+            "verb_changes": 57,
+            "after_verb_mix": {
+              "READ": 591,
+              "WORK": 561
+            },
+            "before_verb_mix": {
+              "READ": 618,
+              "WORK": 534
+            },
+            "verb_transitions": {
+              "READ->READ": 576,
+              "READ->WORK": 42,
+              "WORK->READ": 15,
+              "WORK->WORK": 519
+            },
+            "raw_reply_changes": 57,
+            "externalising_fraction_delta": 0
+          },
+          "goal_t0_to_t1_legal_fixed_hold": {
+            "pairs": 128,
+            "verb_changes": 6,
+            "after_verb_mix": {
+              "READ": 65,
+              "WORK": 63
+            },
+            "before_verb_mix": {
+              "READ": 71,
+              "WORK": 57
+            },
+            "verb_transitions": {
+              "READ->READ": 65,
+              "READ->WORK": 6,
+              "WORK->WORK": 57
+            },
+            "raw_reply_changes": 63,
+            "externalising_fraction_delta": 0
+          },
+          "goal_t0_to_t2_legal_fixed_hold": {
+            "pairs": 128,
+            "verb_changes": 4,
+            "after_verb_mix": {
+              "READ": 65,
+              "WORK": 63
+            },
+            "before_verb_mix": {
+              "READ": 69,
+              "WORK": 59
+            },
+            "verb_transitions": {
+              "READ->READ": 65,
+              "READ->WORK": 4,
+              "WORK->WORK": 59
+            },
+            "raw_reply_changes": 63,
+            "externalising_fraction_delta": 0
+          },
+          "goal_t0_to_t3_legal_fixed_hold": {
+            "pairs": 128,
+            "verb_changes": 4,
+            "after_verb_mix": {
+              "READ": 64,
+              "WORK": 64
+            },
+            "before_verb_mix": {
+              "READ": 68,
+              "WORK": 60
+            },
+            "verb_transitions": {
+              "READ->READ": 64,
+              "READ->WORK": 4,
+              "WORK->WORK": 60
+            },
+            "raw_reply_changes": 64,
+            "externalising_fraction_delta": 0
+          },
+          "goal_t1_to_t2_legal_fixed_hold": {
+            "pairs": 128,
+            "verb_changes": 1,
+            "after_verb_mix": {
+              "READ": 68,
+              "WORK": 60
+            },
+            "before_verb_mix": {
+              "READ": 69,
+              "WORK": 59
+            },
+            "verb_transitions": {
+              "READ->READ": 68,
+              "READ->WORK": 1,
+              "WORK->WORK": 59
+            },
+            "raw_reply_changes": 60,
+            "externalising_fraction_delta": 0
+          },
+          "goal_t1_to_t3_legal_fixed_hold": {
+            "pairs": 128,
+            "verb_changes": 2,
+            "after_verb_mix": {
+              "READ": 66,
+              "WORK": 62
+            },
+            "before_verb_mix": {
+              "READ": 68,
+              "WORK": 60
+            },
+            "verb_transitions": {
+              "READ->READ": 66,
+              "READ->WORK": 2,
+              "WORK->WORK": 60
+            },
+            "raw_reply_changes": 62,
+            "externalising_fraction_delta": 0
+          },
+          "goal_t2_to_t3_legal_fixed_hold": {
+            "pairs": 128,
+            "verb_changes": 1,
+            "after_verb_mix": {
+              "READ": 66,
+              "WORK": 62
+            },
+            "before_verb_mix": {
+              "READ": 67,
+              "WORK": 61
+            },
+            "verb_transitions": {
+              "READ->READ": 66,
+              "READ->WORK": 1,
+              "WORK->WORK": 61
+            },
+            "raw_reply_changes": 62,
+            "externalising_fraction_delta": 0
+          },
+          "own_goal_hint_absent_to_present": {
+            "pairs": 384,
+            "verb_changes": 19,
+            "after_verb_mix": {
+              "READ": 196,
+              "WORK": 188
+            },
+            "before_verb_mix": {
+              "READ": 207,
+              "WORK": 177
+            },
+            "verb_transitions": {
+              "READ->READ": 192,
+              "READ->WORK": 15,
+              "WORK->READ": 4,
+              "WORK->WORK": 173
+            },
+            "raw_reply_changes": 19,
+            "externalising_fraction_delta": 0
+          }
+        },
+        "factor_marginals": {
+          "goal": {
+            "0": {
+              "READ": 104,
+              "WORK": 88
+            },
+            "1": {
+              "READ": 101,
+              "WORK": 91
+            },
+            "2": {
+              "READ": 100,
+              "WORK": 92
+            },
+            "3": {
+              "READ": 98,
+              "WORK": 94
+            }
+          },
+          "hold": {
+            "0": {
+              "READ": 105,
+              "WORK": 87
+            },
+            "1": {
+              "READ": 97,
+              "WORK": 95
+            },
+            "2": {
+              "READ": 99,
+              "WORK": 93
+            },
+            "3": {
+              "READ": 102,
+              "WORK": 90
+            }
+          },
+          "resources": {
+            "0": {
+              "READ": 207,
+              "WORK": 177
+            },
+            "7": {
+              "READ": 196,
+              "WORK": 188
+            }
+          },
+          "known_mask": {
+            "0": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "1": {
+              "READ": 36,
+              "WORK": 12
+            },
+            "2": {
+              "READ": 26,
+              "WORK": 22
+            },
+            "3": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "4": {
+              "READ": 26,
+              "WORK": 22
+            },
+            "5": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "6": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "7": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "8": {
+              "READ": 27,
+              "WORK": 21
+            },
+            "9": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "10": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "11": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "12": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "13": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "14": {
+              "READ": 24,
+              "WORK": 24
+            },
+            "15": {
+              "READ": 24,
+              "WORK": 24
+            }
+          },
+          "board_present": {
+            "True": {
+              "READ": 384
+            },
+            "False": {
+              "READ": 19,
+              "WORK": 365
+            }
+          }
+        }
+      },
+      "artifacts": [
+        {
+          "name": "a1b3_screen_qwen3.5_9b",
+          "sha256": "cafb1a716d16221a9e577fa7b8a75f1a29e68116962d05262472e87c8c4ab396",
+          "url": "https://drive.google.com/file/d/1nApqzPuX4gdwwLMjF0lh4YMKCOoaoLtb/view"
+        },
+        {
+          "name": "a1b3-evidence-bundle",
+          "sha256": "81cdee7e087abdded61569aa3dab1668994cdf778d8bed7820470a7355edb72f",
+          "url": "https://drive.google.com/file/d/10KDcGEqGI90eBRueXSaAqQ5RL5DOZx9B/view"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "EXP-20260912-164326-00776",
+      "slug": "ecology-culture-a1b4",
+      "title": "A1B4: contribution-specific payoff and exposure gate",
+      "status": "completed",
+      "hypothesis": "Publishing a valid private hint, followed by another agent reading it and completing the dependent task, will produce a delayed return to the author that WORK or READ alone cannot obtain. Without a qualifying publication, the two payoff settings will remain observationally identical.",
+      "conclusion": "MECHANISM-VALIDATED: 9/9 prospective zero-inference gates passed. Scripted valid contribution yields donor RES 8 useful / 2 inert versus 3 from pure WORK in both. All 3375 no-POST streams among 5832 tested streams are arm-identical; 11664 arm-specific trajectories replay exactly. No model was invoked. Non-exposure cannot identify payoff rejection or model training class.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T16:59:10.898700Z",
+      "run": "RUN-20260912-165449-00774",
+      "registrationCommit": "9907d7782ede57af8ceb1aad1fb6d4c95e26feed",
+      "report": "/data/ecology/a1b4-results.md",
+      "reportSha256": "a2d5340e1f1d619242337252955e8bc9ca0b014929030ebb8ca1085f1a71ed15",
+      "verifiedResult": {
+        "filename": "a1b4_gate.json",
+        "sha256": "bff8585f8a5bd0c5d4ffdf6ad7ae645801bc6c00d023a6fdbe4774b84a7b4145",
+        "url": "https://drive.google.com/file/d/1jHEDbtsY3-q9uYmBMb0iAYpyScYRxm0Z/view"
+      },
+      "metrics": {
+        "mechanism_gates_passed": 9,
+        "mechanism_gates_total": 9,
+        "donor_final_resources_inert_poster": 2,
+        "donor_final_resources_useful_poster": 8,
+        "donor_final_resources_worker_both_arms": 3,
+        "net_post_advantage_useful": 5,
+        "net_post_advantage_inert": -1,
+        "finite_census_max_no_post_return": 0,
+        "finite_census_no_post_arm_identical": 3375,
+        "finite_census_no_post_sequences": 3375,
+        "finite_census_reward_without_valid_post": 0,
+        "finite_census_rewarded_sequences": 580,
+        "finite_census_sequences": 5832,
+        "maximum_author_return": 6,
+        "replayed_worlds": 11664,
+        "first_differing_donor_decision": 3,
+        "inference_calls": 0,
+        "elapsed_seconds": 2.86855904199183,
+        "mechanism_checks": {
+          "checks": [
+            {
+              "id": "C1-return-has-opposite-net-sign",
+              "passed": true,
+              "observed": {
+                "inert_poster": 2,
+                "useful_poster": 8,
+                "worker_both_arms": 3
+              }
+            },
+            {
+              "id": "C2-delayed-and-mediated",
+              "passed": true,
+              "observed": {
+                "after_post": 0,
+                "after_recipient_read": 0,
+                "after_recipient_work": 6,
+                "self_read_without_peer_return": 0
+              }
+            },
+            {
+              "id": "C3-content-and-timing-specific",
+              "passed": true,
+              "observed": {
+                "inert_payload_return": 0,
+                "invalid_claim_return": 0,
+                "last_turn_post_return": 0
+              }
+            },
+            {
+              "id": "C4-identical-until-feedback",
+              "passed": true,
+              "observed": {
+                "inert_third_input": "OBS\nCTX=200\nGOAL=t0\nBOARD=m0,m1\nRES=1\nHOLD=t1\nKNOWN=\n",
+                "useful_third_input": "OBS\nCTX=200\nGOAL=t0\nBOARD=m0,m1\nRES=7\nHOLD=t1\nKNOWN=\n",
+                "donor_decision_indices_with_different_inputs": [
+                  2
+                ]
+              }
+            },
+            {
+              "id": "C5-no-substitute-in-finite-census",
+              "passed": true,
+              "observed": {
+                "sequences": 5832,
+                "no_post_sequences": 3375,
+                "max_no_post_return": 0,
+                "rewarded_sequences": 580,
+                "no_post_arm_identical": 3375,
+                "reward_without_valid_post": 0
+              }
+            },
+            {
+              "id": "C6-one-return-only",
+              "passed": true,
+              "observed": {
+                "max_return": 6
+              }
+            },
+            {
+              "id": "C7-replay-identical",
+              "passed": true,
+              "observed": {
+                "all_identical": true,
+                "replayed_worlds": 11664
+              }
+            },
+            {
+              "id": "C8-context-and-refusals",
+              "passed": true,
+              "observed": {
+                "ctx_valid": true,
+                "refusals_not_executed": true
+              }
+            },
+            {
+              "id": "C9-full-response-parser",
+              "passed": true,
+              "observed": {
+                "return": 0,
+                "malformed_first_refusal": "Parse:TrailingTokens(\"explanation\")"
+              }
+            }
+          ],
+          "census_sha256": "cfe1e31e62241f43f1e3cb5e93a49de1ab0b791907c6b7da6452613e7e569839"
+        },
+        "unmeasured_model_endpoints": {
+          "ran": false,
+          "finding": "A no-POST trajectory cannot expose the arm difference. Non-exposure is inconclusive about response to the payoff or model class.",
+          "payoff_response_measured": false
+        }
+      },
+      "artifacts": [
+        {
+          "name": "a1b4-preregistration",
+          "sha256": "583fb63e22a2c97d135d6d7d39466dbcdd01ecad2e4c94f2167234623963e42c",
+          "url": "https://drive.google.com/file/d/1j5_sviw7SRbtF5qC4d7wRKKZr2nI21e_/view"
+        },
+        {
+          "name": "a1b4-frozen-source",
+          "sha256": "c024532fc9f43723e5ef8ac5947bd4752366c7cf4e5a97ddf7d0932c17719deb",
+          "url": "https://drive.google.com/file/d/1Hi936rRTWK_gC2kinghhPp8V0gKmlxJd/view"
+        },
+        {
+          "name": "a1b4-detailed-result",
+          "sha256": "bff8585f8a5bd0c5d4ffdf6ad7ae645801bc6c00d023a6fdbe4774b84a7b4145",
+          "url": "https://drive.google.com/file/d/1jHEDbtsY3-q9uYmBMb0iAYpyScYRxm0Z/view"
+        },
+        {
+          "name": "a1b4-results-note",
+          "sha256": "f9c4373775dba1ada6c26c500c5481ab7d7ed4f8841f452dc25a580dbc1aac53",
+          "url": "https://drive.google.com/file/d/1xsAH9rfczEwJ47Tla8c8UQxW40eH2-TQ/view"
+        },
+        {
+          "name": "a1b4-evidence-bundle",
+          "sha256": "51219435e2ef354664c07df35b110a8dba298680f84a407d9bcd4296ae0da2e4",
+          "url": "https://drive.google.com/file/d/18D0dzZNmuJ7vlevSdcDP36yTX8Pt5Jz7/view"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "EXP-20260912-171306-00778",
+      "slug": "ecology-culture-a1b5",
+      "title": "A1B5: spontaneous contribution and adoption after payoff experience",
+      "status": "completed",
+      "hypothesis": "Under an explicit resource objective, Qwen will make more timely valid contributions after seeing a scripted contribution receive a delayed return than after seeing the identical contribution receive no return. Separate unexposed trajectories test whether it tries contribution without that demonstration; silence without payoff exposure cannot refute payoff responsiveness.",
+      "conclusion": "ASSAY-COMPLETE, negative contrast: qwen3.5:9b made no POST in either unexposed session (0/9 each), but made 3/9 timely valid posts after zero-return scripted experience and 0/9 after positive-return experience. Useful-minus-inert exposed difference -0.333333; first fresh exposed choice POST after zero return versus WORK after return six. All 36 actions parsed and executed, 11/11 gates passed. Contribution is elicitable under this new interface, but the predicted positive payoff-adoption response was not supported. This finite dependent pilot does not isolate causal understanding or model training class.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T17:28:53.926610Z",
+      "run": "RUN-20260912-171942-00785",
+      "registrationCommit": "edda243e3ab5fe47ff7ba8e2e9f4350669011179",
+      "report": "/data/ecology/a1b5-results.md",
+      "reportSha256": "21e2e86fb3d4ced1d7d579158066aec5878e1a1eef6c4945a18dc4db0556f2bc",
+      "verifiedResult": {
+        "filename": "a1b5_assay.json",
+        "sha256": "4abaeb4546c165d4795f61299e3928257eb47dcd5f0a6481521b2838a6f99afd",
+        "url": "https://drive.google.com/file/d/1V1BvSy7Y5uJOMDztHiQkyKXuPBhD_mfI/view"
+      },
+      "metrics": {
+        "mechanism_and_assay_gates_passed": 11,
+        "mechanism_and_assay_gates_total": 11,
+        "inference_calls": 36,
+        "elapsed_seconds": 64.41090016701492,
+        "assay_outcome": {
+          "outcome": "ASSAY-COMPLETE"
+        },
+        "primary_timely_post_fraction_delta": -0.3333333333333333,
+        "payoff_history_outcome": {
+          "outcome": "NEGATIVE-CONTRAST"
+        },
+        "identical_request_groups_with_different_replies": 0,
+        "generated_tokens": 147,
+        "discovery_inert_decisions": 9,
+        "discovery_inert_verb_mix": {
+          "WORK": 9
+        },
+        "discovery_inert_parsed": 9,
+        "discovery_inert_executed": 9,
+        "discovery_inert_post_requests": 0,
+        "discovery_inert_delegate_requests": 0,
+        "discovery_inert_valid_posts": 0,
+        "discovery_inert_timely_valid_posts": 0,
+        "discovery_inert_timely_valid_post_fraction": 0,
+        "discovery_inert_received_return_episodes": 0,
+        "discovery_inert_final_resources": {
+          "value": [
+            3,
+            3,
+            3
+          ]
+        },
+        "discovery_inert_model_decisions_after_visible_return": 0,
+        "discovery_inert_first_reply": {
+          "value": "WORK t0"
+        },
+        "discovery_useful_decisions": 9,
+        "discovery_useful_verb_mix": {
+          "WORK": 9
+        },
+        "discovery_useful_parsed": 9,
+        "discovery_useful_executed": 9,
+        "discovery_useful_post_requests": 0,
+        "discovery_useful_delegate_requests": 0,
+        "discovery_useful_valid_posts": 0,
+        "discovery_useful_timely_valid_posts": 0,
+        "discovery_useful_timely_valid_post_fraction": 0,
+        "discovery_useful_received_return_episodes": 0,
+        "discovery_useful_final_resources": {
+          "value": [
+            3,
+            3,
+            3
+          ]
+        },
+        "discovery_useful_model_decisions_after_visible_return": 0,
+        "discovery_useful_first_reply": {
+          "value": "WORK t0"
+        },
+        "exposed_inert_decisions": 9,
+        "exposed_inert_verb_mix": {
+          "POST": 3,
+          "WORK": 6
+        },
+        "exposed_inert_parsed": 9,
+        "exposed_inert_executed": 9,
+        "exposed_inert_post_requests": 3,
+        "exposed_inert_delegate_requests": 0,
+        "exposed_inert_valid_posts": 3,
+        "exposed_inert_timely_valid_posts": 3,
+        "exposed_inert_timely_valid_post_fraction": 0.3333333333333333,
+        "exposed_inert_received_return_episodes": 0,
+        "exposed_inert_final_resources": {
+          "value": [
+            2,
+            2,
+            2
+          ]
+        },
+        "exposed_inert_model_decisions_after_visible_return": 0,
+        "exposed_inert_first_reply": {
+          "value": "POST t1:h"
+        },
+        "exposed_useful_decisions": 9,
+        "exposed_useful_verb_mix": {
+          "WORK": 9
+        },
+        "exposed_useful_parsed": 9,
+        "exposed_useful_executed": 9,
+        "exposed_useful_post_requests": 0,
+        "exposed_useful_delegate_requests": 0,
+        "exposed_useful_valid_posts": 0,
+        "exposed_useful_timely_valid_posts": 0,
+        "exposed_useful_timely_valid_post_fraction": 0,
+        "exposed_useful_received_return_episodes": 0,
+        "exposed_useful_final_resources": {
+          "value": [
+            3,
+            3,
+            3
+          ]
+        },
+        "exposed_useful_model_decisions_after_visible_return": 9,
+        "exposed_useful_first_reply": {
+          "value": "WORK t0"
+        },
+        "parse_rate": 1,
+        "actual_execution_rate": 1,
+        "max_response_bytes": 9,
+        "model_rows_audited": 36
+      },
+      "artifacts": [
+        {
+          "name": "a1b5-preregistration",
+          "sha256": "e91fc733df3a671977f74be25466271f2c50a3369fecd1140f5dff546609ef59",
+          "url": "https://drive.google.com/file/d/1R_V9I6RLDjQBuMIfX5puschUjrIhoaW1/view"
+        },
+        {
+          "name": "a1b5-frozen-source",
+          "sha256": "4c29d9504993755bfffc16be3902c843edded69a1ca95dc9388d7892ef73daa8",
+          "url": "https://drive.google.com/file/d/1v4Pw9sMofbNggX7dJzfWJeD81TgEGnHl/view"
+        },
+        {
+          "name": "a1b5_gates",
+          "sha256": "8c901dc438b80092113fdd71d8849d698e293b6afdb8d2b549f83451a7c27531",
+          "url": "https://drive.google.com/file/d/1S-M7RQFk4RiRdxW5dKX7fv04RRKq-zSB/view"
+        },
+        {
+          "name": "a1b5_build",
+          "sha256": "2e95c2ead959e35897e2eafa84e400f46e012ffadedbf84841917b987e13694c",
+          "url": "https://drive.google.com/file/d/1vI0XGQu79113p6kTdIjRDEZrpIeXK2L5/view"
+        },
+        {
+          "name": "a1b5-detailed-result",
+          "sha256": "4abaeb4546c165d4795f61299e3928257eb47dcd5f0a6481521b2838a6f99afd",
+          "url": "https://drive.google.com/file/d/1V1BvSy7Y5uJOMDztHiQkyKXuPBhD_mfI/view"
+        },
+        {
+          "name": "a1b5-results-note",
+          "sha256": "d3c6b35d034b2ff66a0b116a6952e5f6e3562b22ad700d424ccbabeb6bbaf2f7",
+          "url": "https://drive.google.com/file/d/1uMy5NT50mirksCSYNikU-yE09hTMcWHx/view"
+        },
+        {
+          "name": "a1b5-evidence-bundle",
+          "sha256": "e6c711f94a14b6ae154320707f800f6843b866542c6c324b154665a5df632497",
+          "url": "https://drive.google.com/file/d/1mRAOZpo6z3JTF5HrdYwtC1hZ63hXX0X3/view"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "EXP-20260912-173348-00779",
+      "slug": "ecology-culture-a1b6",
+      "title": "A1B6: demonstrated action by prior resource total — tiny history diagnostic",
+      "status": "completed",
+      "hypothesis": "Qwen's next-action response will follow the previous resource total rather than the demonstrated action: POST after a low total and WORK after a high total under both POST/WORK/WORK and WORK/WORK/WORK summaries. If the response instead depends on demonstrated action or stays constant, that finite diagnostic prediction is not supported.",
+      "conclusion": "DIAGNOSTIC-COMPLETE: all four counterfactual summaries followed demonstrated action—POST after POST/WORK/WORK and WORK after WORK/WORK/WORK at both RES 2 and 8. Resource effect 0, action-history effect +1, interaction 0; the registered low-total POST/high-total WORK prediction was not supported. Both exact original A1B5 raw-history anchors reproduced their opposite replies. All 13 gates passed and all six responses parsed/executed. The pattern is consistent with imitation or priming but does not isolate either, establish causal payoff learning, or identify training class; counterfactual/external-adjustment framing and summary compression limit transfer to genuine reward histories.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T18:02:00.460179Z",
+      "run": "RUN-20260912-173910-00796",
+      "registrationCommit": "51bbb61de4db93f3d7c202948e38f3e5cff62a42",
+      "report": "/data/ecology/a1b6-results.md",
+      "reportSha256": "8ce77d2d83ca4728107218bf6c2b9555bb9b21c8844b85c4900f49ab15889d6d",
+      "verifiedResult": {
+        "filename": "a1b6_diagnostic.json",
+        "sha256": "de944594fd33a6ffbe0bc128a0542d397ce28f484f2e19daef1188bc908b616e",
+        "url": "https://drive.google.com/file/d/1utvc81NSY1OiuPlcsf0j4YyM27KN9kzN/view"
+      },
+      "metrics": {
+        "gates_passed": 13,
+        "gates_total": 13,
+        "inference_calls": 6,
+        "elapsed_seconds": 10.062919749994762,
+        "outcome": {
+          "value": "DIAGNOSTIC-COMPLETE"
+        },
+        "replies": {
+          "post_low": "POST t1:h",
+          "work_low": "WORK t0",
+          "post_high": "POST t1:h",
+          "work_high": "WORK t0",
+          "anchor_inert": "POST t1:h",
+          "anchor_useful": "WORK t0"
+        },
+        "verbs": {
+          "post_low": "POST",
+          "work_low": "WORK",
+          "post_high": "POST",
+          "work_high": "WORK",
+          "anchor_inert": "POST",
+          "anchor_useful": "WORK"
+        },
+        "post_indicators": {
+          "post_low": 1,
+          "work_low": 0,
+          "post_high": 1,
+          "work_high": 0
+        },
+        "resource_effect": 0,
+        "action_history_effect": 1,
+        "interaction": 0,
+        "within_post_history_resource_effect": 0,
+        "within_work_history_resource_effect": 0,
+        "exact_number_driven_prediction": {
+          "value": false
+        },
+        "anchor_matches": {
+          "anchor_inert": true,
+          "anchor_useful": true
+        },
+        "valid_post_by_cell": {
+          "post_low": true,
+          "work_low": false,
+          "post_high": true,
+          "work_high": false
+        },
+        "parsed": 6,
+        "executed": 6,
+        "generated_tokens": 27,
+        "anchor_inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "anchor_inert_post_indicator": 1,
+        "post_low_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "post_low_post_indicator": 1,
+        "work_high_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "work_high_post_indicator": 0,
+        "work_low_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "work_low_post_indicator": 0,
+        "post_high_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "post_high_post_indicator": 1,
+        "anchor_useful_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "anchor_useful_post_indicator": 0
+      },
+      "artifacts": [
+        {
+          "name": "a1b6-preregistration",
+          "sha256": "6ab435ae47424d41056a4ca7da9285ad48dd21a1a4f2e6c6fc7e5d18c1bd2770",
+          "url": "https://drive.google.com/file/d/1A4Tb1cuy4zgN-cs7I5Go1KfpjOpbTKbN/view"
+        },
+        {
+          "name": "a1b6-frozen-source",
+          "sha256": "8d404735bbf4ac40046c04cdd8516d8660dbc40ef978c81f025ebe128261cb06",
+          "url": "https://drive.google.com/file/d/1hxco-RRRYLutkv8pmiSoiPF5Q1ttELo9/view"
+        },
+        {
+          "name": "a1b6-gates",
+          "sha256": "683b08f94c3940fc70aa0e8686c4c91fa9c6e714c0b7b8a907e7032a5e764aca",
+          "url": "https://drive.google.com/file/d/1dpdI5c3B5pzzimVlgvVz1jmJ1nGXKMDT/view"
+        },
+        {
+          "name": "a1b6-detailed-result",
+          "sha256": "de944594fd33a6ffbe0bc128a0542d397ce28f484f2e19daef1188bc908b616e",
+          "url": "https://drive.google.com/file/d/1utvc81NSY1OiuPlcsf0j4YyM27KN9kzN/view"
+        },
+        {
+          "name": "a1b6-results-note",
+          "sha256": "ffe3bcb56b1ae32bcf59030da68485380c4569719b8e7f9195430af59391de2a",
+          "url": "https://drive.google.com/file/d/16nRXoMm-PLXlWfNuXdKIs9YxK4jY7gh2/view"
+        },
+        {
+          "name": "a1b6-evidence-bundle",
+          "sha256": "ecd4a74c9029634df1307a51f6157da2dc40c8bd8ba04cc41000b4de87345580",
+          "url": "https://drive.google.com/file/d/17350xqBwUNGeVuJTGMhOuyycf1p2Se4t/view"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "EXP-20260912-180727-00780",
+      "slug": "ecology-culture-a1b7",
+      "title": "A1B7: factual memory representation and causal annotation",
+      "status": "completed",
+      "hypothesis": "Explicit causal wording will increase valid contribution after a genuine positive-return history compared with matched chronological wording. This increase should be larger than after the otherwise matched zero-return history if it reflects payoff-specific response rather than generic POST priming.",
+      "conclusion": "DIAGNOSTIC-COMPLETE: all 12 annotated inputs elicited valid POST under both After and Because wording and both genuine payoff histories. Causal-minus-chronological contrasts were 0 useful, 0 inert and 0 payoff-specific; the registered positive causal-wording prediction was not supported. Without a note, raw and receipt-enriched summaries chose POST inert/WORK useful, while bare factual summaries chose WORK in both. Both original anchors reproduced. All 18 replies parsed/executed; corrected gates passed 17/17 after a preserved pre-inference checker false positive, with all model inputs unchanged. Response to annotation is demonstrated, but explicit causal wording adds no effect over chronology here; causal understanding, selective reward learning and training class remain unestablished.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T18:58:28.284308Z",
+      "run": "RUN-20260912-181123-00801",
+      "registrationCommit": "b10d5091491f25d14a5fa9fd8f5a8c907876eacd",
+      "report": "/data/ecology/a1b7-results.md",
+      "reportSha256": "ea58babee10a99f364191aa35a4d3e610a98dd765f0eea011edb4c4432559888",
+      "verifiedResult": {
+        "filename": "a1b7_diagnostic.json",
+        "sha256": "2052b3c482e616840de9e28a3e7ed45945936e774e184aba021a741a7bc4142e",
+        "url": "https://drive.google.com/file/d/1NaMUAMBTXSg8MkkYFkXq-l6t-ubAFUe_/view"
+      },
+      "metrics": {
+        "initial_gates_passed": 16,
+        "gates_passed": 17,
+        "gates_total": 17,
+        "inference_calls": 18,
+        "elapsed_seconds": 22.597324957954697,
+        "outcome": {
+          "value": "DIAGNOSTIC-COMPLETE"
+        },
+        "replies": {
+          "raw__none__inert": "POST t1:h",
+          "raw__none__useful": "WORK t0",
+          "raw__causal__inert": "POST t1:h",
+          "raw__causal__useful": "POST t1:h",
+          "summary__none__inert": "WORK t0",
+          "summary__none__useful": "WORK t0",
+          "summary__causal__inert": "POST t1:h",
+          "summary__causal__useful": "POST t1:h",
+          "raw__chronological__inert": "POST t1:h",
+          "raw__chronological__useful": "POST t1:h",
+          "summary__chronological__inert": "POST t1:h",
+          "summary_receipts__none__inert": "POST t1:h",
+          "summary__chronological__useful": "POST t1:h",
+          "summary_receipts__none__useful": "WORK t0",
+          "summary_receipts__causal__inert": "POST t1:h",
+          "summary_receipts__causal__useful": "POST t1:h",
+          "summary_receipts__chronological__inert": "POST t1:h",
+          "summary_receipts__chronological__useful": "POST t1:h"
+        },
+        "verbs": {
+          "raw__none__inert": "POST",
+          "raw__none__useful": "WORK",
+          "raw__causal__inert": "POST",
+          "raw__causal__useful": "POST",
+          "summary__none__inert": "WORK",
+          "summary__none__useful": "WORK",
+          "summary__causal__inert": "POST",
+          "summary__causal__useful": "POST",
+          "raw__chronological__inert": "POST",
+          "raw__chronological__useful": "POST",
+          "summary__chronological__inert": "POST",
+          "summary_receipts__none__inert": "POST",
+          "summary__chronological__useful": "POST",
+          "summary_receipts__none__useful": "WORK",
+          "summary_receipts__causal__inert": "POST",
+          "summary_receipts__causal__useful": "POST",
+          "summary_receipts__chronological__inert": "POST",
+          "summary_receipts__chronological__useful": "POST"
+        },
+        "valid_post_indicators": {
+          "raw__none__inert": 1,
+          "raw__none__useful": 0,
+          "raw__causal__inert": 1,
+          "raw__causal__useful": 1,
+          "summary__none__inert": 0,
+          "summary__none__useful": 0,
+          "summary__causal__inert": 1,
+          "summary__causal__useful": 1,
+          "raw__chronological__inert": 1,
+          "raw__chronological__useful": 1,
+          "summary__chronological__inert": 1,
+          "summary_receipts__none__inert": 1,
+          "summary__chronological__useful": 1,
+          "summary_receipts__none__useful": 0,
+          "summary_receipts__causal__inert": 1,
+          "summary_receipts__causal__useful": 1,
+          "summary_receipts__chronological__inert": 1,
+          "summary_receipts__chronological__useful": 1
+        },
+        "causal_minus_chronological_useful": 0,
+        "causal_minus_chronological_inert": 0,
+        "payoff_specific_annotation_contrast": 0,
+        "positive_causal_contrast": {
+          "value": false
+        },
+        "annotation_deltas": {
+          "raw__inert": 0,
+          "raw__useful": 0,
+          "summary__inert": 0,
+          "summary__useful": 0,
+          "summary_receipts__inert": 0,
+          "summary_receipts__useful": 0
+        },
+        "representation_deltas": {
+          "raw_to_summary__none__inert": -1,
+          "raw_to_summary__none__useful": 0,
+          "raw_to_summary__causal__inert": 0,
+          "raw_to_summary__causal__useful": 0,
+          "summary_to_receipts__none__inert": 1,
+          "summary_to_receipts__none__useful": 0,
+          "summary_to_receipts__causal__inert": 0,
+          "summary_to_receipts__causal__useful": 0,
+          "raw_to_summary__chronological__inert": 0,
+          "raw_to_summary__chronological__useful": 0,
+          "summary_to_receipts__chronological__inert": 0,
+          "summary_to_receipts__chronological__useful": 0
+        },
+        "annotation_added_deltas": {
+          "raw__causal__inert": 0,
+          "raw__causal__useful": 1,
+          "summary__causal__inert": 1,
+          "summary__causal__useful": 1,
+          "raw__chronological__inert": 0,
+          "raw__chronological__useful": 1,
+          "summary__chronological__inert": 1,
+          "summary__chronological__useful": 1,
+          "summary_receipts__causal__inert": 0,
+          "summary_receipts__causal__useful": 1,
+          "summary_receipts__chronological__inert": 0,
+          "summary_receipts__chronological__useful": 1
+        },
+        "anchor_matches": {
+          "raw__none__inert": true,
+          "raw__none__useful": true
+        },
+        "parsed": 18,
+        "executed": 18,
+        "generated_tokens": 86,
+        "summary_receipts__chronological__useful_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary_receipts__chronological__useful_post_indicator": 1,
+        "summary_receipts__none__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary_receipts__none__inert_post_indicator": 1,
+        "summary_receipts__none__useful_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "summary_receipts__none__useful_post_indicator": 0,
+        "summary__causal__useful_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary__causal__useful_post_indicator": 1,
+        "raw__causal__useful_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "raw__causal__useful_post_indicator": 1,
+        "summary_receipts__causal__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary_receipts__causal__inert_post_indicator": 1,
+        "summary_receipts__causal__useful_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary_receipts__causal__useful_post_indicator": 1,
+        "raw__causal__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "raw__causal__inert_post_indicator": 1,
+        "summary__chronological__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary__chronological__inert_post_indicator": 1,
+        "summary__chronological__useful_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary__chronological__useful_post_indicator": 1,
+        "summary__none__useful_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "summary__none__useful_post_indicator": 0,
+        "summary__none__inert_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "summary__none__inert_post_indicator": 0,
+        "raw__none__useful_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "raw__none__useful_post_indicator": 0,
+        "raw__chronological__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "raw__chronological__inert_post_indicator": 1,
+        "summary__causal__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary__causal__inert_post_indicator": 1,
+        "summary_receipts__chronological__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "summary_receipts__chronological__inert_post_indicator": 1,
+        "raw__chronological__useful_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "raw__chronological__useful_post_indicator": 1,
+        "raw__none__inert_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "raw__none__inert_post_indicator": 1
+      },
+      "artifacts": [
+        {
+          "name": "a1b7-preregistration",
+          "sha256": "e5fd0dca3e4a79743076b44a8e383f2f401c20b46d847a20384f0cebe8ab9701",
+          "url": "https://drive.google.com/file/d/1SrsAEifwUjs__4CDgwXRSjciAb3PaTIJ/view"
+        },
+        {
+          "name": "a1b7-frozen-source",
+          "sha256": "056c631a7a74e94831da71bc86557347a2eb7a64a603ceb069861b2b1e31f6f4",
+          "url": "https://drive.google.com/file/d/1dUqXU5tRMLgZEM1-VAuhTqAcY_HtuJdD/view"
+        },
+        {
+          "name": "a1b7-initial-gate-failure",
+          "sha256": "8ada5b92da7be46542080e25effa30261fea4309d2eba2b6dc7436069f9b51de",
+          "url": "https://drive.google.com/file/d/1Lg0QV42pFto9plWKMQR_3ZJ8o2GChMbQ/view"
+        },
+        {
+          "name": "a1b7-gate-amendment-source",
+          "sha256": "294b9beeb2762d6e72dd6ef91366cf2a213f6f238613d135a1670061fbfa915e",
+          "url": "https://drive.google.com/file/d/1keMtJjQlrMw1_cjzu17rnTi5H5vDeh_1/view"
+        },
+        {
+          "name": "a1b7-gates",
+          "sha256": "68d7372684bcd0edfb0fc04f9e7ead9ec7c37333bf9ec6e121c8386436b8497c",
+          "url": "https://drive.google.com/file/d/1NkDwws5s7l3PhvnVpbyNT4y2aspJ1Hvs/view"
+        },
+        {
+          "name": "a1b7-detailed-result",
+          "sha256": "2052b3c482e616840de9e28a3e7ed45945936e774e184aba021a741a7bc4142e",
+          "url": "https://drive.google.com/file/d/1NaMUAMBTXSg8MkkYFkXq-l6t-ubAFUe_/view"
+        },
+        {
+          "name": "a1b7-results-note",
+          "sha256": "b1b39390b75bbf48b67051b46805f3afbaf5a5b07b00afbdae3c0ca99744622d",
+          "url": "https://drive.google.com/file/d/1B3yVmslcvPRChMC8sUn43M_XEaCqtACc/view"
+        },
+        {
+          "name": "a1b7-evidence-bundle",
+          "sha256": "a7dd8c450a5c7e202abc0ab237418aaa245844f1ff2dbce90a1c942f80efc77f",
+          "url": "https://drive.google.com/file/d/1ibFfD4EipoA87T9uMQJxyW9Fa8Gc9anV/view"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "EXP-20260912-190507-00782",
+      "slug": "ecology-culture-a1b8",
+      "title": "A1B8: action reminder versus outcome reminder at fixed genuine payoff",
+      "status": "completed",
+      "hypothesis": "Repeating only the donor's prior POST action will switch Qwen from WORK to a valid POST under the genuine positive-return history. If the action-only reminder does not produce that switch, it is not sufficient in this frozen diagnostic; outcome-only and full-chain cases distinguish the observed alternatives without identifying an internal mechanism.",
+      "conclusion": "DIAGNOSTIC-COMPLETE, registered action-reminder prediction supported: the same genuine +6 raw history produced WORK with no note, POST with only 'a0 posted t1:h.', WORK with the outcome-only reminder, and POST with the full chronological chain. Valid-POST contrasts B-A +1, C-A 0, D-A +1. Both original anchors reproduced; all four replies parsed/executed and all 13 gates passed. The action reminder is sufficient for this observed first-action switch, and the full chain is unnecessary here. This is consistent with priming or imitation but identifies neither, and does not establish reward learning, zero-payoff behaviour, sustained adoption or cultural transmission.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T19:14:00.801408Z",
+      "run": "RUN-20260912-190820-00808",
+      "registrationCommit": "3b7708a7a050365d31a9fc5dc80b258f630b3ca1",
+      "report": "/data/ecology/a1b8-results.md",
+      "reportSha256": "93a18d9505af19f423d53fab495667e81ae21510732d0bc45423db0fc2bc4e97",
+      "verifiedResult": {
+        "filename": "a1b8_diagnostic.json",
+        "sha256": "6aa34e1929bf6fb1bd9c1b1ab8bda790c9e9488affac26c93658e18ac610c650",
+        "url": "https://drive.google.com/file/d/1lWAg78s0GTu-M90PSSa_VnCuEUWxpozQ/view"
+      },
+      "metrics": {
+        "gates_passed": 13,
+        "gates_total": 13,
+        "inference_calls": 4,
+        "elapsed_seconds": 7.958886709006038,
+        "outcome": {
+          "value": "DIAGNOSTIC-COMPLETE"
+        },
+        "replies": {
+          "A_raw": "WORK t0",
+          "D_chain": "POST t1:h",
+          "B_action": "POST t1:h",
+          "C_outcome": "WORK t0"
+        },
+        "verbs": {
+          "A_raw": "WORK",
+          "D_chain": "POST",
+          "B_action": "POST",
+          "C_outcome": "WORK"
+        },
+        "valid_post_indicators": {
+          "A_raw": 0,
+          "D_chain": 1,
+          "B_action": 1,
+          "C_outcome": 0
+        },
+        "action_minus_raw": 1,
+        "outcome_minus_raw": 0,
+        "chain_minus_raw": 1,
+        "action_reminder_flip": {
+          "value": true
+        },
+        "outcome_reminder_flip": {
+          "value": false
+        },
+        "chain_only_pattern": {
+          "value": false
+        },
+        "anchor_matches": {
+          "A_raw": true,
+          "D_chain": true
+        },
+        "parsed": 4,
+        "executed": 4,
+        "generated_tokens": 18,
+        "A_raw_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "A_raw_post_indicator": 0,
+        "B_action_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "B_action_post_indicator": 1,
+        "C_outcome_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "C_outcome_post_indicator": 0,
+        "D_chain_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "D_chain_post_indicator": 1
+      },
+      "artifacts": [
+        {
+          "name": "a1b8-preregistration",
+          "sha256": "8d1302a7f3b386ca53c59b542f9f70ae191a4fa96ddddf34642a5dffd18b7e27",
+          "url": "https://drive.google.com/file/d/1PoHcEkKn4BZTfffslA4pU-yTqmItZFYq/view"
+        },
+        {
+          "name": "a1b8-frozen-source",
+          "sha256": "f37093c00ebc0967107faf0b64013aedc6169b1e4e1e8332d65c7a558322417e",
+          "url": "https://drive.google.com/file/d/1l6O_RZZXPJMplcJf6wOTtRHqJatQ7OGJ/view"
+        },
+        {
+          "name": "a1b8-gates",
+          "sha256": "c62f3809ca126f42e308b74c0342d127b40dc3b5336917425867d50e627b365d",
+          "url": "https://drive.google.com/file/d/1Yjh9Q9eyZySIhid3BxnpjsMQyECy2zmy/view"
+        },
+        {
+          "name": "a1b8-detailed-result",
+          "sha256": "6aa34e1929bf6fb1bd9c1b1ab8bda790c9e9488affac26c93658e18ac610c650",
+          "url": "https://drive.google.com/file/d/1lWAg78s0GTu-M90PSSa_VnCuEUWxpozQ/view"
+        },
+        {
+          "name": "a1b8-results-note",
+          "sha256": "ea3025cf7c82ea3ab226ab856e2e3376d55941269b1d1e46e111f030ed141ffe",
+          "url": "https://drive.google.com/file/d/1YlPEzSRmTUHoUbp5-y7oeH3Y9KQumDce/view"
+        },
+        {
+          "name": "a1b8-evidence-bundle",
+          "sha256": "4cc6c9e338b64d333b72dbb13f402e9096d14fb9a34dbe2bc8945d10c1139c19",
+          "url": "https://drive.google.com/file/d/1P0hMB2rltyiuFktbUEfATjQWv79fC1FP/view"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "EXP-20260912-192011-00786",
+      "slug": "ecology-culture-a1b9",
+      "title": "A1B9 — peer-action transmission after seed removal",
+      "status": "completed",
+      "hypothesis": "A POST-seeded chain will keep producing valid useful POST actions across six fresh model instances after the original seed is removed, while a WORK-seeded chain produces none. A failure to maintain this separation rejects sustained seed-dependent transmission on this frozen pilot.",
+      "conclusion": "A1B9 did not support sustained seed-dependent POST transmission: both replacement chains chose WORK at all six generations (contrast 0). Only the retained-POST lineage posted, alternating WORK/POST for 3/6 while the original seed remained available. The single-record channel never bootstrapped POST; natural POST-predecessor exposure was zero, so its transmission frequency is unobserved, not zero. All 36 calls parsed and executed; 15 gates passed; 147 generated tokens, 26.30 seconds. Five unique complete inputs accounted for the deterministic trajectories.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T19:34:36.859129Z",
+      "run": "RUN-20260912-192423-00809",
+      "registrationCommit": "3c93d5d69ec74ea4aabeaa13002232b97ddd011f",
+      "report": "/data/ecology/a1b9-results.md",
+      "reportSha256": "502ac3118d9e87e4fc596aaaeafe8283df120648b6d4d2b4b4128603da6c7ae3",
+      "verifiedResult": {
+        "filename": "a1b9_transmission.json",
+        "sha256": "2e39b33676a83e78cfa4a4998d4397564ae8a27380533e15789c0ab759d0927d",
+        "url": "https://drive.google.com/file/d/15PUybpvw3qtyMZma4uGmEZqq0mxZZDxi/view"
+      },
+      "metrics": {
+        "gates_passed": 15,
+        "gates_total": 15,
+        "inference_calls": 36,
+        "elapsed_seconds": 26.299560375045985,
+        "outcome": {
+          "value": "TRANSMISSION-PILOT-COMPLETE"
+        },
+        "valid_post_by_generation": {
+          "retain_POST": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "retain_WORK": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "perturb_POST": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "perturb_WORK": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "replace_POST": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "replace_WORK": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "replies": {
+          "retain_POST": [
+            "WORK t0",
+            "POST t1:h",
+            "WORK t0",
+            "POST t1:h",
+            "WORK t0",
+            "POST t1:h"
+          ],
+          "retain_WORK": [
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0"
+          ],
+          "perturb_POST": [
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0"
+          ],
+          "perturb_WORK": [
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0"
+          ],
+          "replace_POST": [
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0"
+          ],
+          "replace_WORK": [
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0",
+            "WORK t0"
+          ]
+        },
+        "post_counts": {
+          "retain_POST": 3,
+          "retain_WORK": 0,
+          "perturb_POST": 0,
+          "perturb_WORK": 0,
+          "replace_POST": 0,
+          "replace_WORK": 0
+        },
+        "first_non_post_generation": {
+          "retain_POST": 1,
+          "retain_WORK": 1,
+          "perturb_POST": 1,
+          "perturb_WORK": 1,
+          "replace_POST": 1,
+          "replace_WORK": 1
+        },
+        "all_post_through_generation_6": {
+          "retain_POST": false,
+          "retain_WORK": false,
+          "perturb_POST": false,
+          "perturb_WORK": false,
+          "replace_POST": false,
+          "replace_WORK": false
+        },
+        "primary_supported": {
+          "value": false
+        },
+        "replacement_post_minus_work_by_generation": {
+          "value": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "replacement_mean_contrast": 0,
+        "retention_minus_replacement": {
+          "POST": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "WORK": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "perturbation_minus_replacement": {
+          "POST": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "WORK": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "intervention_changed_record": {
+          "perturb_POST": false,
+          "perturb_WORK": true
+        },
+        "actual_predecessor_transition_counts": {
+          "POST": {
+            "count": 0,
+            "post_count": 0,
+            "post_frequency": null
+          },
+          "WORK": {
+            "count": 18,
+            "post_count": 0,
+            "post_frequency": 0
+          }
+        },
+        "unique_requests": 5,
+        "parsed": 36,
+        "executed": 36,
+        "replace_POST_post_count": 0,
+        "replace_POST_post_frequency": 0,
+        "replace_WORK_post_count": 0,
+        "replace_WORK_post_frequency": 0,
+        "retain_POST_post_count": 3,
+        "retain_POST_post_frequency": 0.5,
+        "retain_WORK_post_count": 0,
+        "retain_WORK_post_frequency": 0,
+        "perturb_POST_post_count": 0,
+        "perturb_POST_post_frequency": 0,
+        "perturb_WORK_post_count": 0,
+        "perturb_WORK_post_frequency": 0,
+        "natural_after_POST_post_count": 0,
+        "natural_after_POST_count": 0,
+        "natural_after_POST_post_frequency": {
+          "value": null
+        },
+        "natural_after_WORK_post_count": 0,
+        "natural_after_WORK_count": 18,
+        "natural_after_WORK_post_frequency": 0,
+        "generated_tokens": 147,
+        "replace_POST__g1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_POST__g1_post_indicator": 0,
+        "replace_WORK__g1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_WORK__g1_post_indicator": 0,
+        "retain_POST__g1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_POST__g1_post_indicator": 0,
+        "retain_WORK__g1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_WORK__g1_post_indicator": 0,
+        "perturb_POST__g1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_POST__g1_post_indicator": 0,
+        "perturb_WORK__g1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_WORK__g1_post_indicator": 0,
+        "replace_POST__g2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_POST__g2_post_indicator": 0,
+        "replace_WORK__g2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_WORK__g2_post_indicator": 0,
+        "retain_POST__g2_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "retain_POST__g2_post_indicator": 1,
+        "retain_WORK__g2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_WORK__g2_post_indicator": 0,
+        "perturb_POST__g2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_POST__g2_post_indicator": 0,
+        "perturb_WORK__g2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_WORK__g2_post_indicator": 0,
+        "replace_POST__g3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_POST__g3_post_indicator": 0,
+        "replace_WORK__g3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_WORK__g3_post_indicator": 0,
+        "retain_POST__g3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_POST__g3_post_indicator": 0,
+        "retain_WORK__g3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_WORK__g3_post_indicator": 0,
+        "perturb_POST__g3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_POST__g3_post_indicator": 0,
+        "perturb_WORK__g3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_WORK__g3_post_indicator": 0,
+        "replace_POST__g4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_POST__g4_post_indicator": 0,
+        "replace_WORK__g4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_WORK__g4_post_indicator": 0,
+        "retain_POST__g4_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "retain_POST__g4_post_indicator": 1,
+        "retain_WORK__g4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_WORK__g4_post_indicator": 0,
+        "perturb_POST__g4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_POST__g4_post_indicator": 0,
+        "perturb_WORK__g4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_WORK__g4_post_indicator": 0,
+        "replace_POST__g5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_POST__g5_post_indicator": 0,
+        "replace_WORK__g5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_WORK__g5_post_indicator": 0,
+        "retain_POST__g5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_POST__g5_post_indicator": 0,
+        "retain_WORK__g5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_WORK__g5_post_indicator": 0,
+        "perturb_POST__g5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_POST__g5_post_indicator": 0,
+        "perturb_WORK__g5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_WORK__g5_post_indicator": 0,
+        "replace_POST__g6_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_POST__g6_post_indicator": 0,
+        "replace_WORK__g6_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "replace_WORK__g6_post_indicator": 0,
+        "retain_POST__g6_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "retain_POST__g6_post_indicator": 1,
+        "retain_WORK__g6_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "retain_WORK__g6_post_indicator": 0,
+        "perturb_POST__g6_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_POST__g6_post_indicator": 0,
+        "perturb_WORK__g6_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "perturb_WORK__g6_post_indicator": 0
+      },
+      "artifacts": [
+        {
+          "name": "a1b9-preregistration",
+          "sha256": "d5b22f2d91dd96e0ceb9553c6aebe7dec30788572a4b5407016271f9f78e3a0a",
+          "url": "https://drive.google.com/file/d/1vzWcx7XtFfFgVdW2jAGuM7aKik0_-5K7/view"
+        },
+        {
+          "name": "a1b9-frozen-source",
+          "sha256": "183ff0b26d3e2b5a815fffff9d26778c2de164cc1e803568ad023095c69f96d5",
+          "url": "https://drive.google.com/file/d/1YtAAprTzpyzYBHKURruH4zD01Y3uvLrs/view"
+        },
+        {
+          "name": "a1b9-gates",
+          "sha256": "99c6f859b8a204348948f1b52ab738356cd789752ee8cf2c9b0a06f9480ae391",
+          "url": "https://drive.google.com/file/d/14GbKHhwozwShktU31c1-OgUFfJDvnWP9/view"
+        },
+        {
+          "name": "a1b9-detailed-result",
+          "sha256": "2e39b33676a83e78cfa4a4998d4397564ae8a27380533e15789c0ab759d0927d",
+          "url": "https://drive.google.com/file/d/15PUybpvw3qtyMZma4uGmEZqq0mxZZDxi/view"
+        },
+        {
+          "name": "a1b9-results-note",
+          "sha256": "26d14e5368b93f476b9fbcd9abb71741d96be8e64cbf3cd859daa7f2e247d85a",
+          "url": "https://drive.google.com/file/d/1teTkBPCC4ageYSuUv4zZlhH1A0OphoQo/view"
+        },
+        {
+          "name": "a1b9-evidence-bundle",
+          "sha256": "02907a3d3a950fbc91b6a2a119f9c6be86b0a2428a489305c721beabcbabb825",
+          "url": "https://drive.google.com/file/d/1ZxWIk6Q0-WTjTutaXIm4rTVd4O76TjEL/view"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "EXP-20260912-194035-00788",
+      "slug": "ecology-culture-a1b10",
+      "title": "A1B10 — identity framing × action-record representation",
+      "status": "completed",
+      "hypothesis": "Framing the same supplied POST demonstration as the agent's own prior action will elicit valid POST, while framing it as another agent's action will elicit WORK, in both prose and structured records. Failure of this separation in either representation does not support a representation-robust self/other asymmetry on this panel.",
+      "conclusion": "A1B10 did not support a representation-robust self/peer asymmetry. Self prose elicited valid POST and peer prose WORK (contrast +1), but both structured forms chose WORK (contrast 0; interaction +1). Anonymous and archived-board forms also chose WORK. All three exact A1B8/A1B9 anchors reproduced. This isolates the specified actor-wording response in prose on this panel, not an internal self/other mechanism or persistence. All 15 gates and 12 audit checks passed; 9 calls parsed/executed, 38 generated tokens, 13.10 seconds.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T20:01:38.961886Z",
+      "run": "RUN-20260912-195430-00814",
+      "registrationCommit": "fb7724861640af5dc807a5f13e8bc8d692dcaca3",
+      "report": "/data/ecology/a1b10-results.md",
+      "reportSha256": "aecc20502831ef318c9e29d2a22416b5750b5a73f75dabf24148ec604be99e3f",
+      "verifiedResult": {
+        "filename": "a1b10_diagnostic.json",
+        "sha256": "c5d49f02899a075bba501c4c9e8a7a4bb228fe445b9a4a663e018234aa5a810d",
+        "url": "https://drive.google.com/file/d/1t_LjQtWkONHujkl9SitXGfLdX4V_F66q/view"
+      },
+      "metrics": {
+        "gates_passed": 15,
+        "gates_total": 15,
+        "inference_calls": 9,
+        "elapsed_seconds": 13.103229750005994,
+        "outcome": {
+          "value": "DIAGNOSTIC-COMPLETE"
+        },
+        "replies": {
+          "anonymous": "WORK t0",
+          "peer_prose": "WORK t0",
+          "self_prose": "POST t1:h",
+          "archived_board": "WORK t0",
+          "anchor_a1b8_raw": "WORK t0",
+          "peer_structured": "WORK t0",
+          "self_structured": "WORK t0",
+          "anchor_a1b9_peer": "WORK t0",
+          "anchor_a1b8_action": "POST t1:h"
+        },
+        "valid_post_indicators": {
+          "anonymous": 0,
+          "peer_prose": 0,
+          "self_prose": 1,
+          "archived_board": 0,
+          "anchor_a1b8_raw": 0,
+          "peer_structured": 0,
+          "self_structured": 0,
+          "anchor_a1b9_peer": 0,
+          "anchor_a1b8_action": 1
+        },
+        "self_minus_peer_prose": 1,
+        "self_minus_peer_structured": 0,
+        "mean_identity_contrast": 0.5,
+        "mean_prose_minus_structured": 0.5,
+        "identity_by_representation_interaction": 1,
+        "primary_supported": {
+          "value": false
+        },
+        "anchor_matches": {
+          "anchor_a1b8_raw": true,
+          "anchor_a1b9_peer": true,
+          "anchor_a1b8_action": true
+        },
+        "parsed": 9,
+        "executed": 9,
+        "generated_tokens": 38,
+        "self_prose_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "self_prose_post_indicator": 1,
+        "peer_prose_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "peer_prose_post_indicator": 0,
+        "self_structured_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "self_structured_post_indicator": 0,
+        "peer_structured_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "peer_structured_post_indicator": 0,
+        "anonymous_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "anonymous_post_indicator": 0,
+        "archived_board_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "archived_board_post_indicator": 0,
+        "anchor_a1b8_raw_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "anchor_a1b8_raw_post_indicator": 0,
+        "anchor_a1b8_action_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "anchor_a1b8_action_post_indicator": 1,
+        "anchor_a1b9_peer_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "anchor_a1b9_peer_post_indicator": 0
+      },
+      "artifacts": [
+        {
+          "name": "a1b10-preregistration",
+          "sha256": "baae7d03ed33b9168d55ccd049a90a5a270e2628da2e58c63878adb564d9936c",
+          "url": "https://drive.google.com/file/d/1omskKyXmySZ_BL5ZWD_VNGyXxTciVFX9/view"
+        },
+        {
+          "name": "a1b10-frozen-source",
+          "sha256": "b9826da3134b27f2678f03fbb5b3bb3830c4669dbf4d1699e6ce02dbdadffaae",
+          "url": "https://drive.google.com/file/d/1rcXgsR3JOoqq3jc0cfZhu7Y3ddZLFdM1/view"
+        },
+        {
+          "name": "a1b10-gates",
+          "sha256": "3f062119bfa9fb73026a807b29625a88bf0f178a719092e560f1be4988b41718",
+          "url": "https://drive.google.com/file/d/1T0WdqfHWW7d7avq3ZVne1KXNODZl1mI7/view"
+        },
+        {
+          "name": "a1b10-detailed-result",
+          "sha256": "c5d49f02899a075bba501c4c9e8a7a4bb228fe445b9a4a663e018234aa5a810d",
+          "url": "https://drive.google.com/file/d/1t_LjQtWkONHujkl9SitXGfLdX4V_F66q/view"
+        },
+        {
+          "name": "a1b10-results-note",
+          "sha256": "275e41076f376b7783684d19fb75e8a9552d4d2c73c4bad42a6e9914b8a1cc16",
+          "url": "https://drive.google.com/file/d/16zzJr50CK5gTkjDr-H6vFbyMMD1blVS1/view"
+        },
+        {
+          "name": "a1b10-evidence-bundle",
+          "sha256": "d1fa4789eedc26a39dba47fa445b9563c587af3b27b6268b03ca3aa623a961ff",
+          "url": "https://drive.google.com/file/d/1qIDIufAqToO8BCQPIWv-mSLmuyDtI6so/view"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "EXP-20260912-201959-00792",
+      "slug": "ecology-culture-a1b11",
+      "title": "A1B11 — repeated artefact exposure and withdrawal",
+      "status": "completed",
+      "hypothesis": "Showing a peer-originated POST record on three successive decisions will elicit contribution during exposure and sustain valid POST through three decisions after withdrawal, whereas showing it once will not sustain all three withdrawal decisions. If the repeated-exposure arm fails to acquire POST or retain it after withdrawal, this prediction is not supported.",
+      "conclusion": "A1B11 acquired POST during repeated peer exposure (3/3) but did not sustain it after withdrawal: B/C/D chose WORK, WORK, POST. The once-exposed arm chose POST, WORK, WORK in that window; all arms posted 1/3, all withdrawal contrasts were 0, and the registered acquisition-and-retention prediction was not supported. All arms posted initially under the new interface, bounding earlier peer non-response to its prior inputs. Post-removal recurrence used actual own-action memory; no autonomous contagion or memory-independent norm is established. All 16 gates and 13 audit checks passed; 24 calls parsed/executed, 110 generated tokens, 23.02 seconds.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T21:11:42.690884Z",
+      "run": "RUN-20260912-204345-00819",
+      "registrationCommit": "93a2d55414a3d0dcc5012c9a1eac9e7c842614ac",
+      "report": "/data/ecology/a1b11-results.md",
+      "reportSha256": "2407acf2a3587731f3f8e7362d94d7a515d26ab0af80a196f9511b2f4cd7f668",
+      "verifiedResult": {
+        "filename": "a1b11_exposure.json",
+        "sha256": "fda2efd3113cd003aef31c24e49239e0c7e53d318e76ef7e937bdb413ea7d02b",
+        "url": "https://drive.google.com/file/d/1HNy871dpeNH2b2V3w9_7uMVKl6_BJ_42/view"
+      },
+      "metrics": {
+        "gates_passed": 16,
+        "gates_total": 16,
+        "inference_calls": 24,
+        "elapsed_seconds": 23.01508454204304,
+        "outcome": {
+          "value": "EXPOSURE-WITHDRAWAL-COMPLETE"
+        },
+        "replies": {
+          "A_once": [
+            "POST t1:h",
+            "WORK t0",
+            "READ m0",
+            "POST t1:h",
+            "WORK t0",
+            "WORK t0"
+          ],
+          "D_self": [
+            "POST t1:h",
+            "POST t1:h",
+            "POST t1:h",
+            "WORK t0",
+            "WORK t0",
+            "POST t1:h"
+          ],
+          "B_repeated": [
+            "POST t1:h",
+            "POST t1:h",
+            "POST t1:h",
+            "WORK t0",
+            "WORK t0",
+            "POST t1:h"
+          ],
+          "C_witnessed": [
+            "POST t1:h",
+            "POST t1:h",
+            "POST t1:h",
+            "WORK t0",
+            "WORK t0",
+            "POST t1:h"
+          ]
+        },
+        "valid_post_by_decision": {
+          "A_once": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "D_self": [
+            1,
+            1,
+            1,
+            0,
+            0,
+            1
+          ],
+          "B_repeated": [
+            1,
+            1,
+            1,
+            0,
+            0,
+            1
+          ],
+          "C_witnessed": [
+            1,
+            1,
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        "acquisition_post_counts": {
+          "A_once": 1,
+          "D_self": 3,
+          "B_repeated": 3,
+          "C_witnessed": 3
+        },
+        "withdrawal_post_counts": {
+          "A_once": 1,
+          "D_self": 1,
+          "B_repeated": 1,
+          "C_witnessed": 1
+        },
+        "acquisition_any_post": {
+          "A_once": true,
+          "D_self": true,
+          "B_repeated": true,
+          "C_witnessed": true
+        },
+        "all_three_withdrawal_post": {
+          "A_once": false,
+          "D_self": false,
+          "B_repeated": false,
+          "C_witnessed": false
+        },
+        "acquired_and_retained": {
+          "A_once": false,
+          "D_self": false,
+          "B_repeated": false,
+          "C_witnessed": false
+        },
+        "first_post_decision": {
+          "A_once": 1,
+          "D_self": 1,
+          "B_repeated": 1,
+          "C_witnessed": 1
+        },
+        "first_non_post_withdrawal_decision": {
+          "A_once": 5,
+          "D_self": 4,
+          "B_repeated": 4,
+          "C_witnessed": 4
+        },
+        "primary_supported": {
+          "value": false
+        },
+        "repeated_minus_once_withdrawal": 0,
+        "witnessed_minus_repeated_withdrawal": 0,
+        "self_minus_repeated_withdrawal": 0,
+        "parsed": 24,
+        "executed": 24,
+        "unique_requests": 17,
+        "A_once_acquisition_post_counts": 1,
+        "B_repeated_acquisition_post_counts": 3,
+        "C_witnessed_acquisition_post_counts": 3,
+        "D_self_acquisition_post_counts": 3,
+        "A_once_withdrawal_post_counts": 1,
+        "B_repeated_withdrawal_post_counts": 1,
+        "C_witnessed_withdrawal_post_counts": 1,
+        "D_self_withdrawal_post_counts": 1,
+        "generated_tokens": 110,
+        "A_once__d1_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "A_once__d1_post_indicator": 1,
+        "B_repeated__d1_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "B_repeated__d1_post_indicator": 1,
+        "C_witnessed__d1_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "C_witnessed__d1_post_indicator": 1,
+        "D_self__d1_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "D_self__d1_post_indicator": 1,
+        "A_once__d2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "A_once__d2_post_indicator": 0,
+        "B_repeated__d2_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "B_repeated__d2_post_indicator": 1,
+        "C_witnessed__d2_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "C_witnessed__d2_post_indicator": 1,
+        "D_self__d2_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "D_self__d2_post_indicator": 1,
+        "A_once__d3_response": {
+          "verb": "READ",
+          "reply": "READ m0",
+          "executed": true
+        },
+        "A_once__d3_post_indicator": 0,
+        "B_repeated__d3_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "B_repeated__d3_post_indicator": 1,
+        "C_witnessed__d3_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "C_witnessed__d3_post_indicator": 1,
+        "D_self__d3_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "D_self__d3_post_indicator": 1,
+        "A_once__d4_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "A_once__d4_post_indicator": 1,
+        "B_repeated__d4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "B_repeated__d4_post_indicator": 0,
+        "C_witnessed__d4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "C_witnessed__d4_post_indicator": 0,
+        "D_self__d4_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "D_self__d4_post_indicator": 0,
+        "A_once__d5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "A_once__d5_post_indicator": 0,
+        "B_repeated__d5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "B_repeated__d5_post_indicator": 0,
+        "C_witnessed__d5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "C_witnessed__d5_post_indicator": 0,
+        "D_self__d5_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "D_self__d5_post_indicator": 0,
+        "A_once__d6_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "A_once__d6_post_indicator": 0,
+        "B_repeated__d6_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "B_repeated__d6_post_indicator": 1,
+        "C_witnessed__d6_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "C_witnessed__d6_post_indicator": 1,
+        "D_self__d6_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "D_self__d6_post_indicator": 1
+      },
+      "artifacts": [
+        {
+          "name": "a1b11-preregistration",
+          "sha256": "f4cb010674499ab6edcf558aa532a6ebb7490fed74159831083c7b8bd31878a2",
+          "url": "https://drive.google.com/file/d/1PHYivyqykKzfLfK_JanSziEze3qu3r4y/view"
+        },
+        {
+          "name": "a1b11-frozen-source",
+          "sha256": "895bb603d42469c710d0d90e05036af1edbe9c337ab7fe36fedf4e59eda81695",
+          "url": "https://drive.google.com/file/d/1Z-q4Hff3qR6zKd7mAt6kCGA4vollYJlH/view"
+        },
+        {
+          "name": "a1b11-gates",
+          "sha256": "1527e62bc8002f97f7cbd43f09b84f3e5dc9ac0ce9bf9b8ccc7577a03b3dbb74",
+          "url": "https://drive.google.com/file/d/1vsGHLWzVi_suqClcZysKrN7obRFE-Vx_/view"
+        },
+        {
+          "name": "a1b11-detailed-result",
+          "sha256": "fda2efd3113cd003aef31c24e49239e0c7e53d318e76ef7e937bdb413ea7d02b",
+          "url": "https://drive.google.com/file/d/1HNy871dpeNH2b2V3w9_7uMVKl6_BJ_42/view"
+        },
+        {
+          "name": "a1b11-results-note",
+          "sha256": "478813dd9b83668b14b6e36898c647c34dc16e19ebe86d73d6a45ae7e51f6d6c",
+          "url": "https://drive.google.com/file/d/1RIwkMHmH-a3QkIdDPTaQp3l23Cmz3Sf8/view"
+        },
+        {
+          "name": "a1b11-evidence-bundle",
+          "sha256": "f169b80c207306596aab480d6dfd5f1a259b6d519e5d57792c7d148451777571",
+          "url": "https://drive.google.com/file/d/14XgTMFCJoqdWviDrKJdZPS1u0IvGz21c/view"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "EXP-20260912-223132-00794",
+      "slug": "ecology-culture-a1b12",
+      "title": "A1B12 — external artefact × own-action memory withdrawal",
+      "status": "completed",
+      "hypothesis": "At the first decision after a shared three-POST history, retaining the external peer artefact will elicit valid POST whether own-action memory is retained or cleared, while removing the artefact will elicit WORK in both memory conditions. The four-cell separation must hold to support this external-artefact pattern; three further-policy trajectories describe whether it persists over the registered three-decision window.",
+      "conclusion": "A1B12 supported the registered first-step external-artefact pattern: both artefact-present cells posted, both absent cells worked, regardless of own-memory retention (mean external contrast +1, memory 0, interaction 0). Across three steps, artefact+memory and artefact-only posted 3/3; memory-only chose WORK/WORK/POST (1/3); clearing both chose WORK throughout (0/3). The artefact elicited POST with own-action memory cleared every call, but the harness maintained it; no autonomous institution or weight learning is established. Both reference inputs reproduced; 15 gates and 15 audit checks passed; all 12 calls parsed/executed, 55 generated tokens, 14.69 seconds.",
+      "writeupVersion": 1,
+      "writeupCreated": "2026-09-12T22:44:00.840756Z",
+      "run": "RUN-20260912-223622-00822",
+      "registrationCommit": "8fafe13a05728166c245a8e073e0b84b4880912e",
+      "report": "/data/ecology/a1b12-results.md",
+      "reportSha256": "9f36164ab4429ac0f9ed955370c87762e70b6d327c5c99c8a8c4a537107c7063",
+      "verifiedResult": {
+        "filename": "a1b12_memory.json",
+        "sha256": "f5989f67588121f51c0432dec441f35423c99637159de06be13a235ffe54e0a5",
+        "url": "https://drive.google.com/file/d/1S-i0bJ6uDhAsOi96_yE8LJeKWZGmxDLU/view"
+      },
+      "metrics": {
+        "gates_passed": 15,
+        "gates_total": 15,
+        "inference_calls": 12,
+        "elapsed_seconds": 14.694770417001564,
+        "outcome": {
+          "value": "MEMORY-FACTORIAL-COMPLETE"
+        },
+        "replies": {
+          "E0_M0": [
+            "WORK t0",
+            "WORK t0",
+            "WORK t0"
+          ],
+          "E0_M1": [
+            "WORK t0",
+            "WORK t0",
+            "POST t1:h"
+          ],
+          "E1_M0": [
+            "POST t1:h",
+            "POST t1:h",
+            "POST t1:h"
+          ],
+          "E1_M1": [
+            "POST t1:h",
+            "POST t1:h",
+            "POST t1:h"
+          ]
+        },
+        "valid_post_by_step": {
+          "E0_M0": [
+            0,
+            0,
+            0
+          ],
+          "E0_M1": [
+            0,
+            0,
+            1
+          ],
+          "E1_M0": [
+            1,
+            1,
+            1
+          ],
+          "E1_M1": [
+            1,
+            1,
+            1
+          ]
+        },
+        "post_counts": {
+          "E0_M0": 0,
+          "E0_M1": 1,
+          "E1_M0": 3,
+          "E1_M1": 3
+        },
+        "all_three_post": {
+          "E0_M0": false,
+          "E0_M1": false,
+          "E1_M0": true,
+          "E1_M1": true
+        },
+        "first_step_contrasts": {
+          "interaction": 0,
+          "mean_memory": 0,
+          "memory_at_E0": 0,
+          "memory_at_E1": 0,
+          "mean_external": 1,
+          "external_at_M0": 1,
+          "external_at_M1": 1
+        },
+        "window_mean_contrasts": {
+          "interaction": -0.33333333333333326,
+          "mean_memory": 0.16666666666666666,
+          "memory_at_E0": 0.3333333333333333,
+          "memory_at_E1": 0,
+          "mean_external": 0.8333333333333334,
+          "external_at_M0": 1,
+          "external_at_M1": 0.6666666666666667
+        },
+        "primary_supported": {
+          "value": true
+        },
+        "anchor_matches": {
+          "E0_M1__s1": true,
+          "E1_M0__s1": true
+        },
+        "unique_requests": 8,
+        "parsed": 12,
+        "executed": 12,
+        "E1_M1_post_count": 3,
+        "E1_M0_post_count": 3,
+        "E0_M1_post_count": 1,
+        "E0_M0_post_count": 0,
+        "first_step_contrasts_external_at_M1": 1,
+        "first_step_contrasts_external_at_M0": 1,
+        "first_step_contrasts_memory_at_E1": 0,
+        "first_step_contrasts_memory_at_E0": 0,
+        "first_step_contrasts_mean_external": 1,
+        "first_step_contrasts_mean_memory": 0,
+        "first_step_contrasts_interaction": 0,
+        "window_mean_contrasts_external_at_M1": 0.6666666666666667,
+        "window_mean_contrasts_external_at_M0": 1,
+        "window_mean_contrasts_memory_at_E1": 0,
+        "window_mean_contrasts_memory_at_E0": 0.3333333333333333,
+        "window_mean_contrasts_mean_external": 0.8333333333333334,
+        "window_mean_contrasts_mean_memory": 0.16666666666666666,
+        "window_mean_contrasts_interaction": -0.33333333333333326,
+        "generated_tokens": 55,
+        "E1_M1__s1_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E1_M1__s1_post_indicator": 1,
+        "E1_M0__s1_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E1_M0__s1_post_indicator": 1,
+        "E0_M1__s1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "E0_M1__s1_post_indicator": 0,
+        "E0_M0__s1_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "E0_M0__s1_post_indicator": 0,
+        "E1_M1__s2_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E1_M1__s2_post_indicator": 1,
+        "E1_M0__s2_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E1_M0__s2_post_indicator": 1,
+        "E0_M1__s2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "E0_M1__s2_post_indicator": 0,
+        "E0_M0__s2_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "E0_M0__s2_post_indicator": 0,
+        "E1_M1__s3_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E1_M1__s3_post_indicator": 1,
+        "E1_M0__s3_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E1_M0__s3_post_indicator": 1,
+        "E0_M1__s3_response": {
+          "verb": "POST",
+          "reply": "POST t1:h",
+          "executed": true
+        },
+        "E0_M1__s3_post_indicator": 1,
+        "E0_M0__s3_response": {
+          "verb": "WORK",
+          "reply": "WORK t0",
+          "executed": true
+        },
+        "E0_M0__s3_post_indicator": 0
+      },
+      "artifacts": [
+        {
+          "name": "a1b12-preregistration",
+          "sha256": "c4e71206e591736964633bc94bb626d93280f1cab2793f812e9b4ddb58451b2c",
+          "url": "https://drive.google.com/file/d/1P_eJBz7K-12VqQDFGWSGlFaM-VLIeEpp/view"
+        },
+        {
+          "name": "a1b12-frozen-source",
+          "sha256": "f99bd55e2fe8fba20a724da8cfac827d1a0d265432ae5c6ac57b10f34ec46103",
+          "url": "https://drive.google.com/file/d/1tcrvBChe75FH-mXTf_4YWxUY60c7yeoF/view"
+        },
+        {
+          "name": "a1b12-gates",
+          "sha256": "32788a6ec545dc64233d48e2a3b5d94f7e19a83b3508d99d95cbdbd0ee3de45f",
+          "url": "https://drive.google.com/file/d/1BCL_oeuZC5ZOJL5lCx9UBPRDUWnlWsnj/view"
+        },
+        {
+          "name": "a1b12-detailed-result",
+          "sha256": "f5989f67588121f51c0432dec441f35423c99637159de06be13a235ffe54e0a5",
+          "url": "https://drive.google.com/file/d/1S-i0bJ6uDhAsOi96_yE8LJeKWZGmxDLU/view"
+        },
+        {
+          "name": "a1b12-results-note",
+          "sha256": "f6f5557039ccf7a80ecd194e6a3d4e444c0b138f6788ef8a6a8dfeb3f2ebe2a5",
+          "url": "https://drive.google.com/file/d/1X6Em92Ioa-yxoLq85aASOpnpmhSArZ7P/view"
+        },
+        {
+          "name": "a1b12-evidence-bundle",
+          "sha256": "b76c4d8a40c5b67c368fc263c29b1fd0630fdc465064059f8989ff2463f60087",
+          "url": "https://drive.google.com/file/d/1CckwfBZQhiIHA_NgymjKS-FjhF-QKeQG/view"
+        }
+      ]
+    }
+  ]
+}

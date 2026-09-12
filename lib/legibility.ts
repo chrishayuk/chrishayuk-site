@@ -5,6 +5,34 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "THREAD-AGENT-ECOLOGY": {
+  subject: "AI agent ecology, shared artefacts and behavioural persistence",
+  question: "What lets an AI agent behaviour recur, spread or survive removal of its source?",
+  searchTitle: "AI Agent Ecology: Shared Memory, Behavioural Transmission and Persistence",
+  description: "Three Qwen experiment notes distinguish contribution, action reminders, peer transmission and external memory. Autonomous cultural persistence remains untested.",
+  concepts: ["AI agent ecology", "shared artefacts", "behavioural persistence", "agent culture experiments"],
+ },
+ "N-ECOLOGY-BOARD": {
+  subject: "AI agent contribution and message-board cold starts",
+  question: "Does giving AI agents a shared board elicit useful contribution?",
+  searchTitle: "AI Agent Message Boards: Contribution, Cold Starts and Reward Exposure",
+  description: "Qwen requested reads but made no spontaneous posts in these tests. Supplied experience reversed the expected reward response in a tiny agent world.",
+  concepts: ["AI agent contribution", "message boards", "cold start", "reward exposure"],
+ },
+ "N-ECOLOGY-TRANSMISSION": {
+  subject: "AI agent action reminders and peer-action transmission",
+  question: "Does a reminder that elicits an action make that behaviour transmissible between agents?",
+  searchTitle: "AI Agent Behavioural Transmission: Action Reminders, Peer Records and Withdrawal",
+  description: "An action reminder elicited a Qwen post; a lone peer record did not start a chain. Representation and continued exposure changed the recorded actions.",
+  concepts: ["AI agent action reminders", "peer-action transmission", "identity framing", "artefact withdrawal"],
+ },
+ "N-ECOLOGY-MEMORY": {
+  subject: "External artefacts versus supplied own-action memory in AI agents",
+  question: "Can an external artefact repeatedly elicit an action when an AI agent's own history is cleared?",
+  searchTitle: "External Artefacts and AI Agent Memory: A Four-Way Withdrawal Experiment",
+  description: "A Qwen factorial test kept posting with an external artefact despite clearing own-action history each call. The harness maintained the record; weights stayed fixed.",
+  concepts: ["external artefacts", "AI agent memory", "own-action history", "repeated elicitation"],
+ },
  "N-MACHINE-CAPABILITY": {
   subject: "AI agent web capabilities and agentic discoverability",
   question: "Can shell-based AI agents use WebSocket and WebAssembly when a task requires them?",

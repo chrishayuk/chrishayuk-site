@@ -470,7 +470,7 @@ test("machine programme connects six notes and leads with the published capabili
  const { canonicalPaths }=await import('../lib/canonical.ts');
  const ids=['N-MACHINE-VISIT','N-MACHINE-PERMISSION','N-MACHINE-SELF-READ','N-MACHINE-TASK','N-MACHINE-MOTIVATION','N-MACHINE-CAPABILITY'];
  assert.deepEqual(machineThread.steps.map(step=>step.id),ids);
- assert.equal(notebookSelection[0].id,'N-MACHINE-CAPABILITY');
+ assert.equal(notebookSelection.find(note=>ids.includes(note.id))?.id,'N-MACHINE-CAPABILITY');
  assert.ok(canonicalPaths().includes('/thread/machines'));
  const graph=recordGraph();
  assert.deepEqual(graph.nodes.find(node=>node.id==='THREAD-MACHINES')?.members?.map(member=>member.id),ids);

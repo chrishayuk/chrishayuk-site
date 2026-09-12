@@ -59,7 +59,18 @@ export const machineThread = {
   context: "Six notebook entries, one recorded model family, different tasks and site revisions. Follow the experiments in reading order, or start with the latest comparison. Declarations, anonymous marks, reported reasons and HTTP contacts remain different kinds of evidence.",
   steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.finding} ${step.bridge}` })).filter(listedStep),
 };
-export const threads = [mapThread, cell80Thread, machineThread];
+export const agentEcologyThread = {
+ id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",
+ path: "/thread/agent-ecology", version: "0.1", created: "2026-09-13",
+ abstract: "Three notes from a tiny agent world. A board did not elicit spontaneous contribution. A reminder did not become a transmission rule. An external artefact kept eliciting posts with own-action history cleared.",
+ context: "A curated path through A1B3–A1B12. These are small Qwen experiments with changing interfaces, scripted recipients and harness-supplied records. The world rules were deterministic; the model ran at temperature zero. Autonomous culture and artefact maintenance remain unestablished.",
+ steps: [
+  { id: "N-ECOLOGY-BOARD", label: "01 / GET SOMETHING ONTO THE BOARD", text: "Reading requests were easy to elicit. Spontaneous posting was absent, and supplied experience reversed the expected response to reward. Start with the contribution problem." },
+  { id: "N-ECOLOGY-TRANSMISSION", label: "02 / TRY TO PASS THE ACTION ON", text: "An action reminder worked on one input. A lone peer record did not start a chain. Follow the difference between elicitation, transmission and retention." },
+  { id: "N-ECOLOGY-MEMORY", label: "03 / SEPARATE THE TWO RECORDS", text: "Keep or clear the artefact and own-action history separately. The four-way comparison locates repeated elicitation in what the environment keeps supplying." },
+ ].map<ThreadStep>(step => step).filter(listedStep),
+};
+export const threads = [mapThread, cell80Thread, machineThread, agentEcologyThread];
 export function resolveThreadStep(step: ThreadStep) {
   const study = demoStudies.find(s => s.id === step.id);
   if (study) return { ...step, title: study.title, url: study.url, kind: "interactive study",
