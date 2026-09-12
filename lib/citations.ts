@@ -1,14 +1,14 @@
-import { getVideo, videoReferences } from "./youtube";
-import { citationFormats, type CitationRecord } from "@chrishayuk/hause/cite";
-import { SITE, recordPath } from "./records";
-import { archiveIdentifiers, firstCapture } from "./archive";
+import { getVideo, videoReferences } from "./youtube.ts";
+import { citationFormats, type CitationRecord } from "../vendor/hause/cite.ts";
+import { SITE, recordPath } from "./records.ts";
+import { archiveIdentifiers, firstCapture } from "./archive.ts";
 import type { PublicationRecord } from "./types";
 export function citationRecord(record: PublicationRecord): CitationRecord | null {
  if (record.publication !== "published" || !record.published) return null;
  // The archive corroborates the page that was captured — the canonical
  // record URL, not the immutable snapshot the citation resolves to.
  const archive = archiveIdentifiers(`${SITE}${recordPath(record)}`);
- return { id: record.id, revised: record.revised, title: record.title, authors: record.authors, published: record.published, version: record.version, url: `${SITE}/records/${record.id}/${record.version}`, publisher: "Chris Hay", kind: record.kind === "work" ? "software" : record.kind === "notebook" || record.kind === "question" ? "research-note" : "page", abstract: record.abstract, note: record.kind === "film" ? "Editorial record of an appearance; original production by IBM." : undefined,
+ return { id: `${record.id}-v${record.version}`, revised: record.revised, title: record.title, authors: record.authors, published: record.published, version: record.version, url: `${SITE}/records/${record.id}/${record.version}`, publisher: "Chris Hay", kind: record.kind === "work" ? "software" : record.kind === "notebook" || record.kind === "question" ? "research-note" : "page", abstract: record.abstract, note: record.kind === "film" ? "Editorial record of an appearance; original production by IBM." : undefined,
   ...(archive.length ? { identifiers: archive } : {}) };
 }
 export function referenceFormats(record: PublicationRecord) {

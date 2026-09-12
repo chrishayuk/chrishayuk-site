@@ -33,6 +33,7 @@ for (const snapshot of snapshots) {
  const citation = await (await get(`/api/citations/${id}?version=${version}&format=csl-json`)).json();
  assert.equal(citation.URL, ld.url);
  assert.equal(citation.version, version);
+ assert.equal(citation.id, `${id}-v${version}`);
  assert.equal(citation.title, title);
  assert.ok(graph.nodes.some(node => node.id === `${id}@${version}` && node.sourceHash === snapshot.hash));
  console.log(`Verified ${id} v${version}: manuscript, citation, evidence, history and graph.`);

@@ -8,10 +8,22 @@ import { preparePublication } from "../lib/publication-release.ts";
 import { assertAppendOnly, auditProvenance } from "../lib/provenance-audit.ts";
 import { stableJson } from "../lib/publication.ts";
 import { recordGraph } from "../lib/graph.ts";
+import { referenceFormats } from "../lib/citations.ts";
 
 const original = publicationSnapshots[0];
 const revision = { kind: "interpretation" as const, summary: "Follow-up evidence narrows the interpretation.", previous: original.record.version };
 const key = (snapshot: typeof original) => `${snapshot.record.id}@${snapshot.record.version}`;
+
+test("citation exports give different editions distinct bibliography keys and URLs", () => {
+ const next = preparePublication(getManuscript(original.record.id)!, publicationSnapshots, "2.0", "2026-09-13", revision);
+ const csl = (record: typeof original.record) => JSON.parse(referenceFormats(record).find(format => format.id === "csl-json")!.text);
+ const first = csl(original.record), second = csl(next.record);
+ assert.notEqual(first.id, second.id);
+ assert.notEqual(first.URL, second.URL);
+ assert.deepEqual(first.issued, second.issued);
+ assert.equal(first.id, `${original.record.id}-v${original.record.version}`);
+ assert.ok(referenceFormats(next.record).find(format => format.id === "bibtex")!.text.includes(`${next.record.id}-v2.0`));
+});
 
 test("the real preserved corpus has matching manuscripts, evidence and continuity", async () => {
  const result = await auditProvenance(publicationSnapshots, publicationProvenance);
