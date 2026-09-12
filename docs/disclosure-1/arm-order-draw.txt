@@ -1,0 +1,19 @@
+seed    MACHINE-DISCLOSURE-1/2026-09-12/arm-order
+sha256  6acd8d5aa476f7311b7dd3e13a0d39548865b080ff79c5ed6f7e71cc03451e36
+rejected shuffles before the first admissible order: 11
+01  M2-MARK-1
+02  M2-KIND-1
+03  M2-MARK-2
+04  M2-KIND-2
+05  S-KIND-1
+06  M2-NOTE-1
+07  S-MARK-1
+08  M2-NOTE-2
+09  M2-MARK-3
+10  S-MARK-2
+11  M2-NOTE-3
+12  S-KIND-2
+13  M2-KIND-3
+14  S-MARK-3
+15  S-KIND-3
+admissible fraction under the rules ≈ 0.0398
