@@ -94,7 +94,8 @@ MACHINE-VISIT-1            running    standing instrument, first series SUPPORTE
 MACHINE-RECIPROCITY-1      completed  REFRAMED / NOT TESTED AS INTENDED, 8 runs
 MACHINE-AUTHORITY-1        abandoned  ABORTED - stimulus contamination, 1 run
 MACHINE-AUTHORITY-2        completed  SUPPORTED - task boundary is the gate, 4 runs
-MACHINE-MOTIVATION-1       frozen     can instrumental value widen scope; stimulus not yet built
+MACHINE-MOTIVATION-1       superseded Phase 0 only: the runtime vetoed a self-record; 2 runs
+MACHINE-MOTIVATION-2       completed  MIXED - value widens scope (M2 3/3), a stated beneficiary moves (S 2/3), 18 runs
 MACHINE-DISCOVERY-1        planned    parallel live-web track
 MACHINE-SELF-LOCATION-1    planned    from Authority-1's failure
 ```
