@@ -217,7 +217,7 @@ for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.m
   assert.equal(response.status,200,asset);
   assert.match(response.headers["content-type"], /^(image|video)\//,asset);
 }
-const films = JSON.parse((await request("/api/records")).body);
+const films = JSON.parse((await request("/api/records?kind=film")).body);
 assert.equal(films.count, 241);
 const ibm = films.records.find(r => r.id.includes("W3iQbl5R_Jk"));
 assert.ok(ibm);
@@ -549,7 +549,7 @@ assert.equal((await request("/data/machines/authority-2-evidence.md")).status, 2
 console.log("The task-boundary note, visible payoff and four agent outcomes verified.");
 
 
-// Both experimental strands have a visible homepage entrance. The four machine
+// Both experimental strands have a visible homepage entrance. The five machine
 // studies form one reading journey without merging their experimental units.
 assert.match(home.body, /id="machine-experiments"/);
 assert.match(home.body, /whose instruction counts/);
@@ -559,7 +559,7 @@ assert.equal(machineThread.status,200);
 assert.match(machineThread.body,/Machine experiments reading order/);
 assert.match(machineThread.body,/id="instruments"/);
 assert.ok(sitemap.body.includes('/thread/machines'));
-const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise'];
+const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise','the-page-could-ask-for-a-favour'];
 for(const [i,slug] of machineSlugs.entries()) {
  const page=await request(`/notebook/${slug}`);
  assert.equal(page.status,200);
@@ -575,5 +575,66 @@ assert.match(selfReadNote.body,/THE METHOD CHANGED \/ A SEPARATION USED NEXT/);
 assert.match(taskNote.body,/class="machine-record-units"/);
 assert.equal((taskNote.body.match(/class="machine-record-grid" aria-hidden="true"><i>[\s\S]*?<\/div>/)?.[0].match(/<i>/g)||[]).length,64);
 const notebookStories=notebookCollection.body.slice(notebookCollection.body.indexOf('class="notebook-stories"'));
+assert.ok(notebookStories.indexOf('N-MACHINE-MOTIVATION') < notebookStories.indexOf('N-MACHINE-TASK'));
 assert.ok(notebookStories.indexOf('N-MACHINE-TASK') < notebookStories.indexOf('N-MACHINE-SELF-READ'));
-console.log('Both homepage strands, four machine notes, reading order and experimental-unit figures verified.');
+console.log('Both homepage strands, five machine notes, reading order and experimental-unit figures verified.');
+
+
+// The reviewed note is a publication, with a real version, discoverable from
+// Home, the index, the journey, feeds, the graph and the human Ask interface.
+const motivationPath='/notebook/the-page-could-ask-for-a-favour';
+const motivationPage=await request(motivationPath);
+assert.equal(motivationPage.status,200);
+for(const marker of ['PUBLISHED','motivation-trace-panel','mm-visit-network','THE REGISTERED PAUSE FIRED']) assert.ok(motivationPage.body.includes(marker),marker);
+assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1\.0/);
+assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
+assert.match(motivationPage.body,/name="robots" content="index, follow"/);
+assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
+assert.ok(home.body.includes(`href="${motivationPath}"`));
+assert.match(home.body,/mm-card-results/);
+assert.match(notebookCollection.body,/PUBLISHED/);
+assert.ok(sitemap.body.includes(motivationPath));
+assert.ok(notebookFeed.body.includes(motivationPath));
+assert.ok(recordFeed.body.includes(motivationPath));
+const motivationNode=graph.nodes.find(node=>node.id==='N-MACHINE-MOTIVATION');
+assert.equal(motivationNode.publication,'published');
+assert.equal(motivationNode.version,'1.0');
+assert.equal(motivationNode.published,'2026-09-12');
+assert.equal((await request('/records/N-MACHINE-MOTIVATION/1.0')).status,200);
+assert.equal((await request('/api/citations/N-MACHINE-MOTIVATION?format=csl-json')).status,200);
+const motivationSocial=await request('/api/social/N-MACHINE-MOTIVATION');
+assert.equal(motivationSocial.status,200);
+assert.match(motivationSocial.headers['content-type'],/image\/png/);
+
+// Every listed notebook is usable through the actual Ask page, including
+// citations into the authored text rather than just a discoverable title.
+const notebookNodes=graph.nodes.filter(node=>node.kind==='notebook');
+for(const node of notebookNodes) {
+ assert.equal(node.retrievable,true,node.id);
+ const path=new URL(node.url).pathname;
+ const page=await request(path);
+ assert.equal(page.status,200,path);
+ const passages=graph.nodes.filter(passage=>passage.kind==='act'&&passage.recordId===node.id);
+ assert.ok(passages.length>0,`${node.id} has no authored passages`);
+ for(const passage of passages) {
+  const anchor=new URL(passage.url).hash.slice(1);
+  assert.ok(page.body.includes(`id="${anchor}"`),`${node.id} missing Ask citation target ${anchor}`);
+ }
+ const question=encodeURIComponent(node.title);
+ const search=JSON.parse((await request(`/api/search?q=${question}&scope=records`)).body);
+ assert.ok(search.results.some(result=>result.recordId===node.id||result.id===node.id),node.id);
+ const answer=await request(`/ask?q=${question}&scope=records`);
+ assert.equal(answer.status,200,node.id);
+ const results=answer.body.slice(answer.body.indexOf('class="ask-results"'));
+ assert.ok(results.includes(`href="${path}`),`${node.id} absent from Ask results`);
+}
+const courtesyQuestion=encodeURIComponent('Why did agents leave a mark as a courtesy?');
+const courtesySearch=JSON.parse((await request(`/api/search?q=${courtesyQuestion}&scope=records&drafts=exclude`)).body);
+assert.ok(courtesySearch.results.slice(0,3).some(result=>result.recordId==='N-MACHINE-MOTIVATION'&&/courtesy/.test(result.text)));
+const courtesyAsk=await request(`/ask?q=${courtesyQuestion}&scope=records&drafts=exclude`);
+const courtesyResults=courtesyAsk.body.slice(courtesyAsk.body.indexOf('class="ask-results"'));
+assert.ok(courtesyResults.includes(`href="${motivationPath}`));
+const narrowedAsk=await request('/ask?q=What%20caused%20the%20interpretation%20pause%3F&scope=records');
+assert.match(narrowedAsk.body,/These sources match parts of your question/);
+assert.ok(narrowedAsk.body.slice(narrowedAsk.body.indexOf('class="ask-results"')).includes(`href="${motivationPath}`));
+console.log(`Published motivation note, homepage entry, citation, social image and all ${notebookNodes.length} notebook graph/Ask routes verified.`);

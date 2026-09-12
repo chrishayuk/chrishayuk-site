@@ -1,7 +1,7 @@
 /* Closed experiment records and entrances to the live instruments. */
 .machine-journey{margin:12px 0 30px;border-block:1px solid var(--rule)}
 .machine-journey>div{display:flex;justify-content:space-between;gap:15px;padding:16px 0;font-size:9px;color:var(--muted)}
-.machine-journey ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0}
+.machine-journey ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:0;padding:0}
 .machine-journey li+li{border-left:1px solid var(--rule)}
 .machine-journey li>a{display:block;padding:16px 20px 22px;height:100%;text-decoration:none}
 .machine-journey li .record-voice{display:flex;justify-content:space-between;font-size:10px}
@@ -70,3 +70,10 @@
 .machine-record-grid+p>strong{font:34px var(--font-fraunces);color:var(--accent)}
 @media(max-width:800px){.machine-home-heading{grid-template-columns:1fr;gap:15px}.machine-home-heading h2{max-width:24ch}.machine-instruments>div{grid-template-columns:1fr 1fr}.machine-outcome-strip>div>a{padding:20px 14px}.machine-revisions ol{grid-template-columns:1fr 1fr;gap:25px}.machine-permission-contrast>div{grid-template-columns:1fr}.machine-journey strong{font-size:20px}.machine-journey li>a{padding:16px 12px}}
 @media(max-width:520px){.machine-journey>div{flex-wrap:wrap}.machine-journey ol{grid-template-columns:1fr 1fr}.machine-journey li:nth-child(3){border-left:0}.machine-journey li:nth-child(n+3){border-top:1px solid var(--rule)}.machine-outcome-strip>div{grid-template-columns:1fr 1fr}.machine-outcome-strip>div>a:nth-child(3){border-left:0}.machine-outcome-strip>div>a:nth-child(n+3){border-top:1px solid var(--rule)}.machine-instruments>div{gap:20px}.machine-instruments h3{font-size:23px}.machine-record-units>div{grid-template-columns:1fr 22px 1.3fr;gap:12px}.machine-unit-arrow{font-size:22px}.machine-unit-subject>span:last-child{font-size:14px}.machine-record-grid{gap:4px;padding:8px}.machine-record-grid+p{font-size:12px}.machine-record-grid+p>strong{font-size:28px}.machine-contrast-subjects strong{font-size:14px}}
+
+/* The latest completed notebook leads the programme on Home and in its thread. */
+.machine-home-card{display:block;min-width:0}.machine-home-heading{align-items:center}.machine-home-heading .machine-home-card .mv-card{padding:clamp(24px,3vw,45px);min-height:440px}.machine-home-question{margin:32px 0 22px;font-size:10px;color:var(--muted)}
+.mm-card-results{display:flex;flex-direction:column;gap:14px}.mm-card-results>div{display:grid;grid-template-columns:1fr 80px 28px;gap:15px;align-items:center;font:10px/1.6 var(--font-geist-mono);color:#b7b8aa}.mm-card-results>div>span:nth-child(2){display:flex;gap:9px}.mm-card-results i{width:16px;height:16px;display:block;border:1px solid #e3b56b;border-radius:50%}.mm-card-results i[data-marked=true]{background:#e3b56b}.machine-thread-latest .mm-card{max-width:800px;margin:0 auto 60px}.machine-thread-latest .mm-card-results{max-width:540px}.mm-card>p{font-size:clamp(32px,4vw,55px)}.machine-home-heading .machine-home-card:hover{outline:2px solid var(--accent);outline-offset:5px}
+.ask-narrowed{font:14px/1.8 var(--font-inter);max-width:65ch;color:var(--muted);margin:20px 0 30px}
+@media(max-width:800px){.machine-journey strong{font-size:18px}.machine-home-card{margin-top:25px}}
+@media(max-width:520px){.machine-journey li:nth-child(odd){border-left:0}.machine-journey li:last-child{grid-column:1/-1}.mm-card-results>div{font-size:9px;gap:10px;grid-template-columns:1fr 70px 28px}.mm-card-results>div>span:nth-child(2){gap:7px}.mm-card-results i{width:15px;height:15px}}

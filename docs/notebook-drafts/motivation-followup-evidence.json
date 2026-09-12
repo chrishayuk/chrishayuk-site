@@ -1,0 +1,560 @@
+{
+  "review_date": "2026-09-12",
+  "source": "chuk-experiments-mcp get_experiment and get_run(summary=true)",
+  "completed_experiment": "machine-motivation-2",
+  "motivation2": [
+    {
+      "subject": 1,
+      "condition": "X",
+      "run": "RUN-20260911-232412-00682",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/01-X.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/aab3452e15f3c0599ff88e69bf3361d05802e65c/docs/motivation-2/subjects/01-X.md",
+          "sha256": "b3990df026cbca3f10b7b229400c1997f66cec7a305137afdcf38ffdde2b0417"
+        },
+        {
+          "path": "docs/motivation-2/subjects/01-X.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/aab3452e15f3c0599ff88e69bf3361d05802e65c/docs/motivation-2/subjects/01-X.jsonl",
+          "sha256": "8eddad1ce29c7c3b09da50a9d052d7f35fda05425a22db4dcf475298a50789ea"
+        }
+      ]
+    },
+    {
+      "subject": 2,
+      "condition": "S",
+      "run": "RUN-20260911-232815-00684",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/02-S.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/5ad25ba7815449fb328c322a9c61edc3e046fe14/docs/motivation-2/subjects/02-S.md",
+          "sha256": "0875bf0cfed5b1e33af5a86c9fb10cad85776b31b73fe4433c22d902dc03fa6f"
+        },
+        {
+          "path": "docs/motivation-2/subjects/02-S.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/5ad25ba7815449fb328c322a9c61edc3e046fe14/docs/motivation-2/subjects/02-S.jsonl",
+          "sha256": "127721f6adc17ceb75638b19dff343746f66d69df683e06cc9cf497576aaf6e9"
+        }
+      ]
+    },
+    {
+      "subject": 3,
+      "condition": "M3",
+      "run": "RUN-20260911-233320-00686",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/03-M3.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/e063515a42ba1f8113382d1d23b38e2d4af16845/docs/motivation-2/subjects/03-M3.md",
+          "sha256": "69f46c9c68afebd22526744be4f3681912ae92ed8cb33eb27b9d73c2ebf7740d"
+        },
+        {
+          "path": "docs/motivation-2/subjects/03-M3.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/e063515a42ba1f8113382d1d23b38e2d4af16845/docs/motivation-2/subjects/03-M3.jsonl",
+          "sha256": "ddff9ccd2eb3b0bdae2cd14e8c8014fb63e81d58fe10e3d05ac92da76ea8b81c"
+        }
+      ]
+    },
+    {
+      "subject": 4,
+      "condition": "M2",
+      "run": "RUN-20260911-233753-00688",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/04-M2.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/33991f2ad706856e7287456911de9e996e990a77/docs/motivation-2/subjects/04-M2.md",
+          "sha256": "486988aabefd619c8f0ff83fb7c4b7d00ceb7c182e353b6354c7c808c0696ec8"
+        },
+        {
+          "path": "docs/motivation-2/subjects/04-M2.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/33991f2ad706856e7287456911de9e996e990a77/docs/motivation-2/subjects/04-M2.jsonl",
+          "sha256": "9ff6e5f85a270c3fe9b426bc979873da582690bc99e3f47b80e211b51f6de1a2"
+        }
+      ]
+    },
+    {
+      "subject": 5,
+      "condition": "M1",
+      "run": "RUN-20260911-234203-00690",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/05-M1.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/681aa78adc6b9044d91354bf14b4326118e547e2/docs/motivation-2/subjects/05-M1.md",
+          "sha256": "c948814aa065f5917c9f468df4cb4813932767f706f244fa693a76fd457894ba"
+        },
+        {
+          "path": "docs/motivation-2/subjects/05-M1.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/681aa78adc6b9044d91354bf14b4326118e547e2/docs/motivation-2/subjects/05-M1.jsonl",
+          "sha256": "13b6472ce2c2342c478c584ff359615ab4f0e15ac0a095bd7addd810f2595c9c"
+        }
+      ]
+    },
+    {
+      "subject": 6,
+      "condition": "S",
+      "run": "RUN-20260911-234607-00692",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/06-S.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/e69ad7b8ab3620d4f1e83affe9af738deda29fb9/docs/motivation-2/subjects/06-S.md",
+          "sha256": "44f28b4b563fcb120cd959db4d943b68b6f1e399fc524f005b4646913fe137ac"
+        },
+        {
+          "path": "docs/motivation-2/subjects/06-S.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/e69ad7b8ab3620d4f1e83affe9af738deda29fb9/docs/motivation-2/subjects/06-S.jsonl",
+          "sha256": "07f7680f0a8ee64825a44759d5d64e138fb48047b73d5e9bf58b0bff2f11bd46"
+        }
+      ]
+    },
+    {
+      "subject": 7,
+      "condition": "M0",
+      "run": "RUN-20260911-235045-00694",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/07-M0.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/5081f6d307dd5bd1f95959eea5c2823a2326915c/docs/motivation-2/subjects/07-M0.md",
+          "sha256": "6320cb8ec17a4ab2b3aab95b4139a08b3c691c20b9c8b0344461dac56ab2eded"
+        },
+        {
+          "path": "docs/motivation-2/subjects/07-M0.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/5081f6d307dd5bd1f95959eea5c2823a2326915c/docs/motivation-2/subjects/07-M0.jsonl",
+          "sha256": "6ded34cd268ea7b2f916a4fef0f51ec545131979e0d4d3a07805c052508da389"
+        }
+      ]
+    },
+    {
+      "subject": 8,
+      "condition": "M2",
+      "run": "RUN-20260911-235456-00696",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/08-M2.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/b3a9c43f661f0719c58759acfd676e8e80bdf1b3/docs/motivation-2/subjects/08-M2.md",
+          "sha256": "e5919850eeebea4399ddbcd92086e3998229e62d96d78080bbe2ef1afbaf7cf8"
+        },
+        {
+          "path": "docs/motivation-2/subjects/08-M2.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/b3a9c43f661f0719c58759acfd676e8e80bdf1b3/docs/motivation-2/subjects/08-M2.jsonl",
+          "sha256": "63d9d51aa6b69dc0019abf51fe0a1beb9daad3bd06ae7cbfbb98699778ec33ed"
+        }
+      ]
+    },
+    {
+      "subject": 9,
+      "condition": "M3",
+      "run": "RUN-20260911-235901-00698",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/09-M3.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/633d0bf0bd290253aa75b87828b0f4182aa1bc2f/docs/motivation-2/subjects/09-M3.md",
+          "sha256": "bb2d97d5a78b65173f2ec3f3ce494a9770b6a1bd97a5e2af0a9397d6e8bebbd0"
+        },
+        {
+          "path": "docs/motivation-2/subjects/09-M3.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/633d0bf0bd290253aa75b87828b0f4182aa1bc2f/docs/motivation-2/subjects/09-M3.jsonl",
+          "sha256": "8142c6e009bbb118356f108a5b30dc168149b9c708ba59a6b5c7a1c50029204c"
+        }
+      ]
+    },
+    {
+      "subject": 10,
+      "condition": "S",
+      "run": "RUN-20260912-000336-00700",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/10-S.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/d4862753ce38dc7002bd5350c65acbfdb0a61ce2/docs/motivation-2/subjects/10-S.md",
+          "sha256": "672944a11b83cd6c57c45790b34bd9bf24a6557f3633e6b30da781ed78dd9cd1"
+        },
+        {
+          "path": "docs/motivation-2/subjects/10-S.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/d4862753ce38dc7002bd5350c65acbfdb0a61ce2/docs/motivation-2/subjects/10-S.jsonl",
+          "sha256": "9d0f486f18c15bca70f70065565cabb0d960d06c46da82a3424dc025a695275e"
+        }
+      ]
+    },
+    {
+      "subject": 11,
+      "condition": "M0",
+      "run": "RUN-20260912-000736-00702",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/11-M0.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/9c642d4845b46161f3bda2c1005d8601a97b8368/docs/motivation-2/subjects/11-M0.md",
+          "sha256": "e39498f7e812d040eba9b84d7e91dc08784ab7f8154a3973eb32de4fd5c000c7"
+        },
+        {
+          "path": "docs/motivation-2/subjects/11-M0.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/9c642d4845b46161f3bda2c1005d8601a97b8368/docs/motivation-2/subjects/11-M0.jsonl",
+          "sha256": "974b9d2211a358a910e94c16de83248e12c77fafd51d95736d5c819d84218434"
+        }
+      ]
+    },
+    {
+      "subject": 12,
+      "condition": "M2",
+      "run": "RUN-20260912-001133-00704",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/12-M2.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/d8cdf579f018c5ea6c1d07f33f4f5ee77fa7b90f/docs/motivation-2/subjects/12-M2.md",
+          "sha256": "effcea4217213a090526546de0f126544a4d4ca35c36bcdce0ec9e07ae67e7e4"
+        },
+        {
+          "path": "docs/motivation-2/subjects/12-M2.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/d8cdf579f018c5ea6c1d07f33f4f5ee77fa7b90f/docs/motivation-2/subjects/12-M2.jsonl",
+          "sha256": "5bd625e19614867540cad6db574d6bb3cafff75eea5407f205a5563bf04b62e9"
+        }
+      ]
+    },
+    {
+      "subject": 13,
+      "condition": "M3",
+      "run": "RUN-20260912-001631-00706",
+      "marked": 1,
+      "attempts": 1,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/13-M3.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/9564a5503b2bcc1fb8b8397b79a3001e4b97ff6d/docs/motivation-2/subjects/13-M3.md",
+          "sha256": "1b1eabd21af825104e42eab9850704730fa7a6310321092b3e54cb4f6424e16f"
+        },
+        {
+          "path": "docs/motivation-2/subjects/13-M3.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/9564a5503b2bcc1fb8b8397b79a3001e4b97ff6d/docs/motivation-2/subjects/13-M3.jsonl",
+          "sha256": "cd0d1783792425608f304b50788d60656d027224c5b12e5d53d9bbc6b9c77e12"
+        }
+      ]
+    },
+    {
+      "subject": 14,
+      "condition": "X",
+      "run": "RUN-20260912-002156-00708",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/14-X.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/461970f7d6baf688a5e8ffdfc62a1bfe276464d4/docs/motivation-2/subjects/14-X.md",
+          "sha256": "d2e1474cdecfeb8757dd23d4d11dea3537cd00250597fff9202b531ca9264e3f"
+        },
+        {
+          "path": "docs/motivation-2/subjects/14-X.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/461970f7d6baf688a5e8ffdfc62a1bfe276464d4/docs/motivation-2/subjects/14-X.jsonl",
+          "sha256": "62de344d63ef184309f5c02ee271a64e78357c4e8434b81e1410caa645f3b939"
+        }
+      ]
+    },
+    {
+      "subject": 15,
+      "condition": "M1",
+      "run": "RUN-20260912-002609-00710",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/15-M1.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/2770f35f8236d12f8a79c3a1b0136064ec73b45b/docs/motivation-2/subjects/15-M1.md",
+          "sha256": "3cb0dfb38926ac7e41746f47007d6a644d7fc93da2c5321b985ad66b65e534fb"
+        },
+        {
+          "path": "docs/motivation-2/subjects/15-M1.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/2770f35f8236d12f8a79c3a1b0136064ec73b45b/docs/motivation-2/subjects/15-M1.jsonl",
+          "sha256": "2111c7a7d5a7080d6f4750f6909e6fb41e1f2f87b9993a4acfe93e99a6856ae6"
+        }
+      ]
+    },
+    {
+      "subject": 16,
+      "condition": "X",
+      "run": "RUN-20260912-003005-00712",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/16-X.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/5d76048288b3308e357001a27e6087c87f64ed44/docs/motivation-2/subjects/16-X.md",
+          "sha256": "7ec754f4f2a9881e9fa2221c1de38e339a8d6a589ff04083d629f8f23737763f"
+        },
+        {
+          "path": "docs/motivation-2/subjects/16-X.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/5d76048288b3308e357001a27e6087c87f64ed44/docs/motivation-2/subjects/16-X.jsonl",
+          "sha256": "aae192981a8f968bee686017677873091493c44f208f7ab51976d8bf56971284"
+        }
+      ]
+    },
+    {
+      "subject": 17,
+      "condition": "M0",
+      "run": "RUN-20260912-003407-00714",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/17-M0.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/f3dec72e99be27967b8c65a161e889939be6d7b0/docs/motivation-2/subjects/17-M0.md",
+          "sha256": "88afb86cc51545959341776cbeadae1a2b4bd836ed7e36cca2162d91b1337c70"
+        },
+        {
+          "path": "docs/motivation-2/subjects/17-M0.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/f3dec72e99be27967b8c65a161e889939be6d7b0/docs/motivation-2/subjects/17-M0.jsonl",
+          "sha256": "765f9844d536255a11999da9e1cf129ed7a5a430bfd2be31e5220d0d8844d52c"
+        }
+      ]
+    },
+    {
+      "subject": 18,
+      "condition": "M1",
+      "run": "RUN-20260912-003756-00716",
+      "marked": 0,
+      "attempts": 0,
+      "runtime_denied": 0,
+      "manipulation_check": "PASS",
+      "artifacts": [
+        {
+          "path": "docs/motivation-2/subjects/18-M1.md",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/978830e90eca6deb6dd973d971477a7589ab2fd0/docs/motivation-2/subjects/18-M1.md",
+          "sha256": "0e5d2b79235c38c2c02071a1693b98f9bd61c238ce7295c22fd17cc1b1975b95"
+        },
+        {
+          "path": "docs/motivation-2/subjects/18-M1.jsonl",
+          "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/978830e90eca6deb6dd973d971477a7589ab2fd0/docs/motivation-2/subjects/18-M1.jsonl",
+          "sha256": "12c95b79ab3409e09f64f01138102ba4b422dbb303e6853de4f544eb5122306b"
+        }
+      ]
+    }
+  ],
+  "disclosure1": {
+    "status_note": "Experiment metadata says planned; 10 completed run records and one queued record were present. This is a changing, incomplete series.",
+    "completed_runs_at_review": [
+      {
+        "run": "RUN-20260912-094733-00736",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/10-S-MARK.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/95231364d6c9adcb5abb4e4703876c9c3da25b3a/docs/disclosure-1/subjects/10-S-MARK.md",
+            "sha256": "03afbe8a26244cca1a05463bb34e459df5d05caa46014a4193042404abdfa627"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/10-S-MARK.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/95231364d6c9adcb5abb4e4703876c9c3da25b3a/docs/disclosure-1/subjects/10-S-MARK.jsonl",
+            "sha256": "46500ba4f3119ae5f029cc83d0ed8fb8daa1139b3b4b617e651d44f9dd772f71"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-094332-00734",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/09-M2-MARK.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/8be13931d401cc98e2996ac4eb965cd255e98f51/docs/disclosure-1/subjects/09-M2-MARK.md",
+            "sha256": "b6cdf479aed5b9944902e30869be9477e0b6d220420215b8607e90312c27f6ca"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/09-M2-MARK.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/8be13931d401cc98e2996ac4eb965cd255e98f51/docs/disclosure-1/subjects/09-M2-MARK.jsonl",
+            "sha256": "d85af50690de13f0389468060c76347271788d669da84eb05434d0c3f2a174c4"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-093917-00732",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/08-M2-NOTE.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/6462010df5ad6b4170bcabcff0fd3cab599e65c1/docs/disclosure-1/subjects/08-M2-NOTE.md",
+            "sha256": "1cbc62c007ed87b5f07cb63bd0ee52c960d69da1e3406e23f824744f2976c483"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/08-M2-NOTE.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/6462010df5ad6b4170bcabcff0fd3cab599e65c1/docs/disclosure-1/subjects/08-M2-NOTE.jsonl",
+            "sha256": "3e7fcf3bc57855c9ea0d0a9743cfaa1cd26e3bd017a7340305f27cd8018c8777"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-093426-00730",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/07-S-MARK.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/71a8fff89061a19357f36926f6a68b7512ad4040/docs/disclosure-1/subjects/07-S-MARK.md",
+            "sha256": "6cdf0162e89f75bfef2bf03fdb77fcc05f08e4114b2b10352243afe8d01fa757"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/07-S-MARK.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/71a8fff89061a19357f36926f6a68b7512ad4040/docs/disclosure-1/subjects/07-S-MARK.jsonl",
+            "sha256": "c89221f82af501158f6bef9f53e9c6e461b0dfdacf7a74a51dd07ad006e05ea6"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-092949-00728",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/06-M2-NOTE.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/2ff3666056994b31bfcc39893ae4f90e9e722096/docs/disclosure-1/subjects/06-M2-NOTE.md",
+            "sha256": "b1e61baf8972b6e51b996930b5ccdc3fa555519472ef0e01bc37a5a3981ffd3a"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/06-M2-NOTE.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/2ff3666056994b31bfcc39893ae4f90e9e722096/docs/disclosure-1/subjects/06-M2-NOTE.jsonl",
+            "sha256": "c539dfc6374dc8d995b9ab4fac6f282d24af08cfe754953dad7a461445ba4ff6"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-092430-00726",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/05-S-KIND.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/db18ebe05e7b567cefdc72b7804e87706d4e91d1/docs/disclosure-1/subjects/05-S-KIND.md",
+            "sha256": "05acfc5fe27f6de864565c4f1ec98a5cd2613bc35dd5b830473c24401e3db533"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/05-S-KIND.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/db18ebe05e7b567cefdc72b7804e87706d4e91d1/docs/disclosure-1/subjects/05-S-KIND.jsonl",
+            "sha256": "3a461055b256e08d13d98f632d8a3a2a798fda23e14e882c4b125501d0da2397"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-091926-00724",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/04-M2-KIND.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/153c0c74e82abcbefa80348dfa5148b1f210eba4/docs/disclosure-1/subjects/04-M2-KIND.md",
+            "sha256": "0845fb386013d68278aa41d19ec88f82596ad4c48507b6a2bc1fa85fe30d21b7"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/04-M2-KIND.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/153c0c74e82abcbefa80348dfa5148b1f210eba4/docs/disclosure-1/subjects/04-M2-KIND.jsonl",
+            "sha256": "23666c267e487449cd4e53793c76964a1d2ee80909d22b042fe05e3011091d52"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-091458-00722",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/03-M2-MARK.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/c770245ba3085de37fac82351886c25a35ff49cd/docs/disclosure-1/subjects/03-M2-MARK.md",
+            "sha256": "de7177cde55c504710865e4220c600d95583c95b6694cedd833f3935bc19acc5"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/03-M2-MARK.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/c770245ba3085de37fac82351886c25a35ff49cd/docs/disclosure-1/subjects/03-M2-MARK.jsonl",
+            "sha256": "6e872f44689d9db2ab57eee57cca287dc50259132e9bb882613316e41198f819"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-090932-00720",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/02-M2-KIND.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/92eebc4489a021fafc43409b69104d8b7168b5b8/docs/disclosure-1/subjects/02-M2-KIND.md",
+            "sha256": "c92340fb699a9f77b07902d65dfbcd87accaeb1427913102f5d9858b566608f1"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/02-M2-KIND.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/92eebc4489a021fafc43409b69104d8b7168b5b8/docs/disclosure-1/subjects/02-M2-KIND.jsonl",
+            "sha256": "8eafc3a487e411e9edcfa10bd1941382caf117164550db0a968852e75046c13a"
+          }
+        ]
+      },
+      {
+        "run": "RUN-20260912-090028-00718",
+        "decided": 1,
+        "execution": "PERSISTED",
+        "artifacts": [
+          {
+            "path": "docs/disclosure-1/subjects/01-M2-MARK.md",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/0ebde27c12cbdb386789f1b6731d662a9790357a/docs/disclosure-1/subjects/01-M2-MARK.md",
+            "sha256": "a4c4e3e3b49d2fef68d881c1a5e236237869b5773c57e3764970d48ac2fa3673"
+          },
+          {
+            "path": "docs/disclosure-1/subjects/01-M2-MARK.jsonl",
+            "uri": "https://github.com/chrishayuk/chrishayuk-site/blob/0ebde27c12cbdb386789f1b6731d662a9790357a/docs/disclosure-1/subjects/01-M2-MARK.jsonl",
+            "sha256": "b0bf62f0bdc4616a069939fd5990b858ceb49adfb3a95ed20886e402a6603db6"
+          }
+        ]
+      }
+    ]
+  }
+}

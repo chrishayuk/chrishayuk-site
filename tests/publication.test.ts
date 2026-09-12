@@ -403,7 +403,7 @@ test("the shared agent task is a real shared task or absent, never a placeholder
 
 test("discovery includes public notebook drafts without promoting them or listing catalogue stubs", async()=>{
  const {canonicalPaths}=await import('../lib/canonical.ts');const paths=canonicalPaths();
- for(const r of records.filter(r=>r.kind==='notebook')){assert.ok(paths.includes(recordPath(r)));assert.equal(r.publication,'draft');}
+ for(const r of records.filter(r=>r.kind==='notebook')){assert.ok(paths.includes(recordPath(r)));assert.ok(['draft','published'].includes(r.publication));}
  assert.ok(!records.filter(r=>r.publication==='catalogued').some(r=>paths.includes(recordPath(r))));
  assert.equal(new Set(paths).size,paths.length);
 });
@@ -464,20 +464,62 @@ test("the blind-visitor study belongs to the notebook record, index and archive"
 });
 
 
-test("machine programme connects four draft notes and keeps the latest first in the index",async()=>{
+test("machine programme connects five notes and leads with the published motivation study",async()=>{
  const { machineThread, threadPosition }=await import('../lib/threads.ts');
  const { notebookSelection }=await import('../lib/notebook-selection.ts');
  const { canonicalPaths }=await import('../lib/canonical.ts');
- const ids=['N-MACHINE-VISIT','N-MACHINE-PERMISSION','N-MACHINE-SELF-READ','N-MACHINE-TASK'];
+ const ids=['N-MACHINE-VISIT','N-MACHINE-PERMISSION','N-MACHINE-SELF-READ','N-MACHINE-TASK','N-MACHINE-MOTIVATION'];
  assert.deepEqual(machineThread.steps.map(step=>step.id),ids);
- assert.equal(notebookSelection[0].id,'N-MACHINE-TASK');
+ assert.equal(notebookSelection[0].id,'N-MACHINE-MOTIVATION');
  assert.ok(canonicalPaths().includes('/thread/machines'));
  const graph=recordGraph();
  assert.deepEqual(graph.nodes.find(node=>node.id==='THREAD-MACHINES')?.members?.map(member=>member.id),ids);
  for(const [i,id] of ids.entries()) {
   assert.equal(threadPosition(id)?.previous?.id,ids[i-1]);
   assert.equal(threadPosition(id)?.next?.id,ids[i+1]);
-  assert.equal(getRecord(id)?.publication,'draft');
+  assert.equal(getRecord(id)?.publication,id==='N-MACHINE-MOTIVATION'?'published':'draft');
   assert.ok(graph.edges.some(edge=>edge.from===id&&edge.to==='THREAD-MACHINES'&&edge.kind==='in-thread'));
+ }
+});
+
+test("every listed notebook has retrievable passages, source anchors and graph relationships",async()=>{
+ const { retrieveGraph }=await import('../lib/graph.ts');
+ const { recordActs }=await import('../lib/record-knowledge.ts');
+ const graph=recordGraph();
+ for(const note of records.filter(record=>record.kind==='notebook')) {
+  const node=graph.nodes.find(node=>node.id===note.id);
+  assert.equal(node?.retrievable,true,note.id);
+  assert.equal(node?.publication,note.publication,note.id);
+  const acts=recordActs(note);
+  assert.ok(acts.length>0,`${note.id} needs readable authored evidence`);
+  for(const act of acts) {
+   const passage=graph.nodes.find(node=>node.id===act.id);
+   assert.equal(passage?.text,act.text,act.id);
+   assert.equal(passage?.url,`${SITE}${recordPath(note)}#${act.anchor}`,act.id);
+   assert.ok(graph.edges.some(edge=>edge.from===act.id&&edge.to===note.id&&edge.kind==='act-of'),act.id);
+  }
+  assert.ok(retrieveGraph(note.title,{scope:'records'}).results.some(result=>result.recordId===note.id||result.id===note.id),`${note.id} must be findable through Ask`);
+ }
+});
+
+test("the motivation publication has an immutable snapshot and preserves evidence qualifications",async()=>{
+ const { createHash }=await import('node:crypto');
+ const { retrieveGraph }=await import('../lib/graph.ts');
+ const note=getRecord('N-MACHINE-MOTIVATION')!;
+ const snapshot=getVersion(note.id,'1.0')!;
+ assert.equal(note.publication,'published');
+ assert.equal(note.visibility,undefined);
+ assert.equal(note.published,'2026-09-12');
+ assert.equal(snapshot.hash,createHash('sha256').update(stableJson(note)).digest('hex'));
+ assert.ok(FEEDS.record.items().some(item=>item.id===note.id));
+ const questions=[
+  ['Why did agents leave a mark as a courtesy?',/courtesy.*operator/i],
+  ['Why did the runtime block the declaration?',/blocked.*before.*server/i],
+  ['What caused the interpretation pause?',/post|predefined|exploratory/i],
+ ];
+ for(const [question,expected] of questions) {
+  const results=retrieveGraph(question as string,{scope:'records',includeDrafts:false}).results;
+  assert.ok(results.slice(0,3).some(result=>result.recordId===note.id&&(expected as RegExp).test(result.text)),question as string);
+  assert.ok(results.filter(result=>result.recordId===note.id).every(result=>result.publication==='published'&&result.basis==='published-record'));
  }
 });

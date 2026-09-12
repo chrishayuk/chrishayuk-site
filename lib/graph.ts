@@ -92,7 +92,7 @@ function buildGraph() {
  }
  for(const study of demoStudies.filter(s=>s.visibility!=="unlisted")) nodes.push({id:study.id,kind:"interactive-study",title:study.title,text:study.text,url:`${SITE}${study.url}`,sourceUrl:`${SITE}${study.url}`,basis:study.id===memoryStudy.id?"constructed-example":"recorded-arms",retrievable:true,scope:"records",publication:"draft",authors:["Chris Hay"]});
  for (const thread of threads) {
-  nodes.push({id:thread.id,kind:"thread",title:thread.title,text:[thread.abstract,thread.context,...thread.steps.map(s=>`${s.label}. ${s.text}`)].join(" "),url:`${SITE}${thread.path}`,sourceUrl:`${SITE}${thread.path}`,basis:"curated-thread",retrievable:true,scope:"records",publication:"draft",version:thread.version,created:thread.created,authors:["Chris Hay"],keywords:"follow thread map memory LARQL VINDEX3 residual state address",members:thread.steps.map((step,index)=>({id:step.id,position:index+1,reason:step.text,start:step.start}))});
+  nodes.push({id:thread.id,kind:"thread",title:thread.title,text:[thread.abstract,thread.context,...thread.steps.map(s=>`${s.label}. ${s.text}`)].join(" "),url:`${SITE}${thread.path}`,sourceUrl:`${SITE}${thread.path}`,basis:"curated-thread",retrievable:true,scope:"records",publication:"draft",version:thread.version,created:thread.created,authors:["Chris Hay"],keywords:[thread.slug,thread.title,...thread.steps.flatMap(step=>[step.label,...(records.find(record=>record.id===step.id)?.concepts||[])])].join(" "),members:thread.steps.map((step,index)=>({id:step.id,position:index+1,reason:step.text,start:step.start}))});
   for (const step of thread.steps) {
    addEdge(thread.id,step.id,"includes","editorial-reading-order");
    addEdge(step.id,thread.id,"in-thread","editorial-reading-order");
