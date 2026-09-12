@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { auditLegibility, legibilityLd, searchProjection, type LegiblePublication } from "../vendor/hause/legibility.ts";
 import { auditPublicationLegibility } from "../lib/legibility-audit.ts";
-import { legibilityFor } from "../lib/legibility.ts";
+import { legibilityFor, publicationLegibility } from "../lib/legibility.ts";
 import { records } from "../lib/records.ts";
 import { threads } from "../lib/threads.ts";
 import { retrieveGraph, recordGraph } from "../lib/graph.ts";
@@ -51,4 +53,44 @@ test("literal subject queries discover the relevant programme or experiment", ()
   assert.equal(node.text, record.abstract);
   assert.equal(node.subject, legibilityFor(record.id)!.subject);
  }
+});
+
+test("editorial search opt-outs require a reason and keep meaning and provenance obligations", () => {
+ const editorial: LegiblePublication = {...example, searchTitle:undefined, description:undefined, search:{mode:"editorial",reason:"The editorial title already states the question precisely."}};
+ assert.equal(auditLegibility(editorial).ok,true);
+ assert.deepEqual(searchProjection(editorial),{});
+ assert.equal(legibilityLd(editorial).alternativeHeadline,undefined);
+ assert.equal(legibilityLd(editorial).about[0].name,editorial.subject);
+ for (const patch of [{search:{mode:"editorial",reason:" "}}, {subject:""}, {question:""}, {abstract:""}, {authors:[]}, {url:"/relative"}, {state:"published",published:undefined}])
+  assert.equal(auditLegibility({...editorial,...patch} as LegiblePublication).ok,false,JSON.stringify(patch));
+ const registry={...publicationLegibility,"N-MACHINE-TASK":editorial};
+ assert.equal(auditPublicationLegibility(registry).find(result=>result.id==="N-MACHINE-TASK")!.ok,true);
+ const missing=Object.fromEntries(Object.entries(registry).filter(([id])=>id!=="N-MACHINE-TASK"));
+ assert.equal(auditPublicationLegibility(missing).find(result=>result.id==="N-MACHINE-TASK")!.ok,false);
+});
+
+test("diagnostics identify the failure and supply a concrete remedy", () => {
+ const subject=auditLegibility({...example,subject:""}).diagnostics.find(issue=>issue.code==="literal-subject")!;
+ assert.equal(subject.severity,"error");
+ assert.match(subject.message,/what it is about/);
+ assert.match(subject.remedy,/editorial title may remain unchanged/);
+ const missingHead=auditLegibility({...example,searchTitle:undefined}).diagnostics.find(issue=>issue.code==="search-title")!;
+ assert.match(missingHead.remedy,/literal search title/);
+ assert.match(missingHead.remedy,/editorial.*reason/);
+ const duplicate={...publicationLegibility,"N-MACHINE-TASK":{...publicationLegibility["N-MACHINE-TASK"],searchTitle:publicationLegibility["THREAD-MACHINES"].searchTitle!.toUpperCase()+" !!!"}};
+ const collision=auditPublicationLegibility(duplicate).flatMap(result=>result.diagnostics).find(issue=>issue.code==="duplicate-search-title")!;
+ assert.match(collision.message,/N-MACHINE-TASK/);
+ assert.match(collision.remedy,/own question/);
+ for(const date of [undefined,"not-a-date","2026-02-30","2026-13-01"])
+  assert.equal(auditLegibility({...example,state:"published",published:date}).ok,false,String(date));
+ assert.equal(auditLegibility({...example,state:"published",published:"2024-02-29"}).ok,true);
+});
+
+// Fresh processes model a rebuilt edition. Fixtures change in-memory source
+// records before consumers load, so stale module caches cannot hide an edit.
+for(const mode of ["projected","editorial"]) test(`an edit reaches real consumers in ${mode} mode`, () => {
+ const output=execFileSync(process.execPath,["--experimental-strip-types",fileURLToPath(new URL("./fixtures/legibility-edit.ts",import.meta.url)),mode],{
+  cwd:fileURLToPath(new URL("..",import.meta.url)),encoding:"utf8",env:{...process.env,SITE_INDEXABLE:"true"},
+ });
+ assert.match(output,/Three edited records passed metadata, structured data, graph, retrieval and machine-index parity/);
 });

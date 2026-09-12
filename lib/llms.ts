@@ -1,5 +1,6 @@
 import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { legibilityFor } from "./legibility.ts";
+import { threads } from "./threads.ts";
 import { entryState } from "./feeds.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import type { PublicationRecord } from "./types.ts";
@@ -28,10 +29,12 @@ import { ACTOR_TYPE, CAPABILITY, COORDINATION, EVIDENCE, FRICTION, FUNCTION, HAR
  * anybody, machine or otherwise.
  */
 
-const entry = (record: PublicationRecord) => {
- const meaning = legibilityFor(record.id);
- return `- [${record.title}](${SITE}${recordPath(record)}): ${entryState(record)}${meaning ? ` — Subject: ${meaning.subject}. Question: ${meaning.question}` : ""} — ${record.abstract}`;
+const meaningLine = (id: string) => {
+ const meaning = legibilityFor(id);
+ return meaning ? ` — Subject: ${meaning.subject}. Question: ${meaning.question}` : "";
 };
+const entry = (record: PublicationRecord) =>
+ `- [${record.title}](${SITE}${recordPath(record)}): ${entryState(record)}${meaningLine(record.id)} — ${record.abstract}`;
 
 /** An empty section is omitted rather than printed as a heading with nothing under it. */
 const section = (heading: string, lines: string[]): string | null =>
@@ -269,6 +272,7 @@ export function llmsDocument(): string {
   `  about its machine readers without asking, and what it stores.`,
   ``,
   section("The notebook — thinking in progress", of("notebook")),
+  section("Reading threads — editorial guides", threads.map(thread => `- [${thread.title}](${SITE}${thread.path}): Working editorial guide · V${thread.version}${meaningLine(thread.id)} — ${thread.abstract}`)),
   section("Open questions", of("question")),
   section("Systems and work", of("work")),
   section("The practice", HOUSE_PARTS.map(part => `- [${part.name}](${SITE}${part.path}): ${part.text}`)),

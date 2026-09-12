@@ -1,9 +1,9 @@
-import { auditLegibility } from "../vendor/hause/legibility.ts";
+import { auditLegibility, legibilityAuditResult, type Legibility } from "../vendor/hause/legibility.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import { threads } from "./threads.ts";
 import { publicationLegibility } from "./legibility.ts";
 
-export function auditPublicationLegibility() {
+export function auditPublicationLegibility(registry: Readonly<Record<string, Legibility>> = publicationLegibility) {
  const corpus = [
   ...records.filter(record => record.kind === "notebook").map(record => ({
    id: record.id, title: record.title, abstract: record.abstract, url: `${SITE}${recordPath(record)}`,
@@ -17,15 +17,29 @@ export function auditPublicationLegibility() {
   })),
  ];
  const results = corpus.map(record => {
-  const meaning = publicationLegibility[record.id];
-  return { id: record.id, ...(meaning ? auditLegibility({ ...record, ...meaning, indexable: true, visibleAbstract: record.abstract }) : { ok: false, errors: ["Missing legibility record"], advisories: [] }) };
+  const meaning = registry[record.id];
+  return { id: record.id, ...(meaning ? auditLegibility({ ...meaning, ...record, indexable: process.env.SITE_INDEXABLE === "true", visibleAbstract: record.abstract }) : legibilityAuditResult([{
+   code: "record-meaning", severity: "error", message: "This listed publication has no declared subject or reader question.",
+   remedy: `Add a legibility record for ${record.id}. If its editorial head should stand, declare search.mode = editorial with a reason; do not omit the meaning record.`,
+  }])) };
  });
- const titles = new Set<string>();
+ const titles = new Map<string, string>();
  for (const record of corpus) {
-  const title = publicationLegibility[record.id]?.searchTitle;
-  if (title && titles.has(title)) { const result = results.find(result => result.id === record.id)!; result.ok = false; result.errors.push("Duplicate search title"); }
-  if (title) titles.add(title);
+  const meaning = registry[record.id];
+  const title = meaning?.search?.mode === "editorial" ? record.title : meaning?.searchTitle;
+  const key = title?.normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]+/gu," ").trim();
+  if (key && titles.has(key)) {
+   const result = results.find(result => result.id === record.id)!;
+   Object.assign(result, legibilityAuditResult([...result.diagnostics, {
+    code: "duplicate-search-title", severity: "error", message: `The search title is indistinguishable from ${titles.get(key)}.`,
+    remedy: `Give ${record.id} wording that identifies its own question. This check catches duplicate titles, not every possible overlap in search intent.`,
+   }]));
+  }
+  if (key) titles.set(key,record.id);
  }
- for (const id of Object.keys(publicationLegibility)) if (!corpus.some(record => record.id === id)) results.push({ id, ok: false, errors: ["Legibility record has no listed destination"], advisories: [] });
+ for (const id of Object.keys(registry)) if (!corpus.some(record => record.id === id)) results.push({ id, ...legibilityAuditResult([{
+  code: "unresolved-publication", severity: "error", message: "This discovery record has no listed publication to describe.",
+  remedy: `Resolve ${id} to a listed note or thread, or remove the orphaned discovery entry. Unlisted work must not enter the public corpus.`,
+ }]) });
  return results;
 }

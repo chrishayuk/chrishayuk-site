@@ -613,13 +613,19 @@ assert.match(motivationSocial.headers['content-type'],/image\/png/);
 // Every listed notebook is usable through the actual Ask page, including
 // citations into the authored text rather than just a discoverable title.
 const notebookNodes=graph.nodes.filter(node=>node.kind==='notebook');
+const legibilityMachineIndex=await request('/llms.txt');
+assert.equal(legibilityMachineIndex.status,200);
 const decodeHead = text => text.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#x27;|&#39;|&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>');
 function checkLegibility(node, html) {
- assert.ok(node.subject && node.question && node.searchTitle && node.searchDescription, `${node.id}: legibility absent from graph`);
+ assert.ok(node.subject && node.question && ['projected','editorial'].includes(node.searchProjection), `${node.id}: legibility absent from graph`);
+ const projected = node.searchProjection === 'projected';
+ if(projected) assert.ok(node.searchTitle && node.searchDescription, `${node.id}: search projection is incomplete`);
+ else { assert.equal(node.searchTitle,undefined); assert.equal(node.searchDescription,undefined); }
  const title = decodeHead(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] || '');
- assert.equal(title, `${node.searchTitle} — Chris Hay`, `${node.id}: search title`);
+ assert.equal(title, `${projected ? node.searchTitle : node.title} — Chris Hay`, `${node.id}: search title`);
  const description = decodeHead(html.match(/<meta name="description" content="([^"]*)"/)?.[1] || '');
- assert.equal(description, node.searchDescription, `${node.id}: description`);
+ if(projected) assert.equal(description, node.searchDescription, `${node.id}: description`);
+ else assert.ok(description, `${node.id}: editorial description missing`);
  const socialTitle = decodeHead(html.match(/<meta property="og:title" content="([^"]*)"/)?.[1] || '');
  assert.equal(socialTitle, node.title, `${node.id}: editorial social title changed`);
  const heading = decodeHead((html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] || '').replace(/<br\s*\/?\s*>/g,' ').replace(/<[^>]+>/g,'')).replace(/\s+/g,' ').trim();
@@ -627,10 +633,14 @@ function checkLegibility(node, html) {
  const linkedData = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match=>JSON.parse(match[1]));
  const publication = linkedData.find(item=>item.headline===node.title);
  assert.ok(publication, `${node.id}: editorial structured headline missing`);
- assert.equal(publication.alternativeHeadline,node.searchTitle);
- assert.equal(publication.description,node.searchDescription);
+ assert.equal(publication.alternativeHeadline,projected ? node.searchTitle : undefined);
+ if(projected) assert.equal(publication.description,node.searchDescription);
  assert.ok(publication.about.some(item=>item.name===node.subject));
  assert.equal(publication.url,node.url);
+ const machineEntry=legibilityMachineIndex.body.split('\n').find(line=>line.startsWith(`- [${node.title}](${node.url}):`));
+ assert.ok(machineEntry,`${node.id}: missing from llms.txt`);
+ assert.ok(machineEntry.includes(`Subject: ${node.subject}. Question: ${node.question}`),`${node.id}: machine-index meaning differs from graph`);
+ assert.ok(machineEntry.includes(publication.abstract),`${node.id}: machine-index abstract differs from structured data`);
  if(node.kind==='notebook') {
   assert.equal(publication.abstract,node.text);
   assert.ok(publication.isPartOf.some(collection=>collection.url==='https://chrishayuk.com/notebook'));

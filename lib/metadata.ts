@@ -1,8 +1,8 @@
-import { publicationMetadata } from "@chrishayuk/hause/seo";
-import { searchProjection, type Legibility } from "@chrishayuk/hause/legibility";
+import { publicationMetadata } from "../vendor/hause/seo.ts";
+import { searchProjection, type Legibility } from "../vendor/hause/legibility.ts";
 import type { CitationRecord } from "@chrishayuk/hause/cite";
-import { FEEDS } from "./feeds";
-import { SITE } from "./records";
+import { FEEDS } from "./feeds.ts";
+import { SITE } from "./records.ts";
 /** Fly explicitly enables the public edition; Sites and local previews default to noindex. */
 export const INDEXABLE = process.env.SITE_INDEXABLE === "true";
 

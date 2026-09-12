@@ -4,8 +4,10 @@ const results = auditPublicationLegibility();
 console.log("HAUSE / PUBLICATION LEGIBILITY");
 for (const result of results) {
  console.log(`${result.ok ? "PASS" : "FAIL"} ${result.id}`);
- for (const error of result.errors) console.log(`  REQUIRED: ${error}`);
- for (const advisory of result.advisories) console.log(`  ADVISORY: ${advisory}`);
+ for (const issue of result.diagnostics) {
+  console.log(`  ${issue.severity === "error" ? "REQUIRED" : "ADVISORY"} [${issue.code}]: ${issue.message}`);
+  console.log(`    ${issue.remedy}`);
+ }
 }
 console.log(`${results.filter(result => result.ok).length}/${results.length} records passed`);
 if (results.some(result => !result.ok)) process.exitCode = 1;

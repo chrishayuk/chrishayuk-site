@@ -171,5 +171,15 @@ export const publicationLegibility: Record<string, Legibility> = {
 export const legibilityFor = (id: string): Legibility | undefined => publicationLegibility[id];
 export const discoveryTerms = (id: string) => {
  const record = legibilityFor(id);
- return record ? [record.subject, record.question, record.searchTitle, ...record.concepts].join(" ") : "";
+ return record ? [record.subject, record.question, ...(record.search?.mode === "editorial" ? [] : [record.searchTitle]), ...record.concepts].join(" ") : "";
 };
+
+export function legibilityGraphFields(id: string) {
+ const record = legibilityFor(id);
+ if (!record) return {};
+ return {
+  subject: record.subject, question: record.question,
+  searchProjection: record.search?.mode === "editorial" ? "editorial" as const : "projected" as const,
+  ...(record.search?.mode === "editorial" ? {} : {searchTitle: record.searchTitle, searchDescription: record.description}),
+ };
+}

@@ -1,5 +1,5 @@
 import { legibilityFor } from "@/lib/legibility";
-import { legibilityLd } from "@chrishayuk/hause/legibility";
+import { legibilityLd, searchProjection } from "@chrishayuk/hause/legibility";
 import Link from "next/link";
 import { readAddress, addressedMemory } from "@/lib/addressed-memory";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
@@ -16,7 +16,7 @@ export const metadata = pageMetadata(thread.title, thread.abstract, thread.path,
 export default function Page() {
   const steps = thread.steps.map(resolveThreadStep);
   return <main id="main" className="thread-page">
-    <JsonLd data={{...legibilityLd({...legibility,title:thread.title,abstract:thread.abstract}), "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${SITE}${thread.path}`, url: `${SITE}${thread.path}`, name: thread.title, description: legibility.description, author: { "@type": "Person", "@id": `${SITE}/#person` }, mainEntity: { "@type": "ItemList", itemListOrder: "https://schema.org/ItemListOrderAscending", numberOfItems: steps.length, itemListElement: steps.map((step, i) => ({ "@type": "ListItem", position: i+1, name: step.title, url: `${SITE}${step.url}`, description: step.text })) } }}/>
+    <JsonLd data={{...legibilityLd({...legibility,title:thread.title,abstract:thread.abstract}), "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${SITE}${thread.path}`, url: `${SITE}${thread.path}`, name: thread.title, description: searchProjection({...legibility,title:thread.title}).description ?? thread.abstract, author: { "@type": "Person", "@id": `${SITE}/#person` }, mainEntity: { "@type": "ItemList", itemListOrder: "https://schema.org/ItemListOrderAscending", numberOfItems: steps.length, itemListElement: steps.map((step, i) => ({ "@type": "ListItem", position: i+1, name: step.title, url: `${SITE}${step.url}`, description: step.text })) } }}/>
     <header className="thread-intro"><p className="kicker record-voice">CHRIS HAY / {legibility.subject.toUpperCase()}</p><h1>From a map<br/><em>to a memory.</em></h1><p className="dek">{thread.abstract}</p><p className="thread-context">{thread.context}</p><div className="record-bar record-voice"><span>{thread.id}</span><span>EDITORIAL GUIDE · V{thread.version}</span><span>COMPOSED {thread.created}</span><a href="#step-1">START WITH THE FILM ↓</a></div></header>
     <ol className="thread-sequence" aria-label="Reading order">{steps.map((step, i) => {
       const media = step.media ? getMedia(step.media) : undefined;
