@@ -67,7 +67,7 @@ export function resolveThreadStep(step: ThreadStep) {
   const record = getRecord(step.id);
   if (!record) throw new Error(`Unresolved thread member: ${step.id}`);
   return { ...step, title: record.title, url: `${recordPath(record)}${step.start !== undefined ? `?t=${step.start}` : ""}`, kind: record.kind,
-    status: record.publication === "catalogued" ? "ORIGINAL FILM" : `WORKING DRAFT · ${record.status || "OPEN"}`,
+    status: record.publication === "catalogued" ? "ORIGINAL FILM" : record.publication === "published" ? `PUBLISHED · V${record.version}` : `WORKING DRAFT · ${record.status || "OPEN"}`,
     date: record.published, record };
 }
 export function threadPosition(id: string) {

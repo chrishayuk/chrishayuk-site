@@ -1,4 +1,5 @@
 import { publicationMetadata } from "@chrishayuk/hause/seo";
+import { searchProjection, type Legibility } from "@chrishayuk/hause/legibility";
 import type { CitationRecord } from "@chrishayuk/hause/cite";
 import { FEEDS } from "./feeds";
 import { SITE } from "./records";
@@ -41,6 +42,7 @@ export const feedAlternates = {
 };
 
 type PageMetadataOptions = {
+ legibility?: Legibility;
  openGraphType?: "website" | "article";
  image?: { width: number; height: number; alt: string; type?: string };
 };
@@ -50,6 +52,7 @@ export function pageMetadata(title: string, description: string, path: string, i
   indexable: INDEXABLE, image: image || `${SITE}/og-house.png`, citation });
  const detailedImage=image&&options?.image?{url:image,...options.image}:undefined;
  return { ...base,
+  ...(options?.legibility ? searchProjection({ ...options.legibility, title }) : {}),
   openGraph:{...base.openGraph,type:options?.openGraphType||base.openGraph.type,...(detailedImage?{images:[detailedImage]}:{})},
   twitter:{...base.twitter,...(detailedImage?{images:[{url:detailedImage.url,width:detailedImage.width,height:detailedImage.height,alt:detailedImage.alt}]}:{})},
   alternates: { ...base.alternates, types: feedAlternates }

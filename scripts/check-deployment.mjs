@@ -609,11 +609,40 @@ assert.match(motivationSocial.headers['content-type'],/image\/png/);
 // Every listed notebook is usable through the actual Ask page, including
 // citations into the authored text rather than just a discoverable title.
 const notebookNodes=graph.nodes.filter(node=>node.kind==='notebook');
+const decodeHead = text => text.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#x27;|&#39;|&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+function checkLegibility(node, html) {
+ assert.ok(node.subject && node.question && node.searchTitle && node.searchDescription, `${node.id}: legibility absent from graph`);
+ const title = decodeHead(html.match(/<title>([\s\S]*?)<\/title>/)?.[1] || '');
+ assert.equal(title, `${node.searchTitle} — Chris Hay`, `${node.id}: search title`);
+ const description = decodeHead(html.match(/<meta name="description" content="([^"]*)"/)?.[1] || '');
+ assert.equal(description, node.searchDescription, `${node.id}: description`);
+ const socialTitle = decodeHead(html.match(/<meta property="og:title" content="([^"]*)"/)?.[1] || '');
+ assert.equal(socialTitle, node.title, `${node.id}: editorial social title changed`);
+ const heading = decodeHead((html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] || '').replace(/<br\s*\/?\s*>/g,' ').replace(/<[^>]+>/g,'')).replace(/\s+/g,' ').trim();
+ assert.equal(heading,node.title,`${node.id}: editorial H1 changed`);
+ const linkedData = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match=>JSON.parse(match[1]));
+ const publication = linkedData.find(item=>item.headline===node.title);
+ assert.ok(publication, `${node.id}: editorial structured headline missing`);
+ assert.equal(publication.alternativeHeadline,node.searchTitle);
+ assert.equal(publication.description,node.searchDescription);
+ assert.ok(publication.about.some(item=>item.name===node.subject));
+ assert.equal(publication.url,node.url);
+ if(node.kind==='notebook') {
+  assert.equal(publication.abstract,node.text);
+  assert.ok(publication.isPartOf.some(collection=>collection.url==='https://chrishayuk.com/notebook'));
+  if(node.publication==='draft') { assert.equal(publication.creativeWorkStatus,'Draft'); assert.equal(publication.datePublished,undefined); }
+  else assert.equal(publication.datePublished,node.published);
+  for(const edge of graph.edges.filter(edge=>edge.from===node.id&&edge.kind==='in-thread')) {
+   assert.ok(publication.isPartOf.some(collection=>collection.url===graph.nodes.find(item=>item.id===edge.to).url));
+  }
+ }
+}
 for(const node of notebookNodes) {
  assert.equal(node.retrievable,true,node.id);
  const path=new URL(node.url).pathname;
  const page=await request(path);
  assert.equal(page.status,200,path);
+ checkLegibility(node,page.body);
  const passages=graph.nodes.filter(passage=>passage.kind==='act'&&passage.recordId===node.id);
  assert.ok(passages.length>0,`${node.id} has no authored passages`);
  for(const passage of passages) {
@@ -638,3 +667,8 @@ const narrowedAsk=await request('/ask?q=What%20caused%20the%20interpretation%20p
 assert.match(narrowedAsk.body,/These sources match parts of your question/);
 assert.ok(narrowedAsk.body.slice(narrowedAsk.body.indexOf('class="ask-results"')).includes(`href="${motivationPath}`));
 console.log(`Published motivation note, homepage entry, citation, social image and all ${notebookNodes.length} notebook graph/Ask routes verified.`);
+for(const thread of graph.nodes.filter(node=>node.kind==='thread')) {
+ const page=await request(new URL(thread.url).pathname);
+ checkLegibility(thread,page.body);
+}
+console.log('Search metadata, editorial titles, structured subjects and collection relationships verified across 20 notebooks and three threads.');

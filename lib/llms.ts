@@ -1,4 +1,5 @@
 import { HOUSE, HOUSE_PARTS } from "./house.ts";
+import { legibilityFor } from "./legibility.ts";
 import { entryState } from "./feeds.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import type { PublicationRecord } from "./types.ts";
@@ -27,8 +28,10 @@ import { ACTOR_TYPE, CAPABILITY, COORDINATION, EVIDENCE, FRICTION, FUNCTION, HAR
  * anybody, machine or otherwise.
  */
 
-const entry = (record: PublicationRecord) =>
- `- [${record.title}](${SITE}${recordPath(record)}): ${entryState(record)} — ${record.abstract}`;
+const entry = (record: PublicationRecord) => {
+ const meaning = legibilityFor(record.id);
+ return `- [${record.title}](${SITE}${recordPath(record)}): ${entryState(record)}${meaning ? ` — Subject: ${meaning.subject}. Question: ${meaning.question}` : ""} — ${record.abstract}`;
+};
 
 /** An empty section is omitted rather than printed as a heading with nothing under it. */
 const section = (heading: string, lines: string[]): string | null =>
@@ -300,4 +303,3 @@ export const WITHHELD = `# Chris Hay\n\n> This edition is not published and does
  * beside the one robots.txt and the sitemap already honour.
  */
 export const llmsTxt = (indexable: boolean): string => (indexable ? llmsDocument() : WITHHELD);
-

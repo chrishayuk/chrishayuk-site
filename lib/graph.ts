@@ -1,4 +1,5 @@
 import { HOUSE, HOUSE_WORK, HOUSE_PARTS, HOUSE_ABSTRACT } from "./house.ts";
+import { discoveryTerms, legibilityFor } from "./legibility.ts";
 import { ibmAppearances, firstEpisodeSource, panelistIntroduction } from "./ibm-appearances.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import { allVideos, ibm, transcriptFor, videoPath, videoConcepts, videoWork, videoRetrievedAt, youtube } from "./youtube.ts";
@@ -9,6 +10,7 @@ import type { PublicationRecord, Status } from "./types.ts";
 export type GraphScope = "all" | "records" | "films" | "concepts";
 export type GraphNode = {
  id: string; kind: string; title: string; url: string; text?: string; sourceUrl?: string;
+ subject?: string; question?: string; searchTitle?: string; searchDescription?: string;
  basis?: string; retrievable?: boolean; keywords?: string; scope?: Exclude<GraphScope,"all">;
  publication?: PublicationRecord["publication"]; status?: Status; version?: string;
  authors?: string[]; created?: string; published?: string; retrievedAt?: string;
@@ -42,7 +44,8 @@ function buildGraph() {
  for (const r of records) {
   const url = `${SITE}${recordPath(r)}`;
   const basis = r.publication === "draft" ? "draft-record" : "published-record";
-  nodes.push({id:r.id,kind:r.kind,title:r.title,text:r.abstract,url,sourceUrl:url,basis,retrievable:true,scope:r.youtubeId?"films":"records",publication:r.publication,status:r.status,version:r.version,authors:r.authors,created:r.created,published:r.published,keywords:r.concepts.join(" "),recordId:r.id});
+  const legibility = legibilityFor(r.id);
+  nodes.push({id:r.id,kind:r.kind,title:r.title,text:r.abstract,url,sourceUrl:url,basis,retrievable:true,scope:r.youtubeId?"films":"records",publication:r.publication,status:r.status,version:r.version,authors:r.authors,created:r.created,published:r.published,keywords:`${r.concepts.join(" ")} ${discoveryTerms(r.id)}`,recordId:r.id,...(legibility?{subject:legibility.subject,question:legibility.question,searchTitle:legibility.searchTitle,searchDescription:legibility.description}:{})});
   addEdge(r.id,"CATALOGUE-RECORD","catalogued-in","record-index");
   addEdge(r.id,r.authors.includes("IBM")?"ORG-IBM":"PERSON-CHRIS","created-by",r.youtubeId?"source-metadata":"editorial");
   for(const c of r.concepts)addEdge(r.id,`CONCEPT-${c}`,"about",r.youtubeId?"metadata-inferred":"editorial");
@@ -92,7 +95,8 @@ function buildGraph() {
  }
  for(const study of demoStudies.filter(s=>s.visibility!=="unlisted")) nodes.push({id:study.id,kind:"interactive-study",title:study.title,text:study.text,url:`${SITE}${study.url}`,sourceUrl:`${SITE}${study.url}`,basis:study.id===memoryStudy.id?"constructed-example":"recorded-arms",retrievable:true,scope:"records",publication:"draft",authors:["Chris Hay"]});
  for (const thread of threads) {
-  nodes.push({id:thread.id,kind:"thread",title:thread.title,text:[thread.abstract,thread.context,...thread.steps.map(s=>`${s.label}. ${s.text}`)].join(" "),url:`${SITE}${thread.path}`,sourceUrl:`${SITE}${thread.path}`,basis:"curated-thread",retrievable:true,scope:"records",publication:"draft",version:thread.version,created:thread.created,authors:["Chris Hay"],keywords:[thread.slug,thread.title,...thread.steps.flatMap(step=>[step.label,...(records.find(record=>record.id===step.id)?.concepts||[])])].join(" "),members:thread.steps.map((step,index)=>({id:step.id,position:index+1,reason:step.text,start:step.start}))});
+  const legibility = legibilityFor(thread.id);
+  nodes.push({id:thread.id,kind:"thread",title:thread.title,text:[thread.abstract,thread.context,...thread.steps.map(s=>`${s.label}. ${s.text}`)].join(" "),url:`${SITE}${thread.path}`,sourceUrl:`${SITE}${thread.path}`,basis:"curated-thread",retrievable:true,scope:"records",publication:"draft",version:thread.version,created:thread.created,authors:["Chris Hay"],...(legibility?{subject:legibility.subject,question:legibility.question,searchTitle:legibility.searchTitle,searchDescription:legibility.description}:{}),keywords:[discoveryTerms(thread.id),thread.slug,thread.title,...thread.steps.flatMap(step=>[step.label,...(records.find(record=>record.id===step.id)?.concepts||[])])].join(" "),members:thread.steps.map((step,index)=>({id:step.id,position:index+1,reason:step.text,start:step.start}))});
   for (const step of thread.steps) {
    addEdge(thread.id,step.id,"includes","editorial-reading-order");
    addEdge(step.id,thread.id,"in-thread","editorial-reading-order");
