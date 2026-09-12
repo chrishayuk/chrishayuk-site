@@ -1,3 +1,4 @@
+import { machineCapabilityRecord } from "./machine-capability-record.ts";
 import { cell80BoundRecord } from "./cell80-bound-record.ts";
 import { machineMotivationRecord } from "./machine-motivation-record.ts";
 import { machineTaskRecord } from "./machine-task-record.ts";
@@ -13,6 +14,7 @@ import { addressBuildRecord } from "./address-build-record.ts";
 import { agentAttributionRecord } from "./agent-attribution-record.ts";
 import { exhibitionRecord } from "./exhibition-record.ts";
 import { visualNotebooks } from "./visual-notebooks.ts";
+import { compareVersions } from "../vendor/hause/provenance.ts";
 
 export const SITE = "https://chrishayuk.com";
 export const socials = { YouTube: "https://www.youtube.com/@chrishayuk", GitHub: "https://github.com/chrishayuk", LinkedIn: "https://www.linkedin.com/in/chrishayuk/", IBM: "https://www.ibm.com/think/podcasts/mixture-of-experts" };
@@ -51,12 +53,15 @@ const filmSources = [
 ];
 for (const f of filmSources) authored.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
-authored.unshift(machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, addressBuildRecord, ...visualNotebooks);
+authored.unshift(machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, addressBuildRecord, ...visualNotebooks);
 authored.push(...videoRecords);
 
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };
 export const publicationSnapshots = snapshots as Snapshot[];
-for (const snapshot of publicationSnapshots) {
+/** The editable manuscripts must remain accessible after a publication exists. */
+export const manuscripts = [...authored];
+export const getManuscript = (id: string) => manuscripts.find(record => record.id === id);
+for (const snapshot of [...publicationSnapshots].sort((a, b) => compareVersions(a.record.version, b.record.version))) {
  const i = authored.findIndex(r => r.id === snapshot.record.id);
  if(i >= 0) authored[i] = snapshot.record; else authored.push(snapshot.record);
 }

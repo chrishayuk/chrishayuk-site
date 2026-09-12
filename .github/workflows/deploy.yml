@@ -22,12 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Preserve published manuscripts and evidence history
+        run: npm run audit:provenance
+        env:
+          PROVENANCE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
       - run: npm run build:fly
         env:
           SITE_INDEXABLE: "true"
@@ -40,6 +46,7 @@ jobs:
             sleep 1
           done
           npm run test:deployment
+          node scripts/check-publication-pages.mjs
   deploy:
     needs: verify
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import http from "node:http";
 import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 
 const base = process.env.CHECK_ORIGIN || "http://localhost:3000";
 function request(path, host = "chrishayuk.com", headers = {}) {
@@ -559,7 +560,7 @@ assert.equal(machineThread.status,200);
 assert.match(machineThread.body,/Machine experiments reading order/);
 assert.match(machineThread.body,/id="instruments"/);
 assert.ok(sitemap.body.includes('/thread/machines'));
-const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise','the-page-could-ask-for-a-favour'];
+const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise','the-page-could-ask-for-a-favour','the-tool-was-not-the-problem'];
 for(const [i,slug] of machineSlugs.entries()) {
  const page=await request(`/notebook/${slug}`);
  assert.equal(page.status,200);
@@ -577,7 +578,7 @@ assert.equal((taskNote.body.match(/class="machine-record-grid" aria-hidden="true
 const notebookStories=notebookCollection.body.slice(notebookCollection.body.indexOf('class="notebook-stories"'));
 assert.ok(notebookStories.indexOf('N-MACHINE-MOTIVATION') < notebookStories.indexOf('N-MACHINE-TASK'));
 assert.ok(notebookStories.indexOf('N-MACHINE-TASK') < notebookStories.indexOf('N-MACHINE-SELF-READ'));
-console.log('Both homepage strands, five machine notes, reading order and experimental-unit figures verified.');
+console.log('Both homepage strands, six machine notes, reading order and experimental-unit figures verified.');
 
 
 // The reviewed note is a publication, with a real version, discoverable from
@@ -590,8 +591,8 @@ assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1
 assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
-assert.ok(home.body.includes(`href="${motivationPath}"`));
-assert.match(home.body,/mm-card-results/);
+assert.ok(home.body.includes(`href="/notebook/the-tool-was-not-the-problem"`));
+assert.match(home.body,/wc-card-grid/);
 assert.match(notebookCollection.body,/PUBLISHED/);
 assert.ok(sitemap.body.includes(motivationPath));
 assert.ok(notebookFeed.body.includes(motivationPath));
@@ -605,6 +606,31 @@ const motivationVersion=await request('/records/N-MACHINE-MOTIVATION/1.0');
 const versionLd=[...motivationVersion.body.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match=>JSON.parse(match[1])).find(item=>item.headline==='The page could ask for a favour.');
 assert.equal(versionLd.url,'https://chrishayuk.com/records/N-MACHINE-MOTIVATION/1.0');
 assert.equal(versionLd.mainEntityOfPage,versionLd.url);
+assert.ok(motivationVersion.body.includes('PRESERVED MANUSCRIPT'));
+assert.ok(motivationVersion.body.includes('id="versions"'));
+assert.doesNotMatch(motivationVersion.body, /class="motivation-trace-panel|data-marked="/);
+const versionApi = JSON.parse((await request('/api/record/N-MACHINE-MOTIVATION?version=1.0')).body);
+const historyApi = JSON.parse((await request('/api/record/N-MACHINE-MOTIVATION/history')).body);
+assert.equal(historyApi.versions.length, 1);
+assert.equal(historyApi.versions[0].hash, versionApi.hash);
+assert.equal(versionLd.identifier.value, versionApi.hash);
+assert.equal(historyApi.versions[0].revision.kind, 'initial');
+assert.equal(historyApi.versions[0].scientificStatus, versionApi.record.status);
+assert.equal(historyApi.versions[0].publication, 'published');
+const draftHistory = JSON.parse((await request('/api/record/N-MACHINE-TASK/history')).body);
+assert.deepEqual(draftHistory.versions, []);
+assert.equal((await request('/api/record/NO-SUCH-RECORD/history')).status, 404);
+assert.equal((await request('/api/record/N-MACHINE-MOTIVATION?version=99.0')).status, 404);
+for (const source of historyApi.versions[0].sources.filter(source => source.preserved)) {
+ const artifact = await request(source.preserved.url);
+ assert.equal(artifact.status, 200);
+ assert.equal(createHash('sha256').update(artifact.body).digest('hex'), source.preserved.sha256);
+ assert.ok(motivationVersion.body.includes(source.preserved.url));
+}
+const pinnedCitation = JSON.parse((await request('/api/citations/N-MACHINE-MOTIVATION?version=1.0&format=csl-json')).body);
+assert.equal(pinnedCitation.URL, versionLd.url);
+assert.equal(pinnedCitation.version, '1.0');
+assert.ok(graph.edges.some(edge => edge.to === 'N-MACHINE-MOTIVATION@1.0' && edge.kind === 'includes-version'));
 assert.equal((await request('/api/citations/N-MACHINE-MOTIVATION?format=csl-json')).status,200);
 const motivationSocial=await request('/api/social/N-MACHINE-MOTIVATION');
 assert.equal(motivationSocial.status,200);
@@ -685,4 +711,4 @@ for(const thread of graph.nodes.filter(node=>node.kind==='thread')) {
  const page=await request(new URL(thread.url).pathname);
  checkLegibility(thread,page.body);
 }
-console.log('Search metadata, editorial titles, structured subjects and collection relationships verified across 20 notebooks and three threads.');
+console.log('Search metadata, editorial titles, structured subjects and collection relationships verified across 21 notebooks and three threads.');

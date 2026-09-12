@@ -2,6 +2,7 @@ import { publicationSnapshots, recordPath, SITE } from "./records.ts";
 import { authoredRecords } from "./canonical.ts";
 import { entryDate, FEEDS } from "./feeds.ts";
 import { firstCapture } from "./archive.ts";
+import { provenanceFor } from "./provenance.ts";
 import type { PublicationRecord } from "./types";
 
 /**
@@ -22,10 +23,10 @@ import type { PublicationRecord } from "./types";
  *   look like news on every poll, and an agent diffing it would cry wolf
  *   forever. Two polls with nothing published in between return
  *   byte-identical documents.
- * - **`material_revision` is a fact, not a guess.** It is true when an
- *   earlier version of that record exists. Prose edits inside a version
- *   never produce one, so "ignore minor revisions" is a rule this
- *   endpoint can actually support.
+ * - **`material_revision` is a fact, not a guess.** An explicit revision record
+ *   distinguishes clarification from interpretation or correction. Legacy
+ *   records fall back to the presence of an earlier version. Published
+ *   manuscripts cannot be silently edited within a version.
  * - **A draft says it is a draft.** There is no `published_at` on
  *   unpublished work, because inventing one is precisely the claim this
  *   whole record exists to make impossible. `recorded_at` is always
@@ -47,8 +48,10 @@ const LATEST = 20;
  */
 export const CHATGPT_TASK: string | null = null;
 
-/** True when this record has an earlier version on file — a real revision. */
+/** Explicit release classification; older records without it retain the original earlier-version rule. */
 export function isMaterialRevision(record: PublicationRecord): boolean {
+ const revision = provenanceFor(record.id, record.version)?.revision;
+ if (revision) return revision.kind === "interpretation" || revision.kind === "correction";
  return publicationSnapshots.some(s => {
   if(s.record.id!==record.id)return false;
   const a=s.record.version.split(".").map(Number), b=record.version.split(".").map(Number);
@@ -70,6 +73,7 @@ export type FollowEntry = {
  /** First publication. Absent on a draft, because a draft has none. */
  published_at?: string;
  material_revision: boolean;
+ revision?: { kind: string; summary: string; previous?: string };
  topics: string[];
  summary: string;
  url: string;
@@ -95,6 +99,7 @@ export function followEntries(): FollowEntry[] {
     updated_at: `${entryDate(record)}T00:00:00Z`,
     ...(record.publication === "published" && record.published ? { published_at: `${record.published}T00:00:00Z` } : {}),
     material_revision: isMaterialRevision(record),
+    revision: provenanceFor(record.id, record.version)?.revision,
     topics: record.concepts,
     summary: record.abstract,
     url,
@@ -111,7 +116,7 @@ export function followSignal() {
   updated_at: latest[0]?.updated_at ?? "1970-01-01T00:00:00Z",
   site: SITE,
   author: "Chris Hay",
-  policy: "A record is a draft until it is individually reviewed and published; drafts carry recorded_at and no published_at. material_revision is true only when an earlier version of that record exists, so edits within a version are not revisions. updated_at is derived from the newest record and does not move on its own.",
+  policy: "A record is a draft until it is individually reviewed and published; drafts carry recorded_at and no published_at. material_revision identifies interpretation changes and corrections from the explicit revision record; clarifications are non-material. Legacy versions fall back to the presence of an earlier version. Published manuscripts cannot be edited within a version. updated_at is derived from the newest record and does not move on its own.",
   feeds: {
    notebook: `${SITE}${FEEDS.notebook.path}`,
    record: `${SITE}${FEEDS.record.path}`,

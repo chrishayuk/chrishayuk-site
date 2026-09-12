@@ -1,5 +1,6 @@
 import { HOUSE, HOUSE_WORK, HOUSE_PARTS, HOUSE_ABSTRACT } from "./house.ts";
 import { discoveryTerms, legibilityGraphFields } from "./legibility.ts";
+import { publicationHistory } from "./provenance.ts";
 import { ibmAppearances, firstEpisodeSource, panelistIntroduction } from "./ibm-appearances.ts";
 import { records, recordPath, SITE } from "./records.ts";
 import { allVideos, ibm, transcriptFor, videoPath, videoConcepts, videoWork, videoRetrievedAt, youtube } from "./youtube.ts";
@@ -46,6 +47,25 @@ function buildGraph() {
   const basis = r.publication === "draft" ? "draft-record" : "published-record";
   nodes.push({id:r.id,kind:r.kind,title:r.title,text:r.abstract,url,sourceUrl:url,basis,retrievable:true,scope:r.youtubeId?"films":"records",publication:r.publication,status:r.status,version:r.version,authors:r.authors,created:r.created,published:r.published,keywords:`${r.concepts.join(" ")} ${discoveryTerms(r.id)}`,recordId:r.id,...legibilityGraphFields(r.id)});
   addEdge(r.id,"CATALOGUE-RECORD","catalogued-in","record-index");
+  const history = publicationHistory(r.id);
+  if (history?.versions.length) {
+   const historyId = `${r.id}:history`;
+   nodes.push({ id: historyId, kind: "publication-history", title: `${r.title} / publication history`, text: history.versions.map(entry => `Version ${entry.version}, ${entry.revised || entry.published}. ${entry.revision?.summary || ""} Scientific status: ${entry.scientificStatus || "not recorded"}.`).join(" "), url: `${url}#versions`, sourceUrl: `${url}#versions`, basis: "publication-history", retrievable: true, scope: "records", publication: r.publication, recordId: r.id, keywords: "provenance citation revision version history" });
+   addEdge(r.id, historyId, "has-history", "preserved-publication");
+   history.versions.forEach((entry, index) => {
+    const id = `${r.id}@${entry.version}`;
+    nodes.push({ id, kind: "publication-version", title: `${r.title} / v${entry.version}`, url: entry.url, sourceUrl: entry.manuscript, sourceHash: entry.hash, publication: entry.publication, status: entry.scientificStatus, version: entry.version, recordId: r.id, basis: "preserved-manuscript", retrievable: false });
+    addEdge(historyId, id, "includes-version", "preserved-publication");
+    for (const reference of entry.supersedes || []) addEdge(id, `${reference.id}@${reference.version}`, "supersedes", reference.reason);
+    if (index) addEdge(id, `${r.id}@${history.versions[index - 1].version}`, "revises", entry.revision?.kind || "publication-history");
+    entry.sources.forEach((source, sourceIndex) => {
+     const evidenceId = `${id}:evidence-${sourceIndex + 1}`;
+     const preserved = "preserved" in source ? source.preserved : undefined;
+     nodes.push({ id: evidenceId, kind: preserved ? "artifact" : "source", title: source.title, text: source.note, url: preserved ? `${SITE}${preserved.url}` : source.url || `${entry.url}#source-${sourceIndex + 1}`, sourceUrl: `${entry.url}#source-${sourceIndex + 1}`, sourceHash: preserved?.sha256, recordId: r.id, basis: preserved ? "preserved-artifact" : "source-reference", retrievable: false });
+     addEdge(id, evidenceId, "cites-source", preserved ? "preserved-artifact" : "source-reference");
+    });
+   });
+  }
   addEdge(r.id,r.authors.includes("IBM")?"ORG-IBM":"PERSON-CHRIS","created-by",r.youtubeId?"source-metadata":"editorial");
   for(const c of r.concepts)addEdge(r.id,`CONCEPT-${c}`,"about",r.youtubeId?"metadata-inferred":"editorial");
   for(const id of r.related)addEdge(r.id,id,"related",r.youtubeId?"metadata-inferred":"editorial");

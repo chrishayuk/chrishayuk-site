@@ -5,11 +5,18 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-MACHINE-CAPABILITY": {
+  subject: "AI agent web capabilities and agentic discoverability",
+  question: "Can shell-based AI agents use WebSocket and WebAssembly when a task requires them?",
+  searchTitle: "AI Agents Using WebSocket and WebAssembly: Capability and Discovery",
+  description: "Eighteen agents used six web mechanisms, including WebSocket and WASM. A failed capability prediction raises the next question: how do agents discover tools?",
+  concepts: ["AI agent web capabilities", "agentic discoverability", "WebSocket", "WebAssembly", "harness mediation"],
+ },
  "THREAD-MACHINES": {
   subject: "AI agent permissions and task authority",
   question: "How do AI agents decide whether a website request belongs to their task?",
   searchTitle: "AI Agent Permissions, Task Scope and Website Instructions — Experiments",
-  description: "Five connected experiments on how AI agents respond to website invitations, user permission, task requirements and reasons to act.",
+  description: "Six connected experiments on AI agent permissions, website instructions, task requirements, reasons to act and web capabilities.",
   concepts: ["AI agent permissions", "task scope", "website instructions", "instruction authority"],
  },
  "THREAD-CELL80": {

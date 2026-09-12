@@ -1,7 +1,7 @@
 /* Closed experiment records and entrances to the live instruments. */
 .machine-journey{margin:12px 0 30px;border-block:1px solid var(--rule)}
 .machine-journey>div{display:flex;justify-content:space-between;gap:15px;padding:16px 0;font-size:9px;color:var(--muted)}
-.machine-journey ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:0;padding:0}
+.machine-journey ol{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));list-style:none;margin:0;padding:0}
 .machine-journey li+li{border-left:1px solid var(--rule)}
 .machine-journey li>a{display:block;padding:16px 20px 22px;height:100%;text-decoration:none}
 .machine-journey li .record-voice{display:flex;justify-content:space-between;font-size:10px}
@@ -76,4 +76,4 @@
 .mm-card-results{display:flex;flex-direction:column;gap:14px}.mm-card-results>div{display:grid;grid-template-columns:1fr 80px 28px;gap:15px;align-items:center;font:10px/1.6 var(--font-geist-mono);color:#b7b8aa}.mm-card-results>div>span:nth-child(2){display:flex;gap:9px}.mm-card-results i{width:16px;height:16px;display:block;border:1px solid #e3b56b;border-radius:50%}.mm-card-results i[data-marked=true]{background:#e3b56b}.machine-thread-latest .mm-card{max-width:800px;margin:0 auto 60px}.machine-thread-latest .mm-card-results{max-width:540px}.mm-card>p{font-size:clamp(32px,4vw,55px)}.machine-home-heading .machine-home-card:hover{outline:2px solid var(--accent);outline-offset:5px}
 .ask-narrowed{font:14px/1.8 var(--font-inter);max-width:65ch;color:var(--muted);margin:20px 0 30px}
 @media(max-width:800px){.machine-journey strong{font-size:18px}.machine-home-card{margin-top:25px}}
-@media(max-width:520px){.machine-journey li:nth-child(odd){border-left:0}.machine-journey li:last-child{grid-column:1/-1}.mm-card-results>div{font-size:9px;gap:10px;grid-template-columns:1fr 70px 28px}.mm-card-results>div>span:nth-child(2){gap:7px}.mm-card-results i{width:15px;height:15px}}
+@media(max-width:520px){.machine-journey li:nth-child(odd){border-left:0}.machine-journey li:last-child:nth-child(odd){grid-column:1/-1}.mm-card-results>div{font-size:9px;gap:10px;grid-template-columns:1fr 70px 28px}.mm-card-results>div>span:nth-child(2){gap:7px}.mm-card-results i{width:15px;height:15px}}

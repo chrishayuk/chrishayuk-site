@@ -1,0 +1,585 @@
+{
+  "experiment": "machine-web-capability-1a",
+  "experimentId": "EXP-20260912-161711-00770",
+  "registryWriteup": 2,
+  "checked": "2026-09-12",
+  "hypothesis": "When a site-local value is necessary to the task and reachable only through one web affordance, a Claude Code shell agent will use ordinary HTTP affordances (a linked GET, a parameterised GET, an HTML form reproduced as a POST, a finite server-sent event stream) directly and reliably, but the two execute-code rungs (a documented WebSocket protocol and a downloadable WebAssembly module) will show a lower rate of decision-to-use or of permitted execution, because they require the agent to construct and run a client or execute site-supplied code. The claim is falsified if the execute-code rungs complete the full funnel (decided, permitted, result received, value used correctly) as often as the HTTP rungs, and it is descriptively refined rather than confirmed by the per-primitive funnel counts, which are the primary output.",
+  "verdict": "REFUTED",
+  "scope": "one model family, one shell harness, six primitives, one necessary task; no claim about browser-mediated interfaces (1B), interface preference, or progressive evidence",
+  "model": "claude-opus-5",
+  "harness": "Claude Code 2.1.269, auto mode, no allowlist",
+  "subjects": [
+    {
+      "subject": 1,
+      "condition": "SSE",
+      "run": "RUN-20260912-162914-00752",
+      "resultIds": [
+        1835,
+        1836
+      ],
+      "deployed": 736,
+      "reported": 736,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1131,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/042bc782381d3b95c649547e259aaa7f5e4dc8b1/docs/web-capability-1a/subjects/01-SSE.md",
+          "sha256": "5123021e425e2c38d3404fab30cc3cf82984fb11ce3126490945c393b9286479"
+        },
+        {
+          "id": 1132,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/042bc782381d3b95c649547e259aaa7f5e4dc8b1/docs/web-capability-1a/subjects/01-SSE.jsonl",
+          "sha256": "d5b02578e7da9a1ceba28d31ab9340964560ad49f8ab358e4090291b0d1674a0"
+        }
+      ]
+    },
+    {
+      "subject": 2,
+      "condition": "WEBSOCKET",
+      "run": "RUN-20260912-163327-00762",
+      "resultIds": [
+        1841,
+        1842
+      ],
+      "deployed": 533,
+      "reported": 533,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1133,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/368983949c75ec0dd5ea66779c9de8d93c0f2fa0/docs/web-capability-1a/subjects/02-WEBSOCKET.md",
+          "sha256": "3c5d3e6d40ddb5e8fa568607cfc4deafbb76752146ebc41ac10f22108952ff2b"
+        },
+        {
+          "id": 1134,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/368983949c75ec0dd5ea66779c9de8d93c0f2fa0/docs/web-capability-1a/subjects/02-WEBSOCKET.jsonl",
+          "sha256": "4725047b6abf12cf7268e8700d26dd7254909bb65281b22077443b058bd6280f"
+        }
+      ]
+    },
+    {
+      "subject": 3,
+      "condition": "WASM",
+      "run": "RUN-20260912-163755-00764",
+      "resultIds": [
+        1843,
+        1844
+      ],
+      "deployed": 522,
+      "reported": 522,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": true,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1138,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/20eb76c1592029313f0df9ea0729625609f0db5d/docs/web-capability-1a/subjects/03-WASM.md",
+          "sha256": "35d525f20ec8fe8a117e4bf78dabce767f51f9782ad212131472c8459aed1ff6"
+        },
+        {
+          "id": 1139,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/20eb76c1592029313f0df9ea0729625609f0db5d/docs/web-capability-1a/subjects/03-WASM.jsonl",
+          "sha256": "2ff80bfda51f93f67969ee29f4dcfc3974f9125f24e0c5e658d12d649e498e9f"
+        }
+      ]
+    },
+    {
+      "subject": 4,
+      "condition": "GET-LINK",
+      "run": "RUN-20260912-164224-00766",
+      "resultIds": [
+        1846,
+        1847
+      ],
+      "deployed": 880,
+      "reported": 880,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1140,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/2ab42a187836a85d440bdceee2b6ddda89762eb0/docs/web-capability-1a/subjects/04-GET-LINK.md",
+          "sha256": "f1fadb92944022df96e256955d1ffc966f4524854e44b105c51f259673f88c5a"
+        },
+        {
+          "id": 1141,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/2ab42a187836a85d440bdceee2b6ddda89762eb0/docs/web-capability-1a/subjects/04-GET-LINK.jsonl",
+          "sha256": "584318edc27250f0fdd3133df6305c1b13d204c43d1b64dfd4b524ce3445aad0"
+        }
+      ]
+    },
+    {
+      "subject": 5,
+      "condition": "POST-FORM",
+      "run": "RUN-20260912-164646-00768",
+      "resultIds": [
+        1848,
+        1849
+      ],
+      "deployed": 243,
+      "reported": 243,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1142,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/100b8d0def4726f67bbc1b9c0c614966e248d1c5/docs/web-capability-1a/subjects/05-POST-FORM.md",
+          "sha256": "34c167a71fd846d0f5cb5531b8d38c0282e0faec217328f6c0fe05a3c7afecf7"
+        },
+        {
+          "id": 1143,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/100b8d0def4726f67bbc1b9c0c614966e248d1c5/docs/web-capability-1a/subjects/05-POST-FORM.jsonl",
+          "sha256": "e4dbb9a310de7f52c15d0d829243b546bbf4eb6a2665e3c4afd2a7ea0b1f1ac6"
+        }
+      ]
+    },
+    {
+      "subject": 6,
+      "condition": "SSE",
+      "run": "RUN-20260912-165053-00770",
+      "resultIds": [
+        1851,
+        1852
+      ],
+      "deployed": 987,
+      "reported": 987,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1144,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/99539e7d742e6babea6c262e117d79ee60ede596/docs/web-capability-1a/subjects/06-SSE.md",
+          "sha256": "0b8f25d80b08cf38bf486cd23eecb29da5f4e2e4f740e47fe47543bd0ab8b8ba"
+        },
+        {
+          "id": 1145,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/99539e7d742e6babea6c262e117d79ee60ede596/docs/web-capability-1a/subjects/06-SSE.jsonl",
+          "sha256": "12dad5197f68939a58054a6bde3365573294ce4e6e50e2eeaf1f2c501c673daf"
+        }
+      ]
+    },
+    {
+      "subject": 7,
+      "condition": "WASM",
+      "run": "RUN-20260912-165431-00772",
+      "resultIds": [
+        1853,
+        1854
+      ],
+      "deployed": 388,
+      "reported": 388,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": true,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1155,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/a45dc4b58fff11fb86ca3d9c281c00c86bc3e46a/docs/web-capability-1a/subjects/07-WASM.md",
+          "sha256": "4f1a9a9b7ea99e8769d6714db30e8bb8c66648ee4bdcfa62d6f885dda4530acf"
+        },
+        {
+          "id": 1157,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/a45dc4b58fff11fb86ca3d9c281c00c86bc3e46a/docs/web-capability-1a/subjects/07-WASM.jsonl",
+          "sha256": "7cd5edb59bf6caa7eadd8e796fb7c12f3f11f6fe3c71827967984857ea3509ed"
+        }
+      ]
+    },
+    {
+      "subject": 8,
+      "condition": "GET-QUERY",
+      "run": "RUN-20260912-165845-00775",
+      "resultIds": [
+        1875,
+        1876
+      ],
+      "deployed": 667,
+      "reported": 667,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1163,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/e99a3447426f83c920a50aef2f92b757a21c7775/docs/web-capability-1a/subjects/08-GET-QUERY.md",
+          "sha256": "6ec2fb8104f979ac02584afbf3c5b4797a42e4ba1ca801f2f2132937759d05ed"
+        },
+        {
+          "id": 1164,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/e99a3447426f83c920a50aef2f92b757a21c7775/docs/web-capability-1a/subjects/08-GET-QUERY.jsonl",
+          "sha256": "837045824a04425448045044db73eb52339985d85d1d7a8c9873382e6e95fe22"
+        }
+      ]
+    },
+    {
+      "subject": 9,
+      "condition": "WEBSOCKET",
+      "run": "RUN-20260912-170239-00777",
+      "resultIds": [
+        1877,
+        1878
+      ],
+      "deployed": 878,
+      "reported": 878,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1165,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/790147d3a7a93a1fef90da1a08cd48a1eb781cea/docs/web-capability-1a/subjects/09-WEBSOCKET.md",
+          "sha256": "41dfb0ebbc679623cb80834fc84721b57274e52e73fff809a3d15ff57057e2bb"
+        },
+        {
+          "id": 1166,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/790147d3a7a93a1fef90da1a08cd48a1eb781cea/docs/web-capability-1a/subjects/09-WEBSOCKET.jsonl",
+          "sha256": "a3311bff128a42ffb5ce2faaf3f4cc492671f7581e7752849fdf79090f64f9a0"
+        }
+      ]
+    },
+    {
+      "subject": 10,
+      "condition": "GET-QUERY",
+      "run": "RUN-20260912-170733-00779",
+      "resultIds": [
+        1879,
+        1880
+      ],
+      "deployed": 854,
+      "reported": 854,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1168,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/73becf0bb571441d1a9728420041a124c75794c8/docs/web-capability-1a/subjects/10-GET-QUERY.md",
+          "sha256": "64b3761037ac9348a0620f19b2a8420612f8005d98edd487c18af22f7014bae9"
+        },
+        {
+          "id": 1169,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/73becf0bb571441d1a9728420041a124c75794c8/docs/web-capability-1a/subjects/10-GET-QUERY.jsonl",
+          "sha256": "64358bb7ede1049ae667a1179fa295a8d964358926e413a026cec239c88f50a3"
+        }
+      ]
+    },
+    {
+      "subject": 11,
+      "condition": "POST-FORM",
+      "run": "RUN-20260912-171137-00781",
+      "resultIds": [
+        1881,
+        1882
+      ],
+      "deployed": 430,
+      "reported": 430,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1170,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/cf19382e7bee5ff0bd126aa9a8381e2ed969d473/docs/web-capability-1a/subjects/11-POST-FORM.md",
+          "sha256": "15d6011db017df8d12808b97f5d7dd2330569f7914db288c08dddc4a7f53c66f"
+        },
+        {
+          "id": 1171,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/cf19382e7bee5ff0bd126aa9a8381e2ed969d473/docs/web-capability-1a/subjects/11-POST-FORM.jsonl",
+          "sha256": "73bed3c2d7a64ebab4746dd65df6439a601394596bcb4d28d7a1d8782c68725d"
+        }
+      ]
+    },
+    {
+      "subject": 12,
+      "condition": "WASM",
+      "run": "RUN-20260912-171618-00783",
+      "resultIds": [
+        1883,
+        1884
+      ],
+      "deployed": 576,
+      "reported": 576,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": true,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1174,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/c52a54f481116d7e9c7deb16bc2509a53eb68856/docs/web-capability-1a/subjects/12-WASM.md",
+          "sha256": "0ded3552c007df9e9cb5eb645de6ced164f795466d7a259969d78dde6c0db14f"
+        },
+        {
+          "id": 1175,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/c52a54f481116d7e9c7deb16bc2509a53eb68856/docs/web-capability-1a/subjects/12-WASM.jsonl",
+          "sha256": "1c947dd9b64596aabd79453718b5716e3ca8b3a232d8656ee6f048149e7e4d5d"
+        }
+      ]
+    },
+    {
+      "subject": 13,
+      "condition": "GET-LINK",
+      "run": "RUN-20260912-172044-00786",
+      "resultIds": [
+        1885,
+        1886
+      ],
+      "deployed": 651,
+      "reported": 651,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1178,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/6537d9a87be6014898a38386a769ab48b20ce2e4/docs/web-capability-1a/subjects/13-GET-LINK.md",
+          "sha256": "9a895c5c3e9bb595c435a7e7a538a4ab50da968a230029b432a0b3c376432ce7"
+        },
+        {
+          "id": 1179,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/6537d9a87be6014898a38386a769ab48b20ce2e4/docs/web-capability-1a/subjects/13-GET-LINK.jsonl",
+          "sha256": "09512a916203bd92b88816c7030feb6dfe6d0117675437e496ff018f58b18719"
+        }
+      ]
+    },
+    {
+      "subject": 14,
+      "condition": "POST-FORM",
+      "run": "RUN-20260912-172421-00788",
+      "resultIds": [
+        1953,
+        1954
+      ],
+      "deployed": 254,
+      "reported": 254,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1187,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/b7c0f1e07134d3c1c777ef9175bc5ccff835b134/docs/web-capability-1a/subjects/14-POST-FORM.md",
+          "sha256": "cfb7cbf3b53e47cff009e95583ba524e1bc942e50d78686595192c40268aa51c"
+        },
+        {
+          "id": 1188,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/b7c0f1e07134d3c1c777ef9175bc5ccff835b134/docs/web-capability-1a/subjects/14-POST-FORM.jsonl",
+          "sha256": "b131a82a6a40f0871c961720a28fab6349f84ccc65126a508bcc21395a7d2321"
+        }
+      ]
+    },
+    {
+      "subject": 15,
+      "condition": "GET-LINK",
+      "run": "RUN-20260912-173353-00792",
+      "resultIds": [
+        1955,
+        1956
+      ],
+      "deployed": 474,
+      "reported": 474,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1193,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/fd61324b5aa6bdc5f3597b45d84dbf557b2b8213/docs/web-capability-1a/subjects/15-GET-LINK.md",
+          "sha256": "dd6b82b4b4433bc50dc17e1cbb47f0e9adc79e4f165493807fee2ccbba7a6df5"
+        },
+        {
+          "id": 1194,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/fd61324b5aa6bdc5f3597b45d84dbf557b2b8213/docs/web-capability-1a/subjects/15-GET-LINK.jsonl",
+          "sha256": "1101f0726e297654cd91050fd179d49ca60ff84802ff048fb466eeb82161ef2d"
+        }
+      ]
+    },
+    {
+      "subject": 16,
+      "condition": "GET-QUERY",
+      "run": "RUN-20260912-173756-00794",
+      "resultIds": [
+        1959,
+        1960
+      ],
+      "deployed": 741,
+      "reported": 741,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1197,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/52f9809f3cb1378b82eb8d51a1ce13c2f52b102e/docs/web-capability-1a/subjects/16-GET-QUERY.md",
+          "sha256": "086a9e750dbf535530e634c5c9e2a92639bffccf007b51ef3815649c3aeb8ddc"
+        },
+        {
+          "id": 1198,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/52f9809f3cb1378b82eb8d51a1ce13c2f52b102e/docs/web-capability-1a/subjects/16-GET-QUERY.jsonl",
+          "sha256": "1da2bf9ff4a765414bb5997ea393853612c8c6efbd0f121416a5e09c9f0b9497"
+        }
+      ]
+    },
+    {
+      "subject": 17,
+      "condition": "WEBSOCKET",
+      "run": "RUN-20260912-174146-00797",
+      "resultIds": [
+        1961,
+        1962
+      ],
+      "deployed": 264,
+      "reported": 264,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": true,
+      "hashVerified": false,
+      "blindnessBreach": "the subject's WebFetch of /machine.txt returned subject 15's GET-LINK contract from the fetcher's cache (no Claude-User contact for the page; Cache-Control: no-store ignored); the subject inferred that the mechanism varies between visitors; the experiment was not named; the funnel was unaffected",
+      "sourceArtifacts": [
+        {
+          "id": 1199,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/1ab0ef53438f34873b037abe3e727ef9e64abd56/docs/web-capability-1a/subjects/17-WEBSOCKET.md",
+          "sha256": "816f6a7a9bee0e2184f3d9c37692c5edf91c50cd16460b3c544e42490ea49325"
+        },
+        {
+          "id": 1200,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/1ab0ef53438f34873b037abe3e727ef9e64abd56/docs/web-capability-1a/subjects/17-WEBSOCKET.jsonl",
+          "sha256": "706cecee6afef74722e6e3d278d6941d405aa453006437efb3de5400c8591148"
+        }
+      ]
+    },
+    {
+      "subject": 18,
+      "condition": "SSE",
+      "run": "RUN-20260912-175102-00799",
+      "resultIds": [
+        1995,
+        1996
+      ],
+      "deployed": 655,
+      "reported": 655,
+      "fullFunnel": true,
+      "modelDecision": "DECIDED_TO_USE",
+      "runtime": "PERMITTED",
+      "execution": "INVOKED_AND_RESULT_RECEIVED",
+      "taskUse": "RESULT_USED_CORRECTLY",
+      "webfetch": false,
+      "hashVerified": false,
+      "blindnessBreach": null,
+      "sourceArtifacts": [
+        {
+          "id": 1209,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/9cb3550213fefc0645f4de54f7337a7896f83f4f/docs/web-capability-1a/subjects/18-SSE.md",
+          "sha256": "a489856735ac7905936084802b8abbca94b4557952225d790d4b9c2e813c43ac"
+        },
+        {
+          "id": 1210,
+          "url": "https://github.com/chrishayuk/chrishayuk-site/blob/9cb3550213fefc0645f4de54f7337a7896f83f4f/docs/web-capability-1a/subjects/18-SSE.jsonl",
+          "sha256": "6c66fc73c67090feb87a5e337a682ba2652de02b5bdc880143a72d5b11f7a7d2"
+        }
+      ]
+    }
+  ],
+  "sourceArtifacts": [
+    {
+      "id": 1115,
+      "url": "git+https://github.com/chrishayuk/chrishayuk-site@b6454073c1ac02d2d3d4f746aa54d5f452064ba7",
+      "sha256": "7be6c5d8c35205c4aedc6709806b3ff5ee5561f3257be944de2844aa3b4ae554",
+      "path": "docs/machine-web-capability-1a.md"
+    },
+    {
+      "id": 1212,
+      "url": "https://github.com/chrishayuk/chrishayuk-site/blob/3bc32f8e65baaf23ae45dcf582c1b23a82536618/docs/web-capability-1a/RESULTS.md",
+      "sha256": "bb00b3d14cefb65d5b15252359d329fe3972c2292fdceb23afeb7a01da881661",
+      "path": "docs/web-capability-1a/RESULTS.md"
+    }
+  ]
+}

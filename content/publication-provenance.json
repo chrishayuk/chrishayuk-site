@@ -1,0 +1,79 @@
+[
+  {
+    "id": "N-MACHINE-MOTIVATION",
+    "version": "1.0",
+    "recordHash": "cbb36546b85df72619cde6ee54eff1e08e4df56c6bd3eac6afd36c610b1b26bd",
+    "revision": {
+      "kind": "initial",
+      "summary": "Initial published record."
+    },
+    "sources": [
+      {
+        "title": "MACHINE-MOTIVATION-2 / frozen preregistration",
+        "url": "https://github.com/chrishayuk/chrishayuk-site/blob/6fc0692148d0210b77439bcdcbcc24fb6346763c/docs/machine-motivation-2.md",
+        "note": "Includes the two-part task, six conditions, frozen draw order and interpretation-pause rule."
+      },
+      {
+        "title": "MACHINE-MOTIVATION-2 / completed results",
+        "url": "https://github.com/chrishayuk/chrishayuk-site/blob/978830e90eca6deb6dd973d971477a7589ab2fd0/docs/motivation-2/RESULTS.md",
+        "note": "Eighteen visitors; the final report explicitly identifies lifting the pause as a judgement after the data."
+      },
+      {
+        "title": "Individual outcomes and source hashes",
+        "url": "/data/machines/motivation-2-evidence.json",
+        "note": "Reconstructed from the registry's eighteen run records. All 36 source report and transcript hashes were checked during the editorial audit.",
+        "preserved": {
+          "url": "/data/publications/sha256/92d9766aa2f265e2e8d9cd9ee44daa25d6d79e5518aaf4f4b3865187562ad36f.json",
+          "sha256": "92d9766aa2f265e2e8d9cd9ee44daa25d6d79e5518aaf4f4b3865187562ad36f",
+          "date": "2026-09-12"
+        }
+      },
+      {
+        "title": "MOTIVATION-1 / the runtime block",
+        "url": "https://github.com/chrishayuk/chrishayuk-site/blob/978830e90eca6deb6dd973d971477a7589ab2fd0/docs/motivation/subjects/02-M2.md",
+        "note": "Both attempted requests included a note in the original transcript. The series paused after two dispatched subjects."
+      }
+    ]
+  },
+  {
+    "id": "N-MACHINE-CAPABILITY",
+    "version": "1.0",
+    "recordHash": "5f51ec55a4cfd7c31dc43434b4e01c171763fb592439407975b91834942ab1e6",
+    "revision": {
+      "kind": "initial",
+      "summary": "Initial publication: the capability census refutes its predicted drop-off and motivates a discovery experiment."
+    },
+    "sources": [
+      {
+        "title": "WEB-CAPABILITY-1A / audited outcomes and source hashes",
+        "url": "/data/machines/web-capability-1a-evidence.json",
+        "note": "Read from chuk-experiments: experiment EXP-20260912-161711-00770, write-up v2 and all 18 completed runs. All 36 subject report/transcript hashes, the protocol and the final report were checked against local source files. Original Git pointers may require repository access.",
+        "preserved": {
+          "url": "/data/publications/sha256/099f99657387ebd1e652083cad6137b1ab240663e6632023b301b33b7e953294.json",
+          "sha256": "099f99657387ebd1e652083cad6137b1ab240663e6632023b301b33b7e953294",
+          "date": "2026-09-12"
+        }
+      },
+      {
+        "title": "The final results, including the falsified prediction",
+        "url": "/data/machines/web-capability-1a-results.md",
+        "note": "Public copy of the final report at source commit 3bc32f8e65baaf23ae45dcf582c1b23a82536618, registered as artifact 1212. It supersedes the earlier results artifact, which omitted the explicit verdict paragraph.",
+        "preserved": {
+          "url": "/data/publications/sha256/bb00b3d14cefb65d5b15252359d329fe3972c2292fdceb23afeb7a01da881661.md",
+          "sha256": "bb00b3d14cefb65d5b15252359d329fe3972c2292fdceb23afeb7a01da881661",
+          "date": "2026-09-12"
+        }
+      },
+      {
+        "title": "The frozen protocol",
+        "url": "/data/machines/web-capability-1a-protocol.md",
+        "note": "Frozen before the build and first subject at source commit b6454073c1ac02d2d3d4f746aa54d5f452064ba7. The prior, falsifier, supplied task address and configuration limits remain in the record.",
+        "preserved": {
+          "url": "/data/publications/sha256/7be6c5d8c35205c4aedc6709806b3ff5ee5561f3257be944de2844aa3b4ae554.md",
+          "sha256": "7be6c5d8c35205c4aedc6709806b3ff5ee5561f3257be944de2844aa3b4ae554",
+          "date": "2026-09-12"
+        }
+      }
+    ]
+  }
+]

@@ -54,9 +54,9 @@ export const cell80Thread = {
 };
 export const machineThread = {
   id: "THREAD-MACHINES", slug: "machines", title: "The website asks. Whose instruction counts?",
-  path: "/thread/machines", version: "0.2", created: "2026-09-12",
-  abstract: "An invitation became a usability test, then a question about permission, task scope and what makes an action worthwhile. Follow five connected notes, from agents recognising the experiment to visitors leaving a mark as a courtesy.",
-  context: "Five notebook entries, one recorded model family, different tasks and site revisions. Follow the experiments in reading order, or start with the latest comparison. Declarations, anonymous marks, reported reasons and HTTP contacts remain different kinds of evidence.",
+  path: "/thread/machines", version: "0.3", created: "2026-09-12",
+  abstract: "An invitation became a usability test, then a question about permission, task scope and what makes an action worthwhile. Follow six connected notes, from agents recognising the experiment to useful actions, usable mechanisms and the next question: discovery.",
+  context: "Six notebook entries, one recorded model family, different tasks and site revisions. Follow the experiments in reading order, or start with the latest comparison. Declarations, anonymous marks, reported reasons and HTTP contacts remain different kinds of evidence.",
   steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.finding} ${step.bridge}` })).filter(listedStep),
 };
 export const threads = [mapThread, cell80Thread, machineThread];

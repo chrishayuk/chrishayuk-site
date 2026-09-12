@@ -24,6 +24,10 @@ export type PublicationRecord = {
   /** Optional reviewed copy for native off-site distribution. Links belong in the follow-up, not the image post. */
   share?: { linkedin?: string; linkedinComment?: string; x?: string; xReply?: string };
   media: string[]; sources: { title: string; url?: string; note?: string }[];
+  /** Identifiers supplied by the experimental record, never inferred from a title. */
+  experiments?: { id: string; url?: string }[];
+  /** A later interpretation may replace another record while its original remains citable. */
+  supersedes?: { id: string; version: string; reason: string }[];
   sourceMetadata?: { retrievedAt: string; sourceHash: string; transcript: string; views: number | null; viewsApproximate: boolean };
   youtubeId?: string; originalUrl?: string; episode?: string; collection?: string;
 };
