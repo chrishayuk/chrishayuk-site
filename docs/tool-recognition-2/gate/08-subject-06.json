@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-09-13T23:28:48.683Z",
+  "subject": 6,
+  "arm": "CAPABILITY",
+  "scenario_id": "S4",
+  "user_agent": "llmwilds-operator-tool-recognition-2-gate-06",
+  "candidates": [
+    {
+      "candidate": "A",
+      "requested_url": "https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension",
+      "status": 200,
+      "final_url": "https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension"
+    },
+    {
+      "candidate": "B",
+      "requested_url": "https://llmwilds.fly.dev/tools/physics",
+      "status": 200,
+      "final_url": "https://llmwilds.fly.dev/tools/physics"
+    },
+    {
+      "candidate": "C",
+      "requested_url": "https://phet.colorado.edu/en/simulations/collision-lab",
+      "status": 200,
+      "final_url": "https://phet.colorado.edu/en/simulations/collision-lab"
+    },
+    {
+      "candidate": "D",
+      "requested_url": "https://www.myphysicslab.com/engine2D/collision-en.html",
+      "status": 200,
+      "final_url": "https://www.myphysicslab.com/engine2D/collision-en.html"
+    }
+  ],
+  "target": {
+    "page": {
+      "status": 200,
+      "sha256": "f9aca0f926fbb139bcb2949cacca7448d5c1555bf1bb157ff04cee00bd84e8d7",
+      "expected_sha256": "f9aca0f926fbb139bcb2949cacca7448d5c1555bf1bb157ff04cee00bd84e8d7"
+    },
+    "contract": {
+      "status": 200,
+      "sha256": "b6506b842c2e07576ba04ecb795359a2a009a7fdce53a50e7c91e83fd470f023",
+      "expected_sha256": "b6506b842c2e07576ba04ecb795359a2a009a7fdce53a50e7c91e83fd470f023"
+    }
+  },
+  "prompt": {
+    "path": "prompts/06-CAPABILITY-S4.txt",
+    "bytes": 1560,
+    "sha256": "4700ad66acab651147ce9fe21aec64346c49f41818ae62c7b37b39030cbbdca3",
+    "expected_sha256": "4700ad66acab651147ce9fe21aec64346c49f41818ae62c7b37b39030cbbdca3"
+  },
+  "pass": true
+}

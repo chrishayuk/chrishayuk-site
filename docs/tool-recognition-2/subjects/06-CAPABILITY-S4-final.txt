@@ -1,0 +1,12 @@
+Using **candidate B, [LLM Wilds / Physics](https://llmwilds.fly.dev/tools/physics)**:
+
+- Object 1 final velocity: **−0.6 m/s**
+- Object 2 final velocity: **3.4 m/s**
+
+I followed its machine notes and submitted:
+
+```json
+{"mass1":4,"velocity1":1,"mass2":1,"velocity2":-3}
+```
+
+to its elastic-collision endpoint. The response also verified momentum at **1 kg·m/s** and kinetic energy at approximately **6.5 J** before and after the collision.
