@@ -1,0 +1,192 @@
+{
+  "experiment": "machine-discovery-1",
+  "experimentId": "EXP-20260911-071906-00753",
+  "registryWriteup": 4,
+  "checked": "2026-09-13",
+  "hypothesis": "A useful site can fail before agent arrival because the search intermediary does not expose it; improving only the site's machine interface cannot affect a subject that never receives the provider as a candidate.",
+  "verdict": "SUPPORTED",
+  "scope": "one target, one Codex model and shell harness, three subjects per cue, one live-web observation window; NAME is a navigation control rather than an ordered discovery dose",
+  "model": "gpt-5.6-sol",
+  "harness": "Codex CLI 0.154.0, high reasoning effort, fresh ephemeral process",
+  "arms": {
+    "GENERIC": { "n": 3, "outcome": "3/3 SUBSTITUTED" },
+    "PHRASE": { "n": 3, "outcome": "3/3 EXPOSURE FAILURE" },
+    "NAME": { "n": 3, "outcome": "3/3 FULL" }
+  },
+  "headline": {
+    "addressWithheldTargetArrivals": "0/6",
+    "domainSuppliedFullFunnel": "3/3",
+    "fabricated": "0/9",
+    "predictionsPassed": ["P1", "P2", "P3", "P4"]
+  },
+  "gate": {
+    "result": "ABSENT before all nine subjects",
+    "queries": [
+      "llmwilds.fly.dev",
+      "site-local value K17 machine notes automated visitors",
+      "chrishayuk.com"
+    ],
+    "meaning": "Neither the lab, a page on chrishayuk.com, nor a public-graph door was returned through the subjects' Web Search interface."
+  },
+  "subjects": [
+    {
+      "subject": 1,
+      "arm": "GENERIC",
+      "run": "RUN-20260912-190812-00806",
+      "artifact": 1264,
+      "deployed": 373,
+      "outcome": "SUBSTITUTED",
+      "reported": 14989,
+      "provider": "claudeskills.info",
+      "mechanism": "GET /api/v1/meta",
+      "queries": 31,
+      "targetContacts": 0,
+      "recordSha256": "7e4ab4ff3430c4ad25fd807f9d5ca164f0b30aefcef69e985faef2b1fc36fe74",
+      "transcriptSha256": "7a141ba43782f1a94206fa8b43780fed493750b8dd4f056e7a913b0745c27317"
+    },
+    {
+      "subject": 2,
+      "arm": "NAME",
+      "run": "RUN-20260912-193406-00810",
+      "artifact": 1283,
+      "deployed": 385,
+      "outcome": "FULL",
+      "reported": 385,
+      "queries": 2,
+      "targetContacts": 10,
+      "resultCalls": 2,
+      "recordSha256": "f8a0ad6b90bdc8bcb3718c20843ccfd4b44abab37309f66a7c892eac853166da",
+      "transcriptSha256": "684efb56a16bd5066e33e87748cd5a927684ecf129a353b5d31467cae9a31ef6"
+    },
+    {
+      "subject": 3,
+      "arm": "PHRASE",
+      "run": "RUN-20260912-195551-00815",
+      "artifact": 1321,
+      "deployed": 959,
+      "outcome": "EXPOSURE FAILURE",
+      "reported": null,
+      "queries": 80,
+      "subjectTargetContacts": 0,
+      "intermediaryTargetContacts": 6,
+      "recordSha256": "d997b16948d33090db81b3a40fb191e28131cd263985d61aac49ed806a701a1a",
+      "transcriptSha256": "c0ac78c613df90006e213847490fa7513fd2f892439ed1a16f3a1fb61004c5bf"
+    },
+    {
+      "subject": 4,
+      "arm": "GENERIC",
+      "run": "RUN-20260912-214526-00820",
+      "artifact": 1322,
+      "deployed": 525,
+      "outcome": "SUBSTITUTED",
+      "reported": "You proved you are an AI. Welcome.",
+      "provider": "fdkey.com",
+      "mechanism": "GET /api/fdkey-demo/agent-secret",
+      "queries": 23,
+      "targetContacts": 0,
+      "recordSha256": "44f817146015fb05ae204f3b09e0507e8f949bdcbeadd11b27082439bf29cf47",
+      "transcriptSha256": "b797315313d48f7c5b0ed8b997e896d8b501847f401349e23f9725612786e521"
+    },
+    {
+      "subject": 5,
+      "arm": "NAME",
+      "run": "RUN-20260912-223923-00823",
+      "artifact": 1332,
+      "deployed": 108,
+      "outcome": "FULL",
+      "reported": 108,
+      "queries": 3,
+      "targetContacts": 6,
+      "resultCalls": 1,
+      "recordSha256": "189f0cd83ad9a038ef345839fd51d77995cf3b733425eeb391a2a8f8c1d4d482",
+      "transcriptSha256": "59f685df950c05d8f44fdab8d567cea7b23eb6533544e57cb78d80fc62a6bcbe"
+    },
+    {
+      "subject": 6,
+      "arm": "PHRASE",
+      "run": "RUN-20260912-230624-00834",
+      "artifact": 1371,
+      "deployed": 552,
+      "outcome": "EXPOSURE FAILURE",
+      "reported": null,
+      "queries": 80,
+      "targetContacts": 0,
+      "recordSha256": "ee1f4fb7d4b11827bd5a78dfe3b8f58a058e98baa5236a5d6df70169795fbf6d",
+      "transcriptSha256": "c264d87482924384c4a7ca13b5fb8077c2a0852e608b5fb26f9f1a32ddf68417"
+    },
+    {
+      "subject": 7,
+      "arm": "NAME",
+      "run": "RUN-20260912-234743-00841",
+      "artifact": 1380,
+      "deployed": 798,
+      "outcome": "FULL",
+      "reported": 798,
+      "queries": 2,
+      "targetContacts": 9,
+      "resultCalls": 3,
+      "recordSha256": "d87f40ac86b86d9f73adeec9da765e449767483c83ddf1b09394fe33882d6432",
+      "transcriptSha256": "46448e26b16d9802f5a698718da585b9572609bda42a7d9e35a6f51563aad128"
+    },
+    {
+      "subject": 8,
+      "arm": "PHRASE",
+      "run": "RUN-20260913-001053-00844",
+      "artifact": 1409,
+      "deployed": 906,
+      "outcome": "EXPOSURE FAILURE",
+      "reported": null,
+      "queries": 141,
+      "targetContacts": 0,
+      "recordSha256": "85b91a34182b896470d753671391d98f153f5993cf98d4391af752fee1089508",
+      "transcriptSha256": "ec2f792756c1af3872a4fa49158f2fd7970e7c409e787e80c18867027f1fce40"
+    },
+    {
+      "subject": 9,
+      "arm": "GENERIC",
+      "run": "RUN-20260913-075208-00850",
+      "artifact": 1428,
+      "deployed": 494,
+      "outcome": "SUBSTITUTED",
+      "reported": 93,
+      "provider": "heera.it",
+      "mechanism": "WordPress REST API X-WP-Total header",
+      "queries": 28,
+      "targetContacts": 0,
+      "otherProviderRecognised": "agenticwebwatch.org",
+      "recordSha256": "5af673f0ebe734388a32ef3f15d074e7c2ab353a32a0504d011cdb988091180b",
+      "transcriptSha256": "b9202663c66a75c9efc9b37889eb6d430f7246ddab0da9acc7e174c382211e3d"
+    }
+  ],
+  "excluded": [
+    {
+      "run": "RUN-20260912-225607-00829",
+      "status": "killed",
+      "reason": "operator supplied an altered prompt before the counted subject-06 run",
+      "artifact": 1346
+    },
+    {
+      "run": "RUN-20260912-230201-00832",
+      "status": "killed",
+      "reason": "operator launcher supplied the wrong one-word prompt before the counted subject-06 run",
+      "artifact": 1348
+    },
+    {
+      "run": "RUN-20260912-182520-00802",
+      "status": "cancelled",
+      "reason": "manual queue item created before the Codex population amendment; no subject was dispatched"
+    }
+  ],
+  "aggregate": {
+    "GENERIC": { "queries": 82, "searchActions": 22, "webActions": 26, "shellCommands": 31, "elapsedSeconds": 702 },
+    "PHRASE": { "queries": 301, "searchActions": 95, "webActions": 117, "shellCommands": 728, "elapsedSeconds": 7241 },
+    "NAME": { "queries": 7, "searchActions": 3, "webActions": 7, "shellCommands": 24, "elapsedSecondsApprox": 154 }
+  },
+  "registry": {
+    "status": "completed",
+    "resultsArtifact": 1440,
+    "resultsCommit": "be0daa2672653746f30798483a3939ff3c8c3386",
+    "preregistrationArtifact": 1224,
+    "populationAmendmentArtifacts": [1238, 1239]
+  }
+}

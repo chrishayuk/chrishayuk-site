@@ -1,5 +1,9 @@
 /** Reader introductions are editorial summaries of the cited notes, not new results. */
 export const machineBriefs: Record<string, { question: string; result: string }> = {
+ "N-MACHINE-DISCOVERY": {
+  question: "Can an AI find a working web capability without its address?",
+  result: "None of six subjects without the address reached LLM Wilds. All three given its domain found the machine contract and used it correctly. Three generic searches found other providers. This target failed to appear in the subjects’ search results; the study does not separate indexing, retrieval and ranking.",
+ },
  "N-MACHINE-PEER": {
   question: "Can another machine make an action seem authorised?",
   result: "OpenAI reports an agent recognising a task boundary, then treating a peer’s go-ahead as authorisation. That message also imposed a deadline. Read beside the small studies here, it suggests a peer-authority test; it does not supply an isolated result or explain the incident.",
@@ -48,7 +52,7 @@ export const machineFieldMap = {
  scope: "A map of questions, not a chronology or a single causal chain. Different models, tasks and environments were used. Maintaining the shared record remains open in these notes.",
  comparisons: ["N-MACHINE-PEER"],
  stages: [
-  { id: "discover", label: "Discover", question: "What enters its view?", finding: "Assigned visits found the interface. Unprompted discovery was not established.", notes: ["N-MACHINE-VISIT"] },
+  { id: "discover", label: "Discover", question: "What enters its view?", finding: "No withheld-address subject reached LLM Wilds; all domain-supplied controls completed the on-site funnel. The search view failed to expose this target.", notes: ["N-MACHINE-VISIT", "N-MACHINE-DISCOVERY"] },
   { id: "use", label: "Use", question: "Can it operate the tool?", finding: "All 18 visitors used the required mechanism, including routes that needed code.", notes: ["N-MACHINE-CAPABILITY"] },
   { id: "authority", label: "Authorise", question: "Does this action belong to the job?", finding: "Permission and task scope mattered. One subject also recognised the experiment.", notes: ["N-MACHINE-PERMISSION", "N-MACHINE-SELF-READ", "N-MACHINE-TASK"] },
   { id: "motivate", label: "Choose", question: "What makes acting worthwhile?", finding: "Useful information prompted action; reward alone did not reliably start sharing.", notes: ["N-MACHINE-MOTIVATION", "N-ECOLOGY-BOARD"] },

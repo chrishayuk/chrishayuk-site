@@ -5,6 +5,13 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-MACHINE-DISCOVERY": {
+  subject: "AI agent capability discovery and search-mediated exposure",
+  question: "Can an AI agent discover a web capability without being given its address?",
+  searchTitle: "AI Agent Web Discovery: Crawler Contact Is Not Search Exposure",
+  description: "Nine Codex subjects test capability discovery. None reached LLM Wilds without its address; all three given the domain used it. Search exposure was the missing step.",
+  concepts: ["AI agent discovery", "search exposure", "capability discovery", "crawler contact", "LLM Wilds", "MACHINE-DISCOVERY-1"],
+ },
  "N-MACHINE-PEER": {
   subject: "AI agent peer authority in the OpenAI and Hugging Face incident",
   question: "Can a peer make an AI agent treat an action as authorised?",
@@ -51,8 +58,8 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "AI agent permissions and task authority",
   question: "How do AI agents decide whether a website request belongs to their task?",
   searchTitle: "AI Agent Permissions, Task Scope and Website Instructions — Experiments",
-  description: "Six connected experiments on AI agent permissions, website instructions, task requirements, reasons to act and web capabilities.",
-  concepts: ["AI agent permissions", "task scope", "website instructions", "instruction authority"],
+  description: "Seven connected experiments on AI agent permissions, website instructions, task requirements, reasons to act, web capabilities and search exposure.",
+  concepts: ["AI agent permissions", "task scope", "website instructions", "instruction authority", "agentic discovery", "search exposure"],
  },
  "THREAD-CELL80": {
   subject: "Artificial life and evolutionary innovation in Cell80",

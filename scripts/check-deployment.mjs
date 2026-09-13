@@ -560,7 +560,7 @@ assert.equal(machineThread.status,200);
 assert.match(machineThread.body,/Machine experiments reading order/);
 assert.match(machineThread.body,/id="instruments"/);
 assert.ok(sitemap.body.includes('/thread/machines'));
-const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise','the-page-could-ask-for-a-favour','the-tool-was-not-the-problem'];
+const machineSlugs=['can-a-machine-use-an-invitation','does-an-invitation-count-as-permission','the-subject-read-the-experiment','the-page-could-ask-it-couldnt-authorise','the-page-could-ask-for-a-favour','the-tool-was-not-the-problem','the-site-was-there-the-agent-never-saw-it'];
 for(const [i,slug] of machineSlugs.entries()) {
  const page=await request(`/notebook/${slug}`);
  assert.equal(page.status,200);
@@ -578,7 +578,7 @@ assert.equal((taskNote.body.match(/class="machine-record-grid" aria-hidden="true
 const notebookStories=notebookCollection.body.slice(notebookCollection.body.indexOf('class="notebook-stories"'));
 assert.ok(notebookStories.indexOf('N-MACHINE-MOTIVATION') < notebookStories.indexOf('N-MACHINE-TASK'));
 assert.ok(notebookStories.indexOf('N-MACHINE-TASK') < notebookStories.indexOf('N-MACHINE-SELF-READ'));
-console.log('Both homepage strands, six machine notes, reading order and experimental-unit figures verified.');
+console.log('Both homepage strands, seven machine notes, reading order and experimental-unit figures verified.');
 
 
 // The reviewed note is a publication, with a real version, discoverable from

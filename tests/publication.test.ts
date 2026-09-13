@@ -464,20 +464,20 @@ test("the blind-visitor study belongs to the notebook record, index and archive"
 });
 
 
-test("machine programme connects six notes and leads with the published capability study",async()=>{
+test("machine programme connects seven notes and leads with the discovery follow-up",async()=>{
  const { machineThread, threadPosition }=await import('../lib/threads.ts');
  const { notebookSelection }=await import('../lib/notebook-selection.ts');
  const { canonicalPaths }=await import('../lib/canonical.ts');
- const ids=['N-MACHINE-VISIT','N-MACHINE-PERMISSION','N-MACHINE-SELF-READ','N-MACHINE-TASK','N-MACHINE-MOTIVATION','N-MACHINE-CAPABILITY'];
+ const ids=['N-MACHINE-VISIT','N-MACHINE-PERMISSION','N-MACHINE-SELF-READ','N-MACHINE-TASK','N-MACHINE-MOTIVATION','N-MACHINE-CAPABILITY','N-MACHINE-DISCOVERY'];
  assert.deepEqual(machineThread.steps.map(step=>step.id),ids);
- assert.equal(notebookSelection.find(note=>ids.includes(note.id))?.id,'N-MACHINE-CAPABILITY');
+ assert.equal(notebookSelection.find(note=>ids.includes(note.id))?.id,'N-MACHINE-DISCOVERY');
  assert.ok(canonicalPaths().includes('/thread/machines'));
  const graph=recordGraph();
  assert.deepEqual(graph.nodes.find(node=>node.id==='THREAD-MACHINES')?.members?.map(member=>member.id),ids);
  for(const [i,id] of ids.entries()) {
   assert.equal(threadPosition(id)?.previous?.id,ids[i-1]);
   assert.equal(threadPosition(id)?.next?.id,ids[i+1]);
-  assert.equal(getRecord(id)?.publication,['N-MACHINE-MOTIVATION','N-MACHINE-CAPABILITY'].includes(id)?'published':'draft');
+  assert.equal(getRecord(id)?.publication,['N-MACHINE-MOTIVATION','N-MACHINE-CAPABILITY','N-MACHINE-DISCOVERY'].includes(id)?'published':'draft');
   assert.ok(graph.edges.some(edge=>edge.from===id&&edge.to==='THREAD-MACHINES'&&edge.kind==='in-thread'));
  }
 });

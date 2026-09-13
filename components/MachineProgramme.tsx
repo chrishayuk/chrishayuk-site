@@ -1,6 +1,6 @@
 import { MachinePeerConnection } from "./MachinePeerNotebook";
 import Link from "next/link";
-import { MachineCapabilityCard } from "./MachineCapabilityCard";
+import { MachineDiscoveryCard } from "./MachineDiscoveryCard";
 import { getRecord, isListed, recordPath } from "@/lib/records";
 import { machineJourney } from "@/lib/machine-journey";
 import evidence from "@/public/data/machines/authority-2-evidence.json";
@@ -39,8 +39,9 @@ export function MachineInstruments() {
 }
 
 export function MachineHomeFeature() {
+  const latest = getRecord(machineJourney.at(-1)!.id)!;
   return <section id="machine-experiments" className="machine-home-feature" aria-labelledby="machine-home-heading" data-hause-act="connection">
-    <div className="machine-home-heading"><div><p className="kicker record-voice">MACHINE EXPERIMENTS / SIX CONNECTED NOTES</p><h2 id="machine-home-heading">The tool was not<br/><em>the problem.</em></h2><p>Eighteen AI visitors. Six web mechanisms. Every visitor found the required value, including those who built a socket client or ran a WebAssembly module.</p><p>The predicted capability barrier did not appear. The next question is how an agent discovers what a website can do.</p><div className="inline-links"><Link className="text-link" href="/notebook/the-tool-was-not-the-problem">READ THE CAPABILITY NOTE ↗</Link><Link className="text-link" href="/thread/machines">FOLLOW ALL SIX NOTES ↗</Link></div></div><Link className="machine-home-card" href="/notebook/the-tool-was-not-the-problem" aria-label="Read The tool was not the problem"><MachineCapabilityCard/></Link></div>
+    <div className="machine-home-heading"><div><p className="kicker record-voice">MACHINE EXPERIMENTS / {machineJourney.length} CONNECTED NOTES</p><h2 id="machine-home-heading">The site was there.<br/><em>The agent never saw it.</em></h2><p>{latest.dek}</p><p>The target never entered the six subjects’ visible search results. A server can receive crawler requests without an agent receiving a result.</p><div className="inline-links"><Link className="text-link" href={recordPath(latest)}>READ THE DISCOVERY NOTE ↗</Link><Link className="text-link" href="/thread/machines">FOLLOW ALL {machineJourney.length} NOTES ↗</Link></div></div><Link className="machine-home-card" href={recordPath(latest)} aria-label={`Read ${latest.title}`}><MachineDiscoveryCard/></Link></div>
     <MachinePeerConnection/><p className="machine-home-question record-voice">THE PROGRAMME / When a website asks an AI agent to act, whose instruction counts?</p>
     <nav className="machine-home-places record-voice" aria-label="Explore the machine instruments"><Link href="/readership">THE OBSERVATORY ↗</Link><Link href="/machine-guestbook">THE GUESTBOOK ↗</Link><Link href="/machines">THE MACHINE INTERFACE ↗</Link><Link href="/thread/machines#field-map">MACHINES / FIELD EXPERIMENTS ↗</Link><Link href="/thread/machines#instruments">LLM WILDS & THE EXPERIMENTS ↗</Link></nav>
   </section>;

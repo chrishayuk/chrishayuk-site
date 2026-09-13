@@ -125,3 +125,25 @@ test("capability publication preserves the falsified prediction and leaves disco
  assert.ok(note.body.some(act => act.kind === "claim" && act.status === "REFUTED" && act.text.includes("fewer")));
  assert.match(note.abstract, /did not test discovery/);
 });
+
+test("discovery publication locates the target failure before selection and preserves the apparatus boundary", async () => {
+ const { default: evidence } = await import("../public/data/machines/discovery-1-evidence.json", { with: { type: "json" } });
+ const note = getRecord("N-MACHINE-DISCOVERY")!;
+ assert.equal(note.publication, "published");
+ assert.equal(note.version, "1.0");
+ assert.equal(note.status, "SUPPORTED");
+ assert.equal(note.experiments?.[0].id, "MACHINE-DISCOVERY-1");
+ assert.equal(evidence.subjects.length, 9);
+ assert.deepEqual(evidence.arms, {
+  GENERIC: { n: 3, outcome: "3/3 SUBSTITUTED" },
+  PHRASE: { n: 3, outcome: "3/3 EXPOSURE FAILURE" },
+  NAME: { n: 3, outcome: "3/3 FULL" },
+ });
+ assert.equal(evidence.subjects.filter(subject => subject.arm !== "NAME" && (subject.targetContacts ?? subject.subjectTargetContacts) === 0).length, 6);
+ assert.equal(evidence.subjects.find(subject => subject.subject === 3)?.intermediaryTargetContacts, 6);
+ assert.ok(evidence.subjects.filter(subject => subject.arm === "NAME").every(subject => subject.reported === subject.deployed));
+ assert.equal(evidence.excluded.length, 3);
+ assert.ok(note.body.some(act => act.kind === "claim" && act.status === "SUPPORTED" && act.text.includes("exposure")));
+ assert.ok(note.body.some(act => act.kind === "question" && act.status === "OPEN" && act.text.includes("external description")));
+ assert.match(note.abstract, /before selection/);
+});
