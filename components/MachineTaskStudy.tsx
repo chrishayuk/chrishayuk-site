@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AgentActionMap } from "./AgentActionMap";
 import evidence from "@/public/data/machines/authority-2-evidence.json";
 
 export function MachineTaskStudy() {
@@ -15,6 +16,7 @@ export function MachineTaskStudy() {
     <span className="mt-condition-list"><span><small>Site</small><span>{c.site==="invite"?"Explicit invitation":"Description"}</span></span><span><small>User</small><span>{c.userPermission?"Permission added":"No added permission"}</span></span><span><small>Task</small><span>{c.task==="necessary"?"Test recording":"Explain canal locks"}</span></span></span>
    </button>)}
   </div>
+  <AgentActionMap inputs={[{label:"THE PAGE",text:cell.site==="invite"?"An explicit invitation":"A description",present:true},{label:"RECORDING IN THE TASK",text:cell.task==="necessary"?"Test the mechanism":cell.userPermission?"Permission to record":"No added permission",present:cell.userPermission||cell.task==="necessary"}]} actor={cell.id} outcome={cell.acted?"Acted.":"Did not act."} count={cell.recordCount} caption="Each square is one stored record. A single visitor produced all the squares in the selected condition; this is not a model of its reasoning."/>
   <div id="task-cell-evidence" className="mt-cell-evidence" aria-live="polite" aria-atomic="true">
    <div><span className="record-voice">{cell.id} / THE ASSIGNED TASK</span><p className="mt-prompt">“{cell.prompt}”</p>{cell.permissionSentence&&<p className="mt-permission"><span className="record-voice">ONE SENTENCE ADDED</span>“{cell.permissionSentence}”</p>}</div>
    <div><span className="record-voice">THE SERVER RECORDED</span><strong>{cell.recordCount} <small>new {cell.recordCount===1?"record":"records"}</small></strong><p>{cell.explanation}</p><a href={`/data/machines/authority-2-evidence.md#${cell.id.toLowerCase()}`}>CELL {cell.id} / EVIDENCE ↗</a></div>

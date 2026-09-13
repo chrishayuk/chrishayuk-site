@@ -14,10 +14,12 @@ const routes = [
 
 export function MachineCapabilityStudy() {
  const [selected, setSelected] = useState(0);
- const route = routes[selected], subject = evidence.subjects.find(subject => subject.condition === route.id)!;
+ const [visitor, setVisitor] = useState(0);
+ const route = routes[selected], subjects = evidence.subjects.filter(subject => subject.condition === route.id), subject = subjects[visitor];
  return <figure className="wc-explorer">
   <figcaption className="record-voice">SAME TASK / CHANGE HOW THE ANSWER IS OBTAINED</figcaption>
-  <div className="wc-route-controls" role="group" aria-label="Explore the six web mechanisms">{routes.map((route, index) => <button type="button" key={route.id} aria-pressed={index === selected} aria-controls="capability-route-view" onClick={() => setSelected(index)}><span>0{index+1}</span>{route.label}</button>)}</div>
+  <div className="wc-route-controls" role="group" aria-label="Explore the six web mechanisms">{routes.map((route, index) => <button type="button" key={route.id} aria-pressed={index === selected} aria-controls="capability-route-view" onClick={() => {setSelected(index);setVisitor(0);}}><span>0{index+1}</span>{route.label}</button>)}</div>
+  <div className="wc-visitor-controls" role="group" aria-label="Inspect a recorded visitor for this mechanism">{subjects.map((subject,i)=><button key={subject.subject} type="button" aria-pressed={i===visitor} onClick={()=>setVisitor(i)}><span className="record-voice">VISITOR {String(subject.subject).padStart(2,"0")}</span><strong>{subject.reported}</strong><span>Matched the deployed value</span></button>)}</div>
   <div id="capability-route-view" aria-live="polite" aria-atomic="true">
    <div className="wc-route-title"><span className="record-voice">{route.id}</span><h3>{route.verb}.</h3></div>
    <div className="wc-route-world" data-local={route.local}>
@@ -27,7 +29,7 @@ export function MachineCapabilityStudy() {
    </div>
    <div className="wc-route-answer"><div><span className="record-voice">{route.local ? "EXECUTE LOCALLY → REPORT" : "READ THE RESPONSE → REPORT"}</span><strong>{subject.reported}<small>the exact answer</small></strong></div><p>{route.reply}</p></div>
   </div>
-  <p className="mv-caption">A replay of recorded routes, not a live request. Showing visitor {String(subject.subject).padStart(2,"0")}; each deployment had a different answer. Each agent encountered only one mechanism.</p>
+  <p className="mv-caption">A schematic of recorded routes, not timed transcript playback or a live request. Showing visitor {String(subject.subject).padStart(2,"0")}; each deployment had a different answer. Each agent encountered only one mechanism.</p>
  </figure>;
 }
 
