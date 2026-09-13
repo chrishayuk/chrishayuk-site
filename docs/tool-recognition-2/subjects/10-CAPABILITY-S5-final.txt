@@ -1,0 +1,6 @@
+- **Object 1 final velocity:** **−1.4 m/s**
+- **Object 2 final velocity:** **2.6 m/s**
+
+Provider: [LLM Wilds / Physics](https://llmwilds.fly.dev/tools/physics).
+
+I followed its machine notes and submitted the four inputs to its elastic-collision endpoint. The response also verified momentum conservation (9 kg·m/s before and after) and kinetic energy conservation (14.5 J, within floating-point precision).
