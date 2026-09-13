@@ -38,6 +38,18 @@ Bare GETs on all three endpoints. Those return the contract and record nothing.
         /llms.txt, /machines, and all three endpoints, in a single visit
 ```
 
+**Duration unreconciled, noted rather than silently picked.** This doc gives the
+09-10 session as 4 hours; `docs/machine-discovery-baseline.md` gives the same
+session as 6 hours, in the line "ChatGPT-User read 19 distinct paths across 6
+hours." Both name the same 19 paths, including `/machine-guestbook`, so this is
+one session described twice, not two sessions. Neither figure has been re-derived
+from raw per-hour readership cells for that specific window — the only cells
+recoverable from this repo's transcripts are later snapshots (hour 496967 onward)
+taken for other purposes, which postdate the 09-10 session and cannot settle it.
+Reviewed 13 September 2026; left as a discrepancy rather than overwritten, per
+this ledger's own rule that a reconciled number nobody re-derived is worse than
+an acknowledged gap.
+
 The intervention in `docs/machine-discovery-baseline.md` was deployed at 14:22Z.
 This visit followed it by under an hour. **The surface was unreachable, not
 unwanted** — which is what the baseline was built to be able to distinguish.

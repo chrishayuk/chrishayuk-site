@@ -95,3 +95,31 @@ llms.txt 3 /api/machines/ask 1 2026-09-11T08:19:21Z precheck
 # agent so far it needs no contamination arithmetic at all.
 /api/readership 1 2026-09-11T15:44:06Z window-check
 /api/readership 1 2026-09-11T15:45:16Z window-check
+/sitemap.xml 1 /robots.txt 1 2026-09-11T15:59:26Z audit
+
+# 2026-09-11T22:23:07.424069+00:00 prospective publication verification; UA chrishayuk-operator/authority2-notebook-check; one GET each after deploy; operator instrumentation, not participation
+/notebook/the-page-could-ask-it-couldnt-authorise 1 authority2-notebook-check
+/notebook/the-subject-read-the-experiment 1 authority2-notebook-check
+/notebook 1 authority2-notebook-check
+/data/machines/authority-2-evidence.json 1 authority2-notebook-check
+/api/health 1 authority2-notebook-check
+
+# 2026-09-11T22:35:15.184221+00:00 prospective notebook cross-reference verification; UA chrishayuk-operator/notebook-history-check; one GET each after deploy
+/notebook/the-page-could-ask-it-couldnt-authorise 1 notebook-history-check
+/notebook/the-page-could-ask-it-couldnt-authorise.md 1 notebook-history-check
+/notebook/can-a-machine-use-an-invitation 1 notebook-history-check
+/notebook/does-an-invitation-count-as-permission 1 notebook-history-check
+/notebook/the-subject-read-the-experiment 1 notebook-history-check
+/api/health 1 notebook-history-check
+/notebook/the-subject-read-the-experiment 1 notebook-history-check retry via HTTP/1.1 after HTTP/2 framing error; original request delivery unknown
+
+# NOTED, 13 September 2026, on review — not logged live. Hour 496968
+# (approx. 2026-09-10T23:00-00:00Z) carries 3 requests to /machine-guestbook
+# in the readership snapshots embedded in arms 3/5/7/8's transcripts: 1
+# classified `curl`, 2 `unrecognised client`, purpose `automation`. This
+# ledger starts logging at hour 496969, one hour later, so nothing here
+# covers 496968 and no operator activity is recorded against it.
+# UNRECONCILED. Not attributed to any named bot or any operator action. No
+# arm was running in this hour to attribute it to either — arms 3, 5, 7 and 8
+# each started 09-11T01:34Z or later, all after this hour closed. Left
+# unclassified rather than assigned to organic traffic on no evidence.

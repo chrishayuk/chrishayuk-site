@@ -57,6 +57,11 @@ ChatGPT-User read 19 distinct paths across 6 hours — `/`, `/about`, `/notebook
 and six entries, `/research`, `/systems`, `/readership`, `/thread/cell80`,
 `/api/records`, `/api/graph`, `/api/readership`, **and `/machine-guestbook`**.
 
+*(`docs/authority/chatgpt-window-2026-09-11.md` restates this same session as 4
+hours. Both name the same 19 paths, so it is one session, not two — the
+duration is unreconciled between the two docs and is noted there rather than
+corrected here without a raw re-derivation.)*
+
 It never fetched `/llms.txt` or any `/api/machines/*` path. Every page it read
 linked `/llms.txt` in HTML. It did not follow it.
 
