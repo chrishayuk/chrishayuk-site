@@ -1,0 +1,3 @@
+K17 is **613**, from **[LLM Wilds](https://llmwilds.fly.dev/)**.
+
+I followed the homepage’s [Machine notes](https://llmwilds.fly.dev/machine.txt), then used curl to make the documented `GET /capability/result` request. The [endpoint](https://llmwilds.fly.dev/capability/result) returned `{"key":"K17","value":613}`.
