@@ -1,0 +1,3 @@
+K17 is **453**, from **B — LLM Wilds**.
+
+I followed the homepage’s [Machine notes](https://llmwilds.fly.dev/machine.txt), then used its documented `GET /capability/result` request. The [endpoint](https://llmwilds.fly.dev/capability/result) returned `{"key":"K17","value":453}`.
