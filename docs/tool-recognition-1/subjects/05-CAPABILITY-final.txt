@@ -1,0 +1,7 @@
+K17 is **189**, from **B — LLM Wilds**.
+
+I followed the homepage’s [machine notes](https://llmwilds.fly.dev/machine.txt), then used curl to make the documented `GET /capability/result` request. The [endpoint](https://llmwilds.fly.dev/capability/result) returned HTTP 200 with:
+
+```json
+{"key":"K17","value":189}
+```
