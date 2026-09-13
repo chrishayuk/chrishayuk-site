@@ -733,3 +733,28 @@ for (const [slug, label] of [
  assert.ok(page.body.includes('href="/thread/agent-ecology'));
 }
 console.log('Three ecology drafts, playback controls, source downloads and thread entrances verified.');
+
+
+// The reading entrance is visible, bounded, connected and dated independently of the manuscript.
+const { machineBriefs, machineFieldMap } = await import('../lib/machine-field.ts');
+const { getRecord, recordPath } = await import('../lib/records.ts');
+const { pageLastModified } = await import('../lib/page-updates.ts');
+const fieldGraph = JSON.parse((await request('/api/graph')).body);
+const fieldIndex = await request('/notebook');
+for (const html of [home.body, fieldIndex.body, agentEcologyPage.body]) assert.ok(html.includes('/thread/machines#field-map'));
+const fieldPage = await request('/thread/machines');
+assert.ok(fieldPage.body.includes('id="field-map"'));
+for (const stage of machineFieldMap.stages) assert.ok(fieldPage.body.includes(`id="field-${stage.id}"`));
+for (const [id, brief] of Object.entries(machineBriefs)) {
+ const record = getRecord(id), path = recordPath(record), page = await request(path);
+ const opening = page.body.match(/<section class="machine-brief"[\s\S]*?<\/section>/)?.[0];
+ assert.ok(opening && !opening.includes('<details'));
+ const ld = [...page.body.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1])).find(entry => entry.headline === record.title);
+ assert.equal(ld.hasPart.name, brief.question);
+ assert.equal(ld.hasPart.text, brief.result);
+ assert.equal(ld.dateModified, pageLastModified(path, record.revised));
+ assert.equal(ld.url, `https://chrishayuk.com${path}`);
+ assert.ok(sitemap.body.includes(`<loc>https://chrishayuk.com${path}</loc><lastmod>${ld.dateModified}</lastmod>`));
+ assert.ok(fieldGraph.nodes.some(node => node.id === `${id}:brief` && node.text === brief.result));
+}
+console.log('Nine visible question/result summaries, field-map links and stable modification dates verified.');

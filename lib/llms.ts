@@ -1,3 +1,4 @@
+import { machineBriefs, machineFieldMap } from "./machine-field.ts";
 import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { legibilityFor } from "./legibility.ts";
 import { threads } from "./threads.ts";
@@ -275,6 +276,7 @@ export function llmsDocument(): string {
   `  about its machine readers without asking, and what it stores.`,
   ``,
   section("The notebook — thinking in progress", of("notebook")),
+  section("Machines / field experiments", [`- [${machineFieldMap.title}](${SITE}${machineFieldMap.path}): ${machineFieldMap.description} ${machineFieldMap.scope}`, ...records.filter(record => machineBriefs[record.id]).map(record => `- [${machineBriefs[record.id].question}](${SITE}${recordPath(record)}#in-brief): ${entryState(record)} — ${machineBriefs[record.id].result}`)]),
   section("Reading threads — editorial guides", threads.map(thread => `- [${thread.title}](${SITE}${thread.path}): Working editorial guide · V${thread.version}${meaningLine(thread.id)} — ${thread.abstract}`)),
   section("Open questions", of("question")),
   section("Systems and work", of("work")),

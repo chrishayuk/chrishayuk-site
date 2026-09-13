@@ -1,3 +1,4 @@
+import { pageLastModified } from "./page-updates.ts";
 import { publicationMetadata } from "../vendor/hause/seo.ts";
 import { searchProjection, type Legibility } from "../vendor/hause/legibility.ts";
 import type { CitationRecord } from "@chrishayuk/hause/cite";
@@ -50,10 +51,11 @@ type PageMetadataOptions = {
 export function pageMetadata(title: string, description: string, path: string, image?: string, citation?: CitationRecord, options?: PageMetadataOptions) {
  const base = publicationMetadata({ title, description, url: `${SITE}${path}`, siteName: "Chris Hay",
   indexable: INDEXABLE, image: image || `${SITE}/og-house.png`, citation });
+ const modifiedTime = pageLastModified(path);
  const detailedImage=image&&options?.image?{url:image,...options.image}:undefined;
  return { ...base,
   ...(options?.legibility ? searchProjection({ ...options.legibility, title }) : {}),
-  openGraph:{...base.openGraph,type:options?.openGraphType||base.openGraph.type,...(detailedImage?{images:[detailedImage]}:{})},
+  openGraph:{...base.openGraph,...(options?.openGraphType === "article" && modifiedTime ? { modifiedTime } : {}),type:options?.openGraphType||base.openGraph.type,...(detailedImage?{images:[detailedImage]}:{})},
   twitter:{...base.twitter,...(detailedImage?{images:[{url:detailedImage.url,width:detailedImage.width,height:detailedImage.height,alt:detailedImage.alt}]}:{})},
   alternates: { ...base.alternates, types: feedAlternates }
  };

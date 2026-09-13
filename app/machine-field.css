@@ -1,0 +1,22 @@
+.machine-brief{max-width:760px;margin:40px 0 32px;padding:28px 0;border-block:1px solid var(--rule)}
+.machine-brief h2{font:400 clamp(26px,3vw,38px)/1.25 var(--font-fraunces);letter-spacing:-.025em;text-wrap:balance;max-width:32ch;margin:0 0 20px}
+.machine-brief>p{font:17px/1.85 var(--font-inter);max-width:65ch;margin:0 0 22px}
+.machine-brief .text-link{font-size:11px}
+.machine-field-map{padding:60px var(--margin);border-block:1px solid var(--rule)}
+.machine-field-map>header{max-width:740px;margin-bottom:40px}
+.machine-field-map>header .record-voice{font-size:11px;color:var(--muted)}
+.machine-field-map h2{font:400 clamp(36px,5vw,64px)/1.12 var(--font-fraunces);letter-spacing:-.035em;margin:22px 0}
+.machine-field-map>header>p:last-child{font:18px/1.8 var(--font-inter);max-width:58ch}
+.machine-field-map>ol{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0;margin:0;gap:30px 24px;counter-reset:none}
+.machine-field-map>ol>li{position:relative;border-top:2px solid var(--accent);padding:22px 0 0;min-width:0;display:flex;flex-direction:column}
+.machine-field-map>ol>li:not(:last-child):after{content:"→";position:absolute;right:0;top:-16px;background:var(--bg);color:var(--accent);padding-left:8px;font:24px/1 var(--font-inter)}
+.machine-field-map>ol>li[data-open=true]{border-top-style:dashed}
+.machine-field-map li>.record-voice{font-size:11px;line-height:1.7;color:var(--muted)}
+.machine-field-map h3{font:400 27px/1.25 var(--font-fraunces);letter-spacing:-.02em;margin:18px 0;max-width:20ch}
+.machine-field-map li>p{font:15px/1.8 var(--font-inter);margin:0 0 22px}
+.machine-field-map li>div{margin-top:auto;display:grid;gap:12px}
+.machine-field-map li a{font:14px/1.6 var(--font-inter);text-decoration:underline;text-underline-offset:4px}
+.machine-field-map a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.machine-field-scope{font:14px/1.8 var(--font-inter);color:var(--muted);max-width:80ch;margin:34px 0 20px}
+@media(max-width:1000px){.machine-field-map>ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.machine-field-map>ol{grid-template-columns:1fr;gap:28px}.machine-field-map>ol>li{padding:20px 0 0 28px}.machine-field-map>ol>li:not(:last-child):after{content:"↓";left:0;right:auto;top:23px;background:none;padding:0}.machine-field-map h3{max-width:none;font-size:27px}.machine-brief{margin-top:30px}.machine-brief>p{font-size:16px}}

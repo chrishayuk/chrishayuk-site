@@ -19,6 +19,7 @@ for (const snapshot of snapshots) {
  assert.deepEqual(json.record, snapshot.record);
  assert.equal(json.hash, snapshot.hash);
  assert.ok(html.includes("PRESERVED MANUSCRIPT"));
+ assert.ok(!html.includes('class="machine-brief"'), "current editorial summary does not enter a frozen edition");
  const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1])).find(entry => entry.headline === title);
  assert.equal(ld.url, `https://chrishayuk.com${path}`);
  assert.equal(ld.abstract, abstract);

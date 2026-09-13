@@ -1,3 +1,4 @@
+import { machineBriefs, machineFieldMap } from "./machine-field.ts";
 import { HOUSE, HOUSE_WORK, HOUSE_PARTS, HOUSE_ABSTRACT } from "./house.ts";
 import { discoveryTerms, legibilityGraphFields } from "./legibility.ts";
 import { publicationHistory } from "./provenance.ts";
@@ -47,6 +48,12 @@ function buildGraph() {
   const basis = r.publication === "draft" ? "draft-record" : "published-record";
   nodes.push({id:r.id,kind:r.kind,title:r.title,text:r.abstract,url,sourceUrl:url,basis,retrievable:true,scope:r.youtubeId?"films":"records",publication:r.publication,status:r.status,version:r.version,authors:r.authors,created:r.created,published:r.published,keywords:`${r.concepts.join(" ")} ${discoveryTerms(r.id)}`,recordId:r.id,...legibilityGraphFields(r.id)});
   addEdge(r.id,"CATALOGUE-RECORD","catalogued-in","record-index");
+  const brief = machineBriefs[r.id];
+  if (brief) {
+   const briefId = `${r.id}:brief`;
+   nodes.push({ id: briefId, kind: "reading-summary", title: brief.question, text: brief.result, url: `${url}#in-brief`, sourceUrl: `${url}#in-brief`, basis: "editorial-summary", retrievable: true, scope: "records", publication: r.publication, status: r.status, recordId: r.id, authors: r.authors, keywords: `${r.concepts.join(" ")} ${discoveryTerms(r.id)}` });
+   addEdge(briefId, r.id, "summarises", "editorial-summary");
+  }
   const history = publicationHistory(r.id);
   if (history?.versions.length) {
    const historyId = `${r.id}:history`;
@@ -119,6 +126,12 @@ function buildGraph() {
    addEdge(thread.id,step.id,"includes","editorial-reading-order");
    addEdge(step.id,thread.id,"in-thread","editorial-reading-order");
   }
+ }
+ const fieldMembers = [...new Set(machineFieldMap.stages.flatMap(stage => stage.notes))].filter(id => records.some(record => record.id === id));
+ nodes.push({ id: machineFieldMap.id, kind: "reading-map", title: machineFieldMap.title, text: [machineFieldMap.description, machineFieldMap.scope, ...machineFieldMap.stages.map(stage => `${stage.question} ${stage.finding}`)].join(" "), url: `${SITE}${machineFieldMap.path}`, sourceUrl: `${SITE}${machineFieldMap.path}`, basis: "editorial-question-map", retrievable: true, scope: "records", publication: "draft", authors: ["Chris Hay"], keywords: "AI agents field experiments discovery capability authority permission motivation persistence inheritance transmission external memory culture ecology" });
+ for (const id of fieldMembers) {
+  addEdge(machineFieldMap.id, id, "includes", "editorial-question-map");
+  addEdge(id, machineFieldMap.id, "related", "editorial-question-map");
  }
  const count=(kind:string)=>nodes.filter(n=>n.kind===kind).length;
  return {version:"1.2",retrievedAt:[youtube.retrievedAt,ibm.retrievedAt].sort().at(-1),coverage:{records:records.length,films:allVideos.length,transcripts:allVideos.filter(v=>transcriptFor(v.youtubeId)).length,systems:count("work"),notebook:count("notebook"),questions:count("question"),threads:count("thread"),editorialDrafts:records.filter(r=>r.publication==="draft").length,acts:count("act"),chapters:count("chapter"),passages:count("passage"),concepts:concepts.length,sourceReferences:count("source"),nodes:nodes.length,relationships:edges.length},nodes,edges};

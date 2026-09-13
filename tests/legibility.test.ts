@@ -5,7 +5,9 @@ import { fileURLToPath } from "node:url";
 import { auditLegibility, legibilityLd, searchProjection, type LegiblePublication } from "../vendor/hause/legibility.ts";
 import { auditPublicationLegibility } from "../lib/legibility-audit.ts";
 import { legibilityFor, publicationLegibility } from "../lib/legibility.ts";
-import { records } from "../lib/records.ts";
+import { machineBriefs, machineFieldMap } from "../lib/machine-field.ts";
+import { pageLastModified } from "../lib/page-updates.ts";
+import { records, getRecord, recordPath } from "../lib/records.ts";
 import { threads } from "../lib/threads.ts";
 import { retrieveGraph, recordGraph } from "../lib/graph.ts";
 
@@ -93,4 +95,33 @@ for(const mode of ["projected","editorial"]) test(`an edit reaches real consumer
   cwd:fileURLToPath(new URL("..",import.meta.url)),encoding:"utf8",env:{...process.env,SITE_INDEXABLE:"true"},
  });
  assert.match(output,/Three edited records passed metadata, structured data, graph, retrieval and machine-index parity/);
+});
+
+
+test("the field map and reader summaries cite listed notes without adding experimental results", () => {
+ const graph = recordGraph();
+ const members = [...new Set(machineFieldMap.stages.flatMap(stage => stage.notes))];
+ assert.deepEqual(new Set(members), new Set(Object.keys(machineBriefs)));
+ for (const id of members) {
+  const record = getRecord(id)!;
+  assert.ok(records.includes(record));
+  const summary = graph.nodes.find(node => node.id === `${id}:brief`)!;
+  assert.equal(summary.text, machineBriefs[id].result);
+  assert.equal(summary.sourceUrl, `https://chrishayuk.com${recordPath(record)}#in-brief`);
+  assert.equal(summary.publication, record.publication);
+  assert.equal(summary.basis, "editorial-summary");
+  assert.ok(graph.edges.some(edge => edge.from === machineFieldMap.id && edge.to === id));
+ }
+ assert.equal(machineFieldMap.stages.at(-1)?.open, true);
+ assert.ok(retrieveGraph("Machines field experiments", { scope: "records" }).results.some(result => result.id === machineFieldMap.id));
+});
+
+test("page modification dates are explicit and do not change manuscript or snapshot dates", () => {
+ const record = getRecord("N-MACHINE-MOTIVATION")!;
+ const before = JSON.stringify(record);
+ assert.equal(pageLastModified(recordPath(record), record.revised), "2026-09-13");
+ assert.equal(pageLastModified("/unknown"), undefined);
+ assert.equal(pageLastModified("/records/N-MACHINE-MOTIVATION/1.0"), undefined);
+ assert.equal(pageLastModified(recordPath(record), "2026-09-14"), "2026-09-14");
+ assert.equal(JSON.stringify(record), before);
 });
