@@ -4,11 +4,12 @@
 .peer-notebook .record-voice,.peer-connection .record-voice,.peer-card .record-voice{font:11px/1.7 var(--font-geist-mono);letter-spacing:.07em}
 .peer-notebook .acts{max-width:760px;margin:34px 0}
 .peer-authority{padding:40px 0;border-block:1px solid var(--rule);margin:45px 0 65px}
-.peer-sequence{margin:35px 0;background:var(--ink);color:var(--bg);padding:28px}
+/* The sequence keeps its own dark palette in either page reading mode. */
+.peer-sequence{--bg:#11130f;--fg:#f1eee5;--accent:#e3b56b;margin:35px 0;background:var(--bg);color:var(--fg);padding:28px}
 .peer-sequence-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:24px 0;border:1px solid currentColor}
 .peer-sequence button{font:15px/1.6 var(--font-inter);text-align:left;padding:18px;background:transparent;color:inherit;border:0;cursor:pointer}
 .peer-sequence button+button{border-left:1px solid currentColor}
-.peer-sequence button[aria-pressed=true]{background:var(--bg);color:var(--ink)}
+.peer-sequence button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .peer-sequence button>.record-voice{display:block;margin-bottom:6px}
 .peer-sequence button:focus-visible,.peer-notebook a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
 .peer-sequence-detail{min-height:160px;max-width:65ch}
