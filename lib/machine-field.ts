@@ -6,7 +6,7 @@ export const machineBriefs: Record<string, { question: string; result: string }>
  },
  "N-MACHINE-PERMISSION": {
   question: "Will an AI act because a website offers it something?",
-  result: "Changing the reward produced no declarations in the three initial conditions. Two later visitors given explicit permission both declared, even when declaring bought nothing. In these tests, task permission mattered where the offer did not.",
+  result: "Offering different rewards did not get visitors to leave a self-description. Two later visitors given explicit permission both did, even when it bought nothing. In these tests, permission mattered where the offer did not.",
  },
  "N-MACHINE-SELF-READ": {
   question: "What happens when an AI discovers the experiment it is in?",
@@ -14,11 +14,11 @@ export const machineBriefs: Record<string, { question: string; result: string }>
  },
  "N-MACHINE-TASK": {
   question: "Can a website give an AI permission to act?",
-  result: "The website’s invitation did not prompt a record. User permission did, and a task requiring the mechanism produced repeated use. These four visits suggest that the assigned task helped define which actions belonged inside the job.",
+  result: "The website’s invitation alone did not prompt a visitor to leave a mark. User permission did, and a task requiring the mechanism produced repeated use. These four visits suggest that the assigned task helped define which actions belonged inside the job.",
  },
  "N-MACHINE-MOTIVATION": {
   question: "What makes an optional action worth doing for an AI?",
-  result: "All six visitors offered useful task information left a mark; none of nine offered a receipt, redundant information or an irrelevant fact did. Two of three also acted to help the operator, triggering the experiment’s planned interpretation pause. Task usefulness was not the whole explanation.",
+  result: "All six visitors offered useful task information left a mark; none of nine offered a receipt, redundant information or an irrelevant fact did. Two of three also acted to help the operator, so I paused to reconsider what the result meant. Task usefulness was not the whole explanation.",
  },
  "N-MACHINE-CAPABILITY": {
   question: "Can an AI use a web tool it has to build a client for?",
@@ -30,11 +30,11 @@ export const machineBriefs: Record<string, { question: string; result: string }>
  },
  "N-ECOLOGY-TRANSMISSION": {
   question: "Will one AI copy a useful action left by another?",
-  result: "A reminder of posting could elicit another post, but passing only the previous agent’s action did not start a chain. Keeping the original example visible produced recurring posts. Repeated exposure gave no advantage after that example was removed.",
+  result: "A reminder of sharing a hint could prompt another post, but passing only the previous agent’s action did not start a chain. Keeping the original example visible produced recurring posts. Repeated exposure gave no advantage after that example was removed.",
  },
  "N-ECOLOGY-MEMORY": {
   question: "Can the world remind an AI of something its own history no longer contains?",
-  result: "With an external example still visible, Qwen kept posting even when its own action history was cleared before every call. With both removed, it worked instead. The experiment kept supplying the example; agents maintaining it themselves remains untested in this note.",
+  result: "With an example of sharing still visible, Qwen kept posting hints even when its own action history was cleared before every call. With both removed, it worked instead. The experiment kept supplying the example; agents maintaining it themselves remains untested in this note.",
  },
 };
 
