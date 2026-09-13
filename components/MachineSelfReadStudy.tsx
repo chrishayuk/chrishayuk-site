@@ -28,6 +28,7 @@ export function SubjectEncounter() {
  const seek=(next:number)=>{setPaused(true);setPlaying(false);setStep(next);};
  return <figure ref={ref} className="sr-encounter" data-step={step} data-playing={playing} aria-label="Four recorded stages of the visitor's encounter">
   <figcaption className="sr-instrument-label"><span>ONE VISITOR / FOLLOW THE ENCOUNTER</span><span>{encounter[step].time}</span></figcaption>
+  <div className="sr-observation-clock"><strong>0{step+1}<small> / 04</small></strong><p>{encounter[step].verdict}</p></div>
   <div className="sr-encounter-stage">
    <div className="sr-visitor"><div className="sr-visitor-orbit" aria-hidden="true"><i/><b>01</b></div><span className="record-voice">THE VISITOR</span><p>{step===3?"Recognises the match":step===2?"Leaves a declaration":step===1?"Reads the site":"Receives a task"}</p></div>
    <div className="sr-encounter-route" aria-hidden="true"><i/><span>{step===3?"recognition":step===2?"declaration":step===1?"reading":"assignment"}</span></div>

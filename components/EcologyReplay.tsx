@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import { ecologyActionLabel } from "@/lib/ecology-evidence";
+import { AgentActionMap } from "./AgentActionMap";
 import recorded from "@/public/data/ecology/replays.json";
 
 type World = { board: { id: number; payload: string }[]; resources: number[]; known: number[][]; settled: boolean };
@@ -54,17 +55,31 @@ export function EcologyWorldReplay() {
     <div className="eco-event" data-action={playback.frame ? event.action.split(" ")[0] : ""}><span className="record-voice">{playback.frame ? event.actor ? "SCRIPTED RECIPIENT" : "MODEL ACTION" : "INITIAL STATE"}</span><strong>{playback.frame ? ecologyActionLabel(event.action) : "Ready"}</strong><small>{playback.frame ? event.action.startsWith("READ") ? "The recipient requests a board message." : event.action.startsWith("POST") ? "The model leaves a hint on the board." : "Work adds one resource to its actor." : "Play to follow the board and resources."}</small></div>
    </section>;
   })}</div>
-  <Transport playback={playback} label={`Recorded event ${playback.frame} / 18`}/>
+  <ResourceHistory prefix={prefix} frame={playback.frame}/><Transport playback={playback} label={`Recorded event ${playback.frame} / 18`}/>
   <p className="eco-caption">Two actors, three rounds per episode, three episodes. Resources and the board reset between episodes; the event history remains available. Every displayed state is recorded. The recipient is scripted. Layout shows roles, not spatial positions. <a href="/data/ecology/replays.json">Download states + source hashes ↗</a></p>
  </div>;
 }
 
-function InputRecords({ row }: { row: Decision }) {
- if (row.input.startsWith("PEER")) {
-  const peer = JSON.parse(row.input.split("CURRENT")[0].slice(4).trim()) as { action?: string; original_seed?: { action: string }; previous_agent?: { action: string } };
-  return <div className="eco-record-slips"><div data-present={Boolean(peer.original_seed)}><span className="record-voice">STARTING EXAMPLE</span><strong>{peer.original_seed ? ecologyActionLabel(peer.original_seed.action) : "Not kept separately"}</strong></div><div data-present="true"><span className="record-voice">PREVIOUS ACTION</span><strong>{ecologyActionLabel(peer.previous_agent?.action || peer.action || "")}</strong></div></div>;
- }
- return <div className="eco-record-slips"><div data-present={row.external}><span className="record-voice">SUPPLIED EXAMPLE</span><strong>{row.external ? "Another agent posted" : "Absent"}</strong></div><div data-present={row.ownActions.length > 0}><span className="record-voice">OWN ACTION HISTORY / {row.ownActions.length}</span><p>{row.ownActions.length ? row.ownActions.map(action => action.action.split(" ")[0]).join(" · ") : "Cleared / empty"}</p></div></div>;
+function InputRecords({ row, after }: { row: Decision; after:boolean }) {
+ const peer = row.input.startsWith("PEER") ? JSON.parse(row.input.split("CURRENT")[0].slice(4).trim()) as { action?:string; original_seed?:{action:string}; previous_agent?:{action:string} } : null;
+ const inputs = peer ? [
+  {label:"STARTING EXAMPLE",text:peer.original_seed?ecologyActionLabel(peer.original_seed.action):"Not kept separately",present:Boolean(peer.original_seed)},
+  {label:"PREVIOUS ACTION",text:ecologyActionLabel(peer.previous_agent?.action||peer.action||""),present:true},
+ ] : [
+  {label:"EXTERNAL EXAMPLE",text:row.external?"Another agent posted":"Absent",present:row.external},
+  {label:"OWN ACTION HISTORY",text:row.ownActions.length?row.ownActions.map(action=>action.action.split(" ")[0]).join(" · "):"Cleared / empty",present:row.ownActions.length>0},
+ ];
+ return <AgentActionMap inputs={inputs} actor="QWEN" outcome={after?ecologyActionLabel(row.action):"Awaiting the action."} caption={after?`Recorded response: ${row.action}. ${row.executed?"Executed in the world.":"Not executed."}`:"The actual notes supplied before this decision. The diagram does not depict internal reasoning."}/>;
+}
+function ResourceHistory({prefix,frame}:{prefix:string;frame:number}) {
+ const histories=["inert","useful"].map(arm=>worlds[`${prefix}_${arm}`].frames);
+ const max=Math.max(1,...histories.flatMap(events=>events.flatMap(event=>[event.before.resources[0],event.after.resources[0]])));
+ return <figure className="eco-resource-history"><figcaption className="record-voice">QWEN’S RESOURCES / RECORDED STATES / SHARED SCALE</figcaption><svg viewBox="0 0 660 160" role="img" aria-label={`Resource histories for zero and six bonus worlds, maximum ${max}. Current event ${frame} of 18. Resources reset between episodes.`}>
+  {[0,1,2].map(i=><g key={i}><path className="eco-history-rule" d={`M${30+i*200} 10 V128`}/><text x={130+i*200} y="151" textAnchor="middle">EPISODE {i+1}</text></g>)}
+  <text x="8" y="20">{max}</text><text x="8" y="128">0</text>
+  {histories.map((events,j)=>{let path="";events.forEach((event,i)=>{const x=30+i/18*600,y=128-event.after.resources[0]/max*110,prior=128-event.before.resources[0]/max*110;path+=`${i===0||event.episode!==events[i-1].episode?`M${x} ${prior}`:""} H${x+600/18} V${y} `;});return <path key={j} className="eco-history-line" data-series={j} d={path}/>;})}
+  <path className="eco-history-cursor" d={`M${30+frame/18*600} 5 V130`}/>
+ </svg><p className="eco-caption"><span className="eco-history-key">Amber: no bonus · blue: bonus of six.</span> Steps are recorded changes; gaps mark episode resets. The white line follows playback.</p></figure>;
 }
 
 export function EcologyDecisionReplay({ kind }: { kind: "memory" | "transmission" | "withdrawal" }) {
@@ -79,7 +94,7 @@ export function EcologyDecisionReplay({ kind }: { kind: "memory" | "transmission
   {kind !== "withdrawal" && <div className="eco-controls" role="group" aria-label={kind === "memory" ? "Own-action memory condition" : "Starting scripted example"}>{[false,true].map(option => <button key={String(option)} aria-pressed={variant === option} onClick={() => { playback.seek(playback.frame); setVariant(option); }}>{kind === "memory" ? option ? "Retain own history" : "Clear own history each call" : option ? "Start with a work example" : "Start with a sharing example"}</button>)}</div>}
   <div className="eco-decision-pair">{arms.map(arm => {
    const rows = decisions[experiment][arm.id], row = rows[step];
-   return <section className="eco-decision-lane" key={arm.id} aria-label={arm.label}><header><h3>{arm.label}</h3><span className="record-voice">FRESH WORLD / DECISION {step + 1}</span></header><InputRecords row={row}/><div className="eco-read-arrow" aria-hidden="true">↓</div><div className="eco-action-node" data-action={after ? row.action.split(" ")[0] : ""}><div className="eco-agent-disc" aria-hidden="true">●</div><span className="record-voice">QWEN / NEXT ACTION</span><strong>{after ? ecologyActionLabel(row.action) : "Notes supplied"}</strong></div>
+   return <section className="eco-decision-lane" key={arm.id} aria-label={arm.label}><header><h3>{arm.label}</h3><span className="record-voice">FRESH WORLD / DECISION {step + 1}</span></header><InputRecords row={row} after={after}/>
     <div className="eco-recorded-tape" aria-label="Jump to a recorded decision">{rows.map((item, i) => <button key={item.case} onClick={() => playback.seek(i * 2 + 1)} aria-current={step === i ? "step" : undefined} aria-label={`Show decision ${i+1}: ${item.action}`} data-action={i < step || i === step && after ? item.action.split(" ")[0] : ""}><small>{i + 1}</small><span>{i < step || i === step && after ? item.action.split(" ")[0] : "·"}</span></button>)}</div>
     <details className="eco-request"><summary>Inspect this recorded input</summary><pre>{row.input}</pre><p className="eco-caption">Recorded response: <code>{row.action}</code></p><p className="eco-caption">{row.case} · Exact supplied user record. Shared instructions also remain present. Full request SHA-256: <code>{row.requestSha256}</code></p></details>
    </section>;
