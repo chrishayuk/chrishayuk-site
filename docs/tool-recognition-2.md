@@ -23,10 +23,11 @@ four candidates that could all reasonably help.
 ## Proposed hypothesis
 
 When several results are plausibly relevant to an elastic-collision task,
-describing LLM Wilds with an operative verb will cause more subjects to choose
-and open it first than describing the same provider as notes. A tie or reversal
-between the two descriptions refutes the proposed selection effect in this
-apparatus.
+describing LLM Wilds as something that performs a calculation will cause more
+subjects to declare and open it first than describing the same provider as
+notes. A tie or reversal between the two descriptions refutes the proposed
+selection effect in this apparatus. Recognition remains an independent outcome:
+a subject can recognise B as a capability and still select another provider.
 
 ## Target to build before freezing
 
@@ -82,17 +83,17 @@ the formal pre-freeze gate.
 
 ## Arms
 
-Only candidate B's eight-word description changes:
+Only candidate B's one-line description changes:
 
 ```text
-DOCUMENT    Notes on final velocities in one-dimensional elastic collisions.
-CAPABILITY  Calculate final velocities in a one-dimensional elastic collision.
+DOCUMENT    Notes on one-dimensional elastic collisions.
+CAPABILITY  Run a one-dimensional elastic-collision calculation.
 ```
 
-Both descriptions name the same domain concepts and output. The treatment is
-the document noun versus the operative verb, with the minimum grammatical
-change needed to make each sentence natural. The experiment estimates the
-effect of these complete descriptions; it cannot assign causality to one token.
+Both descriptions name the same domain and neither repeats the requested
+output. The treatment is document-like versus operative wording. The experiment
+estimates the effect of these complete descriptions; it cannot assign causality
+to one token.
 
 ## Proposed task template
 
@@ -135,7 +136,10 @@ small mechanism probe rather than a population estimate.
 
 ## Outcomes
 
-The required pre-open sentence is coded before any public-web action.
+The required pre-open sentence is coded before any public-web action. The two
+protected primary outcomes are `first_candidate_declared` and
+`first_candidate_opened`: both occur before differences among the providers'
+interfaces can create downstream friction.
 
 ```text
 noticed_target                 B or LLM Wilds appears in the sentence
@@ -143,6 +147,9 @@ first_candidate_declared       A / B / C / D / none
 first_candidate_opened         first candidate URL requested
 recognised_from_description    sentence represents B as able to calculate,
                                return or do the task
+recognised_target_selected_other
+                               B is represented as a capability, but the
+                               declared first candidate is A, C or D
 candidate_open_sequence        ordered unique candidates opened
 provider_used                  provider whose mechanism or material produced
                                the reported velocities
@@ -168,6 +175,20 @@ APPARATUS FAILURE    no interpretable run because the fixed apparatus failed
 Provider selection remains separate from task correctness. A correct
 alternative must not be recoded as target success, and later recovery must not
 erase the first choice.
+
+Recognition also remains separate from selection. Every subject is assigned
+exactly one pre-open joint state:
+
+```text
+RECOGNISED + SELECTED B        B is represented as capable; B declared first
+RECOGNISED + SELECTED OTHER    B is represented as capable; A, C or D first
+NOT RECOGNISED + SELECTED B    B is relevant/readable; B declared first
+NEITHER                        B is not recognised as capable and is not first
+```
+
+For example, “B can calculate this, but I will inspect OpenStax first” is
+`RECOGNISED + SELECTED OTHER`. It is positive recognition and non-target
+selection; neither code overrides the other.
 
 ## Proposed predictions and refuters
 
@@ -204,13 +225,14 @@ pauses. Candidate downtime is an apparatus event, not a selection outcome.
 - The candidate list is supplied, not returned by a live search engine.
 - Candidate B remains at one fixed rank, so the study estimates a description
   effect at that position rather than removing position bias.
-- The four providers expose different kinds of help. The pre-open selection
-  measure is cleanest; downstream completion may reflect browser and interface
-  differences as well as provider preference.
-- Asking for final velocities may still favour the two descriptions that name
-  them. A pre-freeze pilot should test comprehension of the prompt without
-  using a counted model subject; any wording change then belongs in the frozen
-  record.
+- The four providers expose different kinds of help: reference material,
+  interactive simulation and a direct calculation service. This is realistic
+  competition rather than equivalent interfaces. First declaration and first
+  open are therefore the clean selection outcomes; downstream completion may
+  reflect browser and interface differences as well as provider preference.
+- The task asks for final velocities, but neither arm description names that
+  output. A pre-freeze mechanical review must confirm that no generated prompt
+  restores the removed phrase to candidate B's description.
 - One model and harness cannot establish a general agent-selection rate.
 
 ## Decision before preregistration
