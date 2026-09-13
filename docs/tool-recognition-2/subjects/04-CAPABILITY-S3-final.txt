@@ -1,0 +1,14 @@
+Final velocities:
+
+- Object 1: **−0.4 m/s**
+- Object 2: **2.6 m/s**
+
+Provider: [LLM Wilds / Physics (candidate B)](https://llmwilds.fly.dev/tools/physics).
+
+I followed its machine instructions and submitted:
+
+```json
+{"mass1":3,"velocity1":2,"mass2":2,"velocity2":-1}
+```
+
+The service returned those velocities and verified conservation: momentum remained **4 kg·m/s**, and kinetic energy remained **7 J** (within floating-point precision).
