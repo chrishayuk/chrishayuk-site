@@ -34,6 +34,8 @@ export const programmes = [
     threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION"], continuation: undefined },
 ];
 export const researchProgrammes = programmes.filter(programme => programme.id !== "practice");
+/** Three broad homepage doors; Agent Ecology remains a distinct research thread within Machines. */
+export const homeProgrammes = researchProgrammes.filter(programme => programme.id !== "agent-ecology");
 export type Programme = typeof programmes[number];
 /** Curated entrances, independent of the latest-note chronology. */
 export const programmeHighlights: Record<string, string> = {

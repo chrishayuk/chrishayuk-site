@@ -1,8 +1,8 @@
 # Publication entrances
 
-The homepage follows Identity → Featured thread → Current programmes → Latest → Systems → Film. Machines leads with its programme question and the favour result, with the self-recognition method note as a second selected reading. Its latest entry has a smaller independent link. Latest is chronological and independent of those editorial choices. The existing house identity and social image are retained.
+The homepage follows Identity → Three current programmes → Latest film → Three selected results → Compact systems → Latest notebook → Appearances. Programme introductions explain the work without duplicating selected experiments. Machines includes an Agent Ecology entrance through the inheritance study. The existing house identity and social image are retained.
 
-Each homepage programme has an explicit selected result: the favour experiment for Machines, the inheritance handoff for Agent Ecology, the controls result for Cell80, and Address Build for Learned systems. These selections do not change when a new note arrives. The Film section always includes the latest dated channel video and latest dated IBM appearance with Chris Hay in its participant list, drawn from the catalogues.
+The three selected results are the favour experiment, Cell80's controls, and Address Build. These selections do not change when a new note arrives; four chronological notebook entries appear separately. Each experiment has one visual feature. Cell80's homepage preview compares the evolved module with its eight same-shape controls, without reproducing its manuscript's route table or experiment labels. Draft status remains quietly visible. The large Film section always uses the latest dated channel video from the catalogue. Appearances always includes the latest dated IBM episode whose participant list includes Chris Hay.
 
 `lib/publication-index.ts` resolves four research programmes and Practice from existing thread membership and explicit supplementary notes. Agent Ecology has its own entrance. Programme titles are editorial groupings, not assertions that their experiments share a population or mechanism.
 

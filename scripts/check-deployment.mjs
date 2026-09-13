@@ -34,20 +34,23 @@ assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
-assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "now", "programmes", "latest", "systems", "film"]);
-for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause", "/work/mcp-cli"]) assert.ok(home.body.includes(`href="${path}"`));
+assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "programmes", "film", "results", "systems", "notebook", "appearances"]);
+for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause"]) assert.ok(home.body.includes(`href="${path}"`));
 const { latestNotes, notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
-const { researchProgrammes, programmeHighlight, programmeInvitations } = await import('../lib/publication-index.ts');
-assert.equal(researchProgrammes.length, 4);
-for (const programme of researchProgrammes) {
+const { homeProgrammes, programmeHighlight, programmeInvitations } = await import('../lib/publication-index.ts');
+assert.equal(homeProgrammes.length, 3);
+assert.equal((home.body.match(/class="mm-card-results"/g) || []).length, 1, "Favour has one visual feature");
+assert.equal((home.body.match(/data-selected-experiment=/g) || []).length, 3);
+assert.doesNotMatch(home.body, /START WITH THIS EXPERIMENT|CELL80 \/ 06 · AP-0–AP-2/);
+for (const programme of homeProgrammes) {
  const highlight = programmeHighlight(programme);
  const invitation = programmeInvitations[programme.id];
  assert.ok(highlight && invitation, `${programme.id}: selected experiment and invitation`);
  assert.ok(home.body.includes(`href="/notebook/${highlight.slug}#${invitation.anchor}"`), `${programme.id}: direct entrance into the selected experiment`);
 }
 const homeLatest = home.body.match(/<section id="latest"[\s\S]*?<\/section>/)?.[0];
-assert.equal((homeLatest?.match(/<li>/g) || []).length, 3);
-for (const note of latestNotes.slice(0, 3)) assert.ok(homeLatest.includes(`/notebook/${note.slug}`));
+assert.equal((homeLatest?.match(/<li>/g) || []).length, 4);
+for (const note of latestNotes.slice(0, 4)) assert.ok(homeLatest.includes(`/notebook/${note.slug}`));
 // The Cell80 edition uses authored HAUSE rooms and preserves its draft record.
 for (const slug of ['can-you-name-the-mutation-that-changed-a-world','what-keeps-an-evolving-world-alive','when-does-improvement-become-invention']) {
  const note=await request(`/notebook/${slug}`);
@@ -566,9 +569,10 @@ console.log("The task-boundary note, visible payoff and four agent outcomes veri
 
 // Both experimental strands have a visible homepage entrance. The five machine
 // studies form one reading journey without merging their experimental units.
-assert.match(home.body, /id="now"/);
-assert.match(home.body, /MACHINES \/ A RESEARCH THREAD/);
-assert.ok(home.body.indexOf('id="now"') < home.body.indexOf('id="current-programmes"'));
+assert.match(home.body, /id="selected-results"/);
+assert.match(home.body, /What can an agent discover, trust and leave behind/);
+assert.ok(home.body.indexOf('id="current-programmes"') < home.body.indexOf('id="latest-youtube"'));
+assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="selected-results"'));
 const machineThread=await request('/thread/machines');
 assert.equal(machineThread.status,200);
 assert.match(machineThread.body,/Machine experiments reading order/);

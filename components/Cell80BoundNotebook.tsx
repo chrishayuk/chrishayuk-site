@@ -9,6 +9,7 @@ import { EvidenceTable } from "@chrishayuk/hause/components/EvidenceTable";
 import type { PublicationRecord } from "@/lib/types";
 import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { Acts } from "./Acts";
+import controls from "@/lib/data/cell80-bound-controls.json";
 
 /** The centrepiece: each route, what it looked like, and the control that explained it. */
 const routes = [
@@ -49,7 +50,13 @@ export function Cell80BoundNotebook({record}:{record:PublicationRecord}) {
   <NotebookNavigation><Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↑</a><a href="#cell80-record">READ THE FULL NOTE ↑</a><Link href="/thread/cell80#further-notes">ALL SIX NOTES ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 
-export function Cell80BoundCard() {
+export function Cell80BoundCard({ exhibition = false }: { exhibition?: boolean } = {}) {
+  if (exhibition) return <div className="cell80-preview cell80-reach-preview">
+    <div className="cell80-reach-bars" role="img" aria-label="Newly reachable programs within three mutations: the evolved module and each of eight arbitrary modules of the same shape all add 27,888.">
+      {controls.controls.map((row, index) => <div key={row.module} data-evolved={index === 0}><span>{index === 0 ? "Evolved" : `Control ${index}`}</span><i aria-hidden="true"/><strong>{row.built_on_unreachable_before.toLocaleString("en-GB")}</strong></div>)}
+    </div>
+    <span className="record-voice">NEW PROGRAMS REACHED WITHIN THREE MUTATIONS</span>
+  </div>;
   return <div className="cell80-preview cell80-further-preview"><span className="record-voice">CELL80 / 06 · AP-0–AP-2</span>
     <div className="cell80-bound-preview" role="img" aria-label="Four routes and the control that explained each: the barrier by a dependence in the energy rule, composition by containment, encapsulation by compression, niche construction by a chemistry that could not make niches both specific and usable.">
       {routes.map(route => <div key={route.id}><span className="record-voice">{route.label}</span><i aria-hidden="true"/><p>{route.explained}</p></div>)}
