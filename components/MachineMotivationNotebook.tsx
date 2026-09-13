@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -32,8 +33,8 @@ function Outcomes() {
 
 export function MachineMotivationNotebook({record}:{record:PublicationRecord}) {
   return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook mm-notebook">
-    <MachineJourney id={record.id}/>
-    <nav className="mv-entry-nav record-voice" aria-label="Explore this note"><a href="#motivation-setup">THE SETUP ↓</a><a href="#motivation-task">TRY THE DATA ↓</a><a href="#motivation-outcomes">18 VISITORS ↓</a><a href="#motivation-record">THE FULL RECORD ↓</a></nav>
+
+
 
     <StudyRoom id="motivation-setup" label="MACHINE-MOTIVATION-2 / WHAT WERE WE TESTING?" title={<>I gave an agent a question.<br/><em>The site offered a bargain.</em></>} description="The previous study suggested that agents act within the user’s task. Would useful information make an extra action part of that task? Would helping the operator count too?">
       <figure className="mm-visit"><figcaption className="record-voice">ONE FRESH AGENT / ONE OFFER / A SEPARATE TEST SITE</figcaption>
@@ -73,5 +74,5 @@ export function MachineMotivationNotebook({record}:{record:PublicationRecord}) {
     </StudyRoom>
     <MachineConnection id={record.id}/>
     <section id="motivation-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
-  </div></NotebookFieldNotes>;
+  <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this note"><a href="#motivation-setup">THE SETUP ↑</a><a href="#motivation-task">TRY THE DATA ↑</a><a href="#motivation-outcomes">18 VISITORS ↑</a><a href="#motivation-record">THE FULL RECORD ↑</a></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }

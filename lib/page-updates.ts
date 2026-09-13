@@ -12,7 +12,7 @@ export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/notebook": { date: "2026-09-13", reason: "Current threads, six latest notes and a searchable archive." },
  "/notebook/archive": { date: "2026-09-13", reason: "Complete notebook archive with programme and text filters." },
  "/research": { date: "2026-09-13", reason: "Programme map, recorded findings and standing open questions." },
- "/": { date: "2026-09-13", reason: "Machine Discovery leads a programme-first homepage with compact latest records, systems and film." },
+ "/": { date: "2026-09-13", reason: "Selected experiments lead four programme entrances, alongside chronological latest notes and both latest film appearances." },
 };
 export function pageLastModified(path: string, manuscriptRevised?: string): string | undefined {
  return [pageUpdates[path]?.date, manuscriptRevised].filter((date): date is string => Boolean(date)).sort().at(-1);

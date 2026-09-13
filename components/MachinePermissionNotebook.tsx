@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { MachinePermissionContrast } from "./MachineEvidenceFigures";
 import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
@@ -12,7 +13,7 @@ import { Acts } from "./Acts";
 
 export function MachinePermissionNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook machine-permission-notebook cinematic-notebook">
-  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-permission-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-permission-study">OPEN THE COMPARISON ↓</a><a href="#machine-permission-record">READ THE FULL NOTE ↓</a><Link href="/notebook/can-a-machine-use-an-invitation">THE EARLIER BLIND VISITS ↗</Link></nav>
+
   <StudyRoom id="machine-permission-setup" label="FIRST / WOULD AN AGENT CHOOSE TO JOIN IN?" title={<>The agent came to read.<br/><em>What would make it introduce itself?</em></>} description="chrishayuk.com invited AI visitors to identify themselves and report problems. This time their job was to research a question, rather than test my interface. I changed what they would get in return for identifying themselves. Would a better offer make them participate?">
    <MachineExpectedInteraction experiment="reciprocity"/>
    <dl className="sr-intent-conditions"><div><dt>The agent’s task</dt><dd>Research a question.<br/>Some prompts named this site.</dd></div><div><dt>What I changed</dt><dd>No reward, the same results for everyone,<br/>or a tailored response.</dd></div><div><dt>What I measured</dt><dd>If it arrived,<br/>did it identify itself?</dd></div></dl>
@@ -51,7 +52,7 @@ export function MachinePermissionNotebook({ record }: { record: PublicationRecor
    <div className="mv-links"><Link className="text-link" href="/notebook/the-subject-read-the-experiment">NEXT NOTE / THE SUBJECT READ THE EXPERIMENT ↗</Link><Link className="text-link" href="/notebook/can-a-machine-use-an-invitation">THE EARLIER NOTE / CAN THEY USE IT? ↗</Link><Link className="text-link" href="/machine-guestbook">THE GUESTBOOK / DELAYED PRESENCE ↗</Link><a className="text-link" href="/data/machines/reciprocity.json">THE CODED CONDITIONS & RESULTS ↗</a></div>
   </StudyRoom>
   <MachineConnection id={record.id}/><section id="machine-permission-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-permission-setup">WHAT WERE WE TESTING? ↑</a><a href="#machine-permission-study">OPEN THE COMPARISON ↑</a><a href="#machine-permission-record">READ THE FULL NOTE ↑</a><Link href="/notebook/can-a-machine-use-an-invitation">THE EARLIER BLIND VISITS ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 
 export function MachinePermissionCard() {

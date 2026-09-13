@@ -37,6 +37,14 @@ assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-sc
 assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "now", "programmes", "latest", "systems", "film"]);
 for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause", "/work/mcp-cli"]) assert.ok(home.body.includes(`href="${path}"`));
 const { latestNotes, notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
+const { researchProgrammes, programmeHighlight, programmeInvitations } = await import('../lib/publication-index.ts');
+assert.equal(researchProgrammes.length, 4);
+for (const programme of researchProgrammes) {
+ const highlight = programmeHighlight(programme);
+ const invitation = programmeInvitations[programme.id];
+ assert.ok(highlight && invitation, `${programme.id}: selected experiment and invitation`);
+ assert.ok(home.body.includes(`href="/notebook/${highlight.slug}#${invitation.anchor}"`), `${programme.id}: direct entrance into the selected experiment`);
+}
 const homeLatest = home.body.match(/<section id="latest"[\s\S]*?<\/section>/)?.[0];
 assert.equal((homeLatest?.match(/<li>/g) || []).length, 3);
 for (const note of latestNotes.slice(0, 3)) assert.ok(homeLatest.includes(`/notebook/${note.slug}`));
@@ -689,6 +697,12 @@ for(const node of notebookNodes) {
  const page=await request(path);
  assert.equal(page.status,200,path);
  checkLegibility(node,page.body);
+ if (page.body.includes('visual-notebook-record')) {
+  const opening = page.body.match(/<header class="(?:record-header|agent-hero)"[\s\S]*?<\/header>/)?.[0];
+  assert.ok(opening, `${node.id}: notebook opening`);
+  assert.doesNotMatch(opening, /class="record-bar|class="notebook-synopsis|class="machine-brief/);
+  assert.ok(page.body.includes('class="notebook-afterword"'), `${node.id}: research apparatus remains after the experiment`);
+ }
  const passages=graph.nodes.filter(passage=>passage.kind==='act'&&passage.recordId===node.id);
  assert.ok(passages.length>0,`${node.id} has no authored passages`);
  for(const passage of passages) {

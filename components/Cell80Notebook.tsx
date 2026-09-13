@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { Cell80SurvivalGate } from "./Cell80EvidencePath";
 import { Cell80Journey, Cell80Connection } from "./Cell80Journey";
 import Link from "next/link";
@@ -107,7 +108,7 @@ function InventionNotebook() {
 
 export function Cell80Notebook({ record }: { record: PublicationRecord }) {
   const part = cell80Part(record.id);
-  return <NotebookFieldNotes><div className="cell80-notebook cinematic-notebook"><Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↓</a><a href="#cell80-record">READ THE FULL NOTE ↓</a><Link href="/thread/cell80">ALL SIX NOTES ↗</Link></nav><p className="cell80-reading-key">Dotted terms have short explanations.</p>{part === 1 ? <ReplayNotebook/> : part === 2 ? <SurvivalNotebook/> : <InventionNotebook/>}<Cell80Connection id={record.id}/><PriorWork part={part}/><ReadingRecord record={record}/></div></NotebookFieldNotes>;
+  return <NotebookFieldNotes><div className="cell80-notebook cinematic-notebook"><p className="cell80-reading-key">Dotted terms have short explanations.</p>{part === 1 ? <ReplayNotebook/> : part === 2 ? <SurvivalNotebook/> : <InventionNotebook/>}<Cell80Connection id={record.id}/><PriorWork part={part}/><ReadingRecord record={record}/><NotebookNavigation><Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↑</a><a href="#cell80-record">READ THE FULL NOTE ↑</a><Link href="/thread/cell80">ALL SIX NOTES ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 
 export function Cell80Card({ part, compact = false }: { part: number; compact?: boolean }) {

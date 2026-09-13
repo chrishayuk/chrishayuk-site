@@ -51,6 +51,15 @@
 .curated-systems p{font:14px/1.8 var(--font-inter);color:var(--muted)}
 .curated-home .home-film-caption h3{font:clamp(30px,4vw,54px)/1.12 var(--font-fraunces);max-width:24ch}
 .curated-home .home-latest-film{border-top:1px solid var(--rule)}
+.visual-notebook-record .record-header{padding-bottom:40px}
+.visual-notebook-record .record-header .breadcrumbs{margin-bottom:32px}
+.notebook-state{color:var(--muted)}
+.notebook-afterword{margin-bottom:40px}
+.notebook-afterword>.machine-brief{margin-inline:0}
+.notebook-afterword .record-summary{margin:24px 0}
+.notebook-reading-map{margin:35px 0}
+.notebook-reading-map>nav,.notebook-reading-map>p{margin-inline:20px}
+.agent-hero>.dek{font:clamp(18px,2vw,24px)/1.6 var(--font-inter);max-width:48ch;margin:24px auto 35px}
 .machine-home-selected{padding-top:24px;margin-top:26px;border-top:1px solid var(--rule)}
 .machine-home-selected>.record-voice{font-size:10px;color:var(--muted)}
 .machine-home-selected h3{font:clamp(27px,3vw,40px)/1.2 var(--font-fraunces);margin:16px 0}

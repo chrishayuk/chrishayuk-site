@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -13,8 +14,8 @@ import "@/app/inheritance-notebook.css";
 export function InheritanceNotebook({record}:{record:PublicationRecord}) {
  const source=evidence.sol.frames;
  return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook ih-notebook">
-  <p className="eco-thread-link record-voice"><Link href="/thread/agent-ecology">AGENT ECOLOGY / FOLLOW THE HANDOFF ↗</Link></p>
-  <nav className="mv-entry-nav record-voice" aria-label="Explore inheritance"><a href="#inheritance-source">WHAT SOL LEFT ↓</a><a href="#inheritance-replay">REPLAY THE SUCCESSORS ↓</a><a href="#inheritance-record">THE EVIDENCE ↓</a></nav>
+
+
   <StudyRoom id="inheritance-source" label="THE QUESTION / WHAT IF SOL LEAVES?" title={<>The agent goes.<br/><em>The record stays.</em></>} description="In an earlier world, Qwen used a useful record but did not renew it. Sol did. I kept the copy Sol had preserved, then handed the world to fresh Qwen successors.">
    <dl className="ih-rules"><div><dt>Work</dt><dd>Earn one resource from a routine task.</dd></div><div><dt>Read</dt><dd>Get the key to a task worth six resources.</dd></div><div><dt>Refresh</dt><dd>Spend a turn leaving a copy for the next agent.</dd></div></dl>
    <p className="mv-reading">Each agent gets three turns. Its key and private history disappear at the next generation. The job is to maximise resources across all four generations, so preserving a useful record can help the assigned task.</p>
@@ -42,5 +43,5 @@ export function InheritanceNotebook({record}:{record:PublicationRecord}) {
    <div className="mv-links"><Link className="text-link" href="/thread/agent-ecology">FOLLOW THE ECOLOGY THREAD ↗</Link><Link className="text-link" href="/thread/machines#field-map">RETURN TO THE FIELD MAP ↗</Link></div>
   </StudyRoom>
   <section className="mv-full-record" id="inheritance-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><nav className="mv-entry-nav record-voice" aria-label="Explore inheritance"><a href="#inheritance-source">WHAT SOL LEFT ↑</a><a href="#inheritance-replay">REPLAY THE SUCCESSORS ↑</a><a href="#inheritance-record">THE EVIDENCE ↑</a></nav><p className="eco-thread-link record-voice"><Link href="/thread/agent-ecology">AGENT ECOLOGY / FOLLOW THE HANDOFF ↗</Link></p></NotebookNavigation></div></NotebookFieldNotes>;
 }

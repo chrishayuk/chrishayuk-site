@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { Cell80TimingGate, Cell80InheritanceGate } from "./Cell80EvidencePath";
 import { Cell80Journey, Cell80Connection } from "./Cell80Journey";
 import Link from "next/link";
@@ -76,10 +77,10 @@ function InheritedHistory() {
 
 export function Cell80FurtherNotebook({record}:{record:PublicationRecord}) {
   return <NotebookFieldNotes><div className="cell80-notebook cinematic-notebook">
-    <Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↓</a><a href="#cell80-record">READ THE FULL NOTE ↓</a><Link href="/thread/cell80#further-notes">ALL SIX NOTES ↗</Link></nav><p className="cell80-reading-key">Dotted terms have short explanations.</p>
+    <p className="cell80-reading-key">Dotted terms have short explanations.</p>
     {cell80FurtherPart(record.id) === 1 ? <Barrier/> : <InheritedHistory/>}
     <Cell80Connection id={record.id}/><section className="cell80-reading-record" id="cell80-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
-  </div></NotebookFieldNotes>;
+  <NotebookNavigation><Cell80Journey id={record.id}/><nav className="cell80-entry-nav record-voice" aria-label="Explore this note"><a href="#cell80-study">ENTER THE STUDY ↑</a><a href="#cell80-record">READ THE FULL NOTE ↑</a><Link href="/thread/cell80#further-notes">ALL SIX NOTES ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 
 export function Cell80FurtherCard({part}:{part:number}) {

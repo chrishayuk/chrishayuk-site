@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { MachineRevisionSequence } from "./MachineEvidenceFigures";
 import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineVerbStudy } from "./MachineVerbStudy";
@@ -14,7 +15,7 @@ import { Acts } from "./Acts";
 
 export function MachineVisitNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook">
-  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-visit-setup">WHAT WERE WE TESTING? ↓</a><a href="#machine-visit-study">FOLLOW A VISITOR ↓</a><a href="#machine-visit-record">READ THE FULL NOTE ↓</a><Link href="/notebook">THE NOTEBOOK ↗</Link></nav>
+
   <StudyRoom id="machine-visit-setup" label="FIRST / THE AGENT AND THE WEBSITE" title={<>Could it introduce itself?<br/><em>Could it tell me what broke?</em></>} description="I added ways for AI visitors to identify themselves and leave feedback on chrishayuk.com. Then I sent fresh agents to try them using only the public website. Could they find the invitation, understand it and get an action through?">
    <MachineExpectedInteraction experiment="visit"/>
    <dl className="sr-intent-conditions"><div><dt>The agent’s task</dt><dd>Explore this website.<br/>Try the machine interface.</dd></div><div><dt>What I changed</dt><dd>Fix the site between visits.<br/>Send a fresh agent each time.</dd></div><div><dt>What I watched</dt><dd>Discovery, self-description,<br/>feedback—and would it bother?</dd></div></dl>
@@ -50,7 +51,7 @@ export function MachineVisitNotebook({ record }: { record: PublicationRecord }) 
    <div className="mv-links"><Link className="text-link" href="/notebook/does-an-invitation-count-as-permission">NEXT NOTE / DOES AN INVITATION COUNT AS PERMISSION? ↗</Link><Link className="text-link" href="/readership">THE OBSERVATORY / WHAT ARRIVES ↗</Link><Link className="text-link" href="/machine-guestbook">THE GUESTBOOK / WHAT REMAINS ↗</Link><Link className="text-link" href="/notebook/can-you-name-the-mutation-that-changed-a-world">ANOTHER EXPERIMENT / CELL80 ↗</Link></div>
   </StudyRoom>
   <MachineConnection id={record.id}/><section id="machine-visit-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#machine-visit-setup">WHAT WERE WE TESTING? ↑</a><a href="#machine-visit-study">FOLLOW A VISITOR ↑</a><a href="#machine-visit-record">READ THE FULL NOTE ↑</a><Link href="/notebook">THE NOTEBOOK ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 
 export function MachineVisitCard() {

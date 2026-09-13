@@ -20,7 +20,7 @@ type PageProps = { params: Promise<{section:string}>; searchParams: Promise<{[ke
 const first = (value: string|string[]|undefined) => Array.isArray(value) ? value[0] : value;
 const descriptions: Record<string,string> = {
  notebook: "Experiments, working notes and essays from the work. Follow current threads or explore the notebook archive.",
- research: "Experiments, evidence and open questions. A map of Machines, Cell80 and learned-system research, with recorded findings and sources.",
+ research: "Experiments, evidence and open questions. A map of Machines, Agent Ecology, Cell80 and learned-system research, with recorded findings and sources.",
  ideas: "Questions, research and the notebook. Chris Hay’s thinking before the answer.",
  systems: "LARQL, VINDEX3, HAUSE and MCP-CLI. Systems by Chris Hay, with their own identities and a place in the record.",
  objects: "Films, interfaces and publications by Chris Hay. Ideas made real.",

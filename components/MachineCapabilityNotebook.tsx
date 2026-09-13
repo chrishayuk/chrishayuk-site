@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { NotebookFieldNotes } from "./NotebookFieldNotes";
@@ -11,8 +12,8 @@ import "@/app/machine-capability.css";
 
 export function MachineCapabilityNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook wc-notebook">
-  <MachineJourney id={record.id}/>
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this note"><a href="#capability-task">TRY THE SIX ROUTES ↓</a><a href="#capability-result">SEE THE RESULT ↓</a><a href="#capability-harness">SWITCH THE CHANNEL ↓</a></nav>
+
+
   <StudyRoom id="capability-task" label="THE TASK / FIND ONE NUMBER" title={<>One answer.<br/><em>Six ways to get it.</em></>} description="K17 was just a name for a number the agent had to find. The page explained how to obtain it, but did not contain the answer. Each visitor had to use the mechanism it was offered.">
    <MachineCapabilityStudy/>
    <p className="mv-reading">The first four routes return an answer. A socket needs a client. A module needs to be run. I expected those last two to lose agents.</p>
@@ -38,5 +39,5 @@ export function MachineCapabilityNotebook({ record }: { record: PublicationRecor
   </StudyRoom>
   <MachineConnection id={record.id}/>
   <section id="capability-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this note"><a href="#capability-task">TRY THE SIX ROUTES ↑</a><a href="#capability-result">SEE THE RESULT ↑</a><a href="#capability-harness">SWITCH THE CHANNEL ↑</a></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
