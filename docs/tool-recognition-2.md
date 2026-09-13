@@ -75,6 +75,11 @@ The external descriptions must be checked against the live pages before
 freeze. They are controlled candidate summaries, not claimed verbatim search
 snippets.
 
+The design-draft availability check is recorded at
+`docs/tool-recognition-2/gate/00-design-draft-availability.md`: A, C and D
+returned 200; the unbuilt target route B returned 404, as expected. This is not
+the formal pre-freeze gate.
+
 ## Arms
 
 Only candidate B's eight-word description changes:
