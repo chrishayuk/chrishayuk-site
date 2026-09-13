@@ -85,7 +85,7 @@ test("programme indexes cover every listed note without promoting drafts or losi
   if (index) assert.ok(noteDate(notebookNotes[index - 1]) >= noteDate(note));
  }
  assert.equal(latestNotes.length, 6);
- assert.equal(nowNote?.id, "N-MACHINE-DISCOVERY");
+ assert.equal(nowNote?.id, "N-MACHINE-MOTIVATION");
  assert.equal(noteDate({ ...notebookNotes[0], published: undefined, created: "2026-09-01", revised: "2026-09-13" }), "2026-09-01");
 });
 

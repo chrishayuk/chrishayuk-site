@@ -19,6 +19,16 @@ function request(path, host = "chrishayuk.com", headers = {}) {
 const home = await request("/");
 assert.equal(home.status, 200);
 assert.match(home.body, /href="\/film\/mixture-of-experts"/);
+const { latestVideo: homeYoutube, latestMoe: homeMoe, videoPath: homeVideoPath } = await import('../lib/youtube.ts');
+for (const [id, video] of [["latest-youtube", homeYoutube], ["latest-mixture-of-experts", homeMoe]]) {
+ const start = home.body.indexOf(`<article id="${id}"`);
+ assert.ok(start >= 0, `${id} stays on the homepage`);
+ const feature = home.body.slice(start, home.body.indexOf('</article>', start));
+ assert.ok(feature.includes('cinema-player'), `${id} has a playable video`);
+ assert.ok(feature.includes(`href="${homeVideoPath(video)}"`), `${id} uses the latest catalogue selection`);
+}
+assert.ok(homeMoe.participants.includes("Chris Hay"));
+assert.match(home.body, /WITH CHRIS HAY AS A PANELIST/);
 assert.match(home.body, /rel="canonical" href="https:\/\/chrishayuk.com"/);
 assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
@@ -549,7 +559,7 @@ console.log("The task-boundary note, visible payoff and four agent outcomes veri
 // Both experimental strands have a visible homepage entrance. The five machine
 // studies form one reading journey without merging their experimental units.
 assert.match(home.body, /id="now"/);
-assert.match(home.body, /NOW \/ MACHINE DISCOVERY/);
+assert.match(home.body, /MACHINES \/ A RESEARCH THREAD/);
 assert.ok(home.body.indexOf('id="now"') < home.body.indexOf('id="current-programmes"'));
 const machineThread=await request('/thread/machines');
 assert.equal(machineThread.status,200);
@@ -588,7 +598,7 @@ assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noinde
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
 assert.ok(home.body.includes(`href="/notebook/the-site-was-there-the-agent-never-saw-it"`));
-assert.match(home.body,/md-card-result/);
+assert.match(home.body,/mm-card-results/);
 assert.match(notebookCollection.body,/Published/);
 assert.ok(sitemap.body.includes(motivationPath));
 assert.ok(notebookFeed.body.includes(motivationPath));

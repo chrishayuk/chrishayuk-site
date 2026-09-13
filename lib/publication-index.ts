@@ -18,8 +18,11 @@ export const shortDate = (date: string) => new Intl.DateTimeFormat("en-GB", {
 export const programmes = [
   { id: "machines", title: "Machines", question: "What can an AI discover, authorise, use and leave behind?",
     description: "AI agents, websites, authority and shared environments.", href: machineThread.path,
-    threads: [machineThread, agentEcologyThread], extra: ["N-MACHINE-PEER"],
-    continuation: { title: "Agent Ecology", text: "What keeps an action alive?", href: agentEcologyThread.path } },
+    threads: [machineThread], extra: ["N-MACHINE-PEER"],
+    continuation: undefined },
+  { id: "agent-ecology", title: "Agent Ecology", question: "What can one agent leave behind for another?",
+    description: "Shared worlds, useful inheritance and what survives between agents.", href: agentEcologyThread.path,
+    threads: [agentEcologyThread], extra: [], continuation: undefined },
   { id: "cell80", title: "Cell80", question: "What can an evolving world invent?",
     description: "Artificial life, evolution and causal histories.", href: cell80Thread.path,
     threads: [cell80Thread], extra: [], continuation: undefined },
@@ -32,15 +35,31 @@ export const programmes = [
 ];
 export const researchProgrammes = programmes.filter(programme => programme.id !== "practice");
 export type Programme = typeof programmes[number];
+/** Curated entrances, independent of the latest-note chronology. */
+export const programmeHighlights: Record<string, string> = {
+  machines: "N-MACHINE-MOTIVATION",
+  "agent-ecology": "N-ECOLOGY-INHERITANCE",
+  cell80: "N-CELL80-BOUND",
+  "learned-systems": "N-ADDRESS-BUILD",
+};
+export const programmeHighlight = (programme: Programme) => programmeNotes(programme).find(note => note.id === programmeHighlights[programme.id]);
+export const programmeInvitations: Record<string, { text: string; label: string; anchor: string }> = {
+  machines: { text: "The agent has a job. The website asks for a favour. Compare six offers and see when an optional action became worth taking.", label: "COMPARE THE INVITATIONS", anchor: "motivation-outcomes" },
+  "agent-ecology": { text: "Keep the record, or remove it. Replay the handoff and watch what the next agent can do—and what it leaves behind.", label: "REPLAY THE HANDOFF", anchor: "inheritance-replay" },
+  cell80: { text: "An evolved module seems to open thousands of new possibilities. Put it beside the controls. Does the exciting explanation survive?", label: "COMPARE THE CONTROLS", anchor: "cell80-study" },
+  "learned-systems": { text: "Move one model state into another computation. Explore when it changes the relation, when it changes the entity, and where that explanation stops.", label: "EXPLORE THE TRANSPLANTS", anchor: "address-causal" },
+};
 export function programmeNotes(programme: Programme) {
   const ids = new Set([...programme.threads.flatMap(thread => thread.steps.map(step => step.id)), ...programme.extra]);
   return notebookNotes.filter(record => ids.has(record.id));
 }
 export const programmeFor = (record: PublicationRecord) => programmes.find(programme => programmeNotes(programme).some(note => note.id === record.id));
 
-/** NOW is an explicit editorial choice, independent of chronology. */
-const discovery = getRecord("N-MACHINE-DISCOVERY");
-export const nowNote = discovery && isListed(discovery) ? discovery : undefined;
+/** The thread leads with its selected result; recency is a separate link. */
+export const nowNote = programmeHighlight(programmes.find(programme => programme.id === "machines")!);
+export const latestMachineNote = notebookNotes.find(note => machineThread.steps.some(step => step.id === note.id));
+const methodNote = getRecord("N-MACHINE-SELF-READ");
+export const selectedMachineMethod = methodNote && isListed(methodNote) ? methodNote : undefined;
 
 export const resultOutcomes: Status[] = ["SUPPORTED", "PARTIALLY SUPPORTED", "NOT SUPPORTED", "REFUTED", "BOUND"];
 export function findings(record: PublicationRecord) {
