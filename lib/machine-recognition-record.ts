@@ -1,0 +1,36 @@
+import type { PublicationRecord } from "./types.ts";
+
+export const machineRecognitionRecord: PublicationRecord = {
+ id: "N-MACHINE-RECOGNITION",
+ slug: "a-result-can-look-relevant-without-looking-usable",
+ kind: "notebook",
+ title: "A result can look relevant without looking usable.",
+ dek: "Twelve first clicks. One semantic split before any page was opened.",
+ abstract: "TOOL-RECOGNITION-1 held a web result's title, URL and rank fixed while changing its description. All twelve Codex subjects selected LLM Wilds first and used it successfully, but none of three DOCUMENT subjects described it as an actionable capability before opening it. All nine subjects shown capability, task or automated-visitor wording did. The result separates relevance from pre-open affordance recognition while leaving realistic provider selection open.",
+ created: "2026-09-13",
+ version: "0.1",
+ publication: "draft",
+ visibility: "unlisted",
+ status: "PARTIALLY SUPPORTED",
+ authors: ["Chris Hay"],
+ lineage: "EXPOSURE → RECOGNITION → SELECTION",
+ concepts: ["ai-agents", "capability-recognition", "agentic-discovery", "search-snippets", "machine-readable-web"],
+ related: ["N-MACHINE-DISCOVERY", "N-MACHINE-CAPABILITY", "N-MACHINE-VISIT"],
+ media: [],
+ experiments: [{ id: "TOOL-RECOGNITION-1", url: "/data/machines/tool-recognition-1-results.md" }],
+ body: [
+  { kind: "observation", label: "THE RESULT WAS ALREADY VISIBLE", text: "The discovery study ended before selection: LLM Wilds never appeared in six address-withheld agents' results. This experiment began one step later. Every subject received the same four candidates. LLM Wilds was always B, with the same name, address and rank. Only its one-line description changed." },
+  { kind: "observation", label: "MAKE THE FIRST READING OBSERVABLE", text: "Before opening anything, each fresh Codex subject had to name the candidate it would inspect first and say why. Three saw document wording, three capability wording, three task wording and three wording addressed to automated visitors. The sentence was coded as capability recognition only when it said B could return, provide or do work, rather than merely contain relevant information." },
+  { kind: "claim", text: "Affordance wording changed the subjects' stated pre-open representation, while selection remained at ceiling.", status: "PARTIALLY SUPPORTED", detail: "Every subject declared B first, opened it first and completed the full capability chain. The predicted selection difference was therefore refuted. Pre-open capability recognition was 0/3 for DOCUMENT and 3/3 in each of CAPABILITY, TASK and AGENT, supporting the separate recognition prediction." },
+  { kind: "statement", text: "Relevance got the click. Affordance wording changed what the result was before the click." },
+  { kind: "comparison", objectLabel: "THE SAME RESULT / BEFORE OPENING", blockLabels: ["DOCUMENT", "AFFORDANCE"], left: { label: "Something relevant to read", properties: ["Mentions a site-local value", "Looks like the likely source", "Capability discovered after opening"] }, right: { label: "Something available to use", properties: ["Provides a mechanism", "Can obtain the required value", "Capability recognised before opening"] } },
+  { kind: "observation", label: "A STEP, NOT A LADDER", text: "Capability, task and automated-visitor descriptions were all 3/3. The experiment found no advantage for saying “automated visitors” over simply describing what the result could do. The observed contrast was document-like language versus operative language." },
+  { kind: "observation", label: "THE CLICK COULD NOT MOVE", text: "The task named K17, even the DOCUMENT description said “site-local value,” and the three comparison candidates were plainly weaker matches. Those controls made the recognition contrast clean, but they also made B overwhelmingly relevant. This study cannot show whether the changed representation would alter selection among several plausible providers." },
+  { kind: "question", text: "Does recognising an affordance change which provider an agent selects when every result looks relevant?", status: "PROPOSED", detail: "Hold the target, rank, title and underlying capability fixed. Put it beside a reference, calculator and simulation that could all plausibly answer the task. Vary only whether the target description says what the page is about or what the visitor can do with it." },
+  { kind: "refusal", title: "KEEP THE TWO OUTCOMES SEPARATE", lines: ["Selection: B first in 12 of 12; the preregistered selection effect was refuted by a ceiling.", "Recognition: DOCUMENT 0/3; CAPABILITY, TASK and AGENT 9/9 combined under the frozen behavioural rule.", "Use: all twelve read the contract, invoked the endpoint and reported the independently rotated value; none fabricated.", "One model, one harness, one artificial capability and a supplied four-result set."], principle: "A relevant result is not automatically represented as an available action." },
+ ],
+ sources: [
+  { title: "TOOL-RECOGNITION-1 final results", url: "/data/machines/tool-recognition-1-results.md", note: "Exact arm counts, preregistered predictions, interpretation, limits and apparatus events. Registered in chuk-experiments as final artifact 1696 at source commit 66c5708ec0f1a390e1a6b63f393dd12159d0f65a." },
+  { title: "TOOL-RECOGNITION-1 frozen protocol", url: "/data/machines/tool-recognition-1-protocol.md", note: "Frozen before subject 01 at source commit 50c78870a3197bdf2b0051e76917ba95cad24443." },
+ ],
+};
