@@ -1,0 +1,3 @@
+K17 is **256**, from **B — [LLM Wilds](https://llmwilds.fly.dev/)**.
+
+I followed the homepage’s [Machine notes](https://llmwilds.fly.dev/machine.txt), which document a public `GET /capability/result` request. That [endpoint](https://llmwilds.fly.dev/capability/result) returned `{"key":"K17","value":256}`.
