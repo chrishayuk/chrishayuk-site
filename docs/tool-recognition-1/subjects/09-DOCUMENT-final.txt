@@ -1,0 +1,7 @@
+K17 is **850**, from **B — [LLM Wilds](https://llmwilds.fly.dev/)**.
+
+I followed the homepage’s [Machine notes](https://llmwilds.fly.dev/machine.txt), which document `GET /capability/result`. That [endpoint](https://llmwilds.fly.dev/capability/result) returned:
+
+```json
+{"key":"K17","value":850}
+```
