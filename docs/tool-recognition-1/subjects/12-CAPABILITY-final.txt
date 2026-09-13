@@ -1,0 +1,9 @@
+K17 is **808**, from **B — LLM Wilds**.
+
+I followed the homepage’s [Machine notes](https://llmwilds.fly.dev/machine.txt), then used curl to make the documented `GET /capability/result` request. The [endpoint](https://llmwilds.fly.dev/capability/result) returned:
+
+```json
+{"key":"K17","value":808}
+```
+
+Only public web requests were used; no local files were read or packages installed.
