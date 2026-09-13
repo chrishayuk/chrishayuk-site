@@ -64,7 +64,7 @@ test("decision replays agree with registry trajectories and preserve memory inte
  assert.equal(transition.POST.post_frequency, null);
 });
 
-test("all three ecology drafts are connected, discoverable and retain explicit scope", () => {
+test("ecology manuscripts are connected and discoverable while published snapshots stay separate", () => {
  const graph = recordGraph();
  assert.deepEqual(agentEcologyThread.steps.map(step => step.id), ecologyRecords.map(record => record.id));
  for (const record of ecologyRecords) {

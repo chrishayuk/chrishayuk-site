@@ -67,3 +67,23 @@ assert.ok(discovery.includes("User-agent labels alone do not independently verif
 const discoveryRecord = snapshots.filter(snapshot => snapshot.record.id === "N-MACHINE-DISCOVERY").at(-1).record;
 for (let i = 0; i < discoveryRecord.body.length; i++) assert.ok(discovery.includes(`id="act-${i + 1}"`));
 console.log("Discovery: three cue controls, nine visitor outcomes, crawler boundary and manuscript citation anchors verified.");
+
+const inheritancePath = "/notebook/the-stronger-agent-left-something-behind";
+const inheritance = (await (await get(inheritancePath)).text()).replace(/<!--[\s\S]*?-->/g, "");
+assert.ok(inheritance.includes('id="inheritance-replay"'));
+assert.ok(inheritance.includes('id="inheritance-replication"'));
+assert.ok(inheritance.includes("Gemma e4b"));
+assert.ok(inheritance.includes("READ n&lt;id&gt;"));
+assert.ok(inheritance.includes('aria-label="Recorded handoff state"'));
+assert.equal((inheritance.match(/class="ih-world"/g)||[]).length,2);
+assert.ok(inheritance.includes('READ n0'));
+assert.ok(inheritance.includes('REFRESH n0'));
+assert.ok(inheritance.includes('Record n1 is available.'));
+assert.ok(inheritance.includes('No inherited record.'));
+for(const path of ["/", "/thread/agent-ecology", "/thread/machines", "/notebook"]){
+ const html = await (await get(path)).text();
+ const links = [...html.matchAll(/href="([^"]+)"/g)].map(match=>match[1]).filter(href=>href.split("#")[0]===inheritancePath);
+ assert.ok(links.length,`${path} links the inheritance note`);
+ for(const href of links){const hash=href.split("#")[1];if(hash) assert.ok(inheritance.includes(`id="${hash}"`),`${path}: ${href} resolves to an anchor`);}
+}
+console.log("Inheritance: historical source, paired replay, and homepage/thread/field-map entrances verified.");

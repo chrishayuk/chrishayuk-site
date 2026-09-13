@@ -4,7 +4,7 @@ Editorial review, 13 September 2026. Checked against SOL1 write-up v4 and
 PEER-AUTHORITY-P1 write-up v2 on chuk-experiments. This is a writing brief,
 not a new experimental result or a published Notebook entry.
 
-The existing three ecology notes cover Qwen through A1B12. Their abstracts already
+The first three ecology notes cover Qwen through A1B12. Their abstracts already
 name that population and distinguish elicitation from autonomous persistence.
 Keep those observations recoverable. The next entries should show how the question
 changed when maintenance was tested and the model was changed.
@@ -80,3 +80,19 @@ Sources:
 
 - [SOL1, completed; write-up v4](https://chuk-experiments-server.fly.dev/#/experiments/ecology-culture-sol1)
 - [PEER-AUTHORITY-P1, completed; write-up v2](https://chuk-experiments-server.fly.dev/#/experiments/ecology-peer-authority-p1)
+
+
+## I1 supplies the next handoff
+
+I1 subsequently closed with a useful first-successor inheritance: 7 versus 3
+resources, then contrasts of zero in generations three and four. The new note,
+“The stronger agent left something behind”, uses the actual preserved Sol copy
+and the recorded Qwen states. It joins the ecology thread as the fourth entry.
+The copy’s content was supplied by the apparatus, not invented by Sol. No Sol
+identity was shown to Qwen. The broader model-comparison and peer-authority
+articles above remain separate proposals.
+
+I2 was incorporated before the inheritance note's first publication. It reproduces
+Qwen and adds Gemma in the same task. Both inherited payoffs are seven; Gemma's
+zero removal payoff and malformed actions remain visible. This extends recipients,
+not producer or world generality. See inheritance-release-check.md for validation.

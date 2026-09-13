@@ -1,0 +1,277 @@
+{
+  "experiment": "ecology-inheritance-i2",
+  "run": "RUN-20260913-095823-00865",
+  "sourceSha256": {
+    "i2/result.json": "54e8f59f032441e48cfa6ba1eceedc70982ca4d2d532b71047e3b8a7826001bc",
+    "i2/RESULTS.md": "65fd1a4d9f5f67dcc270a55119ac974adea421185172a716f324cb997e8caff5"
+  },
+  "qwenExactActionMatches": 18,
+  "panels": [
+    {
+      "recipient": "qwen",
+      "model": "qwen3.5:9b",
+      "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+      "analysis": {
+        "arms": {
+          "inherit": {
+            "resources": [
+              7,
+              3,
+              3
+            ],
+            "acquired": [
+              1,
+              0,
+              0
+            ],
+            "gated_work": [
+              1,
+              0,
+              0
+            ],
+            "refresh_requested": [
+              0,
+              0,
+              0
+            ],
+            "refresh_executed": [
+              0,
+              0,
+              0
+            ],
+            "live_at_start": [
+              true,
+              false,
+              false
+            ],
+            "replies": [
+              [
+                "WORK t1",
+                "READ n1",
+                "WORK t0"
+              ],
+              [
+                "WORK t1",
+                "WORK t1",
+                "WORK t1"
+              ],
+              [
+                "WORK t1",
+                "WORK t1",
+                "WORK t1"
+              ]
+            ],
+            "total_successor_resources": 13,
+            "generations_with_live_record": 1,
+            "recipient_descendant_at_start": [
+              false,
+              false,
+              false
+            ]
+          },
+          "removed": {
+            "resources": [
+              3,
+              3,
+              3
+            ],
+            "acquired": [
+              0,
+              0,
+              0
+            ],
+            "gated_work": [
+              0,
+              0,
+              0
+            ],
+            "refresh_requested": [
+              0,
+              0,
+              0
+            ],
+            "refresh_executed": [
+              0,
+              0,
+              0
+            ],
+            "live_at_start": [
+              false,
+              false,
+              false
+            ],
+            "replies": [
+              [
+                "WORK t1",
+                "WORK t1",
+                "WORK t1"
+              ],
+              [
+                "WORK t1",
+                "WORK t1",
+                "WORK t1"
+              ],
+              [
+                "WORK t1",
+                "WORK t1",
+                "WORK t1"
+              ]
+            ],
+            "total_successor_resources": 9,
+            "generations_with_live_record": 0,
+            "recipient_descendant_at_start": [
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "resource_differences": [
+          4,
+          0,
+          0
+        ],
+        "total_resource_difference": 4,
+        "primary_supported": true,
+        "sustained_useful_inheritance": false,
+        "parsed": 18,
+        "executed": 18,
+        "unique_requests": 12,
+        "recipient_maintained_survival": false
+      }
+    },
+    {
+      "recipient": "gemma",
+      "model": "gemma4:e4b",
+      "digest": "c6eb396dbd5992bbe3f5cdb947e8bbc0ee413d7c17e2beaae69f5d569cf982eb",
+      "analysis": {
+        "arms": {
+          "inherit": {
+            "resources": [
+              7,
+              1,
+              1
+            ],
+            "acquired": [
+              1,
+              0,
+              0
+            ],
+            "gated_work": [
+              1,
+              0,
+              0
+            ],
+            "refresh_requested": [
+              0,
+              0,
+              0
+            ],
+            "refresh_executed": [
+              0,
+              0,
+              0
+            ],
+            "live_at_start": [
+              true,
+              false,
+              false
+            ],
+            "replies": [
+              [
+                "READ n1",
+                "WORK t0",
+                "WORK t1"
+              ],
+              [
+                "WORK t0",
+                "READ n<id>",
+                "WORK t1"
+              ],
+              [
+                "WORK t0",
+                "READ n<id>",
+                "WORK t1"
+              ]
+            ],
+            "total_successor_resources": 9,
+            "generations_with_live_record": 1,
+            "recipient_descendant_at_start": [
+              false,
+              false,
+              false
+            ]
+          },
+          "removed": {
+            "resources": [
+              0,
+              1,
+              1
+            ],
+            "acquired": [
+              0,
+              0,
+              0
+            ],
+            "gated_work": [
+              0,
+              0,
+              0
+            ],
+            "refresh_requested": [
+              0,
+              0,
+              0
+            ],
+            "refresh_executed": [
+              0,
+              0,
+              0
+            ],
+            "live_at_start": [
+              false,
+              false,
+              false
+            ],
+            "replies": [
+              [
+                "WORK t0",
+                "READ n<id>",
+                "READ n<id>"
+              ],
+              [
+                "WORK t0",
+                "READ n<id>",
+                "WORK t1"
+              ],
+              [
+                "WORK t0",
+                "READ n<id>",
+                "WORK t1"
+              ]
+            ],
+            "total_successor_resources": 2,
+            "generations_with_live_record": 0,
+            "recipient_descendant_at_start": [
+              false,
+              false,
+              false
+            ]
+          }
+        },
+        "resource_differences": [
+          7,
+          0,
+          0
+        ],
+        "total_resource_difference": 7,
+        "primary_supported": true,
+        "sustained_useful_inheritance": false,
+        "parsed": 12,
+        "executed": 7,
+        "unique_requests": 12,
+        "recipient_maintained_survival": false
+      }
+    }
+  ]
+}

@@ -5,6 +5,13 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-ECOLOGY-INHERITANCE": {
+  subject: "Cross-model AI agent capability inheritance through persistent records",
+  question: "Can an AI agent use a capability preserved by another model?",
+  searchTitle: "AI Agent Capability Inheritance: Sol, Qwen and Gemma Experiments",
+  description: "Qwen and Gemma used a capability record preserved by Sol. Both earned seven resources with it; neither renewed it. Controlled experiments separate inheritance from renewal.",
+  concepts: ["AI agent inheritance", "cross-model capability transfer", "persistent records", "Sol", "Qwen", "Gemma", "agent ecology", "I1", "I2"],
+ },
  "N-MACHINE-DISCOVERY": {
   subject: "AI agent capability discovery and search-mediated exposure",
   question: "Can an AI agent discover a web capability without being given its address?",

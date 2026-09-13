@@ -1,5 +1,9 @@
 /** Reader introductions are editorial summaries of the cited notes, not new results. */
 export const machineBriefs: Record<string, { question: string; result: string }> = {
+ "N-ECOLOGY-INHERITANCE": {
+  question: "Can one AI inherit a useful capability from another?",
+  result: "A fresh Qwen successor read a record preserved by Sol and earned seven resources instead of three. It never renewed the record. After expiry, the next two generations lost the advantage. A follow-up added Gemma, which also earned seven with the record, but zero without it; failures in its control limit that contrast. Useful inheritance reached two recipient families in the same world.",
+ },
  "N-MACHINE-DISCOVERY": {
   question: "Can an AI find a working web capability without its address?",
   result: "None of six subjects without the address reached LLM Wilds. All three given its domain found the machine contract and used it correctly. Three generic searches found other providers. This target failed to appear in the subjects’ search results; the study does not separate indexing, retrieval and ranking.",
@@ -49,7 +53,7 @@ export const machineBriefs: Record<string, { question: string; result: string }>
 export const machineFieldMap = {
  id: "MAP-MACHINE-FIELD", path: "/thread/machines#field-map", title: "Machines / field experiments",
  description: "What can an AI notice, use, act on and leave behind? Follow the questions from visiting a website to inhabiting a world that keeps records.",
- scope: "A map of questions, not a chronology or a single causal chain. Different models, tasks and environments were used. Maintaining the shared record remains open in these notes.",
+ scope: "A map of questions, not a chronology or a single causal chain. Different models, tasks and environments were used. One model handoff demonstrated useful inheritance, followed by expiry without recipient renewal.",
  comparisons: ["N-MACHINE-PEER"],
  stages: [
   { id: "discover", label: "Discover", question: "What enters its view?", finding: "No withheld-address subject reached LLM Wilds; all domain-supplied controls completed the on-site funnel. The search view failed to expose this target.", notes: ["N-MACHINE-VISIT", "N-MACHINE-DISCOVERY"] },
@@ -57,7 +61,7 @@ export const machineFieldMap = {
   { id: "authority", label: "Authorise", question: "Does this action belong to the job?", finding: "Permission and task scope mattered. One subject also recognised the experiment.", notes: ["N-MACHINE-PERMISSION", "N-MACHINE-SELF-READ", "N-MACHINE-TASK"] },
   { id: "motivate", label: "Choose", question: "What makes acting worthwhile?", finding: "Useful information prompted action; reward alone did not reliably start sharing.", notes: ["N-MACHINE-MOTIVATION", "N-ECOLOGY-BOARD"] },
   { id: "remember", label: "Remember", question: "Can the environment remind it?", finding: "A supplied example kept eliciting posts with own-action history cleared.", notes: ["N-ECOLOGY-MEMORY"] },
-  { id: "inherit", label: "Pass on", question: "Will the next agent repeat it?", finding: "A lone peer record did not start a posting chain. The original cue still mattered.", notes: ["N-ECOLOGY-TRANSMISSION"] },
-  { id: "maintain", label: "Maintain", question: "Who keeps the useful record alive?", finding: "The experiment supplied the records. A loop maintained by agents is the next question here.", notes: ["N-ECOLOGY-MEMORY"], open: true },
+  { id: "inherit", label: "Pass on", question: "What can the next agent inherit?", finding: "A lone action record did not start a posting chain. A capability record preserved by Sol helped Qwen and Gemma successors.", notes: ["N-ECOLOGY-TRANSMISSION", "N-ECOLOGY-INHERITANCE"] },
+  { id: "maintain", label: "Maintain", question: "Who keeps the useful record alive?", finding: "Sol preserved a supplied record. Qwen and Gemma used it but made no next copy; the benefit expired. Sustained recipient renewal remains open.", notes: ["N-ECOLOGY-INHERITANCE"], open: true },
  ],
 };

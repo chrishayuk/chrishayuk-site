@@ -200,5 +200,106 @@
         }
       }
     ]
+  },
+  {
+    "id": "N-ECOLOGY-INHERITANCE",
+    "version": "1.0",
+    "recordHash": "49e14d52e9c1400f9240b7e351cfaa9e373c683d9a5c73d3b7b15cd13d35dcac",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication of I1 and I2: useful Sol-record inheritance in Qwen and Gemma, without observed renewal and with Gemma control failures preserved."
+    },
+    "sources": [
+      {
+        "title": "I2 / second-recipient results and control limitations",
+        "url": "/data/ecology/i2-results.md",
+        "note": "Exact bytes match registered artifact 1520, SHA-256 65fd1a4d9f5f67dcc270a55119ac974adea421185172a716f324cb997e8caff5. Completed run RUN-20260913-095823-00865.",
+        "preserved": {
+          "url": "/data/publications/sha256/65fd1a4d9f5f67dcc270a55119ac974adea421185172a716f324cb997e8caff5.md",
+          "sha256": "65fd1a4d9f5f67dcc270a55119ac974adea421185172a716f324cb997e8caff5",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "I2 / complete requests, failures and world traces",
+        "url": "/data/ecology/i2-result.json",
+        "note": "Exact bytes match registered artifact 1519, SHA-256 54e8f59f032441e48cfa6ba1eceedc70982ca4d2d532b71047e3b8a7826001bc. Malformed replies and runtime refusals are preserved without repair.",
+        "preserved": {
+          "url": "/data/publications/sha256/54e8f59f032441e48cfa6ba1eceedc70982ca4d2d532b71047e3b8a7826001bc.json",
+          "sha256": "54e8f59f032441e48cfa6ba1eceedc70982ca4d2d532b71047e3b8a7826001bc",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "I2 / frozen recipient-replication protocol",
+        "url": "/data/ecology/i2-protocol.md",
+        "note": "Exact bytes match registered artifact 1512. Same historical Sol source and task, a fresh Qwen anchor and Gemma as the second recipient family.",
+        "preserved": {
+          "url": "/data/publications/sha256/5be7e0a8455f335839fb2ad7ffe8df48a360795cb4114dde55849c5c302d0e52.md",
+          "sha256": "5be7e0a8455f335839fb2ad7ffe8df48a360795cb4114dde55849c5c302d0e52",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "I2 / recipient comparison figure data",
+        "url": "/data/ecology/i2-summary.json",
+        "note": "A projection of the hash-verified full I2 result. Includes complete analysis arrays, model digests and the exact Qwen anchor match count.",
+        "preserved": {
+          "url": "/data/publications/sha256/293ac1ae7f772ceb742e1eb28a017dce7d932d16c4d612a2f322dd5c2f9fc5c2.json",
+          "sha256": "293ac1ae7f772ceb742e1eb28a017dce7d932d16c4d612a2f322dd5c2f9fc5c2",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "I1 / completed experiment and interpretation",
+        "url": "/data/ecology/i1-results.md",
+        "note": "Exact local report matches registered artifact 1502, SHA-256 6800043e1e18a3e5ecf43ee6f018044394d70f19c094e32a796d3b3e759acfd4. Experiment ecology-inheritance-i1; run RUN-20260913-090952-00862.",
+        "preserved": {
+          "url": "/data/publications/sha256/6800043e1e18a3e5ecf43ee6f018044394d70f19c094e32a796d3b3e759acfd4.md",
+          "sha256": "6800043e1e18a3e5ecf43ee6f018044394d70f19c094e32a796d3b3e759acfd4",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "I1 / full requests, responses and world traces",
+        "url": "/data/ecology/i1-result.json",
+        "note": "Exact bytes match registered artifact 1501, SHA-256 9aad161fde240b4b31f18ed33d1797540d9645bbe8fa24180623e4f73f812424.",
+        "preserved": {
+          "url": "/data/publications/sha256/9aad161fde240b4b31f18ed33d1797540d9645bbe8fa24180623e4f73f812424.json",
+          "sha256": "9aad161fde240b4b31f18ed33d1797540d9645bbe8fa24180623e4f73f812424",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "I1 / frozen protocol",
+        "url": "/data/ecology/i1-protocol.md",
+        "note": "Exact bytes match registered artifact 1496. Source selection and the retain/remove comparison were fixed before Qwen inference.",
+        "preserved": {
+          "url": "/data/publications/sha256/4f582b0c7bce960325d5dd0fdde060cdd28c185567361b6fb7149f086f16bef8.md",
+          "sha256": "4f582b0c7bce960325d5dd0fdde060cdd28c185567361b6fb7149f086f16bef8",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "The recorded handoff / visual replay data",
+        "url": "/data/ecology/i1-replay.json",
+        "note": "Selected exact world rows and stores from I1 and the historical SOL1 none source. Import verifies both full source hashes. No interpolated states; Sol preserved a copy of supplied text.",
+        "preserved": {
+          "url": "/data/publications/sha256/233adc6c8fe34bbcb7e6f4239a9bdd7ac5e44cd70138ace6554eee96a3813ed6.json",
+          "sha256": "233adc6c8fe34bbcb7e6f4239a9bdd7ac5e44cd70138ace6554eee96a3813ed6",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "SOL1 / the historical maintenance comparison",
+        "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-culture-sol1",
+        "note": "Completed write-up v4. Both Sol settings maintained the A1B14 inheritance. This note uses the actual first generation of run RUN-20260913-082940-00857."
+      },
+      {
+        "title": "The page couldn’t authorise. The peer said go.",
+        "url": "/notebook/the-page-couldnt-authorise-the-peer-said-go",
+        "note": "The earlier Notebook comparison links the OpenAI and METR primary reports and distinguishes that incident from these small experiments."
+      }
+    ]
   }
 ]

@@ -61,14 +61,15 @@ export const machineThread = {
 };
 export const agentEcologyThread = {
  id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",
- path: "/thread/agent-ecology", version: "0.1", created: "2026-09-13",
- abstract: "A shared board did not get agents to contribute. One agent’s example did not start a chain. But keeping an example visible could prompt sharing even after the agent’s own history was cleared.",
- replay: { record: "N-ECOLOGY-MEMORY", anchor: "ecology-memory", label: "REPLAY THE MEMORY COMPARISON" },
- context: "A curated path through A1B3–A1B12. These are small Qwen experiments with changing interfaces, scripted recipients and harness-supplied records. The world rules were deterministic; the model ran at temperature zero. Autonomous culture and artefact maintenance remain unestablished.",
+ path: "/thread/agent-ecology", version: "0.2", created: "2026-09-13",
+ abstract: "An example could keep prompting an agent after its own history was cleared. Later, Qwen and Gemma used a capability record preserved by Sol, but did not renew it. Follow the difference between a useful inheritance and one that lasts.",
+ replay: { record: "N-ECOLOGY-INHERITANCE", anchor: "inheritance-replay", label: "REPLAY THE MODEL HANDOFF" },
+ context: "A curated path from A1B3–A1B12 to the SOL1/I1 handoff. The interfaces and populations change across these small controlled worlds. Sol preserved a supplied capability record; Qwen and Gemma each inherited its benefit for one generation. Self-sustaining culture remains unestablished.",
  steps: [
   { id: "N-ECOLOGY-BOARD", label: "01 / GET SOMETHING ONTO THE BOARD", text: "Reading requests were easy to elicit. Spontaneous posting was absent, and supplied experience reversed the expected response to reward. Start with the contribution problem." },
   { id: "N-ECOLOGY-TRANSMISSION", label: "02 / TRY TO PASS THE ACTION ON", text: "An action reminder worked on one input. A lone peer record did not start a chain. Follow the difference between elicitation, transmission and retention." },
   { id: "N-ECOLOGY-MEMORY", label: "03 / SEPARATE THE TWO RECORDS", text: "Keep or clear the artefact and own-action history separately. The four-way comparison locates repeated elicitation in what the environment keeps supplying." },
+  { id: "N-ECOLOGY-INHERITANCE", label: "04 / HAND THE WORLD TO ANOTHER MODEL", text: "Sol preserved a capability record. Qwen used it; a follow-up extended useful inheritance to Gemma. Neither recipient renewed it here. Separate useful inheritance from recipient renewal." },
  ].map<ThreadStep>(step => step).filter(listedStep),
 };
 export const threads = [mapThread, cell80Thread, machineThread, agentEcologyThread];
