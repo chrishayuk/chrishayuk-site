@@ -757,4 +757,26 @@ for (const [id, brief] of Object.entries(machineBriefs)) {
  assert.ok(sitemap.body.includes(`<loc>https://chrishayuk.com${path}</loc><lastmod>${ld.dateModified}</lastmod>`));
  assert.ok(fieldGraph.nodes.some(node => node.id === `${id}:brief` && node.text === brief.result));
 }
-console.log('Nine visible question/result summaries, field-map links and stable modification dates verified.');
+console.log(`${Object.keys(machineBriefs).length} visible question/result summaries, field-map links and stable modification dates verified.`);
+
+// A reported incident is a comparison, not another measured experimental arm.
+const peerNote = getRecord('N-MACHINE-PEER'), peerPath = recordPath(peerNote);
+const peerPage = await request(peerPath);
+assert.equal(peerPage.status, 200);
+for (const html of [home.body, fieldPage.body, agentEcologyPage.body, fieldIndex.body]) assert.ok(html.includes(`href="${peerPath}"`));
+for (const source of peerNote.sources) assert.ok(peerPage.body.includes(`href="${source.url}"`));
+assert.match(peerPage.body, /SCHEMATIC, NOT A TRANSCRIPT REPLAY/);
+assert.match(peerPage.body, /six-minute deadline/);
+assert.match(peerPage.body, /PROPOSED · NO RESULTS HERE/);
+assert.match(peerPage.body, /aria-pressed="true"/);
+const { agentEcologyThread, resolveThreadStep } = await import('../lib/threads.ts');
+for (const step of agentEcologyThread.steps.map(resolveThreadStep)) {
+ assert.ok(home.body.includes(`href="${step.url}"`));
+ assert.ok(agentEcologyPage.body.includes(`href="${step.url}"`));
+}
+const replayPath = `${recordPath(getRecord(agentEcologyThread.replay.record))}#${agentEcologyThread.replay.anchor}`;
+for (const html of [home.body, agentEcologyPage.body]) {
+ assert.ok(html.includes(`href="${replayPath}"`));
+ assert.ok(html.includes(agentEcologyThread.abstract));
+}
+console.log('Incident comparison, primary citations, unrun question and shared home/thread ecology links verified.');

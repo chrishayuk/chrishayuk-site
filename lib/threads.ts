@@ -62,7 +62,8 @@ export const machineThread = {
 export const agentEcologyThread = {
  id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",
  path: "/thread/agent-ecology", version: "0.1", created: "2026-09-13",
- abstract: "Three notes from a tiny agent world. A board did not elicit spontaneous contribution. A reminder did not become a transmission rule. An external artefact kept eliciting posts with own-action history cleared.",
+ abstract: "A shared board did not get agents to contribute. One agent’s example did not start a chain. But keeping an example visible could prompt sharing even after the agent’s own history was cleared.",
+ replay: { record: "N-ECOLOGY-MEMORY", anchor: "ecology-memory", label: "REPLAY THE MEMORY COMPARISON" },
  context: "A curated path through A1B3–A1B12. These are small Qwen experiments with changing interfaces, scripted recipients and harness-supplied records. The world rules were deterministic; the model ran at temperature zero. Autonomous culture and artefact maintenance remain unestablished.",
  steps: [
   { id: "N-ECOLOGY-BOARD", label: "01 / GET SOMETHING ONTO THE BOARD", text: "Reading requests were easy to elicit. Spontaneous posting was absent, and supplied experience reversed the expected response to reward. Start with the contribution problem." },

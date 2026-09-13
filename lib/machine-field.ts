@@ -1,5 +1,9 @@
 /** Reader introductions are editorial summaries of the cited notes, not new results. */
 export const machineBriefs: Record<string, { question: string; result: string }> = {
+ "N-MACHINE-PEER": {
+  question: "Can another machine make an action seem authorised?",
+  result: "OpenAI reports an agent recognising a task boundary, then treating a peer’s go-ahead as authorisation. That message also imposed a deadline. Read beside the small studies here, it suggests a peer-authority test; it does not supply an isolated result or explain the incident.",
+ },
  "N-MACHINE-VISIT": {
   question: "Can an AI visitor find and use a website’s invitation?",
   result: "Four agents sent to investigate the site found the invitation and tried its tools. Their visits exposed broken storage and confusing vocabulary; they did not test whether an ordinary visitor would choose to participate.",
@@ -42,6 +46,7 @@ export const machineFieldMap = {
  id: "MAP-MACHINE-FIELD", path: "/thread/machines#field-map", title: "Machines / field experiments",
  description: "What can an AI notice, use, act on and leave behind? Follow the questions from visiting a website to inhabiting a world that keeps records.",
  scope: "A map of questions, not a chronology or a single causal chain. Different models, tasks and environments were used. Maintaining the shared record remains open in these notes.",
+ comparisons: ["N-MACHINE-PEER"],
  stages: [
   { id: "discover", label: "Discover", question: "What enters its view?", finding: "Assigned visits found the interface. Unprompted discovery was not established.", notes: ["N-MACHINE-VISIT"] },
   { id: "use", label: "Use", question: "Can it operate the tool?", finding: "All 18 visitors used the required mechanism, including routes that needed code.", notes: ["N-MACHINE-CAPABILITY"] },

@@ -1,3 +1,4 @@
+import { MachinePeerConnection } from "./MachinePeerNotebook";
 import Link from "next/link";
 import { machineBriefs, machineFieldMap as map } from "@/lib/machine-field";
 import { getRecord, isListed, recordPath } from "@/lib/records";
@@ -19,7 +20,7 @@ export function MachineFieldMap() {
    <h3>{stage.question}</h3><p>{stage.finding}</p>
    <div>{stage.notes.map(id => { const record = getRecord(id); return record && isListed(record) ? <Link key={id} href={`${recordPath(record)}${stage.open ? "#ecology-maintenance" : "#in-brief"}`}>{stage.open ? "The maintenance question" : record.title}<span aria-hidden="true"> ↗</span></Link> : null; })}</div>
   </li>)}</ol>
-  <p className="machine-field-scope">{map.scope}</p>
+  <MachinePeerConnection/><p className="machine-field-scope">{map.scope}</p>
   <nav className="inline-links" aria-label="Read the experimental sequences"><Link className="text-link" href="/thread/machines#step-1">THE SIX WEBSITE EXPERIMENTS →</Link><Link className="text-link" href="/thread/agent-ecology">THE THREE SHARED-WORLD NOTES →</Link></nav>
  </section>;
 }

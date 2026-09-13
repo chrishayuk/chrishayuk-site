@@ -127,11 +127,12 @@ function buildGraph() {
    addEdge(step.id,thread.id,"in-thread","editorial-reading-order");
   }
  }
- const fieldMembers = [...new Set(machineFieldMap.stages.flatMap(stage => stage.notes))].filter(id => records.some(record => record.id === id));
+ const fieldMembers = [...new Set([...machineFieldMap.stages.flatMap(stage => stage.notes), ...machineFieldMap.comparisons])].filter(id => records.some(record => record.id === id));
  nodes.push({ id: machineFieldMap.id, kind: "reading-map", title: machineFieldMap.title, text: [machineFieldMap.description, machineFieldMap.scope, ...machineFieldMap.stages.map(stage => `${stage.question} ${stage.finding}`)].join(" "), url: `${SITE}${machineFieldMap.path}`, sourceUrl: `${SITE}${machineFieldMap.path}`, basis: "editorial-question-map", retrievable: true, scope: "records", publication: "draft", authors: ["Chris Hay"], keywords: "AI agents field experiments discovery capability authority permission motivation persistence inheritance transmission external memory culture ecology" });
  for (const id of fieldMembers) {
-  addEdge(machineFieldMap.id, id, "includes", "editorial-question-map");
-  addEdge(id, machineFieldMap.id, "related", "editorial-question-map");
+  const basis = machineFieldMap.comparisons.includes(id) ? "editorial-comparison" : "editorial-question-map";
+  addEdge(machineFieldMap.id, id, "includes", basis);
+  addEdge(id, machineFieldMap.id, "related", basis);
  }
  const count=(kind:string)=>nodes.filter(n=>n.kind===kind).length;
  return {version:"1.2",retrievedAt:[youtube.retrievedAt,ibm.retrievedAt].sort().at(-1),coverage:{records:records.length,films:allVideos.length,transcripts:allVideos.filter(v=>transcriptFor(v.youtubeId)).length,systems:count("work"),notebook:count("notebook"),questions:count("question"),threads:count("thread"),editorialDrafts:records.filter(r=>r.publication==="draft").length,acts:count("act"),chapters:count("chapter"),passages:count("passage"),concepts:concepts.length,sourceReferences:count("source"),nodes:nodes.length,relationships:edges.length},nodes,edges};

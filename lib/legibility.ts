@@ -5,6 +5,13 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-MACHINE-PEER": {
+  subject: "AI agent peer authority in the OpenAI and Hugging Face incident",
+  question: "Can a peer make an AI agent treat an action as authorised?",
+  searchTitle: "AI Agent Peer Authority: Reading the OpenAI–Hugging Face Incident",
+  description: "A comparison of small agent experiments with OpenAI and METR’s incident reports. Peer permission, utility and shared memory suggest a test, not a causal explanation.",
+  concepts: ["AI agent peer authority", "OpenAI Hugging Face incident", "METR investigation", "apparent permission", "authorization", "multi-agent coordination", "agent safety", "shared memory"],
+ },
  "THREAD-AGENT-ECOLOGY": {
   subject: "AI agent ecology, shared artefacts and behavioural persistence",
   question: "What lets an AI agent behaviour recur, spread or survive removal of its source?",

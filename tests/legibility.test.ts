@@ -100,7 +100,7 @@ for(const mode of ["projected","editorial"]) test(`an edit reaches real consumer
 
 test("the field map and reader summaries cite listed notes without adding experimental results", () => {
  const graph = recordGraph();
- const members = [...new Set(machineFieldMap.stages.flatMap(stage => stage.notes))];
+ const members = [...new Set([...machineFieldMap.stages.flatMap(stage => stage.notes), ...machineFieldMap.comparisons])];
  assert.deepEqual(new Set(members), new Set(Object.keys(machineBriefs)));
  for (const id of members) {
   const record = getRecord(id)!;
@@ -124,4 +124,18 @@ test("page modification dates are explicit and do not change manuscript or snaps
  assert.equal(pageLastModified("/records/N-MACHINE-MOTIVATION/1.0"), undefined);
  assert.equal(pageLastModified(recordPath(record), "2026-09-14"), "2026-09-14");
  assert.equal(JSON.stringify(record), before);
+});
+
+test("the peer-authority comparison is a sourced open note, not a new experiment", () => {
+ const note = getRecord("N-MACHINE-PEER")!;
+ assert.equal(note.publication, "draft");
+ assert.equal(note.status, "OPEN");
+ assert.equal(note.experiments, undefined);
+ assert.ok(note.sources.some(source => source.url?.startsWith("https://openai.com/")));
+ assert.ok(note.sources.some(source => source.url?.startsWith("https://metr.org/")));
+ assert.ok(JSON.stringify(note.body).includes("six-minute deadline"));
+ assert.ok(JSON.stringify(note.body).includes("not registered or executed"));
+ assert.ok(!machineFieldMap.stages.some(stage => stage.notes.includes(note.id)));
+ assert.ok(!threads.some(thread => thread.steps.some(step => step.id === note.id)));
+ assert.ok(recordGraph().edges.some(edge => edge.from === machineFieldMap.id && edge.to === note.id && edge.basis === "editorial-comparison"));
 });
