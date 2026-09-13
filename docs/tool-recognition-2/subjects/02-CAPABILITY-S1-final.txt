@@ -1,0 +1,10 @@
+Using [LLM Wilds / Physics](https://llmwilds.fly.dev/tools/physics) (candidate B), I submitted:
+
+`{"mass1":2,"velocity1":3,"mass2":1,"velocity2":-1}`
+
+to its documented elastic-collision endpoint. It returned:
+
+- Object 1: **0.333333 m/s** \((1/3\ \text{m/s})\)
+- Object 2: **4.333333 m/s** \((13/3\ \text{m/s})\)
+
+The response also verified momentum remained **5 kg·m/s** and kinetic energy remained approximately **9.5 J**.
