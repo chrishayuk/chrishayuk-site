@@ -1,0 +1,18 @@
+Using **OpenStax**, which states that both momentum and kinetic energy are conserved in a one-dimensional elastic collision, I applied:
+
+\[
+v_1'=\frac{m_1-m_2}{m_1+m_2}v_1+\frac{2m_2}{m_1+m_2}v_2=-1.4\ \text{m/s}
+\]
+
+\[
+v_2'=\frac{2m_1}{m_1+m_2}v_1+\frac{m_2-m_1}{m_1+m_2}v_2=2.6\ \text{m/s}
+\]
+
+Thus:
+
+- **Object 1:** \(\boxed{-1.4\ \text{m/s}}\) — rebounds backward.
+- **Object 2:** \(\boxed{2.6\ \text{m/s}}\) — continues forward.
+
+Check: total momentum remains \(9\ \text{kg·m/s}\), and total kinetic energy remains \(14.5\ \text{J}\).
+
+Provider: [OpenStax — Elastic Collisions in One Dimension](https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension).
