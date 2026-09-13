@@ -1,0 +1,22 @@
+Using **OpenStax (candidate A)**, which states that a perfectly elastic one-dimensional collision conserves both momentum and kinetic energy. [OpenStax: Elastic Collisions in One Dimension](https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension)
+
+I substituted the given values into the standard elastic-collision formulas:
+
+\[
+v_1'=\frac{m_1-m_2}{m_1+m_2}v_1+
+\frac{2m_2}{m_1+m_2}v_2
+=-\frac{19}{7}\ \text{m/s}
+\]
+
+\[
+v_2'=\frac{2m_1}{m_1+m_2}v_1+
+\frac{m_2-m_1}{m_1+m_2}v_2
+=\frac{2}{7}\ \text{m/s}
+\]
+
+Therefore:
+
+- **Object 1:** \(v_1'=-19/7\approx\mathbf{-2.714\ m/s}\)
+- **Object 2:** \(v_2'=2/7\approx\mathbf{0.286\ m/s}\)
+
+As a check, both total momentum (\(-13\ \mathrm{kg\,m/s}\)) and kinetic energy (\(18.5\ \mathrm J\)) are unchanged.
