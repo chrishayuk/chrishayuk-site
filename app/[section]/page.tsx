@@ -1,5 +1,6 @@
 import { Systems, Ideas, Objects } from "@/components/HouseCollections";
 import { NotebookCollection } from "@/components/NotebookCollection";
+import { ResearchCollection } from "@/components/ResearchCollection";
 import { Catalogue } from "@/components/Catalogue";
 import { catalogueUrl, catalogue } from "@/lib/catalogue";
 import { HOUSE, HOUSE_PUBLICATIONS } from "@/lib/house";
@@ -18,6 +19,8 @@ const sections = ["ideas","systems","objects","record","work","film","notebook",
 type PageProps = { params: Promise<{section:string}>; searchParams: Promise<{[key:string]:string|string[]|undefined}> };
 const first = (value: string|string[]|undefined) => Array.isArray(value) ? value[0] : value;
 const descriptions: Record<string,string> = {
+ notebook: "Experiments, working notes and essays from the work. Follow current threads or explore the notebook archive.",
+ research: "Experiments, evidence and open questions. A map of Machines, Cell80 and learned-system research, with recorded findings and sources.",
  ideas: "Questions, research and the notebook. Chris Hay’s thinking before the answer.",
  systems: "LARQL, VINDEX3, HAUSE and MCP-CLI. Systems by Chris Hay, with their own identities and a place in the record.",
  objects: "Films, interfaces and publications by Chris Hay. Ideas made real.",
@@ -28,12 +31,14 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
  const title=section==="work"?"Systems":section.charAt(0).toUpperCase()+section.slice(1);
  const description=descriptions[section==="work"?"systems":section] || (section==="about" ? `${HOUSE.personLine} ${HOUSE.description}` : HOUSE_PUBLICATIONS.find(p=>p.path===`/${section}`)?.text || `Chris Hay / ${section}. ${HOUSE.descriptor}.`);
  if(section==="record") { const raw=await searchParams; const query=catalogue({q:first(raw.q),kind:first(raw.kind),page:first(raw.page)}); const metadata=pageMetadata(title,description,catalogueUrl(query.q,query.kind,query.page)); return {...metadata,...(query.q ? {robots:{index:false,follow:true}} : {})}; }
+ if(section==="research") { const query=await searchParams; return {...pageMetadata(title,description,"/research"),...(query.outcome || query.publication ? {robots:{index:false,follow:true}} : {})}; }
  return pageMetadata(title,description,section==="work"?"/systems":`/${section}`);
 }
 export default async function IndexPage({params,searchParams}:PageProps) {
  const {section}=await params; if(!sections.includes(section)) notFound();
  if(section==="ideas") return <Ideas/>;
  if(section==="notebook") return <NotebookCollection/>;
+ if(section==="research") { const query=await searchParams; return <ResearchCollection outcome={first(query.outcome)} publication={first(query.publication)}/>; }
  if(section==="systems"||section==="work") return <Systems/>;
  if(section==="objects") return <Objects/>;
  if(section==="record") { const query=await searchParams; return <Catalogue query={{q:first(query.q),kind:first(query.kind),page:first(query.page)}}/>; }

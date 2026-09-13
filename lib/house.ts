@@ -26,8 +26,8 @@ export const HOUSE_WORK = [
 ];
 
 export const HOUSE_PUBLICATIONS = [
-  { name: "Research", path: "/research", text: "The questions, the evidence and the boundary of what has been shown." },
-  { name: "Notebook", path: "/notebook", text: "The record before the answer. Thoughts, sketches and questions while they are still taking shape." },
+  { name: "Research", path: "/research", text: "Experiments, evidence and open questions. A map of the programmes and their recorded findings." },
+  { name: "Notebook", path: "/notebook", text: "Experiments, working notes and essays from the work. Follow a thread or explore the archive." },
   { name: "Film", path: "/film", text: "Another medium for thinking. Experiments, explanations and conversations in public." },
 ];
 

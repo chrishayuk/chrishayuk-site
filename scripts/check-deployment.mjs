@@ -18,34 +18,18 @@ function request(path, host = "chrishayuk.com", headers = {}) {
 }
 const home = await request("/");
 assert.equal(home.status, 200);
-assert.match(home.body, /WITH CHRIS HAY AS A PANELIST/);
+assert.match(home.body, /href="\/film\/mixture-of-experts"/);
 assert.match(home.body, /rel="canonical" href="https:\/\/chrishayuk.com"/);
 assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
-assert.match(home.body, /id="from-the-notebook"/);
-assert.match(home.body, /href="\/notebook\/what-is-the-map"/);
-assert.match(home.body, /href="\/notebook\/can-you-name-the-mutation-that-changed-a-world"/);
-assert.match(home.body, /class="cell80-home-preview"/);
-assert.match(home.body, /\/data\/cell80\/home-observed\.png/);
-assert.match(home.body, /WATCH THE REPLAY/);
-assert.match(home.body, /href="\/notebook\/what-keeps-an-evolving-world-alive"/);
-assert.match(home.body, /href="\/notebook\/when-does-improvement-become-invention"/);
-assert.match(home.body, /Continue through the six Cell80 Notebook entries/);
-assert.doesNotMatch(home.body, /cell80-further-preview|cell80-barrier-world|cell80-inherited-world/);
-assert.match(home.body, /href="\/notebook\/give-invention-something-to-unlock"/);
-assert.match(home.body, /href="\/notebook\/an-advantage-needs-a-chance-to-become-history"/);
-
-assert.match(home.body, /href="\/notebook\/the-address-is-built-through-depth"/);
-assert.match(home.body, /class="address-teaser"/);
-assert.match(home.body, /cfvod\.kaltura\.com\/p\/1773841\/sp\/177384100\/thumbnail\/entry_id\/1_rwy4uz25\/width\/1280/);
-assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="latest-mixture-of-experts"'));
-assert.ok(home.body.indexOf('id="latest-mixture-of-experts"') < home.body.indexOf('id="from-the-notebook"'));
-assert.ok(home.body.indexOf('id="from-the-notebook"') < home.body.indexOf('id="selected-films"'));
-assert.ok(home.body.indexOf('id="selected-films"') < home.body.indexOf('id="further-notes"'));
-assert.ok(home.body.indexOf('id="further-notes"') < home.body.indexOf('id="selected-work"'));
-for (const path of ["/work/larql", "/work/vindex3", "/work/mcp-cli"]) assert.ok(home.body.includes(`href="${path}"`));
+assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "now", "programmes", "latest", "systems", "film"]);
+for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause", "/work/mcp-cli"]) assert.ok(home.body.includes(`href="${path}"`));
+const { latestNotes, notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
+const homeLatest = home.body.match(/<section id="latest"[\s\S]*?<\/section>/)?.[0];
+assert.equal((homeLatest?.match(/<li>/g) || []).length, 3);
+for (const note of latestNotes.slice(0, 3)) assert.ok(homeLatest.includes(`/notebook/${note.slug}`));
 // The Cell80 edition uses authored HAUSE rooms and preserves its draft record.
 for (const slug of ['can-you-name-the-mutation-that-changed-a-world','what-keeps-an-evolving-world-alive','when-does-improvement-become-invention']) {
  const note=await request(`/notebook/${slug}`);
@@ -225,18 +209,31 @@ assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
-// The authority note is listed: on the index, in the thread, the graph and Ask.
+// The thread-first index has six latest notes; the archive retains every note.
 const notebook = await request("/notebook");
-assert.match(notebook.body, /href="\/notebook\/my-ci-has-to-undo-my-coding-agent"/);
-assert.match(notebook.body, /href="\/notebook\/which-source-wins"/);
-assert.match(notebook.body, /href="\/notebook\/what-is-the-map"/);
-assert.match(notebook.body, /FILM → QUESTION → EVIDENCE → INSTRUMENT/);
-assert.match(notebook.body, /authority-card/);
-assert.doesNotMatch(notebook.body, /VISUAL NOTES/);
-// The new evidence note leads the Notebook and remains an anchored draft record.
+assert.match(notebook.body, /id="current-threads"/);
+assert.match(notebook.body, /href="\/notebook\/archive"/);
+const notebookLatest = notebook.body.match(/<section id="latest-notes"[\s\S]*?<\/section>/)?.[0];
+assert.equal((notebookLatest?.match(/<li>/g) || []).length, 6);
+assert.doesNotMatch(notebook.body, /notebook-story|authority-card/);
+const notebookArchive = await request('/notebook/archive');
+assert.equal(notebookArchive.status, 200);
+for (const note of notebookNotes) assert.ok(notebookArchive.body.includes(`/notebook/${note.slug}`));
+const practiceArchive = await request('/notebook/archive?programme=practice');
+assert.match(practiceArchive.body, /my-ci-has-to-undo-my-coding-agent/);
+assert.doesNotMatch(practiceArchive.body, /href="\/notebook\/which-source-wins"/);
+const emptyArchive = await request('/notebook/archive?q=zzzznomatch');
+assert.match(emptyArchive.body, /No notes match/);
+const research = await request('/research');
+assert.equal(research.status, 200);
+for (const note of researchNotes) assert.ok(research.body.includes(`/notebook/${note.slug}`));
+assert.match(research.body, /id="open-questions"/);
+const refutedResearch = await request('/research?outcome=REFUTED');
+assert.match(refutedResearch.body, /href="\/notebook\/the-tool-was-not-the-problem"/);
+assert.doesNotMatch(refutedResearch.body, /class="research-result"[^]*href="\/notebook\/which-source-wins"/);
+// Depth evidence remains an anchored draft record in its thread and archive.
 const depthPath = "/notebook/the-address-is-built-through-depth";
-assert.ok(notebook.body.indexOf('href="/notebook/my-ci-has-to-undo-my-coding-agent"') < notebook.body.indexOf(`href="${depthPath}"`));
-assert.ok(notebook.body.indexOf(`href="${depthPath}"`) < notebook.body.indexOf('href="/notebook/what-is-the-map"'));
+assert.ok(notebookArchive.body.includes(`href="${depthPath}"`));
 assert.ok(thread.body.includes(`href="${depthPath}"`));
 const depth = await request(depthPath);
 assert.equal(depth.status, 200);
@@ -460,9 +457,9 @@ assert.match(visitExhibition.body, /N-MACHINE-VISIT/);
 assert.match(visitExhibition.body, /hause-study-room/);
 assert.match(visitExhibition.body, /hause-field-notes/);
 assert.match(visitExhibition.body, /REFERENCE DRAFT/);
-const notebookCollection = await request("/notebook");
+const notebookCollection = notebookArchive;
 assert.match(notebookCollection.body, /href="\/notebook\/can-a-machine-use-an-invitation"/);
-assert.match(notebookCollection.body, /mv-card-traces/);
+assert.match(visitExhibition.body, /mv-card-traces/);
 assert.match(visitExhibition.body, /not reconstructed transcripts/);
 const visitProtocol = await request("/data/machines/machine-visit-protocol.md");
 assert.equal(visitProtocol.status, 200);
@@ -552,9 +549,9 @@ console.log("The task-boundary note, visible payoff and four agent outcomes veri
 
 // Both experimental strands have a visible homepage entrance. The five machine
 // studies form one reading journey without merging their experimental units.
-assert.match(home.body, /id="machine-experiments"/);
-assert.match(home.body, /whose instruction counts/);
-assert.ok(home.body.indexOf('id="machine-experiments"') < home.body.indexOf('id="from-the-notebook"'));
+assert.match(home.body, /id="now"/);
+assert.match(home.body, /NOW \/ MACHINE DISCOVERY/);
+assert.ok(home.body.indexOf('id="now"') < home.body.indexOf('id="current-programmes"'));
 const machineThread=await request('/thread/machines');
 assert.equal(machineThread.status,200);
 assert.match(machineThread.body,/Machine experiments reading order/);
@@ -575,9 +572,9 @@ assert.match(permissionNote.body,/class="machine-permission-contrast"/);
 assert.match(selfReadNote.body,/THE METHOD CHANGED \/ A SEPARATION USED NEXT/);
 assert.match(taskNote.body,/class="machine-record-units"/);
 assert.equal((taskNote.body.match(/class="machine-record-grid" aria-hidden="true"><i>[\s\S]*?<\/div>/)?.[0].match(/<i>/g)||[]).length,64);
-const notebookStories=notebookCollection.body.slice(notebookCollection.body.indexOf('class="notebook-stories"'));
-assert.ok(notebookStories.indexOf('N-MACHINE-MOTIVATION') < notebookStories.indexOf('N-MACHINE-TASK'));
-assert.ok(notebookStories.indexOf('N-MACHINE-TASK') < notebookStories.indexOf('N-MACHINE-SELF-READ'));
+const notebookStories=notebookCollection.body;
+assert.ok(notebookStories.indexOf('href="/notebook/the-page-could-ask-for-a-favour"') < notebookStories.indexOf('href="/notebook/the-page-could-ask-it-couldnt-authorise"'));
+assert.ok(notebookStories.indexOf('href="/notebook/the-page-could-ask-it-couldnt-authorise"') < notebookStories.indexOf('href="/notebook/the-subject-read-the-experiment"'));
 console.log('Both homepage strands, seven machine notes, reading order and experimental-unit figures verified.');
 
 
@@ -593,7 +590,7 @@ assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
 assert.ok(home.body.includes(`href="/notebook/the-site-was-there-the-agent-never-saw-it"`));
 assert.match(home.body,/md-card-result/);
-assert.match(notebookCollection.body,/PUBLISHED/);
+assert.match(notebookCollection.body,/Published/);
 assert.ok(sitemap.body.includes(motivationPath));
 assert.ok(notebookFeed.body.includes(motivationPath));
 assert.ok(recordFeed.body.includes(motivationPath));
@@ -741,7 +738,8 @@ const { getRecord, recordPath } = await import('../lib/records.ts');
 const { pageLastModified } = await import('../lib/page-updates.ts');
 const fieldGraph = JSON.parse((await request('/api/graph')).body);
 const fieldIndex = await request('/notebook');
-for (const html of [home.body, fieldIndex.body, agentEcologyPage.body]) assert.ok(html.includes('/thread/machines#field-map'));
+for (const html of [home.body, fieldIndex.body]) assert.ok(html.includes('href="/thread/machines"'));
+assert.ok(agentEcologyPage.body.includes('/thread/machines#field-map'));
 const fieldPage = await request('/thread/machines');
 assert.ok(fieldPage.body.includes('id="field-map"'));
 for (const stage of machineFieldMap.stages) assert.ok(fieldPage.body.includes(`id="field-${stage.id}"`));
@@ -763,7 +761,7 @@ console.log(`${Object.keys(machineBriefs).length} visible question/result summar
 const peerNote = getRecord('N-MACHINE-PEER'), peerPath = recordPath(peerNote);
 const peerPage = await request(peerPath);
 assert.equal(peerPage.status, 200);
-for (const html of [home.body, fieldPage.body, agentEcologyPage.body, fieldIndex.body]) assert.ok(html.includes(`href="${peerPath}"`));
+for (const html of [notebookArchive.body, fieldPage.body, agentEcologyPage.body]) assert.ok(html.includes(`href="${peerPath}"`));
 for (const source of peerNote.sources) assert.ok(peerPage.body.includes(`href="${source.url}"`));
 assert.match(peerPage.body, /SCHEMATIC, NOT A TRANSCRIPT REPLAY/);
 assert.match(peerPage.body, /six-minute deadline/);
@@ -771,11 +769,11 @@ assert.match(peerPage.body, /PROPOSED · NO RESULTS HERE/);
 assert.match(peerPage.body, /aria-pressed="true"/);
 const { agentEcologyThread, resolveThreadStep } = await import('../lib/threads.ts');
 for (const step of agentEcologyThread.steps.map(resolveThreadStep)) {
- assert.ok(home.body.includes(`href="${step.url}"`));
+ assert.ok(notebookArchive.body.includes(`href="${step.url}"`));
  assert.ok(agentEcologyPage.body.includes(`href="${step.url}"`));
 }
 const replayPath = `${recordPath(getRecord(agentEcologyThread.replay.record))}#${agentEcologyThread.replay.anchor}`;
-for (const html of [home.body, agentEcologyPage.body]) {
+for (const html of [agentEcologyPage.body]) {
  assert.ok(html.includes(`href="${replayPath}"`));
  assert.ok(html.includes(agentEcologyThread.abstract));
 }
