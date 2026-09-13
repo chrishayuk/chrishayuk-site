@@ -591,8 +591,8 @@ assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1
 assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
-assert.ok(home.body.includes(`href="/notebook/the-tool-was-not-the-problem"`));
-assert.match(home.body,/wc-card-grid/);
+assert.ok(home.body.includes(`href="/notebook/the-site-was-there-the-agent-never-saw-it"`));
+assert.match(home.body,/md-card-result/);
 assert.match(notebookCollection.body,/PUBLISHED/);
 assert.ok(sitemap.body.includes(motivationPath));
 assert.ok(notebookFeed.body.includes(motivationPath));
