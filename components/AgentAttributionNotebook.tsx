@@ -7,17 +7,16 @@ import { Statement } from "@chrishayuk/hause/components/forms/Statement";
 import { Acts } from "./Acts";
 import { NotebookFieldNotes } from "./NotebookFieldNotes";
 
-export function AgentAttributionHero({ record, citation, captureUrl }: { record: PublicationRecord; citation: boolean; captureUrl?: string }) {
+export function AgentAttributionHero({ record }: { record: PublicationRecord; citation: boolean; captureUrl?: string }) {
   return <header className="agent-hero">
-    <nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/">CHRIS HAY</Link><span>/</span><Link href="/notebook">NOTEBOOK</Link><span>/ {record.id}</span></nav>
+    <nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/">CHRIS HAY</Link><span>/</span><Link href="/notebook">NOTEBOOK</Link><span>/ {record.publication === "published" ? "PUBLISHED" : "WORKING NOTE"}</span></nav>
     <h1 className="agent-hero-title">{record.title}</h1>
+    <p className="dek">{record.dek}</p>
     <div className="agent-commit" aria-label="Illustrative commit fragment">
       <span>commit a83c19…</span>
       <span>Author: Chris Hay</span>
       <ErasingTrailer />
     </div>
-    <details className="notebook-synopsis"><summary className="record-voice">ABOUT THIS NOTE +</summary><p className="record-summary">{record.abstract}</p></details>
-    <div className="record-bar record-voice"><span>{record.id}</span><span>{record.status}</span><span>RECORDED {record.created}</span><span>{record.publication.toUpperCase()} · V{record.version}</span><span className="record-verbs"><a href="#cite">{citation ? "CITE" : "REFERENCE DRAFT"} ↓</a>{captureUrl && <a href={captureUrl} rel="nofollow">ARCHIVE ↗</a>}<a href="#follow">FOLLOW ↓</a></span></div>
   </header>;
 }
 

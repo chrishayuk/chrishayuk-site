@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { EcologyDecisionReplay, EcologyWorldReplay } from "./EcologyReplay";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
@@ -73,7 +74,7 @@ function MemoryNote({ record }: { record: PublicationRecord }) {
  </>;
 }
 export function EcologyNotebook({ record }: { record: PublicationRecord }) {
- return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook"><p className="eco-thread-link record-voice"><Link href="/thread/agent-ecology">AGENT ECOLOGY / FOLLOW THE THREAD ↗</Link></p>{record.id === "N-ECOLOGY-BOARD" ? <BoardNote record={record}/> : record.id === "N-ECOLOGY-TRANSMISSION" ? <TransmissionNote record={record}/> : <MemoryNote record={record}/>}
+ return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook">{record.id === "N-ECOLOGY-BOARD" ? <BoardNote record={record}/> : record.id === "N-ECOLOGY-TRANSMISSION" ? <TransmissionNote record={record}/> : <MemoryNote record={record}/>}
   <section className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><p className="eco-thread-link record-voice"><Link href="/thread/agent-ecology">AGENT ECOLOGY / FOLLOW THE THREAD ↗</Link></p></NotebookNavigation></div></NotebookFieldNotes>;
 }

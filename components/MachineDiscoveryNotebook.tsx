@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import Link from "next/link";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
@@ -20,8 +21,8 @@ const alternatives = [
 ];
 
 export function MachineDiscoveryNotebook({ record }: { record: PublicationRecord }) {
- return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook md-notebook"><MachineJourney id={record.id}/>
-  <nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#discovery-cues">TRY THE THREE CUES ↓</a><a href="#discovery-boundary">WHERE THE ROUTE BROKE ↓</a><a href="#discovery-record">THE SOURCE RECORD ↓</a></nav>
+ return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook md-notebook">
+
   <StudyRoom id="discovery-cues" label="FIRST FIND THE SITE. THEN ASK IT FOR A NUMBER." title={<>Last time, I gave it the address.<br/><em>This time, I took it away.</em></>} description="LLM Wilds kept a number off its ordinary pages. A short machine guide explained how to request it. I changed that number before each visitor, so a correct answer could be checked.">
    <figure className="md-task"><figcaption className="record-voice">ON THE SITE / THE SAME WORKING ROUTE FOR EVERY VISITOR</figcaption><ol><li><span>Homepage</span><small>Points to the guide</small></li><li><span>Machine notes</span><small>Explain the request</small></li><li><span>Request the number</span><small>Get K17</small></li></ol></figure>
    <p className="mv-reading">The first obstacle was reaching that site. Nine fresh agents received one of three clues. Choose a clue to follow the route it produced.</p>
@@ -53,5 +54,5 @@ export function MachineDiscoveryNotebook({ record }: { record: PublicationRecord
    <div className="mv-links"><a className="text-link" href="/data/machines/discovery-1-results.md">THE CLOSED EXPERIMENT ↗</a><Link className="text-link" href="/thread/machines#field-map">BACK TO THE FIELD MAP ↗</Link></div>
   </StudyRoom>
   <MachineConnection id={record.id}/><section className="mv-full-record" id="discovery-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#discovery-cues">TRY THE THREE CUES ↑</a><a href="#discovery-boundary">WHERE THE ROUTE BROKE ↑</a><a href="#discovery-record">THE SOURCE RECORD ↑</a></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }

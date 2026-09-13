@@ -70,9 +70,47 @@ test("canonical hashing ignores object key order, but preserves semantic array o
 test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
 test("homepage follows the edited publication sequence and excludes placeholder scenes",async()=>{
  const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");
- assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["identity","latest-youtube","latest-moe","latest-notebook","selected-films","further-notes"]);
+ assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["identity","programmes","film","results","systems","notebook","appearances"]);
+ assert.equal((page.match(/id="latest-youtube"/g)||[]).length,1);
+ assert.equal((page.match(/id="latest-mixture-of-experts"/g)||[]).length,1);
+ assert.doesNotMatch(page,/MachineMotivationCard|nowNote/);
  assert.doesNotMatch(page,/london-night|ffn-notebook|personal-architecture|personal-books|personal-journey|mcp-interaction|operator-notebook|larql-scene/);
  assert.doesNotMatch(page,/SUPPORTED.*NATURAL DEPTH|FINDING.*E25/);
+});
+
+test("programme indexes cover every listed note without promoting drafts or losing chronology", async () => {
+ const { notebookNotes, latestNotes, noteDate, programmes, programmeNotes, nowNote } = await import("../lib/publication-index.ts");
+ assert.deepEqual(new Set(notebookNotes.map(note => note.id)), new Set(records.filter(record => record.kind === "notebook").map(record => record.id)));
+ assert.deepEqual(new Set(programmes.flatMap(programmeNotes).map(note => note.id)), new Set(notebookNotes.map(note => note.id)));
+ for (const [index, note] of notebookNotes.entries()) {
+  assert.equal(note, getRecord(note.id), "indexes retain canonical publication snapshots");
+  assert.notEqual(note.visibility, "unlisted");
+  if (index) assert.ok(noteDate(notebookNotes[index - 1]) >= noteDate(note));
+ }
+ assert.equal(latestNotes.length, 6);
+ assert.equal(nowNote?.id, "N-MACHINE-MOTIVATION");
+ assert.equal(noteDate({ ...notebookNotes[0], published: undefined, created: "2026-09-01", revised: "2026-09-13" }), "2026-09-01");
+});
+
+test("notebook archive searches experiment identifiers and intersects programme filters", async () => {
+ const { notebookArchive } = await import("../lib/publication-index.ts");
+ assert.deepEqual(notebookArchive({ q: "MACHINE-DISCOVERY-1" }).entries.map(record => record.id), ["N-MACHINE-DISCOVERY"]);
+ assert.equal(notebookArchive({ q: "MACHINE-DISCOVERY-1", programme: "cell80" }).entries.length, 0);
+ assert.equal(notebookArchive({ programme: "practice" }).entries.length, 2);
+ assert.equal(notebookArchive({ programme: "unknown" }).programme, "all");
+ assert.equal(notebookArchive({ q: "a".repeat(400) }).q.length, 300);
+});
+
+test("research finding filters use scoped evidence independently of publication or overall status", async () => {
+ const { findings, researchNotes } = await import("../lib/publication-index.ts");
+ const authority = getRecord("N-AUTHORITY")!;
+ assert.equal(authority.status, "OPEN");
+ assert.ok(researchNotes.includes(authority));
+ assert.ok(findings(authority).some(finding => finding.status === "SUPPORTED"));
+ assert.ok(findings(authority).some(finding => finding.status === "NOT SUPPORTED"));
+ assert.ok(findings(getRecord("N-MACHINE-CAPABILITY")!).some(finding => finding.status === "REFUTED"));
+ assert.ok(findings(getRecord("N-CELL80-BOUND")!).some(finding => finding.status === "BOUND"));
+ assert.ok(!researchNotes.some(record => record.id === "N-EXHIBITION" || record.id === "N-MACHINE-PEER"));
 });
 
 // Retrieval must not turn metadata associations into transcript-backed assertions.
@@ -279,9 +317,10 @@ test("notebook notes declare their own lineage and every act kind renders", asyn
   if (act.kind !== "photograph" && !(act.kind === "film" && "media" in act))
    assert.ok(actText(act).length > 0, `${record.id}: empty ${act.kind}`);
  }
- // The index reads lineage from the record rather than assuming a film.
+ // The index introduces threads and a compact chronological selection.
  const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
- assert.match(index, /r\.lineage \|\| "FILM → QUESTION → RECORD"/);
+ assert.match(index, /ProgrammeDoors/);
+ assert.match(index, /CompactNotes notes=\{latestNotes\}/);
  assert.doesNotMatch(index, /VISUAL NOTES/);
 });
 

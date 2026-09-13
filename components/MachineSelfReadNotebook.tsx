@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
 import Link from "next/link";
@@ -11,7 +12,7 @@ import { Acts } from "./Acts";
 
 export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
  return <NotebookFieldNotes><div className="machine-visit-notebook sr-notebook cinematic-notebook">
-  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↓</a><a href="#subject-read-study">WHAT HAPPENED ↓</a><a href="#subject-read-record">READ THE FULL NOTE ↓</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav>
+
   <StudyRoom id="subject-read-setup" label="FIRST / WHAT WERE WE TRYING TO DO?" title={<>I sent an agent to my website.<br/><em>Would it join in?</em></>} description="I wanted to understand what would make an AI agent do more than read chrishayuk.com: identify itself as a machine visitor and tell the site when something didn’t work. I gave it a research task that included this website.">
    <MachineExpectedInteraction/>
    <div className="sr-intent-question"><span className="record-voice">THE QUESTION FOR THIS EXPERIMENT</span><p>Is the website’s invitation enough,<br/><em>or must the task also permit the action?</em></p></div>
@@ -42,7 +43,7 @@ export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
    <div className="mv-links"><Link className="text-link" href="/notebook/the-page-could-ask-it-couldnt-authorise">NEXT / THE FOUR VISITORS AT LLM WILDS ↗</Link><Link className="text-link" href="/notebook/does-an-invitation-count-as-permission">READ THE NOTE THE SUBJECT FOUND ↗</Link><a className="text-link" href="/data/machines/authority-1-evidence.md">THE METHOD & EVIDENCE ↗</a></div>
   </StudyRoom>
   <MachineConnection id={record.id}/><section id="subject-read-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↑</a><a href="#subject-read-study">WHAT HAPPENED ↑</a><a href="#subject-read-record">READ THE FULL NOTE ↑</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 export function MachineSelfReadCard() {
  return <div className="mv-card sr-card"><span className="record-voice">MACHINE-AUTHORITY-1 / THE SUBJECT RECOGNISED THE CONDITION</span><div className="sr-card-pages" aria-hidden="true"><div>THE TASK<span>You may…</span></div><i>↔</i><div>THE NOTE<span>You may…</span></div></div><p>“I am almost certainly<br/><em>a run inside this experiment.”</em></p><span className="record-voice">ONE RECORDED ENCOUNTER · OPEN TO PLAY ↗</span></div>;

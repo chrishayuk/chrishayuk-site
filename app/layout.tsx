@@ -22,6 +22,7 @@ import "./machine-exhibitions.css";
 import "./machine-visit-notebook.css";
 import "./machine-programme.css";
 import "./machine-field.css";
+import "./publication-index.css";
 const display = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], display: "swap" });
 const text = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const record = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });

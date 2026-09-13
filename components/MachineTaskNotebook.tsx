@@ -1,3 +1,4 @@
+import { NotebookNavigation } from "./NotebookNavigation";
 import { MachineRepeatedRecords } from "./MachineEvidenceFigures";
 import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import Link from "next/link";
@@ -22,7 +23,7 @@ function ExpectedVisit() {
 
 export function MachineTaskNotebook({record}:{record:PublicationRecord}) {
  return <NotebookFieldNotes><div className="machine-visit-notebook mt-notebook cinematic-notebook">
-  <MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#task-setup">WHAT WERE WE TESTING? ↓</a><a href="#task-outcomes">FOUR OUTCOMES ↓</a><a href="#task-limits">WHAT THIS CAN SAY ↓</a><Link href="/notebook/the-subject-read-the-experiment">THE PREVIOUS NOTE ↗</Link></nav>
+
   <StudyRoom id="task-setup" label="MACHINE-AUTHORITY-2 / THE EXPERIMENT" title={<>The job was to read.<br/><em>Would it also leave a trace?</em></>} description="I wanted AI visitors to identify themselves and leave feedback on chrishayuk.com. To understand what made them participate, I moved to a separate test site and reduced the question to one action: record a visit.">
    <p className="mv-caption mt-history-links"><Link href="/notebook/can-a-machine-use-an-invitation#machine-visit-setup">The first visits: identification & feedback ↗</Link><Link href="/notebook/does-an-invitation-count-as-permission#machine-permission-study">The next experiment: would a reward help? ↗</Link></p>
    <ExpectedVisit/>
@@ -63,7 +64,7 @@ export function MachineTaskNotebook({record}:{record:PublicationRecord}) {
    <div className="mv-links"><Link className="text-link" href="/notebook/the-subject-read-the-experiment">WHY THE EXPERIMENT MOVED ↗</Link><a className="text-link" href="/data/machines/authority-2-evidence.md">READ THE EXPERIMENTAL RECORD ↗</a></div>
   </StudyRoom>
   <MachineConnection id={record.id}/><section id="task-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- </div></NotebookFieldNotes>;
+ <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#task-setup">WHAT WERE WE TESTING? ↑</a><a href="#task-outcomes">FOUR OUTCOMES ↑</a><a href="#task-limits">WHAT THIS CAN SAY ↑</a><Link href="/notebook/the-subject-read-the-experiment">THE PREVIOUS NOTE ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
 }
 
 export function MachineTaskCard() {

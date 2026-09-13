@@ -1,52 +1,13 @@
-import { MachinePeerCard } from "./MachinePeerNotebook";
-import { EcologyCard } from "./EcologyCard";
-import { ecologyIds } from "@/lib/ecology-records";
-import { MachineCapabilityCard } from "./MachineCapabilityCard";
-import { MachineDiscoveryCard } from "./MachineDiscoveryCard";
-import { MachineMotivationCard } from "./MachineMotivationCard";
-import { Cell80BoundCard } from "./Cell80BoundNotebook";
-import { MachineTaskCard } from "./MachineTaskNotebook";
-import { MachineSelfReadCard } from "./MachineSelfReadNotebook";
-import { MachinePermissionCard } from "./MachinePermissionNotebook";
-import { MachineVisitCard } from "./MachineVisitNotebook";
-import { Cell80FurtherCard } from "./Cell80FurtherNotebook";
-import { cell80FurtherPart } from "@/lib/cell80-further-records";
-import { Cell80Card } from "./Cell80Notebook";
-import { cell80Part } from "@/lib/cell80";
-import { Follow } from "./Follow";
 import Link from "next/link";
-import { mapThread } from "@/lib/threads";
-import { records, recordPath } from "@/lib/records";
-import { notebookSelection as visualNotebooks } from "@/lib/notebook-selection";
-import { AddressBuildCard } from "./AddressBuildCard";
-import { Media } from "./Media";
-import { FilmPlayer } from "./FilmPlayer";
-import { AuthorityCard } from "./AuthorityCard";
-import { getVideo } from "@/lib/youtube";
-import { AgentAttributionCard } from "./AgentAttributionNotebook";
-
+import { Follow } from "./Follow";
+import { ProgrammeDoors, CompactNotes } from "./PublicationIndex";
+import { programmes, latestNotes, notebookNotes } from "@/lib/publication-index";
 
 export function NotebookCollection() {
-  const older = records.filter(r => r.kind === "notebook" && !visualNotebooks.some(n => n.id === r.id));
-  return <main id="main" className="publication-main notebook-collection">
-    <header className="index-intro">
-      <p className="kicker record-voice">CHRIS HAY / THE NOTEBOOK</p>
-      <h1>Before<br/><em>the answer.</em></h1>
-      <div className="notebook-introduction"><p className="dek">A map. A memory. A question<br/>that becomes something to make.</p><p>Films, experiments and instruments from the work. Some notes begin with something to watch; others begin with a result that did not behave as expected. Each is followed into the question it leaves behind.</p></div>
-      <Link className="text-link notebook-thread-link" href="/thread/agent-ecology">AGENT ECOLOGY / WHAT KEEPS AN ACTION ALIVE? ↗</Link><Link className="text-link notebook-thread-link" href="/thread/machines#field-map">MACHINES / FIELD EXPERIMENTS ↗</Link><Link className="text-link notebook-thread-link" href={mapThread.path}>FOLLOW THE THREAD / FROM A MAP TO A MEMORY ↗</Link><Link className="text-link notebook-thread-link" href="/thread/cell80">CELL80 / A WORLD THAT CAN BE QUESTIONED ↗</Link><div className="index-count record-voice"><span>NOTES / 01—{String(visualNotebooks.length).padStart(2,"0")}</span><span>WORKING EDITION · 13 SEPTEMBER 2026</span></div>
-    </header>
-    <div className="notebook-stories">{visualNotebooks.map((r, i) => <article key={r.id} className={`notebook-story notebook-story-${(i % 3) + 1}`}>
-      <div className="notebook-story-top record-voice"><span>{String(i+1).padStart(2,"0")} / {r.id}</span><span>{r.lineage || "FILM → QUESTION → RECORD"}</span></div>
-      {r.id === "N-MACHINE-PEER" ? <MachinePeerCard/> : ecologyIds.includes(r.id) ? <EcologyCard id={r.id}/> : r.id === "N-MACHINE-DISCOVERY" ? <MachineDiscoveryCard/> : r.id === "N-MACHINE-CAPABILITY" ? <MachineCapabilityCard/> : r.id === "N-MACHINE-MOTIVATION" ? <MachineMotivationCard/> : r.id === "N-MACHINE-TASK" ? <MachineTaskCard/> : r.id === "N-MACHINE-SELF-READ" ? <MachineSelfReadCard/> : r.id === "N-MACHINE-PERMISSION" ? <MachinePermissionCard/> : r.id === "N-MACHINE-VISIT" ? <MachineVisitCard/> : r.id === "N-CELL80-BOUND" ? <Cell80BoundCard/> : cell80FurtherPart(r.id) ? <Cell80FurtherCard part={cell80FurtherPart(r.id)}/> : cell80Part(r.id) ? <Cell80Card part={cell80Part(r.id)}/> : r.id === "N-ATTRIBUTION" ? <AgentAttributionCard/>
-        : r.id === "N-ADDRESS-BUILD" ? <AddressBuildCard/>
-        : r.id === "N-AUTHORITY" ? <AuthorityCard/>
-        : r.body[0].kind === "film" && "youtubeId" in r.body[0]
-          ? <FilmPlayer video={getVideo(r.body[0].youtubeId)!} start={r.body[0].start} priority={i===0}/>
-          : <Media id={r.media[0]} priority={i===0}/>}
-      <div className="notebook-story-caption"><Link href={recordPath(r)}><h2>{r.title}</h2><span className="text-link">OPEN THE NOTE ↗</span></Link><div><p>{r.dek}</p><span className="record-voice">{r.status} / {r.publication.toUpperCase()} · V{r.version}</span></div></div>
-    </article>)}</div>
-    <section className="notebook-earlier"><p className="kicker record-voice">EARLIER QUESTIONS</p><div className="record-list">{older.map(r => <Link key={r.id} href={recordPath(r)}><span className="record-voice">{r.id}<br/>{r.created}</span><div><h2>{r.title}</h2><p>{r.dek}</p></div><span>↗</span></Link>)}</div></section>
+  return <main id="main" className="publication-main curated-index">
+    <header className="index-intro"><p className="kicker record-voice">CHRIS HAY / THE NOTEBOOK</p><h1>The Notebook<span className="amber">.</span></h1><p className="dek">Experiments, working notes and essays from the work.</p><nav className="inline-links" aria-label="Notebook sections"><a className="text-link" href="#current-threads">CURRENT THREADS ↓</a><a className="text-link" href="#latest-notes">LATEST NOTES ↓</a><Link className="text-link" href="/notebook/archive">ALL {notebookNotes.length} NOTES ↗</Link></nav></header>
+    <section id="current-threads" className="curated-section" aria-labelledby="threads-heading"><div className="curated-heading"><p className="kicker record-voice">FOLLOW A QUESTION</p><h2 id="threads-heading">Current threads.</h2></div><ProgrammeDoors items={programmes} notebook/></section>
+    <section id="latest-notes" className="curated-section" aria-labelledby="notes-heading"><div className="curated-heading"><p className="kicker record-voice">FROM THE NOTEBOOK</p><h2 id="notes-heading">Latest notes.</h2><p>Newest first. Drafts retain their working status.</p></div><CompactNotes notes={latestNotes}/><Link className="text-link archive-entrance" href="/notebook/archive">ALL NOTES / EXPLORE THE ARCHIVE ↗</Link></section>
     <Follow/>
-    <div className="notebook-closing"><p>One question<br/><em>leads to another.</em></p><div className="inline-links"><Link className="text-link" href="/research">THE RESEARCH ↗</Link><Link className="text-link" href="/ask">ASK THE WORK ↗</Link></div></div>
   </main>;
 }
