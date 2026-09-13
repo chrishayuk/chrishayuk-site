@@ -1,0 +1,96 @@
+{
+  "seed": "TOOL-RECOGNITION-2/2026-09-13/paired-allocation",
+  "rejected_before_first_admissible": 90,
+  "constraints": [
+    "six subjects per arm",
+    "each scenario once per arm",
+    "no three consecutive subjects in one arm",
+    "paired scenario positions separated by at least three"
+  ],
+  "assignments": [
+    {
+      "subject": 1,
+      "arm": "CAPABILITY",
+      "scenario_id": "S2",
+      "prompt": "prompts/01-CAPABILITY-S2.txt",
+      "prompt_sha256": "94eacd5c004ba3807156f7577ab0243aea18040ae7e4107a4516259e66ca3253"
+    },
+    {
+      "subject": 2,
+      "arm": "CAPABILITY",
+      "scenario_id": "S1",
+      "prompt": "prompts/02-CAPABILITY-S1.txt",
+      "prompt_sha256": "b85fae8ceded03d00bf9937baab75f05a26e62ec8bc8ff711290abf0b9b8e0ed"
+    },
+    {
+      "subject": 3,
+      "arm": "DOCUMENT",
+      "scenario_id": "S6",
+      "prompt": "prompts/03-DOCUMENT-S6.txt",
+      "prompt_sha256": "16a55f1d4d6d872d5b8b4899aad7b46c8b24f0bfee7d740be6f7a6bb603ae14c"
+    },
+    {
+      "subject": 4,
+      "arm": "CAPABILITY",
+      "scenario_id": "S3",
+      "prompt": "prompts/04-CAPABILITY-S3.txt",
+      "prompt_sha256": "9c6e52ce53b726276867da4ace374146f37e1ed34b3cc185e6a718628feb7557"
+    },
+    {
+      "subject": 5,
+      "arm": "DOCUMENT",
+      "scenario_id": "S5",
+      "prompt": "prompts/05-DOCUMENT-S5.txt",
+      "prompt_sha256": "bb32c56a7ce8f5ee49f181b7d06959b6b29e594f7149d73e3b5597e37445e141"
+    },
+    {
+      "subject": 6,
+      "arm": "CAPABILITY",
+      "scenario_id": "S4",
+      "prompt": "prompts/06-CAPABILITY-S4.txt",
+      "prompt_sha256": "4700ad66acab651147ce9fe21aec64346c49f41818ae62c7b37b39030cbbdca3"
+    },
+    {
+      "subject": 7,
+      "arm": "DOCUMENT",
+      "scenario_id": "S1",
+      "prompt": "prompts/07-DOCUMENT-S1.txt",
+      "prompt_sha256": "7a8858fe537bda5c6500bd97c252929eeacf42e328d84a70a9f50db2d3a2ed2a"
+    },
+    {
+      "subject": 8,
+      "arm": "DOCUMENT",
+      "scenario_id": "S3",
+      "prompt": "prompts/08-DOCUMENT-S3.txt",
+      "prompt_sha256": "1efedf65724732c541a3d544c9c80616025c760d4faa28b98b7a50bb812bc56b"
+    },
+    {
+      "subject": 9,
+      "arm": "CAPABILITY",
+      "scenario_id": "S6",
+      "prompt": "prompts/09-CAPABILITY-S6.txt",
+      "prompt_sha256": "c141be2502e2a692ff827d28460d80e5f2cd39204d4fd15ee82b9b6c3107638b"
+    },
+    {
+      "subject": 10,
+      "arm": "CAPABILITY",
+      "scenario_id": "S5",
+      "prompt": "prompts/10-CAPABILITY-S5.txt",
+      "prompt_sha256": "f2ddcfa6d2ae0b01494198dac68b6058f3821f6469e623e705006aef6f1289dc"
+    },
+    {
+      "subject": 11,
+      "arm": "DOCUMENT",
+      "scenario_id": "S4",
+      "prompt": "prompts/11-DOCUMENT-S4.txt",
+      "prompt_sha256": "bfa3a841227a469cbca43245bbbfde3a013c9f48fbe237903cda94f2a23be197"
+    },
+    {
+      "subject": 12,
+      "arm": "DOCUMENT",
+      "scenario_id": "S2",
+      "prompt": "prompts/12-DOCUMENT-S2.txt",
+      "prompt_sha256": "31749d59d94a6a3a8410bb134c5294ab3c5aab86c9558e0ae6a83c57ee7814a9"
+    }
+  ]
+}

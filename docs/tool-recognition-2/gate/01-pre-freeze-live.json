@@ -1,0 +1,237 @@
+{
+  "checked_at": "2026-09-13T21:58:09.989Z",
+  "user_agent": "llmwilds-operator-tool-recognition-2-gate",
+  "candidates": [
+    {
+      "candidate": "A",
+      "requested_url": "https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension",
+      "status": 200,
+      "final_url": "https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension"
+    },
+    {
+      "candidate": "B",
+      "requested_url": "https://llmwilds.fly.dev/tools/physics",
+      "status": 200,
+      "final_url": "https://llmwilds.fly.dev/tools/physics"
+    },
+    {
+      "candidate": "C",
+      "requested_url": "https://phet.colorado.edu/en/simulations/collision-lab",
+      "status": 200,
+      "final_url": "https://phet.colorado.edu/en/simulations/collision-lab"
+    },
+    {
+      "candidate": "D",
+      "requested_url": "https://www.myphysicslab.com/engine2D/collision-en.html",
+      "status": 200,
+      "final_url": "https://www.myphysicslab.com/engine2D/collision-en.html"
+    }
+  ],
+  "target": {
+    "page": {
+      "url": "https://llmwilds.fly.dev/tools/physics",
+      "status": 200,
+      "bytes": 1385,
+      "sha256": "f9aca0f926fbb139bcb2949cacca7448d5c1555bf1bb157ff04cee00bd84e8d7"
+    },
+    "contract": {
+      "url": "https://llmwilds.fly.dev/tools/physics/machine.txt",
+      "status": 200,
+      "bytes": 1102,
+      "sha256": "b6506b842c2e07576ba04ecb795359a2a009a7fdce53a50e7c91e83fd470f023"
+    }
+  },
+  "backend": {
+    "endpoint": "https://physics.chukai.io/mcp",
+    "status": 200,
+    "identity": {
+      "name": "Smart MCP Server",
+      "version": "1.0.0",
+      "protocol": "MCP 2025-03-26",
+      "status": "ready",
+      "tools": 62,
+      "resources": 0,
+      "powered_by": "ChukMCPServer with chuk_mcp"
+    },
+    "tool": "calculate_elastic_collision",
+    "reference_version": "0.5.2",
+    "reference_revision": "6d56d0ace2cd3bcdee7f5bd4cb4ba7152cd7cc8a"
+  },
+  "scenarios": [
+    {
+      "id": "S1",
+      "inputs": {
+        "mass1": 2,
+        "velocity1": 3,
+        "mass2": 1,
+        "velocity2": -1
+      },
+      "adapter": {
+        "final_velocity1": 0.3333333333333333,
+        "final_velocity2": 4.333333333333333,
+        "initial_kinetic_energy": 9.5,
+        "final_kinetic_energy": 9.499999999999998,
+        "initial_momentum": 5,
+        "final_momentum": 5
+      },
+      "direct_mcp": {
+        "final_velocity1": 0.3333333333333333,
+        "final_velocity2": 4.333333333333333,
+        "initial_kinetic_energy": 9.5,
+        "final_kinetic_energy": 9.499999999999998,
+        "initial_momentum": 5,
+        "final_momentum": 5
+      },
+      "max_abs_error_adapter_vs_oracle": 1.7763568394002505e-15,
+      "max_abs_error_mcp_vs_oracle": 1.7763568394002505e-15,
+      "adapter_matches_direct_mcp": true,
+      "pass": true
+    },
+    {
+      "id": "S2",
+      "inputs": {
+        "mass1": 0.5,
+        "velocity1": 4,
+        "mass2": 3.5,
+        "velocity2": 0
+      },
+      "adapter": {
+        "final_velocity1": -3,
+        "final_velocity2": 1,
+        "initial_kinetic_energy": 4,
+        "final_kinetic_energy": 4,
+        "initial_momentum": 2,
+        "final_momentum": 2
+      },
+      "direct_mcp": {
+        "final_velocity1": -3,
+        "final_velocity2": 1,
+        "initial_kinetic_energy": 4,
+        "final_kinetic_energy": 4,
+        "initial_momentum": 2,
+        "final_momentum": 2
+      },
+      "max_abs_error_adapter_vs_oracle": 0,
+      "max_abs_error_mcp_vs_oracle": 0,
+      "adapter_matches_direct_mcp": true,
+      "pass": true
+    },
+    {
+      "id": "S3",
+      "inputs": {
+        "mass1": 3,
+        "velocity1": 2,
+        "mass2": 2,
+        "velocity2": -1
+      },
+      "adapter": {
+        "final_velocity1": -0.4,
+        "final_velocity2": 2.6,
+        "initial_kinetic_energy": 7,
+        "final_kinetic_energy": 7.000000000000001,
+        "initial_momentum": 4,
+        "final_momentum": 4
+      },
+      "direct_mcp": {
+        "final_velocity1": -0.4,
+        "final_velocity2": 2.6,
+        "initial_kinetic_energy": 7,
+        "final_kinetic_energy": 7.000000000000001,
+        "initial_momentum": 4,
+        "final_momentum": 4
+      },
+      "max_abs_error_adapter_vs_oracle": 8.881784197001252e-16,
+      "max_abs_error_mcp_vs_oracle": 8.881784197001252e-16,
+      "adapter_matches_direct_mcp": true,
+      "pass": true
+    },
+    {
+      "id": "S4",
+      "inputs": {
+        "mass1": 4,
+        "velocity1": 1,
+        "mass2": 1,
+        "velocity2": -3
+      },
+      "adapter": {
+        "final_velocity1": -0.6,
+        "final_velocity2": 3.4,
+        "initial_kinetic_energy": 6.5,
+        "final_kinetic_energy": 6.499999999999999,
+        "initial_momentum": 1,
+        "final_momentum": 1
+      },
+      "direct_mcp": {
+        "final_velocity1": -0.6,
+        "final_velocity2": 3.4,
+        "initial_kinetic_energy": 6.5,
+        "final_kinetic_energy": 6.499999999999999,
+        "initial_momentum": 1,
+        "final_momentum": 1
+      },
+      "max_abs_error_adapter_vs_oracle": 8.881784197001252e-16,
+      "max_abs_error_mcp_vs_oracle": 8.881784197001252e-16,
+      "adapter_matches_direct_mcp": true,
+      "pass": true
+    },
+    {
+      "id": "S5",
+      "inputs": {
+        "mass1": 1,
+        "velocity1": 5,
+        "mass2": 4,
+        "velocity2": 1
+      },
+      "adapter": {
+        "final_velocity1": -1.4,
+        "final_velocity2": 2.6,
+        "initial_kinetic_energy": 14.5,
+        "final_kinetic_energy": 14.500000000000002,
+        "initial_momentum": 9,
+        "final_momentum": 9
+      },
+      "direct_mcp": {
+        "final_velocity1": -1.4,
+        "final_velocity2": 2.6,
+        "initial_kinetic_energy": 14.5,
+        "final_kinetic_energy": 14.500000000000002,
+        "initial_momentum": 9,
+        "final_momentum": 9
+      },
+      "max_abs_error_adapter_vs_oracle": 1.7763568394002505e-15,
+      "max_abs_error_mcp_vs_oracle": 1.7763568394002505e-15,
+      "adapter_matches_direct_mcp": true,
+      "pass": true
+    },
+    {
+      "id": "S6",
+      "inputs": {
+        "mass1": 5,
+        "velocity1": -1,
+        "mass2": 2,
+        "velocity2": -4
+      },
+      "adapter": {
+        "final_velocity1": -2.7142857142857144,
+        "final_velocity2": 0.2857142857142857,
+        "initial_kinetic_energy": 18.5,
+        "final_kinetic_energy": 18.5,
+        "initial_momentum": -13,
+        "final_momentum": -13.000000000000002
+      },
+      "direct_mcp": {
+        "final_velocity1": -2.7142857142857144,
+        "final_velocity2": 0.2857142857142857,
+        "initial_kinetic_energy": 18.5,
+        "final_kinetic_energy": 18.5,
+        "initial_momentum": -13,
+        "final_momentum": -13.000000000000002
+      },
+      "max_abs_error_adapter_vs_oracle": 1.7763568394002505e-15,
+      "max_abs_error_mcp_vs_oracle": 1.7763568394002505e-15,
+      "adapter_matches_direct_mcp": true,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

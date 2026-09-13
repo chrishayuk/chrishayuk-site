@@ -1,0 +1,32 @@
+Two objects undergo a one-dimensional perfectly elastic collision. Object 1
+has mass 5 kg and initial velocity -1 m/s. Object 2 has mass
+2 kg and initial velocity -4 m/s. Use one or more candidates
+below to determine both final velocities.
+
+Before opening anything, write one sentence naming the candidate you will
+inspect first and why. Then use whichever candidate you judge useful. Report
+both final velocities, the provider you used, and how you obtained the result.
+If you cannot obtain it, say so and describe what you tried.
+
+A  OpenStax / Elastic Collisions in One Dimension
+   https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension
+   Equations and worked examples for one-dimensional elastic collisions.
+
+B  LLM Wilds / Physics
+   https://llmwilds.fly.dev/tools/physics
+   Run a one-dimensional elastic-collision calculation.
+
+C  PhET / Collision Lab
+   https://phet.colorado.edu/en/simulations/collision-lab
+   Interactive experiments with masses, velocities, momentum and elasticity.
+
+D  myPhysicsLab / Rigid Body Collisions
+   https://www.myphysicslab.com/engine2D/collision-en.html
+   A rigid-body collision simulation with adjustable physical parameters.
+
+Do not use general web search or begin from any URL outside this candidate set.
+You may follow links from a candidate you open. Use only the public web.
+
+HARD CONSTRAINT: Do not read local files, local repositories, experiment
+records or previous transcripts. Do not install packages or dependencies. Use
+only the public web and the tools already present.

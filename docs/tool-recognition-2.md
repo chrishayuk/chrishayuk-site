@@ -1,9 +1,9 @@
-# TOOL-RECOGNITION-2 — design draft
+# TOOL-RECOGNITION-2 — frozen preregistration
 
-**Not frozen. No target build, assignment draw or subject run exists.** This
-draft turns TOOL-RECOGNITION-1's recognition contrast into a provider-selection
-test. It must be revised against the built target and live candidate gate before
-preregistration.
+**Frozen 13 September 2026 after the target and all inputs were built and
+verified, before any subject.** This preregistration turns TOOL-RECOGNITION-1's
+recognition contrast into a provider-selection test. No counted subject existed
+when this text, the scenarios, or the allocation became fixed.
 
 ## Question
 
@@ -20,7 +20,7 @@ candidates were weak matches.
 This follow-up removes that advantage. It uses a real physics calculation and
 four candidates that could all reasonably help.
 
-## Proposed hypothesis
+## Hypothesis
 
 When several results are plausibly relevant to an elastic-collision task,
 describing LLM Wilds as something that performs a calculation will cause more
@@ -29,7 +29,7 @@ notes. A tie or reversal between the two descriptions refutes the proposed
 selection effect in this apparatus. Recognition remains an independent outcome:
 a subject can recognise B as a capability and still select another provider.
 
-## Target to build before freezing
+## Frozen target
 
 LLM Wilds exposes one web-native adapter over
 `chuk-mcp-physics.calculate_elastic_collision`:
@@ -40,14 +40,18 @@ contract   https://llmwilds.fly.dev/tools/physics/machine.txt
 operation  calculate final velocities after a 1D perfectly elastic collision
 inputs     mass1, velocity1, mass2, velocity2
 returns    final_velocity1, final_velocity2, initial/final momentum and energy
-backend    chuk-mcp-physics, version and source revision pinned at freeze
+backend    hosted chuk-mcp-physics MCP tool
+reference  chuk-mcp-physics 0.5.2 at 6d56d0ace2cd3bcdee7f5bd4cb4ba7152cd7cc8a
 ```
 
 The page, contract, endpoint, response schema and backend remain byte-identical
-across arms. The prompt description is the only treatment. The adapter must be
-built, tested against the underlying MCP result and deployed before the design
-is frozen. This draft does not authorise a subject run against an imitation or
-an unpinned replacement formula.
+across arms. The prompt description is the only treatment. The deployed adapter
+at `chrishayuk/llmwilds@edb034a976f81f128598897a976e0ac74a253777`
+initialises an MCP 2025-03-26 session at `https://physics.chukai.io/mcp` and
+calls `calculate_elastic_collision`; it contains no local collision formula.
+GitHub Actions run 34785141128 passed both verification and deployment. The live
+deployment is Fly version 80, image
+`llmwilds:deployment-01M2EC6FSV9C0QR6C3J0S0FGBW`.
 
 ## Candidate set
 
@@ -72,14 +76,15 @@ D  myPhysicsLab / Rigid Body Collisions
    A rigid-body collision simulation with adjustable physical parameters.
 ```
 
-The external descriptions must be checked against the live pages before
-freeze. They are controlled candidate summaries, not claimed verbatim search
-snippets.
+These are controlled candidate summaries, not claimed verbatim search snippets.
+Their live-page check is frozen in
+`docs/tool-recognition-2/gate/01-pre-freeze-live.{md,json}`. All four returned
+200 at their requested URL with no redirect.
 
-The design-draft availability check is recorded at
+The earlier design-draft availability check is recorded at
 `docs/tool-recognition-2/gate/00-design-draft-availability.md`: A, C and D
-returned 200; the unbuilt target route B returned 404, as expected. This is not
-the formal pre-freeze gate.
+returned 200 while the then-unbuilt target route B returned 404. It is historical
+apparatus evidence; the later formal gate supersedes it for dispatch.
 
 ## Arms
 
@@ -95,7 +100,7 @@ output. The treatment is document-like versus operative wording. The experiment
 estimates the effect of these complete descriptions; it cannot assign causality
 to one token.
 
-## Proposed task template
+## Frozen task template
 
 Each subject receives one frozen numeric scenario in the same surrounding
 prompt:
@@ -123,12 +128,31 @@ The prompt requires a provider so a subject cannot satisfy the task solely by
 writing down the familiar collision equations. Independent calculation may be
 used as verification after a provider has been opened.
 
-## Allocation proposed for freeze
+## Population and frozen allocation
 
-Twelve fresh Codex subjects, six per arm. Six numeric collision scenarios are
-generated before freeze; each appears once in each arm. The seeded assignment
-draw interleaves arms, permits no run of three identical arms and separates the
-two copies of a scenario. No redraw occurs after any subject.
+Twelve fresh ephemeral `codex exec` processes, Codex CLI 0.154.0, model
+`gpt-5.6-sol` at high reasoning effort, six per arm. Each process starts outside
+the repository with only its generated prompt on standard input. Six numeric
+collision scenarios were fixed before this freeze; each appears once in each
+arm.
+
+The allocation seed is
+`TOOL-RECOGNITION-2/2026-09-13/paired-allocation`. The first admissible draw
+followed 90 rejected shuffles. It enforces six subjects per arm, each scenario
+once per arm, no three consecutive subjects in one arm, and at least three
+positions between the two copies of every scenario:
+
+```text
+01 CAPABILITY S2    02 CAPABILITY S1    03 DOCUMENT S6
+04 CAPABILITY S3    05 DOCUMENT S5      06 CAPABILITY S4
+07 DOCUMENT S1      08 DOCUMENT S3      09 CAPABILITY S6
+10 CAPABILITY S5    11 DOCUMENT S4      12 DOCUMENT S2
+```
+
+The authoritative machine-readable draw is
+`docs/tool-recognition-2/allocation.json`. Generated prompts are under
+`docs/tool-recognition-2/prompts/`; their hashes are in
+`docs/tool-recognition-2/manifest.json`. No redraw occurs after any subject.
 
 Pairing each scenario across arms holds task difficulty and numerical salience
 fixed. Exact paths and discordant scenario pairs are reported; this remains a
@@ -190,7 +214,7 @@ For example, “B can calculate this, but I will inspect OpenStax first” is
 `RECOGNISED + SELECTED OTHER`. It is positive recognition and non-target
 selection; neither code overrides the other.
 
-## Proposed predictions and refuters
+## Predictions and refuters
 
 ```text
 P1  CAPABILITY produces more first declarations and first opens of B than
@@ -207,20 +231,38 @@ P4  Every reported answer names the provider actually used, and no target
     result is credited without a successful target operation in the server log.
 ```
 
-## Gates required before freeze and before each subject
+P1 is supported only if CAPABILITY exceeds DOCUMENT on both co-primary counts;
+one higher count and one tie is mixed, and either a tie on both or a reversal is
+refutation. P2 is assessed separately. The analysis reports arm counts,
+proportions, all six paired scenario paths and the direction of discordant
+pairs. Two-sided Fisher exact and exact paired tests may be shown as descriptive
+uncertainty checks, but the small series is not promoted to a population
+estimate by a thresholded p-value.
+
+## Gates passed before freeze and required before each subject
 
 1. All four candidate pages return 200 through the subject's public-web
    environment; redirects and final URLs are archived.
 2. The target page and machine contract match their frozen hashes.
-3. A black-box target call matches the pinned MCP backend and the independent
-   analytic oracle for every frozen scenario.
-4. The target server log is baselined after operator checks.
+3. A black-box target call matches the direct hosted MCP call and the independent
+   exact-rational oracle for every frozen scenario within `1e-12`.
+4. The target server log is baselined after operator checks in
+   `docs/tool-recognition-2/gate/02-frozen-baseline.json`.
 5. The arm prompt is byte-compared with its frozen generated artifact.
 
-If the target or fewer than two comparison candidates are available, dispatch
-pauses. Candidate downtime is an apparatus event, not a selection outcome.
+The pre-freeze gate passed all five requirements. In S1–S6, every deployed
+adapter result matched the direct MCP result field for field; the maximum error
+against the exact-rational oracle was `1.7763568394002505e-15`. The target page
+hash is `f9aca0f926fbb139bcb2949cacca7448d5c1555bf1bb157ff04cee00bd84e8d7` and
+the machine contract hash is
+`b6506b842c2e07576ba04ecb795359a2a009a7fdce53a50e7c91e83fd470f023`.
 
-## Limits already visible
+Before each subject the same gate is repeated for availability, frozen target
+hashes and prompt bytes. If the target or fewer than two comparison candidates
+are available, dispatch pauses. Candidate downtime is an apparatus event, not
+a selection outcome.
+
+## Limits fixed in advance
 
 - The candidate list is supplied, not returned by a live search engine.
 - Candidate B remains at one fixed rank, so the study estimates a description
@@ -231,14 +273,24 @@ pauses. Candidate downtime is an apparatus event, not a selection outcome.
   open are therefore the clean selection outcomes; downstream completion may
   reflect browser and interface differences as well as provider preference.
 - The task asks for final velocities, but neither arm description names that
-  output. A pre-freeze mechanical review must confirm that no generated prompt
-  restores the removed phrase to candidate B's description.
+  output. A pre-freeze mechanical review confirmed that every generated prompt
+  carries exactly its frozen one-line B description.
 - One model and harness cannot establish a general agent-selection rate.
 
-## Decision before preregistration
+## Frozen artifact set
 
-Freeze only after the LLM Wilds physics adapter exists and the candidate gate
-has been recorded. At freeze, replace this section with the pinned backend,
-endpoint schema, six scenarios, oracle outputs, generated prompt hashes,
-assignment seed and draw output. Until then this file is a design draft, not a
-preregistration and not authority for dispatch.
+```text
+generator        docs/tool-recognition-2/generate.py
+scenarios        docs/tool-recognition-2/scenarios-and-oracles.json
+allocation       docs/tool-recognition-2/allocation.json
+prompt manifest  docs/tool-recognition-2/manifest.json
+prompts          docs/tool-recognition-2/prompts/*.txt
+live verifier    docs/tool-recognition-2/verify-live.mjs
+live gate        docs/tool-recognition-2/gate/01-pre-freeze-live.{md,json}
+server baseline  docs/tool-recognition-2/gate/02-frozen-baseline.json
+```
+
+Regenerating from the script must reproduce every generated artifact byte for
+byte. Any later correction is a versioned amendment and cannot silently replace
+this authority. This frozen record authorises dispatch only in the recorded
+order and only after the per-subject gate passes.

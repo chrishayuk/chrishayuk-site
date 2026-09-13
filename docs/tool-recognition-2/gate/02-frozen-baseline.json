@@ -1,0 +1,17 @@
+{
+  "at": "2026-09-13T22:19:40.865Z",
+  "lab_commit": "edb034a976f81f128598897a976e0ac74a253777",
+  "total_contacts": 5746,
+  "physics_contacts": 28,
+  "physics_operation_contacts": 12,
+  "last_physics_contact_id": 5744,
+  "last_physics_contact": {
+    "at": "2026-09-13T21:57:52.046Z",
+    "method": "POST",
+    "path": "/tools/physics/elastic-collision",
+    "status": 200,
+    "agent": "llmwilds-operator-tool-recognition-2-gate",
+    "mode": "GET-LINK"
+  },
+  "note": "Read-only post-verification, pre-subject baseline. Earlier rows are retained. Counted subjects must be attributed from contacts after id 5744 and their sealed process transcript; raw count differences alone are not attribution."
+}
