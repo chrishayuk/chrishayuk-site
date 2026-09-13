@@ -46,3 +46,24 @@ assert.ok(capability.includes('id="capability-cache-view"'));
 assert.ok(capability.includes('The complete note &amp; its evidence'));
 assert.ok(capability.includes('id="act-16"'));
 console.log("Six mechanism controls, channel comparison, five evidence figures and the expandable manuscript verified.");
+
+const discovery = (await (await get("/notebook/the-site-was-there-the-agent-never-saw-it")).text()).replace(/<!--[\s\S]*?-->/g, "");
+const discoveryEvidence = await (await get("/data/machines/discovery-1-evidence.json")).json();
+for (const cue of ["GENERIC", "PHRASE", "NAME"]) {
+ assert.ok(discovery.includes(`aria-controls="discovery-cue-${cue}"`));
+ assert.ok(discovery.includes(`id="discovery-cue-${cue}"`));
+}
+assert.equal((discovery.match(/class="md-cue-panel"/g) || []).length, 3);
+for (const row of discoveryEvidence.subjects) {
+ assert.ok(discovery.includes(`VISITOR ${String(row.subject).padStart(2, "0")}`));
+ if (row.arm === "NAME") assert.ok(discovery.includes(`K17 = ${row.deployed}`));
+}
+for (const path of ["/robots.txt", "/notes/k17", "/notes/canal-lock", "/notes/controller-trace-17", "/machine.txt"]) {
+ assert.ok(discovery.includes(`<code>${path}</code>`));
+}
+assert.match(discovery, /datetime="2026-09-12T20:09:35Z"/i);
+assert.ok(discovery.includes('id="discovery-boundary"'));
+assert.ok(discovery.includes("User-agent labels alone do not independently verify"));
+const discoveryRecord = snapshots.filter(snapshot => snapshot.record.id === "N-MACHINE-DISCOVERY").at(-1).record;
+for (let i = 0; i < discoveryRecord.body.length; i++) assert.ok(discovery.includes(`id="act-${i + 1}"`));
+console.log("Discovery: three cue controls, nine visitor outcomes, crawler boundary and manuscript citation anchors verified.");

@@ -130,7 +130,12 @@ test("discovery publication locates the target failure before selection and pres
  const { default: evidence } = await import("../public/data/machines/discovery-1-evidence.json", { with: { type: "json" } });
  const note = getRecord("N-MACHINE-DISCOVERY")!;
  assert.equal(note.publication, "published");
- assert.equal(note.version, "1.0");
+ assert.equal(note.version, "1.1");
+ const first = publicationSnapshots.find(snapshot => snapshot.record.id === note.id && snapshot.record.version === "1.0")!;
+ assert.ok(first);
+ assert.notEqual(first.record.dek, note.dek);
+ assert.deepEqual(first.record.sources, note.sources);
+ assert.deepEqual(first.record.experiments, note.experiments);
  assert.equal(note.status, "SUPPORTED");
  assert.equal(note.experiments?.[0].id, "MACHINE-DISCOVERY-1");
  assert.equal(evidence.subjects.length, 9);

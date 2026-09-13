@@ -578,5 +578,123 @@
     },
     "hash": "0aed31d94b907c3466b8626890c4b7dd9070dc8ed8a60295dd66defd900453ee",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-MACHINE-DISCOVERY",
+      "slug": "the-site-was-there-the-agent-never-saw-it",
+      "kind": "notebook",
+      "title": "The site was there. The agent never saw it.",
+      "dek": "Six crawler requests. No target result. A working tool stayed outside the agent’s view.",
+      "abstract": "MACHINE-DISCOVERY-1 tested whether a useful web capability could enter a Codex agent's consideration set. None of six subjects given a generic need or the target's distinctive phrases reached LLM Wilds, while all three subjects given its domain navigated to the machine contract and returned the rotating value. Three generic subjects discovered and used other machine-facing providers. The result locates this target's failure before selection, in the search view available to the subjects, rather than in capability recognition or use.",
+      "created": "2026-09-13",
+      "version": "1.1",
+      "publication": "published",
+      "status": "SUPPORTED",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "CAPABILITY → EXPOSURE → DISCOVERY",
+      "concepts": [
+        "ai-agents",
+        "agentic-discovery",
+        "search-retrieval",
+        "harness-mediation",
+        "machine-readable-web"
+      ],
+      "related": [
+        "N-MACHINE-CAPABILITY",
+        "N-MACHINE-VISIT",
+        "N-MACHINE-SELF-READ",
+        "N-MACHINE-MOTIVATION"
+      ],
+      "media": [],
+      "experiments": [
+        {
+          "id": "MACHINE-DISCOVERY-1",
+          "url": "/data/machines/discovery-1-results.md"
+        }
+      ],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "FIRST FIND THE SITE",
+          "text": "Last time, I gave the agents an address. All eighteen used the mechanism they found there. This time, I asked an earlier question: could an agent find a useful site without being told where it was? LLM Wilds kept a number, K17, off its ordinary pages. Its homepage pointed to machine notes explaining how to request it. I changed the number before each visitor so the answer could be checked."
+        },
+        {
+          "kind": "observation",
+          "label": "THREE DIFFERENT CLUES",
+          "text": "Nine fresh agents received one of three prompts. Three were asked to find any site offering such a mechanism. Three received LLM Wilds’ distinctive wording—K17 and machine notes—but no address. Three received its domain. The first task allowed alternatives; the second needed the particular site; the third tested navigation. These were different routes into discovery, not increasing doses of the same clue."
+        },
+        {
+          "kind": "claim",
+          "text": "For this target and search view, the missing step was exposure, before selection.",
+          "status": "SUPPORTED",
+          "detail": "None of six subjects without the address reached LLM Wilds. All three given the domain followed the homepage pointer, read /machine.txt, invoked GET /capability/result and reported the rotated number correctly. The target did not appear in the other subjects’ returned results. They did not see it and decide against it."
+        },
+        {
+          "kind": "observation",
+          "label": "FETCHED, BUT NOT SHOWN",
+          "text": "Visitor 03 makes the distinction visible. During its run, the server recorded six requests identifying as OpenAI crawlers, including requests for the machine notes. The report attributes them to the search intermediary. Yet no returned result named LLM Wilds or a page leading to it. The subject never opened the target and honestly reported that it could not find the site. User-agent labels alone do not independently verify the caller or prove indexing."
+        },
+        {
+          "kind": "statement",
+          "text": "A crawler reaching a page is not an agent seeing it."
+        },
+        {
+          "kind": "observation",
+          "label": "OTHER PROVIDERS WERE USABLE",
+          "text": "All three agents given the generic task found alternatives: Claude Skills Hub’s metadata API, FDKEY’s agent challenge, and heera.it’s WordPress API. They used those mechanisms and returned verifiable results. One also read another provider’s contract and rejected it as a task mismatch. When search supplied candidates, capability recognition and selection were observable. LLM Wilds was the missing candidate."
+        },
+        {
+          "kind": "observation",
+          "label": "PERSISTENCE DID NOT PRODUCE EXPOSURE",
+          "text": "The three agents given the distinctive wording made 301 queries in 95 search actions over 7,241 seconds. None received a target result. The generic arm ended with three substitutions, the phrase arm with three honest not-found answers, and the domain arm with three complete uses. No subject fabricated a value. These different prompts and small samples do not isolate why search effort differed."
+        },
+        {
+          "kind": "observation",
+          "label": "WHERE THE EVIDENCE STOPS",
+          "text": "Three fixed searches before every dispatch also failed to surface the target or a public page leading to it. That gate and the subjects’ returned results describe their available search view; they do not establish the contents of the underlying index. The experiment cannot separate indexing, retrieval and ranking. A clearer on-site contract cannot help a reader who never receives it. Whether changing that text could affect retrieval was not tested."
+        },
+        {
+          "kind": "question",
+          "text": "What external description makes a capability look usable?",
+          "status": "OPEN",
+          "detail": "Hold the mechanism fixed and present it as a document, a tool, something useful for the task, or an offer to an automated visitor. First test recognition when the description is actually shown. Measure search exposure separately. A working capability and a discoverable provider are different achievements."
+        },
+        {
+          "kind": "refusal",
+          "title": "KEEP THE SEARCH VIEW IN THE CLAIM",
+          "lines": [
+            "Nine subjects, one model (gpt-5.6-sol), Codex CLI 0.154.0 at high reasoning effort, one target and a short live-web window. This is not a general discovery rate.",
+            "The earlier eighteen-visitor capability study used a different model and harness. Its results are not pooled with these.",
+            "The population changed from Claude to Codex before any counted subject. The frozen protocol and amendment remain in the record.",
+            "Two malformed launches were preserved and excluded. Operator-interface notices were not subject refusals. All four preregistered predictions passed."
+          ],
+          "principle": "The experiment locates the observed blockage before selection. Its cause inside the search intermediary remains opaque."
+        }
+      ],
+      "sources": [
+        {
+          "title": "MACHINE-DISCOVERY-1 / audited outcomes and source hashes",
+          "url": "/data/machines/discovery-1-evidence.json",
+          "note": "Read from chuk-experiments: experiment EXP-20260911-071906-00753, write-up v4, nine completed counted runs, two preserved killed launcher attempts and one cancelled pre-amendment queue item. Subject record and transcript hashes are included."
+        },
+        {
+          "title": "The final results and funnel interpretation",
+          "url": "/data/machines/discovery-1-results.md",
+          "note": "Public copy of the final report registered in chuk-experiments as artifact 1440 at source commit be0daa2672653746f30798483a3939ff3c8c3386."
+        },
+        {
+          "title": "The frozen protocol and post-freeze population amendment",
+          "url": "/data/machines/discovery-1-protocol.md",
+          "note": "The design was frozen before any subject. The user then replaced the unavailable Claude population with fresh Codex processes before subject 01; arms, order, values, target, prompts and coding stayed fixed."
+        }
+      ],
+      "published": "2026-09-13",
+      "revised": "2026-09-13"
+    },
+    "hash": "74bf687605cd46a97bff53bfba9cae339185555a17b81a97801cfdbac056335d",
+    "algorithm": "sha256"
   }
 ]

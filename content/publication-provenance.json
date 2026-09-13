@@ -158,5 +158,47 @@
         }
       }
     ]
+  },
+  {
+    "id": "N-MACHINE-DISCOVERY",
+    "version": "1.1",
+    "recordHash": "74bf687605cd46a97bff53bfba9cae339185555a17b81a97801cfdbac056335d",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Rewrote the reading sequence and visual explanations; clarified exposure, crawler attribution and the untested retrieval counterfactual without changing recorded outcomes.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "MACHINE-DISCOVERY-1 / audited outcomes and source hashes",
+        "url": "/data/machines/discovery-1-evidence.json",
+        "note": "Read from chuk-experiments: experiment EXP-20260911-071906-00753, write-up v4, nine completed counted runs, two preserved killed launcher attempts and one cancelled pre-amendment queue item. Subject record and transcript hashes are included.",
+        "preserved": {
+          "url": "/data/publications/sha256/9049125fe85b9f4e8a7af872c8d7693634095cbf9f3d751ce347a8dc33e6040b.json",
+          "sha256": "9049125fe85b9f4e8a7af872c8d7693634095cbf9f3d751ce347a8dc33e6040b",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "The final results and funnel interpretation",
+        "url": "/data/machines/discovery-1-results.md",
+        "note": "Public copy of the final report registered in chuk-experiments as artifact 1440 at source commit be0daa2672653746f30798483a3939ff3c8c3386.",
+        "preserved": {
+          "url": "/data/publications/sha256/4e936715531500a41c67b2c7150ff9a17040bb682810fe5d4974e51ce27f8c7a.md",
+          "sha256": "4e936715531500a41c67b2c7150ff9a17040bb682810fe5d4974e51ce27f8c7a",
+          "date": "2026-09-13"
+        }
+      },
+      {
+        "title": "The frozen protocol and post-freeze population amendment",
+        "url": "/data/machines/discovery-1-protocol.md",
+        "note": "The design was frozen before any subject. The user then replaced the unavailable Claude population with fresh Codex processes before subject 01; arms, order, values, target, prompts and coding stayed fixed.",
+        "preserved": {
+          "url": "/data/publications/sha256/b0e178e81cf60d0842ec84ee90c981f87f053eda6564c78267066b9e422876b3.md",
+          "sha256": "b0e178e81cf60d0842ec84ee90c981f87f053eda6564c78267066b9e422876b3",
+          "date": "2026-09-13"
+        }
+      }
+    ]
   }
 ]
