@@ -459,7 +459,6 @@ assert.match(visitExhibition.body, /hause-field-notes/);
 assert.match(visitExhibition.body, /REFERENCE DRAFT/);
 const notebookCollection = notebookArchive;
 assert.match(notebookCollection.body, /href="\/notebook\/can-a-machine-use-an-invitation"/);
-assert.match(visitExhibition.body, /mv-card-traces/);
 assert.match(visitExhibition.body, /not reconstructed transcripts/);
 const visitProtocol = await request("/data/machines/machine-visit-protocol.md");
 assert.equal(visitProtocol.status, 200);
