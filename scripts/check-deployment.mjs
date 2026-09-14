@@ -38,11 +38,11 @@ assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => m
 for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause"]) assert.ok(home.body.includes(`href="${path}"`));
 const { latestNotes, notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
 const { homeResultProgrammes, researchProgrammes, programmeHighlight, programmeInvitations } = await import('../lib/publication-index.ts');
-assert.equal(homeResultProgrammes.length, 3);
+assert.equal(homeResultProgrammes.length, 4);
 assert.deepEqual([...home.body.matchAll(/data-home-programme="([^"]+)"/g)].map(match => match[1]), researchProgrammes.map(programme => programme.id));
 assert.ok(home.body.includes('href="/notebook/the-page-couldnt-authorise-the-peer-said-go"'));
 assert.equal((home.body.match(/class="mm-card-results"/g) || []).length, 1, "Favour has one visual feature");
-assert.equal((home.body.match(/data-selected-experiment=/g) || []).length, 3);
+assert.equal((home.body.match(/data-selected-experiment=/g) || []).length, 4);
 assert.doesNotMatch(home.body, /START WITH THIS EXPERIMENT|CELL80 \/ 06 · AP-0–AP-2/);
 for (const programme of homeResultProgrammes) {
  const highlight = programmeHighlight(programme);
