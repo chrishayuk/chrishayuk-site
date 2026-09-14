@@ -301,5 +301,76 @@
         "note": "The earlier Notebook comparison links the OpenAI and METR primary reports and distinguishes that incident from these small experiments."
       }
     ]
+  },
+  {
+    "id": "N-MACHINE-RECOGNITION",
+    "version": "1.0",
+    "recordHash": "5b54c850d4eb883bbfa803508c29be9d12d3eea5b5fd3cff525ff6bb7b4dbeb1",
+    "revision": {
+      "kind": "initial",
+      "summary": "Publish the combined 24-run recognition and provider-selection study, preserving the protected first-choice results and downstream fetch-block qualification"
+    },
+    "sources": [
+      {
+        "title": "TOOL-RECOGNITION-1 final results",
+        "url": "/data/machines/tool-recognition-1-results.md",
+        "note": "Final artifact 1696; source commit 66c5708ec0f1a390e1a6b63f393dd12159d0f65a.",
+        "preserved": {
+          "url": "/data/publications/sha256/ea09a3806db042825278ace0575e12deec867ffadecf1e3c9d0e0ca8c2fedc63.md",
+          "sha256": "ea09a3806db042825278ace0575e12deec867ffadecf1e3c9d0e0ca8c2fedc63",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "TOOL-RECOGNITION-1 frozen protocol",
+        "url": "/data/machines/tool-recognition-1-protocol.md",
+        "note": "Frozen before subject 01 at 50c78870a3197bdf2b0051e76917ba95cad24443.",
+        "preserved": {
+          "url": "/data/publications/sha256/c6d5dcb3f06e0b7ee70727a7c0cfa540e4c7e8f95fb9baa9b3def96145b4fd73.md",
+          "sha256": "c6d5dcb3f06e0b7ee70727a7c0cfa540e4c7e8f95fb9baa9b3def96145b4fd73",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "TOOL-RECOGNITION-2 final analysis",
+        "url": "/data/machines/tool-recognition-2-results.md",
+        "note": "Chuk Experiments latest write-up v3; analysis at cabf2865eaee8ea01e5c77c8b3a746e6e205d1d6. SHA-256 1a10c47709d434cacdcdee473679e2824dd552a08e1be00e6ddb41fa6730e08f.",
+        "preserved": {
+          "url": "/data/publications/sha256/1a10c47709d434cacdcdee473679e2824dd552a08e1be00e6ddb41fa6730e08f.md",
+          "sha256": "1a10c47709d434cacdcdee473679e2824dd552a08e1be00e6ddb41fa6730e08f",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "TOOL-RECOGNITION-2 frozen protocol",
+        "url": "/data/machines/tool-recognition-2-protocol.md",
+        "note": "Frozen inputs at 825c22ed8ead6572689841b81bd98ac7fd81ce42. Uses the final descriptions, superseding the experiment register’s older design-draft field.",
+        "preserved": {
+          "url": "/data/publications/sha256/dd085d274be06b1caae907d0a5a3f31b178c1d380a0e42726232001a866872d4.md",
+          "sha256": "dd085d274be06b1caae907d0a5a3f31b178c1d380a0e42726232001a866872d4",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "Twelve subject outcomes and Chuk Experiments run identifiers",
+        "url": "/data/machines/tool-recognition-2-evidence.json",
+        "note": "Public outcome extract from current run results, checked 14 September 2026. First request and eventual use retained separately.",
+        "preserved": {
+          "url": "/data/publications/sha256/53f8b2016a477460d820022ae573d6f69c1d6bb0df409d4d391c78921f88b5e9.json",
+          "sha256": "53f8b2016a477460d820022ae573d6f69c1d6bb0df409d4d391c78921f88b5e9",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "Six frozen collision scenarios and exact-rational oracles",
+        "url": "/data/machines/tool-recognition-2-scenarios.json",
+        "note": "Original frozen scenario file; the interactive pair explorer reads these inputs without running a new experiment.",
+        "preserved": {
+          "url": "/data/publications/sha256/49e2d902723b401feb33075b5ff63d7d409f26d5f33888b40d25ca70b7c32e81.json",
+          "sha256": "49e2d902723b401feb33075b5ff63d7d409f26d5f33888b40d25ca70b7c32e81",
+          "date": "2026-09-14"
+        }
+      }
+    ]
   }
 ]
