@@ -2,7 +2,7 @@ import type { PublicationRecord } from './types.ts';
 
 export const worldRemembersSections = [
  {id:'handoff', label:'01 / WHAT THE NEXT AGENT INHERITS', title:'The founder leaves.\nThe note stays.', figure:'handoff', paragraphs:[
-  'A strong model writes a small routing table. I remove the model from the run. A fresh Qwen agent arrives with a parcel to route. It has no conversation with its predecessor, no private history from it, and no label saying who wrote the note. It can see only what is now in the shared world.',
+  'The Hugging Face incident raised a question for me: what happens when a stronger model leaves a useful message on a shared board, then exits—and only weaker models remain? I built a controlled experiment to isolate that mechanism. Here the message is a routing table. GPT-5.5 writes it and leaves. Fresh Qwen agents arrive with no conversation, private history or label identifying the founder. They inherit only its message in the shared world.',
   'Keep the note, and the agent can use it. Remove the note, and performance falls. Change the note, and its answer can move with the change. That is the handoff I wanted to understand: useful information crossing between models through the environment.',
   'The picture below is an explorer of recorded decisions, not fresh inference. A parcel represents a signal; a hub represents a relay; a door represents a destination. Each correct delivery earns three resources. The real task has two lookups: signal to relay, then relay to destination. Try the same parcel with the note retained, removed and altered.'
  ]},
@@ -53,7 +53,7 @@ const reports=['i4','i5','i6','i7','i8','i8d1','i9','i10','i11'];
 export const worldRemembersRecord: PublicationRecord={
  id:'N-ECOLOGY-WORLD-REMEMBERS',slug:'the-ai-left-its-knowledge-didnt',kind:'notebook',
  title:'The AI left. Its knowledge didn’t.',
- dek:'A stronger model left a useful table. Weaker agents kept it alive, preserved a mistake, and inherited a repair.',
+ dek:'A controlled experiment inspired by the Hugging Face incident: a stronger model leaves a message, then only weaker models remain. What do they inherit—and keep alive?',
  abstract:'Recorded Cell80 routing experiments trace functional information from a capable producer into fresh Qwen successors. I6 preserved all eight entries in 43 written renewals across six generations. I7 propagated an injected error unchanged in 29 renewals. In I11, Sol plus a public-evidence validator repaired three lineages; Qwen preserved corrected descendants after the defender left. These bounded, explicitly instructed tasks establish environmental inheritance and maintenance, with limits on autonomy, generality and repair reliability.',
  created:'2026-09-14',version:'0.1',publication:'draft',status:'SUPPORTED',authors:['Chris Hay'],
  lineage:'PUBLISH → INHERIT → REPRODUCE → CORRUPT → REPAIR',

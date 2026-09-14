@@ -62,15 +62,15 @@ export const machineThread = {
 export const agentEcologyThread = {
  id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",
  path: "/thread/agent-ecology", version: "0.3", created: "2026-09-13",
- abstract: "An example could keep prompting an agent after its own history was cleared. Later, Qwen and Gemma used a capability record preserved by Sol, but did not renew it. In a later routing world, Qwen wrote descendants, preserved a corruption, and inherited guarded repairs. Follow what changes between these tasks.",
+ abstract: "What can one agent leave behind for another? These controlled experiments separate contribution, transmission and memory, then ask what happens when a stronger model leaves a shared message and only weaker models remain to use and maintain it.",
  replay: { record: "N-ECOLOGY-INHERITANCE", anchor: "inheritance-replay", label: "REPLAY THE MODEL HANDOFF" },
- context: "A curated path from A1B3–A1B12 to the SOL1/I1 handoff. The interfaces and populations change across these small controlled worlds. Sol preserved a supplied capability record; Qwen and Gemma each inherited its benefit for one generation. I4–I11 extend the sequence to explicitly instructed population maintenance, error propagation and a temporary Sol-plus-validator repair. Open-ended autonomous culture remains unestablished.",
+ context: "The Hugging Face incident motivated the later handoff question: shared infrastructure can let one run leave information for another. This series isolates parts of that mechanism in small worlds. Each note states its own intervention; models, tasks and interfaces change between studies. The archive and maintenance objective are supplied. This is a controlled study of inheritance, not a recreation of the incident or a demonstration of spontaneous culture.",
  steps: [
-  { id: "N-ECOLOGY-BOARD", label: "01 / GET SOMETHING ONTO THE BOARD", text: "Reading requests were easy to elicit. Spontaneous posting was absent, and supplied experience reversed the expected response to reward. Start with the contribution problem." },
-  { id: "N-ECOLOGY-TRANSMISSION", label: "02 / TRY TO PASS THE ACTION ON", text: "An action reminder worked on one input. A lone peer record did not start a chain. Follow the difference between elicitation, transmission and retention." },
-  { id: "N-ECOLOGY-MEMORY", label: "03 / SEPARATE THE TWO RECORDS", text: "Keep or clear the artefact and own-action history separately. The four-way comparison locates repeated elicitation in what the environment keeps supplying." },
-  { id: "N-ECOLOGY-INHERITANCE", label: "04 / HAND THE WORLD TO ANOTHER MODEL", text: "Sol preserved a capability record. Qwen used it; a follow-up extended useful inheritance to Gemma. Neither recipient renewed it here. Separate useful inheritance from recipient renewal." },
-  { id: "N-ECOLOGY-WORLD-REMEMBERS", label: "05 / KEEP THE INHERITANCE ALIVE", text: "A routing record crosses models, survives written renewal, carries an injected mistake and passes on a validated repair. Explore actual decisions after the founder and defender have left." },
+  { id: "N-ECOLOGY-BOARD", label: "01 / GET SOMETHING ONTO THE BOARD", text: "Will an agent contribute at all? Change board presence, then the payoff from sharing. A board alone did not produce spontaneous useful posts." },
+  { id: "N-ECOLOGY-TRANSMISSION", label: "02 / TRY TO PASS THE ACTION ON", text: "Can one contribution become the next agent’s example? Pass action records between fresh contexts, then remove the seed. A lone peer record did not start a chain." },
+  { id: "N-ECOLOGY-MEMORY", label: "03 / SEPARATE THE TWO RECORDS", text: "Is the agent remembering, or is the world reminding it? Keep or clear the external example and own history independently. The external example sustained posting without own history." },
+  { id: "N-ECOLOGY-INHERITANCE", label: "04 / HAND THE WORLD TO ANOTHER MODEL", text: "What remains after the stronger model leaves? Keep or remove Sol’s actual surviving record. Qwen and Gemma benefited, but neither renewed it in this world." },
+  { id: "N-ECOLOGY-WORLD-REMEMBERS", label: "05 / KEEP THE INHERITANCE ALIVE", text: "Can the weaker population keep that inheritance alive? Require written descendants, inject an error, then test a temporary defender. Both mistakes and validated repairs reached later agents." },
  ].map<ThreadStep>(step => step).filter(listedStep),
 };
 export const threads = [mapThread, cell80Thread, machineThread, agentEcologyThread];
