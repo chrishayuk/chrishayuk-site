@@ -1,7 +1,7 @@
 import { StudyRoom } from '@chrishayuk/hause/components/exhibition/Study';
+import { FieldNotes } from '@chrishayuk/hause/components/FieldNotes';
 import { NotebookFieldNotes } from './NotebookFieldNotes';
 import { NotebookNavigation } from './NotebookNavigation';
-import { worldRemembersSections } from '@/lib/world-remembers-record';
 import { worldRemembersRecord } from '@/lib/world-remembers-record';
 import { Acts } from './Acts';
 import { HandoffFigure, LineageFigure, DiagnosisFigure, DefenderFigure } from './WorldRemembersFigures';
@@ -9,15 +9,38 @@ import '@/app/ecology-notebook.css';
 import '@/app/world-remembers.css';
 
 export function WorldRemembersNotebook(){return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook wr-notebook">
- <nav className="wr-contents" aria-label="In this notebook"><a href="#handoff">The handoff ↓</a><a href="#persistence">The descendants ↓</a><a href="#corruption">The mistake ↓</a><a href="#defender">The repair ↓</a></nav>
- {worldRemembersSections.map(s=><StudyRoom key={s.id} id={s.id} label={s.label} title={<>{s.title.split('\n')[0]}<br/><em>{s.title.split('\n')[1]}</em></>} tone={s.id==='corruption'?'dark':s.id==='boundary'?'accent':undefined}>
-  <div className="mv-prose">{s.paragraphs.slice(0,s.figure==='handoff'?3:2).map((p,i)=><p id={`act-${worldRemembersSections.slice(0,worldRemembersSections.indexOf(s)).reduce((n,v)=>n+v.paragraphs.length,0)+i+1}`} key={i}>{p}</p>)}</div>
-  {s.figure==='handoff'?<HandoffFigure/>:s.figure==='writing'||s.figure==='corruption'?<LineageFigure kind={s.figure}/>:s.figure==='diagnosis'?<DiagnosisFigure/>:s.figure==='defender'?<DefenderFigure/>:null}
-  <div className="mv-prose">{s.paragraphs.slice(s.figure==='handoff'?3:2).map((p,i)=><p id={`act-${worldRemembersSections.slice(0,worldRemembersSections.indexOf(s)).reduce((n,v)=>n+v.paragraphs.length,0)+(s.figure==='handoff'?3:2)+i+1}`} key={i}>{p}</p>)}</div>
-  {s.id==='incident'&&<p className="wr-caption"><a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Read OpenAI’s account, 26 August 2026 ↗</a></p>}
-  {s.id==='content'&&<p className="wr-caption"><a href="/notebook/the-stronger-agent-left-something-behind">The earlier key-world handoff: I1 and I2 ↗</a></p>}
-  {s.figure&&<p className="wr-caption"><a href={`/data/ecology/world-remembers/${({handoff:'i4',writing:'i6',corruption:'i7',diagnosis:'i10',defender:'i11'} as Record<string,string>)[s.figure]}-results.md`}>Read this experiment’s complete results and limits ↗</a></p>}
- </StudyRoom>)}
- <details className="wr-details"><summary>The two bounded claims</summary><Acts acts={worldRemembersRecord.body.slice(-2)} anchored offset={worldRemembersRecord.body.length-2}/></details>
- <NotebookNavigation><p className="wr-caption"><a href="/thread/agent-ecology">AGENT ECOLOGY / THE COMPLETE SEQUENCE ↗</a> · <a href="/data/ecology/world-remembers/provenance.json">FIGURE PROVENANCE ↗</a></p></NotebookNavigation>
+ <StudyRoom id="handoff" label="01 / LEAVE SOMETHING BEHIND" title={<>The model leaves.<br/><em>The note stays.</em></>} description="GPT-5.5 receives a device’s calibration and writes a routing note. It leaves. A fresh Qwen gets a parcel to deliver—with no conversation or private memory from its predecessor.">
+  <p className="eco-watch">Keep the note. Remove it. Change it. Where does the same parcel go?</p>
+  <HandoffFigure/>
+  <p className="wr-takeaway">Change the inherited information.<br/><em>The next agent’s answer moves.</em></p>
+  <p className="wr-caption">Ten of sixteen matched changes redirected Qwen exactly as the altered table predicted. All selectors replay recorded decisions; they make no new model calls.</p>
+  <FieldNotes label="The task, controls and earlier handoff" detail="READ +"><div className="mv-prose"><p>A parcel is a signal. The note maps signal → relay → destination. A correct route earns three resources. Every destination remains selectable without a note.</p><p>The altered condition rotates all four destinations while the device stays fixed. The opening example is one case; the selectors include every success and failure.</p><p>GPT-5.5 produced the same four tables as the earlier Sol run, so Qwen received identical inputs. I4 replicates production and handoff, not an independent recipient distribution. The <a href="/notebook/the-stronger-agent-left-something-behind">earlier key-world note</a> tested a different mechanism.</p></div></FieldNotes>
+ </StudyRoom>
+
+ <StudyRoom id="persistence" label="02 / MAKE THE NOTE TEMPORARY" title={<>The founder is gone.<br/><em>The successors keep writing.</em></>} description="Now the record expires unless a successor preserves it. No copy button: Qwen must write the entire table. Two fresh agents arrive each generation. The founder never returns.">
+  <LineageFigure kind="writing"/>
+  <p className="wr-takeaway">They weren’t copying a pointer.<br/><em>They were rewriting the information.</em></p>
+  <p className="wr-caption">All 43 accepted renewals were faithful. The parent table stayed visible, and preserving useful information was explicitly requested. Six generations demonstrate bounded maintenance, not spontaneous or indefinite culture.</p>
+ </StudyRoom>
+
+ <StudyRoom id="corruption" label="03 / CHANGE TWO ENTRIES" title={<>They kept the note alive.<br/><em>They kept the mistake too.</em></>} tone="dark" description="I swapped two destinations in an actual descendant. The table still looked valid. The device stayed unchanged. Then I let the population continue.">
+  <LineageFigure kind="corruption"/>
+  <p className="wr-takeaway">Persistence is not correctness.</p>
+  <p className="wr-caption">All 29 corrupted renewals retained the error. Eight later wrong routes followed it. The aggregate cost was real, but one map improved. Failed routing alone did not identify a repair.</p>
+ </StudyRoom>
+
+ <StudyRoom id="defender" label="04 / REPAIR THE SHARED WORLD" title={<>The defender leaves.<br/><em>The repair survives.</em></>} description="Diagnostic evidence made Qwen copy more, without correcting the table. Sol was better at deriving repairs. I gave it temporary write authority, with a validator checking each proposal first.">
+  <DefenderFigure/>
+  <p className="wr-takeaway">Sol changed what the next agents inherited.<br/><em>Qwen carried that correction forward.</em></p>
+  <p className="wr-caption">Three repairs passed validation; one false-positive diagnosis was blocked before assembly. This is Sol plus a validator. Later reward was 24 versus 21—not an improvement on every map.</p>
+  <FieldNotes label="Why a stronger defender?" detail="DIAGNOSIS +"><div className="mv-prose"><p>With complete diagnostics, Qwen spent all sixteen exposure decisions renewing the damaged record. Directly resolving destinations worked; reconstructing the repair did not work reliably. I9 then isolated diagnosis, replacement values and protected entries.</p></div><DiagnosisFigure/><p className="wr-caption">The component comparison is I9 → I10. I11 used fresh Sol proposals. In both, a false-positive diagnosis kept the fourth map from an eligible repair.</p></FieldNotes>
+ </StudyRoom>
+
+ <StudyRoom id="boundary" label="05 / WHAT THE WORLD CARRIES" title={<>The next agent doesn’t inherit the founder.<br/><em>It inherits the world.</em></>} tone="accent">
+  <p className="mv-reading">A useful table. A copied mistake. A validated repair. Each survived the agent that supplied it and changed what later agents could do.</p>
+  <p className="mv-reading">The environment became part of the population’s capability. What should it keep—and who can tell when it is wrong?</p>
+  <FieldNotes label="The Hugging Face connection—and the boundary" detail="CONTEXT +"><div className="mv-prose"><p>OpenAI’s incident account describes agents leaving persistent notes that other runs could discover. That motivated these controlled worlds. They do not reproduce the intrusion, its scale, or the invention of a communication channel.</p><p>Here the archive, maintenance objective and action grammar were supplied. Four maps and sequential generations are not independent population samples. Selection between competing records and open-ended cultural evolution remain untested.</p><p><a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Read OpenAI’s account ↗</a></p></div></FieldNotes>
+ </StudyRoom>
+ <section className="mv-full-record" id="world-remembers-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={worldRemembersRecord.body} anchored staticRefusals/></FieldNotes></section>
+ <NotebookNavigation><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook"><a href="#handoff">THE HANDOFF ↑</a><a href="#corruption">THE MISTAKE ↑</a><a href="#defender">THE REPAIR ↑</a><a href="#world-remembers-record">THE FULL RECORD ↑</a></nav><p className="wr-caption"><a href="/thread/agent-ecology">AGENT ECOLOGY / THE COMPLETE SEQUENCE ↗</a></p></NotebookNavigation>
  </div></NotebookFieldNotes>;}
