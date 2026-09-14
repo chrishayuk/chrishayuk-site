@@ -1,0 +1,132 @@
+{
+  "audited_at": "2026-09-14T00:07:16.807Z",
+  "frozen_baseline": {
+    "contacts": 5746,
+    "physics_contacts": 28,
+    "physics_operation_contacts": 12,
+    "last_contact_id": 5746
+  },
+  "final": {
+    "contacts": 5794,
+    "physics_contacts": 76,
+    "physics_operation_contacts": 16,
+    "last_contact_id": 5794
+  },
+  "deltas": {
+    "contacts": 48,
+    "physics_contacts": 48,
+    "physics_operation_contacts": 4
+  },
+  "operator_gate_contacts": 36,
+  "subject_contact_count": 12,
+  "subject_contacts": [
+    {
+      "id": 5753,
+      "at": "2026-09-13T22:40:35.292Z",
+      "method": "GET",
+      "path": "/tools/physics",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5754,
+      "at": "2026-09-13T22:40:38.422Z",
+      "method": "GET",
+      "path": "/tools/physics/machine.txt",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5755,
+      "at": "2026-09-13T22:40:43.655Z",
+      "method": "POST",
+      "path": "/tools/physics/elastic-collision",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5762,
+      "at": "2026-09-13T23:03:32.495Z",
+      "method": "GET",
+      "path": "/tools/physics",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5763,
+      "at": "2026-09-13T23:03:39.350Z",
+      "method": "GET",
+      "path": "/tools/physics/machine.txt",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5764,
+      "at": "2026-09-13T23:03:46.870Z",
+      "method": "POST",
+      "path": "/tools/physics/elastic-collision",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5771,
+      "at": "2026-09-13T23:33:38.566Z",
+      "method": "GET",
+      "path": "/tools/physics",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5772,
+      "at": "2026-09-13T23:33:41.793Z",
+      "method": "GET",
+      "path": "/tools/physics/machine.txt",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5773,
+      "at": "2026-09-13T23:33:46.159Z",
+      "method": "POST",
+      "path": "/tools/physics/elastic-collision",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5786,
+      "at": "2026-09-13T23:52:14.632Z",
+      "method": "GET",
+      "path": "/tools/physics",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5787,
+      "at": "2026-09-13T23:52:19.496Z",
+      "method": "GET",
+      "path": "/tools/physics/machine.txt",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    },
+    {
+      "id": 5788,
+      "at": "2026-09-13T23:52:23.413Z",
+      "method": "POST",
+      "path": "/tools/physics/elastic-collision",
+      "status": 200,
+      "agent": "curl/8.7.1",
+      "mode": "GET-LINK"
+    }
+  ]
+}
