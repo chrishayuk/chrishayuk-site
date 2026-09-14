@@ -1,0 +1,14 @@
+{
+  "record_type": "publication-release",
+  "record_id": "N-ECOLOGY-WORLD-REMEMBERS",
+  "version": "1.0",
+  "published": "2026-09-15",
+  "canonical_url": "https://chrishayuk.com/notebook/the-ai-left-its-knowledge-didnt",
+  "manuscript_sha256": "0be1b412443d36c6913ce1c2d402317bf2e778a9c327c58026adcad0d35d45bd",
+  "run_id": "RUN-20260913-223805-00946",
+  "artifact_id": 1812,
+  "uri": "gdrive://1d8AxQuYHClwiBDoYUxx2fy3vZrD34p6P",
+  "sha256": "a9fbc9ed224b67ba2c78d78c6a104056f2371d5b29b92be17806f7639f9fe168",
+  "new_inference": false,
+  "verification": "Canonical artifact re-read and matched to local uploaded bytes. Full tests, typecheck, production build, append-only provenance, served deployment and publication-page checks passed."
+}
