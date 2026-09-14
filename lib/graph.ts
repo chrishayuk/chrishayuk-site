@@ -1,4 +1,5 @@
 import { machineBriefs, machineFieldMap } from "./machine-field.ts";
+import { ecologySeriesUpdates } from "./ecology-series-updates.ts";
 import { HOUSE, HOUSE_WORK, HOUSE_PARTS, HOUSE_ABSTRACT } from "./house.ts";
 import { discoveryTerms, legibilityGraphFields } from "./legibility.ts";
 import { publicationHistory } from "./provenance.ts";
@@ -49,6 +50,13 @@ function buildGraph() {
   nodes.push({id:r.id,kind:r.kind,title:r.title,text:r.abstract,url,sourceUrl:url,basis,retrievable:true,scope:r.youtubeId?"films":"records",publication:r.publication,status:r.status,version:r.version,authors:r.authors,created:r.created,published:r.published,keywords:`${r.concepts.join(" ")} ${discoveryTerms(r.id)}`,recordId:r.id,...legibilityGraphFields(r.id)});
   addEdge(r.id,"CATALOGUE-RECORD","catalogued-in","record-index");
   const brief = machineBriefs[r.id];
+  const update = ecologySeriesUpdates[r.id];
+  if(update){
+   const updateId=`${r.id}:series-update-2026-09-14`;
+   nodes.push({id:updateId,kind:"reading-summary",title:`${r.title} / later experiments`,text:update.text,url:`${url}#series-update`,sourceUrl:`${url}#series-update`,basis:"dated-editorial-follow-up",retrievable:true,scope:"records",recordId:r.id,created:"2026-09-14",keywords:"later result follow-up maintenance inheritance repair peer authority"});
+   addEdge(updateId,r.id,"updates-reading-context","dated-editorial-follow-up");
+   if(r.id.startsWith('N-ECOLOGY-'))addEdge(updateId,'N-ECOLOGY-WORLD-REMEMBERS','continues-in','dated-editorial-follow-up');
+  }
   if (brief) {
    const briefId = `${r.id}:brief`;
    nodes.push({ id: briefId, kind: "reading-summary", title: brief.question, text: brief.result, url: `${url}#in-brief`, sourceUrl: `${url}#in-brief`, basis: "editorial-summary", retrievable: true, scope: "records", publication: r.publication, status: r.status, recordId: r.id, authors: r.authors, keywords: `${r.concepts.join(" ")} ${discoveryTerms(r.id)}` });

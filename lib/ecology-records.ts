@@ -1,3 +1,4 @@
+import { worldRemembersRecord } from "./world-remembers-record.ts";
 import { inheritanceRecord } from "./inheritance-record.ts";
 import type { PublicationRecord } from "./types.ts";
 
@@ -70,5 +71,5 @@ export const ecologyMemoryRecord: PublicationRecord = {
  ],
 };
 
-export const ecologyRecords = [ecologyBoardRecord, ecologyTransmissionRecord, ecologyMemoryRecord, inheritanceRecord];
+export const ecologyRecords = [ecologyBoardRecord, ecologyTransmissionRecord, ecologyMemoryRecord, inheritanceRecord, worldRemembersRecord];
 export const ecologyIds = ecologyRecords.map(record => record.id);

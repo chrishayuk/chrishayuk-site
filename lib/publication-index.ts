@@ -21,7 +21,7 @@ export const programmes = [
     threads: [machineThread], extra: ["N-MACHINE-PEER"],
     continuation: undefined },
   { id: "agent-ecology", title: "Agent Ecology", question: "What can agents do together?",
-    description: "Agent swarms, shared memory, stronger and weaker models. What makes collaboration work—and where does it break?", href: agentEcologyThread.path,
+    description: "What do fresh agents inherit? Follow useful records, persistent mistakes and repairs across stronger and weaker models.", href: agentEcologyThread.path,
     threads: [agentEcologyThread], extra: [], continuation: undefined },
   { id: "cell80", title: "Cell80", question: "What happens when programs evolve?",
     description: "Tiny, verifiable programs: tools for agents and building blocks for evolving worlds. Replay the history. Change one thing. See what follows.", href: cell80Thread.path,
@@ -34,20 +34,20 @@ export const programmes = [
     threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION"], continuation: undefined },
 ];
 export const researchProgrammes = programmes.filter(programme => programme.id !== "practice");
-/** Three selected results; the programme entrances include all four research programmes. */
-export const homeResultProgrammes = researchProgrammes.filter(programme => programme.id !== "agent-ecology");
+/** The selected results now include the population-inheritance sequence. */
+export const homeResultProgrammes = researchProgrammes;
 export type Programme = typeof programmes[number];
 /** Curated entrances, independent of the latest-note chronology. */
 export const programmeHighlights: Record<string, string> = {
   machines: "N-MACHINE-MOTIVATION",
-  "agent-ecology": "N-ECOLOGY-INHERITANCE",
+  "agent-ecology": "N-ECOLOGY-WORLD-REMEMBERS",
   cell80: "N-CELL80-BOUND",
   "learned-systems": "N-ADDRESS-BUILD",
 };
 export const programmeHighlight = (programme: Programme) => programmeNotes(programme).find(note => note.id === programmeHighlights[programme.id]);
 export const programmeInvitations: Record<string, { text: string; label: string; anchor: string }> = {
   machines: { text: "The agent has a job. The website asks for a favour. Compare six offers and see when an optional action became worth taking.", label: "COMPARE THE INVITATIONS", anchor: "motivation-outcomes" },
-  "agent-ecology": { text: "Keep the record, or remove it. Replay the handoff and watch what the next agent can do—and what it leaves behind.", label: "REPLAY THE HANDOFF", anchor: "inheritance-replay" },
+  "agent-ecology": { text: "The founder leaves. Successors keep its table alive, preserve a mistake, and inherit a repair. Follow the recorded decisions.", label: "FOLLOW THE INHERITANCE", anchor: "handoff" },
   cell80: { text: "An evolved module seems to open thousands of new possibilities. Put it beside the controls. Does the exciting explanation survive?", label: "COMPARE THE CONTROLS", anchor: "cell80-study" },
   "learned-systems": { text: "Move one model state into another computation. Explore when it changes the relation, when it changes the entity, and where that explanation stops.", label: "EXPLORE THE TRANSPLANTS", anchor: "address-causal" },
 };

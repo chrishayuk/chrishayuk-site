@@ -12,7 +12,7 @@ export function HomeProgrammes() {
     {researchProgrammes.map(programme => <article key={programme.id} data-home-programme={programme.id}>
       <Link href={programme.href}><h3>{programme.title}<span aria-hidden="true"> ↗</span></h3><p className="home-programme-question">{programme.question}</p></Link>
       <p className="home-programme-detail">{programme.description}</p>
-      {programme.id === "agent-ecology" && <div className="home-ecology-link"><Link href="/notebook/the-stronger-agent-left-something-behind#inheritance-replay">The stronger agent left something behind. ↗</Link><Link href="/notebook/the-page-couldnt-authorise-the-peer-said-go">The Hugging Face incident comparison ↗</Link></div>}
+      {programme.id === "agent-ecology" && <div className="home-ecology-link"><Link href="/notebook/the-ai-left-its-knowledge-didnt#handoff">The AI left. Its knowledge didn’t. ↗</Link><Link href="/notebook/the-page-couldnt-authorise-the-peer-said-go">The Hugging Face incident comparison ↗</Link></div>}
     </article>)}
   </div>;
 }
@@ -33,6 +33,7 @@ export function SelectedExperiments({ items }: { items: Programme[] }) {
 }
 
 function SelectedResultVisual({ id }: { id: string }) {
+  if (id === "N-ECOLOGY-WORLD-REMEMBERS") return <img src="/images/notebook/world-remembers.png" alt="The AI left. Its knowledge didn’t. An illustrated archive carried into descendants." width={1733} height={908} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>;
   if (id === "N-MACHINE-MOTIVATION") return <MachineMotivationCard exhibition/>;
   if (id === "N-ECOLOGY-INHERITANCE") return <EcologyCard id={id}/>;
   if (id === "N-CELL80-BOUND") return <Cell80BoundCard exhibition/>;

@@ -1,5 +1,9 @@
 /** Reader introductions are editorial summaries of the cited notes, not new results. */
 export const machineBriefs: Record<string, { question: string; result: string }> = {
+ "N-ECOLOGY-WORLD-REMEMBERS": {
+  question: "Can useful information—and a repair—survive the model that supplied it?",
+  result: "In a routing world with an explicit preservation objective, Qwen wrote 43 faithful renewals after the founder left. The same process preserved an injected error. Later, three Sol-plus-validator repairs survived in Qwen-written descendants at the start of generation six, versus zero in the controls. Bounded maintenance and repair, not spontaneous culture.",
+ },
  "N-ECOLOGY-INHERITANCE": {
   question: "Can one AI inherit a useful capability from another?",
   result: "A fresh Qwen successor read a record preserved by Sol and earned seven resources instead of three. It never renewed the record. After expiry, the next two generations lost the advantage. A follow-up added Gemma, which also earned seven with the record, but zero without it; failures in its control limit that contrast. Useful inheritance reached two recipient families in the same world.",
@@ -62,6 +66,6 @@ export const machineFieldMap = {
   { id: "motivate", label: "Choose", question: "What makes acting worthwhile?", finding: "Useful information prompted action; reward alone did not reliably start sharing.", notes: ["N-MACHINE-MOTIVATION", "N-ECOLOGY-BOARD"] },
   { id: "remember", label: "Remember", question: "Can the environment remind it?", finding: "A supplied example kept eliciting posts with own-action history cleared.", notes: ["N-ECOLOGY-MEMORY"] },
   { id: "inherit", label: "Pass on", question: "What can the next agent inherit?", finding: "A lone action record did not start a posting chain. A capability record preserved by Sol helped Qwen and Gemma successors.", notes: ["N-ECOLOGY-TRANSMISSION", "N-ECOLOGY-INHERITANCE"] },
-  { id: "maintain", label: "Maintain", question: "Who keeps the useful record alive?", finding: "Sol preserved a supplied record. Qwen and Gemma used it but made no next copy; the benefit expired. Sustained recipient renewal remains open.", notes: ["N-ECOLOGY-INHERITANCE"], open: true },
+  { id: "maintain", label: "Maintain", question: "Who keeps the useful record alive?", finding: "Sol preserved a supplied record. Qwen and Gemma used it but made no next copy; the benefit expired. In a later routing world, Qwen wrote useful descendants through generation six, also preserved injected errors, and carried forward three validated repairs.", notes: ["N-ECOLOGY-INHERITANCE", "N-ECOLOGY-WORLD-REMEMBERS"], open: true },
  ],
 };

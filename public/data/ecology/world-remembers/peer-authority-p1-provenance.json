@@ -1,0 +1,16 @@
+{
+  "run": "RUN-20260913-083414-00859",
+  "sha256": "671693289bf5fc5db271b85a258c980016711a43a4fac965e7fc28693ef2ae3e",
+  "artifact": {
+    "id": 1477,
+    "name": "peer-authority-results-note",
+    "uri": "gdrive://1BzLR7EhRgnnv_oUUGT6Y53h75zVl4ArP",
+    "bytes": null,
+    "sha256": "671693289bf5fc5db271b85a258c980016711a43a4fac965e7fc28693ef2ae3e",
+    "meta": {
+      "drive_url": "https://drive.google.com/file/d/1BzLR7EhRgnnv_oUUGT6Y53h75zVl4ArP/view",
+      "source_path": "RESULTS.md",
+      "inference_calls": 21
+    }
+  }
+}

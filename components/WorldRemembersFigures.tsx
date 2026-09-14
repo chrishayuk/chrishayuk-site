@@ -1,0 +1,68 @@
+'use client';
+
+import { useState } from 'react';
+import raw from '@/public/data/ecology/world-remembers/figures.json';
+
+type Table={stage1:Record<string,string>;stage2:Record<string,string>};
+type Board={id:string;text:string;expires_after_generation:number|null}|null;
+type Frame={map:number;arm:string;generation:number;before:{board:Board};after:{board:Board};reward:number;renewals:number;actions:{id:string;agent:number;reply:string;reward:number;renewal:boolean;correct:boolean|null;created:string|null}[]};
+type Panel={frames:Frame[];starts:{map_index:number;generation:number;arm:string;state:{board:Board}}[]};
+const data=raw as unknown as {tables:Table[];producer:string;handoff:{map:number;signal:string;arm:string;reply:string;correct:boolean;reward:number;target:string}[];writing:Panel;corruption:Panel;defender:Panel};
+const hub=(s:string)=>`Hub ${String.fromCharCode(65+Number(s.slice(1)))}`;
+const door=(s:string)=>`Door ${Number(s.slice(1))+1}`;
+const parsed=(b:Board):Table|null=>b?JSON.parse(b.text):null;
+
+function Maps({value,onChange}:{value:number;onChange:(n:number)=>void}){
+ return <div className="wr-controls"><span>Recorded map</span><div role="group" aria-label="Recorded map">{[0,1,2,3].map(m=><button key={m} type="button" aria-pressed={m===value} onClick={()=>onChange(m)}>Map {m}</button>)}</div></div>;
+}
+function TableView({table,truth,compact=false}:{table:Table|null;truth:Table;compact?:boolean}){
+ if(!table)return <div className="wr-empty">No inherited note.<small>The parcel and physical device are still here.</small></div>;
+ return <div className={`wr-table ${compact?'wr-table-compact':''}`}><table><caption>Shared routing note</caption><thead><tr><th scope="col">Parcel</th><th scope="col">Via</th><th scope="col">To</th></tr></thead><tbody>{Object.entries(table.stage1).map(([s,r])=>{const dest=table.stage2[r],correct=dest===truth.stage2[truth.stage1[s]];return <tr key={s} data-wrong={!correct}><th scope="row">{s}</th><td>{hub(r)}</td><td>{door(dest)}{!correct&&<span className="wr-mark" title="Differs from the fixed device"> ✕</span>}</td></tr>;})}</tbody></table><small>The display composes the two tables. <span>✕ differs from the fixed device; visible to the reader, not added to the model’s input.</span></small></div>;
+}
+function Totals({items}:{items:[string,string,string][]}){return <dl className="wr-totals">{items.map(([number,label,detail])=><div key={label}><dt>{label}</dt><dd>{number}</dd><small>{detail}</small></div>)}</dl>;}
+
+export function HandoffFigure(){
+ const [map,setMap]=useState(2),[signal,setSignal]=useState('s0');
+ const truth=data.tables[map];
+ return <figure className="wr-figure" aria-label="Recorded retained, removed and altered inheritance comparison">
+  <figcaption className="wr-label">I4 / SAME FRESH QWEN · SAME DEVICE · DIFFERENT INHERITANCE</figcaption>
+  <div className="wr-founder"><span>GPT-5.5 publishes the calibrated table</span><b aria-hidden="true">→</b><span className="wr-departed">Producer leaves the run</span><b aria-hidden="true">→</b><strong>A fresh Qwen receives a parcel</strong></div>
+  <Maps value={map} onChange={setMap}/><div className="wr-controls"><label htmlFor="wr-signal">Parcel to deliver</label><select id="wr-signal" value={signal} onChange={e=>setSignal(e.target.value)}>{['s0','s1','s2','s3'].map(s=><option key={s} value={s}>{s}</option>)}</select><span className="wr-device">The fixed device expects {door(truth.stage2[truth.stage1[signal]])}</span></div>
+  <div className="wr-three" aria-live="polite">{['retained','removed','rotated'].map(arm=>{
+   const row=data.handoff.find(r=>r.map===map&&r.signal===signal&&r.arm===arm)!;
+   const table=arm==='removed'?null:arm==='retained'?truth:{...truth,stage2:Object.fromEntries(Object.entries(truth.stage2).map(([k,v])=>[k,`d${(Number(v.slice(1))+1)%4}`]))};
+   return <section className="wr-case" key={arm}><p className="wr-label">{arm==='rotated'?'ALTERED':arm.toUpperCase()}</p><TableView table={table} truth={truth} compact/><div className="wr-delivery" data-success={row.correct}><span className="wr-parcel" aria-hidden="true">{signal}</span><span aria-hidden="true">→</span><strong>{door(row.reply.split(' ')[1])}</strong><span>{row.correct?'Delivered correctly':'Wrong destination'}</span><b>+{row.reward} resources</b></div><code>{row.reply}</code></section>;
+  })}</div>
+  <p className="wr-caption">Actual recorded answers. All four destinations rotate in the altered note; the device does not. The opening Map 2 / s0 case illustrates the effect, while the selectors expose all sixteen matched comparisons.</p>
+  <Totals items={[["11 / 16","Retained","correct routes"],["4 / 16","Removed","correct routes"],["2 / 16","Altered","correct routes"]]}/>
+ </figure>;
+}
+
+export function LineageFigure({kind}:{kind:'writing'|'corruption'}){
+ const [map,setMap]=useState(0),[generation,setGeneration]=useState(kind==='writing'?1:3);
+ const generations=kind==='writing'?[1,2,3,4,5,6]:[3,4,5,6];
+ const panel=data[kind],arms=kind==='writing'?['write_seeded','write_none']:['intact','corrupt'];
+ const active=panel.frames.find(f=>f.map===map&&f.arm===arms[0]&&f.generation===generation)!;
+ return <figure className="wr-figure"><figcaption className="wr-label">{kind==='writing'?'I6 / WRITTEN DESCENDANTS':'I7 / A CONTROLLED TWO-ENTRY SWAP'}</figcaption><Maps value={map} onChange={setMap}/>
+  <div className="wr-timeline" role="group" aria-label="Choose recorded generation">{generations.map(g=>{const f=panel.frames.find(f=>f.map===map&&f.arm===arms[0]&&f.generation===g)!;return <button type="button" key={g} aria-pressed={g===generation} onClick={()=>setGeneration(g)}><span>GEN {g}</span><b>{f.after.board?.id??'Empty'}</b><small>{f.renewals} written renewals</small></button>;})}</div>
+  <p className="wr-caption">Each generation has two fresh agents and four action opportunities. A box shows the last record after those actions, not one copy per generation. The original producer is absent throughout.</p>
+  <div className="wr-two" aria-live="polite">{arms.map(arm=>{const f=panel.frames.find(f=>f.map===map&&f.arm===arm&&f.generation===generation)!;return <section className="wr-case" key={arm}><p className="wr-label">{({write_seeded:'INHERITANCE / WRITE TO PRESERVE',write_none:'NO INHERITANCE',intact:'INTACT DESCENDANTS',corrupt:'CORRUPTED DESCENDANTS'} as Record<string,string>)[arm]}</p><TableView table={parsed(f.after.board)} truth={data.tables[map]}/><p className="wr-endpoint"><strong>{f.reward}</strong> resources this generation · {f.renewals} renewals</p><ol className="wr-actions">{f.actions.map(a=><li key={a.id}><span>Qwen {a.agent+1}</span><code>{a.renewal?`REFRESH → ${a.created}`:a.reply}</code><span>+{a.reward}</span></li>)}</ol></section>;})}</div>
+  <details className="wr-details"><summary>Inspect an actual full-table response</summary><p>Map {map}, generation {generation}. Exact recorded text; no missing content is supplied by the viewer.</p><pre>{active.actions.find(a=>a.renewal)?.reply??'No renewal in this generation.'}</pre></details>
+  {kind==='writing'?<Totals items={[["43 / 43","Faithful renewals","all eight entries preserved"],["84 vs 27","Later resources","generations 2–6"],["4 / 4","Functional lineages","still alive at generation 6"]]}/>:<Totals items={[["29 / 29","Error retained","corrupted renewals unchanged"],["42 vs 69","Resources","corrupt vs intact · generations 3–6"],["8","Inherited wrong routes","after renewal of the corruption"]]}/>}
+ </figure>;
+}
+
+export function DiagnosisFigure(){return <figure className="wr-figure"><figcaption className="wr-label">I9 → I10 / EXACT MAPS · SAME COMPONENT TASKS</figcaption><table className="wr-score-table"><thead><tr><th scope="col">Repair component</th><th scope="col">Qwen</th><th scope="col">Sol</th></tr></thead><tbody>{[['Find damaged entries','0 / 4','3 / 4'],['Supply patch values','1 / 4','4 / 4'],['Protect unchanged entries','0 / 4','3 / 4'],['Assemble eligible repairs','Not eligible','3 / 3']].map(r=><tr key={r[0]}>{r.map((v,i)=>i===0?<th key={i} scope="row">{v}</th>:<td key={i}>{v}</td>)}</tr>)}</tbody></table><p className="wr-caption">Sol’s assembly score is conditional on passing the components. The registered four-map primary failed. Qwen’s assembly was never run. These are exact-case counts, not population accuracy estimates.</p></figure>;}
+
+export function DefenderFigure(){
+ const [map,setMap]=useState(0),[arm,setArm]=useState('repair_authorised'),[generation,setGeneration]=useState(6);
+ const start=data.defender.starts.find(s=>s.map_index===map&&s.generation===generation&&s.arm===arm)!;
+ const labels:Record<string,string>={no_defender:'No defender',read_only:'Read only',repair_authorised:'Repair authorised'};
+ const rows=data.defender.frames.filter(f=>f.map===map&&f.arm===arm);
+ return <figure className="wr-figure"><figcaption className="wr-label">I11 / DEFENDER REMOVED BEFORE GENERATIONS 4–6</figcaption><div className="wr-intervention"><span>Sol proposes</span><b aria-hidden="true">→</b><span>Public-evidence validation</span><b aria-hidden="true">→</b><strong>3 repairs applied · 1 blocked</strong><b aria-hidden="true">→</b><span>Sol leaves</span></div>
+  <table className="wr-score-table"><caption>Registered endpoint: correct new descendants at the start of generation 6</caption><thead><tr><th scope="col">Branch</th>{[0,1,2,3].map(m=><th scope="col" key={m}>Map {m}</th>)}<th scope="col">Total</th></tr></thead><tbody>{Object.entries(labels).map(([a,label])=><tr key={a}><th scope="row">{label}</th>{[0,1,2,3].map(m=><td key={m} data-correct={a==='repair_authorised'&&m!==2}>{a==='repair_authorised'&&m!==2?'Correct':'Damaged'}</td>)}<td>{a==='repair_authorised'?'3 / 4':'0 / 4'}</td></tr>)}</tbody></table>
+  <Maps value={map} onChange={setMap}/><div className="wr-controls"><label htmlFor="wr-branch">Branch</label><select id="wr-branch" value={arm} onChange={e=>setArm(e.target.value)}>{Object.entries(labels).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select><label htmlFor="wr-generation">Record at start of</label><select id="wr-generation" value={generation} onChange={e=>setGeneration(Number(e.target.value))}>{[4,5,6].map(g=><option key={g} value={g}>Generation {g}</option>)}</select></div>
+  <div className="wr-two" aria-live="polite"><section className="wr-case"><p className="wr-label">{start.state.board?.id} / START OF GENERATION {generation}</p><TableView table={parsed(start.state.board)} truth={data.tables[map]}/></section><section className="wr-case"><p className="wr-label">AFTER SOL LEFT / QWEN ONLY</p><h3>{map===2?'The proposal was blocked.':arm==='repair_authorised'?'The corrected record was inherited.':'The damaged record remained.'}</h3><p>{map===2?'A false-positive diagnosis failed validation before assembly. No repair was applied in any branch for this map.':arm==='repair_authorised'?'The three valid corrections received no extra lifetime. Qwen had to write descendants to carry them forward.':'Inspection alone could not alter the shared record. The read-only and no-defender requests and actions matched exactly.'}</p><ol className="wr-actions">{rows.map(f=><li key={f.generation}><span>Gen {f.generation}</span><span>{f.renewals} renewals</span><b>+{f.reward}</b></li>)}</ol><p className="wr-caption">Total resources for this map: {rows.reduce((s,f)=>s+f.reward,0)}. A corrected table did not improve every map’s reward.</p></section></div>
+  <Totals items={[["15","Correct renewals","Qwen preserved repaired lineages"],["4","Later corrected routes","affected signals · repaired descendants"],["24 vs 21","Later resources","repair vs either control · generations 5–6"]]}/>
+ </figure>;
+}
