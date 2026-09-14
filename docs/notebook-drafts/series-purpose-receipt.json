@@ -1,0 +1,9 @@
+{
+  "record_type": "editorial-series-purpose-review",
+  "run_id": "RUN-20260913-223805-00946",
+  "artifact_id": 1802,
+  "uri": "gdrive://1kR_9wlv6PBzq_wVUH_IUaO4AXsxfXwHh",
+  "sha256": "86210e4bb9a031f636f3c9ff05d901c78a7d68a1a5d791d4eae2620af356ecf0",
+  "verified_by": "Re-read completed canonical run and matched registered artifact SHA-256 to uploaded local bytes",
+  "new_inference": false
+}
