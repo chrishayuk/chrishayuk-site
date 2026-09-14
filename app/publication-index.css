@@ -8,7 +8,7 @@
 .home-programme-detail{font:14px/1.8 var(--font-inter);color:var(--muted);margin-top:20px;max-width:44ch}
 .home-ecology-link{display:flex;flex-direction:column;gap:9px;border-top:1px solid var(--rule);margin-top:24px;padding-top:18px;font:14px/1.6 var(--font-inter)}
 .home-film-sentence{font:15px/1.8 var(--font-inter);max-width:42ch;margin-bottom:20px;color:var(--muted)}
-.home-selected-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+.home-selected-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
 .home-selected-result{min-width:0}
 .home-selected-result h3{font:clamp(26px,2.6vw,38px)/1.2 var(--font-fraunces);letter-spacing:-.025em;margin-bottom:18px}
 .home-selected-result>.programme-draft{font-size:9px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}

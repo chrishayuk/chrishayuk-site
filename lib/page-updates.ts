@@ -1,3 +1,4 @@
+import { ecologySeriesUpdates } from "./ecology-series-updates.ts";
 import { machineBriefs } from "./machine-field.ts";
 import { getRecord, recordPath } from "./records.ts";
 
@@ -7,12 +8,14 @@ import { getRecord, recordPath } from "./records.ts";
  */
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
  ...Object.fromEntries(Object.keys(machineBriefs).map(id => [recordPath(getRecord(id)!), { date: "2026-09-13", reason: "Visible question and bounded result; link to the field-experiment map." }])),
+ ...Object.fromEntries(Object.keys(ecologySeriesUpdates).map(id => [recordPath(getRecord(id)!), { date: "2026-09-14", reason: "Dated later-results context, preserving the original manuscript and snapshot." }])),
+ "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-14", reason: "New visual notebook on written inheritance, error propagation and guarded repair." },
  "/thread/machines": { date: "2026-09-13", reason: "Field map connects website and shared-world experiments." },
- "/thread/agent-ecology": { date: "2026-09-13", reason: "Connected to the permanent field-experiment map." },
+ "/thread/agent-ecology": { date: "2026-09-14", reason: "Fifth note connects handoff to population maintenance and repair." },
  "/notebook": { date: "2026-09-13", reason: "Current threads, six latest notes and a searchable archive." },
  "/notebook/archive": { date: "2026-09-13", reason: "Complete notebook archive with programme and text filters." },
  "/research": { date: "2026-09-13", reason: "Programme map, recorded findings and standing open questions." },
- "/": { date: "2026-09-13", reason: "Cleaner programme invitations distinguish agent tasks from agent collaboration; Agent Ecology has an equal entrance. Film, selected results, systems, notebook and appearances retain their order." },
+ "/": { date: "2026-09-14", reason: "Cleaner programme invitations distinguish agent tasks from agent collaboration; Agent Ecology has an equal entrance. Film, selected results, systems, notebook and appearances retain their order." },
 };
 export function pageLastModified(path: string, manuscriptRevised?: string): string | undefined {
  return [pageUpdates[path]?.date, manuscriptRevised].filter((date): date is string => Boolean(date)).sort().at(-1);

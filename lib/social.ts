@@ -6,7 +6,7 @@ export function socialRecord(id:string){const record=getRecord(id);return record
 export const socialClaim=(record:PublicationRecord)=>record.dek;
 export const socialState=(record:PublicationRecord)=>`${record.publication.toUpperCase()} · V${record.version} · ${record.publication==='published'?'PUBLISHED '+record.published:'RECORDED '+record.created}`;
 export const socialUrl=(record:PublicationRecord)=>`${SITE}${recordPath(record)}`;
-export const socialImage=(record:PublicationRecord)=>`${SITE}/api/social/${record.id}?v=${createHash('sha256').update(JSON.stringify([record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`;
+export const socialImage=(record:PublicationRecord)=>record.id==='N-ECOLOGY-WORLD-REMEMBERS'?`${SITE}/images/notebook/world-remembers.png?v=${createHash('sha256').update(JSON.stringify([record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`:`${SITE}/api/social/${record.id}?v=${createHash('sha256').update(JSON.stringify([record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`;
 export type SocialEdition='linkedin'|'x';
 const editionHash=(record:PublicationRecord,format:SocialEdition)=>createHash('sha256').update(JSON.stringify([format,record.id,record.title,record.dek,record.lineage,record.share,record.version])).digest('hex').slice(0,12);
 export const socialEditionImage=(record:PublicationRecord,format:SocialEdition,download=false)=>`${SITE}/api/social/${record.id}?format=${format}&v=${editionHash(record,format)}${download?'&download=1':''}`;

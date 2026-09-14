@@ -5,6 +5,13 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-ECOLOGY-WORLD-REMEMBERS": {
+  subject: "Cross-model environmental inheritance, maintenance and repair",
+  question: "Can fresh AI agents preserve useful information, errors and repairs after their source leaves?",
+  searchTitle: "The AI Left: Shared-State Inheritance, Corruption and Defender Repair",
+  description: "Qwen wrote 43 faithful renewals, preserved an injected error, then carried three validated Sol repairs forward. Explore recorded Cell80 lineages after founder removal.",
+  concepts: ["environmental inheritance", "institutional maintenance", "error propagation", "defender repair", "persistent shared state", "I4", "I6", "I7", "I11"],
+ },
  "N-ECOLOGY-INHERITANCE": {
   subject: "Cross-model AI agent capability inheritance through persistent records",
   question: "Can an AI agent use a capability preserved by another model?",
@@ -30,7 +37,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "AI agent ecology, shared artefacts and behavioural persistence",
   question: "What lets an AI agent behaviour recur, spread or survive removal of its source?",
   searchTitle: "AI Agent Ecology: Shared Memory, Behavioural Transmission and Persistence",
-  description: "Three Qwen experiment notes distinguish contribution, action reminders, peer transmission and external memory. Autonomous cultural persistence remains untested.",
+  description: "Five notes trace contribution, external memory, cross-model inheritance, written maintenance and guarded repair. Bounded instructed persistence is observed; autonomous culture remains open.",
   concepts: ["AI agent ecology", "shared artefacts", "behavioural persistence", "agent culture experiments"],
  },
  "N-ECOLOGY-BOARD": {
