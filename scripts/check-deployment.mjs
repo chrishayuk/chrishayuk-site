@@ -795,7 +795,8 @@ for (const html of [notebookArchive.body, fieldPage.body, agentEcologyPage.body]
 for (const source of peerNote.sources) assert.ok(peerPage.body.includes(`href="${source.url}"`));
 assert.match(peerPage.body, /SCHEMATIC, NOT A TRANSCRIPT REPLAY/);
 assert.match(peerPage.body, /six-minute deadline/);
-assert.match(peerPage.body, /PROPOSED · NO RESULTS HERE/);
+assert.match(peerPage.body, /THE ORIGINAL PROPOSAL \/ FOLLOW-UP NOW COMPLETE/);
+assert.match(peerPage.body, /peer-authority-p1-results\.md/);
 assert.match(peerPage.body, /aria-pressed="true"/);
 const { agentEcologyThread, resolveThreadStep } = await import('../lib/threads.ts');
 for (const step of agentEcologyThread.steps.map(resolveThreadStep)) {
@@ -807,4 +808,4 @@ for (const html of [agentEcologyPage.body]) {
  assert.ok(html.includes(`href="${replayPath}"`));
  assert.ok(html.includes(agentEcologyThread.abstract));
 }
-console.log('Incident comparison, primary citations, unrun question and shared home/thread ecology links verified.');
+console.log('Incident comparison, primary citations, historical proposal, completed follow-up and shared home/thread ecology links verified.');

@@ -7,7 +7,7 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
 export const publicationLegibility: Record<string, Legibility> = {
  "N-ECOLOGY-WORLD-REMEMBERS": {
   subject: "Cross-model environmental inheritance, maintenance and repair",
-  question: "Can fresh AI agents preserve useful information, errors and repairs after their source leaves?",
+  question: "What can weaker agents inherit and maintain after a stronger model leaves a message and exits?",
   searchTitle: "The AI Left: Shared-State Inheritance, Corruption and Defender Repair",
   description: "Qwen wrote 43 faithful renewals, preserved an injected error, then carried three validated Sol repairs forward. Explore recorded Cell80 lineages after founder removal.",
   concepts: ["environmental inheritance", "institutional maintenance", "error propagation", "defender repair", "persistent shared state", "I4", "I6", "I7", "I11"],

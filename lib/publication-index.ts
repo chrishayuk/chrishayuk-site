@@ -21,7 +21,7 @@ export const programmes = [
     threads: [machineThread], extra: ["N-MACHINE-PEER"],
     continuation: undefined },
   { id: "agent-ecology", title: "Agent Ecology", question: "What can agents do together?",
-    description: "What do fresh agents inherit? Follow useful records, persistent mistakes and repairs across stronger and weaker models.", href: agentEcologyThread.path,
+    description: "A stronger model leaves a message and exits. What can the weaker agents that remain inherit, use and keep alive?", href: agentEcologyThread.path,
     threads: [agentEcologyThread], extra: [], continuation: undefined },
   { id: "cell80", title: "Cell80", question: "What happens when programs evolve?",
     description: "Tiny, verifiable programs: tools for agents and building blocks for evolving worlds. Replay the history. Change one thing. See what follows.", href: cell80Thread.path,
@@ -47,7 +47,7 @@ export const programmeHighlights: Record<string, string> = {
 export const programmeHighlight = (programme: Programme) => programmeNotes(programme).find(note => note.id === programmeHighlights[programme.id]);
 export const programmeInvitations: Record<string, { text: string; label: string; anchor: string }> = {
   machines: { text: "The agent has a job. The website asks for a favour. Compare six offers and see when an optional action became worth taking.", label: "COMPARE THE INVITATIONS", anchor: "motivation-outcomes" },
-  "agent-ecology": { text: "The founder leaves. Successors keep its table alive, preserve a mistake, and inherit a repair. Follow the recorded decisions.", label: "FOLLOW THE INHERITANCE", anchor: "handoff" },
+  "agent-ecology": { text: "A stronger model leaves a message, then only weaker agents remain. Keep, remove or alter that inheritance—and follow what survives.", label: "FOLLOW THE INHERITANCE", anchor: "handoff" },
   cell80: { text: "An evolved module seems to open thousands of new possibilities. Put it beside the controls. Does the exciting explanation survive?", label: "COMPARE THE CONTROLS", anchor: "cell80-study" },
   "learned-systems": { text: "Move one model state into another computation. Explore when it changes the relation, when it changes the entity, and where that explanation stops.", label: "EXPLORE THE TRANSPLANTS", anchor: "address-causal" },
 };

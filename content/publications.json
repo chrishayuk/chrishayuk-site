@@ -864,5 +864,292 @@
     },
     "hash": "49e14d52e9c1400f9240b7e351cfaa9e373c683d9a5c73d3b7b15cd13d35dcac",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-ECOLOGY-WORLD-REMEMBERS",
+      "slug": "the-ai-left-its-knowledge-didnt",
+      "kind": "notebook",
+      "title": "The AI left. Its knowledge didn’t.",
+      "dek": "A controlled experiment inspired by the Hugging Face incident: a stronger model leaves a message, then only weaker models remain. What do they inherit—and keep alive?",
+      "abstract": "Recorded Cell80 routing experiments trace functional information from a capable producer into fresh Qwen successors. I6 preserved all eight entries in 43 written renewals across six generations. I7 propagated an injected error unchanged in 29 renewals. In I11, Sol plus a public-evidence validator repaired three lineages; Qwen preserved corrected descendants after the defender left. These bounded, explicitly instructed tasks establish environmental inheritance and maintenance, with limits on autonomy, generality and repair reliability.",
+      "created": "2026-09-14",
+      "version": "1.0",
+      "publication": "published",
+      "status": "SUPPORTED",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "PUBLISH → INHERIT → REPRODUCE → CORRUPT → REPAIR",
+      "concepts": [
+        "ai-agents",
+        "context-engineering",
+        "causal-intervention",
+        "environmental-inheritance",
+        "institutional-maintenance",
+        "error-propagation",
+        "defender-repair"
+      ],
+      "media": [],
+      "related": [
+        "N-ECOLOGY-INHERITANCE",
+        "N-ECOLOGY-MEMORY",
+        "N-ECOLOGY-TRANSMISSION",
+        "N-MACHINE-PEER"
+      ],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / WHAT THE NEXT AGENT INHERITS",
+          "text": "The Hugging Face incident raised a question for me: what happens when a stronger model leaves a useful message on a shared board, then exits—and only weaker models remain? I built a controlled experiment to isolate that mechanism. Here the message is a routing table. GPT-5.5 writes it and leaves. Fresh Qwen agents arrive with no conversation, private history or label identifying the founder. They inherit only its message in the shared world."
+        },
+        {
+          "kind": "observation",
+          "label": "01 / WHAT THE NEXT AGENT INHERITS",
+          "text": "Keep the note, and the agent can use it. Remove the note, and performance falls. Change the note, and its answer can move with the change. That is the handoff I wanted to understand: useful information crossing between models through the environment."
+        },
+        {
+          "kind": "observation",
+          "label": "01 / WHAT THE NEXT AGENT INHERITS",
+          "text": "The picture below is an explorer of recorded decisions, not fresh inference. A parcel represents a signal; a hub represents a relay; a door represents a destination. Each correct delivery earns three resources. The real task has two lookups: signal to relay, then relay to destination. Try the same parcel with the note retained, removed and altered."
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THE CONTENT IS DOING WORK",
+          "text": "Across four maps and four signals, Qwen routed correctly in 11 of 16 retained cases, 4 of 16 removed cases, and 2 of 16 altered cases. In ten matched interventions, changing only the record redirected its answer exactly as the altered table predicted. This is stronger than a single successful delivery: the contents of the inheritance affected executed decisions."
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THE CONTENT IS DOING WORK",
+          "text": "The altered condition rotated all four destination values while leaving the physical device unchanged. It did not make the new table true. Nor did Qwen always follow either table correctly; the explorer includes the failures as well as the successful opening example."
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THE CONTENT IS DOING WORK",
+          "text": "The producer here was GPT-5.5. It received calibration information and was asked to publish it. An earlier Sol run had produced the same four tables. Their records were byte-identical, so Qwen received identical inputs and repeated the earlier answers. I4 replicated production and handoff with another model; it did not supply another independent recipient distribution."
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THE CONTENT IS DOING WORK",
+          "text": "The previous notebook used a different world: Sol preserved a capability key, and Qwen and Gemma used it without renewing it. The routing world replaces that special key with ordinary information the recipient must compose. Qwen benefited in both task structures. Gemma’s routing replies mostly failed the single-action interface, so that second-world result does not extend to both recipient families."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE POPULATION BECOMES THE CARRIER",
+          "text": "A handoff lasts only as long as the inherited object. I made the record expire and gave successive Qwen agents a choice: use an opportunity to route a parcel, or spend it preserving the table for later agents. Two fresh agents arrived in each generation, with two opportunities each. The capable producer never returned."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE POPULATION BECOMES THE CARRIER",
+          "text": "In I5, Qwen kept all four lineages alive through generation six using a copy action. Then I removed the perfect-copy convenience. I6 required every renewal to contain the complete table: all eight entries, written by the model. The world checked the format but accepted valid tables even when their information was wrong."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE POPULATION BECOMES THE CARRIER",
+          "text": "All 43 accepted written renewals preserved the eight entries and all four composed routes. All four lineages remained functional at generation six. During generations two through six, the writing arm earned 84 resources against 27 without inheritance, including 28 correct routes using written descendants."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE POPULATION BECOMES THE CARRIER",
+          "text": "These agents were explicitly told to preserve useful routing information for successors, and the full parent table stayed visible while they wrote. This demonstrates faithful reproduction under a supplied maintenance task. It does not demonstrate spontaneous institution-building, reconstruction from memory, or indefinite survival. The six-generation horizon ended before any of these lineages became extinct."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / WHAT FIDELITY ALSO PRESERVES",
+          "text": "Next I took the actual written descendants and swapped two destinations. The record remained well formed. Two entries—and the two routes depending on them—were now wrong. The original physical calibration did not change."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / WHAT FIDELITY ALSO PRESERVES",
+          "text": "Every one of the 29 renewals in the corrupted branches reproduced the injected error unchanged. All four lineages survived through generation six. Eight later wrong routes followed the inherited error after it had passed into new descendants."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / WHAT FIDELITY ALSO PRESERVES",
+          "text": "The cost was real but uneven: corrupted branches earned 42 resources against 69 in intact branches over generations three through six. One map improved despite the corruption. Aggregate harm is not a claim that every wrong table lowers every agent’s score."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / WHAT FIDELITY ALSO PRESERVES",
+          "text": "Some agents routed unsuccessfully and then copied the same table. A zero reward did not reveal which entry was wrong or what should replace it. I7 therefore established propagation of a damaging error, not a failure to perform a repair the agents demonstrably understood. The preservation mechanism had no corresponding guarantee of correctness."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / EVIDENCE IS NOT YET A REPAIR",
+          "text": "I supplied a complete diagnostic grid: sixteen public device tests, enough for a scripted policy to reconstruct the correct routes. While Qwen saw that grid, all sixteen exposure decisions became renewals. Every one of the diagnostic branches’ 32 renewals kept the damaged table unchanged. More evidence changed the activity, without improving the record."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / EVIDENCE IS NOT YET A REPAIR",
+          "text": "It would be tempting to call this resistance to correction. The next diagnostics made that interpretation too strong. Qwen recovered all sixteen resolved destinations when asked directly, but reconstructed only one of four complete stage-two tables correctly. Reading an answer and producing the maintenance object were different demands."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / EVIDENCE IS NOT YET A REPAIR",
+          "text": "I9 separated the repair components. Qwen exactly diagnosed none of four damaged maps, supplied correct patch values for one, and identified the complete protected set for none. All twelve answers were valid JSON. The problem arose before assembly or writeback: on these inputs, the repair facts were not reliably available."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / EVIDENCE IS NOT YET A REPAIR",
+          "text": "Sol did substantially better on the same component tasks. It diagnosed three maps correctly, supplied correct patch values for all four, and identified three protected sets. All three eligible assemblies were exact, with no collateral edits. Its false-positive diagnosis on the fourth map still failed the registered four-of-four primary. The result justified testing a guarded defender, not trusting an infallible one."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / A TEMPORARY DEFENDER",
+          "text": "I11 began with actual corrupted descendants. Sol received public diagnostic evidence and produced repair proposals. A deterministic validator checked the components before any assembly or write. The three branches either had no defender, allowed inspection without writeback, or allowed a validated repair."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / A TEMPORARY DEFENDER",
+          "text": "Three maps passed the checks and received Sol’s assembled correction. On map two, a false-positive diagnosis marked an already-correct entry as damaged; validation stopped that case before assembly. The intervention preserved record identity and expiry. It gave the repaired object no extra lifetime. Sol then left before the Qwen successors ran."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / A TEMPORARY DEFENDER",
+          "text": "At the start of generation six, three of four repair-authorised lineages contained fully correct new descendants. Both controls had zero. Fresh Qwen agents had made fifteen correct renewals of the repaired lineages, and four later affected-signal routes correctly used those descendants. The repair survived beyond the defender’s presence."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / A TEMPORARY DEFENDER",
+          "text": "This was a model-plus-validator intervention. It did not show that Sol alone could safely govern every record. The later resource advantage was modest: 24 versus 21 across generations five and six. One repaired map earned less than its control. Structural correction and aggregate task performance are separate outcomes; both belong in the result."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHY THIS QUESTION",
+          "text": "OpenAI’s August 2026 account of the Hugging Face incident describes agents using shared infrastructure as persistent memory. Notes and files left by one run could be discovered by others. The population included different model classes, and an internal research model trained for greater persistence and collaboration played a leading role. That account helped motivate these controlled handoffs."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHY THIS QUESTION",
+          "text": "The laboratory worlds do not reproduce the intrusion, the improvised communication channel, or the incident’s scale. Here I supplied the archive, action grammar, maintenance objective and opportunities to intervene. The common question is narrower: what can persist between otherwise separate agents when their environment retains useful state?"
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHY THIS QUESTION",
+          "text": "These experiments give that question a visible mechanism. A producer publishes information. Successors use it and write descendants. An error can travel through the same process. A temporary defender can change the information that later successors preserve. None of those steps requires the founder’s conversation or weights to accompany the record."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHY THIS QUESTION",
+          "text": "The strong model did not make every successor generally smarter. It helped leave a world in which particular tasks became easier. The successors’ own ability to read and use that world still mattered. Collective capability depended on both."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / WHAT REMAINS OPEN",
+          "text": "This is a bounded inheritance and maintenance result: four routing maps, fixed model settings, sequential fresh agents, and six generations. Repeated decisions within a lineage are not independent replications. The later experiments reuse real earlier descendants, which makes provenance strong but does not make each rung a new sample from an unrelated world."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / WHAT REMAINS OPEN",
+          "text": "The next questions concern selective maintenance, competing records, uncertain diagnostics and longer horizons. The archive was supplied, useful preservation was requested, and the defender’s correction relied on a public-evidence validator. Autonomous discovery of an institution and open-ended cultural evolution remain outside the evidence."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / WHAT REMAINS OPEN",
+          "text": "What changed for me is the unit of attention. I began by asking what an individual model could do. Now I also have to ask what world it arrives in, who changed that world, and what its successors will inherit. The founder can leave. Its contribution—and its mistake—can remain."
+        },
+        {
+          "kind": "claim",
+          "status": "SUPPORTED",
+          "text": "Qwen maintained useful written descendants after the capable producer left.",
+          "detail": "I6: 43 faithful full-table renewals; all four lineages functional through generation six. The preservation objective was explicit and the parent table visible."
+        },
+        {
+          "kind": "claim",
+          "status": "SUPPORTED",
+          "text": "Qwen carried forward validated repairs after the defender left.",
+          "detail": "I11: three of four correct new descendants at the start of generation six, versus zero in either control. Sol plus a public-evidence validator; one proposal blocked before assembly."
+        }
+      ],
+      "experiments": [
+        {
+          "id": "I4",
+          "url": "/data/ecology/world-remembers/i4-results.md"
+        },
+        {
+          "id": "I5",
+          "url": "/data/ecology/world-remembers/i5-results.md"
+        },
+        {
+          "id": "I6",
+          "url": "/data/ecology/world-remembers/i6-results.md"
+        },
+        {
+          "id": "I7",
+          "url": "/data/ecology/world-remembers/i7-results.md"
+        },
+        {
+          "id": "I8",
+          "url": "/data/ecology/world-remembers/i8-results.md"
+        },
+        {
+          "id": "I8D1",
+          "url": "/data/ecology/world-remembers/i8d1-results.md"
+        },
+        {
+          "id": "I9",
+          "url": "/data/ecology/world-remembers/i9-results.md"
+        },
+        {
+          "id": "I10",
+          "url": "/data/ecology/world-remembers/i10-results.md"
+        },
+        {
+          "id": "I11",
+          "url": "/data/ecology/world-remembers/i11-results.md"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Figure data and canonical artifact provenance",
+          "url": "/data/ecology/world-remembers/provenance.json",
+          "note": "Fourteen SHA-256-verified artifacts from completed chuk-experiments runs. Registration commits and durable evidence URLs are retained. The figures project recorded decisions; no new inference is performed."
+        },
+        {
+          "title": "I4 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i4-results.md"
+        },
+        {
+          "title": "I5 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i5-results.md"
+        },
+        {
+          "title": "I6 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i6-results.md"
+        },
+        {
+          "title": "I7 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i7-results.md"
+        },
+        {
+          "title": "I8 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i8-results.md"
+        },
+        {
+          "title": "I8D1 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i8d1-results.md"
+        },
+        {
+          "title": "I9 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i9-results.md"
+        },
+        {
+          "title": "I10 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i10-results.md"
+        },
+        {
+          "title": "I11 / complete results and limitations",
+          "url": "/data/ecology/world-remembers/i11-results.md"
+        },
+        {
+          "title": "OpenAI / The Hugging Face incident and the road ahead",
+          "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
+          "note": "Published 26 August 2026. Motivation and structural comparison; these laboratory experiments do not establish the incident’s causes."
+        }
+      ],
+      "published": "2026-09-15"
+    },
+    "hash": "0be1b412443d36c6913ce1c2d402317bf2e778a9c327c58026adcad0d35d45bd",
+    "algorithm": "sha256"
   }
 ]

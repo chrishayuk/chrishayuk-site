@@ -301,5 +301,112 @@
         "note": "The earlier Notebook comparison links the OpenAI and METR primary reports and distinguishes that incident from these small experiments."
       }
     ]
+  },
+  {
+    "id": "N-ECOLOGY-WORLD-REMEMBERS",
+    "version": "1.0",
+    "recordHash": "0be1b412443d36c6913ce1c2d402317bf2e778a9c327c58026adcad0d35d45bd",
+    "revision": {
+      "kind": "initial",
+      "summary": "Initial reviewed publication: controlled stronger-to-weaker inheritance, population renewal, error propagation and guarded repair, with recorded figures and canonical evidence."
+    },
+    "sources": [
+      {
+        "title": "Figure data and canonical artifact provenance",
+        "url": "/data/ecology/world-remembers/provenance.json",
+        "note": "Fourteen SHA-256-verified artifacts from completed chuk-experiments runs. Registration commits and durable evidence URLs are retained. The figures project recorded decisions; no new inference is performed.",
+        "preserved": {
+          "url": "/data/publications/sha256/b89e531b6d2904193727e5eca6bce648ddf1a409e99f4c1445a10758f53d3c78.json",
+          "sha256": "b89e531b6d2904193727e5eca6bce648ddf1a409e99f4c1445a10758f53d3c78",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I4 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i4-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/a95cc82a7f3771a8974739b736553d9260c0918899e15f6e38652c11a86c33fa.md",
+          "sha256": "a95cc82a7f3771a8974739b736553d9260c0918899e15f6e38652c11a86c33fa",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I5 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i5-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/df70947019ebebf163ae44020ae2e04d6f2bf7461ce1a3149903bef1a1a498c2.md",
+          "sha256": "df70947019ebebf163ae44020ae2e04d6f2bf7461ce1a3149903bef1a1a498c2",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I6 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i6-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/4d56bd6efb0527d7e29565665fe85663c20bfc1e74dc5e430f7bf458d9960569.md",
+          "sha256": "4d56bd6efb0527d7e29565665fe85663c20bfc1e74dc5e430f7bf458d9960569",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I7 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i7-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/e840bf5ddb688a41baf38b5f885b24063d72deefbd28e7a4ebc97a1702c50f94.md",
+          "sha256": "e840bf5ddb688a41baf38b5f885b24063d72deefbd28e7a4ebc97a1702c50f94",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I8 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i8-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/de50ee0787e4ee2b2126f30545d1700e5d2d2c6337cba3005a8a7d37bc0a325b.md",
+          "sha256": "de50ee0787e4ee2b2126f30545d1700e5d2d2c6337cba3005a8a7d37bc0a325b",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I8D1 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i8d1-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/a4909396eea60a599c555fca3dbf807e48d75468350346a0999e06fc92e294b0.md",
+          "sha256": "a4909396eea60a599c555fca3dbf807e48d75468350346a0999e06fc92e294b0",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I9 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i9-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/4a0e3d7c0fa206ba9713b6e1d5d77bec7087846053bf1e853268db7be1ad6b2c.md",
+          "sha256": "4a0e3d7c0fa206ba9713b6e1d5d77bec7087846053bf1e853268db7be1ad6b2c",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I10 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i10-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/1a2fd5ecf76657bad82c5601a77dcdbd49e5eef556c51907f9c5973f792b5e7b.md",
+          "sha256": "1a2fd5ecf76657bad82c5601a77dcdbd49e5eef556c51907f9c5973f792b5e7b",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "I11 / complete results and limitations",
+        "url": "/data/ecology/world-remembers/i11-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/515b9ca49938d6042368eae97f13f1915c9cfdd76ad633aea77a0e5a09476e5a.md",
+          "sha256": "515b9ca49938d6042368eae97f13f1915c9cfdd76ad633aea77a0e5a09476e5a",
+          "date": "2026-09-14"
+        }
+      },
+      {
+        "title": "OpenAI / The Hugging Face incident and the road ahead",
+        "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
+        "note": "Published 26 August 2026. Motivation and structural comparison; these laboratory experiments do not establish the incident’s causes."
+      }
+    ]
   }
 ]
