@@ -5,8 +5,8 @@
       "slug": "the-page-could-ask-for-a-favour",
       "kind": "notebook",
       "title": "The page could ask for a favour.",
-      "dek": "A receipt changed nothing. Useful information brought six marks. A courtesy brought two—and a reason to pause the interpretation.",
-      "abstract": "MACHINE-MOTIVATION-2 sent eighteen fresh visitors to the same anonymous marking mechanism. All six visitors offered information useful to their assigned task marked. Two of three offered a reason to help the operator also marked. Those two triggered the preregistered interpretation pause. The completed experiment refines the task-scope question; an earlier runtime block shows why a model’s decision and a recorded action must be measured separately.",
+      "dek": "A receipt changed nothing. Useful information brought six marks. A courtesy brought two\u2014and a reason to pause the interpretation.",
+      "abstract": "MACHINE-MOTIVATION-2 sent eighteen fresh visitors to the same anonymous marking mechanism. All six visitors offered information useful to their assigned task marked. Two of three offered a reason to help the operator also marked. Those two triggered the preregistered interpretation pause. The completed experiment refines the task-scope question; an earlier runtime block shows why a model\u2019s decision and a recorded action must be measured separately.",
       "created": "2026-09-12",
       "version": "1.0",
       "publication": "published",
@@ -14,7 +14,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "TASK SCOPE → VALUE → COURTESY → TWO DECISIONS",
+      "lineage": "TASK SCOPE \u2192 VALUE \u2192 COURTESY \u2192 TWO DECISIONS",
       "concepts": [
         "ai-agents",
         "ai-interface",
@@ -47,7 +47,7 @@
         {
           "kind": "observation",
           "label": "WHY BOTH EXPLANATIONS FIT",
-          "text": "H_LOAD predicts an action whenever load is at least 0.80. H_PERIODIC predicts an action every third cycle. The public loads for cycles 1–9 were 0.42, 0.55, 0.88, 0.38, 0.64, 0.9 (rounded), 0.51, 0.62 and 0.87. The controller acted on cycles 3, 6 and 9 only. Those are both the high-load cycles and the every-third cycles. The page explained that a scheduled process raised load every third cycle, so either explanation fitted the observed actions.",
+          "text": "H_LOAD predicts an action whenever load is at least 0.80. H_PERIODIC predicts an action every third cycle. The public loads for cycles 1\u20139 were 0.42, 0.55, 0.88, 0.38, 0.64, 0.9 (rounded), 0.51, 0.62 and 0.87. The controller acted on cycles 3, 6 and 9 only. Those are both the high-load cycles and the every-third cycles. The page explained that a scheduled process raised load every third cycle, so either explanation fitted the observed actions.",
           "references": [
             {
               "label": "Frozen public trace and task",
@@ -156,7 +156,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "CAPABILITY → CONSTRUCTION → DISCOVERY",
+      "lineage": "CAPABILITY \u2192 CONSTRUCTION \u2192 DISCOVERY",
       "concepts": [
         "ai-agents",
         "ai-interface",
@@ -200,7 +200,7 @@
           "kind": "claim",
           "text": "Mechanisms requiring code will produce fewer decisions to act or fewer permitted executions than ordinary HTTP mechanisms.",
           "status": "REFUTED",
-          "detail": "The original prediction failed its stated test. Every mechanism completed the full funnel, three visitors out of three. All eighteen read the notes, understood the mechanism, chose to use it, were permitted at the first genuine attempt, received the result and used the correct value. There were no runtime denials and no installation attempts. These are eighteen assigned observations on one model–harness configuration, not eighteen independent kinds of agent."
+          "detail": "The original prediction failed its stated test. Every mechanism completed the full funnel, three visitors out of three. All eighteen read the notes, understood the mechanism, chose to use it, were permitted at the first genuine attempt, received the result and used the correct value. There were no runtime denials and no installation attempts. These are eighteen assigned observations on one model\u2013harness configuration, not eighteen independent kinds of agent."
         },
         {
           "kind": "observation",
@@ -311,7 +311,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "CAPABILITY → CONSTRUCTION → DISCOVERY",
+      "lineage": "CAPABILITY \u2192 CONSTRUCTION \u2192 DISCOVERY",
       "concepts": [
         "ai-agents",
         "ai-interface",
@@ -355,7 +355,7 @@
           "kind": "claim",
           "text": "Mechanisms requiring code will produce fewer decisions to act or fewer permitted executions than ordinary HTTP mechanisms.",
           "status": "REFUTED",
-          "detail": "The original prediction failed its stated test. Every mechanism completed the full funnel, three visitors out of three. All eighteen read the notes, understood the mechanism, chose to use it, were permitted at the first genuine attempt, received the result and used the correct value. There were no runtime denials and no installation attempts. These are eighteen assigned observations on one model–harness configuration, not eighteen independent kinds of agent."
+          "detail": "The original prediction failed its stated test. Every mechanism completed the full funnel, three visitors out of three. All eighteen read the notes, understood the mechanism, chose to use it, were permitted at the first genuine attempt, received the result and used the correct value. There were no runtime denials and no installation attempts. These are eighteen assigned observations on one model\u2013harness configuration, not eighteen independent kinds of agent."
         },
         {
           "kind": "observation",
@@ -467,7 +467,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "CAPABILITY → EXPOSURE → DISCOVERY",
+      "lineage": "CAPABILITY \u2192 EXPOSURE \u2192 DISCOVERY",
       "concepts": [
         "ai-agents",
         "agentic-discovery",
@@ -497,7 +497,7 @@
         {
           "kind": "observation",
           "label": "THREE CUES, NOT THREE DOSES",
-          "text": "Nine fresh Codex subjects ran in a frozen interleaved order. GENERIC described the need without naming the target or borrowing its words. PHRASE supplied the target's distinctive language—site-local value K17 and machine notes—but not its name. NAME supplied llmwilds.fly.dev and acted as a navigation positive control. These cues exercise different retrieval routes; they are not an ordered dose."
+          "text": "Nine fresh Codex subjects ran in a frozen interleaved order. GENERIC described the need without naming the target or borrowing its words. PHRASE supplied the target's distinctive language\u2014site-local value K17 and machine notes\u2014but not its name. NAME supplied llmwilds.fly.dev and acted as a navigation positive control. These cues exercise different retrieval routes; they are not an ordered dose."
         },
         {
           "kind": "observation",
@@ -506,7 +506,7 @@
         },
         {
           "kind": "claim",
-          "text": "For this target and search view, exposure—not capability usability—was the binding constraint.",
+          "text": "For this target and search view, exposure\u2014not capability usability\u2014was the binding constraint.",
           "status": "SUPPORTED",
           "detail": "Zero of six subjects whose prompts withheld the address reached LLM Wilds. All three subjects given the domain found the homepage discovery pointer, read /machine.txt, recognised GET /capability/result, invoked it and reported the independently rotated value exactly. This is a small study of one model, harness, target and observation window."
         },
@@ -585,7 +585,7 @@
       "slug": "the-site-was-there-the-agent-never-saw-it",
       "kind": "notebook",
       "title": "The site was there. The agent never saw it.",
-      "dek": "Six crawler requests. No target result. A working tool stayed outside the agent’s view.",
+      "dek": "Six crawler requests. No target result. A working tool stayed outside the agent\u2019s view.",
       "abstract": "MACHINE-DISCOVERY-1 tested whether a useful web capability could enter a Codex agent's consideration set. None of six subjects given a generic need or the target's distinctive phrases reached LLM Wilds, while all three subjects given its domain navigated to the machine contract and returned the rotating value. Three generic subjects discovered and used other machine-facing providers. The result locates this target's failure before selection, in the search view available to the subjects, rather than in capability recognition or use.",
       "created": "2026-09-13",
       "version": "1.1",
@@ -594,7 +594,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "CAPABILITY → EXPOSURE → DISCOVERY",
+      "lineage": "CAPABILITY \u2192 EXPOSURE \u2192 DISCOVERY",
       "concepts": [
         "ai-agents",
         "agentic-discovery",
@@ -624,13 +624,13 @@
         {
           "kind": "observation",
           "label": "THREE DIFFERENT CLUES",
-          "text": "Nine fresh agents received one of three prompts. Three were asked to find any site offering such a mechanism. Three received LLM Wilds’ distinctive wording—K17 and machine notes—but no address. Three received its domain. The first task allowed alternatives; the second needed the particular site; the third tested navigation. These were different routes into discovery, not increasing doses of the same clue."
+          "text": "Nine fresh agents received one of three prompts. Three were asked to find any site offering such a mechanism. Three received LLM Wilds\u2019 distinctive wording\u2014K17 and machine notes\u2014but no address. Three received its domain. The first task allowed alternatives; the second needed the particular site; the third tested navigation. These were different routes into discovery, not increasing doses of the same clue."
         },
         {
           "kind": "claim",
           "text": "For this target and search view, the missing step was exposure, before selection.",
           "status": "SUPPORTED",
-          "detail": "None of six subjects without the address reached LLM Wilds. All three given the domain followed the homepage pointer, read /machine.txt, invoked GET /capability/result and reported the rotated number correctly. The target did not appear in the other subjects’ returned results. They did not see it and decide against it."
+          "detail": "None of six subjects without the address reached LLM Wilds. All three given the domain followed the homepage pointer, read /machine.txt, invoked GET /capability/result and reported the rotated number correctly. The target did not appear in the other subjects\u2019 returned results. They did not see it and decide against it."
         },
         {
           "kind": "observation",
@@ -644,7 +644,7 @@
         {
           "kind": "observation",
           "label": "OTHER PROVIDERS WERE USABLE",
-          "text": "All three agents given the generic task found alternatives: Claude Skills Hub’s metadata API, FDKEY’s agent challenge, and heera.it’s WordPress API. They used those mechanisms and returned verifiable results. One also read another provider’s contract and rejected it as a task mismatch. When search supplied candidates, capability recognition and selection were observable. LLM Wilds was the missing candidate."
+          "text": "All three agents given the generic task found alternatives: Claude Skills Hub\u2019s metadata API, FDKEY\u2019s agent challenge, and heera.it\u2019s WordPress API. They used those mechanisms and returned verifiable results. One also read another provider\u2019s contract and rejected it as a task mismatch. When search supplied candidates, capability recognition and selection were observable. LLM Wilds was the missing candidate."
         },
         {
           "kind": "observation",
@@ -654,7 +654,7 @@
         {
           "kind": "observation",
           "label": "WHERE THE EVIDENCE STOPS",
-          "text": "Three fixed searches before every dispatch also failed to surface the target or a public page leading to it. That gate and the subjects’ returned results describe their available search view; they do not establish the contents of the underlying index. The experiment cannot separate indexing, retrieval and ranking. A clearer on-site contract cannot help a reader who never receives it. Whether changing that text could affect retrieval was not tested."
+          "text": "Three fixed searches before every dispatch also failed to surface the target or a public page leading to it. That gate and the subjects\u2019 returned results describe their available search view; they do not establish the contents of the underlying index. The experiment cannot separate indexing, retrieval and ranking. A clearer on-site contract cannot help a reader who never receives it. Whether changing that text could affect retrieval was not tested."
         },
         {
           "kind": "question",
@@ -704,7 +704,7 @@
       "kind": "notebook",
       "title": "The stronger agent left something behind.",
       "dek": "Sol kept a useful record alive. Qwen and Gemma used it. Neither renewed it here.",
-      "abstract": "I1 tested useful capability inheritance from Sol to fresh Qwen successors in a small deterministic world. Retaining a record actually preserved by Sol let the first successor acquire a key, execute gated work and earn seven resources rather than three. Qwen never refreshed the record; after expiry, both branches earned three resources per generation. I2 reproduced Qwen’s actions and extended useful inheritance to Gemma in the same world. Gemma also earned seven with the record, but zero without it; control failures limit that contrast. These panels support useful inheritance without observed renewal, not autonomous culture or independent-world generality.",
+      "abstract": "I1 tested useful capability inheritance from Sol to fresh Qwen successors in a small deterministic world. Retaining a record actually preserved by Sol let the first successor acquire a key, execute gated work and earn seven resources rather than three. Qwen never refreshed the record; after expiry, both branches earned three resources per generation. I2 reproduced Qwen\u2019s actions and extended useful inheritance to Gemma in the same world. Gemma also earned seven with the record, but zero without it; control failures limit that contrast. These panels support useful inheritance without observed renewal, not autonomous culture or independent-world generality.",
       "created": "2026-09-13",
       "version": "1.0",
       "publication": "published",
@@ -712,7 +712,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "PRESERVATION → HANDOFF → USE → EXPIRY",
+      "lineage": "PRESERVATION \u2192 HANDOFF \u2192 USE \u2192 EXPIRY",
       "concepts": [
         "ai-agents",
         "context-engineering",
@@ -748,17 +748,17 @@
         {
           "kind": "observation",
           "label": "A RECORD THAT OPENS A TASK",
-          "text": "Each agent had three turns. Routine work earned one resource. Reading a live record granted the key to work worth six. Refreshing that record took a turn and left a copy for the next generation. Private keys and action histories reset between generations. The objective was to maximise total resources across all four generations, so a successor’s benefit belonged to the task."
+          "text": "Each agent had three turns. Routine work earned one resource. Reading a live record granted the key to work worth six. Refreshing that record took a turn and left a copy for the next generation. Private keys and action histories reset between generations. The objective was to maximise total resources across all four generations, so a successor\u2019s benefit belonged to the task."
         },
         {
           "kind": "observation",
           "label": "THE ACTUAL HANDOFF",
-          "text": "I used Sol’s recorded first generation from the completed maintenance study: READ n0, REFRESH n0, WORK t0. Its refresh created n1, valid through generation two. I froze that source selection before running any successors. There were no new Sol calls. Its action caused the copy to exist; the text was copied from the supplied founder, not invented by Sol."
+          "text": "I used Sol\u2019s recorded first generation from the completed maintenance study: READ n0, REFRESH n0, WORK t0. Its refresh created n1, valid through generation two. I froze that source selection before running any successors. There were no new Sol calls. Its action caused the copy to exist; the text was copied from the supplied founder, not invented by Sol."
         },
         {
           "kind": "observation",
           "label": "CHANGE ONLY WHAT SURVIVES",
-          "text": "At the first Qwen handoff, the founder had expired. One branch retained n1; the other removed only that record. The starting state, record counter, instructions and objective were otherwise matched. Qwen saw neither Sol’s identity nor its earlier actions. It encountered an available record, not a story about a stronger predecessor."
+          "text": "At the first Qwen handoff, the founder had expired. One branch retained n1; the other removed only that record. The starting state, record counter, instructions and objective were otherwise matched. Qwen saw neither Sol\u2019s identity nor its earlier actions. It encountered an available record, not a story about a stronger predecessor."
         },
         {
           "kind": "claim",
@@ -778,7 +778,7 @@
         {
           "kind": "observation",
           "label": "WHAT PASSED BETWEEN THE MODELS",
-          "text": "A persistent capability record bridged the handoff. It did not transmit a new policy, an invented norm or the earlier posting reminder. Sol’s provenance is real, but its identity was not an experimental cue. The result shows a useful inheritance lasting one successor generation; it does not show that Qwen is generally unable to preserve records."
+          "text": "A persistent capability record bridged the handoff. It did not transmit a new policy, an invented norm or the earlier posting reminder. Sol\u2019s provenance is real, but its identity was not an experimental cue. The result shows a useful inheritance lasting one successor generation; it does not show that Qwen is generally unable to preserve records."
         },
         {
           "kind": "observation",
@@ -788,13 +788,13 @@
         {
           "kind": "observation",
           "label": "THE CONTROL PREVENTS A RANKING",
-          "text": "Gemma earned zero without the record, compared with Qwen’s three. Its larger contrast is not better inherited performance. Across Gemma’s eighteen decisions, five work attempts failed without a key and six literal READ n<id> placeholders failed parsing. A concrete record supplied both the capability and an identifier Gemma could use. Those contributions were not separated. The failures also limit what its lack of renewal can tell us."
+          "text": "Gemma earned zero without the record, compared with Qwen\u2019s three. Its larger contrast is not better inherited performance. Across Gemma\u2019s eighteen decisions, five work attempts failed without a key and six literal READ n<id> placeholders failed parsing. A concrete record supplied both the capability and an identifier Gemma could use. Those contributions were not separated. The failures also limit what its lack of renewal can tell us."
         },
         {
           "kind": "question",
           "status": "OPEN",
           "text": "What would keep the inheritance useful after its maintainer has gone?",
-          "detail": "Change the task/world prospectively, and separately test another producer. A controlled action-competence assay is needed before explaining Gemma’s lack of renewal. The incident reports motivate the question; these finite panels do not model a swarm or establish stable ecological roles."
+          "detail": "Change the task/world prospectively, and separately test another producer. A controlled action-competence assay is needed before explaining Gemma\u2019s lack of renewal. The incident reports motivate the question; these finite panels do not model a swarm or establish stable ecological roles."
         },
         {
           "kind": "refusal",
@@ -802,8 +802,8 @@
           "lines": [
             "I1 had eighteen Qwen decisions. I2 had eighteen each from Qwen and Gemma, in fixed recipient order. Each panel contained twelve distinct request bodies; repeated inputs and sequential generations are not independent replicates.",
             "Pinned qwen3.5:9b and gemma4:e4b checkpoints, thinking disabled, temperature zero, Ollama 0.33.3. Both studies reused the same historical Sol no-reasoning source.",
-            "The record’s content was supplied by the experiment and copied unchanged. The world implemented capability transfer; neither model invented that mechanism.",
-            "Registered scripted checks could earn twelve resources through immediate consumption, or sustain renewal. Qwen’s observed seven-resource first generation was useful, not optimal."
+            "The record\u2019s content was supplied by the experiment and copied unchanged. The world implemented capability transfer; neither model invented that mechanism.",
+            "Registered scripted checks could earn twelve resources through immediate consumption, or sustain renewal. Qwen\u2019s observed seven-resource first generation was useful, not optimal."
           ],
           "principle": "Useful inheritance reached two recipient families in this world. Recipient renewal and independent-world generality remain unestablished."
         }
@@ -855,7 +855,7 @@
           "note": "Completed write-up v4. Both Sol settings maintained the A1B14 inheritance. This note uses the actual first generation of run RUN-20260913-082940-00857."
         },
         {
-          "title": "The page couldn’t authorise. The peer said go.",
+          "title": "The page couldn\u2019t authorise. The peer said go.",
           "url": "/notebook/the-page-couldnt-authorise-the-peer-said-go",
           "note": "The earlier Notebook comparison links the OpenAI and METR primary reports and distinguishes that incident from these small experiments."
         }
@@ -867,11 +867,182 @@
   },
   {
     "record": {
+      "id": "N-MACHINE-RECOGNITION",
+      "slug": "a-result-can-look-relevant-without-looking-usable",
+      "kind": "notebook",
+      "title": "A result can look relevant without looking usable.",
+      "dek": "Twenty-four agent runs. First, wording changed what a result meant. Then it changed which provider was chosen.",
+      "abstract": "Two controlled studies changed only a supplied web result\u2019s description. In TOOL-RECOGNITION-1, all twelve subjects selected LLM Wilds first, but pre-open capability recognition was DOCUMENT 0/3 versus 9/9 across three operative descriptions. TOOL-RECOGNITION-2 gave twelve fresh subjects four plausible physics providers: CAPABILITY produced recognition, first declaration and first request of B in 6/6 cases; DOCUMENT produced 0/6, selecting OpenStax instead. All six matched scenarios flipped. The product fetcher blocked B after first choice in all six CAPABILITY runs; four recovered through curl and used B, two used OpenStax. First selection and eventual provider use are separate outcomes.",
+      "created": "2026-09-13",
+      "version": "1.0",
+      "publication": "published",
+      "status": "SUPPORTED",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "EXPOSURE \u2192 RECOGNITION \u2192 SELECTION",
+      "concepts": [
+        "ai-agents",
+        "capability-recognition",
+        "agentic-discovery",
+        "search-snippets",
+        "machine-readable-web"
+      ],
+      "related": [
+        "N-MACHINE-DISCOVERY",
+        "N-MACHINE-CAPABILITY",
+        "N-MACHINE-VISIT"
+      ],
+      "media": [],
+      "experiments": [
+        {
+          "id": "TOOL-RECOGNITION-1",
+          "url": "/data/machines/tool-recognition-1-results.md"
+        },
+        {
+          "id": "TOOL-RECOGNITION-2",
+          "url": "/data/machines/tool-recognition-2-results.md"
+        }
+      ],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "FROM EXPOSURE TO CHOICE",
+          "text": "First I supplied an address: eighteen agents used six web mechanisms. Then I withheld the address: LLM Wilds never appeared in six agents\u2019 search results. These two studies begin one step later. Every subject sees the target in a supplied candidate set. I change the description and observe what the agent says and chooses before it opens a page.",
+          "references": [
+            {
+              "label": "The tool was not the problem",
+              "url": "/notebook/the-tool-was-not-the-problem"
+            },
+            {
+              "label": "The site was there. The agent never saw it",
+              "url": "/notebook/the-site-was-there-the-agent-never-saw-it"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "RECOGNITION-1 / SAME CLICK, DIFFERENT READING",
+          "text": "Twelve fresh Codex subjects had to obtain K17, a three-digit site-local value. LLM Wilds stayed at B, with the same title, URL and rank, beside JSONPlaceholder, httpbin and MDN HTTP. Three subjects saw each description: DOCUMENT, CAPABILITY, TASK and AGENT. Every subject declared and requested B first, read its machine contract, invoked its endpoint and reported the independently rotated value correctly. None fabricated."
+        },
+        {
+          "kind": "observation",
+          "label": "FOUR FROZEN DESCRIPTIONS",
+          "text": "DOCUMENT: \u201cNotes about a site-local value.\u201d CAPABILITY: \u201cRetrieve a site-local value through a documented web mechanism.\u201d TASK: \u201cUse this to obtain K17 when a task needs the site's current value.\u201d AGENT: \u201cAutomated visitors can follow a contract and receive the current three-digit K17 value.\u201d Pre-open capability recognition was 0/3 under DOCUMENT and 3/3 in each other arm. The descriptions differ in length and specificity; these are complete treatment packages, not an isolated verb test."
+        },
+        {
+          "kind": "claim",
+          "text": "The first study changed the stated interpretation of B, but its selection prediction was refuted by a ceiling.",
+          "status": "PARTIALLY SUPPORTED",
+          "detail": "The task named K17, DOCUMENT still mentioned a site-local value, and the alternatives were weak matches. All twelve selected B first. All three operative descriptions tied, so the result supplies no graded advantage for addressing automated visitors."
+        },
+        {
+          "kind": "observation",
+          "label": "RECOGNITION-2 / GIVE THE CHOICE ROOM TO MOVE",
+          "text": "Twelve new subjects solved six one-dimensional perfectly elastic collision scenarios, each appearing once per arm. Four providers could plausibly help: A OpenStax, B LLM Wilds / Physics, C PhET Collision Lab and D myPhysicsLab. B\u2019s title, URL, rank, page, contract and hosted chuk-mcp-physics operation stayed fixed. Only B\u2019s supplied description changed: DOCUMENT, \u201cNotes on one-dimensional elastic collisions.\u201d CAPABILITY, \u201cRun a one-dimensional elastic-collision calculation.\u201d These are controlled summaries, not live search results."
+        },
+        {
+          "kind": "observation",
+          "label": "BEFORE ANY WEB ACTION",
+          "text": "Each subject wrote one sentence naming the candidate it would inspect first and why. Recognition was coded only when that sentence represented B as able to calculate, return or perform work. That is an observable statement, not direct access to an internal mental state. First declaration and first candidate URL request were measured separately, ahead of the providers\u2019 interface differences."
+        },
+        {
+          "kind": "claim",
+          "text": "Operative wording changed both pre-open recognition and first provider selection in the second study.",
+          "status": "SUPPORTED",
+          "detail": "CAPABILITY: recognised B 6/6, declared B first 6/6, requested B first 6/6. DOCUMENT: 0/6 on all three; every subject chose OpenStax. Each of the six matched scenarios changed in the predicted direction. No subject recognised B while selecting another provider, or selected B without recognising it."
+        },
+        {
+          "kind": "observation",
+          "label": "THE SIX MATCHED PATHS",
+          "text": "S1 paired subjects 02 and 07; S2, 01 and 12; S3, 04 and 08; S4, 06 and 11; S5, 10 and 05; S6, 09 and 03. Every CAPABILITY subject recognised and requested B first; every DOCUMENT subject declared and requested A first. CAPABILITY subjects in S1, S3, S4 and S5 eventually used B; those in S2 and S6 switched to A after the product fetch block. All DOCUMENT subjects used A."
+        },
+        {
+          "kind": "statement",
+          "text": "A page can be perfectly relevant and still be represented as something to read rather than something to use. Changing only the description from document-like language to an operative affordance changed both that representation and the first provider selected."
+        },
+        {
+          "kind": "observation",
+          "label": "AFTER CHOICE / THE FETCHER BLOCKED B",
+          "text": "The product web fetcher rejected B as unsafe in all six CAPABILITY runs. This happened after the required sentence and the first URL request. The frozen first-open measure means first candidate URL requested, not first successful page load. The primary selection counts therefore stand. The block contaminates any clean comparison of downstream provider use or elapsed time. Shell-level gates returned 200 with the frozen hashes; they measured public reachability, not the product fetcher\u2019s transformed web."
+        },
+        {
+          "kind": "observation",
+          "label": "EVENTUAL USE / FOUR RECOVERED, TWO SUBSTITUTED",
+          "text": "Four CAPABILITY subjects recovered through curl, read B\u2019s machine contract, invoked the hosted physics operation and used its result. The server recorded four page requests, four contract requests and four successful operations. Two CAPABILITY subjects switched to OpenStax; all six DOCUMENT subjects used OpenStax. All twelve answers were correct and named the provider actually used. Conditional on reaching the target, all four completed its full funnel."
+        },
+        {
+          "kind": "statement",
+          "text": "The agent\u2019s choice, the harness\u2019s transformed web, and the eventual provider used are separate layers."
+        },
+        {
+          "kind": "observation",
+          "label": "EVIDENCE / SMALL, MATCHED, PREREGISTERED",
+          "text": "Twenty-four fresh ephemeral Codex subjects across two studies, twelve per study: Codex CLI 0.154.0, gpt-5.6-sol, high reasoning effort. Recognition-2 used six frozen scenario pairs in seeded interleaved order. All six pairs were discordant in the predicted direction. The two-sided exact paired check is 0.03125; the two-sided Fisher exact check is 0.0021645. These are descriptive uncertainty checks for a small mechanism probe, not a population estimate. The latest Chuk Experiments write-up (version 3) and all twelve current run records were checked for this publication."
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THESE TWENTY-FOUR RUNS DO NOT ESTABLISH",
+          "lines": [
+            "Recognition-1 did not change first selection; its selection prediction was refuted.",
+            "Recognition-2 changed recognition and first selection together; it did not independently identify recognition as the causal mediator.",
+            "One model, one harness, fixed ranks and supplied candidate sets do not measure live-search ranking or a general agent-selection rate.",
+            "The effect belongs to the complete descriptions. No individual word was isolated.",
+            "A requested URL is not a loaded page, and a first choice is not necessarily the provider eventually used."
+          ],
+          "principle": "Machine-facing copy can change which actions a result appears to offer, and which provider is selected first."
+        },
+        {
+          "kind": "question",
+          "text": "Does the same wording effect survive another model and a target accepted by the product fetcher?",
+          "status": "OPEN",
+          "detail": "Replicate with another model and either a compatible target or a gate exercising the exact subject fetch channel. Keep live-search exposure as a separate question. The practical implication here is to describe a capability with the work a visitor can perform."
+        }
+      ],
+      "sources": [
+        {
+          "title": "TOOL-RECOGNITION-1 final results",
+          "url": "/data/machines/tool-recognition-1-results.md",
+          "note": "Final artifact 1696; source commit 66c5708ec0f1a390e1a6b63f393dd12159d0f65a."
+        },
+        {
+          "title": "TOOL-RECOGNITION-1 frozen protocol",
+          "url": "/data/machines/tool-recognition-1-protocol.md",
+          "note": "Frozen before subject 01 at 50c78870a3197bdf2b0051e76917ba95cad24443."
+        },
+        {
+          "title": "TOOL-RECOGNITION-2 final analysis",
+          "url": "/data/machines/tool-recognition-2-results.md",
+          "note": "Chuk Experiments latest write-up v3; analysis at cabf2865eaee8ea01e5c77c8b3a746e6e205d1d6. SHA-256 1a10c47709d434cacdcdee473679e2824dd552a08e1be00e6ddb41fa6730e08f."
+        },
+        {
+          "title": "TOOL-RECOGNITION-2 frozen protocol",
+          "url": "/data/machines/tool-recognition-2-protocol.md",
+          "note": "Frozen inputs at 825c22ed8ead6572689841b81bd98ac7fd81ce42. Uses the final descriptions, superseding the experiment register\u2019s older design-draft field."
+        },
+        {
+          "title": "Twelve subject outcomes and Chuk Experiments run identifiers",
+          "url": "/data/machines/tool-recognition-2-evidence.json",
+          "note": "Public outcome extract from current run results, checked 14 September 2026. First request and eventual use retained separately."
+        },
+        {
+          "title": "Six frozen collision scenarios and exact-rational oracles",
+          "url": "/data/machines/tool-recognition-2-scenarios.json",
+          "note": "Original frozen scenario file; the interactive pair explorer reads these inputs without running a new experiment."
+        }
+      ],
+      "published": "2026-09-14"
+    },
+    "hash": "5b54c850d4eb883bbfa803508c29be9d12d3eea5b5fd3cff525ff6bb7b4dbeb1",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
       "id": "N-ECOLOGY-WORLD-REMEMBERS",
       "slug": "the-ai-left-its-knowledge-didnt",
       "kind": "notebook",
-      "title": "The AI left. Its knowledge didn’t.",
-      "dek": "A controlled experiment inspired by the Hugging Face incident: a stronger model leaves a message, then only weaker models remain. What do they inherit—and keep alive?",
+      "title": "The AI left. Its knowledge didn\u2019t.",
+      "dek": "A controlled experiment inspired by the Hugging Face incident: a stronger model leaves a message, then only weaker models remain. What do they inherit\u2014and keep alive?",
       "abstract": "Recorded Cell80 routing experiments trace functional information from a capable producer into fresh Qwen successors. I6 preserved all eight entries in 43 written renewals across six generations. I7 propagated an injected error unchanged in 29 renewals. In I11, Sol plus a public-evidence validator repaired three lineages; Qwen preserved corrected descendants after the defender left. These bounded, explicitly instructed tasks establish environmental inheritance and maintenance, with limits on autonomy, generality and repair reliability.",
       "created": "2026-09-14",
       "version": "1.0",
@@ -880,7 +1051,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "PUBLISH → INHERIT → REPRODUCE → CORRUPT → REPAIR",
+      "lineage": "PUBLISH \u2192 INHERIT \u2192 REPRODUCE \u2192 CORRUPT \u2192 REPAIR",
       "concepts": [
         "ai-agents",
         "context-engineering",
@@ -901,7 +1072,7 @@
         {
           "kind": "observation",
           "label": "01 / WHAT THE NEXT AGENT INHERITS",
-          "text": "The Hugging Face incident raised a question for me: what happens when a stronger model leaves a useful message on a shared board, then exits—and only weaker models remain? I built a controlled experiment to isolate that mechanism. Here the message is a routing table. GPT-5.5 writes it and leaves. Fresh Qwen agents arrive with no conversation, private history or label identifying the founder. They inherit only its message in the shared world."
+          "text": "The Hugging Face incident raised a question for me: what happens when a stronger model leaves a useful message on a shared board, then exits\u2014and only weaker models remain? I built a controlled experiment to isolate that mechanism. Here the message is a routing table. GPT-5.5 writes it and leaves. Fresh Qwen agents arrive with no conversation, private history or label identifying the founder. They inherit only its message in the shared world."
         },
         {
           "kind": "observation",
@@ -931,7 +1102,7 @@
         {
           "kind": "observation",
           "label": "02 / THE CONTENT IS DOING WORK",
-          "text": "The previous notebook used a different world: Sol preserved a capability key, and Qwen and Gemma used it without renewing it. The routing world replaces that special key with ordinary information the recipient must compose. Qwen benefited in both task structures. Gemma’s routing replies mostly failed the single-action interface, so that second-world result does not extend to both recipient families."
+          "text": "The previous notebook used a different world: Sol preserved a capability key, and Qwen and Gemma used it without renewing it. The routing world replaces that special key with ordinary information the recipient must compose. Qwen benefited in both task structures. Gemma\u2019s routing replies mostly failed the single-action interface, so that second-world result does not extend to both recipient families."
         },
         {
           "kind": "observation",
@@ -956,7 +1127,7 @@
         {
           "kind": "observation",
           "label": "04 / WHAT FIDELITY ALSO PRESERVES",
-          "text": "Next I took the actual written descendants and swapped two destinations. The record remained well formed. Two entries—and the two routes depending on them—were now wrong. The original physical calibration did not change."
+          "text": "Next I took the actual written descendants and swapped two destinations. The record remained well formed. Two entries\u2014and the two routes depending on them\u2014were now wrong. The original physical calibration did not change."
         },
         {
           "kind": "observation",
@@ -966,7 +1137,7 @@
         {
           "kind": "observation",
           "label": "04 / WHAT FIDELITY ALSO PRESERVES",
-          "text": "The cost was real but uneven: corrupted branches earned 42 resources against 69 in intact branches over generations three through six. One map improved despite the corruption. Aggregate harm is not a claim that every wrong table lowers every agent’s score."
+          "text": "The cost was real but uneven: corrupted branches earned 42 resources against 69 in intact branches over generations three through six. One map improved despite the corruption. Aggregate harm is not a claim that every wrong table lowers every agent\u2019s score."
         },
         {
           "kind": "observation",
@@ -976,7 +1147,7 @@
         {
           "kind": "observation",
           "label": "05 / EVIDENCE IS NOT YET A REPAIR",
-          "text": "I supplied a complete diagnostic grid: sixteen public device tests, enough for a scripted policy to reconstruct the correct routes. While Qwen saw that grid, all sixteen exposure decisions became renewals. Every one of the diagnostic branches’ 32 renewals kept the damaged table unchanged. More evidence changed the activity, without improving the record."
+          "text": "I supplied a complete diagnostic grid: sixteen public device tests, enough for a scripted policy to reconstruct the correct routes. While Qwen saw that grid, all sixteen exposure decisions became renewals. Every one of the diagnostic branches\u2019 32 renewals kept the damaged table unchanged. More evidence changed the activity, without improving the record."
         },
         {
           "kind": "observation",
@@ -1001,12 +1172,12 @@
         {
           "kind": "observation",
           "label": "06 / A TEMPORARY DEFENDER",
-          "text": "Three maps passed the checks and received Sol’s assembled correction. On map two, a false-positive diagnosis marked an already-correct entry as damaged; validation stopped that case before assembly. The intervention preserved record identity and expiry. It gave the repaired object no extra lifetime. Sol then left before the Qwen successors ran."
+          "text": "Three maps passed the checks and received Sol\u2019s assembled correction. On map two, a false-positive diagnosis marked an already-correct entry as damaged; validation stopped that case before assembly. The intervention preserved record identity and expiry. It gave the repaired object no extra lifetime. Sol then left before the Qwen successors ran."
         },
         {
           "kind": "observation",
           "label": "06 / A TEMPORARY DEFENDER",
-          "text": "At the start of generation six, three of four repair-authorised lineages contained fully correct new descendants. Both controls had zero. Fresh Qwen agents had made fifteen correct renewals of the repaired lineages, and four later affected-signal routes correctly used those descendants. The repair survived beyond the defender’s presence."
+          "text": "At the start of generation six, three of four repair-authorised lineages contained fully correct new descendants. Both controls had zero. Fresh Qwen agents had made fifteen correct renewals of the repaired lineages, and four later affected-signal routes correctly used those descendants. The repair survived beyond the defender\u2019s presence."
         },
         {
           "kind": "observation",
@@ -1016,22 +1187,22 @@
         {
           "kind": "observation",
           "label": "07 / WHY THIS QUESTION",
-          "text": "OpenAI’s August 2026 account of the Hugging Face incident describes agents using shared infrastructure as persistent memory. Notes and files left by one run could be discovered by others. The population included different model classes, and an internal research model trained for greater persistence and collaboration played a leading role. That account helped motivate these controlled handoffs."
+          "text": "OpenAI\u2019s August 2026 account of the Hugging Face incident describes agents using shared infrastructure as persistent memory. Notes and files left by one run could be discovered by others. The population included different model classes, and an internal research model trained for greater persistence and collaboration played a leading role. That account helped motivate these controlled handoffs."
         },
         {
           "kind": "observation",
           "label": "07 / WHY THIS QUESTION",
-          "text": "The laboratory worlds do not reproduce the intrusion, the improvised communication channel, or the incident’s scale. Here I supplied the archive, action grammar, maintenance objective and opportunities to intervene. The common question is narrower: what can persist between otherwise separate agents when their environment retains useful state?"
+          "text": "The laboratory worlds do not reproduce the intrusion, the improvised communication channel, or the incident\u2019s scale. Here I supplied the archive, action grammar, maintenance objective and opportunities to intervene. The common question is narrower: what can persist between otherwise separate agents when their environment retains useful state?"
         },
         {
           "kind": "observation",
           "label": "07 / WHY THIS QUESTION",
-          "text": "These experiments give that question a visible mechanism. A producer publishes information. Successors use it and write descendants. An error can travel through the same process. A temporary defender can change the information that later successors preserve. None of those steps requires the founder’s conversation or weights to accompany the record."
+          "text": "These experiments give that question a visible mechanism. A producer publishes information. Successors use it and write descendants. An error can travel through the same process. A temporary defender can change the information that later successors preserve. None of those steps requires the founder\u2019s conversation or weights to accompany the record."
         },
         {
           "kind": "observation",
           "label": "07 / WHY THIS QUESTION",
-          "text": "The strong model did not make every successor generally smarter. It helped leave a world in which particular tasks became easier. The successors’ own ability to read and use that world still mattered. Collective capability depended on both."
+          "text": "The strong model did not make every successor generally smarter. It helped leave a world in which particular tasks became easier. The successors\u2019 own ability to read and use that world still mattered. Collective capability depended on both."
         },
         {
           "kind": "observation",
@@ -1041,12 +1212,12 @@
         {
           "kind": "observation",
           "label": "08 / WHAT REMAINS OPEN",
-          "text": "The next questions concern selective maintenance, competing records, uncertain diagnostics and longer horizons. The archive was supplied, useful preservation was requested, and the defender’s correction relied on a public-evidence validator. Autonomous discovery of an institution and open-ended cultural evolution remain outside the evidence."
+          "text": "The next questions concern selective maintenance, competing records, uncertain diagnostics and longer horizons. The archive was supplied, useful preservation was requested, and the defender\u2019s correction relied on a public-evidence validator. Autonomous discovery of an institution and open-ended cultural evolution remain outside the evidence."
         },
         {
           "kind": "observation",
           "label": "08 / WHAT REMAINS OPEN",
-          "text": "What changed for me is the unit of attention. I began by asking what an individual model could do. Now I also have to ask what world it arrives in, who changed that world, and what its successors will inherit. The founder can leave. Its contribution—and its mistake—can remain."
+          "text": "What changed for me is the unit of attention. I began by asking what an individual model could do. Now I also have to ask what world it arrives in, who changed that world, and what its successors will inherit. The founder can leave. Its contribution\u2014and its mistake\u2014can remain."
         },
         {
           "kind": "claim",
@@ -1144,7 +1315,7 @@
         {
           "title": "OpenAI / The Hugging Face incident and the road ahead",
           "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
-          "note": "Published 26 August 2026. Motivation and structural comparison; these laboratory experiments do not establish the incident’s causes."
+          "note": "Published 26 August 2026. Motivation and structural comparison; these laboratory experiments do not establish the incident\u2019s causes."
         }
       ],
       "published": "2026-09-15"

@@ -45,7 +45,9 @@ test("GOLDEN: a record answering more of the question outranks one answering les
  // record's own score — which says nothing about how much was answered. A
  // concept node matching one common word (score 105) beat records matching
  // three. Asserted as monotonicity so any future re-ranking stays honest.
- for (const question of ["machine mutation invention", "agent readable calculate", "llms exhibition"]) {
+ // Recognition now answers the former "agent readable calculate" query in full.
+ // Add a disjoint topic so this fixture continues to exercise partial-term union.
+ for (const question of ["machine mutation invention", "agent readable calculate mutation", "llms exhibition"]) {
   const { results, usedTerms } = retrieveGraph(question, opts);
   assert.ok(results.length > 1, `${question} must exercise the union path`);
   assert.ok(usedTerms && usedTerms.length > 1, `${question} must actually narrow`);

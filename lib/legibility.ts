@@ -12,6 +12,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Qwen wrote 43 faithful renewals, preserved an injected error, then carried three validated Sol repairs forward. Explore recorded Cell80 lineages after founder removal.",
   concepts: ["environmental inheritance", "institutional maintenance", "error propagation", "defender repair", "persistent shared state", "I4", "I6", "I7", "I11"],
  },
+ "N-MACHINE-RECOGNITION": {
+  subject: "AI agent capability recognition and provider selection",
+  question: "Does a web result’s description change which provider an AI agent selects?",
+  searchTitle: "AI Agent Tool Recognition: How Descriptions Change Provider Selection",
+  description: "Two controlled studies, 24 Codex runs: operative wording changed pre-open recognition and first provider choice. Six paired physics scenarios separate selection from later use.",
+  concepts: ["AI agent tool recognition", "provider selection", "capability descriptions", "affordance wording", "LLM Wilds", "TOOL-RECOGNITION-1", "TOOL-RECOGNITION-2"],
+ },
  "N-ECOLOGY-INHERITANCE": {
   subject: "Cross-model AI agent capability inheritance through persistent records",
   question: "Can an AI agent use a capability preserved by another model?",
