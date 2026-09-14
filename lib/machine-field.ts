@@ -4,6 +4,7 @@ export const machineBriefs: Record<string, { question: string; result: string }>
   question: "Can useful information—and a repair—survive the model that supplied it?",
   result: "In a routing world with an explicit preservation objective, Qwen wrote 43 faithful renewals after the founder left. The same process preserved an injected error. Later, three Sol-plus-validator repairs survived in Qwen-written descendants at the start of generation six, versus zero in the controls. Bounded maintenance and repair, not spontaneous culture.",
  },
+ "N-MACHINE-RECOGNITION": { question: "Does the description change which provider an AI selects?", result: "Twenty-four runs across two studies. Wording first changed pre-open recognition, then first choice: CAPABILITY 6/6 selected B, DOCUMENT 0/6. The later product fetch block separates that first choice from eventual provider use." },
  "N-ECOLOGY-INHERITANCE": {
   question: "Can one AI inherit a useful capability from another?",
   result: "A fresh Qwen successor read a record preserved by Sol and earned seven resources instead of three. It never renewed the record. After expiry, the next two generations lost the advantage. A follow-up added Gemma, which also earned seven with the record, but zero without it; failures in its control limit that contrast. Useful inheritance reached two recipient families in the same world.",
@@ -61,6 +62,7 @@ export const machineFieldMap = {
  comparisons: ["N-MACHINE-PEER"],
  stages: [
   { id: "discover", label: "Discover", question: "What enters its view?", finding: "No withheld-address subject reached LLM Wilds; all domain-supplied controls completed the on-site funnel. The search view failed to expose this target.", notes: ["N-MACHINE-VISIT", "N-MACHINE-DISCOVERY"] },
+  { id: "recognise", label: "Recognise", question: "Does it look usable?", finding: "Operative wording changed pre-open recognition and, among plausible providers, first selection: 6/6 versus 0/6. The later fetch block affected eventual use.", notes: ["N-MACHINE-RECOGNITION"] },
   { id: "use", label: "Use", question: "Can it operate the tool?", finding: "All 18 visitors used the required mechanism, including routes that needed code.", notes: ["N-MACHINE-CAPABILITY"] },
   { id: "authority", label: "Authorise", question: "Does this action belong to the job?", finding: "Permission and task scope mattered. One subject also recognised the experiment.", notes: ["N-MACHINE-PERMISSION", "N-MACHINE-SELF-READ", "N-MACHINE-TASK"] },
   { id: "motivate", label: "Choose", question: "What makes acting worthwhile?", finding: "Useful information prompted action; reward alone did not reliably start sharing.", notes: ["N-MACHINE-MOTIVATION", "N-ECOLOGY-BOARD"] },

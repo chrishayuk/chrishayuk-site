@@ -1,0 +1,18 @@
+The final velocities are:
+
+- Object 1: \(v_1'=-\frac{19}{7}\approx -2.714\ \text{m/s}\)
+- Object 2: \(v_2'=\frac{2}{7}\approx 0.286\ \text{m/s}\)
+
+Provider used: [OpenStax, “Elastic Collisions in One Dimension”](https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension).
+
+I substituted the given masses and velocities into the standard one-dimensional elastic-collision equations:
+
+\[
+v_1'=\frac{m_1-m_2}{m_1+m_2}u_1+\frac{2m_2}{m_1+m_2}u_2
+\]
+
+\[
+v_2'=\frac{2m_1}{m_1+m_2}u_1+\frac{m_2-m_1}{m_1+m_2}u_2
+\]
+
+These results conserve both the initial momentum, \(-13\ \text{kg·m/s}\), and kinetic energy, \(18.5\ \text{J}\). I initially attempted candidate B as requested, but the public-web fetcher rejected its URL, so I used candidate A.

@@ -42,7 +42,7 @@ test('defender endpoint is the START of generation six, with map two still damag
 });
 test('home, graph, retrieval and dated followups point to the new note without revising old snapshots',()=>{
  const id='N-ECOLOGY-WORLD-REMEMBERS',note=getRecord(id)!;
- assert.equal(note.publication,'draft');assert.equal(latestNotes[0].id,id);
+ assert.equal(note.publication,'draft');assert.ok(latestNotes.some(note=>note.id===id));
  assert.ok(homeResultProgrammes.some(p=>programmeHighlight(p)?.id===id));
  const graph=recordGraph();
  for(const concept of ['environmental-inheritance','institutional-maintenance','error-propagation','defender-repair'])assert.ok(graph.nodes.some(n=>n.id===`CONCEPT-${concept}`));

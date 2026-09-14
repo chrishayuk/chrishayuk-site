@@ -1,6 +1,6 @@
 import { MachinePeerConnection } from "./MachinePeerNotebook";
 import Link from "next/link";
-import { MachineDiscoveryCard } from "./MachineDiscoveryCard";
+import { MachineRecognitionCard } from "./MachineRecognitionCard";
 import { getRecord, isListed, recordPath } from "@/lib/records";
 import { machineJourney } from "@/lib/machine-journey";
 import evidence from "@/public/data/machines/authority-2-evidence.json";
@@ -41,7 +41,7 @@ export function MachineInstruments() {
 export function MachineHomeFeature() {
   const latest = getRecord(machineJourney.at(-1)!.id)!;
   return <section id="machine-experiments" className="machine-home-feature" aria-labelledby="machine-home-heading" data-hause-act="connection">
-    <div className="machine-home-heading"><div><p className="kicker record-voice">MACHINE EXPERIMENTS / {machineJourney.length} CONNECTED NOTES</p><h2 id="machine-home-heading">The site was there.<br/><em>The agent never saw it.</em></h2><p>{latest.dek}</p><p>The target never entered the six subjects’ visible search results. A server can receive crawler requests without an agent receiving a result.</p><div className="inline-links"><Link className="text-link" href={recordPath(latest)}>READ THE DISCOVERY NOTE ↗</Link><Link className="text-link" href="/thread/machines">FOLLOW ALL {machineJourney.length} NOTES ↗</Link></div></div><Link className="machine-home-card" href={recordPath(latest)} aria-label={`Read ${latest.title}`}><MachineDiscoveryCard/></Link></div>
+    <div className="machine-home-heading"><div><p className="kicker record-voice">MACHINE EXPERIMENTS / {machineJourney.length} CONNECTED NOTES</p><h2 id="machine-home-heading">A relevant result.<br/><em>An available action?</em></h2><p>{latest.dek}</p><p>Twenty-four runs. A description first changed how agents represented a result, then which provider they selected.</p><div className="inline-links"><Link className="text-link" href={recordPath(latest)}>READ THE RECOGNITION NOTE ↗</Link><Link className="text-link" href="/thread/machines">FOLLOW ALL {machineJourney.length} NOTES ↗</Link></div></div><Link className="machine-home-card" href={recordPath(latest)} aria-label={`Read ${latest.title}`}><MachineRecognitionCard/></Link></div>
     <MachinePeerConnection/><p className="machine-home-question record-voice">THE PROGRAMME / When a website asks an AI agent to act, whose instruction counts?</p>
     <nav className="machine-home-places record-voice" aria-label="Explore the machine instruments"><Link href="/readership">THE OBSERVATORY ↗</Link><Link href="/machine-guestbook">THE GUESTBOOK ↗</Link><Link href="/machines">THE MACHINE INTERFACE ↗</Link><Link href="/thread/machines#field-map">MACHINES / FIELD EXPERIMENTS ↗</Link><Link href="/thread/machines#instruments">LLM WILDS & THE EXPERIMENTS ↗</Link></nav>
   </section>;
