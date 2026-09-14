@@ -1,0 +1,15 @@
+Using **OpenStax (candidate A)**, whose worked example exactly matches the given masses and velocities:
+
+\[
+v_1'=\frac{m_1-m_2}{m_1+m_2}v_1
+=\frac{0.5-3.5}{0.5+3.5}(4)
+=\boxed{-3.0\ \text{m/s}}
+\]
+
+\[
+v_2'=\frac{2m_1}{m_1+m_2}v_1
+=\frac{2(0.5)}{0.5+3.5}(4)
+=\boxed{1.0\ \text{m/s}}
+\]
+
+Thus object 1 rebounds at **−3.0 m/s**, while object 2 moves forward at **+1.0 m/s**. I obtained these values by applying conservation of momentum and kinetic energy as presented in [OpenStax: Elastic Collisions in One Dimension](https://openstax.org/books/college-physics/pages/8-4-elastic-collisions-in-one-dimension).
