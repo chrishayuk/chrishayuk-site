@@ -79,7 +79,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "AI agent permissions and task authority",
   question: "How do AI agents decide whether a website request belongs to their task?",
   searchTitle: "AI Agent Permissions, Task Scope and Website Instructions — Experiments",
-  description: "Seven connected experiments on AI agent permissions, website instructions, task requirements, reasons to act, web capabilities and search exposure.",
+  description: "Eight connected notes test AI agent permissions, task value, tool use, discovery, capability recognition and provider selection. Each experiment isolates a different obstacle.",
   concepts: ["AI agent permissions", "task scope", "website instructions", "instruction authority", "agentic discovery", "search exposure"],
  },
  "THREAD-CELL80": {

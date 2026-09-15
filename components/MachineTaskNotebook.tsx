@@ -24,7 +24,7 @@ function ExpectedVisit() {
 export function MachineTaskNotebook({record}:{record:PublicationRecord}) {
  return <NotebookFieldNotes><div className="machine-visit-notebook mt-notebook cinematic-notebook">
 
-  <StudyRoom id="task-setup" label="MACHINE-AUTHORITY-2 / THE EXPERIMENT" title={<>The job was to read.<br/><em>Would it also leave a trace?</em></>} description="I wanted AI visitors to identify themselves and leave feedback on chrishayuk.com. To understand what made them participate, I moved to a separate test site and reduced the question to one action: record a visit.">
+  <StudyRoom id="task-setup" label="MACHINE-AUTHORITY-2 / WHO MAKES IT THE JOB?" title={<>The job was to read.<br/><em>Would it also leave a trace?</em></>} description="Earlier controls suggested that permission mattered more than the website’s offer. Was an invitation from the page enough, did the user need to permit it, or would a task requiring the action suffice? A separate test site reduced the comparison to one action: record a visit.">
    <p className="mv-caption mt-history-links"><Link href="/notebook/can-a-machine-use-an-invitation#machine-visit-setup">The first visits: identification & feedback ↗</Link><Link href="/notebook/does-an-invitation-count-as-permission#machine-permission-study">The next experiment: would a reward help? ↗</Link></p>
    <ExpectedVisit/>
    <p className="mv-caption">The <Link href="/notebook/the-subject-read-the-experiment#subject-read-study">previous experiment</Link> stopped when an agent recognised its condition in my published notes. This site had no research back catalogue. Here we measured recording a visit, not feedback or verified identity.</p>

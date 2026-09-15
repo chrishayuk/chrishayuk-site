@@ -23,7 +23,8 @@ const alternatives = [
 export function MachineDiscoveryNotebook({ record }: { record: PublicationRecord }) {
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook md-notebook">
 
-  <StudyRoom id="discovery-cues" label="FIRST FIND THE SITE. THEN ASK IT FOR A NUMBER." title={<>Last time, I gave it the address.<br/><em>This time, I took it away.</em></>} description="LLM Wilds kept a number off its ordinary pages. A short machine guide explained how to request it. I changed that number before each visitor, so a correct answer could be checked.">
+  <StudyRoom id="discovery-cues" label="THE QUESTION / WILL THE TOOL ENTER ITS VIEW?" title={<>Last time, I gave it the address.<br/><em>This time, I took it away.</em></>} description="Being able to use a tool is not enough if the agent never finds it. The capability study supplied the address. This study asked whether agents could discover a working provider when given its domain, a distinctive clue, or only a general task.">
+   <p className="mv-reading">LLM Wilds offered a hidden number through a machine guide. That route worked before every visit, and the number changed so answers could be checked. I varied the clue, then followed search exposure, arrival and use separately.</p>
    <figure className="md-task"><figcaption className="record-voice">ON THE SITE / THE SAME WORKING ROUTE FOR EVERY VISITOR</figcaption><ol><li><span>Homepage</span><small>Points to the guide</small></li><li><span>Machine notes</span><small>Explain the request</small></li><li><span>Request the number</span><small>Get K17</small></li></ol></figure>
    <p className="mv-reading">The first obstacle was reaching that site. Nine fresh agents received one of three clues. Choose a clue to follow the route it produced.</p>
    <MachineDiscoveryStudy/>

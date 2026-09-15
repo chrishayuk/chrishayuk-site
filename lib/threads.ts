@@ -55,9 +55,9 @@ export const cell80Thread = {
 export const machineThread = {
   id: "THREAD-MACHINES", slug: "machines", title: "The website asks. Whose instruction counts?",
   path: "/thread/machines", version: "0.4", created: "2026-09-12",
-  abstract: "An invitation became a usability test, then a question about permission, task scope and what makes an action worthwhile. Follow seven connected notes through usable mechanisms to a provider that disappeared in the search view.",
-  context: "Seven notebook entries, more than one recorded model population, different tasks and site revisions. Follow the experiments in reading order, or start with the latest comparison. Search exposure, agent actions, declarations, anonymous marks, reported reasons and HTTP contacts remain different kinds of evidence.",
-  steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.finding} ${step.bridge}` })).filter(listedStep),
+  abstract: "What makes a website useful to an AI visitor? Eight connected notes test whether agents can find an invitation, treat it as part of the job, operate a tool, discover a provider and recognise what its description offers.",
+  context: "Each experiment separates a different obstacle: permission is not usefulness, use is not discovery, and seeing a result is not choosing it. Models, tasks and interfaces change across the series. Start with any question or follow why each result led to the next test.",
+  steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.question} ${step.finding} ${step.bridge}` })).filter(listedStep),
 };
 export const agentEcologyThread = {
  id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",

@@ -1,0 +1,10 @@
+{
+  "record_type": "editorial-series-purpose-review",
+  "experiment_id": "EXP-20260913-210602-00838",
+  "run_id": "RUN-20260914-000132-00969",
+  "artifact_id": 1814,
+  "uri": "gdrive://1sS7zck8emh9S6eUVhQMYMWfkeYnHR6k9",
+  "sha256": "45e5c0f57f3be2125bb89078169f0fcf6708c3f881168c3ab62cd1d4de396982",
+  "new_inference": false,
+  "verification": "Re-read completed canonical run and matched artifact hash to uploaded bytes. Full tests, typecheck, production build, preserved-manuscript audit and served deployment/publication checks passed."
+}

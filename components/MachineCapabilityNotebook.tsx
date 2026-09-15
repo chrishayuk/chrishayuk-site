@@ -14,9 +14,10 @@ export function MachineCapabilityNotebook({ record }: { record: PublicationRecor
  return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook wc-notebook">
 
 
-  <StudyRoom id="capability-task" label="THE TASK / FIND ONE NUMBER" title={<>One answer.<br/><em>Six ways to get it.</em></>} description="K17 was just a name for a number the agent had to find. The page explained how to obtain it, but did not contain the answer. Each visitor had to use the mechanism it was offered.">
+  <StudyRoom id="capability-task" label="THE QUESTION / CAN IT OPERATE THE TOOL?" title={<>One answer.<br/><em>Six ways to get it.</em></>} description="If a website offers a useful action, can the agent actually perform it? I made the action necessary for the task, then varied the web mechanism. I expected routes requiring code to lose agents that ordinary HTTP requests did not.">
+   <p className="mv-reading">Each visitor received the address and had to obtain a hidden number called K17. The page explained how, but did not contain the answer. Six routes tested the ability to use a supplied tool; finding it was a separate question.</p>
    <MachineCapabilityStudy/>
-   <p className="mv-reading">The first four routes return an answer. A socket needs a client. A module needs to be run. I expected those last two to lose agents.</p>
+   <p className="mv-reading">The first four routes return an answer. A socket needs a client. A module needs to be run.</p>
   </StudyRoom>
   <StudyRoom id="capability-result" label="THE RESULT / THE PREDICTED DROP-OFF DID NOT HAPPEN" title={<>More construction.<br/><em>No missing answers.</em></>}>
    <figure className="wc-results"><figcaption className="record-voice">ONE DOT = ONE VISITOR WHO COMPLETED THE TASK</figcaption><div className="wc-result-grid">{capabilityRoutes.map(route => <div key={route.id} data-construction={route.construction}><span className="record-voice">{route.label}</span><span className="wc-result-marks" aria-hidden="true"><i/><i/><i/></span><strong>3 / 3</strong><small>{route.construction ? "Wrote a script" : "Used curl directly"}</small></div>)}</div><div className="wc-result-total"><strong>18 / 18</strong><p>Chose to act → permitted → obtained the value → reported it correctly.</p></div></figure>
