@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { VisualStudy } from "@/components/VisualStudy";
 import { Media } from "@/components/Media";
 import { HomeProgrammes, SelectedExperiments, CompactNotes } from "@/components/PublicationIndex";
 import { FilmPlayer } from "@/components/FilmPlayer";
@@ -35,6 +36,7 @@ export default function Home() {
    <div className="curated-heading curated-heading-link"><h2 id="results-heading">What the experiments revealed.</h2><Link className="text-link" href="/research">EXPLORE THE RESEARCH ↗</Link></div>
    <SelectedExperiments items={homeResultProgrammes}/>
   </section>
+  <VisualStudy name="inheritance" href="/notebook/the-ai-left-its-knowledge-didnt" linkLabel="THE AI LEFT. ITS KNOWLEDGE DIDN’T."/>
   <section id="systems" className="curated-section home-systems-index" data-scene="systems" aria-labelledby="systems-heading">
    <h2 id="systems-heading" className="home-quiet-heading">Systems.</h2>
    <div className="home-system-links">{systems.map(work => <Link href={work.path} key={work.path}>{work.name}<span aria-hidden="true"> ↗</span></Link>)}</div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StudyImage } from "./VisualStudy";
 import { recordPath } from "@/lib/records";
 import { noteDate, shortDate, programmeFor, programmeNotes, programmeHighlight, programmeInvitations, researchProgrammes, type Programme } from "@/lib/publication-index";
 import type { PublicationRecord } from "@/lib/types";
@@ -33,7 +34,7 @@ export function SelectedExperiments({ items }: { items: Programme[] }) {
 }
 
 function SelectedResultVisual({ id }: { id: string }) {
-  if (id === "N-ECOLOGY-WORLD-REMEMBERS") return <img src="/images/notebook/world-remembers.png" alt="The AI left. Its knowledge didn’t. An illustrated archive carried into descendants." width={1733} height={908} style={{width:'100%',height:'auto',display:'block'}} loading="lazy"/>;
+  if (id === "N-ECOLOGY-WORLD-REMEMBERS") return <EcologyCard id={id}/>;
   if (id === "N-MACHINE-MOTIVATION") return <MachineMotivationCard exhibition/>;
   if (id === "N-ECOLOGY-INHERITANCE") return <EcologyCard id={id}/>;
   if (id === "N-CELL80-BOUND") return <Cell80BoundCard exhibition/>;
@@ -42,7 +43,14 @@ function SelectedResultVisual({ id }: { id: string }) {
 }
 
 export function ProgrammeDoors({ items, notebook = false, highlights = false }: { items: Programme[]; notebook?: boolean; highlights?: boolean }) {
-  if (notebook) return <ul className="notebook-thread-list">{items.map(programme => <li key={programme.id}><Link href={programme.href}><span>{programme.title}</span><span>{programmeNotes(programme).length} {programme.id === "practice" ? "essays" : "notes"} ↗</span></Link></li>)}</ul>;
+  if (notebook) {
+    const sceneNames = { machines: "threshold", "agent-ecology": "inheritance" } as const;
+    const featured = items.filter(p => p.id in sceneNames);
+    return <><div className="notebook-scene-doors">{featured.map(programme => <figure className="notebook-scene-door" key={programme.id}>
+      <Link href={programme.href}><div className="visual-study-frame"><StudyImage name={sceneNames[programme.id as keyof typeof sceneNames]} sizes="(max-width: 700px) 100vw, 55vw"/></div><h3>{programme.title}<span aria-hidden="true">↗</span></h3><p className="notebook-scene-question">{programme.question}</p></Link>
+      <figcaption className="record-voice">{programmeNotes(programme).length} NOTES · VISUAL STUDY · AI-GENERATED<br/>NOT EXPERIMENTAL EVIDENCE</figcaption>
+    </figure>)}</div><ul className="notebook-thread-list">{items.filter(p => !(p.id in sceneNames)).map(programme => <li key={programme.id}><Link href={programme.href}><span>{programme.title}</span><span>{programmeNotes(programme).length} {programme.id === "practice" ? "essays" : "notes"} ↗</span></Link></li>)}</ul></>;
+  }
   return <div className={`programme-doors${notebook ? " programme-doors-notebook" : ""}`}>
     {items.map((programme, index) => {
       const notes = programmeNotes(programme);

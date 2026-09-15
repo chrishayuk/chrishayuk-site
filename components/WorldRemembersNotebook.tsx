@@ -1,3 +1,4 @@
+import { VisualStudy } from './VisualStudy';
 import { StudyRoom } from '@chrishayuk/hause/components/exhibition/Study';
 import { FieldNotes } from '@chrishayuk/hause/components/FieldNotes';
 import { NotebookFieldNotes } from './NotebookFieldNotes';
@@ -24,6 +25,8 @@ export function WorldRemembersNotebook(){return <NotebookFieldNotes><div classNa
   <p className="wr-takeaway">They weren’t copying a pointer.<br/><em>They were rewriting the information.</em></p>
   <p className="wr-caption">All 43 accepted renewals were faithful. The parent table stayed visible, and preserving useful information was explicitly requested. Six generations demonstrate bounded maintenance, not spontaneous or indefinite culture.</p>
  </StudyRoom>
+
+ <VisualStudy name="descendant"/>
 
  <StudyRoom id="corruption" label="03 / CHANGE TWO ENTRIES" title={<>They kept the note alive.<br/><em>They kept the mistake too.</em></>} tone="dark" description="I swapped two destinations in an actual descendant. The table still looked valid. The device stayed unchanged. Then I let the population continue.">
   <LineageFigure kind="corruption"/>

@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-15",
+  "classification": "AI-generated visual studies; not experimental evidence",
+  "assets": [
+    {
+      "path": "public/images/studies/threshold-800.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 22950,
+      "sha256": "a5971da9a3a7cca076cfe15b90e2e946cab0209b89395a42b97e1ecdec699aff"
+    },
+    {
+      "path": "public/images/studies/threshold.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 80622,
+      "sha256": "e7dead5d47336d39f9b8fc2d4adf5d8b5531ba20e1189f7feedec937601f6618"
+    },
+    {
+      "path": "docs/visual-studies-originals/threshold.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1834734,
+      "sha256": "1a8d4bb88b0009b548562b3444c794ccb5bb8dcbf1211ba38ea2fd962c253298"
+    },
+    {
+      "path": "public/images/studies/inheritance-800.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 36386,
+      "sha256": "1ffc6cbf061521de98578259870435e197bd3cdd5a3fddc6a2da988f806849ac"
+    },
+    {
+      "path": "public/images/studies/inheritance.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 98132,
+      "sha256": "62c2c96ef07f130631ff3855fe9a54f014e2b932c5165d31e9d8be74e3d91657"
+    },
+    {
+      "path": "docs/visual-studies-originals/inheritance.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1654537,
+      "sha256": "faf07d39e88043c55ab0e808816b5121756b60ffaf43c12656e130c9beedc907"
+    },
+    {
+      "path": "public/images/studies/descendant-800.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 48660,
+      "sha256": "6cba9053f09026cd21e11e8fdf5ce9ed567e491f99bd9f8d0bc20e52acde6076"
+    },
+    {
+      "path": "public/images/studies/descendant.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 150194,
+      "sha256": "943904f7f3904a4fcfa42a8eb1daf06f525e38d93db8271c1a6f64dc1ccd7921"
+    },
+    {
+      "path": "docs/visual-studies-originals/descendant.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1993773,
+      "sha256": "b9d82da5d8381b64c689c816f1d0b4df6f2bfe2a0e44282e2657d819a0594f37"
+    }
+  ]
+}
