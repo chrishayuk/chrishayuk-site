@@ -9,8 +9,8 @@ import { getRecord, recordPath } from "./records.ts";
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
  ...Object.fromEntries(Object.keys(machineBriefs).map(id => [recordPath(getRecord(id)!), { date: "2026-09-13", reason: "Visible question and bounded result; link to the field-experiment map." }])),
  ...Object.fromEntries(Object.keys(ecologySeriesUpdates).map(id => [recordPath(getRecord(id)!), { date: "2026-09-14", reason: "Dated later-results context, preserving the original manuscript and snapshot." }])),
- "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-15", reason: "New visual notebook on written inheritance, error propagation and guarded repair, with a separately labelled descendant visual study." },
- "/thread/machines": { date: "2026-09-15", reason: "Eight experimental premises and a clearly labelled cinematic threshold study." },
+ "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-15", reason: "An inheritance opening plate and descendant visual pause frame the existing recorded evidence, without revising the manuscript." },
+ "/thread/machines": { date: "2026-09-15", reason: "Eight experimental premises, a cinematic threshold study and distinct maintenance links to the key-world limit and routing-world persistence." },
  "/thread/agent-ecology": { date: "2026-09-15", reason: "Cinematic inheritance study and written-descendant preview; closing question now reflects population renewal and guarded repair." },
  "/notebook": { date: "2026-09-15", reason: "Cinematic Machines and Agent Ecology entrances; latest notes remain a typographic list." },
  "/notebook/archive": { date: "2026-09-15", reason: "Complete notebook archive with programme and text filters." },
@@ -19,8 +19,8 @@ export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/notebook/the-site-was-there-the-agent-never-saw-it": { date: "2026-09-15", reason: "Opening separates tool discovery from ability to use a supplied address." },
  "/notebook/the-page-could-ask-it-couldnt-authorise": { date: "2026-09-15", reason: "Opening states the competing sources of permission and task necessity." },
  "/notebook/does-an-invitation-count-as-permission": { date: "2026-09-15", reason: "Explains why later permission controls followed the original reward comparison." },
- "/research": { date: "2026-09-13", reason: "Programme map, recorded findings and standing open questions." },
- "/": { date: "2026-09-15", reason: "A cinematic inheritance study gives the research a visual pause; the selected article now previews recorded written renewal." },
+ "/research": { date: "2026-09-15", reason: "Programme totals and latest dates now include the same companion notes as the Notebook." },
+ "/": { date: "2026-09-15", reason: "The cinematic inheritance study now introduces selected results; the article opens with the same visual identity." },
 };
 export function pageLastModified(path: string, manuscriptRevised?: string): string | undefined {
  return [pageUpdates[path]?.date, manuscriptRevised].filter((date): date is string => Boolean(date)).sort().at(-1);

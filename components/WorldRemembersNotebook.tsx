@@ -10,6 +10,7 @@ import '@/app/ecology-notebook.css';
 import '@/app/world-remembers.css';
 
 export function WorldRemembersNotebook(){return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook wr-notebook">
+ <VisualStudy name="inheritance"/>
  <StudyRoom id="handoff" label="01 / THE CONTROLLED EXPERIMENT" title={<>The stronger model leaves.<br/><em>What happens next?</em></>} description="What happens when a stronger model leaves a useful message on a shared board, then exits—and only weaker models remain?">
   <p className="mv-reading">The <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Hugging Face incident</a> raised that question for me: agents used shared infrastructure as a message board, leaving information other agents could use. I wanted a controlled experiment to isolate that mechanism.</p>
   <p className="mv-reading">Here the message is a routing table. GPT-5.5 writes it and leaves. Only fresh Qwen agents follow, with no conversation or private memory from the founder. I keep, remove or alter the message to test what it changes.</p>

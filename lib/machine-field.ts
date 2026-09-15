@@ -58,7 +58,7 @@ export const machineBriefs: Record<string, { question: string; result: string }>
 export const machineFieldMap = {
  id: "MAP-MACHINE-FIELD", path: "/thread/machines#field-map", title: "Machines / field experiments",
  description: "What can an AI notice, use, act on and leave behind? Follow the questions from visiting a website to inhabiting a world that keeps records.",
- scope: "A map of questions, not a chronology or a single causal chain. Different models, tasks and environments were used. One model handoff demonstrated useful inheritance, followed by expiry without recipient renewal.",
+ scope: "A map of questions, not a chronology or a single causal chain. Different models, tasks and environments were used. Key-world inheritance expired without recipient renewal; later routing worlds tested written persistence and guarded repair.",
  comparisons: ["N-MACHINE-PEER"],
  stages: [
   { id: "discover", label: "Discover", question: "What enters its view?", finding: "No withheld-address subject reached LLM Wilds; all domain-supplied controls completed the on-site funnel. The search view failed to expose this target.", notes: ["N-MACHINE-VISIT", "N-MACHINE-DISCOVERY"] },
