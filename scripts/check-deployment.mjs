@@ -573,7 +573,7 @@ console.log("The task-boundary note, visible payoff and four agent outcomes veri
 // studies form one reading journey without merging their experimental units.
 assert.match(home.body, /id="selected-results"/);
 assert.match(home.body, /When does an action belong to the task/);
-assert.match(home.body, /What can agents do together/);
+assert.match(home.body, /What keeps an action alive/);
 assert.ok(home.body.indexOf('id="current-programmes"') < home.body.indexOf('id="latest-youtube"'));
 assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="selected-results"'));
 const machineThread=await request('/thread/machines');
