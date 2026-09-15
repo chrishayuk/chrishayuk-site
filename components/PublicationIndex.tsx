@@ -54,16 +54,14 @@ export function ProgrammeDoors({ items, notebook = false, highlights = false }: 
   return <div className={`programme-doors${notebook ? " programme-doors-notebook" : ""}`}>
     {items.map((programme, index) => {
       const notes = programmeNotes(programme);
-      const primaryIds = new Set(programme.threads[0]?.steps.map(step => step.id));
-      const primaryNotes = programme.threads.length ? notes.filter(note => primaryIds.has(note.id)) : notes;
-      const latest = primaryNotes[0];
+      const latest = notes[0];
       const highlight = highlights ? programmeHighlight(programme) : undefined;
       const invitation = programmeInvitations[programme.id];
       return <article key={programme.id} className={`programme-door programme-door-${programme.id}`}>
         <Link className="programme-entrance" href={programme.href}>
           <span className="record-voice programme-number">0{index + 1}<span aria-hidden="true">↗</span></span>
           <h3>{programme.title}</h3><p className="programme-question">{notebook ? programme.description : programme.question}</p>
-          {!highlights && <span className="record-voice programme-count">{primaryNotes.length} {programme.id === "practice" ? "essays" : "connected notes"}{latest && <> · latest {shortDate(noteDate(latest))}</>}</span>}
+          {!highlights && <span className="record-voice programme-count">{notes.length} {programme.id === "practice" ? "essays" : "notes"}{latest && <> · latest {shortDate(noteDate(latest))}</>}</span>}
         </Link>
         {highlight && <div className="programme-highlight"><Link className="programme-result-visual" href={`${recordPath(highlight)}#${invitation.anchor}`} aria-label={`Explore ${highlight.title}`}><SelectedResultVisual id={highlight.id}/></Link><h4><Link href={recordPath(highlight)}>{highlight.title} ↗</Link></h4>{highlight.publication !== "published" && <p className="record-voice programme-draft">Working draft</p>}<p className="programme-invitation">{invitation.text}</p><Link className="text-link" href={`${recordPath(highlight)}#${invitation.anchor}`}>{invitation.label} ↗</Link></div>}
         {notebook && latest && <p className="programme-latest"><span className="record-voice">LATEST IN THE THREAD</span><Link href={recordPath(latest)}>{latest.title} ↗</Link></p>}
