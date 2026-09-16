@@ -31,7 +31,7 @@ assert.ok(homeMoe.participants.includes("Chris Hay"));
 assert.match(home.body, /WITH CHRIS HAY AS A PANELIST/);
 assert.match(home.body, /rel="canonical" href="https:\/\/chrishayuk.com"/);
 assert.match(home.body, /name="robots" content="index, follow"/);
-assert.match(home.body, /https:\/\/chrishayuk.com\/og-house.png/);
+assert.match(home.body, /https:\/\/chrishayuk.com\/og-after-hours.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
 assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "programmes", "film", "results", "systems", "notebook", "appearances"]);

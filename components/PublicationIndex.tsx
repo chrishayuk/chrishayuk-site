@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import { StudyImage } from "./VisualStudy";
 import { recordPath } from "@/lib/records";
 import { noteDate, shortDate, programmeFor, programmeNotes, programmeHighlight, programmeInvitations, researchProgrammes, type Programme } from "@/lib/publication-index";
@@ -18,18 +19,21 @@ export function HomeProgrammes() {
   </div>;
 }
 
-export function SelectedExperiments({ items }: { items: Programme[] }) {
+export function SelectedExperiments({ items, withGalleryPause = false }: { items: Programme[]; withGalleryPause?: boolean }) {
   return <div className="home-selected-results">{items.map(programme => {
     const note = programmeHighlight(programme);
     if (!note) return null;
     const invitation = programmeInvitations[programme.id];
-    return <article className="home-selected-result" key={programme.id} data-selected-experiment={note.id}>
+    return <Fragment key={programme.id}><article className="home-selected-result" data-selected-experiment={note.id}>
       <Link className="programme-result-visual" href={`${recordPath(note)}#${invitation.anchor}`} aria-label={`Explore ${note.title}`}><SelectedResultVisual id={note.id}/></Link>
       <h3><Link href={recordPath(note)}>{note.title}</Link></h3>
       {note.publication !== "published" && <p className="record-voice programme-draft">Working draft</p>}
       <p className="programme-invitation">{invitation.text}</p>
       <Link className="text-link" href={`${recordPath(note)}#${invitation.anchor}`}>{invitation.label} ↗</Link>
-    </article>;
+    </article>{withGalleryPause && programme.id === "agent-ecology" && <div className="home-gallery-pause">
+      <p className="record-voice">CELL80 / LEARNED SYSTEMS</p>
+      <span className="record-voice" aria-hidden="true">03</span>
+    </div>}</Fragment>;
   })}</div>;
 }
 

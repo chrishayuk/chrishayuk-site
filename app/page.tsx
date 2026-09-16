@@ -7,6 +7,7 @@ import { previewFor } from "@/components/YouTubeCollection";
 import { latestVideo, latestMoe, videoPath, durationLabel } from "@/lib/youtube";
 import { homeResultProgrammes, latestNotes } from "@/lib/publication-index";
 import { HOUSE_WORK } from "@/lib/house";
+import "./home-exhibition.css";
 
 const systems = [
  { name: "Cell80", path: "/thread/cell80" },
@@ -25,18 +26,20 @@ export default function Home() {
    <h2 id="programmes-heading" className="home-quiet-heading">Current programmes.</h2>
    <HomeProgrammes/>
   </section>
-  <section id="film" className="home-latest-film" data-scene="film" aria-labelledby="latest-youtube-heading">
+  <VisualStudy name="threshold" exhibition href="/thread/machines" linkLabel="ENTER MACHINES"/>
+  <section id="film" className="home-latest-film home-screening" data-scene="film" aria-labelledby="latest-youtube-heading">
    <article id="latest-youtube" aria-labelledby="latest-youtube-heading">
     <div className="home-section-label"><p className="kicker record-voice">LATEST FILM</p><Link className="text-link" href="/film/youtube">MORE ON YOUTUBE ↗</Link></div>
     <FilmPlayer video={latestVideo} preview={previewFor(latestVideo)}/>
     <div className="home-film-caption"><h2 id="latest-youtube-heading"><Link href={videoPath(latestVideo)}>{latestVideo.title}</Link></h2><div><p className="home-film-sentence">{latestVideo.description.split("\n\n")[0] || "Experiments, explanations and ideas, in public."}</p><p className="record-voice">{latestVideo.published} · {durationLabel(latestVideo.duration)}</p></div></div>
    </article>
   </section>
-  <VisualStudy name="inheritance" href="/notebook/the-ai-left-its-knowledge-didnt" linkLabel="THE AI LEFT. ITS KNOWLEDGE DIDN’T."/>
+  <VisualStudy name="inheritance" exhibition chapter href="/notebook/the-ai-left-its-knowledge-didnt" linkLabel="THE AI LEFT. ITS KNOWLEDGE DIDN’T."/>
   <section id="selected-results" className="curated-section" data-scene="results" aria-labelledby="results-heading">
    <div className="curated-heading curated-heading-link"><h2 id="results-heading">What the experiments revealed.</h2><Link className="text-link" href="/research">EXPLORE THE RESEARCH ↗</Link></div>
-   <SelectedExperiments items={homeResultProgrammes}/>
+   <SelectedExperiments items={homeResultProgrammes} withGalleryPause/>
   </section>
+  <VisualStudy name="interior" exhibition href="/thread/the-map" linkLabel="ENTER LEARNED SYSTEMS"/>
   <section id="systems" className="curated-section home-systems-index" data-scene="systems" aria-labelledby="systems-heading">
    <h2 id="systems-heading" className="home-quiet-heading">Systems.</h2>
    <div className="home-system-links">{systems.map(work => <Link href={work.path} key={work.path}>{work.name}<span aria-hidden="true"> ↗</span></Link>)}</div>

@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-15",
+  "date": "2026-09-17",
   "classification": "AI-generated visual studies; not experimental evidence",
   "assets": [
     {
@@ -64,6 +64,27 @@
       "height": 941,
       "bytes": 1993773,
       "sha256": "b9d82da5d8381b64c689c816f1d0b4df6f2bfe2a0e44282e2657d819a0594f37"
+    },
+    {
+      "path": "public/images/studies/interior.webp",
+      "width": 1672,
+      "height": 941,
+      "bytes": 90232,
+      "sha256": "0ccf412af0298538adf783731e5d7c89e439a2f9c766cb516a477b1c45cae8ee"
+    },
+    {
+      "path": "public/images/studies/interior-800.webp",
+      "width": 800,
+      "height": 451,
+      "bytes": 29124,
+      "sha256": "c7f3b132ed5c210b39ef98c1accf839297b30591eaaaca92b93700fb66f3d9dd"
+    },
+    {
+      "path": "docs/visual-studies-originals/interior.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 1777533,
+      "sha256": "cb6a23108bf9744a1792a785849560a04cdf6500129299fa9f3e2afd364ee160"
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-17",
+  "tool": "Built-in image_gen",
+  "classification": "AI-generated visual studies; not experimental evidence",
+  "studies": {
+    "interior": {
+      "prompt": "Use case: stylized-concept. Create one cinematic photographic visual study for Chris Hay's research publication, titled internally THE INTERIOR (NO TEXT IN IMAGE). Landscape 16:9, high resolution. Imagine a human-scale view inside a large, physically plausible engineered assembly at night: repeated worn aluminium partitions and narrow cavities receding into darkness. Camera close to one imperfect metal edge in the foreground; a small physical inspection lamp partway inside illuminates just one passage, leaving the others dark. Natural 35mm perspective, credible fasteners, ordinary manufacturing details, fine scratches and handling marks. Restrained charcoal, tarnished silver, warm ivory lamp, neutral cool ambient shadow, fine film grain. Quiet architectural composition with unoccupied space, readable depth, tactile surfaces. Recent use rather than dereliction. Like the world of a used night workshop with an empty chair, glass record, dark monitor and tungsten task light, but this scene contains only the interior structure. One believable light source, no excessive glossy wet surfaces. Main illuminated passage centrally grouped to remain legible in a 4:5 mobile crop; foreground edge and repeated partitions create scale. No people, robots, text, numbers, diagrams, screens, circuitry, holograms, glowing portal, neon, luminous materials, floating objects or impossible architecture. This is an imagined environment, not a scientific visualisation.",
+      "source": "/Users/christopherhay/.codex/generated_images/01a0ac72-dfb6-73c1-8ef1-6c70f1fecd4b/exec-6aedb65c-edae-4f0d-8de4-431fb72f5cf5.png",
+      "original": "docs/visual-studies-originals/interior.png",
+      "desktop": "public/images/studies/interior.webp",
+      "small": "public/images/studies/interior-800.webp",
+      "mobileFraming": "CSS 4:5, object-position 50% 50%; retains lamp and central receding partitions"
+    }
+  },
+  "social": {
+    "prompt": "Use case: ads-marketing. Generate a complete landscape social sharing card for CHRIS HAY's website. 3:2 landscape composition. A restrained photographic campaign image: the dark interior of a used aluminium assembly, repeated structural partitions, a single physical warm inspection lamp revealing depth on the right side, charcoal shadows, tarnished silver, natural wear, fine film grain. On the left, generous quiet dark negative space with crisp warm ivory editorial typography. Render exactly these words, flawlessly spelled: small uppercase sans serif 'CHRIS HAY'; then large refined editorial serif in three lines 'A house for' / 'ideas, systems' / 'and objects.'; below small sans serif 'Building things to find out how they work.' The large serif is literary and elegant, reminiscent of Fraunces, ideas, systems in italic. No extra words, URL, logo, border, watermark, fake measurements, futuristic glow or diagrams. Typography and photograph form one composition, readable at social thumbnail scale, substantial safe margins all around. This is for a research, engineering, design and film publication; scientific instrument meets gallery exhibition.",
+    "output": "public/og-after-hours.png",
+    "source": "/Users/christopherhay/.codex/generated_images/01a0ac72-dfb6-73c1-8ef1-6c70f1fecd4b/exec-8c77e4fa-7ecb-45ab-9726-4f600a339d98.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "b88c0ad422612ac89e479ce75e1252a153d4c22fa2d1be50d9a8b1090bc8b3b8"
+  }
+}

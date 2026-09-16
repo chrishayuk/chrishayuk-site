@@ -17,6 +17,11 @@ const studies = {
     subject: "AGENT ECOLOGY / THE DESCENDANT",
     alt: "AI-generated visual study: successive glass plates carry a repeated branching mark and amber point into the distance.",
   },
+  interior: {
+    title: "The interior.",
+    subject: "LEARNED SYSTEMS / THE INTERIOR",
+    alt: "AI-generated visual study: worn metal partitions recede into a dark assembly, with an inspection light revealing a narrow passage.",
+  },
 } as const;
 
 export type VisualStudyName = keyof typeof studies;
@@ -29,12 +34,17 @@ export function StudyImage({ name, sizes = "100vw" }: { name: VisualStudyName; s
     sizes={sizes} width={1672} height={941} loading="lazy" decoding="async" alt={studies[name].alt}/>;
 }
 
-export function VisualStudy({ name, href, linkLabel }: { name: VisualStudyName; href?: string; linkLabel?: string }) {
+export function VisualStudy({ name, href, linkLabel, exhibition = false, chapter = false }: { name: VisualStudyName; href?: string; linkLabel?: string; exhibition?: boolean; chapter?: boolean }) {
   const study = studies[name];
-  return <figure className={`visual-study visual-study-${name}`} data-visual-study={name}>
+  return <figure className={`visual-study visual-study-${name}${exhibition ? " visual-study-exhibition" : ""}${chapter ? " visual-study-chapter" : ""}`} data-visual-study={name}>
+    {chapter && <div className="visual-study-prelude">
+      <p className="record-voice visual-study-subject">{study.subject}</p>
+      <p className="visual-study-title">{study.title}</p>
+      <span className="record-voice visual-study-index" aria-hidden="true">02</span>
+    </div>}
     <div className="visual-study-frame"><StudyImage name={name}/></div>
     <figcaption>
-      <div><p className="record-voice visual-study-subject">{study.subject}</p><p className="visual-study-title">{study.title}</p></div>
+      {!chapter && <div><p className="record-voice visual-study-subject">{study.subject}</p>{name !== "interior" && <p className="visual-study-title">{study.title}</p>}</div>}
       <div className="visual-study-context"><p className="record-voice">VISUAL STUDY · AI-GENERATED<br/>NOT EXPERIMENTAL EVIDENCE</p>{href && <Link className="text-link" href={href}>{linkLabel || "EXPLORE THE QUESTION"} ↗</Link>}</div>
     </figcaption>
   </figure>;
