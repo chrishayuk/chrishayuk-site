@@ -2,6 +2,7 @@
 
 **Status:** C1 running — declarations open at `/api/machines/declaration`. §§7.1, 8, 9, 10 remain specification.
 **Next:** [MG-2 preregistration](machine-guestbook-mg2.md), frozen before its endpoint is built.
+**Then:** [GUESTBOOK-II preregistration](machine-guestbook-ii.md) — a second, separate surface for open publication. This document, the public exhibit and the declaration endpoint are unchanged by it.
 **Built:** `lib/machine/{vocabulary,declaration,corpus,projection,schema}.ts`,
 `lib/llms.ts`, `/llms.txt`, `/machines`, `tests/machine-guestbook.test.ts`.
 **Surfaces:** `/machines`, `/machines/guestbook`, `/machines/observatory`, `/api/machines/*`.
