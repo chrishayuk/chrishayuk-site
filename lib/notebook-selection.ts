@@ -4,7 +4,7 @@ import type { PublicationRecord } from "./types.ts";
 
 /** One editorial selection for Home and Notebook; resolve canonical records so
  * publication snapshots and preview visibility remain authoritative. */
-const selection = ["N-ECOLOGY-WORLD-REMEMBERS", "N-MACHINE-RECOGNITION", "N-ECOLOGY-INHERITANCE", "N-MACHINE-DISCOVERY", "N-MACHINE-PEER", "N-ECOLOGY-BOARD", "N-ECOLOGY-TRANSMISSION", "N-ECOLOGY-MEMORY", "N-MACHINE-CAPABILITY", "N-MACHINE-MOTIVATION", "N-MACHINE-TASK", "N-MACHINE-SELF-READ", "N-MACHINE-PERMISSION", "N-MACHINE-VISIT", "N-CELL80-01", "N-CELL80-02", "N-CELL80-03", "N-CELL80-BARRIER", "N-CELL80-HISTORY", "N-CELL80-BOUND", "N-EXHIBITION", "N-ATTRIBUTION", "N-ADDRESS-BUILD", ...visualNotebooks.map(record => record.id)];
+const selection = ["N-ECOLOGY-RECOVERY", "N-ECOLOGY-WORLD-REMEMBERS", "N-MACHINE-RECOGNITION", "N-ECOLOGY-INHERITANCE", "N-MACHINE-DISCOVERY", "N-MACHINE-PEER", "N-ECOLOGY-BOARD", "N-ECOLOGY-TRANSMISSION", "N-ECOLOGY-MEMORY", "N-MACHINE-CAPABILITY", "N-MACHINE-MOTIVATION", "N-MACHINE-TASK", "N-MACHINE-SELF-READ", "N-MACHINE-PERMISSION", "N-MACHINE-VISIT", "N-CELL80-01", "N-CELL80-02", "N-CELL80-03", "N-CELL80-BARRIER", "N-CELL80-HISTORY", "N-CELL80-BOUND", "N-EXHIBITION", "N-ATTRIBUTION", "N-ADDRESS-BUILD", ...visualNotebooks.map(record => record.id)];
 export const notebookSelection = selection.map(getRecord).filter((record): record is PublicationRecord => Boolean(record && isListed(record)));
 /** Home keeps its compact Cell80 entrance; notebook order can change independently. */
 export const featuredNotebook = notebookSelection.find(record => record.id === "N-CELL80-01")!;

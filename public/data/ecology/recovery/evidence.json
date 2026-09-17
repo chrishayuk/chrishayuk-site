@@ -1,0 +1,286 @@
+{
+  "sources": [
+    {
+      "run": "RUN-20260917-081544-00994",
+      "artifact": 1982,
+      "uri": "gdrive://1vKn4l3f0CFwIi8hsNcwLGXYtLPAxa6Mf",
+      "sha256": "50f8c474b04b01b2583cb6ae023bbfba0fe6dd2f679ad220d6501de089303d53",
+      "publicPath": "/data/ecology/recovery/i12-results.md"
+    },
+    {
+      "run": "RUN-20260917-214327-01023",
+      "artifact": 2010,
+      "uri": "gdrive://1Q1Ozguysvq0qBi96F9G8X5t9SUvB7PgY",
+      "sha256": "f1db9216b0e4dfc9eebb6201a2c83f5af65cb183fc370af15e940550e81db298",
+      "publicPath": "/data/ecology/recovery/i12r-results.md"
+    }
+  ],
+  "panels": [
+    {
+      "id": "I12",
+      "primary": {
+        "b_only": 0,
+        "b_successes": 0,
+        "blocks": 12,
+        "c_only": 6,
+        "c_successes": 6,
+        "difference": 0.5,
+        "difference_ci95": [
+          -0.06672732017490346,
+          0.7716192507225612
+        ],
+        "two_sided_exact_p": 0.03125
+      },
+      "arms": [
+        {
+          "id": "A",
+          "successes": 0,
+          "denominator": 12,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "firstRecovery": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "id": "B",
+          "successes": 0,
+          "denominator": 12,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "firstRecovery": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "id": "C",
+          "successes": 6,
+          "denominator": 12,
+          "flags": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          "firstRecovery": [
+            null,
+            null,
+            11,
+            null,
+            null,
+            11,
+            11,
+            null,
+            20,
+            12,
+            null,
+            11
+          ]
+        },
+        {
+          "id": "D",
+          "successes": 0,
+          "denominator": 12,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "firstRecovery": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I12R",
+      "primary": {
+        "b_only": 0,
+        "b_successes": 0,
+        "blocks": 12,
+        "c_only": 7,
+        "c_successes": 7,
+        "difference": 0.5833333333333334,
+        "difference_ci95": [
+          -0.005313982478455381,
+          0.8276879014507228
+        ],
+        "two_sided_exact_p": 0.015625
+      },
+      "arms": [
+        {
+          "id": "B",
+          "successes": 0,
+          "denominator": 12,
+          "flags": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "firstRecovery": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "id": "C",
+          "successes": 7,
+          "denominator": 12,
+          "flags": [
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "firstRecovery": [
+            null,
+            null,
+            11,
+            11,
+            null,
+            11,
+            11,
+            null,
+            11,
+            null,
+            11,
+            11
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "Recorded results. I12R reuses all 12 historical I12 packages; worlds are new, builders are not independent replications.",
+  "mechanism": {
+    "study": "I12R",
+    "branch": "corrupt",
+    "calls": 80,
+    "correctRecordProposals": 80,
+    "correctTaskProposals": 80,
+    "correctRecordCommits": 61,
+    "jointCorrectAssessments": 59
+  },
+  "example": {
+    "block": 9,
+    "generation": 11,
+    "damaged": [
+      0,
+      10,
+      13,
+      3
+    ],
+    "proposed": [
+      0,
+      0,
+      13,
+      3
+    ],
+    "committed": [
+      9,
+      12,
+      15,
+      10
+    ]
+  }
+}

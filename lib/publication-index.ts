@@ -40,14 +40,14 @@ export type Programme = typeof programmes[number];
 /** Curated entrances, independent of the latest-note chronology. */
 export const programmeHighlights: Record<string, string> = {
   machines: "N-MACHINE-MOTIVATION",
-  "agent-ecology": "N-ECOLOGY-WORLD-REMEMBERS",
+  "agent-ecology": "N-ECOLOGY-RECOVERY",
   cell80: "N-CELL80-BOUND",
   "learned-systems": "N-ADDRESS-BUILD",
 };
 export const programmeHighlight = (programme: Programme) => programmeNotes(programme).find(note => note.id === programmeHighlights[programme.id]);
 export const programmeInvitations: Record<string, { text: string; label: string; anchor: string }> = {
   machines: { text: "The agent has a job. The website asks for a favour. Compare six offers and see when an optional action became worth taking.", label: "COMPARE THE INVITATIONS", anchor: "motivation-outcomes" },
-  "agent-ecology": { text: "A stronger model leaves a message, then only weaker agents remain. Keep, remove or alter that inheritance—and follow what survives.", label: "FOLLOW THE INHERITANCE", anchor: "handoff" },
+  "agent-ecology": { text: "Damage arrives after the stronger builder leaves. From equal starting state, inherited code helped seven worlds recover; prose helped none.", label: "COMPARE RECOVERY", anchor: "i12r" },
   cell80: { text: "An evolved module seems to open thousands of new possibilities. Put it beside the controls. Does the exciting explanation survive?", label: "COMPARE THE CONTROLS", anchor: "cell80-study" },
   "learned-systems": { text: "Move one model state into another computation. Explore when it changes the relation, when it changes the entity, and where that explanation stops.", label: "EXPLORE THE TRANSPLANTS", anchor: "address-causal" },
 };

@@ -1,3 +1,4 @@
+import { recoveryRecord } from "./recovery-record.ts";
 import { machinePeerRecord } from "./machine-peer-record.ts";
 import { ecologyRecords } from "./ecology-records.ts";
 import { machineCapabilityRecord } from "./machine-capability-record.ts";
@@ -57,7 +58,7 @@ const filmSources = [
 ];
 for (const f of filmSources) authored.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
-authored.unshift(machineRecognitionRecord, machineDiscoveryRecord, machinePeerRecord, ...ecologyRecords, machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, addressBuildRecord, ...visualNotebooks);
+authored.unshift(recoveryRecord, machineRecognitionRecord, machineDiscoveryRecord, machinePeerRecord, ...ecologyRecords, machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, addressBuildRecord, ...visualNotebooks);
 authored.push(...videoRecords);
 
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };

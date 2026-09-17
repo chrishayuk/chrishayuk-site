@@ -1,3 +1,4 @@
+import { RecoveryCard } from "./RecoveryNotebook";
 import Link from "next/link";
 import { Fragment } from "react";
 import { StudyImage } from "./VisualStudy";
@@ -14,7 +15,7 @@ export function HomeProgrammes() {
     {researchProgrammes.map(programme => <article key={programme.id} data-home-programme={programme.id}>
       <Link href={programme.href}><h3>{programme.title}<span aria-hidden="true"> ↗</span></h3><p className="home-programme-question">{programme.question}</p></Link>
       <p className="home-programme-detail">{programme.description}</p>
-      {programme.id === "agent-ecology" && <div className="home-ecology-link"><Link href="/notebook/the-ai-left-its-knowledge-didnt#handoff">The AI left. Its knowledge didn’t. ↗</Link><Link href="/notebook/the-page-couldnt-authorise-the-peer-said-go">The Hugging Face incident comparison ↗</Link></div>}
+      {programme.id === "agent-ecology" && <div className="home-ecology-link"><Link href="/notebook/the-repairer-left-the-mechanism-kept-working">The repairer left. The mechanism kept working. ↗</Link><Link href="/notebook/the-ai-left-its-knowledge-didnt#handoff">The AI left. Its knowledge didn’t. ↗</Link><Link href="/notebook/the-page-couldnt-authorise-the-peer-said-go">The Hugging Face incident comparison ↗</Link></div>}
     </article>)}
   </div>;
 }
@@ -38,6 +39,7 @@ export function SelectedExperiments({ items, withGalleryPause = false }: { items
 }
 
 function SelectedResultVisual({ id }: { id: string }) {
+  if (id === "N-ECOLOGY-RECOVERY") return <RecoveryCard/>;
   if (id === "N-ECOLOGY-WORLD-REMEMBERS") return <EcologyCard id={id}/>;
   if (id === "N-MACHINE-MOTIVATION") return <MachineMotivationCard exhibition/>;
   if (id === "N-ECOLOGY-INHERITANCE") return <EcologyCard id={id}/>;

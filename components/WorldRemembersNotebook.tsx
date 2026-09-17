@@ -10,6 +10,7 @@ import '@/app/ecology-notebook.css';
 import '@/app/world-remembers.css';
 
 export function WorldRemembersNotebook(){return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook wr-notebook">
+ <aside className="mv-reading"><p className="record-voice">FOLLOW-UP / 17 SEPTEMBER 2026</p><p>Later experiments tested damage introduced after the builder left. With starting state held equal, inherited executable machinery supported recovery in 7/12 worlds versus 0/12 with prose. The machinery remained protected.</p><a href="/notebook/the-repairer-left-the-mechanism-kept-working">Continue: The repairer left. The mechanism kept working. ↗</a></aside>
  <VisualStudy name="inheritance"/>
  <StudyRoom id="handoff" label="01 / THE CONTROLLED EXPERIMENT" title={<>The stronger model leaves.<br/><em>What happens next?</em></>} description="What happens when a stronger model leaves a useful message on a shared board, then exits—and only weaker models remain?">
   <p className="mv-reading">The <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">Hugging Face incident</a> raised that question for me: agents used shared infrastructure as a message board, leaving information other agents could use. I wanted a controlled experiment to isolate that mechanism.</p>

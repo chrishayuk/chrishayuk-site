@@ -61,7 +61,7 @@ export const machineThread = {
 };
 export const agentEcologyThread = {
  id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",
- path: "/thread/agent-ecology", version: "0.3", created: "2026-09-13",
+ path: "/thread/agent-ecology", version: "0.4", created: "2026-09-13",
  abstract: "What can one agent leave behind for another? These controlled experiments separate contribution, transmission and memory, then ask what happens when a stronger model leaves a shared message and only weaker models remain to use and maintain it.",
  replay: { record: "N-ECOLOGY-INHERITANCE", anchor: "inheritance-replay", label: "REPLAY THE MODEL HANDOFF" },
  context: "The Hugging Face incident motivated the later handoff question: shared infrastructure can let one run leave information for another. This series isolates parts of that mechanism in small worlds. Each note states its own intervention; models, tasks and interfaces change between studies. The archive and maintenance objective are supplied. This is a controlled study of inheritance, not a recreation of the incident or a demonstration of spontaneous culture.",
@@ -71,6 +71,7 @@ export const agentEcologyThread = {
   { id: "N-ECOLOGY-MEMORY", label: "03 / SEPARATE THE TWO RECORDS", text: "Is the agent remembering, or is the world reminding it? Keep or clear the external example and own history independently. The external example sustained posting without own history." },
   { id: "N-ECOLOGY-INHERITANCE", label: "04 / HAND THE WORLD TO ANOTHER MODEL", text: "What remains after the stronger model leaves? Keep or remove Sol’s actual surviving record. Qwen and Gemma benefited, but neither renewed it in this world." },
   { id: "N-ECOLOGY-WORLD-REMEMBERS", label: "05 / KEEP THE INHERITANCE ALIVE", text: "Can the weaker population keep that inheritance alive? Require written descendants, inject an error, then test a temporary defender. Both mistakes and validated repairs reached later agents." },
+  { id: "N-ECOLOGY-RECOVERY", label: "06 / INHERIT A WAY TO RECOVER", text: "Can successors repair damage that arrives after the stronger builder leaves? Equal-state recovery was 7/12 with executable machinery and 0/12 with prose, under a fixed interface. The machinery remained protected." },
  ].map<ThreadStep>(step => step).filter(listedStep),
 };
 export const threads = [mapThread, cell80Thread, machineThread, agentEcologyThread];

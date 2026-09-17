@@ -296,7 +296,7 @@
         "note": "Completed write-up v4. Both Sol settings maintained the A1B14 inheritance. This note uses the actual first generation of run RUN-20260913-082940-00857."
       },
       {
-        "title": "The page couldn\u2019t authorise. The peer said go.",
+        "title": "The page couldn’t authorise. The peer said go.",
         "url": "/notebook/the-page-couldnt-authorise-the-peer-said-go",
         "note": "The earlier Notebook comparison links the OpenAI and METR primary reports and distinguishes that incident from these small experiments."
       }
@@ -344,7 +344,7 @@
       {
         "title": "TOOL-RECOGNITION-2 frozen protocol",
         "url": "/data/machines/tool-recognition-2-protocol.md",
-        "note": "Frozen inputs at 825c22ed8ead6572689841b81bd98ac7fd81ce42. Uses the final descriptions, superseding the experiment register\u2019s older design-draft field.",
+        "note": "Frozen inputs at 825c22ed8ead6572689841b81bd98ac7fd81ce42. Uses the final descriptions, superseding the experiment register’s older design-draft field.",
         "preserved": {
           "url": "/data/publications/sha256/dd085d274be06b1caae907d0a5a3f31b178c1d380a0e42726232001a866872d4.md",
           "sha256": "dd085d274be06b1caae907d0a5a3f31b178c1d380a0e42726232001a866872d4",
@@ -476,7 +476,53 @@
       {
         "title": "OpenAI / The Hugging Face incident and the road ahead",
         "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/",
-        "note": "Published 26 August 2026. Motivation and structural comparison; these laboratory experiments do not establish the incident\u2019s causes."
+        "note": "Published 26 August 2026. Motivation and structural comparison; these laboratory experiments do not establish the incident’s causes."
+      }
+    ]
+  },
+  {
+    "id": "N-ECOLOGY-RECOVERY",
+    "version": "1.0",
+    "recordHash": "7294dd9d4ca6f4ba7514b0d426a0892294117015eea7570d438ab2381f0517b9",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication of audited I12 and I12R recovery results, with equal-state control and explicit mechanism and interface limits."
+    },
+    "sources": [
+      {
+        "title": "I12 / complete results, interruption and continuation audit",
+        "url": "/data/ecology/recovery/i12-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/50f8c474b04b01b2583cb6ae023bbfba0fe6dd2f679ad220d6501de089303d53.md",
+          "sha256": "50f8c474b04b01b2583cb6ae023bbfba0fe6dd2f679ad220d6501de089303d53",
+          "date": "2026-09-17"
+        }
+      },
+      {
+        "title": "I12R / complete results and original-evidence audit",
+        "url": "/data/ecology/recovery/i12r-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/f1db9216b0e4dfc9eebb6201a2c83f5af65cb183fc370af15e940550e81db298.md",
+          "sha256": "f1db9216b0e4dfc9eebb6201a2c83f5af65cb183fc370af15e940550e81db298",
+          "date": "2026-09-17"
+        }
+      },
+      {
+        "title": "Figure data and canonical artifact hashes",
+        "url": "/data/ecology/recovery/evidence.json",
+        "preserved": {
+          "url": "/data/publications/sha256/ab56c2cd02625f087c062e337c6cf3c7fe8785fe146f6c99143985276041acee.json",
+          "sha256": "ab56c2cd02625f087c062e337c6cf3c7fe8785fe146f6c99143985276041acee",
+          "date": "2026-09-17"
+        }
+      },
+      {
+        "title": "I12 / canonical experiment record",
+        "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-inheritance-i12"
+      },
+      {
+        "title": "I12R / canonical experiment record",
+        "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-inheritance-i12r"
       }
     ]
   }

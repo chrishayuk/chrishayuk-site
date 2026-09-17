@@ -5,6 +5,7 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-ECOLOGY-RECOVERY": { subject: "Inherited executable recovery after model departure", question: "Can weaker successors recover from new damage using a departed builder’s mechanism?", searchTitle: "Inherited AI Recovery: Equal-State Prose and Executable Experiments", description: "From identical state and damage, Qwen recovered 7/12 worlds with inherited code and 0/12 with prose. Explore I12 and I12R, their mechanisms and limitations.", concepts: ["inherited recovery", "executable capability", "I12", "I12R", "model turnover"] },
  "N-ECOLOGY-WORLD-REMEMBERS": {
   subject: "Cross-model environmental inheritance, maintenance and repair",
   question: "What can weaker agents inherit and maintain after a stronger model leaves a message and exits?",
@@ -44,7 +45,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "AI agent ecology, shared artefacts and behavioural persistence",
   question: "What lets an AI agent behaviour recur, spread or survive removal of its source?",
   searchTitle: "AI Agent Ecology: Shared Memory, Behavioural Transmission and Persistence",
-  description: "Five notes trace contribution, external memory, cross-model inheritance, written maintenance and guarded repair. Bounded instructed persistence is observed; autonomous culture remains open.",
+  description: "Six notes trace contribution, external memory, cross-model inheritance, written maintenance and guarded repair. Bounded instructed persistence is observed; autonomous culture remains open.",
   concepts: ["AI agent ecology", "shared artefacts", "behavioural persistence", "agent culture experiments"],
  },
  "N-ECOLOGY-BOARD": {
