@@ -71,6 +71,13 @@
    drawn and then decorated. See the design notebook for the reasoning. */
 .ml-stage{background:#0c0e0a;color:#f1eee5;padding:0 0 6px}
 .ml-fade{transition:opacity 2.2s ease}
+.ml-room{transition:stroke 2.2s ease,stroke-width 2.2s ease}
+.ml-tabs{display:flex;gap:2px;margin-bottom:18px}
+.ml-tab{background:none;border:0;border-bottom:1px solid transparent;color:#5c5f52;font-family:var(--me-mono);font-size:11px;letter-spacing:.08em;padding:10px 14px;cursor:pointer;min-height:44px}
+.ml-tab[aria-selected="true"]{color:#e3b56b;border-bottom-color:#e3b56b}
+.ml-tab:hover{color:#f1eee5}
+.ml-tab-out{color:#8f9285;text-decoration:none;display:inline-flex;align-items:center}
+.ml-tab-out:hover{color:#f1eee5}
 @keyframes ml-sun{0%,100%{opacity:.85}50%{opacity:1}}
 .ml-sun{animation:ml-sun 5s ease-in-out infinite}
 @keyframes ml-draw-user{0%{stroke-dashoffset:100;opacity:0}8%{opacity:.9}45%{stroke-dashoffset:0;opacity:.9}68%{opacity:.7}100%{stroke-dashoffset:0;opacity:0}}
