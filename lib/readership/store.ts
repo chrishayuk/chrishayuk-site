@@ -125,6 +125,11 @@ const EMPTY_CONFIDENCE: Record<Confidence, number> = { verified: 0, declared: 0,
 const EMPTY_SURFACES: Record<Surface, number> = { page: 0, feed: 0, agent_document: 0, api: 0, asset: 0, other: 0 };
 
 const AI: Purpose[] = ["ai_user", "ai_search", "ai_training"];
+/** `recent` also carries automation, for the machines/live exhibition — a
+ * named provider is never invented for it, so the providers/agents block
+ * below stays AI-only. Widens which rows the same window returns; the
+ * aggregate automation total was already public on this page. */
+const RECENT_PURPOSES: Purpose[] = [...AI, "automation"];
 
 /**
  * Recomputed at most once every five minutes.
@@ -198,7 +203,7 @@ export async function summary(days: number, visible: ReadonlySet<string>): Promi
   if (row.purpose in bucket) bucket[row.purpose as keyof typeof bucket] += row.n;
   daily.set(day, bucket);
 
-  if (row.hour >= recentSince && AI.includes(row.purpose as Purpose) && visible.has(row.path)) {
+  if (row.hour >= recentSince && RECENT_PURPOSES.includes(row.purpose as Purpose) && visible.has(row.path)) {
    const key = `${row.hour}|${row.agent}|${row.provider}|${row.purpose}|${row.confidence}|${row.path}`;
    const entry = recent.get(key) ?? { hour: row.hour, purpose: row.purpose, provider: row.provider, agent: row.agent, confidence: row.confidence, path: row.path, n: 0 };
    entry.n += row.n; recent.set(key, entry);

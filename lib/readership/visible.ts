@@ -38,7 +38,7 @@ const MACHINE_DOCUMENTS = [
  "/record/feed.xml", "/record/feed.json", "/notebook/feed.xml",
  "/api/records", "/api/record", "/api/graph", "/api/search", "/api/citations", "/api/concepts", "/api/social", "/api/share", "/api/readership",
  "/api/machines/declaration", "/api/machines/ask", "/api/machines/feedback",
- "/llms.txt", "/readership", "/machines",
+ "/llms.txt", "/readership", "/machines", "/machines/live",
 ];
 
 let cache: ReadonlySet<string> | null = null;

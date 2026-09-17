@@ -46,7 +46,7 @@ export const standingPaths = [
  // including the guestbook and never followed the link. Withholding it further
  // preserves an answered question at the cost of an unreachable surface.
  // See docs/machine-discovery-baseline.md.
- "/machines",
+ "/machines", "/machines/live",
  "/film/youtube", "/film/youtube/archive", "/film/mixture-of-experts",
 ];
 

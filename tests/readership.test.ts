@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { classify, normalisePath, referralOf, surfaceOf, UNRECOGNISED } from "../lib/readership/classify.ts";
 import { isVerifiable, parseIp, rangeSnapshot, verify } from "../lib/readership/ranges.ts";
-import { confidenceFor } from "../lib/readership/store.ts";
+import { confidenceFor, record, summary } from "../lib/readership/store.ts";
 import { visiblePaths } from "../lib/readership/visible.ts";
 import { allRecords, isListed, recordPath } from "../lib/records.ts";
 import ranges from "../content/agent-ranges.json" with { type: "json" };
@@ -107,6 +107,27 @@ test("verification decides the confidence, and only a declared claim is ever tes
  assert.equal(confidenceFor(human, "203.0.113.7"), "none");
  const unknown = classify({ pathname: "/notebook", userAgent: "curl/8.7.1" });
  assert.equal(confidenceFor(unknown, "203.0.113.7"), "inferred");
+});
+
+test("recent now carries automation for the machines/live exhibition, but never a human row", async () => {
+ const { mkdtemp, rm } = await import("node:fs/promises");
+ const { tmpdir } = await import("node:os");
+ const { join } = await import("node:path");
+ const dir = await mkdtemp(join(tmpdir(), "chrishayuk-readership-"));
+ process.env.READERSHIP_DB = join(dir, "readership.db");
+ try {
+  await record(classify({ pathname: "/notebook", userAgent: "curl/8.7.1" }), null);
+  await record(classify({ pathname: "/notebook", userAgent: "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot" }), null);
+  await record(classify({ pathname: "/notebook", userAgent: "Mozilla/5.0 (Macintosh) AppleWebKit/605.1.15 Safari/605.1.15" }), null);
+  const report = await summary(1, visiblePaths());
+  assert.ok(report, "the seeded store must answer");
+  assert.ok(report!.recent.some(row => row.purpose === "automation" && row.path === "/notebook"), "an automation row must now appear");
+  assert.ok(report!.recent.some(row => row.purpose === "ai_user" && row.path === "/notebook"), "the existing AI purposes still appear");
+  assert.ok(!report!.recent.some(row => row.purpose === "human"), "the human/machine boundary itself is unchanged");
+ } finally {
+  delete process.env.READERSHIP_DB;
+  await rm(dir, { recursive: true, force: true });
+ }
 });
 
 test("the public page will name only paths this publication already publishes", () => {

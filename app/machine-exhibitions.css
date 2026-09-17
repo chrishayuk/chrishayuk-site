@@ -67,4 +67,27 @@
 @media(min-width:761px) and (max-width:1100px){.me-journeys{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.me-section-head{display:block}.me-section-head>p{text-align:left;margin-top:16px}.me-branches,.me-journeys,.me-protocol-strip,.me-interventions{grid-template-columns:1fr}.me-branches{gap:34px;border:0;padding-top:10px}.me-evidence:before{display:none}.me-axes{grid-template-columns:repeat(2,minmax(0,1fr))}.me-inspector li{display:block}.me-inspector li>span:last-child{display:block;margin-top:6px}.me-correction summary{align-items:start}.me-reconcile-bars>div{grid-template-columns:130px 1fr 28px;gap:10px;font-size:10px}.me-method dl>div{grid-template-columns:1fr;gap:10px}.me-presence-field{min-height:520px;gap:20px 5px}.me-presence-slot:nth-child(n){transform:none}.me-presence-slot summary .record-voice{font-size:8px;letter-spacing:0}.me-presence-slot p{font-size:11px}.me-bucket-key{gap:4px}.me-bucket-key>div{width:70px}.me-bucket-key .me-presence-glyph{width:100px;margin-left:-15px;transform:scale(.6)}.me-journey{padding-top:20px}.me-journey-path{min-height:0}.me-journey-findings>div{min-height:0;display:grid;grid-template-columns:90px 1fr;gap:12px}.me-journey-findings dt{margin:5px 0}.me-journey-findings dd{font-size:22px}.me-trace-gap{min-height:0}.me-journeys{gap:44px}.me-journey-room .me-caption{margin-top:32px}.me-participation{gap:12px}}
 @media(max-width:760px){.me-roster-provider>ul>li{flex-wrap:wrap}.me-roster-meta{justify-content:flex-start;text-align:left;flex-basis:100%}.me-recent li{grid-template-columns:1fr;gap:4px}.me-recent li>span:last-child{text-align:left}}
+/* MACHINES / LIVE — the orbit. Activity reveals the topology; it is not
+   drawn and then decorated. See the design notebook for the reasoning. */
+.ml-stage{background:#0c0e0a;color:#f1eee5;padding:0 0 6px}
+.ml-fade{transition:opacity 2.2s ease}
+@keyframes ml-sun{0%,100%{opacity:.85}50%{opacity:1}}
+.ml-sun{animation:ml-sun 5s ease-in-out infinite}
+@keyframes ml-draw-user{0%{stroke-dashoffset:100;opacity:0}8%{opacity:.9}45%{stroke-dashoffset:0;opacity:.9}68%{opacity:.7}100%{stroke-dashoffset:0;opacity:0}}
+.ml-line-user{stroke-dasharray:100;animation:ml-draw-user 4s ease-out}
+@keyframes ml-arrive-user{0%{opacity:0;transform:scale(.4)}10%{opacity:1;transform:scale(1.25)}18%{transform:scale(1)}55%{opacity:1}100%{opacity:0}}
+.ml-arrive-user{transform-box:fill-box;transform-origin:center;animation:ml-arrive-user 4s ease-out}
+@keyframes ml-land-user{0%,42%{opacity:0;transform:scale(.5)}50%{opacity:1;transform:scale(1.5)}72%{opacity:.5;transform:scale(1)}100%{opacity:0}}
+.ml-land-user{transform-box:fill-box;transform-origin:center;animation:ml-land-user 4s ease-out}
+@keyframes ml-sweep-arc{0%{stroke-dashoffset:100;opacity:0}10%{opacity:.85}70%{stroke-dashoffset:0;opacity:.85}100%{stroke-dashoffset:0;opacity:0}}
+.ml-sweep-arc{stroke-dasharray:100;animation:ml-sweep-arc 4s ease-in-out}
+@keyframes ml-wash{0%{opacity:0}22%{opacity:.4}55%{opacity:.55}82%{opacity:.25}100%{opacity:0}}
+.ml-wash{animation:ml-wash 4.1s ease-in-out}
+@keyframes ml-flicker{0%{opacity:0}6%{opacity:.28}11%{opacity:.04}19%{opacity:.38}26%{opacity:.05}35%{opacity:.32}47%{opacity:.05}62%{opacity:.26}78%{opacity:.05}100%{opacity:0}}
+.ml-flicker{animation:ml-flicker 4s linear}
+.ml-soft{filter:url(#ml-glow);opacity:.75}
+.ml-atmospheric{filter:url(#ml-glow-soft);opacity:.45}
+.ml-ticker{font-family:var(--me-mono);font-size:11px;letter-spacing:.05em;color:#c9b98a;min-height:16px;padding:0 var(--margin)}
+.ml-legend-row{display:flex;justify-content:space-between;align-items:center;gap:24px;font-family:var(--me-mono);padding:0 var(--margin)}
+@media(prefers-reduced-motion:reduce){.ml-sun,.ml-line-user,.ml-arrive-user,.ml-land-user,.ml-sweep-arc,.ml-wash,.ml-flicker{animation:none;opacity:0}.ml-fade{transition:none}}
 @media(prefers-reduced-motion:reduce){.machine-exhibition *{scroll-behavior:auto!important}}
