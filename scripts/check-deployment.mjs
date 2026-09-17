@@ -612,8 +612,7 @@ assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1
 assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
-const { latestNotes: currentLatestNotes } = await import("../lib/publication-index.ts");
-for (const note of currentLatestNotes.slice(0, 3)) assert.ok(home.body.includes(`href="/notebook/${note.slug}"`), `Current latest note: ${note.id}`);
+for (const note of latestNotes.slice(0, 4)) assert.ok(home.body.includes(`href="/notebook/${note.slug}"`), `Current latest note: ${note.id}`);
 assert.match(home.body,/mm-card-results/);
 assert.match(notebookCollection.body,/Published/);
 assert.ok(sitemap.body.includes(motivationPath));
