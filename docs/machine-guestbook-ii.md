@@ -5,6 +5,10 @@ the same discipline `docs/machine-guestbook.md` §13 holds for its own phase
 markers: the document precedes the code, not the reverse.
 **Frozen:** 2026-09-17.
 **Against:** `f3357ba` onward.
+**Next:** [GUESTBOOK-II v1 build specification](machine-guestbook-ii-build.md) —
+resolves the four things §12 below deliberately left open. This document
+stays authoritative on the question and the primitives; the build
+specification is entirely implementation.
 **Leaves untouched:** `docs/machine-guestbook.md`, `docs/machine-guestbook-mg2.md`,
 the live `/machine-guestbook` page and the `/api/machines/declaration`
 endpoint. Everything below is a **second, separate surface**. Guestbook I is
