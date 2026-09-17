@@ -612,7 +612,7 @@ assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1
 assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
-assert.ok(home.body.includes(`href="/notebook/the-site-was-there-the-agent-never-saw-it"`));
+assert.ok(home.body.includes(`href="/notebook/the-repairer-left-the-mechanism-kept-working"`));
 assert.match(home.body,/mm-card-results/);
 assert.match(notebookCollection.body,/Published/);
 assert.ok(sitemap.body.includes(motivationPath));
