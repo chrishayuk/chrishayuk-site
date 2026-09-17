@@ -22,3 +22,26 @@
 .recovery-card strong {font-size:clamp(3rem,6vw,5rem);font-weight:400;}
 .recovery-card strong span {font-size:1.2rem;}
 @media(max-width:600px){.recovery-row{grid-template-columns:1fr 3.2rem;gap:.4rem}.recovery-row>span{grid-column:1/-1}.recovery-worlds ol{gap:.15rem}.recovery-mechanism>div{gap:.5rem}.recovery-mechanism dl{grid-template-columns:1fr}.recovery-card{min-height:17rem}}
+.recovery-diagnostic,.recovery-inheritances {margin:2.5rem 0 3rem;padding:clamp(1rem,3vw,2rem);border:1px solid #c7c2b7;background:#f4f0e8;color:#22221f;}
+.recovery-record-cells {display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.5rem 0;}
+.recovery-record-cells>div {display:flex;flex-direction:column;gap:.4rem;padding:1rem;border:1px solid #c7c2b7;min-width:0;}
+.recovery-record-cells strong {font-size:clamp(2.3rem,5vw,4rem);font-weight:400;line-height:1.2;}
+.recovery-record-cells span,.recovery-arithmetic span {font:500 .65rem/1.5 var(--font-mono,monospace);}
+.recovery-record-cells small {font-size:.7rem;line-height:1.4;}
+.recovery-record-cells .damaged {border:2px solid #9e482e;background:#f3ded1;}
+.recovery-diagnostic>p {max-width:45rem;line-height:1.65;}
+.recovery-candidate {display:flex;align-items:center;justify-content:space-between;font-size:1.1rem;max-width:36rem;margin-top:2rem;}
+.recovery-candidate output {font-size:2rem;}
+.recovery-diagnostic input[type=range] {display:block;width:100%;max-width:36rem;accent-color:#9e482e;margin:1rem 0 2rem;min-height:2rem;}
+.recovery-arithmetic {display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.recovery-arithmetic>div {display:flex;flex-direction:column;gap:.65rem;border-top:1px solid #b6b0a5;padding-top:1rem;}
+.recovery-arithmetic strong {font-size:clamp(1.1rem,3vw,2rem);font-weight:400;}
+.recovery-match {min-height:3.4rem;font-weight:600;}
+.recovery-diagnostic-buttons {display:flex;flex-wrap:wrap;gap:.6rem;}
+.recovery-diagnostic-buttons button {background:transparent;border:1px solid currentColor;padding:.8rem 1rem;font:inherit;color:inherit;cursor:pointer;}
+.recovery-diagnostic-buttons button:focus-visible,.recovery-diagnostic input:focus-visible {outline:3px solid #9e482e;outline-offset:3px;}
+.recovery-inheritances>div {display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.recovery-inheritances h3 {font-size:1.8rem;font-weight:400;}
+.recovery-inheritances ol {padding-left:1.2rem;line-height:1.7;}
+.recovery-inheritances li {margin:.5rem 0;}
+@media(max-width:600px){.recovery-record-cells{gap:.25rem}.recovery-record-cells>div{padding:.65rem .4rem}.recovery-arithmetic{grid-template-columns:1fr}.recovery-inheritances>div{grid-template-columns:1fr;gap:.6rem}}

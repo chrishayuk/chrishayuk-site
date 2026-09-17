@@ -13,8 +13,16 @@ test('recovery figures retain exact canonical reports, paired flags and denomina
  assert.equal(data.panels[1].arms[1].firstRecovery.filter(g=>g===11).length,7);
 });
 test('publication is current and discoverable while predecessor snapshot stays intact',()=>{
- const id='N-ECOLOGY-RECOVERY',r=getRecord(id)!;assert.equal(r.publication,'published');assert.equal(r.version,'1.0');assert.equal(latestNotes[0].id,id);assert.equal(programmeHighlights['agent-ecology'],id);
+ const id='N-ECOLOGY-RECOVERY',r=getRecord(id)!;assert.equal(r.publication,'published');assert.equal(r.version,'1.1');assert.equal(latestNotes[0].id,id);assert.equal(programmeHighlights['agent-ecology'],id);
  assert.ok(recordGraph().edges.some(e=>e.from===id&&e.to==='THREAD-AGENT-ECOLOGY'));
  assert.equal(getRecord('N-ECOLOGY-WORLD-REMEMBERS')!.published,'2026-09-15');
- const text=JSON.stringify(r.body);for(const qualifier of ['protected','interface','not a fresh sample','not an uninterrupted'])assert.ok(text.includes(qualifier));
+ const text=JSON.stringify(r.body);for(const qualifier of ['protected','interface','independent new sample','not an uninterrupted'])assert.ok(text.includes(qualifier));
+});
+
+test('the explanatory instrument derives the lost value from the recorded public diagnostic',()=>{
+ const row=data.example.evidence[1];
+ const candidates=Array.from({length:17},(_,i)=>i).filter(code=>(row.gain*code+row.offset)%17===row.observed);
+ assert.deepEqual(candidates,[0]);assert.equal((row.gain*data.example.damaged[1]+row.offset)%17,4);
+ assert.deepEqual(data.example.evidence.map(r=>Array.from({length:17},(_,i)=>i).find(c=>(r.gain*c+r.offset)%17===r.observed)),data.example.proposed);
+ assert.deepEqual(data.example.freshEvidence.map(r=>Array.from({length:17},(_,i)=>i).find(c=>(r.gain*c+r.offset)%17===r.observed)),data.example.freshTruth);
 });

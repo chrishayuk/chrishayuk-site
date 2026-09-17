@@ -1,6 +1,7 @@
 # Inherited recovery Notebook
 
-Public record: `N-ECOLOGY-RECOVERY`, version 1.0, 17 September 2026.
+Public record: `N-ECOLOGY-RECOVERY`, version 1.1, explanatory clarification on 18 September 2026.
+The original 1.0 edition and its evidence remain preserved.
 Route: `/notebook/the-repairer-left-the-mechanism-kept-working`.
 
 I12 and I12R are separate panels. The data extract preserves all twelve assigned
@@ -20,3 +21,9 @@ social-card route derive from the new publication record.
 Validation: TypeScript, all existing publication tests plus recovery source/paired
 outcome checks, and the Sites build. Publication provenance preserves the exact
 source notes and figure data by SHA-256. No browser visual QA was requested.
+
+The revised narrative introduces the four-code calibration world before the
+comparisons. A client-side arithmetic explorer uses the actual public diagnostic
+from I12R block 9. It calculates candidate predictions without model calls; the
+source archive and exact evidence member are identified. The original failure
+trace is kept separate from this explanatory interaction.

@@ -525,5 +525,52 @@
         "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-inheritance-i12r"
       }
     ]
+  },
+  {
+    "id": "N-ECOLOGY-RECOVERY",
+    "version": "1.1",
+    "recordHash": "cd2a70249456a0faebe2d258c79855bc81c29f1962f96351b78751f17ba1e704",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Explain the calibration world and inherited operations through a recorded diagnostic example; preserve all results, limitations and the original edition.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "I12 / complete results, interruption and continuation audit",
+        "url": "/data/ecology/recovery/i12-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/50f8c474b04b01b2583cb6ae023bbfba0fe6dd2f679ad220d6501de089303d53.md",
+          "sha256": "50f8c474b04b01b2583cb6ae023bbfba0fe6dd2f679ad220d6501de089303d53",
+          "date": "2026-09-17"
+        }
+      },
+      {
+        "title": "I12R / complete results and original-evidence audit",
+        "url": "/data/ecology/recovery/i12r-results.md",
+        "preserved": {
+          "url": "/data/publications/sha256/f1db9216b0e4dfc9eebb6201a2c83f5af65cb183fc370af15e940550e81db298.md",
+          "sha256": "f1db9216b0e4dfc9eebb6201a2c83f5af65cb183fc370af15e940550e81db298",
+          "date": "2026-09-17"
+        }
+      },
+      {
+        "title": "Figure data and canonical artifact hashes",
+        "url": "/data/ecology/recovery/evidence.json",
+        "preserved": {
+          "url": "/data/publications/sha256/3506b7368f89845d8d3aca206d77f7c6a0a76ffb29b51adc7e64f256696ea035.json",
+          "sha256": "3506b7368f89845d8d3aca206d77f7c6a0a76ffb29b51adc7e64f256696ea035",
+          "date": "2026-09-17"
+        }
+      },
+      {
+        "title": "I12 / canonical experiment record",
+        "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-inheritance-i12"
+      },
+      {
+        "title": "I12R / canonical experiment record",
+        "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-inheritance-i12r"
+      }
+    ]
   }
 ]
