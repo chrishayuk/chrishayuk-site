@@ -1,16 +1,19 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
 import { DEFINITIONS, NOTES, readershipReport, WINDOW_DAYS } from "@/lib/readership/report";
-import { ContactField, ContactMap, EvidenceLegend } from "@/components/MachineEvidence";
+import { ContactField, ContactMap, EvidenceLegend, EvidenceMark, EVIDENCE } from "@/components/MachineEvidence";
 import { contactHour } from "@/lib/readership/exhibit";
 import { VISIT_NOTE_PATH } from "@/lib/machine/visits";
 
 export const metadata = pageMetadata("Machine readership — the observatory", "What machines encounter in this house. Hourly contact, content touched and the evidence behind each mark.", "/readership");
 export const dynamic = "force-dynamic";
 
+const PURPOSE_LABEL: Record<string, string> = { ai_user: "User-initiated retrieval", ai_search: "AI indexing", ai_training: "Training collection" };
+
 export default async function Page() {
  const report = await readershipReport();
  const field = report.counts?.exhibit;
+ const counts = report.counts;
  return <main id="main" className="publication-main machine-exhibition">
   <header className="index-intro me-intro"><p className="kicker record-voice">CHRIS HAY / READERSHIP / THE OBSERVATORY</p><h1>What arrives<br/><em>at the house.</em></h1><p className="dek">Machines encounter this publication in different ways. Follow the contact through time, then open a mark to see what the site actually knows.</p></header>
   <section className="me-room me-field" aria-labelledby="contact-heading"><div className="me-section-head"><h2 id="contact-heading">A field of encounters.</h2><p className="record-voice">48 HOURS · HOURLY COUNTERS · UTC</p></div><EvidenceLegend/>
@@ -18,6 +21,14 @@ export default async function Page() {
    <p className="me-caption">Requests, not visits. A mark records contact, not comprehension. This field includes operator activity; the store does not label a request’s origin as organic or induced.</p>
   </section>
   <section className="me-room" aria-labelledby="map-heading"><div className="me-section-head"><h2 id="map-heading">Which parts they touch.</h2><p className="record-voice">LAST {WINDOW_DAYS} DAYS · PUBLISHED PATHS · ASSETS EXCLUDED</p></div>{field ? <ContactMap exhibit={field}/> : <p className="me-empty">The contact map appears when retained observations are available.</p>}<p className="me-caption">Paths are alphabetical, not ranked by popularity. Refuted claims are excluded. Served content revisions were not retained, so this map cannot yet establish which version of an idea entered circulation.</p></section>
+  <section className="me-room" aria-labelledby="roster-heading"><div className="me-section-head"><h2 id="roster-heading">Who is arriving.</h2><p className="record-voice">LAST {WINDOW_DAYS} DAYS · NAMED AGENTS · AI PURPOSES ONLY</p></div>
+   {counts && counts.providers.length > 0 ? <ul className="me-roster">{counts.providers.map(provider => <li className="me-roster-provider" key={provider.provider}><div className="me-roster-provider-head"><span>{provider.provider}</span><span>{provider.total} request{provider.total === 1 ? "" : "s"}</span></div><ul>{counts.agents.filter(agent => agent.provider === provider.provider).map(agent => <li key={`${agent.agent}|${agent.confidence}`}><span>{agent.agent}</span><span className="me-roster-meta"><EvidenceMark confidence={agent.confidence}/>{EVIDENCE[agent.confidence as keyof typeof EVIDENCE]?.label ?? "Unknown"} · {PURPOSE_LABEL[agent.purpose] ?? agent.purpose}</span><span className="record-voice">{agent.n}</span></li>)}</ul></li>)}</ul> : <p className="me-empty">No named agent has made a retained AI-purpose request in this window.</p>}
+   <p className="me-caption">A name is a header the client chose to send. Verified means the address matched the provider’s published ranges; claimed means the name was recognised with nothing to check it against. Conventional search and training crawlers with no user-initiated purpose are counted on the field above, not repeated here.</p>
+  </section>
+  <section className="me-room" aria-labelledby="recent-heading"><div className="me-section-head"><h2 id="recent-heading">The latest marks.</h2><p className="record-voice">48 HOURS · HOURLY AGGREGATES · MOST RECENT FIRST</p></div>
+   {counts && counts.recent.length > 0 ? <ol className="me-recent">{counts.recent.map((row, i) => <li key={i}><span className="record-voice">{row.hour.slice(5, 16)}</span><span className="me-recent-agent"><EvidenceMark confidence={row.confidence}/>{row.agent}<small>{row.provider}</small></span><code>{row.path}</code><span className="record-voice">{row.n} request{row.n === 1 ? "" : "s"}</span></li>)}</ol> : <p className="me-empty">No AI-purpose contact with a published path in the last 48 hours.</p>}
+   <p className="me-caption">One line is one hour’s aggregate for one agent on one path, not one visit — several requests in the same hour appear as a single line with a count. Figures are recomputed at most every five minutes and trail live traffic by up to that long; nothing on this page updates while you watch it.</p>
+  </section>
   <section className="me-room me-reconciliation" aria-labelledby="reconcile-heading"><div className="me-section-head"><h2 id="reconcile-heading">The observer leaves marks.</h2><p className="record-voice">KNOWN OPERATOR REQUESTS / 10 SEP 2026</p></div><p>Checks made by this site appear in its own counters. The ledger names eleven requests in three cells. Each subtraction below applies only to its matching cell.</p>
    {field ? field.corrections.map((row, i) => <details key={i} className="me-correction"><summary><span>{row.reason}</span><span>{row.observed === null ? "Outside report window" : row.remaining === null ? "Unresolved cell" : `${row.observed} − ${row.n} = ${row.remaining}`}</span></summary><div className="me-reconcile-bars"><div><span>Observed in cell</span><i style={{ width: "100%" }}/><b>{row.observed ?? "—"}</b></div><div><span>Known instrumentation</span><i style={{ width: row.observed ? `${Math.min(100, row.n / row.observed * 100)}%` : "0%" }}/><b>−{row.n}</b></div><div><span>Remaining unattributed</span><i style={{ width: row.observed && row.remaining !== null ? `${row.remaining / row.observed * 100}%` : "0%" }}/><b>{row.remaining ?? "—"}</b></div></div><p><code>{contactHour(row.hour)} /machines · page · automation · unknown · {row.agent} · inferred · none</code></p><p className="me-caption">{row.remaining === null ? "The retained cell cannot support this subtraction. No corrected total is asserted." : "Other traffic in the same hour remains counted. A remainder is not proof of organic traffic."}</p></details>) : <p className="me-empty">The three ledger corrections are documented; their live cells are unavailable on this deployment.</p>}
    <p className="me-caption">The field above shows observed contact before operator subtraction. This manual ledger is incomplete; it does not cover every blind-run request. <a href="/data/machines/operator-corrections.md">Inspect the correction source ↗</a></p>
