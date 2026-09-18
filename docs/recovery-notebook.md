@@ -40,3 +40,8 @@ the modular arithmetic explorer is optional.
 manuscript in `lib/recovery-record.ts`, publication snapshots, and all source
 evidence remain unchanged and available in the evidence drawer. This is a reading
 layout update, recorded in `lib/page-updates.ts`, with no new experiment or claim.
+
+Two visual-study pauses now frame the reading path: the existing inheritance study
+after Sol leaves, and a new handoff study between equal-state recovery and the
+proposal-to-commit section. Both are atmospheric, AI-generated editorial images;
+neither is experimental evidence.

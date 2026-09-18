@@ -1,5 +1,5 @@
 import { RecoveryDiagnostic } from './RecoveryDiagnostic';
-import type { CSSProperties } from 'react';
+import { Fragment, type CSSProperties } from 'react';
 import { FieldNotes } from '@chrishayuk/hause/components/FieldNotes';
 import { StudyRoom } from '@chrishayuk/hause/components/exhibition/Study';
 import { NotebookFieldNotes } from './NotebookFieldNotes';
@@ -7,6 +7,7 @@ import { NotebookNavigation } from './NotebookNavigation';
 import { Acts } from './Acts';
 import { recoveryRecord } from '@/lib/recovery-record';
 import { recoveryMovements } from '@/lib/recovery-reading';
+import { VisualStudy } from './VisualStudy';
 import data from '@/public/data/ecology/recovery/evidence.json';
 import '@/app/ecology-notebook.css';
 import '@/app/recovery-notebook.css';
@@ -68,7 +69,8 @@ function InheritancePaths() {
 
 export function RecoveryNotebook() {
  return <NotebookFieldNotes><div className="cinematic-notebook machine-visit-notebook eco-notebook recovery-notebook">
-  {recoveryMovements.map(section => <StudyRoom key={section.id} id={section.id} label={section.label} title={<>{section.title.split('\n').map((line, i) => <span key={line}>{i > 0 && <br/>}{line}</span>)}</>} tone={section.id === 'mechanism' ? 'dark' : section.id === 'next' ? 'accent' : undefined}>
+  {recoveryMovements.map(section => <Fragment key={section.id}><StudyRoom id={section.id} label={section.label} title={<>{section.title.split('\n').map((line, i) => <span key={line}>{i > 0 && <br/>}{line}</span>)}</>} tone={section.id === 'mechanism' ? 'dark' : section.id === 'next' ? 'accent' : undefined}>
+   {section.id === 'question' && <VisualStudy name="inheritance" chapter/>}
    {section.paragraphs.map((text, index) => <div className="recovery-passage" key={text}>
     <p className="mv-reading">{text}</p>
     {section.id === 'inheritance' && index === 0 && <InheritancePaths/>}
@@ -79,7 +81,7 @@ export function RecoveryNotebook() {
     {section.id === 'mechanism' && index === 2 && <RecordedCommit/>}
    </div>)}
    {section.id === 'inheritance' && <details className="recovery-arithmetic-drawer" id="world"><summary>Try the recorded diagnostic: why does only zero fit?</summary><RecoveryDiagnostic/></details>}
-  </StudyRoom>)}
+  </StudyRoom>{section.id === 'i12r' && <VisualStudy name="handoff" chapter/>}</Fragment>)}
   <section className="mv-full-record" id="recovery-record">
    <FieldNotes label="The complete note & its evidence" detail="READ +">
     <p className="recovery-caption">The full published account, including fresh-task construction, uncertainty, rejected packages and the I12 interruption.</p>
