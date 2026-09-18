@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import * as V from "../lib/machine/vocabulary.ts";
-import { LIMITS, MAX_BODY_BYTES, UNTRUSTED_SOURCE, WRITE, WriteQueue, admit, readBounded, resetLimiter, sourceOf, type Stage } from "../lib/machine/admission.ts";
+import { LIMITS, MAX_BODY_BYTES, UNTRUSTED_SOURCE, WRITE, WriteQueue, admit, createLimiter, readBounded, resetLimiter, sourceOf, type Stage } from "../lib/machine/admission.ts";
 import { handleDeclaration, handleDeclaredValues, type StoredDeclaration } from "../lib/machine/handler.ts";
 
 /**
@@ -381,4 +381,37 @@ test("a visitor that can only GET can still declare, and pays the same admission
  }
  const spent = await handleDeclaredValues(request, { function: "verifier" }, deps({ sink: s.fn }));
  assert.equal(spent.response.status, 429, "a GET declaration is rate limited like a POST");
+});
+
+test("GUESTBOOK-II: two independent limiter instances do not share a budget", () => {
+ // The whole reason createLimiter exists: a second endpoint (the wall)
+ // must not silently pool its rate budget with the declaration endpoint's.
+ resetLimiter();
+ const wall = createLimiter();
+ const base = { method: "POST", contentType: "application/json", declaredLength: 10, now: 1 };
+
+ // Exhaust the *declaration* limiter's instance-global ceiling — the one a
+ // distributed flood actually hits — using a fresh source id per call so
+ // the per-source bucket is never what refuses it.
+ for (let i = 0; i < LIMITS.instanceGlobal.capacity; i++) {
+  admit({ ...base, source: { id: `198.51.100.${i % 256}`, trusted: true } });
+ }
+ assert.equal(admit({ ...base, source: { id: "203.0.113.90", trusted: true } }).outcome, "too_many_requests",
+  "the declaration limiter is genuinely spent");
+
+ // A second, independent instance is unaffected by the first's exhaustion.
+ assert.equal(wall.admit({ ...base, source: { id: "203.0.113.91", trusted: true } }).outcome, "admitted",
+  "a second limiter instance must not share the first's budget");
+
+ // And the reverse: spending the wall instance's per-source bucket leaves
+ // the declaration limiter (the module's own default) untouched. Reset it
+ // first — its instance-global ceiling was deliberately spent above, and
+ // this half is isolating the per-source property, not re-proving the one
+ // already shown.
+ resetLimiter();
+ const wallSource = { id: "203.0.113.92", trusted: true };
+ for (let i = 0; i < LIMITS.source.capacity; i++) wall.admit({ ...base, source: wallSource });
+ assert.equal(wall.admit({ ...base, source: wallSource }).outcome, "too_many_requests", "the wall instance is genuinely spent");
+ assert.equal(admit({ ...base, source: wallSource }).outcome, "admitted",
+  "the same source id against the declaration limiter is a fresh bucket — nothing was shared");
 });

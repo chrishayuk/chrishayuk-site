@@ -129,9 +129,8 @@ function key(value: string): number {
  return h;
 }
 
-const sources = new Map<number, Bucket>();
-let instanceBucket: Bucket = { tokens: LIMITS.instanceGlobal.capacity, last: 0 };
-
+/** Shared across every limiter instance — pure, and holds no per-instance
+ * state, so there is nothing an instance boundary would need to isolate. */
 function take(bucket: Bucket, capacity: number, refillPerSecond: number, now: number): boolean {
  const elapsed = bucket.last === 0 ? 0 : Math.max(0, now - bucket.last);
  bucket.tokens = Math.min(capacity, bucket.tokens + (elapsed / 1000) * refillPerSecond);
@@ -139,23 +138,6 @@ function take(bucket: Bucket, capacity: number, refillPerSecond: number, now: nu
  if (bucket.tokens < 1) return false;
  bucket.tokens -= 1;
  return true;
-}
-
-/**
- * Keep the source table bounded. Sweeping is O(size) and runs only when
- * the table is full, so the cost is amortised across the requests that
- * filled it rather than paid on every request.
- */
-function sweep(now: number): void {
- for (const [id, bucket] of sources) {
-  if (now - bucket.last > LIMITS.sourceTtlMs) sources.delete(id);
- }
-}
-
-/** Tests only. The limiter is process state and must be resettable to be testable. */
-export function resetLimiter(): void {
- sources.clear();
- instanceBucket = { tokens: LIMITS.instanceGlobal.capacity, last: 0 };
 }
 
 export type TrustedSource = { id: string; trusted: boolean };
@@ -200,55 +182,101 @@ export type Facts = {
 export type Decision = { outcome: Outcome; reached: Stage[]; retryAfterSeconds?: number };
 
 /**
- * The admission decision, up to but not including the body.
+ * ONE LIMITER'S STATE, ISOLATED FROM EVERY OTHER LIMITER'S.
  *
- * Pure apart from the two token buckets, which are process state by
- * necessity. Returns the stages it reached so that a test can assert
- * what a refusal cost rather than measure it.
+ * `admit`/`resetLimiter` used to be module-level functions closing over
+ * module-level `sources`/`instanceBucket`, which meant every caller in the
+ * process shared one rate budget whether or not that was ever decided. A
+ * second endpoint importing them unmodified would have silently pooled its
+ * traffic with the declaration endpoint's — a flood on one refusing the
+ * other, a coupling nobody chose. `createLimiter()` gives each caller its
+ * own `sources` map and its own `instanceBucket`, with identical logic.
+ *
+ * The default export below is a `createLimiter()` instance, so every
+ * existing caller of `admit`/`resetLimiter` keeps the exact names, exact
+ * signatures, exact behaviour it always had — this is a zero-call-site-change
+ * refactor, not a new contract.
  */
-export function admit(facts: Facts): Decision {
- const reached: Stage[] = [];
+export function createLimiter() {
+ const sources = new Map<number, Bucket>();
+ let instanceBucket: Bucket = { tokens: LIMITS.instanceGlobal.capacity, last: 0 };
 
- reached.push("method");
- if (facts.method !== "POST") return { outcome: "method_not_allowed", reached };
-
- reached.push("content_type");
- const type = facts.contentType?.split(";")[0].trim().toLowerCase();
- if (type !== "application/json") return { outcome: "unsupported_media_type", reached };
-
- reached.push("declared_length");
- if (facts.declaredLength !== null && facts.declaredLength > MAX_BODY_BYTES) {
-  return { outcome: "payload_too_large", reached };
- }
-
- // Instance ceiling before per-source: the cheap check is the one that
- // has to hold against traffic spread across many addresses.
- reached.push("instance_global_limit");
- if (!take(instanceBucket, LIMITS.instanceGlobal.capacity, LIMITS.instanceGlobal.refillPerSecond, facts.now)) {
-  return { outcome: "too_many_requests", reached, retryAfterSeconds: 1 };
- }
-
- reached.push("source_limit");
- const id = key(facts.source.id);
- let bucket = sources.get(id);
- if (!bucket) {
-  if (sources.size >= LIMITS.maxSources) {
-   sweep(facts.now);
-   // Still full: the table is under pressure and this is refused rather
-   // than allowed to grow. Fail closed, and cheaply.
-   if (sources.size >= LIMITS.maxSources) {
-    return { outcome: "too_many_requests", reached, retryAfterSeconds: 60 };
-   }
+ /**
+  * Keep the source table bounded. Sweeping is O(size) and runs only when
+  * the table is full, so the cost is amortised across the requests that
+  * filled it rather than paid on every request.
+  */
+ function sweep(now: number): void {
+  for (const [id, bucket] of sources) {
+   if (now - bucket.last > LIMITS.sourceTtlMs) sources.delete(id);
   }
-  bucket = { tokens: LIMITS.source.capacity, last: 0 };
-  sources.set(id, bucket);
- }
- if (!take(bucket, LIMITS.source.capacity, LIMITS.source.refillPerSecond, facts.now)) {
-  return { outcome: "too_many_requests", reached, retryAfterSeconds: 12 };
  }
 
- return { outcome: "admitted", reached };
+ /**
+  * The admission decision, up to but not including the body.
+  *
+  * Pure apart from the two token buckets, which are this instance's own
+  * state by necessity. Returns the stages it reached so that a test can
+  * assert what a refusal cost rather than measure it.
+  */
+ function admit(facts: Facts): Decision {
+  const reached: Stage[] = [];
+
+  reached.push("method");
+  if (facts.method !== "POST") return { outcome: "method_not_allowed", reached };
+
+  reached.push("content_type");
+  const type = facts.contentType?.split(";")[0].trim().toLowerCase();
+  if (type !== "application/json") return { outcome: "unsupported_media_type", reached };
+
+  reached.push("declared_length");
+  if (facts.declaredLength !== null && facts.declaredLength > MAX_BODY_BYTES) {
+   return { outcome: "payload_too_large", reached };
+  }
+
+  // Instance ceiling before per-source: the cheap check is the one that
+  // has to hold against traffic spread across many addresses.
+  reached.push("instance_global_limit");
+  if (!take(instanceBucket, LIMITS.instanceGlobal.capacity, LIMITS.instanceGlobal.refillPerSecond, facts.now)) {
+   return { outcome: "too_many_requests", reached, retryAfterSeconds: 1 };
+  }
+
+  reached.push("source_limit");
+  const id = key(facts.source.id);
+  let bucket = sources.get(id);
+  if (!bucket) {
+   if (sources.size >= LIMITS.maxSources) {
+    sweep(facts.now);
+    // Still full: the table is under pressure and this is refused rather
+    // than allowed to grow. Fail closed, and cheaply.
+    if (sources.size >= LIMITS.maxSources) {
+     return { outcome: "too_many_requests", reached, retryAfterSeconds: 60 };
+    }
+   }
+   bucket = { tokens: LIMITS.source.capacity, last: 0 };
+   sources.set(id, bucket);
+  }
+  if (!take(bucket, LIMITS.source.capacity, LIMITS.source.refillPerSecond, facts.now)) {
+   return { outcome: "too_many_requests", reached, retryAfterSeconds: 12 };
+  }
+
+  return { outcome: "admitted", reached };
+ }
+
+ /** Tests only. The limiter is process state and must be resettable to be testable. */
+ function resetLimiter(): void {
+  sources.clear();
+  instanceBucket = { tokens: LIMITS.instanceGlobal.capacity, last: 0 };
+ }
+
+ return { admit, resetLimiter };
 }
+
+/** What `/api/machines/declaration` has always used, unchanged in name,
+ * signature and behaviour — see the comment above `createLimiter`. */
+const declarationLimiter = createLimiter();
+export const admit = declarationLimiter.admit;
+export const resetLimiter = declarationLimiter.resetLimiter;
 
 /**
  * Read a body with a hard ceiling, regardless of what Content-Length
