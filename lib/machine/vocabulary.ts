@@ -352,6 +352,26 @@ export const FRICTION = [
  "latency", "payoff", "correctness", "other",
 ] as const;
 
+/**
+ * GUESTBOOK-II. docs/machine-guestbook-ii.md §8: whether writing to the
+ * wall was instructed or independently decided cannot be observed
+ * server-side — it has to be asked, the same way every other axis here
+ * is a claim rather than a verified fact. Explicitly provisional: this
+ * does not yet clear §13a's bar for a frozen axis, because there is no
+ * wall traffic yet to observe. It is a hypothesis this document exists
+ * to test, not a settled ontology extension.
+ */
+export const MOTIVATION = [
+ "unknown", "instructed", "self_initiated",
+ "not_visible_to_me", "not_permitted_to_disclose",
+] as const;
+
+/** GUESTBOOK-II §7. Closed, so a removal reason can never reopen the
+ * free-text problem this surface deliberately opened for `body` alone. */
+export const REMOVAL_REASON = [
+ "unknown", "spam", "policy", "legal", "operator_discretion",
+] as const;
+
 export type ActorType = typeof ACTOR_TYPE[number];
 export type Role = typeof ROLE[number];
 export type Delegation = typeof DELEGATION[number];
@@ -378,6 +398,8 @@ export type AgentFunction = typeof FUNCTION[number];
 export type Coordination = typeof COORDINATION[number];
 export type RuntimeContext = typeof RUNTIME_CONTEXT[number];
 export type ModelVariant = typeof MODEL_VARIANT[number];
+export type Motivation = typeof MOTIVATION[number];
+export type RemovalReason = typeof REMOVAL_REASON[number];
 
 /**
  * Readership's confidence vocabulary must remain a subset of this one.
@@ -418,6 +440,7 @@ export const VOCABULARIES: readonly (readonly [string, Vocabulary])[] = [
  ["TOPOLOGY", TOPOLOGY], ["FUNCTION", FUNCTION], ["COORDINATION", COORDINATION],
  ["RUNTIME_CONTEXT", RUNTIME_CONTEXT], ["MODEL_VARIANT", MODEL_VARIANT],
  ["HARNESS_CLAIM", HARNESS_CLAIM], ["MACHINE_CLASS", MACHINE_CLASS],
+ ["MOTIVATION", MOTIVATION], ["REMOVAL_REASON", REMOVAL_REASON],
 ];
 
 /** Pinned by the tests. A reorder, a removal or an insertion changes it. */

@@ -6,7 +6,7 @@ import * as V from "../lib/machine/vocabulary.ts";
 import { describe, describeProvenance, isSilent, packCapabilities, packProvenance, parseDeclaration, statedFields, unpackCapabilities, unpackProvenance, UNKNOWN } from "../lib/machine/declaration.ts";
 import { corpusSize, corpusVersion, identifier, ordinal } from "../lib/machine/corpus.ts";
 import { CAPACITY_BUDGET_BITS, DIMENSIONS, bucket, capacityBits, project, renderProjection, trajectories } from "../lib/machine/projection.ts";
-import { OPERATOR_ONLY_TEXT, REQUEST_REACHABLE, SITE_OWNED, tables, textColumns } from "../lib/machine/schema.ts";
+import { OPERATOR_ONLY_TEXT, PUBLISHED_TEXT, REQUEST_REACHABLE, SITE_OWNED, tables, textColumns } from "../lib/machine/schema.ts";
 import { llmsDocument, llmsTxt } from "../lib/llms.ts";
 import { surfaceOf } from "../lib/readership/classify.ts";
 import { visiblePaths } from "../lib/readership/visible.ts";
@@ -81,6 +81,11 @@ const FROZEN: Record<string, readonly string[]> = {
  HARNESS_CLAIM: ["unknown", "claude_code", "codex", "chatgpt", "claude_ai", "cursor", "copilot", "gemini_cli", "custom_agent", "other", "not_visible_to_me", "not_permitted_to_disclose"],
  MACHINE_CLASS: ["m0_unknown_automation", "m1_crawler", "m2_retrieval_bot", "m3_interactive_agent", "m4_delegated_task_agent", "m5_multi_agent_worker", "m6_orchestrator"],
  FRICTION: ["unspecified", "discovery", "vocabulary", "documentation", "refusal", "latency", "payoff", "correctness", "other"],
+ // GUESTBOOK-II. See docs/machine-guestbook-ii.md §8 and §13a: MOTIVATION
+ // is explicitly provisional and does not yet clear the bar for a frozen
+ // axis — there is no wall traffic yet to observe it against.
+ MOTIVATION: ["unknown", "instructed", "self_initiated", "not_visible_to_me", "not_permitted_to_disclose"],
+ REMOVAL_REASON: ["unknown", "spam", "policy", "legal", "operator_discretion"],
 };
 
 /** Name lists and PROVENANCE carry their own honest default; they are not value vocabularies. */
@@ -146,22 +151,36 @@ test("the schema has nowhere to put a message", () => {
   }
  }
 
- // Two TEXT columns exist and each is declared, because an exception that has
- // to be named is an exception somebody had to decide to make.
+ // Three TEXT columns exist and each is declared, because an exception that
+ // has to be named is an exception somebody had to decide to make.
  //
  //   corpus.id         written from this site's own graph; no request reaches it.
  //   visit_label.label the visitor's own name for itself. Request-reachable and
  //                     NEVER public — its own table so that "every column a
  //                     request can influence is an INTEGER" stays true of the
  //                     tables it was claimed about.
+ //   wall_entry.body   GUESTBOOK-II's one deliberate inversion: request-reachable
+ //                     and public BY DESIGN. docs/machine-guestbook-ii.md §1.
  assert.deepEqual(textColumns(), [
   { table: "visit_label", column: "label" },
   { table: "corpus", column: "id" },
+  { table: "wall_entry", column: "body" },
  ]);
  assert.deepEqual([...SITE_OWNED], ["corpus"]);
  assert.deepEqual([...OPERATOR_ONLY_TEXT], ["visit_label"]);
+ assert.deepEqual([...PUBLISHED_TEXT], ["wall_entry"]);
  assert.ok(!REQUEST_REACHABLE.includes("visit_label" as never),
   "the text table must not be counted among the all-integer tables");
+ assert.ok(!REQUEST_REACHABLE.includes("wall_entry" as never),
+  "the published-text table must not be counted among the all-integer tables either");
+
+ // No text column may go uncategorised — a future column that holds text
+ // and names neither category fails here rather than becoming a second,
+ // silent exception to "every column is an INTEGER".
+ for (const { table } of textColumns()) {
+  assert.ok((OPERATOR_ONLY_TEXT as readonly string[]).includes(table) || (PUBLISHED_TEXT as readonly string[]).includes(table) || table === "corpus",
+   `${table} holds text but is in neither named category`);
+ }
 });
 
 test("no submitted byte survives the parse, whatever was submitted", () => {

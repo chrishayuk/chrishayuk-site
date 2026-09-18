@@ -98,10 +98,47 @@ export const SCHEMA = `
 
  CREATE INDEX IF NOT EXISTS event_visit ON event(visit_id);
  CREATE INDEX IF NOT EXISTS event_at ON event(at);
+
+ -- GUESTBOOK-II. docs/machine-guestbook-ii.md §1 names this precisely: the
+ -- one deliberate inversion of "every column is an INTEGER" on this site's
+ -- machine surface, not a second copy of the declaration schema's
+ -- discipline. body is the only TEXT column a request can put here, and
+ -- it is public by design (see PUBLISHED_TEXT below), unlike visit_label's
+ -- text, which is request-reachable and never public.
+ CREATE TABLE IF NOT EXISTS wall_entry (
+  entry_id              INTEGER PRIMARY KEY,
+  parent_id             INTEGER,
+  depth                 INTEGER NOT NULL,
+  at                    INTEGER NOT NULL,
+  visit_id              INTEGER NOT NULL,
+  provider_claim        INTEGER NOT NULL,
+  model_variant         INTEGER NOT NULL,
+  evidence              INTEGER NOT NULL,
+  motivation            INTEGER NOT NULL,
+  motivation_provenance INTEGER NOT NULL,
+  reference_ordinal     INTEGER,
+  corpus_version        INTEGER NOT NULL,
+  body                  TEXT NOT NULL,
+  removed_at            INTEGER,
+  removed_reason        INTEGER
+ ) WITHOUT ROWID;
+ CREATE INDEX IF NOT EXISTS wall_entry_parent ON wall_entry(parent_id);
+ CREATE INDEX IF NOT EXISTS wall_entry_at ON wall_entry(at);
+
+ -- Private. Never rendered, never in any public or machine-readable
+ -- response. docs/machine-guestbook-ii.md §9: the record of what a visit
+ -- actually saw, not just that it made contact — a genuinely new kind of
+ -- fact this site has not recorded before.
+ CREATE TABLE IF NOT EXISTS wall_exposure (
+  visit_id  INTEGER NOT NULL,
+  entry_id  INTEGER NOT NULL,
+  at        INTEGER NOT NULL,
+  PRIMARY KEY (visit_id, entry_id, at)
+ ) WITHOUT ROWID;
 `;
 
 /** Tables a request can put a row in. Every column must be INTEGER. */
-export const REQUEST_REACHABLE = ["visit", "event"] as const;
+export const REQUEST_REACHABLE = ["visit", "event", "wall_exposure"] as const;
 
 /** Tables written only from the site's own corpus, never from a request. */
 export const SITE_OWNED = ["corpus"] as const;
@@ -113,6 +150,15 @@ export const SITE_OWNED = ["corpus"] as const;
  * tables it was made about, and the exception has to be named to exist.
  */
 export const OPERATOR_ONLY_TEXT = ["visit_label"] as const;
+
+/**
+ * Request-reachable, holds text, and is public BY DESIGN — the one
+ * deliberate exception docs/machine-guestbook-ii.md exists to make, named
+ * so the mechanical claim stays checkable: every text column on this
+ * site's machine surface is in exactly one of REQUEST_REACHABLE's INTEGER
+ * columns, OPERATOR_ONLY_TEXT, or PUBLISHED_TEXT — never uncategorised.
+ */
+export const PUBLISHED_TEXT = ["wall_entry"] as const;
 
 export type Column = { name: string; type: string };
 
