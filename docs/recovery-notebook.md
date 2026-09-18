@@ -27,3 +27,16 @@ comparisons. A client-side arithmetic explorer uses the actual public diagnostic
 from I12R block 9. It calculates candidate predictions without model calls; the
 source archive and exact evidence member are identified. The original failure
 trace is kept separate from this explanatory interaction.
+
+## Reading edition — 18 September 2026
+
+The main reading path now has six movements rather than ten. Its narrative prose
+is 1,208 words, down from 2,034 (40.6% less, excluding figure labels and captions).
+The equal-state 0/12 versus 7/12 result is the centrepiece. The recorded correct
+proposal followed by an incorrect commit is visible without opening a drawer;
+the modular arithmetic explorer is optional.
+
+`lib/recovery-reading.ts` supplies this shorter reading path. The complete v1.1
+manuscript in `lib/recovery-record.ts`, publication snapshots, and all source
+evidence remain unchanged and available in the evidence drawer. This is a reading
+layout update, recorded in `lib/page-updates.ts`, with no new experiment or claim.

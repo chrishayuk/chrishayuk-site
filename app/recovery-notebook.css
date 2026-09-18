@@ -1,4 +1,17 @@
 .recovery-notebook .mv-reading {max-width: 48rem; line-height:1.7; margin:1.4rem 0;}
+.recovery-equal-state {margin:2.5rem 0 3rem;padding:clamp(1.2rem,3vw,2.5rem);background:#ece5d7;color:#26251f;}
+.recovery-equal-state>div {display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2rem 0;}
+.recovery-equal-state>div>div {display:flex;flex-direction:column;gap:.5rem;}
+.recovery-equal-state strong {font-size:clamp(5rem,12vw,10rem);line-height:1.1;font-weight:400;font-variant-numeric:tabular-nums;}
+.recovery-equal-state small {font-size:clamp(1.4rem,3vw,2.5rem);}
+.recovery-arithmetic-drawer {margin:2rem 0;border-block:1px solid #b6b0a5;}
+.recovery-arithmetic-drawer>summary {cursor:pointer;padding:1.3rem 0;font-size:1.1rem;}
+.recovery-arithmetic-drawer>summary:focus-visible {outline:3px solid #9e482e;outline-offset:3px;}
+.recovery-commit {margin:2rem 0 3rem;}
+.recovery-commit ol {list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;}
+.recovery-commit li {display:flex;flex-direction:column;gap:1rem;padding:1.3rem 0;border-block:1px solid currentColor;}
+.recovery-commit code {font-size:clamp(.95rem,1.9vw,1.4rem);white-space:nowrap;}
+@media(max-width:600px){.recovery-equal-state>div{gap:1rem}.recovery-commit ol{grid-template-columns:1fr}.recovery-commit li{gap:.6rem;padding:1rem 0}.recovery-equal-state strong{font-size:clamp(4rem,16vw,6rem)}}
 .recovery-outcomes,.recovery-worlds,.recovery-mechanism {margin:2.5rem 0 3rem; border-block:1px solid currentColor; padding:1.5rem 0;}
 .recovery-outcomes figcaption,.recovery-worlds figcaption,.recovery-mechanism figcaption {margin-bottom:1.5rem;}
 .recovery-row {display:grid;grid-template-columns: minmax(10rem,1.1fr) 2fr 4rem;gap:1rem;align-items:center;margin:1.25rem 0;}

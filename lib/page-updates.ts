@@ -7,6 +7,7 @@ import { getRecord, recordPath } from "./records.ts";
  * page dates are omitted; a deployment or request never refreshes this clock.
  */
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
+ "/notebook/the-repairer-left-the-mechanism-kept-working": { date: "2026-09-18", reason: "Six-movement reading edition centres equal-state recovery and the proposal-to-commit boundary; arithmetic is optional and the complete published evidence remains in its drawer." },
  ...Object.fromEntries(Object.keys(machineBriefs).map(id => [recordPath(getRecord(id)!), { date: "2026-09-13", reason: "Visible question and bounded result; link to the field-experiment map." }])),
  ...Object.fromEntries(Object.keys(ecologySeriesUpdates).map(id => [recordPath(getRecord(id)!), { date: "2026-09-14", reason: "Dated later-results context, preserving the original manuscript and snapshot." }])),
  "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-15", reason: "An inheritance opening plate and descendant visual pause frame the existing recorded evidence, without revising the manuscript." },
