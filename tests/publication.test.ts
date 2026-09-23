@@ -70,7 +70,7 @@ test("canonical hashing ignores object key order, but preserves semantic array o
 test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
 test("homepage follows the edited publication sequence and excludes placeholder scenes",async()=>{
  const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");
- assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["identity","programmes","film","results","systems","notebook","appearances"]);
+ assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["film","identity","results","programmes","notebook","appearances","systems"]);
  assert.equal((page.match(/id="latest-youtube"/g)||[]).length,1);
  assert.equal((page.match(/id="latest-mixture-of-experts"/g)||[]).length,1);
  assert.doesNotMatch(page,/MachineMotivationCard|nowNote/);
