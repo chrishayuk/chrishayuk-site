@@ -1,0 +1,36 @@
+/* Publication typography. Aliases let existing HAUSE forms use the site's
+   families without changing the shared library or archived records. */
+html {
+  --type-editorial: var(--font-newsreader);
+  --type-sans: var(--font-archivo);
+  --type-mono: var(--font-geist-mono);
+  --type-title: clamp(34px, 4vw, 56px);
+  --type-feature: clamp(28px, 2.8vw, 40px);
+  --type-note: clamp(25px, 2.2vw, 32px);
+  --font-fraunces: var(--type-editorial);
+  --font-inter: var(--type-sans);
+  --font-display: var(--type-editorial);
+  --font-system: var(--type-sans);
+  font-optical-sizing: auto;
+}
+body { font-family: var(--type-sans), Arial, sans-serif; }
+body :is(h1, h2, .editorial) { letter-spacing: -.015em; line-height: 1.12; }
+body .voice-editorial { font-weight: 400; letter-spacing: -.015em; line-height: 1.12; }
+body :is(h1, h2, h3) em { font-style: normal; color: inherit; }
+/* Captions and navigation use the reading family; tabular numbers stay aligned. */
+body :is(.record-voice, .kicker, .text-link, .site-header nav, .menu-toggle, .motion-toggle, .footer-bottom) {
+  font-family: var(--type-sans), Arial, sans-serif;
+  letter-spacing: .015em;
+  font-variant-numeric: tabular-nums;
+}
+body :is(.kicker, .text-link, .footer-bottom) { font-size: 13px; line-height: 1.6; }
+body .site-header nav { font-size: 13px; text-transform: none; }
+body .menu-toggle { font-size: 12px; }
+body .motion-toggle { font-size: 11px; }
+body .nav-dialog nav a { font: 400 clamp(30px, 6vw, 48px)/1.35 var(--type-sans), sans-serif; letter-spacing: -.015em; }
+body .nav-dialog .record-voice { font-size: 13px; }
+body .footer-name { font: 400 clamp(32px, 5vw, 56px)/1.15 var(--type-editorial), Georgia, serif; letter-spacing: -.015em; }
+body .footer-links a { font-family: var(--type-sans), sans-serif; font-size: 14px; line-height: 1.65; }
+body .footer-bottom { flex-wrap: wrap; gap: 16px 28px; }
+body :is(code, pre, kbd, samp) { font-family: var(--type-mono), monospace; font-variant-numeric: tabular-nums; letter-spacing: 0; }
+@media (max-width: 430px) { body .motion-toggle { font-size: 10px; } }
