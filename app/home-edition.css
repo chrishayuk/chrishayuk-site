@@ -7,7 +7,7 @@
   color: var(--fg);
 }
 .edition-home h1, .edition-home h2, .edition-home h3 { text-wrap: balance; }
-.edition-home .edition-caption { font: 13px/1.7 var(--type-sans), sans-serif; color: var(--muted); }
+.edition-home .edition-caption { font: 13px/1.7 var(--font-evidence), monospace; color: var(--muted); }
 .edition-home .edition-link { display: inline-flex; align-items: center; min-height: 44px; font: 13px/1.5 var(--type-sans), sans-serif; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 .edition-home .edition-link:hover { color: var(--accent); }
 .edition-lead .cinema-player { width: 100%; height: auto; max-height: none; aspect-ratio: 16 / 9; border: 0; background: #16191e; }
@@ -37,7 +37,7 @@
 .edition-programmes nav a { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule); font: 16px/1.6 var(--type-sans), sans-serif; }
 .edition-programmes nav a span:last-child { color: var(--muted); font-size: 13px; }
 .edition-home .compact-notes > li { grid-template-columns: 1fr 2fr; gap: 40px; padding-block: 26px; }
-.edition-home .compact-notes .record-voice { font-family: var(--type-sans), sans-serif; letter-spacing: 0; text-transform: none; font-size: 13px; }
+.edition-home .compact-notes .record-voice { font-family: var(--font-evidence), monospace; letter-spacing: 0; text-transform: none; font-size: 13px; }
 .edition-home .compact-note-copy h3 { font: 400 var(--type-note)/1.22 var(--type-editorial), Georgia, serif; letter-spacing: -.01em; }
 .edition-home .compact-note-copy h3 span { display: none; }
 .edition-conversation article { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 6vw; }

@@ -11,6 +11,7 @@ html {
   --font-inter: var(--type-sans);
   --font-display: var(--type-editorial);
   --font-system: var(--type-sans);
+  --font-evidence: var(--type-mono);
   font-optical-sizing: auto;
 }
 body { font-family: var(--type-sans), Arial, sans-serif; }
@@ -18,9 +19,15 @@ body :is(h1, h2, .editorial) { letter-spacing: -.015em; line-height: 1.12; }
 body .voice-editorial { font-weight: 400; letter-spacing: -.015em; line-height: 1.12; }
 body :is(h1, h2, h3) em { font-style: normal; color: inherit; }
 /* Captions and navigation use the reading family; tabular numbers stay aligned. */
-body :is(.record-voice, .kicker, .text-link, .site-header nav, .menu-toggle, .motion-toggle, .footer-bottom) {
+body :is(.kicker, .text-link, .site-header nav, .menu-toggle, .motion-toggle) {
   font-family: var(--type-sans), Arial, sans-serif;
   letter-spacing: .015em;
+  font-variant-numeric: tabular-nums;
+}
+/* Recorded status, dates, measurements and citations retain HAUSE's third voice. */
+body .record-voice {
+  font-family: var(--font-evidence), monospace;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 body :is(.kicker, .text-link, .footer-bottom) { font-size: 13px; line-height: 1.6; }

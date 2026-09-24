@@ -36,7 +36,7 @@ body .programme-number { font-size: 13px; margin-bottom: 22px; }
 body .programme-count,
 body .programme-highlight > .record-voice,
 body .programme-door > .programme-draft,
-body .curated-index .compact-notes .record-voice { font: 13px/1.7 var(--type-sans), sans-serif; letter-spacing: 0; text-transform: none; }
+body .curated-index .compact-notes .record-voice { font: 13px/1.7 var(--font-evidence), monospace; letter-spacing: 0; text-transform: none; }
 body .programme-doors { gap: 40px 56px; }
 body .programme-entrance { flex: none; }
 body .curated-heading { margin-bottom: 26px; }

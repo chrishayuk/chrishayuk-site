@@ -3,8 +3,8 @@
 Branch: `design/editorial-homepages`.
 
 The publication uses Newsreader for editorial titles and Archivo for prose,
-navigation and captions. Geist Mono remains available for code and numerical
-instruments. The families load through `next/font`, with normal and italic faces;
+navigation and prose captions. Geist Mono carries recorded metadata, status,
+dates, measurements, citations and code. The families load through `next/font`, with normal and italic faces;
 Newsreader includes its optical-size axis.
 
 | Role | Family | Size | Treatment |
@@ -13,7 +13,8 @@ Newsreader includes its optical-size axis.
 | Research / conversation title | Newsreader | 28–40px | Regular, 1.16 line height |
 | Notebook title | Newsreader | 25–32px | Regular, 1.22 line height |
 | Body | Archivo | 15–16px on homepage | 1.7–1.8 line height |
-| Navigation / captions | Archivo | 13px | Near-normal tracking |
+| Navigation / prose captions | Archivo | 13px | Near-normal tracking |
+| Record metadata / dates / status | Geist Mono | 13px on collection surfaces | Tabular numerals, normal tracking |
 | Wordmark | Archivo | 24px desktop / 20px narrow mobile | Medium, slight positive tracking |
 | Code | Geist Mono | Context dependent | Tabular numerals, normal tracking |
 
