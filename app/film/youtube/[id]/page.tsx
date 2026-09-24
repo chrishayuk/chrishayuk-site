@@ -9,6 +9,7 @@ import {getRecord,recordPath,SITE,records} from "@/lib/records";
 import {VideoScreening} from "@/components/VideoScreening";
 import {previewFor} from "@/components/YouTubeCollection";
 import {Reference} from "@/components/Reference";
+import {latestVideo} from "@/lib/youtube";
 type Props={params:Promise<{id:string}>;searchParams:Promise<{t?:string}>};
 export async function generateMetadata({params}:Props){const{id}=await params;const v=getVideo(id);return v?pageMetadata(v.title,v.description.split("\n\n")[0]||v.title,videoPath(v),v.poster,videoCitation(v)):{title:"Film not found"};}
 export default async function Page({params,searchParams}:Props){
@@ -17,10 +18,10 @@ export default async function Page({params,searchParams}:Props){
  const notebook=records.filter(r=>r.kind==="notebook"&&r.related.includes(v.id));
  const structured=videoObjectLd({citation:videoCitation(v),pageUrl:`${SITE}${videoPath(v)}`,thumbnailUrl:v.poster.startsWith("/")?`${SITE}${v.poster}`:v.poster,embedUrl:`https://www.youtube-nocookie.com/embed/${v.youtubeId}`,durationSeconds:v.duration,uploadDate:v.uploadedAt||undefined,participants:v.participants});
  const crumbs=breadcrumbLd([{name:"Film",url:`${SITE}/film`},{name:v.collection||"YouTube",url:`${SITE}${v.producer==="IBM"?"/film/mixture-of-experts":"/film/youtube"}`},{name:v.title,url:`${SITE}${videoPath(v)}`}]);
- return <main id="main" className="screening-page"><JsonLd data={[structured,crumbs]}/>
+ return <main id="main" className="screening-page" data-film-journey={v.youtubeId === latestVideo.youtubeId ? "true" : undefined}><JsonLd data={[structured,crumbs]}/>
  <header className="screening-title"><nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/film">FILM</Link><span>/</span><Link href={v.producer === "IBM"?"/film/mixture-of-experts":"/film/youtube"}>{v.producer === "IBM"?"IBM / MIXTURE OF EXPERTS":"YOUTUBE"}</Link></nav><h1>{v.title}</h1><div className="record-bar record-voice"><span>{v.id}</span><span>{durationLabel(v.duration)}</span>{v.published&&<span>PUBLISHED ON YOUTUBE {v.published}</span>}<a href="#cite">CITE ↓</a></div></header>
- <p className="film-answer-first">{v.description.split("\n\n")[0]||`Chris Hay’s “${v.title}”, a film published on YouTube. Full description and transcript are not yet indexed.`}</p>
  <VideoScreening video={v} preview={previewFor(v)} passages={transcript?.passages||[]} initialStart={start}/>
+ <p className="film-answer-first">{v.description.split("\n\n")[0]||`Chris Hay’s “${v.title}”, a film published on YouTube. Full description and transcript are not yet indexed.`}</p>
  <div className="screening-details"><ThreadNavigation id={v.id}/><section className="film-description"><p className="kicker record-voice">{v.producer === "IBM"?"ABOUT THE EPISODE / IBM":"FROM CHRIS / ORIGINAL VIDEO DESCRIPTION"}</p>{v.description?<p>{v.description}</p>:<p>Chris Hay’s “{v.title}”. This catalogue entry currently contains the channel listing; a full description and transcript have not yet been imported.</p>}<a className="text-link" href={v.url}>WATCH THE ORIGINAL ON YOUTUBE ↗</a></section>
  {related.length>0&&<section className="related-records"><h2>CONNECTED WORK / FROM THE VIDEO METADATA</h2>{related.map(r=><Link href={recordPath(r)} key={r.id}>{r.title}<span>↗</span></Link>)}</section>}
  {notebook.length>0&&<section className="related-records"><h2>AFTER THE FILM / FROM THE NOTEBOOK</h2><p className="notebook-related-context">The questions, experiments and follow-ups connected to this conversation. These are working editorial notes.</p>{notebook.map(r=><Link href={recordPath(r)} key={r.id}>{r.title}<span>↗</span></Link>)}</section>}

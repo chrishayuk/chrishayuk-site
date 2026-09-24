@@ -11,6 +11,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/Motion";
 import { SITE, socials } from "@/lib/records";
+import { filmTransitionScript } from "@/lib/film-transition";
 import "./globals.css";
 import "@chrishayuk/hause/exhibition.css";
 import "./notebook-visuals.css";
@@ -25,6 +26,7 @@ import "./machine-field.css";
 import "./publication-index.css";
 import "./typography.css";
 import "./collection-edition.css";
+import "./film-journey.css";
 const display = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], weight: "variable", style: ["normal", "italic"], axes: ["opsz"], display: "swap" });
 const text = Archivo({ variable: "--font-archivo", subsets: ["latin"], weight: ["400", "500", "600"], style: ["normal", "italic"], display: "swap" });
 const record = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
@@ -39,5 +41,5 @@ export default async function RootLayout({ children }: { children: React.ReactNo
  const configuredId = process.env.GOOGLE_ANALYTICS_ID;
  const analyticsId = INDEXABLE && host === "chrishayuk.com" && /^G-[A-Z0-9]+$/.test(configuredId || "") ? configuredId : undefined;
  const person = { "@context": "https://schema.org", "@type": "Person", "@id": `${SITE}/#person`, name: "Chris Hay", description: HOUSE.description, url: SITE, sameAs: Object.values(socials) };
- return <html lang="en" data-mode="light" suppressHydrationWarning className={`${display.variable} ${text.variable} ${record.variable}`}><head><script dangerouslySetInnerHTML={{__html:modeScript("light")}}/></head><body id="top"><Analytics id={analyticsId}/><JsonLd data={[person,webSiteLd({name:"Chris Hay",url:SITE,description:`${HOUSE.descriptor}. ${HOUSE.description}`})]}/><MotionProvider><Header/>{children}<Footer/></MotionProvider></body></html>;
+ return <html lang="en" data-mode="light" suppressHydrationWarning className={`${display.variable} ${text.variable} ${record.variable}`}><head><script dangerouslySetInnerHTML={{__html:modeScript("light")}}/><script dangerouslySetInnerHTML={{__html:filmTransitionScript}}/></head><body id="top"><Analytics id={analyticsId}/><JsonLd data={[person,webSiteLd({name:"Chris Hay",url:SITE,description:`${HOUSE.descriptor}. ${HOUSE.description}`})]}/><MotionProvider><Header/>{children}<Footer/></MotionProvider></body></html>;
 }

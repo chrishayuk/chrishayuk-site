@@ -1,0 +1,57 @@
+/* One native, shared-frame transition. Everything else keeps ordinary navigation. */
+@view-transition { navigation: auto; }
+::view-transition-group(*) { animation-duration: 560ms; animation-timing-function: cubic-bezier(.22, .7, .2, 1); }
+::view-transition-old(root) { animation: none; opacity: 0; }
+::view-transition-new(root) { animation: film-page-arrive 260ms ease-out both; }
+::view-transition-old(film-feature) { animation: none; opacity: 0; }
+::view-transition-new(film-feature) { animation: none; height: 100%; object-fit: contain; mix-blend-mode: normal; }
+@keyframes film-page-arrive { from { opacity: 0; } to { opacity: 1; } }
+
+.film-entrance { display: block; position: relative; aspect-ratio: 16 / 9; background: #090a0b; view-transition-name: film-feature; }
+.film-entrance > img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.film-entrance-label { position: absolute; left: 24px; bottom: 24px; background: #fafaf8; color: #161616; padding: 14px 20px; font: 14px/1.5 var(--font-system), sans-serif; }
+.film-entrance:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+.film-entrance:hover .film-entrance-label { text-decoration: underline; text-underline-offset: 4px; }
+
+.screening-room { background: #090a0b; color: #f4f1eb; }
+.screening-room .screening-frame { background: transparent; }
+.screening-surface { width: min(100%, 1600px, calc(82svh * 16 / 9)); margin-inline: auto; view-transition-name: film-feature; }
+.screening-surface > .cinema-player { width: 100%; max-height: none; aspect-ratio: 16 / 9; }
+.screening-surface .cinema-player > img { object-fit: contain; }
+.screening-controls { max-width: 1600px; margin-inline: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding: 10px var(--margin); }
+.screening-controls a, .screening-controls button { display: inline-flex; align-items: center; min-height: 44px; background: none; color: inherit; border: 0; font: 13px/1.5 var(--font-system), sans-serif; }
+.screening-controls a:hover, .screening-controls button:hover { text-decoration: underline; text-underline-offset: 4px; }
+.screening-stop { display: none !important; }
+.screening-room:has(.is-playing) .screening-stop { display: inline-flex !important; }
+.screening-room a:focus-visible, .screening-room button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+body .screening-page .screening-title { padding-block: 28px 24px; }
+body .screening-page .screening-title h1 { font-size: clamp(24px, 2.6vw, 38px); max-width: 42ch; margin-bottom: 16px; }
+.screening-page .screening-title .breadcrumbs { margin-bottom: 16px; }
+.screening-page .film-answer-first { margin-block: 28px; }
+
+/* A viewing state, not a new permanent colour preference. Controls stay present.
+   Hover or keyboard focus restores navigation/reading contrast immediately. */
+body:has(.screening-room) { transition: background-color 420ms ease, color 420ms ease; }
+body:has(.screening-room) .site-header,
+.screening-page .screening-title,
+.screening-page > .screening-details,
+.screening-page > .film-answer-first { transition: opacity 350ms ease, background-color 420ms ease, color 420ms ease; }
+body:has(.screening-room .is-playing) { --bg: #090a0b; --fg: #f4f1eb; --muted: #aaa79f; --rule: #ffffff30; background: var(--bg); color: var(--fg); }
+body:has(.screening-room .is-playing) .site-header,
+.screening-page:has(.is-playing) > .screening-title,
+.screening-page:has(.is-playing) > .screening-details,
+.screening-page:has(.is-playing) > .film-answer-first { opacity: .55; }
+body:has(.screening-room .is-playing) .site-header:is(:hover, :focus-within),
+.screening-page:has(.is-playing) > :is(.screening-title, .screening-details, .film-answer-first):is(:hover, :focus-within) { opacity: 1; }
+
+@media (max-width: 700px) {
+  .film-entrance-label { left: 14px; bottom: 14px; padding: 12px 16px; }
+  .screening-controls { gap: 4px 16px; padding-block: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  body:has(.screening-room), body:has(.screening-room) .site-header,
+  .screening-page .screening-title, .screening-page > .screening-details,
+  .screening-page > .film-answer-first { transition: none; }
+}

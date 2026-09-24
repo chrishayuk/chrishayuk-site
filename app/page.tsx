@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SelectedExperiments, CompactNotes } from "@/components/PublicationIndex";
 import { FilmPlayer } from "@/components/FilmPlayer";
+import { FilmPoster } from "@/components/FilmPoster";
 import { previewFor } from "@/components/YouTubeCollection";
 import { latestVideo, latestMoe, videoPath, durationLabel } from "@/lib/youtube";
 import { homeResultProgrammes, latestNotes, researchProgrammes, shortDate } from "@/lib/publication-index";
@@ -14,10 +15,10 @@ export default function Home() {
   return <main id="main" className="edition-home">
     <section id="film" className="edition-lead" data-scene="film" aria-labelledby="latest-youtube-heading">
       <article id="latest-youtube">
-        <FilmPlayer video={latestVideo} preview={previewFor(latestVideo)} priority/>
+        <a href={videoPath(latestVideo)} className="film-entrance" data-film-destination aria-label={`Open film: ${latestVideo.title}`}><FilmPoster video={latestVideo} preview={previewFor(latestVideo)} priority/><span className="film-entrance-label">Watch the film <span aria-hidden="true">↗</span></span></a>
         <div className="edition-lead-caption">
           <p className="edition-caption">Latest film<br/>{latestVideo.published && <><time dateTime={latestVideo.published}>{shortDate(latestVideo.published)}</time> · </>}{durationLabel(latestVideo.duration)}</p>
-          <div><h1 id="latest-youtube-heading"><Link href={videoPath(latestVideo)}>{latestVideo.title}</Link></h1><Link className="edition-link" href={videoPath(latestVideo)}>Film & transcript</Link></div>
+          <div><h1 id="latest-youtube-heading"><a href={videoPath(latestVideo)}>{latestVideo.title}</a></h1><a className="edition-link" href={videoPath(latestVideo)}>Film & transcript</a></div>
         </div>
       </article>
     </section>
