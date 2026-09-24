@@ -70,9 +70,9 @@ export function ProgrammeDoors({ items, notebook = false, highlights = false }: 
   </div>;
 }
 
-export function CompactNotes({ notes }: { notes: PublicationRecord[] }) {
+export function CompactNotes({ notes, notebookJourney = false }: { notes: PublicationRecord[]; notebookJourney?: boolean }) {
   return <ol className="compact-notes">{notes.map(record => <li key={record.id}>
     <div className="compact-note-date record-voice"><time dateTime={noteDate(record)}>{shortDate(noteDate(record))}</time><span>{record.publication === "published" ? "Published" : "Working draft"}</span></div>
-    <div className="compact-note-copy"><p className="record-voice">{programmeFor(record)?.title || "Notebook"}</p><h3><Link href={recordPath(record)}>{record.title}<span aria-hidden="true"> ↗</span></Link></h3><p>{record.dek}</p></div>
+    <div className="compact-note-copy"><p className="record-voice">{programmeFor(record)?.title || "Notebook"}</p><h3 className={notebookJourney ? "notebook-journey-title" : undefined} data-notebook-destination={notebookJourney ? recordPath(record) : undefined} style={notebookJourney ? {viewTransitionName: `notebook-${record.id.toLowerCase()}`} : undefined}>{notebookJourney ? <a href={recordPath(record)}>{record.title}</a> : <Link href={recordPath(record)}>{record.title}<span aria-hidden="true"> ↗</span></Link>}</h3><p>{record.dek}</p></div>
   </li>)}</ol>;
 }

@@ -320,7 +320,7 @@ test("notebook notes declare their own lineage and every act kind renders", asyn
  // The index introduces threads and a compact chronological selection.
  const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
  assert.match(index, /programmes\.map/);
- assert.match(index, /CompactNotes notes=\{otherNotes\}/);
+ assert.match(index, /CompactNotes notes=\{otherNotes\} notebookJourney/);
  assert.doesNotMatch(index, /VISUAL NOTES/);
 });
 

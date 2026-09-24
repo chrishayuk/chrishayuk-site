@@ -35,5 +35,26 @@ The recovery result is **0/12 for prose and 7/12 for executable treatment under
 matched damage**. It must never become a fabricated before/after comparison.
 Source qualifications remain part of the work's presentation.
 
-This revision changes the index; individual article compositions are not yet
-redesigned to this direction.
+## Contents-to-note transition
+
+Each title in the current contents has an identity shared with its article
+heading. Native navigation carries that title into the opening over 380ms.
+Paragraphs, figures and evidence receive no entrance animation. Reduced motion
+and the existing pause preference skip the transition; ordinary links remain
+the fallback. Film retains its separate, slower shared-frame transition.
+
+Article openings now have a quiet return link, restrained heading scale,
+authorship, recorded date and publication state. The contents link is available
+again after the record. Direct contents arrivals use native history restoration;
+after further client navigation the link goes explicitly to the contents rather
+than trusting a stale referrer. The same guard now protects the Film return.
+
+The existing article bodies and scientific instruments remain intact. This is
+the opening and navigation pass, not a redesign of every article composition.
+
+Verification: Next and vinext production builds, 58 publication/navigation tests,
+and served HTML checks for unique headings/IDs and matching title identities.
+The browser connection remains unavailable; motion, wrapping and native history
+restoration still require visual/interaction review.
+
+CSS reference: [shared transition classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/view-transition-class).

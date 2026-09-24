@@ -10,7 +10,7 @@ import { NotebookFieldNotes } from "./NotebookFieldNotes";
 export function AgentAttributionHero({ record }: { record: PublicationRecord; citation: boolean; captureUrl?: string }) {
   return <header className="agent-hero">
     <nav className="breadcrumbs record-voice" aria-label="Breadcrumb"><Link href="/">CHRIS HAY</Link><span>/</span><Link href="/notebook">NOTEBOOK</Link><span>/ {record.publication === "published" ? "PUBLISHED" : "WORKING NOTE"}</span></nav>
-    <h1 className="agent-hero-title">{record.title}</h1>
+    <h1 className="agent-hero-title notebook-journey-title" style={{viewTransitionName: `notebook-${record.id.toLowerCase()}`}}>{record.title}</h1>
     <p className="dek">{record.dek}</p>
     <div className="agent-commit" aria-label="Illustrative commit fragment">
       <span>commit a83c19…</span>
