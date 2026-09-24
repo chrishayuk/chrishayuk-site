@@ -4,8 +4,12 @@ Branch: `design/editorial-homepages`
 
 ## Implemented
 
-- Notebook programme entrances now show recorded research and its diagrams through
-  the existing result components. Generated entrance illustrations are removed.
+- Notebook now opens as a contents page: compact masthead, latest note with its
+  recorded date and programme, then the chronological list. Programme navigation
+  sits alongside it on desktop and follows the list on narrow screens.
+- Repeated overlines, introductory navigation, oversized section headings and
+  illustrated programme entrances are removed from this route. Archive and feed
+  destinations remain available. No image is required when the note needs none.
 - Collection and record titles use the homepage's 34–56px Newsreader scale;
   section titles use its 28–40px scale. Programme text and labels use Archivo.
 - Film, research, systems, notebook and prose pages share the quieter hierarchy.
@@ -17,7 +21,9 @@ Branch: `design/editorial-homepages`
 
 ## Verification
 
-The production Next.js build and complete existing test suite pass. Served
+The preceding edition passed its production build and complete test suite. This
+contents-page revision passes the production Next.js build and all 51 existing
+publication tests. Served
 homepage and Notebook HTML each have one h1, unique IDs and valid local anchors.
 The earlier review checked all 33 internal homepage destinations successfully.
 

@@ -12,6 +12,9 @@ Newsreader includes its optical-size axis.
 | Featured film title | Newsreader | 34–56px | Regular, 1.12 line height, −0.015em tracking |
 | Research / conversation title | Newsreader | 28–40px | Regular, 1.16 line height |
 | Notebook title | Newsreader | 25–32px | Regular, 1.22 line height |
+| Notebook index masthead | Archivo | 24px | Medium, 1.3 line height |
+| Notebook index lead | Newsreader | 30–46px | Regular, 1.14 line height |
+| Notebook index entries | Newsreader | 25px | Regular, 1.25 line height |
 | Body | Archivo | 15–16px on homepage | 1.7–1.8 line height |
 | Navigation / prose captions | Archivo | 13px | Near-normal tracking |
 | Record metadata / dates / status | Geist Mono | 13px on collection surfaces | Tabular numerals, normal tracking |
@@ -20,7 +23,8 @@ Newsreader includes its optical-size axis.
 
 Role tokens live in `app/typography.css`. The old family variables are compatibility
 aliases for existing layouts and HAUSE forms. Homepage sizes are defined in
-`app/home-edition.css`; individual scientific instruments keep their own scales.
+`app/home-edition.css`; the contents page uses `app/notebook-edition.css`.
+Individual scientific instruments keep their own scales.
 Decorative italic emphasis is removed from headings, while prose emphasis retains
 its normal semantic styling. Existing social-card font files remain separate.
 
