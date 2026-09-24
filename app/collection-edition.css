@@ -1,0 +1,54 @@
+/* The publication's collection pages share the homepage's reading scale. */
+body .index-intro { padding-block: clamp(40px, 5vw, 72px) 44px; }
+body .index-intro h1,
+body .curated-index .index-intro h1,
+body .channel-intro h1,
+body .prose-page h1,
+body .record-header h1,
+body .screening-title h1 {
+  font: 400 var(--type-title)/1.12 var(--type-editorial), Georgia, serif;
+  letter-spacing: -.015em;
+  max-width: 28ch;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  margin-bottom: 24px;
+}
+body .index-intro .kicker { margin-bottom: 24px; }
+body .index-intro .dek { font-size: 17px; line-height: 1.75; max-width: 58ch; }
+body .index-intro h1 .amber { color: inherit; }
+body .publication-main .section-heading h2,
+body .curated-heading h2,
+body .work-story-heading h2,
+body .channel-feature-copy h2,
+body .channel-latest h2,
+body .channel-popular > h2,
+body .channel-index-link h2,
+body .about-copy h2,
+body .house-record h2 {
+  font: 400 var(--type-feature)/1.2 var(--type-editorial), Georgia, serif;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+body .programme-door h3 { font: 400 27px/1.2 var(--type-editorial), Georgia, serif; letter-spacing: -.01em; }
+body .programme-highlight h4 { font: 400 var(--type-note)/1.25 var(--type-editorial), Georgia, serif; letter-spacing: -.01em; }
+body .programme-question { font: 16px/1.75 var(--type-sans), sans-serif; max-width: 48ch; margin-bottom: 22px; }
+body .programme-number { font-size: 13px; margin-bottom: 22px; }
+body .programme-count,
+body .programme-highlight > .record-voice,
+body .programme-door > .programme-draft,
+body .curated-index .compact-notes .record-voice { font: 13px/1.7 var(--type-sans), sans-serif; letter-spacing: 0; text-transform: none; }
+body .programme-doors { gap: 40px 56px; }
+body .programme-entrance { flex: none; }
+body .curated-heading { margin-bottom: 26px; }
+body .curated-section { padding-block: 36px 60px; }
+body .curated-index .compact-note-copy h3 { font: 400 var(--type-note)/1.25 var(--type-editorial), Georgia, serif; letter-spacing: -.01em; }
+body .curated-index .compact-note-copy > p:last-child { font-size: 15px; line-height: 1.75; }
+body .work-story:nth-child(even) { width: 100%; margin-left: 0; }
+body .work-story > p { font: 400 24px/1.4 var(--type-editorial), Georgia, serif; max-width: 45ch; }
+body .index-count { flex-wrap: wrap; gap: 16px 28px; font-size: 13px; }
+body .publication-main .moe-pair > article:nth-child(2) { margin-top: 48px; }
+@media (max-width: 700px) {
+  body .programme-doors { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  body .publication-main .moe-pair > article:nth-child(2) { margin-top: 0; width: 100%; }
+  body .publication-main .section-heading { flex-wrap: wrap; }
+}

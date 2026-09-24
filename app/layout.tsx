@@ -24,6 +24,7 @@ import "./machine-programme.css";
 import "./machine-field.css";
 import "./publication-index.css";
 import "./typography.css";
+import "./collection-edition.css";
 const display = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], weight: "variable", style: ["normal", "italic"], axes: ["opsz"], display: "swap" });
 const text = Archivo({ variable: "--font-archivo", subsets: ["latin"], weight: ["400", "500", "600"], style: ["normal", "italic"], display: "swap" });
 const record = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"], display: "swap" });
