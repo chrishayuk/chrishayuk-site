@@ -1,7 +1,7 @@
 # Component synchronization — 25 September 2026
 
 Both hause.design and chrishayuk.com consume HAUSE revision
-`cbdf7352e42715daa88ed956698410201e9990c7` on review branches.
+`0fa7945173d2de34531b45309f0ece65cf93e5c3` on review branches.
 
 The book now imports exhibition capabilities directly from the package. Its old
 35-form compatibility snapshot is retired. StagedTransition and TextCorrection
@@ -40,3 +40,8 @@ provides continuous long-form prose and chapter navigation separately from folio
 EditorialPlate supplies wide, inset and portrait image compositions. The Repairer entry
 uses native recorded-data figures through ReadingFigure; the HAUSE composition specimen uses an
 explicitly attributed visual study. Research illustrations are owned by the publication.
+
+The Codex binding now keeps a fixed responsive height across folios. Longer
+spreads scroll internally, with reserved scrollbar space and a stable pagination
+row. Page-turn snapshots preserve the visible scroll position. Read and print
+retain their continuous full-content layout.

@@ -57,7 +57,7 @@ for readers arriving directly at its fragment. No outcomes or source records cha
 
 Spread navigation updates the address without native fragment scrolling. Inert
 visual copies make a directional leaf turn while the real instruments stay mounted;
-height changes interpolate with the turn. Pause and reduced motion skip animation.
+the binding keeps one responsive height throughout the turn. Pause and reduced motion skip animation.
 
 The full reading edition uses the current published record, grouped into eleven
 continuous sections. It retains every act and its original act-N anchor, with
@@ -92,3 +92,11 @@ Verification: typecheck, scoped lint, recovery/source tests, production build an
 rendered HTML checks. The supplied screenshot informed the correction; the updated
 live layout still requires browser visual verification, which is unavailable in
 this session.
+
+### Stable binding dimensions
+
+All seven folios use the same responsive book height. Longer content scrolls
+inside its folio rather than resizing the book, and scrollbar space is reserved
+so text width stays consistent. The turning leaf preserves the outgoing folio’s
+visible scroll position. Pagination labels reserve two lines. Read remains a
+continuous document, and printing restores every folio to its full height.
