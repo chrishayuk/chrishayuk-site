@@ -8,7 +8,9 @@ import { RecoveryResult } from './RecoveryResult';
 import { FigureMotion } from "./FigureMotion";
 import { RecoveryCommit } from "./RecoveryCommit";
 import { RecoveryDiagnostic } from "./RecoveryDiagnostic";
-import type { CSSProperties } from 'react';
+import { Fragment, type CSSProperties } from 'react';
+import { EditorialPlate } from '@chrishayuk/hause/components/EditorialPlate';
+import { StudyImage } from './VisualStudy';
 import { Acts } from './Acts';
 import { actAnchor } from '@/lib/record-knowledge';
 import { recoveryChapters } from '@/lib/recovery-reading';
@@ -30,11 +32,20 @@ function FullPassage({ id, omitLast = false }: { id: string; omitLast?: boolean 
  return <>{paragraphs.map(text => <p key={text}>{text}</p>)}</>;
 }
 
+function InheritancePlate({ detail = false, layout = 'wide' }: { detail?: boolean; layout?: 'wide' | 'inset' | 'portrait' }) {
+ return <EditorialPlate layout={layout} className={detail ? 'recovery-image-detail' : 'recovery-image-scene'} caption={<><span>{detail ? 'The Inheritance / detail' : 'The Inheritance / visual study'}</span><span>AI-generated · not experimental evidence</span></>}><StudyImage name="inheritance" sizes={layout === 'portrait' ? '(max-width: 600px) 90vw, 42vw' : '(max-width: 900px) 100vw, 1100px'}/></EditorialPlate>;
+}
+
 export function RecoveryNotebook() {
  const record = getRecord('N-ECOLOGY-RECOVERY')!;
  const history = publicationHistory(record.id)!;
  const comparison = data.panels.find(panel => panel.id === 'I12R')!;
  const folios = [
+  { id: 'frontispiece', label: 'The inheritance', children: <>
+   <FolioObject place="full"><InheritancePlate/></FolioObject>
+   <FolioObject place="left"><h2>What can remain after an AI leaves?</h2></FolioObject>
+   <FolioObject place="right"><p>A stronger model leaves a repair method. Later agents face damage it is no longer there to fix.</p><a className="recovery-folio-link" href="#experiment">Begin with the experiment ↗</a></FolioObject>
+  </> },
   { id: 'experiment', label: 'The experiment', children: <>
    <FolioObject place="left"><span className="recovery-folio-kicker">The question</span><h2>Can an AI leave behind a way to repair?</h2><p>A stronger model, Sol, leaves a repair method for smaller Qwen agents. Then Sol is removed permanently.</p><p>The agents inherit a record of four numbers. After the builder has gone, the experiment changes one number. Can a successor reconstruct what was lost?</p></FolioObject>
    <FolioObject place="right"><div className="recovery-setup"><h3>What a “world” is</h3><p>A separate calibration task: four stored codes, each from 0 to 16, and independent measurements that can check them. Each new agent starts without its predecessor’s private conversation.</p><h3>What changes between the two groups</h3><p>One inherits written repair instructions. The other inherits a program that calculates and checks a proposed repair. In both, the agent must write the replacement itself.</p><h3>What counts as recovery</h3><p>Restore the original record and answer a new four-code task correctly at the same assessment. The repair machinery itself stays protected.</p></div></FolioObject>
@@ -69,14 +80,14 @@ export function RecoveryNotebook() {
    <FolioObject place="margin"><Marginalia label="Scope / twelve paired worlds"><p id="limits">A fixed interface, historical builder packages and protected repair machinery. Prose successors often failed to follow the permitted interface.</p><p>Four rejected packages stay in each denominator. The effect size is uncertain. These are not independent new builders.</p><a href="#scope">Read the limitations ↗</a></Marginalia></FolioObject>
   </> },
   { id: 'next', label: 'The next question', children: <>
-   <FolioObject place="left"><span className="recovery-folio-kicker">Proposed I13</span><h2>What happens when the mechanism breaks?</h2></FolioObject>
-   <FolioObject place="right"><p>Repair the inherited program. Then have a later successor use it.</p><p className="recovery-folio-small">That is the next question recorded in this note—not a result of I12 or I12R.</p><a className="recovery-folio-link" href="#recovery-codex-history">Follow the record’s history ↗</a></FolioObject>
+   <FolioObject place="left"><span className="recovery-folio-kicker">Proposed I13</span><h2>What happens when the mechanism breaks?</h2><p>Repair the inherited program. Then have a later successor use it.</p><p className="recovery-folio-small">That is the next question recorded in this note—not a result of I12 or I12R.</p><a className="recovery-folio-link" href="#recovery-codex-history">Follow the record’s history ↗</a></FolioObject>
+   <FolioObject place="right"><InheritancePlate detail layout="portrait"/></FolioObject>
    <FolioObject place="full"><Link className="recovery-folio-link" href="/thread/agent-ecology">Agent Ecology / the complete sequence ↗</Link></FolioObject>
   </> },
  ];
  return <div className="recovery-notebook recovery-codex"><Codex id="recovery-codex" title={record.title} collection="Agent Ecology / a research codex" byline={<><span>Chris Hay</span><time dateTime={record.published || record.created}>{record.published || record.created}</time><span>I12 · I12R</span></>} folios={folios}
   manuscript={<Manuscript id="recovery-record" introduction={<><p>{record.dek}</p><p className="recovery-reading-edition">Chris Hay · {record.published} · Complete essay, v{record.version}</p></>} contents={<ol>{recoveryChapters(record).map(chapter => <li key={chapter.id}><a href={`#${chapter.id}`}>{chapter.title}</a></li>)}</ol>}>
-   {recoveryChapters(record).map(chapter => <section id={chapter.id} className="manuscript-chapter" key={chapter.id}><h3>{chapter.title}</h3>{chapter.acts.map(({act,index}) => act.kind === 'observation' ? <div key={index} id={actAnchor(index)}><p>{act.text}</p>{act.references?.map(ref => <p className="manuscript-reference" key={ref.url}><a href={ref.url}>{ref.label} ↗</a></p>)}</div> : act.kind === 'claim' ? <div id={actAnchor(index)} key={index}><p>{act.text}</p><p>{act.detail}</p></div> : <Acts key={index} acts={[act]} anchored offset={index} staticRefusals/>)}</section>)}
+   {recoveryChapters(record).map((chapter, chapterIndex) => <Fragment key={chapter.id}><section id={chapter.id} className="manuscript-chapter"><h3>{chapter.title}</h3>{chapter.acts.map(({act,index}) => act.kind === 'observation' ? <div key={index} id={actAnchor(index)}><p>{act.text}</p>{act.references?.map(ref => <p className="manuscript-reference" key={ref.url}><a href={ref.url}>{ref.label} ↗</a></p>)}</div> : act.kind === 'claim' ? <div id={actAnchor(index)} key={index}><p>{act.text}</p><p>{act.detail}</p></div> : <Acts key={index} acts={[act]} anchored offset={index} staticRefusals/>)}</section>{chapterIndex === 0 && <InheritancePlate/>}{chapterIndex === 7 && <InheritancePlate detail layout="inset"/>}</Fragment>)}
    <footer className="manuscript-end"><a href="#recovery-evidence">Examine the evidence ↗</a><a href="#recovery-codex-history">Publication history ↗</a><a href="#cite">Sources and citation ↗</a></footer>
   </Manuscript>}
   history={<><ol className="recovery-codex-history">{history.versions.map(entry => <li key={entry.version}><span>{entry.revised || entry.published} / v{entry.version}</span><h3>{entry.revision?.kind === 'initial' ? 'First publication' : 'Clarification'}</h3><p>{entry.revision?.summary}</p><a href={entry.url}>Read the preserved edition ↗</a><details><summary>Manuscript fingerprint</summary><code>{entry.hash}</code><a href={entry.manuscript}>Manuscript JSON ↗</a></details></li>)}</ol><p className="recovery-folio-small">The codex is a presentation of these records. It adds no experiment, revised outcome or superseded claim.</p><a className="recovery-folio-link" href={`/api/record/${record.id}/history`}>Complete publication history ↗</a></>}/></div>;

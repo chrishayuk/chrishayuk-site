@@ -30,8 +30,8 @@ trace is kept separate from this explanatory interaction.
 
 ## Codex prototype — 25 September 2026
 
-The current entry uses the shared HAUSE Codex shell. Six spreads hold the experiment setup, result, calibration apparatus, failed
-write, paired evidence and proposed next question.
+The current entry uses the shared HAUSE Codex shell. Seven spreads hold an image frontispiece, experiment setup, result, calibration
+apparatus, failed write, paired evidence and proposed next question.
 Folio numbers describe reading order; they do not claim historical manuscript IDs.
 The cover and spread transition use CSS perspective and depth around selectable
 HTML. Navigation supports links, previous/next buttons, arrow keys in the spread,
@@ -64,3 +64,23 @@ continuous sections. It retains every act and its original act-N anchor, with
 contents, a reading column and access to evidence and sources. It is not the folio
 summary repeated at a different scale. Browser interaction and visual QA remain
 outstanding because no browser is available in this session.
+
+### Image sequencing
+
+The existing Inheritance study returns as a wide frontispiece and a closer portrait
+beside the final question. Read places the full view after the first section and
+an inset detail after the limitations. Images are still; page turns supply motion.
+Every plate identifies the image as AI-generated, not experimental evidence. The
+original responsive assets and their recorded hashes are unchanged.
+
+References reviewed: Burberry’s Postcards from London campaign combines images and
+short films; Dior’s Stone Island savoir-faire story describes the making sequence.
+The implementation borrows variation in image scale and the return from a whole
+view to a detail. Brand imagery is not copied into the site.
+
+- https://uk.burberry.com/c/burberry-world/stories/outerwear-2025-campaign/
+- https://www.dior.com/en_int/fashion/news-savoir-faire/folder-news-and-events/the-savoir-faire-of-the-dior-and-stone-island-capsule
+
+Browser layout and interaction inspection remains unavailable. Source checks,
+responsive image metadata, fragment integrity and production builds verify the
+implementation without claiming a visual comparison of the live layouts.
