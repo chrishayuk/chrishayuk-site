@@ -3,6 +3,14 @@
 .recovery-notebook .hause-study-room > header > h2 { font-size: clamp(32px, 4.2vw, 58px); line-height: 1.15; letter-spacing: -.025em; max-width: 26ch; }
 .recovery-notebook .hause-study-room > header { margin-bottom: 38px; }
 .recovery-notebook .hause-study-room > header > .exhibition-label { font-size: 11px; margin-bottom: 24px; }
+.recovery-opening { max-width: 1080px; margin: 28px auto 48px; padding-inline: clamp(22px, 4vw, 64px); }
+.recovery-opening p, .recovery-intro { font: 400 clamp(18px, 2vw, 23px)/1.7 var(--font-system), sans-serif; max-width: 46ch; }
+.recovery-qualification { font: 15px/1.8 var(--font-system), sans-serif; max-width: 62ch; color: var(--muted); margin-block: 24px; }
+.recovery-context { border-top: 1px solid var(--rule); margin-top: 20px; }
+.recovery-context > summary { min-height: 44px; padding-block: 16px; cursor: pointer; font: 14px/1.7 var(--font-system), sans-serif; }
+.recovery-context > p { font: 16px/1.85 var(--font-system), sans-serif; max-width: 65ch; margin-block: 20px; }
+.recovery-context[open] { padding-bottom: 20px; }
+.recovery-context > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .recovery-notebook .figure-motion { margin-block: clamp(44px, 7vw, 90px); }
 .recovery-notebook .figure-motion > figure { margin: 0; }
 .recovery-notebook figcaption { font: 13px/1.7 var(--font-system), sans-serif; }
@@ -113,3 +121,4 @@
  .figure-motion-replay { display: none; }
 }
 @media print { .recovery-transport, .figure-motion-replay, .recovery-explore input { display: none; } .recovery-explore::details-content { content-visibility: visible !important; } }
+@media print { .recovery-context::details-content { content-visibility: visible !important; } }

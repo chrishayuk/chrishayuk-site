@@ -47,3 +47,21 @@ candidate domain and all three exact record states. The old card is absent.
 Browser discovery still returns no connection. Desktop/mobile composition,
 perceived timing, keyboard operation and animation playback remain unverified
 in a browser. This is an implemented design iteration, not visual sign-off.
+
+## Reading-density revision
+
+The main reading path is now a brief opening and six sections: damage,
+inheritance, result, failure, limits and next question. Each main instrument
+follows a short setup. The earlier I12 panel, paired-world inspection and aggregate
+call counts sit in named native disclosures beside the relevant result.
+
+Measured in served HTML, text outside closed disclosures within the recovery
+article falls from 2,853 to 597 words (79%). This includes captions and controls;
+it excludes the surrounding site navigation and record apparatus. The full
+manuscript and detailed passages remain available. Protected machinery, fixed
+interface, twelve-world uncertainty, reused builders and the I12 interruption
+remain visible in the short reading path. All original section IDs remain.
+
+The deployment build, TypeScript check and 54 recovery/publication tests pass.
+Served HTML confirms the shortened reading path, visible qualifications and
+unique IDs. No manuscript or source data changed.
