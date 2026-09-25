@@ -7,8 +7,12 @@ use the same original frame. Native cross-document view transitions carry that
 frame between the two layouts over 560ms; the surrounding page appears over
 260ms. No navigation delay or scroll interception is added.
 
-The screening page keeps its title compact and gives the film a dark, viewport-
-bounded area. Playback remains an explicit action through the existing HAUSE
+The screening page opens with the original frame in a dark, viewport-bounded
+area. Its editorial title, credits and short introduction follow the film. The
+play control sits at the lower left; return and stop controls sit below the frame.
+The full original description and source/citation material use anchored
+disclosures. Films without captions show a quiet availability line; indexed
+chapters and timed transcripts retain their seek controls. Playback remains an explicit action through the existing HAUSE
 YouTubeFilm and MotionProvider. No YouTube iframe is present on initial arrival.
 The surrounding page darkens while the embedded player is open. Stop film
 unmounts the player, restores the poster and returns keyboard focus to Play.
