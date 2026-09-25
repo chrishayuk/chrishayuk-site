@@ -1,0 +1,23 @@
+name: HAUSE source parity
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Read the exact source pin
+        id: hause
+        run: node -e 'const p=require("./hause.lock.json"); if(!/^[0-9a-f]{40}$/.test(p.revision)) process.exit(1); require("node:fs").appendFileSync(process.env.GITHUB_OUTPUT, "revision="+p.revision+"\n")'
+      - uses: actions/checkout@v4
+        with:
+          repository: chrishayuk/hause
+          ref: ${{ steps.hause.outputs.revision }}
+          path: .hause-upstream
+      - run: npm run check:hause -- --source .hause-upstream
+      - run: npm test

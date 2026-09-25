@@ -50,6 +50,17 @@ components/
 Evidence publication contracts live in `evidence.ts`; neutral styles in `evidence.css`.
 See [EVIDENCE.md](EVIDENCE.md) for the component contracts and first-consumer record.
 
+Material plates, native before/after and collection choices, and recorded outcome
+matrices live in `components/exhibition/`. See [EXHIBITION-MEDIA.md](EXHIBITION-MEDIA.md)
+for their contracts and the hause.design donation. These do not change the form count.
+DecisionTrail stages URL-owned selections; GraphNeighbourhood presents directed
+records with source-backed relationships. `exhibition-graph.ts` validates and
+selects a focused neighbourhood without inventing or truncating edges.
+SequencePlayer stages finite reader-started frames with a static score;
+`record-difference.ts` compares inventory identities rather than totals alone.
+Portable defaults are in `exhibition-media.css`; `exhibition-outcomes.ts` derives
+counts from recorded scoring decisions without inventing success from label equality.
+
 Notebook studies use `components/exhibition/Study.tsx`: StudyRoom, StudySequence
 and StudyMeasures. Their portable `study.css` also styles FieldNotes, Refusal's
 still presentation and TextCorrection. See [STUDIES.md](STUDIES.md) for the
@@ -413,3 +424,28 @@ beats on a centred measure. `StagedTransition` is a performance with `from`, `to
 `kicker`, a three-beat `score` and a `caption`. It requires `MotionProvider`,
 respects reduced motion, and leaves the final state and all three explanations
 readable when paused or without JavaScript. See `EXHIBITION.md` for adoption.
+
+## Publication reading helpers
+
+`FigureMotion.tsx` reveals recorded geometry once and supports replay through
+`MotionProvider`. It never interpolates measurements. Mark descendants with
+`data-figure-trace` or `data-figure-reveal`; the complete figure remains the
+no-JavaScript and reduced-motion edition. The consumer styles `.figure-motion`
+and `.figure-motion-replay`; `reading.css` supplies overridable control defaults.
+
+`AnchoredDisclosure.tsx` keeps native details/summary reading and opens a section
+when its content is linked by fragment. It accepts `label`, `children` and an
+optional `className`; the consumer supplies the editorial treatment.
+
+`legibility.ts` validates publication meaning and builds search/structured-data
+projections without replacing an authored title. `provenance.ts` checks revision
+continuity; persistence, source hashes and preserved artifacts remain with the
+publication. These helpers originated in chrishayuk.com, and are capabilities,
+not additional semantic forms.
+
+## Consumer synchronization
+
+`scripts/consumer-sync.mjs` pins a consumer to one exact HAUSE Git revision and
+checks every shipped source file against `hause.lock.json`. It supports an
+installed Git dependency or a complete source mirror. See [SYNC.md](SYNC.md)
+for the update and CI workflow.

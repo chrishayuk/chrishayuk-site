@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // HAUSE is checked in its own repository and verified by check:hause.
+    "vendor/hause/**",
+    ".hause-upstream/**",
   ]),
 ]);
 
