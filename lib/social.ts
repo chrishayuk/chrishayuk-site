@@ -2,7 +2,7 @@ import {createHash} from 'node:crypto';
 import {getRecord,isListed,recordPath,SITE} from './records.ts';
 import type {PublicationRecord} from './types.ts';
 // Bump when composition or packaged fonts change so exported assets refresh.
-const SOCIAL_EDITION_REVISION='editorial-2026-09-25';
+const SOCIAL_EDITION_REVISION='recorded-cell80-2026-09-25';
 /** Only public notebook records acquire distribution objects. */
 export function socialRecord(id:string){const record=getRecord(id);return record?.kind==='notebook'&&isListed(record)?record:undefined;}
 export const socialClaim=(record:PublicationRecord)=>record.dek;

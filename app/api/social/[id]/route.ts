@@ -15,7 +15,8 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string}>}
  const requested=search.get('format');
  const format=requested==='linkedin'||requested==='x'?requested:'og';
  const size=format==='linkedin'?{width:1200,height:1500}:format==='x'?{width:1600,height:900}:{width:1200,height:630};
- const artwork=format==='og'?createElement(NotebookSocialCard,{record}):createElement(NotebookSocialEdition,{record,format});
+ const assetOrigin=new URL(request.url).origin;
+ const artwork=format==='og'?createElement(NotebookSocialCard,{record,assetOrigin}):createElement(NotebookSocialEdition,{record,format,assetOrigin});
  const disposition=search.get('download')==='1'?`attachment; filename="${record.slug}-${format}.png"`:'inline';
  // Public assets are served by both local runtimes; they are not filesystem
  // entries inside the worker bundle used by the Vite development server.

@@ -4,6 +4,7 @@ import { FigureMotion } from "./FigureMotion";
 import { RecoveryCommit } from "./RecoveryCommit";
 import { RecoveryDiagnostic } from "./RecoveryDiagnostic";
 import type { CSSProperties } from 'react';
+import { AnchoredDisclosure } from "@chrishayuk/hause/components/AnchoredDisclosure";
 import { FieldNotes } from '@chrishayuk/hause/components/FieldNotes';
 import { StudyRoom } from '@chrishayuk/hause/components/exhibition/Study';
 import { NotebookFieldNotes } from './NotebookFieldNotes';
@@ -35,41 +36,46 @@ export function RecoveryNotebook() {
   <StudyRoom id="world" label="01 / THE DAMAGE" title="One entry changes.">
    <p className="recovery-intro">The record says ten. An independent measurement can show why it is wrong—and which value fits.</p>
    <RecoveryDiagnostic/>
-   <details className="recovery-context"><summary>How the calibration test works</summary><FullPassage id="world" omitLast/></details>
   </StudyRoom>
 
   <StudyRoom id="inheritance" label="02 / THE INHERITANCE" title="Leave instructions. Or leave an operation.">
    <p className="recovery-intro">One group inherited prose. Another inherited executable code. In both, the successor still had to write the repaired record.</p>
    <InheritancePaths/>
-   <details className="recovery-context"><summary>What each successor inherited</summary><FullPassage id="inheritance"/></details>
-   <details id="fresh" className="recovery-context"><summary>How a fresh task ruled out a stored answer</summary><FullPassage id="fresh"/></details>
   </StudyRoom>
 
   <StudyRoom id="i12r" label="03 / THE RESULT" title="Seven of twelve recovered with code.">
    <p className="recovery-intro">None recovered with prose. Both groups began with the same correct record and received the same damage.</p>
    <Outcomes id="I12R"/>
+   <a className="recovery-method-link" href="#paired-world-record">Inspect the twelve paired worlds ↗</a>
    <p className="recovery-qualification">Twelve paired worlds, using historical builder packages and a fixed interface. The procedure and executable were protected; prose successors often failed to follow the permitted interface.</p>
-   <details className="recovery-context"><summary>Inspect the twelve paired worlds</summary><PairedWorlds/><FullPassage id="i12r"/></details>
-   <details id="i12" className="recovery-context"><summary>The earlier experiment: preservation and recovery</summary><p>I12 found 6/12 recoveries with code, but the prose records had already failed before damage. I12R was designed to remove that unequal starting point.</p><Outcomes id="I12"/><FullPassage id="i12"/></details>
   </StudyRoom>
 
   <StudyRoom id="mechanism" label="04 / THE FAILURE" title="A correct proposal. A wrong write." tone="dark">
    <p className="recovery-intro">The mechanism could supply the answer. The successor could still lose it when committing the record.</p>
    <RecoveryCommit/>
-   <details className="recovery-context"><summary>Across all eighty executable calls</summary><Mechanism/><FullPassage id="mechanism"/></details>
   </StudyRoom>
 
   <StudyRoom id="limits" label="05 / THE LIMITS" title="The machinery was protected.">
    <p className="recovery-intro">This establishes recovery under the tested conditions. It does not establish that successors can maintain the repair mechanism itself.</p>
    <p className="recovery-qualification">The effect size remains uncertain with twelve worlds. I12 was interrupted and continued; I12R used new worlds but reused the same builder packages.</p>
-   <details className="recovery-context"><summary>Uncertainty, rejected packages and scope</summary><FullPassage id="limits"/></details>
-   <details id="audit" className="recovery-context"><summary>Interruption, continuation and evidence audit</summary><FullPassage id="audit"/></details>
   </StudyRoom>
 
   <StudyRoom id="next" label="06 / NEXT" title="What happens when the mechanism breaks?">
    <p className="recovery-intro">That is the proposed I13: repair the inherited program, then have a later successor use it. It is the next question, not a result of this study.</p>
   </StudyRoom>
 
+  <section className="mv-full-record" id="recovery-methods" aria-label="Supporting material">
+   <AnchoredDisclosure className="recovery-context recovery-methods" label="Methods, comparisons & limitations">
+    <section id="calibration-method"><h3>The calibration test</h3><FullPassage id="world" omitLast/></section>
+    <section id="inheritance-method"><h3>What each successor inherited</h3><FullPassage id="inheritance"/></section>
+    <section id="fresh"><h3>A fresh task, not a stored answer</h3><FullPassage id="fresh"/></section>
+    <section id="paired-world-record"><h3>The twelve paired worlds</h3><PairedWorlds/><FullPassage id="i12r"/></section>
+    <section id="i12"><h3>The earlier experiment</h3><p>I12 found 6/12 recoveries with code, but the prose records had already failed before damage. I12R was designed to remove that unequal starting point.</p><Outcomes id="I12"/><FullPassage id="i12"/></section>
+    <section id="executable-calls"><h3>Across all eighty executable calls</h3><Mechanism/><FullPassage id="mechanism"/></section>
+    <section id="scope"><h3>Uncertainty, rejected packages and scope</h3><FullPassage id="limits"/></section>
+    <section id="audit"><h3>Interruption, continuation and evidence audit</h3><FullPassage id="audit"/></section>
+   </AnchoredDisclosure>
+  </section>
   <section className="mv-full-record" id="recovery-record"><FieldNotes label="Read the complete note & evidence" detail="READ +"><Acts acts={recoveryRecord.body} anchored staticRefusals/></FieldNotes></section>
   <NotebookNavigation><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook"><a href="#world">THE DAMAGE ↑</a><a href="#i12r">THE RESULT ↑</a><a href="#mechanism">PROPOSAL → COMMIT ↑</a><a href="#recovery-record">THE FULL RECORD ↑</a><Link href="/thread/agent-ecology">THE COMPLETE SEQUENCE ↗</Link></nav></NotebookNavigation>
  </div></NotebookFieldNotes>;

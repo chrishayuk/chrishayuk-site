@@ -109,6 +109,25 @@ async function replayFixture(kind: 'lineage' | 'ecology') {
   return decodeReplay(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
 }
 
+test('homepage and social comparison captions match both recorded tick-1080 worlds', async () => {
+  const preview = JSON.parse(await readFile(new URL('../lib/data/cell80-home-preview.json', import.meta.url), 'utf8'));
+  const replay = await replayFixture('lineage');
+  const { frameCounts } = await replayModule;
+  assert.equal(preview.histories.length, replay.histories.length);
+  assert.equal(preview.width, replay.width);
+  for (const [index, history] of replay.histories.entries()) {
+    const caption = preview.histories[index];
+    const frame = history.frames.find(frame => frame.tick === preview.tick)!;
+    assert.ok(frame);
+    const counts = frameCounts(frame);
+    assert.equal(caption.historyHash, history.hash);
+    assert.equal(caption.label, history.label);
+    assert.equal(caption.population, counts.population);
+    assert.equal(caption.program33, counts.program33);
+    assert.equal(caption.share, `${(100 * counts.program33 / counts.population).toFixed(1)}%`);
+  }
+});
+
 test('spatial replay preserves the actual pre-fork states and changes only the inherited program at birth', async () => {
   const { replayIndex, frameCounts } = await replayModule;
   const data = await replayFixture('lineage');

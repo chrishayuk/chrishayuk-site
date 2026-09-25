@@ -57,6 +57,17 @@
 .edition-lead-caption { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding-block: 28px 0; }
 .edition-lead h2 { max-width: 30ch; font: 400 var(--type-title)/1.12 var(--type-editorial), Georgia, serif; letter-spacing: -.015em; margin-bottom: 12px; }
 .edition-section { margin-block: var(--edition-space); }
+.edition-cell80-heading { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-bottom: 40px; }
+.edition-cell80-heading h2 { font: 400 clamp(34px, 4.4vw, 68px)/1.12 var(--type-editorial), Georgia, serif; max-width: 24ch; letter-spacing: -.02em; }
+.edition-cell80-heading p { margin-top: 18px; }
+.edition-cell80-worlds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 3vw, 48px); }
+.edition-cell80-worlds figure { margin: 0; min-width: 0; }
+.edition-cell80-worlds a { display: block; }
+.edition-cell80-worlds img { display: block; width: 100%; height: auto; aspect-ratio: 1; }
+.edition-cell80-worlds figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; padding-top: 16px; font: 13px/1.6 var(--type-sans), sans-serif; }
+.edition-cell80-worlds figcaption span:last-child { color: var(--muted); }
+.edition-cell80-footer { display: flex; justify-content: space-between; align-items: start; gap: 24px; margin-top: 24px; }
+.edition-cell80-footer .edition-caption { max-width: 68ch; }
 .edition-section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
 .edition-section > h2, .edition-section-heading h2 { font: 400 18px/1.4 var(--type-sans), sans-serif; letter-spacing: -.015em; }
 .edition-home .home-selected-results { gap: clamp(28px, 5vw, 80px); }
@@ -91,6 +102,9 @@
   .edition-header .desktop-nav { gap: 15px; }
 }
 @media (max-width: 700px) {
+  .edition-cell80-heading { grid-template-columns: 1fr; gap: 8px; margin-bottom: 28px; }
+  .edition-cell80-heading p { margin-top: 8px; }
+  .edition-cell80-footer { flex-direction: column; gap: 8px; }
   .site-header.edition-header { height: 76px; }
   .edition-arrival { min-height: max(620px, calc(100svh - 76px)); padding-block: 24px; gap: 32px; }
   .edition-arrival h1 { font-size: clamp(44px, 10vw, 70px); }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SelectedExperiments, CompactNotes } from "@/components/PublicationIndex";
 import { FilmPlayer } from "@/components/FilmPlayer";
 import { FilmPoster } from "@/components/FilmPoster";
@@ -7,6 +8,7 @@ import { previewFor } from "@/components/YouTubeCollection";
 import { latestVideo, latestMoe, videoPath, durationLabel } from "@/lib/youtube";
 import { homeResultProgrammes, latestNotes, researchProgrammes, shortDate } from "@/lib/publication-index";
 import { HOUSE_WORK } from "@/lib/house";
+import cell80Preview from "@/lib/data/cell80-home-preview.json";
 import "./home-edition.css";
 
 const selected = homeResultProgrammes.filter(p => ["machines", "agent-ecology"].includes(p.id));
@@ -35,6 +37,17 @@ export default function Home() {
     <section id="selected-results" className="edition-section" data-scene="results" aria-labelledby="results-heading">
       <div className="edition-section-heading"><h2 id="results-heading">Selected research</h2><Link className="edition-link" href="/research">All research</Link></div>
       <SelectedExperiments items={selected}/>
+    </section>
+    <section id="cell80" className="edition-section edition-cell80" aria-labelledby="cell80-heading">
+      <div className="edition-cell80-heading">
+        <p className="edition-caption">Cell80 / Working note</p>
+        <div><h2 id="cell80-heading"><Link href="/notebook/can-you-name-the-mutation-that-changed-a-world">Can you name the mutation that changed a world?</Link></h2><p>One birth. Two recorded histories.</p></div>
+      </div>
+      <div className="edition-cell80-worlds">{cell80Preview.histories.map(history => <figure key={history.label}>
+        <Link href="/notebook/can-you-name-the-mutation-that-changed-a-world#cell80-study" aria-label={`Explore ${history.label.toLowerCase()}`}><Image src={history.image} width={768} height={768} unoptimized alt={`Recorded world at tick 1,080: ${history.population} organisms; ${history.share} carry program 33.`}/></Link>
+        <figcaption><span>{history.label}</span><span>{history.share} carry program 33</span></figcaption>
+      </figure>)}</div>
+      <div className="edition-cell80-footer"><p className="edition-caption">EX-4 · Tick 1,080. Amber marks program 33; marks can contain several organisms.<br/>The second history undoes the program change at birth. All other birth changes remain.</p><Link className="edition-link" href="/notebook/can-you-name-the-mutation-that-changed-a-world#cell80-study">Explore the recorded worlds ↗</Link></div>
     </section>
     <section id="current-programmes" className="edition-section edition-programmes" data-scene="programmes" aria-labelledby="programmes-heading">
       <h2 id="programmes-heading">Ongoing work</h2>

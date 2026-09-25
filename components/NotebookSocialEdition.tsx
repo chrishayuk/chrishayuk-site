@@ -1,6 +1,7 @@
 import type {PublicationRecord} from '@/lib/types';
 import {readability} from '@/lib/address-build';
 import recoveryEvidence from '@/public/data/ecology/recovery/evidence.json';
+import {Cell80SocialEdition} from './Cell80SocialEdition';
 
 type Format='linkedin'|'x'|'og';
 const ink='#171815',paper='#f2f0eb',muted='#62635e',rule='#c7c7bf',accent=ink;
@@ -93,7 +94,8 @@ function RecoveryEdition({record,format}:{record:PublicationRecord;format:Format
  </div>;
 }
 
-export function NotebookSocialEdition({record,format}:{record:PublicationRecord;format:Format}){
+export function NotebookSocialEdition({record,format,assetOrigin}:{record:PublicationRecord;format:Format;assetOrigin:string}){
+ if(record.id==='N-CELL80-01')return <Cell80SocialEdition record={record} format={format} assetOrigin={assetOrigin}/>;
  if(record.id==='N-ECOLOGY-RECOVERY')return <RecoveryEdition record={record} format={format}/>;
  const portrait=format==='linkedin',og=format==='og';
  const titleSize=portrait?(record.title.length>65?86:106):og?(record.title.length>65?57:70):(record.title.length>65?78:94);
