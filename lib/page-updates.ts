@@ -9,7 +9,7 @@ import { getRecord, recordPath } from "./records.ts";
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
  ...Object.fromEntries(Object.keys(machineBriefs).map(id => [recordPath(getRecord(id)!), { date: "2026-09-13", reason: "Visible question and bounded result; link to the field-experiment map." }])),
  ...Object.fromEntries(Object.keys(ecologySeriesUpdates).map(id => [recordPath(getRecord(id)!), { date: "2026-09-14", reason: "Dated later-results context, preserving the original manuscript and snapshot." }])),
- "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-15", reason: "An inheritance opening plate and descendant visual pause frame the existing recorded evidence, without revising the manuscript." },
+ "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-25", reason: "Reading edition simplifies recorded routing figures, groups supporting methods and uses shared HAUSE figure motion; manuscript and evidence unchanged." },
  "/thread/machines": { date: "2026-09-15", reason: "Eight experimental premises, a cinematic threshold study and distinct maintenance links to the key-world limit and routing-world persistence." },
  "/thread/agent-ecology": { date: "2026-09-15", reason: "Cinematic inheritance study and written-descendant preview; closing question now reflects population renewal and guarded repair." },
  "/notebook": { date: "2026-09-16", reason: "Agent Ecology entrance shares the programme’s persistence question." },
