@@ -1,5 +1,5 @@
 /* This manuscript’s objects. Binding, folios, modes and marginalia are HAUSE. */
-.recovery-codex .codex-folio { min-height: 690px; }
+.recovery-codex .codex-folio { min-height: 510px; }
 .recovery-folio-result { align-self: start; }
 .recovery-folio-result > figure { margin: 0; }
 .recovery-folio-result figcaption { font: 15px/1.7 var(--font-system),sans-serif; }
@@ -78,14 +78,46 @@
 .recovery-context-link { display: inline-flex; align-items: center; min-height: 44px; font: 12px/1.6 var(--font-system),sans-serif; text-decoration: underline; text-underline-offset: 4px; }
 .recovery-reading-edition { font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); margin-top: 24px; }
 
-/* The plates draw the experiment itself from recorded values. */
-.recovery-experiment-plate .editorial-plate-image { aspect-ratio: auto; background: #171d1c; }
-.recovery-experiment-plate svg { display: block; width: 100%; height: auto; }
-.recovery-experiment-plate > figcaption { font-size: 12px; line-height: 1.75; }
-.recovery-experiment-plate > figcaption a { text-decoration: underline; text-underline-offset: 4px; }
-.recovery-plate-pan { display: none; }
-@media (max-width: 600px) {
- .recovery-plate-pan { display: inline; }
- .recovery-experiment-plate .editorial-plate-image { overflow-x: auto; }
- .recovery-experiment-plate svg { min-width: 760px; }
+
+/* The working record belongs on the paper, at the scale of the surrounding text. */
+.recovery-codex figure.recovery-experiment-plate { margin: 0; padding: 0; border: 0; background: transparent; color: var(--fg); }
+.recovery-experiment-plate figcaption { margin-bottom: 24px; }
+.experiment-plate-reference { display: block; color: var(--muted); font: 11px/1.6 var(--font-system),sans-serif; margin-bottom: 12px; }
+.recovery-experiment-plate h3 { font: 400 clamp(23px,2.4vw,32px)/1.2 var(--font-display),serif; max-width: 27ch; }
+.experiment-record-line + .experiment-record-line { margin-top: 28px; }
+.experiment-record-label { font: 12px/1.6 var(--font-system),sans-serif; color: var(--muted); margin: 0 0 10px; }
+.experiment-record-line ol, .experiment-change-mark { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; padding: 0; margin: 0; list-style: none; }
+.experiment-record-line li { text-align: center; font: 400 clamp(32px,4vw,58px)/1.1 var(--font-display),serif; font-variant-numeric: tabular-nums; padding-block: 4px 10px; }
+.experiment-record-line [data-emphasis=changed] { color: #8a4228; border-bottom: 2px solid currentColor; }
+.experiment-record-line [data-emphasis=correct] { color: #315c4d; border-bottom: 2px solid currentColor; }
+.experiment-change-mark { margin: 8px 0 16px; text-align: center; color: #8a4228; font-size: 22px; line-height: 1; }
+.experiment-plate-note { font: 13px/1.75 var(--font-system),sans-serif; max-width: 58ch; margin: 22px 0 0; }
+.experiment-plate-source { margin-top: 18px; font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); }
+.experiment-plate-source a { display: inline-flex; min-height: 36px; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
+.experiment-paired-record { width: 100%; border-collapse: collapse; table-layout: fixed; margin-block: 30px; font: 12px/1.5 var(--font-system),sans-serif; }
+.experiment-paired-record th, .experiment-paired-record td { padding: 10px 0; text-align: center; font-weight: 400; }
+.experiment-paired-record tr > :first-child { width: 20%; text-align: left; }
+.experiment-paired-record thead { color: var(--muted); border-bottom: 1px solid var(--rule); }
+.experiment-outcome { display: inline-grid; width: 16px; height: 16px; place-items: center; font-size: 11px; line-height: 1; border: 1px solid var(--rule); border-radius: 50%; }
+.experiment-outcome[data-recovered=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.recovery-codex .hause-manuscript > .recovery-experiment-plate { margin-block: 48px; padding-block: 28px; border-block: 1px solid var(--rule); }
+/* Once opened, the book gets the space previously used by the cover title. */
+.recovery-codex .hause-codex:not([data-view=cover]) .codex-heading { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px 28px; align-items: end; margin: 12px 0 20px; }
+.recovery-codex .hause-codex:not([data-view=cover]) .codex-collection { grid-column: 1/-1; margin: 0; font-size: 11px; }
+.recovery-codex .hause-codex:not([data-view=cover]) .codex-heading h1 { font-size: 24px; line-height: 1.25; max-width: 42ch; }
+.recovery-codex .hause-codex:not([data-view=cover]) .codex-byline { margin: 0; gap: 6px 16px; font-size: 11px; }
+.recovery-codex .codex-modes { padding-block: 4px; margin-bottom: 20px; }
+.recovery-codex .codex-folio { row-gap: 24px; }
+.recovery-codex .codex-folio-label { padding-bottom: 10px; }
+@media (max-width: 900px) {
+ .recovery-codex .hause-codex:not([data-view=cover]) .codex-heading { grid-template-columns: 1fr; }
 }
+@media (max-width: 600px) {
+ .experiment-record-line li { font-size: clamp(32px,9vw,42px); }
+ .experiment-paired-record { font-size: 10px; }
+ .experiment-outcome { width: 12px; height: 12px; font-size: 9px; }
+ .recovery-codex .codex-folio { min-height: 0; }
+}
+
+/* Programmatic reading targets are not controls; keyboard controls retain their focus rings. */
+.recovery-codex [data-codex-page]:focus { outline: none; }

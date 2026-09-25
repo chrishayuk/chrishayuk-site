@@ -38,5 +38,5 @@ inside its pages to prevent competing scroll handlers. The shared Manuscript for
 provides continuous long-form prose and chapter navigation separately from folios.
 
 EditorialPlate supplies wide, inset and portrait image compositions. The Repairer entry
-uses recorded-data SVG drawings inside it; the HAUSE composition specimen uses an
+uses native recorded-data figures through ReadingFigure; the HAUSE composition specimen uses an
 explicitly attributed visual study. Research illustrations are owned by the publication.

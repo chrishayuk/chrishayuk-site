@@ -65,24 +65,30 @@ contents, a reading column and access to evidence and sources. It is not the fol
 summary repeated at a different scale. Browser interaction and visual QA remain
 outstanding because no browser is available in this session.
 
-### Experiment imagery
+### Experiment imagery and spread correction
 
-The Inheritance workshop image was removed after review. Every plate in this entry
-now draws the recorded experiment from `public/data/ecology/recovery/evidence.json`:
+The screenshot review showed that the large dark SVG overwhelmed the pale folio,
+and that the title/header displaced the record below the viewport. The opening is
+now a composed spread: question and setup on the left, the actual four-entry
+before/after record on the right. Only the changed entry is marked. The open-book
+heading is compact, while the closed cover retains its original treatment.
 
-- Damage: the four stored values against their independent diagnostic solutions,
-  on explicit 0–16 scales. The changed second entry is highlighted.
+The Inheritance workshop image and the tall numeric-axis diagrams are absent.
+Every figure reads `public/data/ecology/recovery/evidence.json` directly:
+
+- Damage: the four correct entries followed by the damaged record, with entry 2
+  marked. The correct record is also the unique diagnostic solution.
 - Paired outcomes: every I12R B/C flag, in original block order, with all twelve
   packages retained in each denominator.
-- Failed write: the actual damaged → proposed → committed record from block 9,
-  G11. Lines join recorded states; they do not imply unrecorded intermediate actions.
+- Failed write: the actual damaged → proposed → committed records from block 9,
+  G11, rendered as lists rather than interpolating lines.
 
-Read places these after the calibration, equal-state result and failed-write
-sections. The next-question spread carries its limitation rather than an image
-suggesting an unrun experiment. Each figure has an accessible description and a
-source link. Small screens can scroll the diagram without shrinking its labels.
-The shared EditorialPlate remains the frame; these scientific drawings and their
-data belong to the publication. Library revisions remain in sync.
+The figures use selectable native HTML and the shared ReadingFigure contract.
+They sit directly on the paper with source links. Responsive record rows replace
+fixed-width SVGs and horizontal panning. Read retains every published paragraph.
+Programmatic folio focus has no perimeter outline; keyboard controls keep theirs.
 
 Verification: typecheck, scoped lint, recovery/source tests, production build and
-rendered HTML checks. Browser visual and interaction QA remains outstanding.
+rendered HTML checks. The supplied screenshot informed the correction; the updated
+live layout still requires browser visual verification, which is unavailable in
+this session.

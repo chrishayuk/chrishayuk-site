@@ -37,9 +37,8 @@ export function RecoveryNotebook() {
  const comparison = data.panels.find(panel => panel.id === 'I12R')!;
  const folios = [
   { id: 'frontispiece', label: 'The damaged record', children: <>
-   <FolioObject place="full"><RecoveryExperimentPlate/></FolioObject>
-   <FolioObject place="left"><h2>What can remain after an AI leaves?</h2></FolioObject>
-   <FolioObject place="right"><p>A stronger model leaves a repair method. Later agents face damage it is no longer there to fix.</p><a className="recovery-folio-link" href="#experiment">Begin with the experiment ↗</a></FolioObject>
+   <FolioObject place="left"><h2>What can remain after an AI leaves?</h2><p>A stronger model leaves a repair method. Later agents face damage it is no longer there to fix.</p><p className="recovery-folio-small">Here is one of the actual four-number records. The second entry was changed after the builder had gone.</p><a className="recovery-folio-link" href="#experiment">Begin with the experiment ↗</a></FolioObject>
+   <FolioObject place="right"><RecoveryExperimentPlate/></FolioObject>
   </> },
   { id: 'experiment', label: 'The experiment', children: <>
    <FolioObject place="left"><span className="recovery-folio-kicker">The question</span><h2>Can an AI leave behind a way to repair?</h2><p>A stronger model, Sol, leaves a repair method for smaller Qwen agents. Then Sol is removed permanently.</p><p>The agents inherit a record of four numbers. After the builder has gone, the experiment changes one number. Can a successor reconstruct what was lost?</p></FolioObject>
