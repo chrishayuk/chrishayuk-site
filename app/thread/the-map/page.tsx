@@ -1,34 +1,27 @@
 import { legibilityFor } from "@/lib/legibility";
 import { legibilityLd, searchProjection } from "@chrishayuk/hause/legibility";
 import Link from "next/link";
-import { readAddress, addressedMemory } from "@/lib/addressed-memory";
 import { JsonLd } from "@chrishayuk/hause/components/JsonLd";
 import { pageMetadata } from "@/lib/metadata";
-import { mapThread as thread, resolveThreadStep, memoryStudy, authorityStudy } from "@/lib/threads";
-import { authorityGate, gateArm } from "@/lib/authority-gate";
-import { getMedia } from "@/lib/media";
+import { mapThread as thread, resolveThreadStep } from "@/lib/threads";
 import { SITE } from "@/lib/records";
-import { AddressBuildCard } from "@/components/AddressBuildCard";
-import { WorkVisual } from "@/components/WorkSelection";
+
+import { ProgrammeIntro, ProgrammeSequence, ProgrammeContext } from '@/components/ProgrammeEdition';
+import { Media } from '@/components/Media';
 
 const legibility = legibilityFor(thread.id)!;
 export const metadata = pageMetadata(thread.title, thread.abstract, thread.path, `${SITE}/media/notebook/stills/HJlWDSyDcD4-156.webp`, undefined, {legibility});
 export default function Page() {
   const steps = thread.steps.map(resolveThreadStep);
-  return <main id="main" className="thread-page">
+  return <main id="main" className="thread-page programme-page">
     <JsonLd data={{...legibilityLd({...legibility,title:thread.title,abstract:thread.abstract}), "@context": "https://schema.org", "@type": "CollectionPage", "@id": `${SITE}${thread.path}`, url: `${SITE}${thread.path}`, name: thread.title, description: searchProjection({...legibility,title:thread.title}).description ?? thread.abstract, author: { "@type": "Person", "@id": `${SITE}/#person` }, mainEntity: { "@type": "ItemList", itemListOrder: "https://schema.org/ItemListOrderAscending", numberOfItems: steps.length, itemListElement: steps.map((step, i) => ({ "@type": "ListItem", position: i+1, name: step.title, url: `${SITE}${step.url}`, description: step.text })) } }}/>
-    <header className="thread-intro"><p className="kicker record-voice">CHRIS HAY / {legibility.subject.toUpperCase()}</p><h1>From a map<br/><em>to a memory.</em></h1><p className="dek">{thread.abstract}</p><p className="thread-context">{thread.context}</p><div className="record-bar record-voice"><span>{thread.id}</span><span>EDITORIAL GUIDE · V{thread.version}</span><span>COMPOSED {thread.created}</span><a href="#step-1">START WITH THE FILM ↓</a></div></header>
-    <ol className="thread-sequence" aria-label="Reading order">{steps.map((step, i) => {
-      const media = step.media ? getMedia(step.media) : undefined;
-      return <li key={step.id} id={`step-${i+1}`} data-hause-act="connection">
-        <div className="thread-step-number record-voice">{String(i+1).padStart(2,"0")}<span>{step.kind}</span></div>
-        <div className="thread-step-content"><p className="kicker record-voice">{step.label}</p><h2><Link href={step.url}>{step.title}</Link></h2><p>{step.text}</p><p className="thread-step-status record-voice">{step.status}{step.date ? ` · ${step.date}` : ""}</p><Link href={step.url} className="text-link">{step.id === memoryStudy.id ? "TRY THE MECHANISM" : step.id === authorityStudy.id ? "OPEN THE INSTRUMENT" : step.kind === "film" ? "WATCH FROM 02:00" : step.kind === "work" ? "EXPLORE THE WORK" : "OPEN THE NOTE"} ↗</Link></div>
-        <Link href={step.url} className="thread-step-image" aria-label={`Open ${step.title}`}>
-          {step.id === "N-ADDRESS-BUILD" ? <AddressBuildCard compact/> : step.id === "W-VINDEX3" ? <WorkVisual id={step.id}/> : step.id === authorityStudy.id ? <div className="thread-authority-preview"><span className="record-voice">EIGHT READS OPEN</span><strong>{gateArm([])!.answer}</strong><span className="record-voice">RETIRE LAYER {authorityGate.architecture.globalLayers[4]}</span><strong data-flipped="true">{gateArm([29])!.answer}</strong><span className="record-voice">RECORDED RESULT ↗</span></div> : step.id === memoryStudy.id ? <div className="thread-demo-preview"><span className="record-voice">{addressedMemory.facts[0].address.toUpperCase()}</span><span aria-hidden="true">↓</span><strong>{readAddress(0).answer}.</strong><span className="record-voice">CHANGE THE QUESTION ↗</span></div> : media && <img src={media.poster || media.desktop} alt={media.alt} width={1600} height={900} loading={i === 0 ? "eager" : "lazy"}/>}
-          {step.id !== memoryStudy.id && step.id !== authorityStudy.id && <span className="record-voice">{step.id === "N-ADDRESS-BUILD" ? "RECORDED EVIDENCE" : step.id === "W-VINDEX3" ? "CONCEPTUAL STUDY" : media?.type === "film" ? "CONSTRUCTED VISUAL STUDY" : "FROM THE FILM"} ↗</span>}
-        </Link>
-      </li>;
-    })}</ol>
-    <div className="thread-ending"><p className="record-voice">THE NEXT QUESTION</p><h2>What would make<br/><em>the address reliable?</em></h2><p>The notes keep the limits visible: changed phrasing, competing entities, retained state and use beyond the first answer. Follow the open research question, or search the underlying records.</p><div className="inline-links"><Link href="/research/ffn-as-graph" className="text-link">THE FFN QUESTION ↗</Link><Link href="/ask?q=address" className="text-link">ASK THE WORK ↗</Link></div></div>
+    <ProgrammeIntro name="Learned Systems" question="What can a model’s changing state tell us?"><p>From the residual map to interventions, addressable memory and the software built around it.</p></ProgrammeIntro>
+    <section className="programme-feature" aria-labelledby="programme-feature-title">
+     <div className="programme-feature-copy"><p className="programme-label">From the film / 02:35–02:40</p><h2 id="programme-feature-title">Follow the residual state.</h2><p>A projected trajectory moves among Tokyo, Paris, Berlin and Cairo. The note examines what the picture can—and cannot—establish.</p><Link className="programme-link" href="/film/youtube/HJlWDSyDcD4?t=155">Watch the source film ↗</Link><Link className="programme-link" href="/notebook/what-is-the-map">Read the note ↗</Link></div>
+     <Media id="notebook-map-trajectory" caption/>
+    </section>
+    <ProgrammeSequence steps={thread.steps} label="Learned systems reading order"/>
+    <ProgrammeContext abstract={thread.abstract} context={thread.context}/>
+    <section className="programme-ending"><h2>What would make the address reliable?</h2><p>Changed phrasing, competing entities and use beyond the first answer remain part of the question.</p><nav aria-label="Continue exploring"><Link href="/research/ffn-as-graph">The FFN question ↗</Link><Link href="/ask?q=address">Search the work ↗</Link></nav></section>
   </main>;
 }

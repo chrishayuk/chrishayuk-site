@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useMotion } from "./Motion";
 import { Cell80Meaning as Meaning } from "./Cell80Meaning";
 import posters from "@/lib/data/cell80-replay-posters.json";
 import { decodeReplay, foodAt, frameCounts, replayIndex, type ReplayFrame, type ReplayHistory, type WorldReplay } from "@/lib/cell80-replay";
@@ -77,6 +78,11 @@ export function Cell80WorldReplay({ kind }: { kind: "lineage" | "ecology" }) {
   const [selected,setSelected] = useState<number|null>(null);
   const root=useRef<HTMLElement>(null), visible=useRef(true);
   const id=useId();
+  const {register,request:playReplay,setPaused}=useMotion();
+  useEffect(()=>{
+    if(!root.current)return;
+    return register({id,element:root.current,manualOnly:true,start:()=>setPlaying(true),stop:()=>setPlaying(false)});
+  },[id,register]);
   const frames=data.histories[0].frames;
   const frame=frames[index];
   const tick=frame.tick;
@@ -98,11 +104,11 @@ export function Cell80WorldReplay({ kind }: { kind: "lineage" | "ecology" }) {
         const replay=await decodeReplay(await response.arrayBuffer());if(controller.signal.aborted)return;
         if(replay.kind!==kind)throw new Error("Wrong replay");
         setData(replay);setIndex(replayIndex(replay.histories[0].frames,kind==="lineage"?980:0));setLoaded(true);setLoadState("ready");
-        if(visible.current&&!document.hidden)setPlaying(true);
+        if(visible.current&&!document.hidden)playReplay(id);
       }catch{if(!controller.signal.aborted)setLoadState("error");}
     }
     void load();return()=>controller.abort();
-  },[request,kind]);
+  },[request,kind,id,playReplay]);
   useEffect(()=>{
     if(!playing||!loaded)return;
     let raf=0;let previous=performance.now();let clock=frames[index].tick;
@@ -131,7 +137,7 @@ export function Cell80WorldReplay({ kind }: { kind: "lineage" | "ecology" }) {
     {loaded&&<PopulationTrace histories={data.histories} tick={tick} ecology={kind==="ecology"}/>}
     {!loaded&&<p className="cell80-caption">The preview is a recorded frame. Play loads {kind==="lineage"?"1.6":"9.3"} MB of history.</p>}
     <div className="cell80-playback">
-      <button type="button" className="cell80-play" disabled={loadState==="loading"} onClick={()=>{if(!loaded){setRequest(r=>r+1);return;}if(index===frames.length-1)setIndex(0);setPlaying(p=>!p);}}>{loadState==="loading"?"Loading history…":playing?"Ⅱ Pause":loaded?"▶ Play":"▶ Load & play"}</button>
+      <button type="button" className="cell80-play" disabled={loadState==="loading"} onClick={()=>{if(!loaded){setRequest(r=>r+1);return;}if(index===frames.length-1)setIndex(0);if(playing)setPaused(true);else playReplay(id);}}>{loadState==="loading"?"Loading history…":playing?"Ⅱ Pause":loaded?"▶ Play":"▶ Load & play"}</button>
       <div className="cell80-scrubber"><label htmlFor={id}>History <span>{format(tick)} / {kind==="lineage"?"1,999":"9,999"}</span></label><input id={id} type="range" min={0} max={Math.max(last,1)} value={tick} disabled={!loaded} aria-valuetext={`Tick ${tick}`} onChange={e=>seek(Number(e.target.value))}/></div>
       <label className="cell80-speed">Speed<select value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={.25}>¼×</option><option value={1}>1×</option><option value={4}>4×</option></select></label>
     </div>

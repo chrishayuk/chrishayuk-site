@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { RecoveryResult } from './RecoveryResult';
 import { FigureMotion } from "./FigureMotion";
 import { RecoveryCommit } from "./RecoveryCommit";
 import { RecoveryDiagnostic } from "./RecoveryDiagnostic";
@@ -13,7 +15,7 @@ import '@/app/ecology-notebook.css';
 import '@/app/recovery-notebook.css';
 
 const labels: Record<string,string> = {A:'Corrected state',B:'Prose procedure',C:'Executable mechanism',D:'Matched baseline'};
-export function RecoveryCard(){return <div className="recovery-card"><span className="record-voice">AGENT ECOLOGY / EQUAL-STATE RECOVERY</span><div><strong>0<span>/12</span></strong><span aria-hidden="true">→</span><strong>7<span>/12</span></strong></div><p>Prose · Executable</p><span className="record-voice">SAME STATE. SAME DAMAGE.<br/>THE BUILDER NEVER RETURNED.</span></div>;}
+export function RecoveryCard(){return <RecoveryResult compact/>;}
 function Outcomes({id}:{id:string}){const panel=data.panels.find(p=>p.id===id)!;return <FigureMotion><figure className="recovery-outcomes" aria-label={`${id} successful worlds by inherited treatment`}><figcaption className="record-voice">{id} / JOINT RECOVERY BY THE END OF TEN SUCCESSOR GENERATIONS</figcaption>{panel.arms.map(arm=><div className="recovery-row" key={arm.id}><span>{arm.id} · {labels[arm.id]}</span><div className="recovery-bar" aria-hidden="true"><i data-figure-trace style={{'--success':`${100*arm.successes/arm.denominator}%`} as CSSProperties}/></div><strong>{arm.successes}<small>/{arm.denominator}</small></strong></div>)}<p className="recovery-caption">Each outcome requires both a correct original record and all four fresh-task answers at the same assessment. {id==='I12'?'Establishment and preservation are part of this endpoint.':'Both arms began with identical correct state and identical corruption.'}</p></figure></FigureMotion>;}
 function PairedWorlds(){const p=data.panels.find(p=>p.id==='I12R')!;return <FigureMotion><figure className="recovery-worlds"><figcaption className="record-voice">I12R / TWELVE PAIRED WORLDS · ORIGINAL BLOCK ORDER 0–11</figcaption>{p.arms.map(arm=><div key={arm.id}><span>{arm.id} · {labels[arm.id]}</span><ol>{arm.flags.map((flag,index)=><li data-figure-reveal className={flag?'recovered':''} key={index} title={`Block ${index}: ${flag?'recovered at G11':'no joint recovery'}`}><span className="sr-only">Block {index}: </span><span className="recovery-world-index">{index}</span><b>{flag?'✓':'—'}</b><span className="sr-only"> {flag?'recovered at G11':'no joint recovery'}</span></li>)}</ol></div>)}<p className="recovery-caption">✓ Recovered · — Did not meet the joint endpoint. Four rejected builder packages remain in each denominator.</p></figure></FigureMotion>;}
 function Mechanism(){return <FigureMotion><figure className="recovery-mechanism"><figcaption className="record-voice">I12R / CORRUPTION BRANCHES · REPEATED OBSERVATIONS</figcaption><div>{[[80,'Executable calls'],[80,'Correct proposals'],[61,'Correct records committed']].map(([n,label])=><div data-figure-reveal key={label}><strong>{n}</strong><span>{label}</span></div>)}</div><p className="recovery-caption">All 80 proposals also answered the fresh task correctly. Committing the correct record and answering the fresh task correctly occurred together in 59 assessments. Calls are not independent worlds.</p></figure></FigureMotion>;}
@@ -69,6 +71,6 @@ export function RecoveryNotebook() {
   </StudyRoom>
 
   <section className="mv-full-record" id="recovery-record"><FieldNotes label="Read the complete note & evidence" detail="READ +"><Acts acts={recoveryRecord.body} anchored staticRefusals/></FieldNotes></section>
-  <NotebookNavigation><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook"><a href="#world">THE DAMAGE ↑</a><a href="#i12r">THE RESULT ↑</a><a href="#mechanism">PROPOSAL → COMMIT ↑</a><a href="#recovery-record">THE FULL RECORD ↑</a><a href="/thread/agent-ecology">THE COMPLETE SEQUENCE ↗</a></nav></NotebookNavigation>
+  <NotebookNavigation><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook"><a href="#world">THE DAMAGE ↑</a><a href="#i12r">THE RESULT ↑</a><a href="#mechanism">PROPOSAL → COMMIT ↑</a><a href="#recovery-record">THE FULL RECORD ↑</a><Link href="/thread/agent-ecology">THE COMPLETE SEQUENCE ↗</Link></nav></NotebookNavigation>
  </div></NotebookFieldNotes>;
 }
