@@ -65,22 +65,24 @@ contents, a reading column and access to evidence and sources. It is not the fol
 summary repeated at a different scale. Browser interaction and visual QA remain
 outstanding because no browser is available in this session.
 
-### Image sequencing
+### Experiment imagery
 
-The existing Inheritance study returns as a wide frontispiece and a closer portrait
-beside the final question. Read places the full view after the first section and
-an inset detail after the limitations. Images are still; page turns supply motion.
-Every plate identifies the image as AI-generated, not experimental evidence. The
-original responsive assets and their recorded hashes are unchanged.
+The Inheritance workshop image was removed after review. Every plate in this entry
+now draws the recorded experiment from `public/data/ecology/recovery/evidence.json`:
 
-References reviewed: Burberry’s Postcards from London campaign combines images and
-short films; Dior’s Stone Island savoir-faire story describes the making sequence.
-The implementation borrows variation in image scale and the return from a whole
-view to a detail. Brand imagery is not copied into the site.
+- Damage: the four stored values against their independent diagnostic solutions,
+  on explicit 0–16 scales. The changed second entry is highlighted.
+- Paired outcomes: every I12R B/C flag, in original block order, with all twelve
+  packages retained in each denominator.
+- Failed write: the actual damaged → proposed → committed record from block 9,
+  G11. Lines join recorded states; they do not imply unrecorded intermediate actions.
 
-- https://uk.burberry.com/c/burberry-world/stories/outerwear-2025-campaign/
-- https://www.dior.com/en_int/fashion/news-savoir-faire/folder-news-and-events/the-savoir-faire-of-the-dior-and-stone-island-capsule
+Read places these after the calibration, equal-state result and failed-write
+sections. The next-question spread carries its limitation rather than an image
+suggesting an unrun experiment. Each figure has an accessible description and a
+source link. Small screens can scroll the diagram without shrinking its labels.
+The shared EditorialPlate remains the frame; these scientific drawings and their
+data belong to the publication. Library revisions remain in sync.
 
-Browser layout and interaction inspection remains unavailable. Source checks,
-responsive image metadata, fragment integrity and production builds verify the
-implementation without claiming a visual comparison of the live layouts.
+Verification: typecheck, scoped lint, recovery/source tests, production build and
+rendered HTML checks. Browser visual and interaction QA remains outstanding.

@@ -37,5 +37,6 @@ Directional leaf turns now replace the spread fade. Codex owns fragment navigati
 inside its pages to prevent competing scroll handlers. The shared Manuscript form
 provides continuous long-form prose and chapter navigation separately from folios.
 
-EditorialPlate supplies wide, inset and portrait image compositions. Both sites
-demonstrate it with their existing, explicitly attributed visual studies.
+EditorialPlate supplies wide, inset and portrait image compositions. The Repairer entry
+uses recorded-data SVG drawings inside it; the HAUSE composition specimen uses an
+explicitly attributed visual study. Research illustrations are owned by the publication.
