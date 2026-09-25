@@ -1,14 +1,16 @@
 import {createHash} from 'node:crypto';
 import {getRecord,isListed,recordPath,SITE} from './records.ts';
 import type {PublicationRecord} from './types.ts';
+// Bump when composition or packaged fonts change so exported assets refresh.
+const SOCIAL_EDITION_REVISION='editorial-2026-09-25';
 /** Only public notebook records acquire distribution objects. */
 export function socialRecord(id:string){const record=getRecord(id);return record?.kind==='notebook'&&isListed(record)?record:undefined;}
 export const socialClaim=(record:PublicationRecord)=>record.dek;
 export const socialState=(record:PublicationRecord)=>`${record.publication.toUpperCase()} · V${record.version} · ${record.publication==='published'?'PUBLISHED '+record.published:'RECORDED '+record.created}`;
 export const socialUrl=(record:PublicationRecord)=>`${SITE}${recordPath(record)}`;
-export const socialImage=(record:PublicationRecord)=>record.id==='N-ECOLOGY-WORLD-REMEMBERS'?`${SITE}/images/notebook/world-remembers.png?v=${createHash('sha256').update(JSON.stringify([record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`:`${SITE}/api/social/${record.id}?v=${createHash('sha256').update(JSON.stringify([record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`;
+export const socialImage=(record:PublicationRecord)=>record.id==='N-ECOLOGY-WORLD-REMEMBERS'?`${SITE}/images/notebook/world-remembers.png?v=${createHash('sha256').update(JSON.stringify([SOCIAL_EDITION_REVISION,record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`:`${SITE}/api/social/${record.id}?v=${createHash('sha256').update(JSON.stringify([SOCIAL_EDITION_REVISION,record.title,socialClaim(record),socialState(record)])).digest('hex').slice(0,12)}`;
 export type SocialEdition='linkedin'|'x';
-const editionHash=(record:PublicationRecord,format:SocialEdition)=>createHash('sha256').update(JSON.stringify([format,record.id,record.title,record.dek,record.lineage,record.share,record.version])).digest('hex').slice(0,12);
+const editionHash=(record:PublicationRecord,format:SocialEdition)=>createHash('sha256').update(JSON.stringify([SOCIAL_EDITION_REVISION,format,record.id,record.title,record.dek,record.lineage,record.share,record.version])).digest('hex').slice(0,12);
 export const socialEditionImage=(record:PublicationRecord,format:SocialEdition,download=false)=>`${SITE}/api/social/${record.id}?format=${format}&v=${editionHash(record,format)}${download?'&download=1':''}`;
 const words=(text:string)=>text.trim().split(/\s+/).filter(Boolean).length;
 /** A native-image publishing kit. Nothing here is posted automatically. */

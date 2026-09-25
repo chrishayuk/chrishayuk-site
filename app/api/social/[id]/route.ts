@@ -8,7 +8,7 @@ import {NotebookSocialEdition} from '@/components/NotebookSocialEdition';
 export const runtime='nodejs';
 // Node deployments read packaged fonts once. Workers serve the same public
 // assets over HTTP because their bundle filesystem does not contain public/.
-const packagedFonts=Promise.all(['Geist-Regular.ttf','Fraunces.ttf'].map(name=>readFile(join(process.cwd(),'public/fonts',name)))).catch(()=>null);
+const packagedFonts=Promise.all(['Archivo-Regular.ttf','Newsreader-Regular.ttf'].map(name=>readFile(join(process.cwd(),'public/fonts',name)))).catch(()=>null);
 export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){
  const record=socialRecord((await params).id);if(!record)return new Response('Not found',{status:404});
  const search=new URL(request.url).searchParams;
@@ -20,6 +20,6 @@ export async function GET(request:Request,{params}:{params:Promise<{id:string}>}
  // Public assets are served by both local runtimes; they are not filesystem
  // entries inside the worker bundle used by the Vite development server.
  const loadFont=async(name:string)=>{const response=await fetch(new URL(`/fonts/${name}`,request.url));if(!response.ok)throw new Error(`Unable to load social font: ${name}`);return response.arrayBuffer();};
- const [textFont,font]=await packagedFonts ?? await Promise.all([loadFont('Geist-Regular.ttf'),loadFont('Fraunces.ttf')]);
- return new ImageResponse(artwork,{...size,fonts:[{name:'Geist',data:textFont,weight:400,style:'normal'},{name:'Fraunces',data:font,weight:400,style:'normal'}],headers:{'Content-Disposition':disposition}});
+ const [textFont,font]=await packagedFonts ?? await Promise.all([loadFont('Archivo-Regular.ttf'),loadFont('Newsreader-Regular.ttf')]);
+ return new ImageResponse(artwork,{...size,fonts:[{name:'Archivo',data:textFont,weight:400,style:'normal'},{name:'Newsreader',data:font,weight:400,style:'normal'}],headers:{'Content-Disposition':disposition}});
 }
