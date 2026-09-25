@@ -20,10 +20,31 @@ social-card route derive from the new publication record.
 
 Validation: TypeScript, all existing publication tests plus recovery source/paired
 outcome checks, and the Sites build. Publication provenance preserves the exact
-source notes and figure data by SHA-256. No browser visual QA was requested.
+source notes and figure data by SHA-256. Browser visual and interaction QA remains outstanding because the browser runtime is unavailable.
 
 The revised narrative introduces the four-code calibration world before the
 comparisons. A client-side arithmetic explorer uses the actual public diagnostic
 from I12R block 9. It calculates candidate predictions without model calls; the
 source archive and exact evidence member are identified. The original failure
 trace is kept separate from this explanatory interaction.
+
+## Codex prototype — 25 September 2026
+
+The current entry uses the shared HAUSE Codex shell. Five spreads hold the result,
+calibration apparatus, failed write, paired evidence and proposed next question.
+Folio numbers describe reading order; they do not claim historical manuscript IDs.
+The cover and spread transition use CSS perspective and depth around selectable
+HTML. Navigation supports links, previous/next buttons, arrow keys in the spread,
+and a separate drag strip. Motion respects the site control and reduced motion.
+
+Read opens the complete v1.1 authored account. History uses the actual preserved
+v1.0 and v1.1 records; no amendments or experimental outcomes were invented.
+Enlarge gives the spread more width. Evidence and instrument controls remain
+native HTML. Fragment links select the relevant spread and reveal disclosures.
+Without JavaScript, the manuscript and all spreads remain visible. This pilot is
+limited to the Repairer entry; other notebooks are not converted into books.
+
+Verification: library tests/typecheck, publication tests including exact source
+and paired-outcome checks, both builds, generated-page checks, and rendered HTML
+checks for headings and fragment targets. Browser visual/interaction QA remains
+outstanding. Review branches only; no deployment.

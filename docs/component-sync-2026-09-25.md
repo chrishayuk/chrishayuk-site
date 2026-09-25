@@ -1,7 +1,7 @@
 # Component synchronization — 25 September 2026
 
 Both hause.design and chrishayuk.com consume HAUSE revision
-`43283a8e06ec33a3c23e9e24296dd99596ba1bb9` on review branches.
+`334ea8b2f88d94654f1292aa1b0913a968ab18c4` on review branches.
 
 The book now imports exhibition capabilities directly from the package. Its old
 35-form compatibility snapshot is retired. StagedTransition and TextCorrection
@@ -13,7 +13,7 @@ FigureMotion, AnchoredDisclosure, legibility and revision-continuity helpers now
 belong to the library. The publication room demonstrates the reading helpers;
 capability records and contribution relationships identify their actual origin.
 
-`npm run check:hause` verifies 111 source files and the exact dependency pin.
+`npm run check:hause` verifies 118 source files and the exact dependency pin.
 The HAUSE source-parity workflow independently checks out that upstream commit,
 so changing both a local component and its checksum still fails CI.
 See the library's SYNC.md for the update procedure.
@@ -26,3 +26,9 @@ branches have not been deployed.
 The application lint boundary excludes the verified HAUSE mirror. Existing
 application-wide lint findings outside this synchronization remain separate
 from the passing build, type and parity checks.
+
+The shared publication library now supplies Codex, FolioObject, Marginalia,
+NotebookEdition, NotebookSupport and ReadingFigure. The publication room has a
+working codex specimen. Chris Hay opts the Repairer entry into five composed
+spreads, with direct manuscript and recorded-history views. Other entries and
+preserved editions retain their existing presentation.
