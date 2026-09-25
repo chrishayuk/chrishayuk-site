@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SelectedExperiments, CompactNotes } from "@/components/PublicationIndex";
 import { FilmPlayer } from "@/components/FilmPlayer";
 import { FilmPoster } from "@/components/FilmPoster";
+import { Media } from "@/components/Media";
 import { previewFor } from "@/components/YouTubeCollection";
 import { latestVideo, latestMoe, videoPath, durationLabel } from "@/lib/youtube";
 import { homeResultProgrammes, latestNotes, researchProgrammes, shortDate } from "@/lib/publication-index";
@@ -13,18 +14,23 @@ const systems = [{ name: "Cell80", path: "/thread/cell80" }, ...HOUSE_WORK.filte
 
 export default function Home() {
   return <main id="main" className="edition-home">
+    <section className="edition-arrival scene dark-scene" data-scene="identity" aria-labelledby="proposition">
+      <Media id="hero-identity" priority className="scene-background"/>
+      <div className="edition-arrival-overline"><span>Chris Hay</span><span>London · 2026</span></div>
+      <div className="edition-arrival-copy">
+        <h1 id="proposition">A house for<br/>ideas, systems<br/>and objects.</h1>
+        <p>Building things to find out how they work.</p>
+      </div>
+      <div className="edition-arrival-footer"><span>Research · Engineering · Design · Film</span><a href="#current-programmes">Explore the house ↓</a></div>
+    </section>
     <section id="film" className="edition-lead" data-scene="film" aria-labelledby="latest-youtube-heading">
       <article id="latest-youtube">
-        <a href={videoPath(latestVideo)} className="film-entrance" data-film-destination aria-label={`Open film: ${latestVideo.title}`}><FilmPoster video={latestVideo} preview={previewFor(latestVideo)} priority/><span className="film-entrance-label">Watch the film <span aria-hidden="true">↗</span></span></a>
+        <a href={videoPath(latestVideo)} className="film-entrance" data-film-destination aria-label={`Open film: ${latestVideo.title}`}><FilmPoster video={latestVideo} preview={previewFor(latestVideo)}/><span className="film-entrance-label">Watch the film <span aria-hidden="true">↗</span></span></a>
         <div className="edition-lead-caption">
           <p className="edition-caption">Latest film<br/>{latestVideo.published && <><time dateTime={latestVideo.published}>{shortDate(latestVideo.published)}</time> · </>}{durationLabel(latestVideo.duration)}</p>
-          <div><h1 id="latest-youtube-heading"><a href={videoPath(latestVideo)}>{latestVideo.title}</a></h1><a className="edition-link" href={videoPath(latestVideo)}>Film & transcript</a></div>
+          <div><h2 id="latest-youtube-heading"><a href={videoPath(latestVideo)}>{latestVideo.title}</a></h2><a className="edition-link" href={videoPath(latestVideo)}>Film & transcript</a></div>
         </div>
       </article>
-    </section>
-    <section className="edition-introduction" data-scene="identity" aria-labelledby="about-chris">
-      <h2 id="about-chris">Chris Hay<br/><span>London</span></h2>
-      <div><p>I build things to find out how they work.</p><p>Research, engineering, design and film. A house for ideas, systems and objects.</p><Link className="edition-link" href="/about">About Chris</Link></div>
     </section>
     <section id="selected-results" className="edition-section" data-scene="results" aria-labelledby="results-heading">
       <div className="edition-section-heading"><h2 id="results-heading">Selected research</h2><Link className="edition-link" href="/research">All research</Link></div>
