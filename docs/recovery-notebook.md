@@ -30,8 +30,8 @@ trace is kept separate from this explanatory interaction.
 
 ## Codex prototype — 25 September 2026
 
-The current entry uses the shared HAUSE Codex shell. Five spreads hold the result,
-calibration apparatus, failed write, paired evidence and proposed next question.
+The current entry uses the shared HAUSE Codex shell. Six spreads hold the experiment setup, result, calibration apparatus, failed
+write, paired evidence and proposed next question.
 Folio numbers describe reading order; they do not claim historical manuscript IDs.
 The cover and spread transition use CSS perspective and depth around selectable
 HTML. Navigation supports links, previous/next buttons, arrow keys in the spread,
@@ -48,3 +48,19 @@ Verification: library tests/typecheck, publication tests including exact source
 and paired-outcome checks, both builds, generated-page checks, and rendered HTML
 checks for headings and fragment targets. Browser visual/interaction QA remains
 outstanding. Review branches only; no deployment.
+
+### Refinement: orientation, leaf turns and a distinct Read edition
+
+The setup defines the agents, the calibration world, the inherited treatments and
+the joint endpoint before the result. The I12R spread includes a short explanation
+for readers arriving directly at its fragment. No outcomes or source records changed.
+
+Spread navigation updates the address without native fragment scrolling. Inert
+visual copies make a directional leaf turn while the real instruments stay mounted;
+height changes interpolate with the turn. Pause and reduced motion skip animation.
+
+The full reading edition uses the current published record, grouped into eleven
+continuous sections. It retains every act and its original act-N anchor, with
+contents, a reading column and access to evidence and sources. It is not the folio
+summary repeated at a different scale. Browser interaction and visual QA remain
+outstanding because no browser is available in this session.

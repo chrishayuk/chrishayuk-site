@@ -47,8 +47,8 @@
 .recovery-codex .codex-manuscript .hause-grid { padding-inline: 0; }
 @media (max-width: 600px) {
  .recovery-codex .codex-folio { min-height: 0; }
- .recovery-codex #i12r .recovery-folio-result[data-place=left] { grid-column: 1/7; }
- .recovery-codex #i12r .recovery-folio-result[data-place=right] { grid-column: 7/-1; }
+ .recovery-codex .recovery-folio-result[data-place=left] { grid-column: 1/7; }
+ .recovery-codex .recovery-folio-result[data-place=right] { grid-column: 7/-1; }
  .recovery-folio-count { gap: 8px; }
  .recovery-folio-count strong { font-size: 100px; }
  .recovery-folio-count > span { font-size: 16px; }
@@ -63,9 +63,17 @@
 /* A bound spread uses the available desk, rather than the article’s prose measure. */
 .publication-main[data-hause-notebook="reading"] > .record-body { max-width: none; padding-inline: 0; }
 @media (max-width: 1200px) {
- .recovery-codex :is(#world,#mechanism) .folio-object[data-place=main],
- .recovery-codex :is(#world,#mechanism) .folio-object[data-place=margin] { grid-column: 1/-1; }
+ .recovery-codex .codex-folio:has(.recovery-diagnostic,.recovery-commit) .folio-object[data-place=main],
+ .recovery-codex .codex-folio:has(.recovery-diagnostic,.recovery-commit) .folio-object[data-place=margin] { grid-column: 1/-1; }
 }
 
 .codex-record-apparatus { max-width: 1120px; margin: 0 auto 64px; padding-inline: var(--margin); }
 @media (max-width:600px) { .recovery-folio-result figcaption { min-height: 3.4em; } }
+
+/* A short orientation on the desk; the full account has its own reading rhythm. */
+.recovery-setup h3 { font: 400 24px/1.3 var(--font-display),serif; margin: 32px 0 12px; }
+.recovery-setup h3:first-child { margin-top: 0; }
+.recovery-setup p { font: 15px/1.8 var(--font-system),sans-serif; max-width: 42ch; }
+.recovery-codex .recovery-result-context { max-width: 65ch; font-size: 15px; line-height: 1.8; }
+.recovery-context-link { display: inline-flex; align-items: center; min-height: 44px; font: 12px/1.6 var(--font-system),sans-serif; text-decoration: underline; text-underline-offset: 4px; }
+.recovery-reading-edition { font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); margin-top: 24px; }

@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import data from '../public/data/ecology/recovery/evidence.json' with {type:'json'};
 import { getRecord } from '../lib/records.ts';
+import { recoveryChapters } from '../lib/recovery-reading.ts';
 import { recordGraph } from '../lib/graph.ts';
 import { latestNotes, programmeHighlights } from '../lib/publication-index.ts';
 test('recovery figures retain exact canonical reports, paired flags and denominators',()=>{
@@ -25,4 +26,16 @@ test('the explanatory instrument derives the lost value from the recorded public
  assert.deepEqual(candidates,[0]);assert.equal((row.gain*data.example.damaged[1]+row.offset)%17,4);
  assert.deepEqual(data.example.evidence.map(r=>Array.from({length:17},(_,i)=>i).find(c=>(r.gain*c+r.offset)%17===r.observed)),data.example.proposed);
  assert.deepEqual(data.example.freshEvidence.map(r=>Array.from({length:17},(_,i)=>i).find(c=>(r.gain*c+r.offset)%17===r.observed)),data.example.freshTruth);
+});
+
+test('the long read preserves every published act in order with its original anchor',()=>{
+ const record=getRecord('N-ECOLOGY-RECOVERY')!;
+ const chapters=recoveryChapters(record);
+ const reading=chapters.flatMap(chapter=>chapter.acts);
+ assert.deepEqual(reading.map(({act})=>act),record.body);
+ assert.deepEqual(reading.map(({index})=>index),record.body.map((_,index)=>index));
+ assert.equal(new Set(chapters.map(chapter=>chapter.id)).size,chapters.length);
+ assert.equal(chapters.length,11);
+ assert.ok(chapters[0].acts.length>1);
+ assert.ok(chapters.some(chapter=>chapter.acts.some(({act})=>'text' in act && act.text.includes('protected'))));
 });
