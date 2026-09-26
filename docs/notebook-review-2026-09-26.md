@@ -54,7 +54,7 @@ creation, revision or retrieval dates from displacing publication chronology.
 ## Shared implementation
 
 HAUSE owns NotebookTemplate, NotebookNote, NotebookFilm, NotebookPreview and
-Codex navigation. Both consumers pin `ee2095e01f937158be790d0c4458b629d5846866`
+Codex navigation. Both consumers pin `60b0dcf3b0bb2f7e3fa9b1b93e720b8706c951a9`
 and verify all 123 shared source files. The design site has specimens and generated
 API/Ask documentation for the same revision. Future notebooks have a default
 shared-template renderer as well as the option to author their own chapters.
@@ -63,3 +63,8 @@ Existing notebook controls, source records and preserved manuscripts remain
 intact. The earlier six-movement recovery reading source was reconciled from
 main and retained; the later notebook composition remains the current edition.
 The paper, diagrams and film framing do not introduce research findings.
+
+The later Cell80 screenshot exposed an inherited black exhibition wrapper around
+a statement. Shared room-style statements now use notebook-sized, left-aligned
+ink with a rust continuation. Thresholds in Cell80, State and the short notes,
+plus the Exhibition and Authority narrative wrappers, inherit the paper palette.

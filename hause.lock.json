@@ -1,5 +1,5 @@
 {
-  "revision": "ee2095e01f937158be790d0c4458b629d5846866",
+  "revision": "60b0dcf3b0bb2f7e3fa9b1b93e720b8706c951a9",
   "packagePath": "vendor/hause",
   "files": {
     "citation-export.css": "7c5b80eefe3e285142c64ca01dd6701275e48324d8893e656321e7fd7dfaa73e",
@@ -96,11 +96,11 @@
     "manifest.ts": "401d9c186a7822126de7813b5ce42d0ed506b2d6f0775bc1c0d6573ee8bdd160",
     "mode.ts": "f30941d320a6524642f82d525f8945ff2c66c097018a5dbda07bc079e0cbb491",
     "motion.ts": "27a14eb9a8e0877e7440eb2ab2800944f1df38efd74c1c8c0fd8979c593dfc37",
-    "notebook-template.css": "01a192d7b86869f465d2e0c6c392f56d6c2b075f9b80cc776276d38940395f54",
+    "notebook-template.css": "09c56eea37f697ac53042b09bde81da9afca2b82583ebefdc48881efa7b7f89c",
     "notebook.css": "920b4fedfcd0df2c3d67f03d68da613e8dc4dfed383c13613e730fb5292d18a8",
     "package.json": "f82cada794064ca4e841b8ac1c90ccee3b712e9e77e58891eb60cd6b461ea295",
     "provenance.ts": "3ee78dc77d61ec815814ed2817e96490c16706c7a6762c7dea734236527ebd8b",
-    "PUBLICATION.md": "04f9959da2c3749beda0fb41f9f45c1d691019f8a25f8beb0537abc0fff44c12",
+    "PUBLICATION.md": "38b6ffe407cb3c5b6dcf979a82ad2ec725bdf863fa1bc625a805ffe66cdd796a",
     "reading.css": "ce877b5189ce41c1d7b6ad39636abd68d7d50b1ab687f2cae3b1a4e28da9311b",
     "README.md": "1ab71a5cca0817bfdbdd0d98710b569d46c6b43e374be3adecd33fa848f6bcd1",
     "record-difference.ts": "8c179bf5ac7dcc86962167b84b76a9ac6bf2c19f7e0dc453ef1a87ea19111e88",

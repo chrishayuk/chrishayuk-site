@@ -1,7 +1,7 @@
 # Shared HAUSE publication components — 26 September 2026
 
 Both hause.design and chrishayuk.com pin HAUSE source revision
-`ee2095e01f937158be790d0c4458b629d5846866`. The design site installs the Git
+`60b0dcf3b0bb2f7e3fa9b1b93e720b8706c951a9`. The design site installs the Git
 package; Chris Hay vendors the same source inventory. `npm run check:hause`
 verifies all 123 shared files and the exact revision. CI independently checks
 out that upstream commit so changing a consumer and its checksum cannot hide drift.
