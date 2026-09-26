@@ -2,6 +2,13 @@
 
 Contributed from the CHRISHAYUK publication. Editorial layouts remain in the consumer; citation and machine-legibility rules belong to HAUSE.
 
+The subsequent hause.design exhibition donation adds `VisualPlate`, native
+`ExhibitionChoices` / `BeforeAfter`, and `OutcomeMatrix`. They keep media credits,
+readable treatment choices and per-case evaluation records with the experience.
+See [EXHIBITION-MEDIA.md](EXHIBITION-MEDIA.md) for contracts and compatibility notes.
+The publication supplies its imagery, text, outcomes and scope; none are generated
+by these components. These capabilities do not add semantic forms.
+
 - `cite.ts`: film/image kinds, literal corporate authors, optional unknown publication dates, stable record IDs; Plain, APA, BibTeX, CSL-JSON and head metadata share one record. Never use a retrieval date as a publication date. An absent date exports as n.d. and is omitted from machine date fields.
 - `seo.ts`: `publicationMetadata` emits canonical, social, indexing and citation head values. `videoObjectLd` distinguishes the local screening URL, original source, producer and participants. These are discoverability helpers, not promises of indexing or rich-result eligibility. Sites supply summaries, facts, routes, imagery and their publication policy.
 - `components/Motion`: one dominant visible media owner, explicit full-film activation, reduced-motion/save-data, global pause, page visibility and dialog suspension. Wrap the publication once. `useMotion` lets local ambient films and system studies join the same coordinator. Storage key is configurable.
@@ -28,6 +35,8 @@ See [EVIDENCE.md](EVIDENCE.md) for contracts, examples and extraction status.
 
 ## Reader-initiated sharing
 
+For the later hause.design donations—VisualPlate, ExhibitionChoices / BeforeAfter, OutcomeMatrix, DecisionTrail, GraphNeighbourhood, SequencePlayer and recordDifference—see [EXHIBITION-MEDIA.md](EXHIBITION-MEDIA.md). They supply reusable exhibition composition and record checks, not additional semantic forms or CHRISHAYUK contribution claims.
+
 `Share` from `@chrishayuk/hause/components/Share` accepts `url`, `text`, optional `label` and `className`. The publication supplies a canonical public URL and a concise proposition, preserving any uncertainty. `share.ts` exports the same `shareLinks` builder for other renderers; `share.css` supplies overridable reading defaults.
 
 LinkedIn receives the canonical link and builds its preview from the destination's metadata; its share URL does not prefill post prose. X receives the supplied text and URL in a composer. Neither link publishes anything automatically. No provider SDK, tracking pixel, account or subscriber store is added. Keep the proposed X text short enough for its composer.
@@ -40,3 +49,90 @@ Copy opens a native disclosure with selectable text, and enhances it with clipbo
 ```
 
 The consumer decides which records may be shared. Do not expose unlisted drafts. Source cards, editorial post drafts and publication status remain consumer-owned. First consumer: CHRISHAYUK, September 2026. This is publication infrastructure, not a newly promoted semantic form.
+
+## Reading and publication contracts
+
+`FigureMotion` and `AnchoredDisclosure` are shared reading helpers extracted
+from chrishayuk.com. A figure's numbers remain recorded values throughout its
+reveal. Motion belongs to `MotionProvider`; paused and reduced-motion readers
+receive the complete still figure. Styling, content and experimental claims
+belong to the publication. An anchored disclosure opens for a fragment inside
+it and remains an ordinary native details element without JavaScript.
+
+`legibility.ts` supplies `searchProjection`, `legibilityLd` and `auditLegibility`.
+An editorial search opt-out needs an authored reason and preserves meaning,
+authorship and provenance obligations.
+
+`provenance.ts` supplies `auditContinuity`, `realDate` and `compareVersions`.
+Revision checks retain the first-publication date and require a later version,
+revision date and named predecessor. Hosts store and verify their own artifacts.
+
+
+## Codex composition
+
+Use `NotebookTemplate` for the complete notebook treatment. It accepts Codex's
+authored `folios`, `manuscript`, `history` and cover metadata, and gives study
+rooms a paper-scale composition. A short proposition can use two spreads; an
+experiment can keep a complete operable study together on one spread. Choose
+boundaries by meaning, never by an automatic character or height cutoff.
+
+`NotebookNote` takes `title`, text `children`, `sketch` and `caption`. Its drawing
+sits in the margin when space permits and follows the text on narrow paper.
+Drawings belong to their publication; do not turn a schematic into invented
+measurements. Supply an SVG accessible name or an equivalent nearby description.
+
+`NotebookFilm` takes the existing player as `children`, a `caption`, and optional
+`source`, `marker` and `timestamp`. It supplies a mounted frame and apparatus;
+the player still owns loading, sound, controls and motion coordination. Keep
+source URLs and start times exact. A decorated mount is not a new playback owner.
+
+Folio paper uses a fine square grid, a quiet outer margin rule and a shaded
+centre fold. The paper treatment also follows the cloned leaves during page
+turns. Tune `--codex-grid-size`, `--codex-grid-ink`, `--codex-margin-ink` and
+`--codex-paper` on `.hause-codex`. The centre fold disappears on narrow screens;
+continuous Read and History views stay unruled, and print omits the decoration.
+
+A major entry can opt into `NotebookEdition` and `Codex`, with `ReadingFigure`,
+`FolioObject` and `Marginalia` as its working objects. Supply ordered `folios`
+with stable IDs, labels and optional `kind: "operate" | "evidence"`, plus the
+`manuscript` and `history` React slots. Mode and index links use real fragments;
+links to an object inside a hidden folio reveal it before scrolling. Existing
+instruments stay mounted when pages change. Do not invent historical numbering,
+revisions or measurements for the cover, marginalia or history view.
+
+The cover is skippable through Read, Operate, Evidence, History and the folio
+index. The drag strip is separate from text and instruments. Narrow screens
+collapse authored columns into source order; no canvas, page-curl asset, imposed
+scrolling or GPU renderer is required. No-JavaScript and print readers receive
+all folios and manuscript sections. Existing playback instruments keep their own
+motion coordinator; this shell changes presentation, never a recorded outcome.
+
+`Manuscript` presents the full authored account as continuous prose, with optional
+contents and chapter anchors. It is distinct from concise `Codex` folios. Codex
+turns use inert visual copies for a directional leaf animation; live instruments stay mounted. Reduced motion and pause skip the turn.
+
+`EditorialPlate` accepts publication-owned media and a required caption. Its
+wide, inset and portrait compositions establish a sequence of views and details
+without inventing media, credentials or evidence. Images remain still inside
+turning folios. The caption should carry the actual credit and provenance.
+
+Codex folios use `--codex-spread-height` as a minimum and grow to fit their
+figures. The document scrolls normally, so images, tables and captions remain
+fully visible. `sizing="fixed"` explicitly opts into a fixed-height binding with
+internal scrolling and a reserved scrollbar gutter. Read remains continuous;
+print and no-JavaScript views expose full content.
+
+Previous/Next and the current spread label sit on the paper’s top edge. This
+strip stays visible below the view selector while a long folio scrolls. The
+selector height is measured so wrapped mobile controls do not overlap it.
+Turning from within a long page brings the new spread back to its beginning.
+
+`NotebookPreview` renders a still open spread for a homepage or index. The host
+supplies a real title, destination, summary, metadata, excerpt and optional margin
+annotation. It uses the same squared stock and binding as Codex, stacks into one
+column on small screens, and has one H2 rather than introducing another page H1.
+Publication selection and chronology belong to the host's record or graph layer.
+
+Room-style Statement forms become left-aligned ink passages at notebook scale
+inside NotebookTemplate. Consumer chapter wrappers should inherit the paper
+palette rather than bring a full-page dark exhibition background into the folio.

@@ -70,7 +70,7 @@ test("canonical hashing ignores object key order, but preserves semantic array o
 test("publication requires a real date and XML text cannot create markup",()=>{assert.throws(()=>validateRecord({...records[0],publication:"published",published:undefined}),/date/);assert.equal(escapeXml('<title>&"'),"&lt;title&gt;&amp;&quot;");});
 test("homepage follows the edited publication sequence and excludes placeholder scenes",async()=>{
  const page=await readFile(new URL("../app/page.tsx",import.meta.url),"utf8");
- assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["identity","programmes","film","results","systems","notebook","appearances"]);
+ assert.deepEqual([...page.matchAll(/data-scene="([^"]+)"/g)].map(m=>m[1]),["identity","film","results","programmes","appearances","systems"]);
  assert.equal((page.match(/id="latest-youtube"/g)||[]).length,1);
  assert.equal((page.match(/id="latest-mixture-of-experts"/g)||[]).length,1);
  assert.doesNotMatch(page,/MachineMotivationCard|nowNote/);
@@ -319,8 +319,8 @@ test("notebook notes declare their own lineage and every act kind renders", asyn
  }
  // The index introduces threads and a compact chronological selection.
  const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
- assert.match(index, /ProgrammeDoors/);
- assert.match(index, /CompactNotes notes=\{latestNotes\}/);
+ assert.match(index, /programmes\.map/);
+ assert.match(index, /CompactNotes notes=\{otherNotes\} notebookJourney/);
  assert.doesNotMatch(index, /VISUAL NOTES/);
 });
 

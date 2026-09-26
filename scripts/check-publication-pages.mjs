@@ -80,10 +80,12 @@ assert.ok(inheritance.includes('READ n0'));
 assert.ok(inheritance.includes('REFRESH n0'));
 assert.ok(inheritance.includes('Record n1 is available.'));
 assert.ok(inheritance.includes('No inherited record.'));
-for(const path of ["/", "/thread/agent-ecology", "/thread/machines", "/notebook"]){
+// The homepage selects the latest published graph record; the collection audit
+// checks that changing entrance separately from these stable programme links.
+for(const path of ["/thread/agent-ecology", "/thread/machines", "/notebook"]){
  const html = await (await get(path)).text();
  const links = [...html.matchAll(/href="([^"]+)"/g)].map(match=>match[1]).filter(href=>href.split("#")[0]===inheritancePath);
  assert.ok(links.length,`${path} links the inheritance note`);
  for(const href of links){const hash=href.split("#")[1];if(hash) assert.ok(inheritance.includes(`id="${hash}"`),`${path}: ${href} resolves to an anchor`);}
 }
-console.log("Inheritance: historical source, paired replay, and homepage/thread/field-map entrances verified.");
+console.log("Inheritance: historical source, paired replay, and thread/field-map entrances verified.");

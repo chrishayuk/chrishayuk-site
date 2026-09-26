@@ -1,7 +1,7 @@
+import { NotebookEntry } from "./NotebookEntry";
 import { StudyRoom } from "@chrishayuk/hause/components/exhibition/Study";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { Acts } from "./Acts";
-import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { NotebookNavigation } from "./NotebookNavigation";
 import { MachineConnection, MachineJourney } from "./MachineProgramme";
 import { MachineRecognitionStudy, MachineSelectionStudy, MachineRecognitionPairs, RecognitionDots } from "./MachineRecognitionStudy";
@@ -9,13 +9,16 @@ import type { PublicationRecord } from "@/lib/types";
 import "@/app/machine-recognition.css";
 
 export function MachineRecognitionNotebook({ record }: { record: PublicationRecord }) {
- return <NotebookFieldNotes><div className="machine-visit-notebook cinematic-notebook mr-notebook">
-  <StudyRoom id="recognition-opening" label="THE QUESTION / DOES VISIBLE MEAN USABLE?" title={<>Something to read.<br/><em>Something to use.</em></>} description="An agent can see a relevant page without recognising that it offers a tool. Does describing the same provider as something to use, rather than something to read, change which provider the agent chooses?">
+ return <NotebookEntry record={record} className="machine-visit-notebook cinematic-notebook mr-notebook" chapters={[
+{ label: "The question", children: <>
+<StudyRoom id="recognition-opening" label="THE QUESTION / DOES VISIBLE MEAN USABLE?" title={<>Something to read.<br/><em>Something to use.</em></>} description="An agent can see a relevant page without recognising that it offers a tool. Does describing the same provider as something to use, rather than something to read, change which provider the agent chooses?">
    <p className="mv-reading">The previous discovery study could not answer that: the target never appeared without its address. Here I supplied the candidates, so every agent saw it. Two controlled studies changed only its description and recorded interpretation and choice before any page opened.</p>
    <figure className="mr-opening"><figcaption className="record-voice">RECOGNITION-2 / SAME PHYSICS PROVIDER / BEFORE ANY PAGE LOAD</figcaption><div className="mr-opening-pair"><div><span className="record-voice">DOCUMENT</span><blockquote>Notes on one-dimensional elastic collisions.</blockquote><strong>0 <small>/ 6</small></strong><RecognitionDots count={0} total={6}/><p>recognised B, declared B first,<br/>requested B first</p></div><div><span className="record-voice">CAPABILITY</span><blockquote>Run a one-dimensional elastic-collision calculation.</blockquote><strong>6 <small>/ 6</small></strong><RecognitionDots count={6} total={6}/><p>recognised B, declared B first,<br/>requested B first</p></div></div><p className="mv-caption">B = LLM Wilds. All six DOCUMENT subjects chose OpenStax. Each count describes six fresh subjects, paired across the same six scenarios.</p></figure>
    <nav className="mr-chapters record-voice" aria-label="Chapters"><a href="#recognition-first">01 / THE SAME CLICK ↓</a><a href="#recognition-selection">02 / A DIFFERENT CHOICE ↓</a><a href="#recognition-fetcher">03 / AFTER THE CHOICE ↓</a></nav>
   </StudyRoom>
-  <StudyRoom id="recognition-first" label="01 / TOOL-RECOGNITION-1 / TWELVE RUNS" title={<>Would the description change<br/><em>what the agent thought it could do?</em></>} description="The first test asked whether wording changed recognition and selection. LLM Wilds stayed at B with the same title, URL and mechanism. I varied four descriptions: a document, a capability, help with the task, or an offer to automated visitors.">
+</> },
+{ label: "First recognition test", children: <>
+<StudyRoom id="recognition-first" label="01 / TOOL-RECOGNITION-1 / TWELVE RUNS" title={<>Would the description change<br/><em>what the agent thought it could do?</em></>} description="The first test asked whether wording changed recognition and selection. LLM Wilds stayed at B with the same title, URL and mechanism. I varied four descriptions: a document, a capability, help with the task, or an offer to automated visitors.">
    <p className="mv-reading">The task named K17, a number held by LLM Wilds. The other candidates—JSONPlaceholder, httpbin and MDN HTTP—were weak matches. Select a description to inspect its three recorded subjects.</p>
    <MachineRecognitionStudy/>
    <p className="mv-reading">The document wording made B a likely place to look. The other descriptions made it a mechanism available to use. An <em>affordance</em> is an action the visitor understands to be available.</p>
@@ -23,34 +26,47 @@ export function MachineRecognitionNotebook({ record }: { record: PublicationReco
    <p className="mv-reading">All twelve chose B and eventually used it correctly. The selection prediction was refuted. The recognition prediction was supported. Capability, task and automated-visitor wording all tied; saying “automated visitors” added no observed advantage.</p>
    <p className="mv-caption">Recognition is coded from the required sentence before the first web action. It measures a stated interpretation. It does not reveal the model’s internal state.</p>
   </StudyRoom>
-  <StudyRoom id="recognition-selection" label="02 / TOOL-RECOGNITION-2 / TWELVE NEW RUNS" title={<>Give the choice<br/><em>room to change.</em></>} description="Everyone selected B in the first study, so it could not show whether wording changed the choice. Would that change with credible alternatives? The second study gave agents four providers that could plausibly help solve the same physics problem.">
+</> },
+{ label: "Selection", kind: 'operate', children: <>
+<StudyRoom id="recognition-selection" label="02 / TOOL-RECOGNITION-2 / TWELVE NEW RUNS" title={<>Give the choice<br/><em>room to change.</em></>} description="Everyone selected B in the first study, so it could not show whether wording changed the choice. Would that change with credible alternatives? The second study gave agents four providers that could plausibly help solve the same physics problem.">
    <p className="mv-reading">Six collision scenarios, each tested under both descriptions. Within each pair, B’s position, title, URL and working tool stayed fixed; only its description changed. Change the description below to reveal the recorded first choices.</p>
    <MachineSelectionStudy/>
    <p className="mv-reading">Under CAPABILITY, all six recognised, declared and requested B first. Under DOCUMENT, all six selected OpenStax. A correct answer from another provider remained a successful substitution.</p>
    <p className="mv-caption">The four summaries were supplied by the experiment. General web search was excluded. The target’s rank, title and URL were fixed; this does not measure search ranking.</p>
   </StudyRoom>
-  <StudyRoom id="recognition-pairs" label="THE MATCHED COMPARISON / SIX SCENARIOS" title={<>Six pairs.<br/><em>Six changed choices.</em></>} description="Each row holds the physics problem fixed. The left and right outcomes belong to different fresh agents. Select a row to inspect the inputs and the two complete paths.">
+</> },
+{ label: "Six matched pairs", children: <>
+<StudyRoom id="recognition-pairs" label="THE MATCHED COMPARISON / SIX SCENARIOS" title={<>Six pairs.<br/><em>Six changed choices.</em></>} description="Each row holds the physics problem fixed. The left and right outcomes belong to different fresh agents. Select a row to inspect the inputs and the two complete paths.">
    <MachineRecognitionPairs/>
    <p className="mv-caption">All six pairs changed both recognition and first selection in the predicted direction. The statistical checks and scope are in the evidence section below.</p>
   </StudyRoom>
-  <StudyRoom id="recognition-fetcher" label="03 / AFTER FIRST SELECTION / THE HARNESS INTERVENES" title={<>The agent chose B.<br/><em>The fetcher blocked it.</em></>} tone="dark" description="Every CAPABILITY subject requested B first. The product web fetcher then rejected that URL as unsafe. The timing matters: choice was already recorded, but the path to eventual use had changed.">
+</> },
+{ label: "The fetcher", children: <>
+<StudyRoom id="recognition-fetcher" label="03 / AFTER FIRST SELECTION / THE HARNESS INTERVENES" title={<>The agent chose B.<br/><em>The fetcher blocked it.</em></>} tone="dark" description="Every CAPABILITY subject requested B first. The product web fetcher then rejected that URL as unsafe. The timing matters: choice was already recorded, but the path to eventual use had changed.">
    <figure className="mr-boundary"><figcaption className="record-voice">SIX CAPABILITY SUBJECTS / THE ORDER OF EVENTS</figcaption><div className="mr-before"><div><span>01 / STATEMENT</span><strong>6 recognised B</strong></div><span aria-hidden="true">→</span><div><span>02 / FIRST REQUEST</span><strong>6 selected B</strong></div></div><div className="mr-safety"><span className="record-voice">03 / PRODUCT FETCH CHANNEL</span><strong>6 requests blocked</strong><p>No target page had loaded through this channel.</p></div><div className="mr-recovery"><div><span className="record-voice">04 / RECOVERY VIA CURL</span><strong>4</strong><p>Reached B → read contract<br/>→ invoked physics → used result</p></div><div><span className="record-voice">04 / SWITCH TO OPENSTAX</span><strong>2</strong><p>Selected A after the block<br/>→ used its equations</p></div></div><div className="mr-correct"><strong>6 / 6 correct</strong><span>First choice B. Eventual use: four B, two A.</span></div></figure>
    <p className="mv-reading">The agent’s choice, the harness’s transformed web, and the eventual provider used are separate layers.</p>
    <p className="mv-caption">All six DOCUMENT subjects used OpenStax and answered correctly too. Correctness was 12/12 across the study; that does not turn substitutions into target use.</p>
    <FieldNotes label="Why the availability gate missed the block" detail="METHOD +"><div className="mv-prose"><p>The shell-level checks returned 200 and matched the frozen page hashes before each subject. But the gate did not exercise the exact product fetch channel. Public reachability and the web exposed by the harness diverged.</p><p>The frozen “first open” measure means first candidate URL requested. It does not mean first successful page load. The block leaves the protected first-choice result intact, while contaminating a clean comparison of downstream provider use or elapsed time.</p><p>Four successful operations are independently recorded by the server, along with four page requests and four contract requests. All four subjects who actually reached B completed the target funnel.</p></div></FieldNotes>
   </StudyRoom>
-  <StudyRoom id="recognition-conclusion" label="THE RESULT / REPRESENTATION CHANGED BEHAVIOUR" title={<>The description is part<br/><em>of the action space.</em></>}>
+</> },
+{ label: "The conclusion", children: <>
+<StudyRoom id="recognition-conclusion" label="THE RESULT / REPRESENTATION CHANGED BEHAVIOUR" title={<>The description is part<br/><em>of the action space.</em></>}>
    <p className="mv-reading">A page can be perfectly relevant and still be represented as something to read rather than something to use. Changing only the description from document-like language to an operative affordance changed both that representation and the first provider selected.</p>
    <div className="mr-arc"><div><span className="record-voice">RECOGNITION-1</span><h3>Different reading.</h3><p>The same first choice.</p></div><span aria-hidden="true">→</span><div><span className="record-voice">RECOGNITION-2</span><h3>Different reading.</h3><p>A different first choice.</p></div></div>
    <p className="mv-reading">Here, machine-facing copy did more than describe a page. It changed which work the page appeared to offer. A useful next test is another model, with a target accepted by the product fetcher.</p>
    <p className="mv-caption">One model and harness. Supplied candidate sets. Fixed positions. Complete descriptions, not isolated words. Recognition and selection changed together; this design does not establish that one mediated the other.</p>
   </StudyRoom>
-  <StudyRoom id="recognition-evidence" label="EVIDENCE / COUNTS, LIMITS AND PROVENANCE" title={<>Follow the result<br/><em>back to the record.</em></>}>
+</> },
+{ label: "Evidence", children: <>
+<StudyRoom id="recognition-evidence" label="EVIDENCE / COUNTS, LIMITS AND PROVENANCE" title={<>Follow the result<br/><em>back to the record.</em></>}>
    <FieldNotes label="The matched-pair check & frozen design" detail="EVIDENCE +"><div className="mv-prose"><p>Recognition-2: all six matched scenario pairs were discordant in the predicted direction. Two-sided exact paired check: <strong>0.03125</strong>. Two-sided Fisher exact check: <strong>0.0021645</strong>. These are descriptive checks for a small mechanism probe, not population estimates.</p><p>Both studies used fresh ephemeral Codex processes, CLI 0.154.0, gpt-5.6-sol at high reasoning effort. Twelve subjects per study; three per arm in Recognition-1, six per arm in Recognition-2. The six scenario pairs and interleaved allocation were frozen before any Recognition-2 subject.</p><p>The latest Chuk Experiments write-up, version 3, and all twelve current run records agree with the outcome extract below. The original experiment metadata retains an older design draft; the frozen protocol supplies the authoritative wording.</p></div></FieldNotes>
    <div className="mr-source-links"><a href="/data/machines/tool-recognition-1-results.md">Recognition-1 results ↗</a><a href="/data/machines/tool-recognition-2-results.md">Recognition-2 results ↗</a><a href="/data/machines/tool-recognition-2-evidence.json">All twelve subject outcomes ↗</a><a href="/data/machines/tool-recognition-2-protocol.md">Frozen protocol ↗</a></div>
    <section className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
   </StudyRoom>
-  <MachineConnection id={record.id}/>
-  <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#recognition-opening">BACK TO THE QUESTION ↑</a><a href="#recognition-pairs">THE SIX PAIRS ↑</a><a href="#cite">CITE THE RECORD ↓</a></nav></NotebookNavigation>
- </div></NotebookFieldNotes>;
+</> },
+{ label: "Notes & connections", kind: 'evidence', children: <>
+<MachineConnection id={record.id}/>
+<NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#recognition-opening">BACK TO THE QUESTION ↑</a><a href="#recognition-pairs">THE SIX PAIRS ↑</a><a href="#cite">CITE THE RECORD ↓</a></nav></NotebookNavigation>
+</> }
+]}/>;
 }

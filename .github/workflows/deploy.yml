@@ -47,6 +47,7 @@ jobs:
           done
           npm run test:deployment
           node scripts/check-publication-pages.mjs
+          npm run audit:notebooks
   deploy:
     needs: verify
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

@@ -1,10 +1,10 @@
+import { NotebookEntry } from "./NotebookEntry";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Act } from "@/lib/types";
 import { actAnchor } from "@/lib/record-knowledge";
 import { Acts } from "./Acts";
 import { Media } from "./Media";
-import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import { StudyRoom, StudySequence } from "@chrishayuk/hause/components/exhibition/Study";
 function Flow({ steps }: {
@@ -116,7 +116,7 @@ function visualFor(label: string): Visual | undefined {
 export function MapNotebook({ acts }: {
     acts: Act[];
 }) {
-    return <NotebookFieldNotes>{acts.slice(1).map((act, i) => {
+    const pages = acts.slice(1).map((act, i) => {
             const offset = i + 1;
             const visual = act.kind === "observation" ? visualFor(act.label || "") : undefined;
             if (!visual)
@@ -128,5 +128,11 @@ export function MapNotebook({ acts }: {
       {visual.boundary && <p className="notebook-boundary">{visual.boundary}</p>}
       <FieldNotes><Acts staticRefusals acts={[act]}/></FieldNotes>
     </StudyRoom></div>;
-        })}</NotebookFieldNotes>;
+        });
+    return <NotebookEntry recordId="N-MAP" className="cinematic-notebook map-notebook" chapters={[
+   {label:'What is moving?',from:0,to:3}, {label:'Read the picture',from:3,to:5},
+   {label:'The provisional answer',from:5,to:7}, {label:'Change the state',from:7,to:10},
+   {label:'What wrote the answer?',from:10,to:13}, {label:'Eight bytes',from:13,to:16},
+   {label:'Coordinates and readers',from:16,to:20}, {label:'From picture to mechanism',from:20,to:22},
+  ].map(chapter => ({ label: chapter.label, children: <>{pages.slice(chapter.from,chapter.to)}</> }))}/>;
 }

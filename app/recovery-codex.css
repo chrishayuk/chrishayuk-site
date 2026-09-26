@@ -1,0 +1,116 @@
+/* This manuscript’s objects. Binding, folios, modes and marginalia are HAUSE. */
+.recovery-codex .codex-folio { min-height: 510px; }
+.recovery-folio-result { align-self: start; }
+.recovery-folio-result > figure { margin: 0; }
+.recovery-folio-result figcaption { font: 15px/1.7 var(--font-system),sans-serif; }
+.recovery-folio-count { display: flex; align-items: baseline; gap: 16px; margin: 16px 0 28px; }
+.recovery-folio-count strong { font: 400 clamp(100px,13vw,200px)/1 var(--font-display),serif; letter-spacing: -.06em; }
+.recovery-folio-count > span { font: 22px/1 var(--font-system),sans-serif; color: var(--muted); }
+.recovery-folio-marks { display: grid; grid-template-columns: repeat(6,18px); gap: 10px; }
+.recovery-folio-marks i { width: 18px; height: 18px; border: 1px solid #22251f66; border-radius: 50%; }
+.recovery-folio-marks i[data-recovered=true] { background: #22251f; border-color: #22251f; }
+.recovery-codex .recovery-folio-small { font: 13px/1.85 var(--font-system),sans-serif; color: var(--muted); max-width: 62ch; }
+.recovery-folio-kicker { display: block; margin: 40px 0; font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); }
+.recovery-folio-record { display: block; font: 14px/1.7 var(--font-evidence),monospace; margin-block: 16px; overflow-wrap: anywhere; }
+.recovery-folio-annotation { margin-top: 56px; font: 13px/1.85 var(--font-system),sans-serif; color: var(--muted); }
+.recovery-folio-annotation h3 { font: 400 22px/1.25 var(--font-display),serif; color: var(--fg); margin-bottom: 20px; }
+.recovery-folio-annotation p + p { margin-top: 16px; }
+.recovery-folio-link { display: inline-flex; align-items: center; min-height: 44px; font: 13px/1.7 var(--font-system),sans-serif; text-decoration: underline; text-underline-offset: 5px; margin-top: 28px; }
+.recovery-codex .recovery-diagnostic, .recovery-codex .recovery-commit { margin-block: 30px 0; padding-top: 20px; }
+.recovery-codex .recovery-stage { gap: clamp(20px,3vw,44px); grid-template-columns: 1fr 1fr; min-height: 300px; padding-block: 28px; }
+.recovery-codex .recovery-stage-value { font-size: clamp(100px,14vw,180px); }
+.recovery-codex .recovery-stage-copy h3 { font-size: 28px; margin-block: 16px; }
+.recovery-codex .recovery-stage-copy p { font-size: 14px; min-height: 0; }
+.recovery-codex .recovery-equation { gap: 10px 16px; font-size: 14px; }
+.recovery-codex .recovery-transport nav { gap: 8px 18px; }
+.recovery-codex .recovery-transport button { font-size: 12px; }
+.recovery-codex .recovery-commit-stage { padding-block: 32px; }
+.recovery-codex .recovery-record-line { gap: 8px; margin-block: 28px; }
+.recovery-codex .recovery-record-line strong { font-size: clamp(36px,6vw,88px); }
+.recovery-codex .recovery-record-line > span { font-size: 48px; }
+.recovery-codex .recovery-commit-caption { font-size: 15px; }
+.recovery-codex .figure-motion { margin-block: 28px; }
+.recovery-codex .recovery-worlds ol { gap: 8px; }
+.recovery-codex .recovery-worlds li { min-height: 65px; }
+.recovery-codex .hause-notebook-support section { margin-block: 32px; }
+.recovery-codex .hause-notebook-support section > h3 { font: 400 26px/1.25 var(--font-display),serif; margin-bottom: 24px; }
+.recovery-codex .hause-notebook-support section > p { font: 15px/1.85 var(--font-system),sans-serif; margin-block: 20px; }
+.recovery-codex-history { list-style: none; padding: 0; }
+.recovery-codex-history li { margin-block: 40px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.recovery-codex-history li > span { font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); }
+.recovery-codex-history h3 { font: 400 32px/1.3 var(--font-display),serif; margin-block: 20px; }
+.recovery-codex-history p { font: 16px/1.8 var(--font-system),sans-serif; max-width: 55ch; }
+.recovery-codex-history a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.recovery-codex-history details { font: 12px/1.8 var(--font-system),sans-serif; margin-block: 16px; }
+.recovery-codex-history summary { cursor: pointer; min-height: 44px; padding-block: 12px; }
+.recovery-codex-history code { display: block; overflow-wrap: anywhere; }
+.recovery-codex .codex-manuscript .hause-grid { padding-inline: 0; }
+@media (max-width: 600px) {
+ .recovery-codex .codex-folio { min-height: 0; }
+ .recovery-codex .recovery-folio-result[data-place=left] { grid-column: 1/7; }
+ .recovery-codex .recovery-folio-result[data-place=right] { grid-column: 7/-1; }
+ .recovery-folio-count { gap: 8px; }
+ .recovery-folio-count strong { font-size: 100px; }
+ .recovery-folio-count > span { font-size: 16px; }
+ .recovery-folio-marks { grid-template-columns: repeat(4,16px); gap: 8px; }
+ .recovery-folio-marks i { width: 16px; height: 16px; }
+ .recovery-codex .recovery-stage { grid-template-columns: 1fr; }
+ .recovery-codex .recovery-stage-value { font-size: 120px; }
+ .recovery-codex .recovery-stage-copy p { max-width: 42ch; }
+ .recovery-codex .recovery-worlds ol { grid-template-columns: repeat(6,minmax(0,1fr)); }
+ .recovery-folio-annotation { margin-top: 28px; }
+}
+/* A bound spread uses the available desk, rather than the article’s prose measure. */
+.publication-main[data-hause-notebook="reading"] > .record-body { max-width: none; padding-inline: 0; }
+@media (max-width: 1200px) {
+ .recovery-codex .codex-folio:has(.recovery-diagnostic,.recovery-commit) .folio-object[data-place=main],
+ .recovery-codex .codex-folio:has(.recovery-diagnostic,.recovery-commit) .folio-object[data-place=margin] { grid-column: 1/-1; }
+}
+
+.codex-record-apparatus { max-width: 1120px; margin: 0 auto 64px; padding-inline: var(--margin); }
+@media (max-width:600px) { .recovery-folio-result figcaption { min-height: 3.4em; } }
+
+/* A short orientation on the desk; the full account has its own reading rhythm. */
+.recovery-setup h3 { font: 400 24px/1.3 var(--font-display),serif; margin: 32px 0 12px; }
+.recovery-setup h3:first-child { margin-top: 0; }
+.recovery-setup p { font: 15px/1.8 var(--font-system),sans-serif; max-width: 42ch; }
+.recovery-setup .setup-sketch-note { font-size: 10px; }
+.recovery-setup .setup-sketch-boundary { stroke-dasharray: 3 5; stroke-opacity: .5; }
+.recovery-setup .setup-sketch-accent { fill: #8a563c; }
+.recovery-setup .setup-sketch-check { stroke: #315c4d; stroke-width: 1.6; }
+.recovery-codex .recovery-result-context { max-width: 65ch; font-size: 15px; line-height: 1.8; }
+.recovery-context-link { display: inline-flex; align-items: center; min-height: 44px; font: 12px/1.6 var(--font-system),sans-serif; text-decoration: underline; text-underline-offset: 4px; }
+.recovery-reading-edition { font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); margin-top: 24px; }
+
+
+/* The working record belongs on the paper, at the scale of the surrounding text. */
+.recovery-codex figure.recovery-experiment-plate { margin: 0; padding: 0; border: 0; background: transparent; color: var(--fg); }
+.recovery-experiment-plate figcaption { margin-bottom: 24px; }
+.experiment-plate-reference { display: block; color: var(--muted); font: 11px/1.6 var(--font-system),sans-serif; margin-bottom: 12px; }
+.recovery-experiment-plate h3 { font: 400 clamp(23px,2.4vw,32px)/1.2 var(--font-display),serif; max-width: 27ch; }
+.experiment-record-line + .experiment-record-line { margin-top: 28px; }
+.experiment-record-label { font: 12px/1.6 var(--font-system),sans-serif; color: var(--muted); margin: 0 0 10px; }
+.experiment-record-line ol, .experiment-change-mark { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; padding: 0; margin: 0; list-style: none; }
+.experiment-record-line li { text-align: center; font: 400 clamp(32px,4vw,58px)/1.1 var(--font-display),serif; font-variant-numeric: tabular-nums; padding-block: 4px 10px; }
+.experiment-record-line [data-emphasis=changed] { color: #8a4228; border-bottom: 2px solid currentColor; }
+.experiment-record-line [data-emphasis=correct] { color: #315c4d; border-bottom: 2px solid currentColor; }
+.experiment-change-mark { margin: 8px 0 16px; text-align: center; color: #8a4228; font-size: 22px; line-height: 1; }
+.experiment-plate-note { font: 13px/1.75 var(--font-system),sans-serif; max-width: 58ch; margin: 22px 0 0; }
+.experiment-plate-source { margin-top: 18px; font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); }
+.experiment-plate-source a { display: inline-flex; min-height: 36px; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
+.experiment-paired-record { width: 100%; border-collapse: collapse; table-layout: fixed; margin-block: 30px; font: 12px/1.5 var(--font-system),sans-serif; }
+.experiment-paired-record th, .experiment-paired-record td { padding: 10px 0; text-align: center; font-weight: 400; }
+.experiment-paired-record tr > :first-child { width: 20%; text-align: left; }
+.experiment-paired-record thead { color: var(--muted); border-bottom: 1px solid var(--rule); }
+.experiment-outcome { display: inline-grid; width: 16px; height: 16px; place-items: center; font-size: 11px; line-height: 1; border: 1px solid var(--rule); border-radius: 50%; }
+.experiment-outcome[data-recovered=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.recovery-codex .hause-manuscript > .recovery-experiment-plate { margin-block: 48px; padding-block: 28px; border-block: 1px solid var(--rule); }
+@media (max-width: 600px) {
+ .experiment-record-line li { font-size: clamp(32px,9vw,42px); }
+ .experiment-paired-record { font-size: 10px; }
+ .experiment-outcome { width: 12px; height: 12px; font-size: 9px; }
+ .recovery-codex .codex-folio { min-height: 0; }
+}
+
+/* Programmatic reading targets are not controls; keyboard controls retain their focus rings. */
+.recovery-codex [data-codex-page]:focus { outline: none; }

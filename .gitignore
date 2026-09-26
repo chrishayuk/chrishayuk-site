@@ -42,3 +42,6 @@ next-env.d.ts
 /work/
 
 *.tsbuildinfo
+
+# Temporary authoritative checkout used by the parity workflow.
+/.hause-upstream/

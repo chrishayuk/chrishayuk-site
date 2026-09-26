@@ -14,6 +14,7 @@ import { getVideo } from "@/lib/youtube";
 import { Connection } from "@chrishayuk/hause/components/forms/Connection";
 import { DemoConnection } from "./DemoConnection";
 import { NotebookRefusal } from "./NotebookRefusal";
+import { NotebookScreening } from "./NotebookScreening";
 const isHauseStatus = (s: Status): s is HauseStatus => (STATUSES as readonly string[]).includes(s);
 export function Acts({ acts, anchored = false, offset = 0, priority = false, staticRefusals = false, frozen = false }: { acts: Act[]; anchored?: boolean; offset?: number; priority?: boolean; staticRefusals?: boolean; frozen?: boolean }) {
   return <div className="acts">{acts.map((act,i) => {
@@ -33,7 +34,7 @@ export function Acts({ acts, anchored = false, offset = 0, priority = false, sta
         if (frozen) return "youtubeId" in act ? <p><a href={`https://www.youtube.com/watch?v=${act.youtubeId}&t=${act.start}`}>{act.caption} ↗</a></p> : <p className="record-voice">RECORDED MEDIA REFERENCE / {act.media}</p>;
         if ("media" in act) return <Media key={i} id={act.media} caption priority={priority}/>;
         const video = getVideo(act.youtubeId);
-        return video ? <figure key={i} className="notebook-screening"><FilmPlayer video={video} start={act.start} priority={priority}/><figcaption><span className="record-voice">FROM THE FILM / {Math.floor(act.start/60)}:{String(act.start%60).padStart(2,"0")}</span><p>{act.caption}</p><a className="text-link" href={`/film/youtube/${act.youtubeId}?t=${act.start}`}>FILM & SOURCE RECORD ↗</a></figcaption></figure> : null;
+        return video ? <NotebookScreening key={i} caption={act.caption} timestamp={`${Math.floor(act.start/60)}:${String(act.start%60).padStart(2,"0")}`} source={{href: `/film/youtube/${act.youtubeId}?t=${act.start}`, label: 'Film & source record'}}><FilmPlayer video={video} start={act.start} priority={priority}/></NotebookScreening> : null;
       }
       case "photograph": return frozen ? <p className="record-voice">RECORDED MEDIA REFERENCE / {act.media}</p> : <Media key={i} id={act.media} caption priority={priority}/>;
       default: { const never: never = act; throw new Error(`Unknown semantic act: ${JSON.stringify(never)}`); }

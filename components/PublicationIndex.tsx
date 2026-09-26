@@ -1,7 +1,6 @@
 import { RecoveryCard } from "./RecoveryNotebook";
 import Link from "next/link";
 import { Fragment } from "react";
-import { StudyImage } from "./VisualStudy";
 import { recordPath } from "@/lib/records";
 import { noteDate, shortDate, programmeFor, programmeNotes, programmeHighlight, programmeInvitations, researchProgrammes, type Programme } from "@/lib/publication-index";
 import type { PublicationRecord } from "@/lib/types";
@@ -50,12 +49,7 @@ function SelectedResultVisual({ id }: { id: string }) {
 
 export function ProgrammeDoors({ items, notebook = false, highlights = false }: { items: Programme[]; notebook?: boolean; highlights?: boolean }) {
   if (notebook) {
-    const sceneNames = { machines: "threshold", "agent-ecology": "inheritance" } as const;
-    const featured = items.filter(p => p.id in sceneNames);
-    return <><div className="notebook-scene-doors">{featured.map(programme => <figure className="notebook-scene-door" key={programme.id}>
-      <Link href={programme.href}><div className="visual-study-frame"><StudyImage name={sceneNames[programme.id as keyof typeof sceneNames]} sizes="(max-width: 700px) 100vw, 55vw"/></div><h3>{programme.title}<span aria-hidden="true">↗</span></h3><p className="notebook-scene-question">{programme.question}</p></Link>
-      <figcaption className="record-voice">{programmeNotes(programme).length} NOTES · VISUAL STUDY · AI-GENERATED<br/>NOT EXPERIMENTAL EVIDENCE</figcaption>
-    </figure>)}</div><ul className="notebook-thread-list">{items.filter(p => !(p.id in sceneNames)).map(programme => <li key={programme.id}><Link href={programme.href}><span>{programme.title}</span><span>{programmeNotes(programme).length} {programme.id === "practice" ? "essays" : "notes"} ↗</span></Link></li>)}</ul></>;
+    return <ProgrammeDoors items={items} highlights/>;
   }
   return <div className={`programme-doors${notebook ? " programme-doors-notebook" : ""}`}>
     {items.map((programme, index) => {
@@ -76,9 +70,9 @@ export function ProgrammeDoors({ items, notebook = false, highlights = false }: 
   </div>;
 }
 
-export function CompactNotes({ notes }: { notes: PublicationRecord[] }) {
+export function CompactNotes({ notes, notebookJourney = false }: { notes: PublicationRecord[]; notebookJourney?: boolean }) {
   return <ol className="compact-notes">{notes.map(record => <li key={record.id}>
     <div className="compact-note-date record-voice"><time dateTime={noteDate(record)}>{shortDate(noteDate(record))}</time><span>{record.publication === "published" ? "Published" : "Working draft"}</span></div>
-    <div className="compact-note-copy"><p className="record-voice">{programmeFor(record)?.title || "Notebook"}</p><h3><Link href={recordPath(record)}>{record.title}<span aria-hidden="true"> ↗</span></Link></h3><p>{record.dek}</p></div>
+    <div className="compact-note-copy"><p className="record-voice">{programmeFor(record)?.title || "Notebook"}</p><h3 className={notebookJourney ? "notebook-journey-title" : undefined} data-notebook-destination={notebookJourney ? recordPath(record) : undefined} style={notebookJourney ? {viewTransitionName: `notebook-${record.id.toLowerCase()}`} : undefined}>{notebookJourney ? <a href={recordPath(record)}>{record.title}</a> : <Link href={recordPath(record)}>{record.title}<span aria-hidden="true"> ↗</span></Link>}</h3><p>{record.dek}</p></div>
   </li>)}</ol>;
 }

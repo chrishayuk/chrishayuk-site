@@ -1,9 +1,9 @@
+import { NotebookEntry } from "./NotebookEntry";
 import Link from "next/link";
 import { authorityGate as data, gateArm, promotionArm } from "@/lib/authority-gate";
 import type { Act } from "@/lib/types";
 import { Acts } from "./Acts";
 import { AuthorityScene } from "./AuthorityScene";
-import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 const chapters = [
     { title: "Bring the fact to the question.", text: "A compact record can supply a missing fact — and the model can calculate with it. Where that record arrives matters.", source: 2 },
@@ -47,21 +47,21 @@ export function AuthorityNotebook({ acts }: {
     if (starts.some((start, index) => start < 1 || (index > 0 && start <= starts[index - 1])) || closing <= starts[5]) {
         throw new Error("Authority notebook chapters no longer match the authored record");
     }
-    return <NotebookFieldNotes>
-    <nav className="authority-chapter-nav record-voice" aria-label="The visual argument">{["POSITION", "CONFLICT", "READS", "PERSISTENCE", "THE WALK", "TIMING"].map((name, index) => <a key={name} href={`#authority-chapter-${index + 1}`}><span>{String(index + 1).padStart(2, "0")}</span>{name}</a>)}</nav>
-    <div className="authority-opening-conflict"><div><span className="record-voice">OLD SOURCE</span><strong>7431</strong></div><span className="record-voice">↓ APPROX. 55,000 TOKENS</span><div><span className="record-voice">NEW RECORD</span><strong>5824</strong></div><p>Who answers?</p></div>
-    <FieldNotes className="authority-notes authority-origin" label="THE ARGUMENT IN FIVE LINES" detail="READ +"><Acts staticRefusals acts={acts.slice(1, starts[0])} anchored offset={1}/></FieldNotes>
-    {chapters.map((chapter, index) => {
+    return <NotebookEntry recordId="N-AUTHORITY" className="authority-notebook" chapters={[
+   {label:'The conflict',children: <><nav className="authority-chapter-nav record-voice" aria-label="The visual argument">{["POSITION", "CONFLICT", "READS", "PERSISTENCE", "THE WALK", "TIMING"].map((name, index) => <a key={name} href={`#authority-chapter-${index + 1}`}><span>{String(index + 1).padStart(2, "0")}</span>{name}</a>)}</nav>
+<div className="authority-opening-conflict"><div><span className="record-voice">OLD SOURCE</span><strong>7431</strong></div><span className="record-voice">↓ APPROX. 55,000 TOKENS</span><div><span className="record-voice">NEW RECORD</span><strong>5824</strong></div><p>Who answers?</p></div>
+<FieldNotes className="authority-notes authority-origin" label="THE ARGUMENT IN FIVE LINES" detail="READ +"><Acts staticRefusals acts={acts.slice(1, starts[0])} anchored offset={1}/></FieldNotes></>},
+   ...chapters.map((chapter, index) => {
             const Figure = figures[index];
             const end = index === 5 ? closing : starts[index + 1];
-            return <section className="authority-chapter" data-tone={index === 3 ? "dark" : undefined} id={`authority-chapter-${index + 1}`} key={chapter.title}>
+            return ({label: chapter.title, kind: 'evidence' as const, children: <section className="authority-chapter" data-tone={index === 3 ? "dark" : undefined} id={`authority-chapter-${index + 1}`} key={chapter.title}>
       <header><span className="authority-chapter-number">{String(index + 1).padStart(2, "0")}</span><div><h2>{chapter.title}</h2><p>{chapter.text}</p></div></header>
       <Figure />
       {index === 0 && <div className="authority-interpretations"><p>Move the record close to the question, and computation returns.</p><p>But prose cannot reliably say “already computed”: a record stating the reversed code gets reversed again. A finished result needs a typed property.</p></div>}
       {index === 2 && <Link href="/demos/authority-gate" className="text-link authority-study-link">TRY ALL EIGHT SWITCHES IN THE STUDY ↗</Link>}
       <FieldNotes className="authority-notes" label={`FIELD NOTES / ${String(index + 1).padStart(2, "0")}`} detail="MEASUREMENTS & QUALIFICATIONS +"><Acts staticRefusals acts={acts.slice(starts[index], end)} anchored offset={starts[index]}/><a className="text-link" href={`#source-${chapter.source}`}>EXPERIMENT & PROVENANCE ↗</a></FieldNotes>
-    </section>;
-        })}
-    <div className="notebook-open-question"><Acts staticRefusals acts={acts.slice(closing)} anchored offset={closing}/></div>
-  </NotebookFieldNotes>;
+    </section>});
+        }),
+   {label:'The open question',children: <div className="notebook-open-question"><Acts staticRefusals acts={acts.slice(closing)} anchored offset={closing}/></div>},
+  ]}/>;
 }
