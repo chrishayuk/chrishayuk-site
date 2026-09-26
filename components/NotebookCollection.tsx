@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Follow } from "./Follow";
+import { NotebookSketch } from "./NotebookSketch";
 import { notebookCollections, notebookNotes, noteDate, shortDate } from "@/lib/publication-index";
 import { getRecord, recordPath } from "@/lib/records";
 import { recordGraph } from "@/lib/graph";
@@ -34,7 +35,7 @@ export function NotebookCollection() {
         <article className="notebook-volume" data-programme={collection.id} data-notebook-destination={recordPath(note)}>
           <a href={`${recordPath(note)}#open-notebook`} className="notebook-volume-cover">
             <div className="notebook-volume-register"><span>{collection.title}</span><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>
-            <h3>{note.title}</h3><p>{note.dek}</p>
+            <div className="notebook-volume-composition"><div className="notebook-volume-copy"><h3>{note.title}</h3><p>{note.dek}</p></div><NotebookSketch id={note.id} collection={collection.id}/></div>
             <div className="notebook-volume-footer"><span>{note.publication === "published" ? "Published" : "Working draft"} · <time dateTime={noteDate(note)}>{shortDate(noteDate(note))}</time></span><span className="notebook-volume-open">Open notebook <span aria-hidden="true">↗</span></span></div>
           </a>
         </article>
