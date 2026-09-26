@@ -241,7 +241,7 @@ assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
 // All notebook collections expose every listed note exactly once.
 const notebook = await request("/notebook");
-assert.match(notebook.body, /id="current-threads"/);
+assert.match(notebook.body, /id="notebook-selection"/);
 assert.match(notebook.body, /href="\/notebook\/archive"/);
 assert.ok(notebook.body.includes(`data-notebook-lead="${homeSelection.latest.id}"`), 'index and homepage share the graph-selected latest publication');
 const { notebookCollections } = await import('../lib/publication-index.ts');
@@ -249,7 +249,7 @@ const collectionEntries = [...notebook.body.matchAll(/data-notebook-entry="([^"]
 assert.deepEqual(collectionEntries.toSorted(), notebookNotes.map(note => note.id).toSorted());
 for (const collection of notebookCollections) {
  assert.ok(notebook.body.includes(`data-notebook-collection="${collection.id}"`));
- assert.ok(notebook.body.includes(`href="#collection-${collection.id}"`));
+ assert.ok(notebook.body.includes(`value="${collection.id}"`));
 }
 for (const note of notebookNotes) {
  assert.ok(notebook.body.includes(`href="/notebook/${note.slug}#open-notebook"`));

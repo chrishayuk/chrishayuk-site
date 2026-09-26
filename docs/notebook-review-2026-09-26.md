@@ -143,3 +143,30 @@ Collections now use mineral blue, sage, clay, lilac and champagne paper, with th
 strengths across spreads, portraits and studies. Small captions and collection
 labels were darkened after contrast checks on the richest stock. Local previews
 remain off; browser geometry and visual appearance still need review.
+
+Paper colour now follows the record into the reader. A single appearance resolver
+sets collection and paper strength for gallery covers, the homepage excerpt and
+every current notebook route, including Recovery and the default future-note
+renderer. Filtered placement no longer changes a notebook's paper strength.
+The shared palette feeds HAUSE's existing Codex tokens for folios, manuscript,
+history, page-turn copies and navigation; the cover uses the same paper. Preserved
+manuscripts do not opt in. Twenty gallery/selection/navigation tests and HAUSE
+source parity pass; browser visual verification remains outstanding.
+
+The index opening is shorter: a compact masthead, a small graph-selected latest
+link and the sticky filters lead directly into the first collection. The separate
+collection directory and latest banner were removed. Collection selection remains
+in the filters; all entries and first-page links remain in the exhibition. The
+deployment contract now checks those collection options rather than the removed
+directory anchors.
+
+All 30 current notebooks now end with an editorial conclusion and an explicit
+scope/open-question paragraph, also included in the manuscript reading view.
+These summaries were checked against the records' abstracts, findings and closing
+observations. Stopped comparisons, source discrepancies, pending replication and
+unmeasured proposals stay explicit. Recognition's existing discussion remains in
+place under a more specific chapter label. Recovery uses the same closing component.
+New records fall back to their own abstract and publication state until a bespoke
+summary is authored. The rendering audit requires exactly one conclusion on the
+final folio and one in the reading view. Original record bodies and preserved
+versions are unchanged; these are presentation summaries, not new findings.

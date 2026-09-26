@@ -1,0 +1,22 @@
+/* One record-owned paper palette for the exhibition, homepage and HAUSE reader. */
+[data-notebook-palette] { --notebook-thread-ink: #6f4e34; --notebook-stock: #e8d8b8; --notebook-paper: var(--notebook-stock); }
+[data-notebook-palette=machines] { --notebook-thread-ink: #3e5666; --notebook-stock: #cbdce1; }
+[data-notebook-palette=agent-ecology] { --notebook-thread-ink: #43583b; --notebook-stock: #d3dec7; }
+[data-notebook-palette=cell80] { --notebook-thread-ink: #80412e; --notebook-stock: #e8cebd; }
+[data-notebook-palette=learned-systems] { --notebook-thread-ink: #60506a; --notebook-stock: #dcd1e4; }
+[data-notebook-tone=light] { --notebook-paper: color-mix(in srgb,var(--notebook-stock) 45%,#f5f0e5); }
+[data-notebook-tone=medium] { --notebook-paper: color-mix(in srgb,var(--notebook-stock) 72%,#f5f0e5); }
+[data-notebook-palette] :is(.hause-codex,.hause-notebook-preview) {
+ --codex-paper: var(--notebook-paper); --codex-ink: #22251f; --codex-muted: #50564b;
+ --codex-rule: #22251f38; --codex-margin-ink: color-mix(in srgb,var(--notebook-thread-ink) 30%,transparent);
+}
+/* Folios, manuscript, history, navigation and turn copies inherit HAUSE's paper token. */
+.notebook-reading-page[data-notebook-palette] .codex-modes {
+ background: var(--notebook-paper); color: #22251f; border-color: #22251f38; padding-inline: 16px;
+}
+.notebook-reading-page[data-notebook-palette] .hause-codex[data-view=cover] .codex-heading {
+ background: var(--notebook-paper); color: #22251f; border-left-color: var(--notebook-thread-ink);
+}
+.notebook-reading-page[data-notebook-palette] .codex-cover-note { color: #50564b; }
+/* Keep the compact heading on the desk during a direct first-page arrival. */
+.notebook-reading-page[data-notebook-palette] .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-heading { background: none; color: inherit; }

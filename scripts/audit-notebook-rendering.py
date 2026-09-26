@@ -32,6 +32,8 @@ class Page(html.parser.HTMLParser):
         self.featured = []
         self.opening_on_first_folio = False
         self.preview_links = []
+        self.conclusion_folios = []
+        self.read_conclusions = 0
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -47,6 +49,11 @@ class Page(html.parser.HTMLParser):
         if tag == 'a' and attrs.get('href', '').startswith('#'):
             self.fragments.append(attrs['href'][1:])
         classes = attrs.get('class', '').split()
+        if attrs.get('data-notebook-conclusion'):
+            if any('codex-folio' in parent[1] for parent in self.stack):
+                self.conclusion_folios.append(self.folios)
+            if any('codex-manuscript' in parent[1] for parent in self.stack):
+                self.read_conclusions += 1
         if attrs.get('id') == 'open-notebook':
             self.opening_on_first_folio = self.folios == 1 and any('codex-folio' in parent[1] for parent in self.stack)
         if 'notebook-preview-enter' in classes:
@@ -97,6 +104,8 @@ def audit(record, frozen=False):
     if duplicate:
         issues.append('duplicate IDs: ' + ', '.join(duplicate))
     if not frozen:
+        if page.conclusion_folios != [page.folios] or page.read_conclusions != 1:
+            issues.append('conclusion missing from the final folio or manuscript')
         if not page.opening_on_first_folio:
             issues.append('homepage opening destination is not on the first folio')
         if page.page_controls != 1:

@@ -1,0 +1,9 @@
+.notebook-conclusion { max-width: 860px; margin: clamp(12px,3vw,40px) auto; color: var(--codex-ink); }
+.notebook-conclusion-register { font: 11px/1.7 var(--font-evidence),monospace; color: var(--codex-muted); margin-bottom: 28px; }
+.notebook-conclusion h2 { font: 400 clamp(42px,6vw,76px)/1.05 var(--font-display),Georgia,serif; letter-spacing: -.04em; margin-bottom: 36px; }
+.notebook-conclusion .notebook-conclusion-takeaway { font: 400 clamp(23px,3vw,34px)/1.45 var(--font-display),Georgia,serif; max-width: 42ch; margin: 0 0 40px; }
+.notebook-conclusion-scope { border-top: 1px solid var(--codex-rule); padding-top: 24px; max-width: 65ch; }
+.notebook-conclusion-scope h3 { font: 12px/1.7 var(--font-evidence),monospace; color: var(--codex-muted); margin-bottom: 16px; }
+.notebook-conclusion-scope p { font: 16px/1.85 var(--font-system),sans-serif; }
+.notebook-conclusion nav { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: 36px; font: 13px/1.7 var(--font-system),sans-serif; }
+.notebook-conclusion nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
