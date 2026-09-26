@@ -1,3 +1,4 @@
+import { notebookFormat, notebookFormats } from '@/lib/notebook-formats';
 import type { ReactNode } from 'react';
 import { NotebookConclusion } from './NotebookConclusion';
 import { NotebookTemplate } from '@chrishayuk/hause/components/NotebookTemplate';
@@ -18,17 +19,18 @@ export function NotebookEntry({ record: supplied, recordId, chapters, className 
  const record = supplied || getRecord(recordId || '');
  if (!record || record.kind !== 'notebook') throw new Error(`Unknown notebook: ${recordId}`);
  const id = `${record.id.toLowerCase()}-notebook`;
+ const format = notebookFormat(record.id);
  const first = record.body[0];
  const opening = first?.kind === 'film' || first?.kind === 'photograph'
   ? [{ label: first.kind === 'film' ? 'The opening film' : 'The opening image', children: <><p className="notebook-entry-dek">{record.dek}</p><Acts acts={[first]} anchored/></> }]
   : [];
- const folios = [...opening, ...chapters, { id: `${id}-conclusion`, label: 'Conclusion', children: <NotebookConclusion record={record}/> }].map((chapter: NotebookChapter, index) => ({
+ const folios = [...opening, ...chapters, { id: `${id}-conclusion`, label: notebookFormats[format].closing, children: <NotebookConclusion record={record}/> }].map((chapter: NotebookChapter, index) => ({
   id: chapter.id || `${id}-folio-${index + 1}`, label: chapter.label, kind: chapter.kind,
   children: <FolioObject place="full" className="notebook-authored-page"><div id={index === 0 ? 'open-notebook' : undefined} className={`notebook-chapter-content ${className}`}>{index === 0 && introduction}{chapter.children}</div></FolioObject>,
  }));
  const history = publicationHistory(record.id);
- return <NotebookTemplate id={id} title={record.title} collection={`Chris Hay / Notebook / ${record.id}`}
-  byline={<><span>{record.authors.join(', ')}</span><span>{record.publication === 'published' ? 'Published' : 'Working note'} · <time dateTime={record.published || record.created}>{record.published || record.created}</time></span><span>v{record.version}</span>{record.status && <span>{record.status}</span>}</>}
+ return <NotebookTemplate format={format} id={id} title={record.title} collection={`Chris Hay / Notebook / ${record.id}`}
+  byline={<><span>{notebookFormats[format].label}</span><span>{record.authors.join(', ')}</span><span>{record.publication === 'published' ? 'Published' : 'Working note'} · <time dateTime={record.published || record.created}>{record.published || record.created}</time></span><span>v{record.version}</span>{record.status && <span>{record.status}</span>}</>}
   folios={folios}
   manuscript={<Manuscript introduction={<><p>{record.dek}</p><p className="notebook-manuscript-state">{record.publication === 'published' ? 'Published manuscript' : 'Working manuscript'} · v{record.version}</p></>}>
    {record.body.map((act, index) => <section key={index} id={`read-act-${index + 1}`} className="notebook-manuscript-passage">

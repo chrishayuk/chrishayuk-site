@@ -1,3 +1,4 @@
+import { notebookFormat, notebookFormats } from '@/lib/notebook-formats';
 import { notebookAppearance } from '@/lib/notebook-appearance';
 import Link from "next/link";
 import { Follow } from "./Follow";
@@ -48,7 +49,7 @@ export function NotebookCollection(query: { collection?: string; publication?: s
       <ol className="notebook-shelf">{collection.notes.map((note, index) => <li key={note.id} id={`entry-${note.id.toLowerCase()}`} data-notebook-entry={note.id} data-presentation={index % 5 === 0 ? "spread" : index % 5 === 1 || index % 5 === 4 ? "portrait" : "study"}>
         <article {...notebookAppearance(note.id)} className="notebook-volume" data-programme={collection.id} data-notebook-destination={recordPath(note)}>
           <a href={`${recordPath(note)}#open-notebook`} className="notebook-volume-cover">
-            <div className="notebook-volume-register"><span>{collection.title}</span><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>
+            <div className="notebook-volume-register"><span>{collection.title} / {notebookFormats[notebookFormat(note.id)].label}</span><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>
             <div className="notebook-volume-composition"><div className="notebook-volume-copy"><h2>{note.title}</h2><p>{note.dek}</p></div><NotebookSketch id={note.id} collection={collection.id}/></div>
             <div className="notebook-volume-footer"><span>{note.publication === "published" ? "Published" : "Working draft"} · <time dateTime={noteDate(note)}>{shortDate(noteDate(note))}</time></span><span className="notebook-volume-open">Open notebook <span aria-hidden="true">↗</span></span></div>
           </a>

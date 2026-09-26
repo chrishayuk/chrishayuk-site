@@ -20,3 +20,8 @@
 .notebook-reading-page[data-notebook-palette] .codex-cover-note { color: #50564b; }
 /* Keep the compact heading on the desk during a direct first-page arrival. */
 .notebook-reading-page[data-notebook-palette] .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-heading { background: none; color: inherit; }
+
+/* If a future latest publication is a lookbook, its homepage excerpt keeps that stock. */
+[data-notebook-format=lookbook] .hause-notebook-preview .notebook-preview-paper,
+[data-notebook-format=thematic] .hause-notebook-preview .notebook-preview-paper { background-image: none; }
+[data-notebook-format=experimental] .hause-notebook-preview .notebook-preview-paper { background-image: radial-gradient(circle,var(--codex-rule) .65px,transparent .85px); background-size: 22px 22px; }
