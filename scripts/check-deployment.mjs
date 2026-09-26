@@ -239,22 +239,30 @@ assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
-// All notebook collections expose every listed note exactly once.
+// The entrance previews collections; each drilldown exposes its notebooks once.
 const notebook = await request("/notebook");
 assert.match(notebook.body, /id="notebook-selection"/);
 assert.match(notebook.body, /href="\/notebook\/archive"/);
 assert.ok(notebook.body.includes(`data-notebook-lead="${homeSelection.latest.id}"`), 'index and homepage share the graph-selected latest publication');
 const { notebookCollections } = await import('../lib/publication-index.ts');
-const collectionEntries = [...notebook.body.matchAll(/data-notebook-entry="([^"]+)"/g)].map(match => match[1]);
-assert.deepEqual(collectionEntries.toSorted(), notebookNotes.map(note => note.id).toSorted());
+assert.equal([...notebook.body.matchAll(/data-collection-preview=/g)].length, notebookCollections.length);
+assert.doesNotMatch(notebook.body, /data-notebook-entry=/);
+const collectionEntries = [];
 for (const collection of notebookCollections) {
- assert.ok(notebook.body.includes(`data-notebook-collection="${collection.id}"`));
- assert.ok(notebook.body.includes(`value="${collection.id}"`));
+ assert.ok(notebook.body.includes(`data-collection-preview="${collection.id}"`));
+ assert.ok(notebook.body.includes(`href="/notebook?collection=${collection.id}"`));
+ const detail = await request(`/notebook?collection=${collection.id}`);
+ assert.equal(detail.status, 200);
+ assert.ok(detail.body.includes('← All collections'));
+ const ids = [...detail.body.matchAll(/data-notebook-entry="([^"]+)"/g)].map(match => match[1]);
+ assert.deepEqual(ids, collection.notes.map(note => note.id));
+ collectionEntries.push(...ids);
+ for (const note of collection.notes) {
+  assert.ok(detail.body.includes(`href="/notebook/${note.slug}#open-notebook"`));
+  assert.ok(detail.body.includes(`data-notebook-destination="/notebook/${note.slug}"`));
+ }
 }
-for (const note of notebookNotes) {
- assert.ok(notebook.body.includes(`href="/notebook/${note.slug}#open-notebook"`));
- assert.ok(notebook.body.includes(`data-notebook-destination="/notebook/${note.slug}"`));
-}
+assert.deepEqual(collectionEntries.toSorted(), notebookNotes.map(note => note.id).toSorted());
 assert.match(notebook.body, /action="\/notebook\/archive"/);
 assert.match(notebook.body, /id="notebook-search"/);
 assert.doesNotMatch(notebook.body, /notebook-story|authority-card/);

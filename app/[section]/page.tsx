@@ -1,3 +1,4 @@
+import { notebookCollections } from "@/lib/publication-index";
 import { Systems, Ideas, Objects } from "@/components/HouseCollections";
 import { NotebookCollection } from "@/components/NotebookCollection";
 import { ResearchCollection } from "@/components/ResearchCollection";
@@ -32,7 +33,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
  const description=descriptions[section==="work"?"systems":section] || (section==="about" ? `${HOUSE.personLine} ${HOUSE.description}` : HOUSE_PUBLICATIONS.find(p=>p.path===`/${section}`)?.text || `Chris Hay / ${section}. ${HOUSE.descriptor}.`);
  if(section==="record") { const raw=await searchParams; const query=catalogue({q:first(raw.q),kind:first(raw.kind),page:first(raw.page)}); const metadata=pageMetadata(title,description,catalogueUrl(query.q,query.kind,query.page)); return {...metadata,...(query.q ? {robots:{index:false,follow:true}} : {})}; }
  if(section==="research") { const query=await searchParams; return {...pageMetadata(title,description,"/research"),...(query.outcome || query.publication ? {robots:{index:false,follow:true}} : {})}; }
- if(section==="notebook") { const query=await searchParams; return {...pageMetadata(title,description,"/notebook"),...(query.collection || query.publication || query.q ? {robots:{index:false,follow:true}} : {})}; }
+ if(section==="notebook") { const query=await searchParams; const collection=notebookCollections.find(item=>item.id===first(query.collection)); return {...pageMetadata(collection ? `${collection.title} / Notebook` : title,collection?.description || description,"/notebook"),...(query.collection || query.publication || query.q ? {robots:{index:false,follow:true}} : {})}; }
  return pageMetadata(title,description,section==="work"?"/systems":`/${section}`);
 }
 export default async function IndexPage({params,searchParams}:PageProps) {
