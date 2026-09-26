@@ -55,7 +55,7 @@ import { MachineRecognitionNotebook } from "./MachineRecognitionNotebook";
 import { PublicationHistory } from "./PublicationHistory";
 import { provenanceFor, publicationHistory } from "@/lib/provenance";
 export function RecordPage({ record, canonicalPath, frozen = false }: { record: PublicationRecord; canonicalPath?: string; frozen?: boolean }) {
- const codexEdition = !frozen && record.id === "N-ECOLOGY-RECOVERY";
+ const codexEdition = !frozen && record.kind === "notebook";
  const PublicationRoot = codexEdition ? NotebookEdition : "main";
  const brief = !frozen && machineBriefs[record.id];
  const modified = frozen ? record.revised : pageLastModified(recordPath(record), record.revised);

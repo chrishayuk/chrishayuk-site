@@ -1,0 +1,31 @@
+/* Publication-specific exhibits keep their instruments inside HAUSE's shared book. */
+.publication-main[data-hause-notebook=reading] > .record-body { max-width: none; padding-inline: 0; }
+.notebook-authored-page { min-width: 0; }
+.notebook-chapter-content { min-width: 0; }
+.notebook-entry-dek { font: 400 24px/1.5 var(--font-display),serif; max-width: 48ch; margin-bottom: 28px; }
+.notebook-chapter-content :is(.notebook-threshold,.notebook-open-question,.map-visual-section,.authority-chapter,.agent-scene,.agent-ending,.peer-authority,.peer-next,.peer-pair,.exhibition-specimen-book,.exhibition-procession) { padding: 24px 0; margin: 0; min-height: 0; }
+.notebook-chapter-content :is(.mv-full-record,.cell80-reading-record) { margin: 28px 0 0; padding: 0; }
+.notebook-chapter-content :is(.mv-reading,.cell80-prose p,.mv-prose p,.wr-caption) { font-size: 15px; line-height: 1.8; }
+.notebook-chapter-content .hause-grid { padding-inline: 0; }
+.notebook-chapter-content .voice-editorial { font-size: clamp(28px,3.8vw,48px); }
+.notebook-chapter-content :is(.map-visual-section,.agent-scene,.peer-authority,.peer-next,.peer-comparison-intro,.exhibition-specimen-book) h2 { font-size: clamp(28px,3.5vw,44px); line-height: 1.2; }
+.notebook-chapter-content .hause-field-notes { margin-block: 24px; }
+.notebook-chapter-content .notebook-screening { margin: 0; }
+.notebook-chapter-content .hause-notebook-film .cinema-player { max-height: none; min-height: 0; aspect-ratio: 16/9; }
+.notebook-chapter-content .hause-notebook-film .media { width: 100%; margin: 0; }
+.notebook-chapter-content .demo-invitation { margin-inline: 0 !important; }
+.notebook-manuscript-state { font-size: 12px; color: var(--muted); }
+.notebook-manuscript-passage { margin-block: 32px; scroll-margin-top: 110px; }
+.notebook-manuscript-passage h3 { font: 400 25px/1.4 var(--font-display),serif; margin: 40px 0 22px; }
+.notebook-manuscript-passage p { margin-block: 22px; }
+.notebook-manuscript-passage .hause-grid { padding: 16px 0; }
+.notebook-entry-history { max-width: 65ch; margin: auto; font: 16px/1.8 var(--font-system),sans-serif; }
+.notebook-entry-history ol { padding: 0; list-style: none; }
+.notebook-entry-history li { padding-block: 24px; border-bottom: 1px solid var(--rule); }
+.notebook-entry-history h3 { font: 400 30px/1.3 var(--font-display),serif; margin-block: 20px; }
+.notebook-entry-history a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
+.notebook-entry-history :is(code,summary,li > span) { font-size: 12px; overflow-wrap: anywhere; }
+.notebook-entry-history details { margin-top: 24px; }
+.notebook-entry-history summary { min-height: 44px; cursor: pointer; }
+.notebook-entry-history code { display: block; }
+.codex-record-apparatus { max-width: 1120px; margin: 0 auto 64px; padding-inline: var(--margin); }

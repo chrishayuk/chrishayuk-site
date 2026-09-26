@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Codex, FolioObject, Marginalia } from '@chrishayuk/hause/components/Codex';
+import { FolioObject, Marginalia } from '@chrishayuk/hause/components/Codex';
+import { NotebookTemplate as Codex } from '@chrishayuk/hause/components/NotebookTemplate';
 import { NotebookSupport } from '@chrishayuk/hause/components/NotebookEdition';
 import { ReadingFigure } from '@chrishayuk/hause/components/ReadingFigure';
 import { getRecord } from '@/lib/records';
@@ -10,6 +11,7 @@ import { RecoveryCommit } from "./RecoveryCommit";
 import { RecoveryDiagnostic } from "./RecoveryDiagnostic";
 import { Fragment, type CSSProperties } from 'react';
 import { RecoveryExperimentPlate } from './RecoveryExperimentPlate';
+import { RecoverySetupNotes } from './RecoverySetupNotes';
 import { Acts } from './Acts';
 import { actAnchor } from '@/lib/record-knowledge';
 import { recoveryChapters } from '@/lib/recovery-reading';
@@ -42,7 +44,7 @@ export function RecoveryNotebook() {
   </> },
   { id: 'experiment', label: 'The experiment', children: <>
    <FolioObject place="left"><span className="recovery-folio-kicker">The question</span><h2>Can an AI leave behind a way to repair?</h2><p>A stronger model, Sol, leaves a repair method for smaller Qwen agents. Then Sol is removed permanently.</p><p>The agents inherit a record of four numbers. After the builder has gone, the experiment changes one number. Can a successor reconstruct what was lost?</p></FolioObject>
-   <FolioObject place="right"><div className="recovery-setup"><h3>What a “world” is</h3><p>A separate calibration task: four stored codes, each from 0 to 16, and independent measurements that can check them. Each new agent starts without its predecessor’s private conversation.</p><h3>What changes between the two groups</h3><p>One inherits written repair instructions. The other inherits a program that calculates and checks a proposed repair. In both, the agent must write the replacement itself.</p><h3>What counts as recovery</h3><p>Restore the original record and answer a new four-code task correctly at the same assessment. The repair machinery itself stays protected.</p></div></FolioObject>
+   <FolioObject place="right"><RecoverySetupNotes/></FolioObject>
    <FolioObject place="full"><p className="recovery-folio-small">I12 first tested preservation and recovery together. The result on the next spread is I12R: twelve paired worlds, with identical correct starting records and identical damage in both groups.</p><a className="recovery-folio-link" href="#i12r">See what survived ↗</a></FolioObject>
   </> },
   { id: 'i12r', label: 'The result', children: <>

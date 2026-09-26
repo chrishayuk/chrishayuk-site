@@ -1,6 +1,6 @@
+import { NotebookEntry } from "./NotebookEntry";
 import type { Act } from "@/lib/types";
 import { Acts } from "./Acts";
-import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { Procession } from "@chrishayuk/hause/components/forms/Procession";
 import { StagedTransition } from "@chrishayuk/hause/components/forms/StagedTransition";
 import { Statement } from "@chrishayuk/hause/components/forms/Statement";
@@ -79,37 +79,47 @@ export function ExhibitionNotebook({ acts }: { acts: Act[] }) {
   if (performance.kind !== "observation") throw new Error("Expected the exhibition performance record");
   const [motion, discovery] = performance.text.split("\n\n");
   if (!discovery) throw new Error("Expected the exhibition contribution passage");
-  return <NotebookFieldNotes><div className="exhibition-edition">
-    <RoomEntrance number="01" title="THE INFLUENCE" detail="The room is part of the story." />
-    <section className="exhibition-opening-prose"><Acts acts={acts.slice(1, 3)} anchored offset={1} /></section>
-    <ReferenceStudies />
-    <div className="exhibition-statement"><RoomStatement act={acts[3]} index={3} /></div>
-    <FieldNotes acts={acts} index={4} label="WHAT CINEMATIC MEANS" />
-    <RoomEntrance number="02" title="THE FRICTION" detail="Six different acts. One shape." />
-    <CardWall />
-    <div className="exhibition-refusal"><Acts acts={[acts[5]]} anchored offset={5} staticRefusals /></div>
-    <FieldNotes acts={acts} index={6} label="THE WALL OF RECTANGLES" />
-    <ActsReleased />
-    <section className="exhibition-act-question"><Acts acts={[acts[7]]} anchored offset={7} /></section>
-    <RoomEntrance number="03" title="THE ARCHIVE" detail="The instinct was there from the beginning." />
-    <Archive />
-    <FieldNotes acts={acts} index={8} label="READ THE FIRST RECORD" />
-    <section className="exhibition-evidence"><Acts acts={[acts[9]]} anchored offset={9} /></section>
-    <section className="exhibition-specimen-book"><span className="record-voice">29 AUGUST 2026 / HAUSE.DESIGN</span><h2>The design system<br/><em>exhibited in the design system.</em></h2><FieldNotes acts={acts} index={10} label="THE FIRST SPECIMEN BOOK" /></section>
-    <RoomEntrance number="04" title="THE LANGUAGE" detail="The material tells you what the room needs to become." />
-    <ThreeRooms />
-    <FieldNotes acts={acts} index={11} label="WHY THREE MODES" />
-    <ReadingComparison act={acts[12]} />
-    <ExhibitionGrammar />
-    <section className="exhibition-procession"><Procession stages={["EXHIBITION", "CINEMATIC COMPOSITION", "FORMS", "SEMANTIC FORMS", "AI COMPOSITION"]} caption="THE ARTISTIC PROBLEM BECOMES A SYSTEMS QUESTION"/><FieldNotes acts={acts} index={13} label="THE QUESTION CHANGED" /></section>
-    <div className="exhibition-room-statement"><span className="record-voice">GIVE ONE IDEA THE WHOLE ROOM</span><RoomStatement act={acts[14]} index={14} /></div>
-    <FieldNotes acts={acts} index={15} label="INFORMATION HAS DRAMATURGY" />
-    <RoomEntrance number="05" title="THE PERFORMANCE" detail="The space between two states has meaning." />
-    <StagedTransition from="Claim." to="Evidence." kicker="ONE CHANGE / THREE AUTHORED BEATS" score={[{ label: "Exit.", description: "The claim leaves." }, { label: "Hold.", description: "A beat of empty space." }, { label: "Enter.", description: "The evidence arrives." }]} caption="The empty beat says that the first state has ended." />
-    <section id="act-17">
+  return <NotebookEntry recordId="N-EXHIBITION" className="exhibition-edition" chapters={[
+{ label: "The influence", children: <>
+<RoomEntrance number="01" title="THE INFLUENCE" detail="The room is part of the story." />
+<section className="exhibition-opening-prose"><Acts acts={acts.slice(1, 3)} anchored offset={1} /></section>
+<ReferenceStudies />
+<div className="exhibition-statement"><RoomStatement act={acts[3]} index={3} /></div>
+<FieldNotes acts={acts} index={4} label="WHAT CINEMATIC MEANS" />
+</> },
+{ label: "The friction", children: <>
+<RoomEntrance number="02" title="THE FRICTION" detail="Six different acts. One shape." />
+<CardWall />
+<div className="exhibition-refusal"><Acts acts={[acts[5]]} anchored offset={5} staticRefusals /></div>
+<FieldNotes acts={acts} index={6} label="THE WALL OF RECTANGLES" />
+<ActsReleased />
+<section className="exhibition-act-question"><Acts acts={[acts[7]]} anchored offset={7} /></section>
+</> },
+{ label: "The archive", children: <>
+<RoomEntrance number="03" title="THE ARCHIVE" detail="The instinct was there from the beginning." />
+<Archive />
+<FieldNotes acts={acts} index={8} label="READ THE FIRST RECORD" />
+<section className="exhibition-evidence"><Acts acts={[acts[9]]} anchored offset={9} /></section>
+<section className="exhibition-specimen-book"><span className="record-voice">29 AUGUST 2026 / HAUSE.DESIGN</span><h2>The design system<br/><em>exhibited in the design system.</em></h2><FieldNotes acts={acts} index={10} label="THE FIRST SPECIMEN BOOK" /></section>
+</> },
+{ label: "The language", children: <>
+<RoomEntrance number="04" title="THE LANGUAGE" detail="The material tells you what the room needs to become." />
+<ThreeRooms />
+<FieldNotes acts={acts} index={11} label="WHY THREE MODES" />
+<ReadingComparison act={acts[12]} />
+<ExhibitionGrammar />
+<section className="exhibition-procession"><Procession stages={["EXHIBITION", "CINEMATIC COMPOSITION", "FORMS", "SEMANTIC FORMS", "AI COMPOSITION"]} caption="THE ARTISTIC PROBLEM BECOMES A SYSTEMS QUESTION"/><FieldNotes acts={acts} index={13} label="THE QUESTION CHANGED" /></section>
+<div className="exhibition-room-statement"><span className="record-voice">GIVE ONE IDEA THE WHOLE ROOM</span><RoomStatement act={acts[14]} index={14} /></div>
+<FieldNotes acts={acts} index={15} label="INFORMATION HAS DRAMATURGY" />
+</> },
+{ label: "The performance", kind: 'operate', children: <>
+<RoomEntrance number="05" title="THE PERFORMANCE" detail="The space between two states has meaning." />
+<StagedTransition from="Claim." to="Evidence." kicker="ONE CHANGE / THREE AUTHORED BEATS" score={[{ label: "Exit.", description: "The claim leaves." }, { label: "Hold.", description: "A beat of empty space." }, { label: "Enter.", description: "The evidence arrives." }]} caption="The empty beat says that the first state has ended." />
+<section id="act-17">
       <HauseFieldNotes className="authority-notes exhibition-field-notes" label="MOTION AS EXPLANATION" detail="READ +"><Acts acts={[{ ...performance, text: motion, references: performance.references?.slice(0, 1) }]} /></HauseFieldNotes>
       <div className="exhibition-act-question"><Acts acts={[{ ...performance, label: "DISCOVERED THROUGH MAKING", text: discovery, references: performance.references?.slice(1) }]} /></div>
     </section>
-    <section className="exhibition-final-question"><p className="record-voice">THE QUESTION CHANGED</p><span>How should I stage this idea?</span><b aria-hidden="true">↓</b><Acts acts={[acts[17]]} anchored offset={17} /></section>
-  </div></NotebookFieldNotes>;
+<section className="exhibition-final-question"><p className="record-voice">THE QUESTION CHANGED</p><span>How should I stage this idea?</span><b aria-hidden="true">↓</b><Acts acts={[acts[17]]} anchored offset={17} /></section>
+</> }
+]}/>;
 }

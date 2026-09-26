@@ -119,10 +119,10 @@ test("the field map and reader summaries cite listed notes without adding experi
 test("page modification dates are explicit and do not change manuscript or snapshot dates", () => {
  const record = getRecord("N-MACHINE-MOTIVATION")!;
  const before = JSON.stringify(record);
- assert.equal(pageLastModified(recordPath(record), record.revised), "2026-09-13");
+ assert.equal(pageLastModified(recordPath(record), record.revised), "2026-09-26");
  assert.equal(pageLastModified("/unknown"), undefined);
  assert.equal(pageLastModified("/records/N-MACHINE-MOTIVATION/1.0"), undefined);
- assert.equal(pageLastModified(recordPath(record), "2026-09-14"), "2026-09-14");
+ assert.equal(pageLastModified(recordPath(record), "2026-09-27"), "2026-09-27");
  assert.equal(JSON.stringify(record), before);
 });
 

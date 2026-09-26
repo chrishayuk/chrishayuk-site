@@ -74,6 +74,10 @@
 .recovery-setup h3 { font: 400 24px/1.3 var(--font-display),serif; margin: 32px 0 12px; }
 .recovery-setup h3:first-child { margin-top: 0; }
 .recovery-setup p { font: 15px/1.8 var(--font-system),sans-serif; max-width: 42ch; }
+.recovery-setup .setup-sketch-note { font-size: 10px; }
+.recovery-setup .setup-sketch-boundary { stroke-dasharray: 3 5; stroke-opacity: .5; }
+.recovery-setup .setup-sketch-accent { fill: #8a563c; }
+.recovery-setup .setup-sketch-check { stroke: #315c4d; stroke-width: 1.6; }
 .recovery-codex .recovery-result-context { max-width: 65ch; font-size: 15px; line-height: 1.8; }
 .recovery-context-link { display: inline-flex; align-items: center; min-height: 44px; font: 12px/1.6 var(--font-system),sans-serif; text-decoration: underline; text-underline-offset: 4px; }
 .recovery-reading-edition { font: 12px/1.7 var(--font-system),sans-serif; color: var(--muted); margin-top: 24px; }
@@ -101,17 +105,6 @@
 .experiment-outcome { display: inline-grid; width: 16px; height: 16px; place-items: center; font-size: 11px; line-height: 1; border: 1px solid var(--rule); border-radius: 50%; }
 .experiment-outcome[data-recovered=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .recovery-codex .hause-manuscript > .recovery-experiment-plate { margin-block: 48px; padding-block: 28px; border-block: 1px solid var(--rule); }
-/* Once opened, the book gets the space previously used by the cover title. */
-.recovery-codex .hause-codex:not([data-view=cover]) .codex-heading { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px 28px; align-items: end; margin: 12px 0 20px; }
-.recovery-codex .hause-codex:not([data-view=cover]) .codex-collection { grid-column: 1/-1; margin: 0; font-size: 11px; }
-.recovery-codex .hause-codex:not([data-view=cover]) .codex-heading h1 { font-size: 24px; line-height: 1.25; max-width: 42ch; }
-.recovery-codex .hause-codex:not([data-view=cover]) .codex-byline { margin: 0; gap: 6px 16px; font-size: 11px; }
-.recovery-codex .codex-modes { padding-block: 4px; margin-bottom: 20px; }
-.recovery-codex .codex-folio { row-gap: 24px; }
-.recovery-codex .codex-folio-label { padding-bottom: 10px; }
-@media (max-width: 900px) {
- .recovery-codex .hause-codex:not([data-view=cover]) .codex-heading { grid-template-columns: 1fr; }
-}
 @media (max-width: 600px) {
  .experiment-record-line li { font-size: clamp(32px,9vw,42px); }
  .experiment-paired-record { font-size: 10px; }

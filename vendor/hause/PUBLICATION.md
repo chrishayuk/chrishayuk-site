@@ -70,6 +70,28 @@ revision date and named predecessor. Hosts store and verify their own artifacts.
 
 ## Codex composition
 
+Use `NotebookTemplate` for the complete notebook treatment. It accepts Codex's
+authored `folios`, `manuscript`, `history` and cover metadata, and gives study
+rooms a paper-scale composition. A short proposition can use two spreads; an
+experiment can keep a complete operable study together on one spread. Choose
+boundaries by meaning, never by an automatic character or height cutoff.
+
+`NotebookNote` takes `title`, text `children`, `sketch` and `caption`. Its drawing
+sits in the margin when space permits and follows the text on narrow paper.
+Drawings belong to their publication; do not turn a schematic into invented
+measurements. Supply an SVG accessible name or an equivalent nearby description.
+
+`NotebookFilm` takes the existing player as `children`, a `caption`, and optional
+`source`, `marker` and `timestamp`. It supplies a mounted frame and apparatus;
+the player still owns loading, sound, controls and motion coordination. Keep
+source URLs and start times exact. A decorated mount is not a new playback owner.
+
+Folio paper uses a fine square grid, a quiet outer margin rule and a shaded
+centre fold. The paper treatment also follows the cloned leaves during page
+turns. Tune `--codex-grid-size`, `--codex-grid-ink`, `--codex-margin-ink` and
+`--codex-paper` on `.hause-codex`. The centre fold disappears on narrow screens;
+continuous Read and History views stay unruled, and print omits the decoration.
+
 A major entry can opt into `NotebookEdition` and `Codex`, with `ReadingFigure`,
 `FolioObject` and `Marginalia` as its working objects. Supply ordered `folios`
 with stable IDs, labels and optional `kind: "operate" | "evidence"`, plus the
@@ -87,15 +109,20 @@ motion coordinator; this shell changes presentation, never a recorded outcome.
 
 `Manuscript` presents the full authored account as continuous prose, with optional
 contents and chapter anchors. It is distinct from concise `Codex` folios. Codex
-turns keep the desk in place and use inert visual copies for a directional leaf
-animation; live instruments stay mounted. Reduced motion and pause skip the turn.
+turns use inert visual copies for a directional leaf animation; live instruments stay mounted. Reduced motion and pause skip the turn.
 
 `EditorialPlate` accepts publication-owned media and a required caption. Its
 wide, inset and portrait compositions establish a sequence of views and details
 without inventing media, credentials or evidence. Images remain still inside
 turning folios. The caption should carry the actual credit and provenance.
 
-Codex folios share a fixed responsive binding height (`--codex-spread-height`).
-Long content scrolls natively inside a folio, with a reserved scrollbar gutter.
-Turning a leaf changes neither book dimensions nor pagination position. Read
-remains a continuous document, and print/no-JavaScript views expose full content.
+Codex folios use `--codex-spread-height` as a minimum and grow to fit their
+figures. The document scrolls normally, so images, tables and captions remain
+fully visible. `sizing="fixed"` explicitly opts into a fixed-height binding with
+internal scrolling and a reserved scrollbar gutter. Read remains continuous;
+print and no-JavaScript views expose full content.
+
+Previous/Next and the current spread label sit on the paper’s top edge. This
+strip stays visible below the view selector while a long folio scrolls. The
+selector height is measured so wrapped mobile controls do not overlap it.
+Turning from within a long page brings the new spread back to its beginning.

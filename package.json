@@ -20,6 +20,7 @@
     "typecheck": "tsc --noEmit",
     "audit:legibility": "node --experimental-strip-types scripts/check-legibility.ts",
     "audit:provenance": "node --experimental-strip-types scripts/check-provenance.ts",
+    "audit:notebooks": "node --experimental-strip-types scripts/notebook-inventory.ts && python3 scripts/audit-notebook-rendering.py",
     "check:hause": "node vendor/hause/scripts/consumer-sync.mjs"
   },
   "dependencies": {

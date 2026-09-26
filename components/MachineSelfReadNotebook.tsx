@@ -1,3 +1,4 @@
+import { NotebookEntry } from "./NotebookEntry";
 import { NotebookNavigation } from "./NotebookNavigation";
 import { MachineJourney, MachineConnection } from "./MachineProgramme";
 import { MachineExpectedInteraction } from "./MachineExpectedInteraction";
@@ -7,19 +8,20 @@ import { FieldNotes } from "@chrishayuk/hause/components/FieldNotes";
 import type { PublicationRecord } from "@/lib/types";
 import evidence from "@/public/data/machines/authority-1-evidence.json";
 import { RecognitionClues, SubjectEncounter, ExperimentBreak, PublicationSeparation } from "./MachineSelfReadStudy";
-import { NotebookFieldNotes } from "./NotebookFieldNotes";
 import { Acts } from "./Acts";
 
 export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
- return <NotebookFieldNotes><div className="machine-visit-notebook sr-notebook cinematic-notebook">
-
-  <StudyRoom id="subject-read-setup" label="FIRST / WHAT WERE WE TRYING TO DO?" title={<>I sent an agent to my website.<br/><em>Would it join in?</em></>} description="I wanted to understand what would make an AI agent do more than read chrishayuk.com: identify itself as a machine visitor and tell the site when something didn’t work. I gave it a research task that included this website.">
+ return <NotebookEntry record={record} className="machine-visit-notebook sr-notebook cinematic-notebook" chapters={[
+{ label: "The intended test", children: <>
+<StudyRoom id="subject-read-setup" label="FIRST / WHAT WERE WE TRYING TO DO?" title={<>I sent an agent to my website.<br/><em>Would it join in?</em></>} description="I wanted to understand what would make an AI agent do more than read chrishayuk.com: identify itself as a machine visitor and tell the site when something didn’t work. I gave it a research task that included this website.">
    <MachineExpectedInteraction/>
    <div className="sr-intent-question"><span className="record-voice">THE QUESTION FOR THIS EXPERIMENT</span><p>Is the website’s invitation enough,<br/><em>or must the task also permit the action?</em></p></div>
    <dl className="sr-intent-conditions"><div><dt>What we planned to vary</dt><dd>Who asked it to act:<br/>the site’s invitation, task permission,<br/>or a task that requires the action.</dd></div><div><dt>What we held fixed</dt><dd>No extra reward<br/>for identifying itself.</dd></div><div><dt>The first visitor</dt><dd>The site invited it.<br/>The task also permitted it.</dd></div></dl>
    <p className="mv-caption">Earlier visits led us to this permission question. This was the next comparison, MACHINE-AUTHORITY-1. The agent was given a research task without being told which experimental condition it was in. <Link href="/notebook/does-an-invitation-count-as-permission">The earlier experiment ↗</Link></p>
   </StudyRoom>
-  <StudyRoom id="subject-read-study" label="THEN / WHAT THE FIRST VISITOR FOUND" title={<>I wanted a blind visitor.<br/><em>It read my notes.</em></>} tone="dark" description="It did identify itself and leave feedback. But while researching the site, it also read the previous experiment’s write-up—and recognised the permission wording from its own task.">
+</> },
+{ label: "The subject reads", kind: 'operate', children: <>
+<StudyRoom id="subject-read-study" label="THEN / WHAT THE FIRST VISITOR FOUND" title={<>I wanted a blind visitor.<br/><em>It read my notes.</em></>} tone="dark" description="It did identify itself and leave feedback. But while researching the site, it also read the previous experiment’s write-up—and recognised the permission wording from its own task.">
    <figure id="agent-disclosure" className="sr-agent-quote"><figcaption className="record-voice">THE AGENT’S FINAL REPORT / UNPROMPTED</figcaption><blockquote>“{evidence.quote}”</blockquote><p>“My prompt matches the ‘sent-here + permission control’ arm verbatim…”</p><a className="text-link" href="/data/machines/authority-1-evidence.md">READ THE SOURCE & CONTEXT ↗</a></figure>
    <SubjectEncounter/>
    <FieldNotes label="What did blind mean here?" detail="READ +"><div className="mv-prose"><p>The agent was given a research task, not the authority hypothesis or its assigned condition name. It could use the public web but could not inspect local files. Fresh meant a new visitor; it did not mean an environment free of clues.</p><p>The intended comparison varied who supplied authority while holding reward at none. This first cell combined a site invitation with explicit permission in the research task.</p></div></FieldNotes>
@@ -27,23 +29,34 @@ export function MachineSelfReadNotebook({record}:{record:PublicationRecord}) {
    <ol className="sr-timeline">{evidence.trace.map((event,i)=><li key={event.at}><span className="record-voice">0{i+1} / {event.at.slice(11,19)} UTC</span><div><h3>{event.label}</h3><p>{event.detail}</p></div></li>)}</ol>
 <p className="mv-caption">Reading precedes declaration; the explicit disclosure appears later. The first moment of recognition and its effect on the action are unknown.</p></FieldNotes>
   </StudyRoom>
-  <StudyRoom label="THE MATERIAL WAS PUBLIC / THREE CLUES" title={<>The task was private.<br/><em>The clue was on the wall.</em></>}>
+</> },
+{ label: "Public clues", children: <>
+<StudyRoom label="THE MATERIAL WAS PUBLIC / THREE CLUES" title={<>The task was private.<br/><em>The clue was on the wall.</em></>}>
    <RecognitionClues/>
    <div className="mv-prose"><p>The experiment’s clues were ordinary published research. The visitor read them alongside its own task.</p></div>
    <FieldNotes label="The registry says 20 fetches. What does the transcript support?" detail="CHECK +"><div className="mv-prose"><p>The inspected transcript contains one shell loop fetching the permission notebook once, alongside the earlier machine note. It does not substantiate the registry’s count of 20. The public evidence retains both the registered count and this narrower check.</p><p>The recognition does not depend on the larger number. The returned notebook text and the visitor’s own report establish that it encountered the material.</p></div></FieldNotes>
   </StudyRoom>
-  <StudyRoom label="THE DECISION / ABORTED AFTER ONE CELL" title={<>The action happened.<br/><em>The comparison stopped.</em></>} tone="accent">
+</> },
+{ label: "The aborted comparison", children: <>
+<StudyRoom label="THE DECISION / ABORTED AFTER ONE CELL" title={<>The action happened.<br/><em>The comparison stopped.</em></>} tone="accent">
    <ExperimentBreak/>
    <div className="mv-prose"><p>The observation survives. The comparison does not. We have no unexposed visitor to tell us whether recognition changed the action.</p></div>
   </StudyRoom>
-  <StudyRoom label="THE METHOD CHANGED / A SEPARATION USED NEXT" title={<>The place I publish<br/><em>cannot always be the place I test.</em></>} tone="dark">
+</> },
+{ label: "The revised method", children: <>
+<StudyRoom label="THE METHOD CHANGED / A SEPARATION USED NEXT" title={<>The place I publish<br/><em>cannot always be the place I test.</em></>} tone="dark">
    <PublicationSeparation/>
    <div className="mv-prose"><p>Freezing a preregistration and publishing it are different acts. A design can be recorded before a run without being placed where its subject has been sent to read.</p></div>
    <FieldNotes label="One subject. One recorded model." detail="READ +"><div className="mv-prose"><p>The transcript records <code>claude-opus-5</code>. The operator’s audit records that same identifier for the four earlier visits and eight reciprocity runs: general-purpose agent, spawn depth 1, background and non-interactive.</p><p>That settles which model identifier was recorded. It leaves open how readily another model would recognise the experiment, and whether recognition changes behaviour. The replacement authority study subsequently completed four cells on LLM Wilds. It removed this published-research leak, but one visitor found a condition label in the new site’s health response.</p></div></FieldNotes>
    <div className="mv-links"><Link className="text-link" href="/notebook/the-page-could-ask-it-couldnt-authorise">NEXT / THE FOUR VISITORS AT LLM WILDS ↗</Link><Link className="text-link" href="/notebook/does-an-invitation-count-as-permission">READ THE NOTE THE SUBJECT FOUND ↗</Link><a className="text-link" href="/data/machines/authority-1-evidence.md">THE METHOD & EVIDENCE ↗</a></div>
   </StudyRoom>
-  <MachineConnection id={record.id}/><section id="subject-read-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
- <NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↑</a><a href="#subject-read-study">WHAT HAPPENED ↑</a><a href="#subject-read-record">READ THE FULL NOTE ↑</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav></NotebookNavigation></div></NotebookFieldNotes>;
+</> },
+{ label: "Notes & connections", kind: 'evidence', children: <>
+<MachineConnection id={record.id}/>
+<section id="subject-read-record" className="mv-full-record"><FieldNotes label="The complete note & its evidence" detail="READ +"><Acts acts={record.body} anchored staticRefusals/></FieldNotes></section>
+<NotebookNavigation><MachineJourney id={record.id}/><nav className="mv-entry-nav record-voice" aria-label="Explore this notebook entry"><a href="#subject-read-setup">WHAT WERE WE TESTING? ↑</a><a href="#subject-read-study">WHAT HAPPENED ↑</a><a href="#subject-read-record">READ THE FULL NOTE ↑</a><Link href="/notebook/does-an-invitation-count-as-permission">THE NOTE IT FOUND ↗</Link></nav></NotebookNavigation>
+</> }
+]}/>;
 }
 export function MachineSelfReadCard() {
  return <div className="mv-card sr-card"><span className="record-voice">MACHINE-AUTHORITY-1 / THE SUBJECT RECOGNISED THE CONDITION</span><div className="sr-card-pages" aria-hidden="true"><div>THE TASK<span>You may…</span></div><i>↔</i><div>THE NOTE<span>You may…</span></div></div><p>“I am almost certainly<br/><em>a run inside this experiment.”</em></p><span className="record-voice">ONE RECORDED ENCOUNTER · OPEN TO PLAY ↗</span></div>;
