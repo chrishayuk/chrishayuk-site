@@ -76,3 +76,12 @@ headings and metadata, source downloads and programme links. Thread pages now
 render the same title held in their graph record; the existing displayed questions
 are the source titles. The Agent Ecology-to-Machines field-map link is restored.
 Run this suite with a fresh local readership database, as CI does.
+
+The homepage preview now sits in a dark, directionally lit desk scene, with a
+gentle perspective and layered paper edges. Mobile and print flatten the spread.
+The shared HAUSE preview still renders live text selected from the publication
+graph. Its title, reading link and outer “Open notebook” link all lead directly
+to `#open-notebook`, a stable destination on the first folio of every current
+entry. The rendering audit checks this across all 30 notebooks and verifies the
+homepage destination. The production build, four selection tests and all 37
+rendered-page checks pass; browser visual verification remains unavailable.

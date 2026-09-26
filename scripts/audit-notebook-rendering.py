@@ -30,6 +30,8 @@ class Page(html.parser.HTMLParser):
         self.page_controls = 0
         self.latest = []
         self.featured = []
+        self.opening_on_first_folio = False
+        self.preview_links = []
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -45,6 +47,10 @@ class Page(html.parser.HTMLParser):
         if tag == 'a' and attrs.get('href', '').startswith('#'):
             self.fragments.append(attrs['href'][1:])
         classes = attrs.get('class', '').split()
+        if attrs.get('id') == 'open-notebook':
+            self.opening_on_first_folio = self.folios == 1 and any('codex-folio' in parent[1] for parent in self.stack)
+        if 'notebook-preview-enter' in classes:
+            self.preview_links.append(attrs.get('href', ''))
         if 'codex-pagination' in classes and self.folios == 0 and any('codex-book' in parent[1] for parent in self.stack):
             self.page_controls += 1
         if tag not in ('area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'):
@@ -91,6 +97,8 @@ def audit(record, frozen=False):
     if duplicate:
         issues.append('duplicate IDs: ' + ', '.join(duplicate))
     if not frozen:
+        if not page.opening_on_first_folio:
+            issues.append('homepage opening destination is not on the first folio')
         if page.page_controls != 1:
             issues.append('page controls are not at the top of the paper')
         if page.sizing != ['content']:
@@ -130,6 +138,10 @@ if home.latest != ([latest] if latest else []):
     home_issues.append('homepage latest does not match publication graph')
 if home.h1 != 1:
     home_issues.append('homepage does not have exactly one H1')
+if latest:
+    latest_record = next(record for record in inventory['notes'] if record['id'] == latest)
+    if home.preview_links != ['/notebook/' + latest_record['slug'] + '#open-notebook']:
+        home_issues.append('homepage preview does not link directly to the latest first folio')
 if len(home.featured) != len(set(home.featured)) or any(key not in published or key == latest for key in home.featured):
     home_issues.append('featured articles contain duplicates, unpublished entries or the latest entry')
 if len(home.featured) != min(3, max(0, len(published) - 1)):

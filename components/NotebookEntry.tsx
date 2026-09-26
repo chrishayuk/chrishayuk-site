@@ -23,7 +23,7 @@ export function NotebookEntry({ record: supplied, recordId, chapters, className 
   : [];
  const folios = [...opening, ...chapters].map((chapter: NotebookChapter, index) => ({
   id: chapter.id || `${id}-folio-${index + 1}`, label: chapter.label, kind: chapter.kind,
-  children: <FolioObject place="full" className="notebook-authored-page"><div className={`notebook-chapter-content ${className}`}>{index === 0 && introduction}{chapter.children}</div></FolioObject>,
+  children: <FolioObject place="full" className="notebook-authored-page"><div id={index === 0 ? 'open-notebook' : undefined} className={`notebook-chapter-content ${className}`}>{index === 0 && introduction}{chapter.children}</div></FolioObject>,
  }));
  const history = publicationHistory(record.id);
  return <NotebookTemplate id={id} title={record.title} collection={`Chris Hay / Notebook / ${record.id}`}

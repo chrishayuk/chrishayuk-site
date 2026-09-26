@@ -13,17 +13,21 @@ export function HomeNotebook() {
  const { latest } = selection();
  if (!latest) return null;
  const record = getRecord(latest.id)!;
+ const openHref = `${recordPath(record)}#open-notebook`;
  const passage = record.body.find(act => act.kind === 'observation');
  const graph = recordGraph();
  const threadIds = new Set(graph.edges.filter(edge => edge.from === latest.id && edge.kind === 'in-thread').map(edge => edge.to));
  const threads = graph.nodes.filter(node => threadIds.has(node.id));
  return <section id="latest-notebook" className="edition-section edition-open-notebook" data-scene="notebook" data-latest-notebook={latest.id} aria-label="Latest published notebook">
   <div className="edition-notebook-intro"><p className="edition-caption">On the desk</p><Link className="edition-link" href="/notebook">All notebooks ↗</Link></div>
-  <NotebookPreview title={latest.title} href={recordPath(record)} summary={record.dek}
+  <div className="edition-notebook-stage">
+  <NotebookPreview title={latest.title} href={openHref} summary={record.dek}
    label="Latest notebook" metadata={<><span>{record.authors.join(' / ')} · </span><time dateTime={latest.published}>{shortDate(latest.published!)}</time></>}
    annotation={<><span className="edition-excerpt-label">From the published note</span>{threads.length > 0 && <nav aria-label="Continue the notebook's research thread">{threads.map(thread => <Link href={new URL(thread.url).pathname} key={thread.id}>{thread.title} ↗</Link>)}</nav>}</>}>
    <p>{passage?.kind === 'observation' ? passage.text : latest.text}</p>
   </NotebookPreview>
+  </div>
+  <div className="edition-notebook-colophon"><span>Working papers / Chris Hay</span><Link href={openHref}>Open notebook <span aria-hidden="true">↗</span></Link></div>
  </section>;
 }
 
