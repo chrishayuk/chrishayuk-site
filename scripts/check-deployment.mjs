@@ -93,8 +93,23 @@ for(const path of ["/ideas","/systems","/objects","/record","/knowledge"]) {
   assert.equal(page.status,200,path);
   assert.ok(page.body.includes(`rel="canonical" href="https://chrishayuk.com${path}"`),path);
   assert.ok(page.body.includes('id="main"'),path);
-  assert.ok(page.body.includes('property="og:image" content="https://chrishayuk.com/og-house.png"'),path);
+  const imagePath = path === "/objects" ? "/media/objects/swanwick-on-screen.webp" : "/og-house.png";
+  assert.ok(page.body.includes(`property="og:image" content="https://chrishayuk.com${imagePath}"`),path);
 }
+const lookbook = await request("/objects/things-i-look-through");
+assert.equal(lookbook.status, 200);
+assert.match(lookbook.body, /rel="canonical" href="https:\/\/chrishayuk.com\/objects\/things-i-look-through"/);
+assert.ok(lookbook.body.indexOf('id="swanwick"') < lookbook.body.indexOf('id="juliet"'));
+assert.ok(lookbook.body.indexOf('id="collection"') < lookbook.body.indexOf('id="juliet"'));
+for (const anchor of ["swanwick", "juliet", "collection", "wayfarer", "eye-jacket", "frogskins", "meta"]) assert.ok(lookbook.body.includes(`id="${anchor}"`));
+assert.match(lookbook.body, /formal events/);
+assert.match(lookbook.body, /wear in my videos/);
+assert.match(lookbook.body, /sensitive to light/);
+assert.match(lookbook.body, /Reference pair/);
+assert.match(lookbook.body, /data-media-id="objects-swanwick"/);
+assert.match(lookbook.body, /hause-editorial-plate/);
+assert.doesNotMatch(lookbook.body, /hause-notebook-preview|codex-folio|ORIGINAL MEDIA TO FOLLOW/);
+assert.ok(primaryNav?.includes('href="/objects"'));
 const legacyWork=await request("/work");
 assert.equal(legacyWork.status,200);
 assert.ok(legacyWork.body.includes('rel="canonical" href="https://chrishayuk.com/systems"'));
@@ -733,7 +748,7 @@ for(const node of notebookNodes) {
  assert.equal(page.status,200,path);
  checkLegibility(node,page.body);
  if (page.body.includes('visual-notebook-record')) {
-  const opening = page.body.match(/<header class="(?:record-header|agent-hero|codex-heading)"[\s\S]*?<\/header>/)?.[0];
+  const opening = page.body.match(/<header class="(?:record-header|agent-hero|codex-heading|notebook-exhibition-heading)"[\s\S]*?<\/header>/)?.[0];
   assert.ok(opening, `${node.id}: notebook opening`);
   assert.doesNotMatch(opening, /class="record-bar|class="notebook-synopsis|class="machine-brief/);
   assert.ok(page.body.includes('class="notebook-afterword"'), `${node.id}: research apparatus remains after the experiment`);

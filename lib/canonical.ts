@@ -1,3 +1,4 @@
+import { seeingCollection } from "./personal-objects.ts";
 import { threads } from "./threads.ts";
 import { allRecords, records, indexedRecords, isListed, recordPath, SITE } from "./records.ts";
 
@@ -35,7 +36,7 @@ import { allRecords, records, indexedRecords, isListed, recordPath, SITE } from 
 
 /** The pages that are always here, independent of any record. */
 export const standingPaths = [
- "/", "/ideas", "/systems", "/objects", "/record", "/knowledge",
+ "/", "/ideas", "/systems", "/objects", seeingCollection.path, "/record", "/knowledge",
  "/film", "/notebook", "/notebook/archive", "/research", "/about", "/colophon", "/accessibility", "/readership",
  "/machine-guestbook", "/llms.txt",
  // /machines joins the canonical surface on 2026-09-11. It was deliberately

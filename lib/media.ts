@@ -1,6 +1,7 @@
 import type { MediaRecord } from "./types";
 import overrides from "../content/media-library.json";
 import { filmStills, stillPath } from "./film-stills.ts";
+import { objectsFilm } from "./personal-objects.ts";
 const required = (id: string, title: string, type: MediaRecord["type"], ratio = "16 / 9"): MediaRecord => ({ id, title, type, state: "required", rights: "pending", alt: title, desktopRatio: ratio, mobileRatio: type === "film" ? "9 / 16" : ratio });
 export const media: MediaRecord[] = [
   required("youtube-studio", "Chris Hay · studio film", "film"),
@@ -21,6 +22,7 @@ export const media: MediaRecord[] = [
   required("closing-portrait", "Chris Hay · closing portrait film", "film"),
 ].map(base => ({ ...base, ...(overrides as unknown as Record<string, Partial<MediaRecord>>)[base.id] }));
 media.push(
+  { id: objectsFilm.mediaId, title: "Swanwick / my pair on film", type: "film", state: "ready", rights: "owned", creator: "Chris Hay", source: objectsFilm.source, desktop: objectsFilm.video, mobile: objectsFilm.video, poster: objectsFilm.image, desktopRatio: "16 / 9", mobileRatio: "16 / 9", loop: true, alt: objectsFilm.alt, caption: "My pair, in use / I Quantized Qwen3.8-27B · silent excerpt" },
   { id: "notebook-exhibition", title: "An object given the room", type: "image", state: "ready", rights: "owned", creator: "Chris Hay with OpenAI ImageGen", source: "/notebook/i-wanted-a-website-to-behave-like-an-exhibition", desktop: "/media/notebook/exhibition-room.webp", desktopRatio: "16 / 9", mobileRatio: "16 / 9", alt: "A small amber glass block sits alone on a black plinth in a vast, dark exhibition room.", caption: "ORIGINAL VISUAL STUDY / THE SPACE AROUND SOMETHING CHANGES HOW YOU READ IT · 2026" },
   { id: "notebook-map-trajectory", title: "The map / residual trajectory from the film", type: "film", state: "ready", rights: "owned", creator: "Chris Hay", source: "https://www.youtube.com/watch?v=HJlWDSyDcD4&t=155", desktop: "/media/notebook/map-trajectory.mp4", mobile: "/media/notebook/map-trajectory.mp4", poster: "/media/notebook/stills/HJlWDSyDcD4-156.webp", desktopRatio: "16 / 9", mobileRatio: "16 / 9", loop: true, alt: "A projected residual trajectory moves among Tokyo, Paris, Berlin and Cairo in Chris Hay’s map demonstration.", caption: "FROM THE FILM / THE RESIDUAL MAP · 02:35–02:40" },
   { id: "notebook-map", title: "The map / a constructed vector study", type: "film", state: "ready", rights: "owned", creator: "Chris Hay", source: "https://github.com/chrishayuk/the-mechanism", desktop: "/media/notebook/map.mp4", mobile: "/media/notebook/map.mp4", poster: "/media/notebook/map.png", desktopRatio: "16 / 9", mobileRatio: "16 / 9", loop: false, alt: "Capital, currency and language directions add to one packed vector in a constructed six-dimensional example.", caption: "CONSTRUCTED EXAMPLE / VECTOR ADDITION · ORIGINAL STUDY, 2026" },

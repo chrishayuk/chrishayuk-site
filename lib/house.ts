@@ -15,7 +15,7 @@ export const HOUSE = {
 export const HOUSE_PARTS = [
   {id:"ideas",name:"Ideas",path:"/ideas",text:"Questions, research and the notebook. A place for thinking before the answer."},
   {id:"systems",name:"Systems",path:"/systems",text:"Models, software, design languages and infrastructure. Giving an idea a structure that can be explored."},
-  {id:"objects",name:"Objects",path:"/objects",text:"What is made: software, interfaces, films and publications. An idea takes a form that can be used, watched or held."},
+  {id:"objects",name:"Objects",path:"/objects",text:"Things made, used, worn and kept. Software, interfaces, films and publications give ideas a form; a personal collection records the objects around the work."},
 ];
 
 export const HOUSE_WORK = [
