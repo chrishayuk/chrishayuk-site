@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { notebookGallery } from '../lib/notebook-gallery.ts';
+import { notebookGallery, notebookCollectionHref } from '../lib/notebook-gallery.ts';
 import { notebookCollections, notebookNotes } from '../lib/publication-index.ts';
 import { notebookAppearance } from '../lib/notebook-appearance.ts';
 
@@ -58,4 +58,15 @@ test('every notebook retains its collection paper when a filter moves it to the 
  assert.deepEqual(notebookAppearance('N-MACHINE-SELF-READ'), { 'data-notebook-palette': 'machines', 'data-notebook-tone': 'full' });
  assert.deepEqual(notebookAppearance('N-ECOLOGY-RECOVERY'), { 'data-notebook-palette': 'agent-ecology', 'data-notebook-tone': 'light' });
  assert.deepEqual(notebookAppearance('N-FUTURE'), { 'data-notebook-palette': 'working-notes', 'data-notebook-tone': 'light' });
+});
+
+test('opening a collection preserves matching filters in an encoded shareable URL', () => {
+ const href = notebookCollectionHref('machines', { publication: 'draft', q: 'subject & experiment' });
+ const url = new URL(href, 'https://chrishayuk.com');
+ assert.equal(url.pathname, '/notebook');
+ assert.equal(url.searchParams.get('collection'), 'machines');
+ assert.equal(url.searchParams.get('publication'), 'draft');
+ assert.equal(url.searchParams.get('q'), 'subject & experiment');
+ assert.equal(notebookCollectionHref('machines', { publication: 'all', q: '  ' }), '/notebook?collection=machines');
+ assert.equal(notebookCollectionHref('machines', { publication: 'invalid' }), '/notebook?collection=machines');
 });

@@ -1,5 +1,13 @@
 import { notebookCollections } from './publication-index.ts';
 
+export function notebookCollectionHref(collection: string, query: { publication?: string; q?: string } = {}) {
+ const params = new URLSearchParams({ collection });
+ if (query.publication === 'published' || query.publication === 'draft') params.set('publication', query.publication);
+ const q = (query.q || '').trim().slice(0, 160);
+ if (q) params.set('q', q);
+ return `/notebook?${params}`;
+}
+
 export function notebookGallery(query: { collection?: string; publication?: string; q?: string } = {}) {
  const q = (query.q || '').trim().slice(0, 160);
  const terms = q.toLocaleLowerCase('en').split(/\s+/).filter(Boolean);

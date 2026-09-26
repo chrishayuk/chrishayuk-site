@@ -170,3 +170,14 @@ New records fall back to their own abstract and publication state until a bespok
 summary is authored. The rendering audit requires exactly one conclusion on the
 final folio and one in the reading view. Original record bodies and preserved
 versions are unchanged; these are presentation summaries, not new findings.
+
+The notebook entrance now previews collections instead of rendering all 30 notes.
+Each of the five collection objects shows its paper colour, a conceptual drawing,
+note counts and two example titles. Opening it leads to its own shareable notebook
+selection. Search and publication filters carry through that link; clearing them
+inside a collection retains the collection. Reader return links have the correct
+collection as their fallback, while direct history return preserves filter/scroll
+state. The archive retains the complete flat index, and the latest-publication
+link still follows the graph. The deployment contract checks all collection
+drilldowns together for complete, unique coverage. Twenty-three focused tests
+and the production build pass; browser visual review remains outstanding.

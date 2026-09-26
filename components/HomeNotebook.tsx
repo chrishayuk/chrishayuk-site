@@ -20,7 +20,7 @@ export function HomeNotebook() {
  const threadIds = new Set(graph.edges.filter(edge => edge.from === latest.id && edge.kind === 'in-thread').map(edge => edge.to));
  const threads = graph.nodes.filter(node => threadIds.has(node.id));
  return <section {...notebookAppearance(record.id)} id="latest-notebook" className="edition-section edition-open-notebook" data-scene="notebook" data-latest-notebook={latest.id} aria-label="Latest published notebook">
-  <div className="edition-notebook-intro"><p className="edition-caption">On the desk</p><Link className="edition-link" href="/notebook">All notebooks ↗</Link></div>
+  <div className="edition-notebook-intro"><p className="edition-caption">On the desk</p><Link className="edition-link" href="/notebook">All collections ↗</Link></div>
   <div className="edition-notebook-stage">
   <NotebookPreview title={latest.title} href={openHref} summary={record.dek}
    label="Latest notebook" metadata={<><span>{record.authors.join(' / ')} · </span><time dateTime={latest.published}>{shortDate(latest.published!)}</time></>}
