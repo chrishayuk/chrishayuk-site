@@ -1,5 +1,5 @@
 {
-  "revision": "60b0dcf3b0bb2f7e3fa9b1b93e720b8706c951a9",
+  "revision": "bdffec610626de9dc51f6f3cf45b5c7e6d30bfb7",
   "packagePath": "vendor/hause",
   "files": {
     "citation-export.css": "7c5b80eefe3e285142c64ca01dd6701275e48324d8893e656321e7fd7dfaa73e",
@@ -96,7 +96,7 @@
     "manifest.ts": "401d9c186a7822126de7813b5ce42d0ed506b2d6f0775bc1c0d6573ee8bdd160",
     "mode.ts": "f30941d320a6524642f82d525f8945ff2c66c097018a5dbda07bc079e0cbb491",
     "motion.ts": "27a14eb9a8e0877e7440eb2ab2800944f1df38efd74c1c8c0fd8979c593dfc37",
-    "notebook-template.css": "09c56eea37f697ac53042b09bde81da9afca2b82583ebefdc48881efa7b7f89c",
+    "notebook-template.css": "fef6ed3488e06537ebdbb2648329cfb6ddc52f694ac13e1c6c78d15aead5941b",
     "notebook.css": "920b4fedfcd0df2c3d67f03d68da613e8dc4dfed383c13613e730fb5292d18a8",
     "package.json": "f82cada794064ca4e841b8ac1c90ccee3b712e9e77e58891eb60cd6b461ea295",
     "provenance.ts": "3ee78dc77d61ec815814ed2817e96490c16706c7a6762c7dea734236527ebd8b",

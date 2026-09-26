@@ -14,7 +14,7 @@ export function AddressDepth() {
       caution: layer >= 28 ? "Perfect readability may decode the answer token; this endpoint is not clean address geometry." : undefined }))}
     series={components.map(component => ({ id: component, label: component.toUpperCase(), domain: [0, 1] as const,
       values: layers.map(layer => readability(layer, component)), precision: 2, unit: "accuracy",
-      color: component === "relation" ? "#bdc7b0" : component === "entity" ? "#e3b374" : "#f0eae0" }))}
+      color: component === "relation" ? "var(--notebook-good, #bdc7b0)" : component === "entity" ? "var(--notebook-rust, #e3b374)" : "var(--codex-ink, #f0eae0)" }))}
     annotations={[{ from: "8", to: "12", label: "↻ Basis change L8 → 12" }, { from: "20", to: "24", label: "↻ Basis change L20 → 24" }]}
     bands={[{ from: "8", to: "24", label: "L8–24 / mechanistic evidence" }, { from: "28", to: "30", label: "Answer-token endpoint", caution: true }]}
     summary="194 prompts · 3 held-out wording folds. Stages are equally spaced for reading; only the displayed depths were measured."

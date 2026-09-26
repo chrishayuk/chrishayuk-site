@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useMotion } from "./Motion";
+import { chartInk } from "@/lib/chart-ink";
 import { Cell80Meaning as Meaning } from "./Cell80Meaning";
 import posters from "@/lib/data/cell80-replay-posters.json";
 import { decodeReplay, foodAt, frameCounts, replayIndex, type ReplayFrame, type ReplayHistory, type WorldReplay } from "@/lib/cell80-replay";
@@ -56,13 +57,15 @@ function PopulationTrace({ histories, tick, ecology }: { histories: ReplayHistor
     return ecology ? [frames.map(f=>({tick:f.tick,value:frameCounts(f).grazers})),frames.map(f=>({tick:f.tick,value:frameCounts(f).predators}))] : histories.map(h=>h.frames.map(f=>({tick:f.tick,value:f.organisms.length})));
   }, [histories, ecology]);
   useEffect(() => {
-    const ctx = canvas.current?.getContext("2d"); if (!ctx) return;
+    const el = canvas.current; if (!el) return;
+    const ctx = el.getContext("2d"); if (!ctx) return;
+    const ink = chartInk(el);
     const max = Math.max(1,...series.flatMap(s=>s.map(p=>p.value))); const end = Math.max(1,series[0].at(-1)!.tick);
     ctx.clearRect(0,0,1200,140);
-    series.forEach((points,i)=>{ctx.strokeStyle=i===0?palette.amber:palette.blue;ctx.lineWidth=2;ctx.beginPath();points.forEach((p,j)=>{const x=p.tick/end*1200,y=130-p.value/max*120;j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();});
-    ctx.strokeStyle=palette.paper;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(tick/end*1200,0);ctx.lineTo(tick/end*1200,140);ctx.stroke();
+    series.forEach((points,i)=>{ctx.strokeStyle=i===0?ink.accent:ink.secondary;ctx.lineWidth=2;ctx.beginPath();points.forEach((p,j)=>{const x=p.tick/end*1200,y=130-p.value/max*120;j===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();});
+    ctx.strokeStyle=ink.ink;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(tick/end*1200,0);ctx.lineTo(tick/end*1200,140);ctx.stroke();
   },[series,tick]);
-  return <div className="cell80-population-trace"><div className="record-voice"><span>POPULATION / SHARED SCALE</span><span><b style={{color:palette.amber,fontWeight:400}}>{ecology ? "GRAZERS" : "OBSERVED"}</b> · <b style={{color:palette.blue,fontWeight:400}}>{ecology ? "PREDATORS" : "UNDONE"}</b></span></div><canvas ref={canvas} width={1200} height={140} role="img" aria-label={ecology ? "Recorded grazer and predator population histories. Exact current counts appear above." : "Recorded population histories in both worlds. Exact current counts appear above."}/></div>;
+  return <div className="cell80-population-trace"><div className="record-voice"><span>POPULATION / SHARED SCALE</span><span><b style={{color:"var(--notebook-rust, #e3b56b)",fontWeight:400}}>{ecology ? "GRAZERS" : "OBSERVED"}</b> · <b style={{color:"var(--notebook-blue, #83c5d2)",fontWeight:400}}>{ecology ? "PREDATORS" : "UNDONE"}</b></span></div><canvas ref={canvas} width={1200} height={140} role="img" aria-label={ecology ? "Recorded grazer and predator population histories. Exact current counts appear above." : "Recorded population histories in both worlds. Exact current counts appear above."}/></div>;
 }
 
 export function Cell80WorldReplay({ kind }: { kind: "lineage" | "ecology" }) {
