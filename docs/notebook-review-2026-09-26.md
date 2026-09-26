@@ -68,3 +68,11 @@ The later Cell80 screenshot exposed an inherited black exhibition wrapper around
 a statement. Shared room-style statements now use notebook-sized, left-aligned
 ink with a rust continuation. Thresholds in Cell80, State and the short notes,
 plus the Exhibition and Authority narrative wrappers, inherit the paper palette.
+
+The full production deployment contract also passes: homepage/graph selection,
+canonical redirects, indexing, films and media, feeds, generated social cards,
+readership classification, citations, all 30 notebook Ask routes, all four thread
+headings and metadata, source downloads and programme links. Thread pages now
+render the same title held in their graph record; the existing displayed questions
+are the source titles. The Agent Ecology-to-Machines field-map link is restored.
+Run this suite with a fresh local readership database, as CI does.

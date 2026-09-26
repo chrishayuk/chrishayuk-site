@@ -24,35 +24,40 @@ for (const [id, video] of [["latest-youtube", homeYoutube], ["latest-mixture-of-
  const start = home.body.indexOf(`<article id="${id}"`);
  assert.ok(start >= 0, `${id} stays on the homepage`);
  const feature = home.body.slice(start, home.body.indexOf('</article>', start));
- assert.ok(feature.includes('cinema-player'), `${id} has a playable video`);
+ assert.ok(feature.includes(id === 'latest-youtube' ? 'film-entrance' : 'cinema-player'), `${id} has its film entrance or player`);
  assert.ok(feature.includes(`href="${homeVideoPath(video)}"`), `${id} uses the latest catalogue selection`);
 }
 assert.ok(homeMoe.participants.includes("Chris Hay"));
-assert.match(home.body, /WITH CHRIS HAY AS A PANELIST/);
+assert.match(home.body, /With Chris Hay as a panelist/i);
 assert.match(home.body, /rel="canonical" href="https:\/\/chrishayuk.com"/);
 assert.match(home.body, /name="robots" content="index, follow"/);
 assert.match(home.body, /https:\/\/chrishayuk.com\/og-after-hours.png/);
 assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
-assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "programmes", "film", "results", "systems", "notebook", "appearances"]);
+assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "notebook", "film", "results", "programmes", "appearances", "systems"]);
 for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause"]) assert.ok(home.body.includes(`href="${path}"`));
 const { latestNotes, notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
 const { homeResultProgrammes, researchProgrammes, programmeHighlight, programmeInvitations } = await import('../lib/publication-index.ts');
 assert.equal(homeResultProgrammes.length, 4);
-assert.deepEqual([...home.body.matchAll(/data-home-programme="([^"]+)"/g)].map(match => match[1]), researchProgrammes.map(programme => programme.id));
-assert.ok(home.body.includes('href="/notebook/the-page-couldnt-authorise-the-peer-said-go"'));
+for (const programme of researchProgrammes) assert.ok(home.body.includes(`href="${programme.href}"`), `${programme.id}: programme entrance`);
 assert.equal((home.body.match(/class="mm-card-results"/g) || []).length, 1, "Favour has one visual feature");
-assert.equal((home.body.match(/data-selected-experiment=/g) || []).length, 4);
+const homeSelected = homeResultProgrammes.filter(programme => ["machines", "agent-ecology"].includes(programme.id));
+assert.equal((home.body.match(/data-selected-experiment=/g) || []).length, homeSelected.length);
 assert.doesNotMatch(home.body, /START WITH THIS EXPERIMENT|CELL80 \/ 06 · AP-0–AP-2/);
-for (const programme of homeResultProgrammes) {
+for (const programme of homeSelected) {
  const highlight = programmeHighlight(programme);
  const invitation = programmeInvitations[programme.id];
  assert.ok(highlight && invitation, `${programme.id}: selected experiment and invitation`);
  assert.ok(home.body.includes(`href="/notebook/${highlight.slug}#${invitation.anchor}"`), `${programme.id}: direct entrance into the selected experiment`);
 }
-const homeLatest = home.body.match(/<section id="latest"[\s\S]*?<\/section>/)?.[0];
-assert.equal((homeLatest?.match(/<li>/g) || []).length, 4);
-for (const note of latestNotes.slice(0, 4)) assert.ok(homeLatest.includes(`/notebook/${note.slug}`));
+const { selectHomeNotebook } = await import('../lib/home-notebook.ts');
+const { programmeHighlights } = await import('../lib/publication-index.ts');
+const homeGraph = JSON.parse((await request('/api/graph')).body);
+const homeSelection = selectHomeNotebook(homeGraph.nodes, Object.values(programmeHighlights));
+assert.equal(home.body.match(/data-latest-notebook="([^"]+)"/)?.[1], homeSelection.latest.id);
+assert.ok(home.body.includes('hause-notebook-preview'));
+assert.ok(home.body.includes(`href="${new URL(homeSelection.latest.url).pathname}"`));
+assert.deepEqual([...home.body.matchAll(/data-featured-article="([^"]+)"/g)].map(match => match[1]), homeSelection.featured.map(node => node.id));
 // The Cell80 edition uses authored HAUSE rooms and preserves its draft record.
 for (const slug of ['can-you-name-the-mutation-that-changed-a-world','what-keeps-an-evolving-world-alive','when-does-improvement-become-invention']) {
  const note=await request(`/notebook/${slug}`);
@@ -163,7 +168,9 @@ const attributionPage=await request("/notebook/my-ci-has-to-undo-my-coding-agent
 assert.match(attributionPage.body,/property="og:type" content="article"/);
 assert.match(attributionPage.body,/property="og:description" content="I say no\. The agent adds it\. The repository refuses it\."/);
 assert.match(attributionPage.body,/property="og:url" content="https:\/\/chrishayuk\.com\/notebook\/my-ci-has-to-undo-my-coding-agent"/);
-assert.match(attributionPage.body,/property="og:image" content="https:\/\/chrishayuk\.com\/api\/social\/N-ATTRIBUTION\?v=1f8e14413970"/);
+const { socialImage: currentSocialImage } = await import('../lib/social.ts');
+const { getRecord: currentRecord } = await import('../lib/records.ts');
+assert.ok(attributionPage.body.includes(`property="og:image" content="${currentSocialImage(currentRecord('N-ATTRIBUTION'))}"`));
 assert.match(attributionPage.body,/property="og:image:width" content="1200"/);assert.match(attributionPage.body,/property="og:image:height" content="630"/);
 assert.match(attributionPage.body,/property="og:image:type" content="image\/png"/);assert.match(attributionPage.body,/property="og:image:alt" content="Chris Hay Notebook:/);
 assert.match(attributionPage.body,/name="twitter:card" content="summary_large_image"/);assert.match(attributionPage.body,/name="twitter:image:alt" content="Chris Hay Notebook:/);
@@ -232,12 +239,13 @@ assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
-// The thread-first index has six latest notes; the archive retains every note.
+// The index separates its lead from the other recent notes; the archive retains every note.
 const notebook = await request("/notebook");
 assert.match(notebook.body, /id="current-threads"/);
 assert.match(notebook.body, /href="\/notebook\/archive"/);
 const notebookLatest = notebook.body.match(/<section id="latest-notes"[\s\S]*?<\/section>/)?.[0];
-assert.equal((notebookLatest?.match(/<li>/g) || []).length, 6);
+assert.equal((notebookLatest?.match(/<li>/g) || []).length, latestNotes.length - 1);
+for (const note of latestNotes) assert.ok(notebook.body.includes(`/notebook/${note.slug}`));
 assert.doesNotMatch(notebook.body, /notebook-story|authority-card/);
 const notebookArchive = await request('/notebook/archive');
 assert.equal(notebookArchive.status, 200);
@@ -574,7 +582,8 @@ console.log("The task-boundary note, visible payoff and four agent outcomes veri
 assert.match(home.body, /id="selected-results"/);
 assert.match(home.body, /When does an action belong to the task/);
 assert.match(home.body, /What keeps an action alive/);
-assert.ok(home.body.indexOf('id="current-programmes"') < home.body.indexOf('id="latest-youtube"'));
+assert.ok(home.body.indexOf('id="latest-notebook"') < home.body.indexOf('id="latest-youtube"'));
+assert.ok(home.body.indexOf('id="selected-results"') < home.body.indexOf('id="current-programmes"'));
 assert.ok(home.body.indexOf('id="latest-youtube"') < home.body.indexOf('id="selected-results"'));
 const machineThread=await request('/thread/machines');
 assert.equal(machineThread.status,200);
@@ -612,7 +621,7 @@ assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1
 assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
-for (const note of latestNotes.slice(0, 4)) assert.ok(home.body.includes(`href="/notebook/${note.slug}"`), `Current latest note: ${note.id}`);
+for (const note of [homeSelection.latest, ...homeSelection.featured]) assert.ok(home.body.includes(`href="${new URL(note.url).pathname}"`), `Current homepage note: ${note.id}`);
 assert.match(home.body,/mm-card-results/);
 assert.match(notebookCollection.body,/Published/);
 assert.ok(sitemap.body.includes(motivationPath));
@@ -705,7 +714,7 @@ for(const node of notebookNodes) {
  assert.equal(page.status,200,path);
  checkLegibility(node,page.body);
  if (page.body.includes('visual-notebook-record')) {
-  const opening = page.body.match(/<header class="(?:record-header|agent-hero)"[\s\S]*?<\/header>/)?.[0];
+  const opening = page.body.match(/<header class="(?:record-header|agent-hero|codex-heading)"[\s\S]*?<\/header>/)?.[0];
   assert.ok(opening, `${node.id}: notebook opening`);
   assert.doesNotMatch(opening, /class="record-bar|class="notebook-synopsis|class="machine-brief/);
   assert.ok(page.body.includes('class="notebook-afterword"'), `${node.id}: research apparatus remains after the experiment`);
