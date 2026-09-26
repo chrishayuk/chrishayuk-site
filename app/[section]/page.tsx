@@ -1,3 +1,4 @@
+import { objectsFilm } from "@/lib/personal-objects";
 import { notebookCollections } from "@/lib/publication-index";
 import { Systems, Ideas, Objects } from "@/components/HouseCollections";
 import { NotebookCollection } from "@/components/NotebookCollection";
@@ -24,13 +25,14 @@ const descriptions: Record<string,string> = {
  research: "Experiments, evidence and open questions. A map of Machines, Agent Ecology, Cell80 and learned-system research, with recorded findings and sources.",
  ideas: "Questions, research and the notebook. Chris Hay’s thinking before the answer.",
  systems: "LARQL, VINDEX3, HAUSE and MCP-CLI. Systems by Chris Hay, with their own identities and a place in the record.",
- objects: "Films, interfaces and publications by Chris Hay. Ideas made real.",
+ objects: "Objects I return to. Things Chris Hay uses, keeps, notices and wears. A personal collection, beginning with glasses.",
  record: "The catalogue of Chris Hay’s work, questions, notebook and films. Stable record identities, authorship, dates and sources."
 };
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
  const {section}=await params;
  const title=section==="work"?"Systems":section.charAt(0).toUpperCase()+section.slice(1);
  const description=descriptions[section==="work"?"systems":section] || (section==="about" ? `${HOUSE.personLine} ${HOUSE.description}` : HOUSE_PUBLICATIONS.find(p=>p.path===`/${section}`)?.text || `Chris Hay / ${section}. ${HOUSE.descriptor}.`);
+ if(section==="objects") return pageMetadata("Objects I return to", description, "/objects", `${SITE}${objectsFilm.image}`, undefined, {image:{width:1600,height:900,alt:objectsFilm.alt}});
  if(section==="record") { const raw=await searchParams; const query=catalogue({q:first(raw.q),kind:first(raw.kind),page:first(raw.page)}); const metadata=pageMetadata(title,description,catalogueUrl(query.q,query.kind,query.page)); return {...metadata,...(query.q ? {robots:{index:false,follow:true}} : {})}; }
  if(section==="research") { const query=await searchParams; return {...pageMetadata(title,description,"/research"),...(query.outcome || query.publication ? {robots:{index:false,follow:true}} : {})}; }
  if(section==="notebook") { const query=await searchParams; const collection=notebookCollections.find(item=>item.id===first(query.collection)); return {...pageMetadata(collection ? `${collection.title} / Notebook` : title,collection?.description || description,"/notebook"),...(query.collection || query.publication || query.q ? {robots:{index:false,follow:true}} : {})}; }

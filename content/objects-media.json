@@ -1,0 +1,57 @@
+{
+  "note": "Reference images identify styles, not Chris’s actual pairs. Visible credits and page sources are in lib/personal-objects.ts.",
+  "assets": [
+    {
+      "path": "/media/objects/swanwick-on-screen.webp",
+      "sourceImage": "/media/youtube/latest-poster.webp",
+      "sourceFilm": "https://www.youtube.com/watch?v=5_ZiJpl4hvs",
+      "kind": "owned-film-still",
+      "creator": "Chris Hay",
+      "sha256": "c91b356bbba4c74ceb41b5d05d992af63705c1cba765f180fa2abf0f922cbf4c"
+    },
+    {
+      "path": "/media/objects/swanwick-on-screen.mp4",
+      "sourceImage": "/media/youtube/latest-desktop.mp4",
+      "sourceFilm": "https://www.youtube.com/watch?v=5_ZiJpl4hvs",
+      "kind": "owned-film-excerpt",
+      "creator": "Chris Hay",
+      "excerpt": "Approximately 00:01–00:09; exact source-keyframe boundaries may vary",
+      "sha256": "425e7934d8f8c9f7a91e3da687d627ffe4dae3b75d13377d8ebd33575493c393"
+    },
+    {
+      "path": "/media/objects/juliet-reference.jpg",
+      "sourceImage": "https://300700.co.uk/cdn/shop/files/8BFF5BBA-F2FA-4677-8E1D-CF3354BD09F0.jpg?width=1000",
+      "kind": "reference-pair",
+      "retrieved": "2026-09-26",
+      "sha256": "7dd08cdc4e864f61d514d559c1bd0554ff09f8bff14afc9c15836d3d5cca2617"
+    },
+    {
+      "path": "/media/objects/eye-jacket-reference.jpg",
+      "sourceImage": "https://300700.co.uk/cdn/shop/files/1D1A1524-E6A0-4DD4-AA7B-D689D1652A45.jpg?width=1000",
+      "kind": "reference-pair",
+      "retrieved": "2026-09-26",
+      "sha256": "f06cba0579663ba0465b211e307ed6833bbca4f7e2f1242629166140b8b493dc"
+    },
+    {
+      "path": "/media/objects/frogskins-reference.jpg",
+      "sourceImage": "https://assets.oakley.com/is/image/OakleyEYE/700285554686_frogskins_polished-black-grey_main_001.png?impolicy=SEO_4x3",
+      "kind": "reference-pair",
+      "retrieved": "2026-09-26",
+      "sha256": "2749e12164d7723323c1ad1cd442a29f26229574101a01f0684486f9f9441ab1"
+    },
+    {
+      "path": "/media/objects/wayfarer-reference.jpg",
+      "sourceImage": "https://assets2.clearly.com.au/prod-onecp-record-files/pieyewear/e5a37a5d-8aad-4b88-a0e5-b35d00c6bb37/0RB2140__901_58__STD__shad__cfr.png?bgc=%23FFFFFF&impolicy=CLE_resize&wid=1000",
+      "kind": "reference-pair",
+      "retrieved": "2026-09-26",
+      "sha256": "39caab875601a94279c52a0b7ce245cd7641cecd15df9cbf868433d860bc78af"
+    },
+    {
+      "path": "/media/objects/meta-reference.jpg",
+      "sourceImage": "https://assets2.lenscrafters.ca/cdn-record-files-pi/1a658162-86e7-4cd1-9c57-b2ea00e04aab/62acbc9f-e542-40e6-a551-b2ea00e04ec6/0RW4012__601_71__P21__noshad__qt.png?impolicy=LC_grey&width=800",
+      "kind": "reference-pair",
+      "retrieved": "2026-09-26",
+      "sha256": "041c5120f48722a069dfd0621cdb41d0acba46608c43fc433437d2ab2b8154a5"
+    }
+  ]
+}

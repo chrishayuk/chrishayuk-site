@@ -1,3 +1,4 @@
+import { personalObjects, seeingCollection } from "./personal-objects.ts";
 import { machineBriefs, machineFieldMap } from "./machine-field.ts";
 import { ecologySeriesUpdates } from "./ecology-series-updates.ts";
 import { HOUSE, HOUSE_WORK, HOUSE_PARTS, HOUSE_ABSTRACT } from "./house.ts";
@@ -44,6 +45,15 @@ function buildGraph() {
  ];
  const edges: GraphEdge[] = [];
  const addEdge = (from:string,to:string,kind:string,basis:string) => edges.push({from,to,kind,basis});
+ const lookbookUrl = `${SITE}${seeingCollection.path}`;
+ nodes.push({id:seeingCollection.id,kind:"lookbook",title:seeingCollection.title,text:seeingCollection.description,url:lookbookUrl,sourceUrl:lookbookUrl,basis:"personal-account",retrievable:true,scope:"records",authors:["Chris Hay"],created:seeingCollection.recorded,keywords:"objects glasses sunglasses frames Swanwick Juliet light sensitivity indoors outside personal collection owned worn"});
+ addEdge(seeingCollection.id,"HOUSE-OBJECTS","collected-in","authored-personal-collection");
+ addEdge(seeingCollection.id,"PERSON-CHRIS","created-by","personal-account");
+ for (const object of personalObjects) {
+  const url = `${lookbookUrl}#${object.slug}`;
+  nodes.push({id:object.id,kind:"personal-object",title:object.maker === object.name ? object.name : `${object.maker} ${object.name}`,text:object.note || `${object.maker} ${object.name}, in Chris Hay’s personal collection of glasses.`,url,sourceUrl:url,basis:"personal-account",retrievable:true,scope:"records",authors:["Chris Hay"],created:seeingCollection.recorded,keywords:`glasses sunglasses frames owned worn ${object.occasion || ""}`});
+  addEdge(object.id,seeingCollection.id,"collected-in","authored-personal-collection");
+ }
  for (const r of records) {
   const url = `${SITE}${recordPath(r)}`;
   const basis = r.publication === "draft" ? "draft-record" : "published-record";
