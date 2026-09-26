@@ -99,3 +99,15 @@ preferences bypass animation. The event lifecycle follows the
 [Chrome cross-document transition guidance](https://developer.chrome.com/docs/web-platform/view-transitions/cross-document).
 Fifteen transition/selection tests, the production build and the full deployment
 contract pass. Browser geometry and animation appearance still require visual review.
+
+Screenshot follow-up: Recognition-1 still carried an independently styled dark
+instrument panel. Current folios now adapt recognition, selection, peer sequences,
+discovery/capability route diagrams, ecology/inheritance diagrams, address studies,
+authority gates and agent-machine instruments to paper and ink. Recognition controls
+use an underlined active state, smaller measures and column-aware responsive layout.
+World Remembers outcome colours retain contrast on paper in either site mode.
+The index covers now use the reader's 20px squared stock, margin line, centre crease
+and paper edges instead of ruled stock and coloured spines. These are scoped CSS
+changes; study data, media pixels, control handlers and preserved editions are intact.
+Production compilation and the 11 legibility contract tests pass. The screenshot
+provides the observed defect; browser visual verification remains unavailable.
