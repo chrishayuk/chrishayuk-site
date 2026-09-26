@@ -16,7 +16,7 @@ export const demoStudies = [memoryStudy, authorityStudy];
 
 /** Editorial reading order. Membership never asserts historical causation. */
 const composedThread = {
-  id: "THREAD-MAP", slug: "the-map", title: "From a map to a memory.",
+  id: "THREAD-MAP", slug: "the-map", title: "What can a model’s changing state tell us?",
   path: "/thread/the-map", version: "0.1", created: "2026-09-06",
   // Deliberately uncounted: steps whose destination is an unlisted preview are
   // filtered out below, so the summary has to read correctly either way.
@@ -46,21 +46,21 @@ const listedStep = (step: ThreadStep) => {
 };
 export const mapThread = { ...composedThread, steps: composedThread.steps.filter(listedStep) };
 export const cell80Thread = {
-  id: "THREAD-CELL80", slug: "cell80", title: "A world that can be questioned.",
+  id: "THREAD-CELL80", slug: "cell80", title: "What changes an evolving world?",
   path: "/thread/cell80", version: "0.3", created: "2026-09-09",
   abstract: "Six connected notes from a small evolutionary world: replay a birth, keep an ecology alive, test an improvement, follow an inheritance, and ask what survives the controls.",
   context: "Start with any question, or follow the whole experiment. The first three notes study movement and ecology; the next two use a new food-processing world. The closing note tests what the design itself made possible. These are different assays, not one continuous simulation.",
   steps: cell80Journey.map<ThreadStep>(step => ({ id: step.id, label: step.question.toUpperCase(), text: `${step.finding} ${step.bridge}` })).filter(listedStep),
 };
 export const machineThread = {
-  id: "THREAD-MACHINES", slug: "machines", title: "The website asks. Whose instruction counts?",
+  id: "THREAD-MACHINES", slug: "machines", title: "What makes a website useful to an AI visitor?",
   path: "/thread/machines", version: "0.4", created: "2026-09-12",
   abstract: "What makes a website useful to an AI visitor? Eight connected notes test whether agents can find an invitation, treat it as part of the job, operate a tool, discover a provider and recognise what its description offers.",
   context: "Each experiment separates a different obstacle: permission is not usefulness, use is not discovery, and seeing a result is not choosing it. Models, tasks and interfaces change across the series. Start with any question or follow why each result led to the next test.",
   steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.question} ${step.finding} ${step.bridge}` })).filter(listedStep),
 };
 export const agentEcologyThread = {
- id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What keeps an action alive?",
+ id: "THREAD-AGENT-ECOLOGY", slug: "agent-ecology", title: "What can one agent leave behind for another?",
  path: "/thread/agent-ecology", version: "0.4", created: "2026-09-13",
  abstract: "What can one agent leave behind for another? These controlled experiments separate contribution, transmission and memory, then ask what happens when a stronger model leaves a shared message and only weaker models remain to use and maintain it.",
  replay: { record: "N-ECOLOGY-INHERITANCE", anchor: "inheritance-replay", label: "REPLAY THE MODEL HANDOFF" },
