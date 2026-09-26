@@ -7,10 +7,11 @@ import { SITE } from "@/lib/records";
 import { Media } from "./Media";
 import "@/app/personal-objects.css";
 
-function SwanwickPhotograph({ priority = false }: { priority?: boolean }) {
+function SwanwickPhotograph({ priority = false, href }: { priority?: boolean; href?: string }) {
  const photo = personalObjects[0].photograph!;
+ const photograph = <Image src={photo.image} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 767px) 100vw, 60vw" priority={priority}/>;
  return <EditorialPlate className="objects-photograph objects-owned-photograph" caption={<><span>{photo.caption}</span><span>Photograph by {photo.credit}</span></>}>
-  <Image src={photo.image} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 767px) 100vw, 60vw" priority={priority}/>
+  {href ? <Link href={href} aria-label="Open Things I look through">{photograph}</Link> : photograph}
  </EditorialPlate>;
 }
 
@@ -23,7 +24,7 @@ export function PersonalObjects() {
   <header className="objects-intro"><p className="record-voice">Chris Hay / Objects</p><h1>Objects<br/><em>I return to.</em></h1><p>Things I use, keep, notice and return to.</p></header>
   <section className="objects-feature" aria-labelledby="seeing-title">
    <div className="objects-feature-copy"><p className="record-voice">01 / Seeing / A personal lookbook</p><h2 id="seeing-title"><Link href={seeingCollection.path}>Things I<br/><em>look through.</em></Link></h2><p>I’m sensitive to light. I always wear sunglasses outside and usually wear Swanwicks indoors. These are the glasses I own and wear.</p><Link href={seeingCollection.path} className="text-link">Enter the lookbook <span aria-hidden="true">↗</span></Link></div>
-   <SwanwickPhotograph priority/>
+   <SwanwickPhotograph priority href={seeingCollection.path}/>
   </section>
   <nav className="objects-contents" aria-label="Inside the lookbook"><Link href={`${seeingCollection.path}#swanwick`}><span className="record-voice">01 / Indoors · My pair on film</span><span>Swanwick</span><span aria-hidden="true">↗</span></Link><Link href={`${seeingCollection.path}#collection`}><span className="record-voice">02 / Outside · The wider collection</span><span>Frames I return to</span><span aria-hidden="true">↗</span></Link></nav>
   <MadeObjects/>
