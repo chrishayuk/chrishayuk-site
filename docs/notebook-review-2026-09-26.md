@@ -181,3 +181,31 @@ state. The archive retains the complete flat index, and the latest-publication
 link still follows the graph. The deployment contract checks all collection
 drilldowns together for complete, unique coverage. Twenty-three focused tests
 and the production build pass; browser visual review remains outstanding.
+
+The follow-up style audit inventoried the rendered folio classes of all 30 live
+notebooks and compared their CSS and inline/chart colours. The missed dark
+AgentActionMap occurred in Task, Permission, Visit, Peer and Ecology replays.
+Its information sheets, actor, outcomes and caption now use notebook stock and
+ink, with a smaller-column layout and readable labels.
+
+Coverage: Machines (9) — agent maps, recognition/discovery/capability instruments,
+self-read sheets, controls and evidence; Agent Ecology (6) — shared maps, histories,
+inheritance worlds and recovery diagrams; Cell80 (6) — population traces, barrier
+marks/legends, playback controls and focus; Learned systems (7) — measured address
+traces, authority/attribution scenes and demo invitations; Practice (2) — exhibition
+specimens and authored statements. Opaque recorded worlds and film pixels retain
+their independent display palette; transparent charts now read the paper palette.
+The world legends retain matching swatches with ink outlines. No study data changed.
+
+Shared exhibition archive, card wall, room comparisons and staged-change forms
+were fixed in HAUSE and released at bdffec610626de9dc51f6f3cf45b5c7e6d30bfb7.
+Both consumers pin that revision and verify all 123 source files. Notebook-specific
+instruments remain in the publication's adapter layer. Paper colours also reach
+raised study surfaces and film mounts. Responsive instruments use their available
+paper column, including desktop spreads with narrow right-hand columns.
+
+Validation: 25 focused notebook tests (including chart/text contrast across five
+stocks and three shades); 17 HAUSE tests. Browser discovery returned no available
+browser, so geometry, hover, animation and final visual appearance remain an
+explicit verification limitation. Source and live HTML audits are not substitutes
+for browser visual sign-off.
