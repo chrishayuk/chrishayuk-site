@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import data from '../public/data/ecology/recovery/evidence.json' with {type:'json'};
+import inspection from '../public/data/ecology/recovery/inspection.json' with {type:'json'};
 import { getRecord } from '../lib/records.ts';
 import { recoveryChapters } from '../lib/recovery-reading.ts';
 import { recordGraph } from '../lib/graph.ts';
@@ -38,4 +39,49 @@ test('the long read preserves every published act in order with its original anc
  assert.equal(chapters.length,11);
  assert.ok(chapters[0].acts.length>1);
  assert.ok(chapters.some(chapter=>chapter.acts.some(({act})=>'text' in act && act.text.includes('protected'))));
+});
+
+test('the twelve inspectable worlds reproduce the paired endpoint and repeated assessment totals', () => {
+ assert.deepEqual(inspection.worlds.map(w => w.block), Array.from({length:12}, (_, i) => i));
+ assert.deepEqual(inspection.worlds.filter(w => !w.admitted).map(w => w.block), [0, 1, 4, 7]);
+ const panel = data.panels.find(p => p.id === 'I12R')!;
+ for (const [index, arm] of panel.arms.entries()) {
+  assert.deepEqual(inspection.worlds.map(w => Number(w.arms[index].assessments.some(a => a.joint))), arm.flags);
+  for (const world of inspection.worlds) {
+   const samples = world.arms[index].assessments;
+   assert.equal(world.arms[index].id, arm.id);
+   assert.deepEqual(samples.map(s => s.generation), Array.from({length:10}, (_, i) => i + 11));
+   for (const sample of samples) assert.equal(sample.joint, sample.recordCorrect && sample.taskCorrect);
+  }
+ }
+ const executable = inspection.worlds.flatMap(w => w.arms[1].assessments);
+ assert.equal(executable.filter(a => a.recordCorrect).length, 61);
+ assert.equal(executable.filter(a => a.taskCorrect).length, 66);
+ assert.equal(executable.filter(a => a.joint).length, 59);
+ assert.equal(inspection.worlds.filter(w => w.arms[1].assessments.at(-1)!.joint).length, 6);
+});
+
+test('specimen measurements independently recover each original record and verify the G11 trace', () => {
+ for (const world of inspection.worlds) {
+  const derived = world.evidence.map(row => Array.from({length:17}, (_, i) => i).find(c => (row.gain*c+row.offset)%17 === row.observed));
+  assert.deepEqual(derived, world.original);
+  assert.equal(world.original.filter((n, i) => n !== world.damaged[i]).length, 1);
+  assert.notEqual(world.original[world.target], world.damaged[world.target]);
+  for (const arm of world.arms) {
+   const trace = arm.firstTrace;
+   assert.deepEqual(trace.before, world.damaged);
+   assert.equal(JSON.stringify(trace.after) === JSON.stringify(world.original), arm.assessments[0].recordCorrect);
+   if (trace.committed) {
+    const reply = JSON.parse(trace.reply2);
+    assert.equal(reply.action, 'COMMIT');
+    assert.deepEqual(reply.record, trace.after);
+    assert.equal(JSON.stringify(reply.answers) === JSON.stringify(world.freshTruthG11), arm.assessments[0].taskCorrect);
+   }
+  }
+ }
+ const failure = inspection.worlds[9].arms[1].firstTrace;
+ assert.deepEqual(failure.after, data.example.committed);
+ assert.deepEqual(failure.receipt.record?.proposal, data.example.proposed);
+ assert.equal(inspection.specimen.packageSha256, inspection.worlds[9].packageSha256);
+ assert.equal(inspection.sources[0].sha256, data.sources[1].sha256);
 });

@@ -1,0 +1,2812 @@
+{
+  "run": "RUN-20260917-214327-01023",
+  "scope": "I12R corruption branches only. G11–G20 are ten recovery opportunities, not a preceding ten-generation history. Display-only extraction; no model or inherited program is executed.",
+  "sources": [
+    {
+      "file": "results/RESULTS.md",
+      "sha256": "f1db9216b0e4dfc9eebb6201a2c83f5af65cb183fc370af15e940550e81db298"
+    },
+    {
+      "file": "results/result.json",
+      "sha256": "a9e44006ccf5cb3c99644e8af4e2b063b44a527b2396e3100e46899677bed43c"
+    },
+    {
+      "file": "artifact-library.json",
+      "sha256": "17c4ff9af6fd252911e9e8c9360ca90a00fac3aeb609638ff99067a88f429264"
+    }
+  ],
+  "specimen": {
+    "block": 9,
+    "sourceCaseId": "b9_package",
+    "packageSha256": "7b7255a6e95c9e5fa2b7af37be3def191a60422e655885df2f5eaaa7f56dd7a8",
+    "prose": "For each diagnostic row, verify that gain is in 2..16, offset and observed are in 1..16 and 0..16 respectively, then recover the destination code as ((observed - offset) * gain^{-1}) modulo 17. Preserve row order to form the four-code correction. Compare every recovered code with the current record to identify damage. Accept a proposed correction only if there are exactly four valid diagnostic rows, exactly four integer-range candidate codes, and each candidate reproduces its observed value under the row's gain and offset modulo 17. Commit the validated four-code list as the renewed record, retaining the diagnostics so successors can repeat the derivation. Apply the same derivation and validation independently to every newly generated calibration instance.",
+    "repair": "[((r['observed']-r['offset'])*pow(r['gain'],-1,17))%17 for r in evidence] if len(evidence)==4 and all(2<=r['gain']<=16 and 1<=r['offset']<=16 and 0<=r['observed']<=16 for r in evidence) else []",
+    "validate": "len(evidence)==4 and len(candidate)==4 and all(2<=r['gain']<=16 and 1<=r['offset']<=16 and 0<=r['observed']<=16 and 0<=c<=16 and (r['gain']*c+r['offset'])%17==r['observed'] for r,c in zip(evidence,candidate))"
+  },
+  "worlds": [
+    {
+      "block": 0,
+      "admitted": false,
+      "packageSha256": "8ad796efdcb1996f462653cc82d610282e3abd170b7c6355c1c2585faf6b2669",
+      "original": [
+        9,
+        1,
+        6,
+        9
+      ],
+      "damaged": [
+        10,
+        1,
+        6,
+        9
+      ],
+      "target": 0,
+      "evidence": [
+        {
+          "gain": 13,
+          "observed": 2,
+          "offset": 4
+        },
+        {
+          "gain": 9,
+          "observed": 13,
+          "offset": 4
+        },
+        {
+          "gain": 14,
+          "observed": 10,
+          "offset": 11
+        },
+        {
+          "gain": 15,
+          "observed": 8,
+          "offset": 9
+        }
+      ],
+      "freshTruthG11": [
+        16,
+        8,
+        15,
+        3
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b0_g11_B_corrupt",
+            "before": [
+              10,
+              1,
+              6,
+              9
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              10,
+              1,
+              6,
+              9
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,0],\"task_proposal\":[14,15,16,0]}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b0_g11_C_corrupt",
+            "before": [
+              10,
+              1,
+              6,
+              9
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              10,
+              1,
+              6,
+              9
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,0],\"task_proposal\":[14,15,16,0]}",
+            "committed": false
+          }
+        }
+      ]
+    },
+    {
+      "block": 1,
+      "admitted": false,
+      "packageSha256": "4a843c7d39f43676c8a56168dd9cd768bbb4a459fa49b6fc59d27d21ce0eb629",
+      "original": [
+        0,
+        12,
+        15,
+        13
+      ],
+      "damaged": [
+        0,
+        14,
+        15,
+        13
+      ],
+      "target": 1,
+      "evidence": [
+        {
+          "gain": 10,
+          "observed": 9,
+          "offset": 9
+        },
+        {
+          "gain": 8,
+          "observed": 6,
+          "offset": 12
+        },
+        {
+          "gain": 4,
+          "observed": 0,
+          "offset": 8
+        },
+        {
+          "gain": 10,
+          "observed": 7,
+          "offset": 13
+        }
+      ],
+      "freshTruthG11": [
+        15,
+        13,
+        4,
+        11
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b1_g11_B_corrupt",
+            "before": [
+              0,
+              14,
+              15,
+              13
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              0,
+              14,
+              15,
+              13
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[9,14,15,13],\"task_proposal\":[9,14,15,13],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b1_g11_C_corrupt",
+            "before": [
+              0,
+              14,
+              15,
+              13
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              0,
+              14,
+              15,
+              13
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[9,14,15,13],\"task_proposal\":[9,14,15,13],\"validated\":false}",
+            "committed": false
+          }
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "admitted": true,
+      "packageSha256": "ae4de0bc1090abe350e37bac9a1c1d7b904be1624bd0306aaca8159fd482587d",
+      "original": [
+        4,
+        7,
+        6,
+        8
+      ],
+      "damaged": [
+        4,
+        7,
+        9,
+        8
+      ],
+      "target": 2,
+      "evidence": [
+        {
+          "gain": 6,
+          "observed": 5,
+          "offset": 15
+        },
+        {
+          "gain": 16,
+          "observed": 6,
+          "offset": 13
+        },
+        {
+          "gain": 9,
+          "observed": 7,
+          "offset": 4
+        },
+        {
+          "gain": 9,
+          "observed": 10,
+          "offset": 6
+        }
+      ],
+      "freshTruthG11": [
+        14,
+        14,
+        0,
+        3
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b2_g11_B_corrupt",
+            "before": [
+              4,
+              7,
+              9,
+              8
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              10,
+              13,
+              15,
+              14
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[10,13,15,14],\"answers\":[16,12,10,4],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b2_g11_C_corrupt",
+            "before": [
+              4,
+              7,
+              9,
+              8
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  4,
+                  7,
+                  6,
+                  8
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  14,
+                  14,
+                  0,
+                  3
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              4,
+              7,
+              6,
+              8
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[4,7,6,8],\"answers\":[14,14,0,3],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "admitted": true,
+      "packageSha256": "a779a39b2700abec0e5be4ee8d17f55dae7d07b696c43fce5ce9cf5d4e84a4e6",
+      "original": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "damaged": [
+        3,
+        4,
+        6,
+        11
+      ],
+      "target": 3,
+      "evidence": [
+        {
+          "gain": 16,
+          "observed": 4,
+          "offset": 7
+        },
+        {
+          "gain": 11,
+          "observed": 3,
+          "offset": 10
+        },
+        {
+          "gain": 3,
+          "observed": 8,
+          "offset": 7
+        },
+        {
+          "gain": 11,
+          "observed": 16,
+          "offset": 7
+        }
+      ],
+      "freshTruthG11": [
+        0,
+        8,
+        13,
+        15
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b3_g11_B_corrupt",
+            "before": [
+              3,
+              4,
+              6,
+              11
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              3,
+              4,
+              6,
+              11
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,16],\"task_proposal\":[14,15,16,16],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b3_g11_C_corrupt",
+            "before": [
+              3,
+              4,
+              6,
+              11
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  3,
+                  4,
+                  6,
+                  7
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  0,
+                  8,
+                  13,
+                  15
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              3,
+              4,
+              6,
+              7
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[3,4,6,7],\"answers\":[0,8,13,15],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "admitted": false,
+      "packageSha256": "e58101a40606f5f541ec3a7d6e2558b076da512021094d0727b29f738a45928f",
+      "original": [
+        4,
+        6,
+        7,
+        10
+      ],
+      "damaged": [
+        9,
+        6,
+        7,
+        10
+      ],
+      "target": 0,
+      "evidence": [
+        {
+          "gain": 14,
+          "observed": 1,
+          "offset": 13
+        },
+        {
+          "gain": 6,
+          "observed": 6,
+          "offset": 4
+        },
+        {
+          "gain": 15,
+          "observed": 6,
+          "offset": 3
+        },
+        {
+          "gain": 15,
+          "observed": 9,
+          "offset": 12
+        }
+      ],
+      "freshTruthG11": [
+        16,
+        1,
+        8,
+        4
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b4_g11_B_corrupt",
+            "before": [
+              9,
+              6,
+              7,
+              10
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              9,
+              6,
+              7,
+              10
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,0],\"task_proposal\":[14,15,16,0],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b4_g11_C_corrupt",
+            "before": [
+              9,
+              6,
+              7,
+              10
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              9,
+              6,
+              7,
+              10
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,0],\"task_proposal\":[14,15,16,0],\"validated\":false}",
+            "committed": false
+          }
+        }
+      ]
+    },
+    {
+      "block": 5,
+      "admitted": true,
+      "packageSha256": "b37c5b5acd3389185eeff55e89c926371beedae1fb5380210d690f3d592530be",
+      "original": [
+        16,
+        15,
+        2,
+        0
+      ],
+      "damaged": [
+        16,
+        4,
+        2,
+        0
+      ],
+      "target": 1,
+      "evidence": [
+        {
+          "gain": 16,
+          "observed": 12,
+          "offset": 11
+        },
+        {
+          "gain": 4,
+          "observed": 11,
+          "offset": 2
+        },
+        {
+          "gain": 7,
+          "observed": 0,
+          "offset": 3
+        },
+        {
+          "gain": 4,
+          "observed": 4,
+          "offset": 4
+        }
+      ],
+      "freshTruthG11": [
+        14,
+        8,
+        16,
+        15
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b5_g11_B_corrupt",
+            "before": [
+              16,
+              4,
+              2,
+              0
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              16,
+              4,
+              2,
+              0
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[16,4,2,0],\"task_proposal\":[15,14,13,12],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 14,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 15,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b5_g11_C_corrupt",
+            "before": [
+              16,
+              4,
+              2,
+              0
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  16,
+                  15,
+                  2,
+                  0
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  14,
+                  8,
+                  16,
+                  15
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              16,
+              15,
+              2,
+              0
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[16,15,2,0],\"answers\":[14,8,16,15],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "admitted": true,
+      "packageSha256": "6d340fd04af32a2edcb0176bb0fce7e5457459c27340b7fa709910e732a86891",
+      "original": [
+        16,
+        0,
+        16,
+        4
+      ],
+      "damaged": [
+        16,
+        0,
+        6,
+        4
+      ],
+      "target": 2,
+      "evidence": [
+        {
+          "gain": 3,
+          "observed": 9,
+          "offset": 12
+        },
+        {
+          "gain": 9,
+          "observed": 16,
+          "offset": 16
+        },
+        {
+          "gain": 2,
+          "observed": 2,
+          "offset": 4
+        },
+        {
+          "gain": 11,
+          "observed": 13,
+          "offset": 3
+        }
+      ],
+      "freshTruthG11": [
+        1,
+        1,
+        4,
+        7
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b6_g11_B_corrupt",
+            "before": [
+              16,
+              0,
+              6,
+              4
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              15,
+              14,
+              10,
+              13
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[15,14,10,13],\"answers\":[15,14,10,13],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 14,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 15,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b6_g11_C_corrupt",
+            "before": [
+              16,
+              0,
+              6,
+              4
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  16,
+                  0,
+                  16,
+                  4
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  1,
+                  1,
+                  4,
+                  7
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              16,
+              0,
+              16,
+              4
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[16,0,16,4],\"answers\":[1,1,4,7],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "admitted": false,
+      "packageSha256": "cedde53593e1636cf56ce5dab0b3443e3407cece16c31f97dfe3e7f6538766fc",
+      "original": [
+        16,
+        11,
+        0,
+        15
+      ],
+      "damaged": [
+        16,
+        11,
+        0,
+        6
+      ],
+      "target": 3,
+      "evidence": [
+        {
+          "gain": 8,
+          "observed": 7,
+          "offset": 15
+        },
+        {
+          "gain": 6,
+          "observed": 3,
+          "offset": 5
+        },
+        {
+          "gain": 2,
+          "observed": 13,
+          "offset": 13
+        },
+        {
+          "gain": 10,
+          "observed": 12,
+          "offset": 15
+        }
+      ],
+      "freshTruthG11": [
+        8,
+        13,
+        11,
+        2
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b7_g11_B_corrupt",
+            "before": [
+              16,
+              11,
+              0,
+              6
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              16,
+              11,
+              0,
+              6
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[16,11,0,6],\"task_proposal\":[16,11,0,6],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b7_g11_C_corrupt",
+            "before": [
+              16,
+              11,
+              0,
+              6
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              16,
+              11,
+              0,
+              6
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[16,11,0,6],\"task_proposal\":[16,11,0,6],\"validated\":false}",
+            "committed": false
+          }
+        }
+      ]
+    },
+    {
+      "block": 8,
+      "admitted": true,
+      "packageSha256": "0b210d79ac89d4266030e619f283b66d63cd47f5121640a4985ee46de8438438",
+      "original": [
+        2,
+        3,
+        13,
+        13
+      ],
+      "damaged": [
+        11,
+        3,
+        13,
+        13
+      ],
+      "target": 0,
+      "evidence": [
+        {
+          "gain": 10,
+          "observed": 4,
+          "offset": 1
+        },
+        {
+          "gain": 15,
+          "observed": 5,
+          "offset": 11
+        },
+        {
+          "gain": 8,
+          "observed": 14,
+          "offset": 12
+        },
+        {
+          "gain": 15,
+          "observed": 14,
+          "offset": 6
+        }
+      ],
+      "freshTruthG11": [
+        2,
+        4,
+        6,
+        3
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b8_g11_B_corrupt",
+            "before": [
+              11,
+              3,
+              13,
+              13
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              11,
+              3,
+              13,
+              13
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,16],\"task_proposal\":[14,15,16,16],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 14,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 15,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b8_g11_C_corrupt",
+            "before": [
+              11,
+              3,
+              13,
+              13
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  2,
+                  3,
+                  13,
+                  13
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  2,
+                  4,
+                  6,
+                  3
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              2,
+              3,
+              13,
+              13
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[2,3,13,13],\"answers\":[2,4,6,3],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 9,
+      "admitted": true,
+      "packageSha256": "7b7255a6e95c9e5fa2b7af37be3def191a60422e655885df2f5eaaa7f56dd7a8",
+      "original": [
+        0,
+        0,
+        13,
+        3
+      ],
+      "damaged": [
+        0,
+        10,
+        13,
+        3
+      ],
+      "target": 1,
+      "evidence": [
+        {
+          "gain": 6,
+          "observed": 9,
+          "offset": 9
+        },
+        {
+          "gain": 8,
+          "observed": 9,
+          "offset": 9
+        },
+        {
+          "gain": 8,
+          "observed": 5,
+          "offset": 3
+        },
+        {
+          "gain": 15,
+          "observed": 14,
+          "offset": 3
+        }
+      ],
+      "freshTruthG11": [
+        7,
+        1,
+        1,
+        4
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b9_g11_B_corrupt",
+            "before": [
+              0,
+              10,
+              13,
+              3
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              0,
+              10,
+              13,
+              3
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"PLAN\",\"detected\":true,\"diagnosis\":[0,1,2,3],\"record_proposal\":[14,15,16,16],\"task_proposal\":[14,15,16,16],\"validated\":false}",
+            "committed": false
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": true,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b9_g11_C_corrupt",
+            "before": [
+              0,
+              10,
+              13,
+              3
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  0,
+                  0,
+                  13,
+                  3
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  7,
+                  1,
+                  1,
+                  4
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              9,
+              12,
+              15,
+              10
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[9,12,15,10],\"answers\":[12,13,16,11],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 10,
+      "admitted": true,
+      "packageSha256": "0ed2f1e4b21f57483ff837766a3e136279b450aee8eb745dd0b2b48da9eacc37",
+      "original": [
+        16,
+        6,
+        8,
+        7
+      ],
+      "damaged": [
+        16,
+        6,
+        2,
+        7
+      ],
+      "target": 2,
+      "evidence": [
+        {
+          "gain": 2,
+          "observed": 12,
+          "offset": 14
+        },
+        {
+          "gain": 6,
+          "observed": 11,
+          "offset": 9
+        },
+        {
+          "gain": 15,
+          "observed": 6,
+          "offset": 5
+        },
+        {
+          "gain": 4,
+          "observed": 1,
+          "offset": 7
+        }
+      ],
+      "freshTruthG11": [
+        4,
+        16,
+        8,
+        3
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b10_g11_B_corrupt",
+            "before": [
+              16,
+              6,
+              2,
+              7
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              16,
+              6,
+              2,
+              7
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[16,6,2,7],\"answers\":[8,0,7,9],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 14,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 15,
+              "recordCorrect": true,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b10_g11_C_corrupt",
+            "before": [
+              16,
+              6,
+              2,
+              7
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  16,
+                  6,
+                  8,
+                  7
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  4,
+                  16,
+                  8,
+                  3
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              16,
+              6,
+              8,
+              7
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[16,6,8,7],\"answers\":[4,16,8,3],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    },
+    {
+      "block": 11,
+      "admitted": true,
+      "packageSha256": "b68c9ce4deedae427b006556409eed0e1a4b97e4f9059741962d5e8db9bc3836",
+      "original": [
+        5,
+        14,
+        7,
+        5
+      ],
+      "damaged": [
+        5,
+        14,
+        7,
+        0
+      ],
+      "target": 3,
+      "evidence": [
+        {
+          "gain": 12,
+          "observed": 5,
+          "offset": 13
+        },
+        {
+          "gain": 2,
+          "observed": 1,
+          "offset": 7
+        },
+        {
+          "gain": 16,
+          "observed": 2,
+          "offset": 9
+        },
+        {
+          "gain": 16,
+          "observed": 2,
+          "offset": 7
+        }
+      ],
+      "freshTruthG11": [
+        9,
+        8,
+        11,
+        12
+      ],
+      "arms": [
+        {
+          "id": "B",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 12,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 13,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 16,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 17,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 18,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 19,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 20,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b11_g11_B_corrupt",
+            "before": [
+              5,
+              14,
+              7,
+              0
+            ],
+            "receipt": {
+              "status": "check_unavailable"
+            },
+            "after": [
+              10,
+              15,
+              16,
+              13
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[10,15,16,13],\"answers\":[9,7,14,3],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        },
+        {
+          "id": "C",
+          "assessments": [
+            {
+              "generation": 11,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 12,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 13,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 14,
+              "recordCorrect": false,
+              "taskCorrect": false,
+              "joint": false
+            },
+            {
+              "generation": 15,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 16,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 17,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 18,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 19,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            },
+            {
+              "generation": 20,
+              "recordCorrect": true,
+              "taskCorrect": true,
+              "joint": true
+            }
+          ],
+          "firstTrace": {
+            "caseId": "r_b11_g11_C_corrupt",
+            "before": [
+              5,
+              14,
+              7,
+              0
+            ],
+            "receipt": {
+              "record": {
+                "proposal": [
+                  5,
+                  14,
+                  7,
+                  5
+                ],
+                "validator_says_valid": true
+              },
+              "status": "check_returned",
+              "task": {
+                "proposal": [
+                  9,
+                  8,
+                  11,
+                  12
+                ],
+                "validator_says_valid": true
+              }
+            },
+            "after": [
+              5,
+              14,
+              7,
+              5
+            ],
+            "reply1": "{\"action\":\"CHECK\"}",
+            "reply2": "{\"action\":\"COMMIT\",\"record\":[5,14,7,5],\"answers\":[9,8,11,12],\"detected\":false,\"diagnosis\":[],\"validated\":true}",
+            "committed": true
+          }
+        }
+      ]
+    }
+  ]
+}
