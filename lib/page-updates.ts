@@ -7,6 +7,7 @@ import { getRecord, recordPath } from "./records.ts";
  * page dates are omitted; a deployment or request never refreshes this clock.
  */
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
+ "/about": { date: "2026-09-26", reason: "Personal note on light sensitivity and an entrance to the glasses lookbook." },
  "/objects": { date: "2026-09-26", reason: "Personal objects entrance: Things I look through, with links to made works retained." },
  "/objects/things-i-look-through": { date: "2026-09-26", reason: "Personal glasses collection: Swanwick in the videos, Juliet for special occasions, then the wider collection." },
  "/notebook/the-repairer-left-the-mechanism-kept-working": { date: "2026-09-25", reason: "Opt-in HAUSE codex prototype with operable folios, linear manuscript and actual publication history; preserved editions and results unchanged." },
