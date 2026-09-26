@@ -105,6 +105,7 @@ for (const anchor of ["swanwick", "juliet", "collection", "wayfarer", "eye-jacke
 assert.match(lookbook.body, /formal events/);
 assert.match(lookbook.body, /wear in my videos/);
 assert.match(lookbook.body, /sensitive to light/);
+assert.match(lookbook.body, /always wear sunglasses outside and usually wear my Swanwicks indoors/);
 assert.match(lookbook.body, /Reference pair/);
 assert.match(lookbook.body, /data-media-id="objects-swanwick"/);
 assert.match(lookbook.body, /hause-editorial-plate/);

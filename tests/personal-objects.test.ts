@@ -8,7 +8,7 @@ import { canonicalPaths, archivePaths } from "../lib/canonical.ts";
 test("personal objects retain Chris’s order and only supplied personal accounts", () => {
  assert.deepEqual(personalObjects.slice(0,2).map(object => object.slug), ["swanwick", "juliet"]);
  assert.match(personalObjects[0].note!, /wear in my videos/);
- assert.match(personalObjects[0].note!, /Swanwicks help indoors; sunglasses are for outside/);
+ assert.match(personalObjects[0].note!, /always wear sunglasses outside and usually wear my Swanwicks indoors/);
  assert.match(seeingCollection.description, /sensitive to light/);
  assert.match(personalObjects[1].note!, /formal events/);
  assert.equal(personalObjects.slice(2).filter(object => object.note).length, 0);

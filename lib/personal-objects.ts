@@ -17,7 +17,7 @@ export const seeingCollection = {
  id: "LOOKBOOK-SEEING",
  path: "/objects/things-i-look-through",
  title: "Things I look through",
- description: "I’m sensitive to light. Swanwicks indoors, sunglasses outside. The glasses I own and wear, beginning with my actual pair on film.",
+ description: "I’m sensitive to light. I always wear sunglasses outside and usually wear Swanwicks indoors. The glasses I own and wear, beginning with my actual pair on film.",
  recorded: "2026-09-26",
 };
 
@@ -25,7 +25,7 @@ export const personalObjects: PersonalObject[] = [
  {
   id: "OBJECT-SWANWICK", slug: "swanwick", name: "Swanwick", maker: "Swanwick",
   occasion: "In the videos", title: "The pair you see on screen.",
-  note: "I’m sensitive to light, so I always wear sunglasses or my Swanwicks. The Swanwicks help indoors; sunglasses are for outside. These are the glasses I wear in my videos.",
+  note: "I’m sensitive to light. I always wear sunglasses outside and usually wear my Swanwicks indoors. These are the glasses I wear in my videos.",
  },
  {
   id: "OBJECT-JULIET", slug: "juliet", name: "Juliet", maker: "Oakley",
