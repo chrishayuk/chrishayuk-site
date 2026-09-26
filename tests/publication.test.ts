@@ -317,11 +317,8 @@ test("notebook notes declare their own lineage and every act kind renders", asyn
   if (act.kind !== "photograph" && !(act.kind === "film" && "media" in act))
    assert.ok(actText(act).length > 0, `${record.id}: empty ${act.kind}`);
  }
- // The index introduces threads and a compact chronological selection.
- const index = await readFile(new URL("../components/NotebookCollection.tsx", import.meta.url), "utf8");
- assert.match(index, /programmes\.map/);
- assert.match(index, /CompactNotes notes=\{otherNotes\} notebookJourney/);
- assert.doesNotMatch(index, /VISUAL NOTES/);
+ // Collection browsing and filtering are covered by notebook-gallery.test.ts.
+ // They no longer depend on the earlier chronological-list component names.
 });
 
 test("the archive surface offers a third party only the records that carry a claim, and never an unlisted preview", () => {
