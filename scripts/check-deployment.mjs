@@ -105,7 +105,16 @@ for (const anchor of ["swanwick", "juliet", "collection", "wayfarer", "eye-jacke
 assert.match(lookbook.body, /formal events/);
 assert.match(lookbook.body, /wear in my videos/);
 assert.match(lookbook.body, /sensitive to light/);
+assert.match(lookbook.body, /always wear sunglasses outside and usually wear my Swanwicks indoors/);
 assert.match(lookbook.body, /Reference pair/);
+for (const slug of ["swanwick", "wayfarer", "frogskins"]) {
+ const photo = `/media/objects/${slug}-my-pair.png`;
+ assert.ok(lookbook.body.includes(encodeURIComponent(photo)), `${slug}: actual photograph is served responsively`);
+ const image = await request(`/_next/image?url=${encodeURIComponent(photo)}&w=1080&q=75`, "chrishayuk.com", { Accept: "image/webp" });
+ assert.equal(image.status, 200, `${slug}: optimised photograph loads`);
+ assert.match(image.headers["content-type"], /image\/webp/);
+}
+
 assert.match(lookbook.body, /data-media-id="objects-swanwick"/);
 assert.match(lookbook.body, /hause-editorial-plate/);
 assert.doesNotMatch(lookbook.body, /hause-notebook-preview|codex-folio|ORIGINAL MEDIA TO FOLLOW/);
@@ -811,7 +820,13 @@ const { getRecord, recordPath } = await import('../lib/records.ts');
 const { pageLastModified } = await import('../lib/page-updates.ts');
 const fieldGraph = JSON.parse((await request('/api/graph')).body);
 const fieldIndex = await request('/notebook');
-for (const html of [home.body, fieldIndex.body]) assert.ok(html.includes('href="/thread/machines"'));
+assert.ok(home.body.includes('href="/thread/machines"'));
+const { notebookCollectionHref } = await import('../lib/notebook-gallery.ts');
+const machinesCollectionPath = notebookCollectionHref('machines');
+assert.ok(fieldIndex.body.includes(`href="${machinesCollectionPath}"`));
+const machinesCollectionPage = await request(machinesCollectionPath);
+assert.equal(machinesCollectionPage.status, 200);
+assert.ok(machinesCollectionPage.body.includes('href="/thread/machines"'));
 assert.ok(agentEcologyPage.body.includes('/thread/machines#field-map'));
 const fieldPage = await request('/thread/machines');
 assert.ok(fieldPage.body.includes('id="field-map"'));

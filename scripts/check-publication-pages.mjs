@@ -82,7 +82,7 @@ assert.ok(inheritance.includes('Record n1 is available.'));
 assert.ok(inheritance.includes('No inherited record.'));
 // The homepage selects the latest published graph record; the collection audit
 // checks that changing entrance separately from these stable programme links.
-for(const path of ["/thread/agent-ecology", "/thread/machines", "/notebook"]){
+for(const path of ["/thread/agent-ecology", "/thread/machines", "/notebook?collection=agent-ecology"]){
  const html = await (await get(path)).text();
  const links = [...html.matchAll(/href="([^"]+)"/g)].map(match=>match[1]).filter(href=>href.split("#")[0]===inheritancePath);
  assert.ok(links.length,`${path} links the inheritance note`);
