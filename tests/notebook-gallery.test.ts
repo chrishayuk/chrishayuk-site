@@ -32,3 +32,13 @@ test('invalid filters fall back independently and clearing restores the full sel
  const published = notebookGallery({ publication: 'published' });
  assert.equal(drafts.count + published.count, notebookGallery().count);
 });
+
+test('title and description search intersects the filters and handles empty matches', () => {
+ const result = notebookGallery({ q: '  SUBJECT experiment  ', collection: 'machines', publication: 'draft' });
+ assert.deepEqual(result.collections.flatMap(item => item.notes.map(note => note.id)), ['N-MACHINE-SELF-READ']);
+ assert.equal(result.q, 'SUBJECT experiment');
+ assert.equal(notebookGallery({ q: 'SUBJECT experiment', publication: 'published' }).count, 0);
+ assert.equal(notebookGallery({ q: 'no-matching-notebook-98765' }).count, 0);
+ assert.deepEqual(notebookGallery({ q: '   ' }), notebookGallery());
+ assert.equal(notebookGallery({ q: 'a'.repeat(200) }).q.length, 160);
+});
