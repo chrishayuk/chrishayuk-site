@@ -20,7 +20,7 @@ export function HomeNotebook() {
  const graph = recordGraph();
  const threadIds = new Set(graph.edges.filter(edge => edge.from === latest.id && edge.kind === 'in-thread').map(edge => edge.to));
  const threads = graph.nodes.filter(node => threadIds.has(node.id));
- return <section {...appearance} id="latest-notebook" className="edition-section edition-open-notebook" data-scene="notebook" data-latest-notebook={latest.id} aria-label="Latest published notebook">
+ return <section {...appearance} id="latest-notebook" className="edition-section edition-open-notebook hause-notebook-material" data-scene="notebook" data-latest-notebook={latest.id} aria-label="Latest published notebook">
   <div className="edition-notebook-intro"><p className="edition-caption">On the desk</p><Link className="edition-link" href="/notebook">All collections ↗</Link></div>
   <div className="edition-notebook-stage">
   <NotebookPreview title={latest.title} href={openHref} summary={record.dek}

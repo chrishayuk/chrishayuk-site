@@ -1,7 +1,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { allRecords, publicationSnapshots } from '../lib/records.ts';
+import { notebookFormat } from '../lib/notebook-formats.ts';
 
-const notes = allRecords.filter(record => record.kind === 'notebook');
+const notes = allRecords.filter(record => record.kind === 'notebook').map(record => ({ ...record, format: notebookFormat(record.id) }));
 const frozen = publicationSnapshots.filter((snapshot, index, snapshots) =>
  snapshot.record.kind === 'notebook' && snapshots.findIndex(other => other.record.id === snapshot.record.id) === index
 ).map(({ record }) => ({ id: record.id, version: record.version, title: record.title }));

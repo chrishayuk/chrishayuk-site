@@ -2,6 +2,7 @@ import { notebookFormat, notebookFormats } from '@/lib/notebook-formats';
 import { notebookAppearance } from '@/lib/notebook-appearance';
 import Link from "next/link";
 import { Follow } from "./Follow";
+import { Media } from "./Media";
 import { NotebookSketch } from "./NotebookSketch";
 import { notebookCollections, notebookNotes, noteDate, shortDate } from "@/lib/publication-index";
 import { getRecord, recordPath } from "@/lib/records";
@@ -16,7 +17,7 @@ export function NotebookCollection(query: { collection?: string; publication?: s
   const filtered = gallery.publication !== "all" || !!gallery.q;
   const latest = selectHomeNotebook(recordGraph().nodes).latest;
   const lead = (latest && getRecord(latest.id)) || notebookNotes[0];
-  return <main id="main" className="publication-main notebook-edition" data-notebook-view={activeCollection ? "collection" : "overview"}>
+  return <main id="main" className="publication-main notebook-edition hause-notebook-material" data-notebook-view={activeCollection ? "collection" : "overview"}>
     <header className="notebook-masthead">
       <div>{activeCollection ? <a className="notebook-back" href="/notebook">← All collections</a> : <p className="notebook-register">Chris Hay / Working papers</p>}<h1>{activeCollection?.title || "Notebook"}<span>.</span></h1></div>
       <div className="notebook-masthead-note"><p>{activeCollection?.description || "Experiments, observations and questions still open."}</p>
@@ -50,8 +51,8 @@ export function NotebookCollection(query: { collection?: string; publication?: s
         <article {...notebookAppearance(note.id)} className="notebook-volume" data-programme={collection.id} data-notebook-destination={recordPath(note)}>
           <a href={`${recordPath(note)}#open-notebook`} className="notebook-volume-cover">
             <div className="notebook-volume-register"><span>{collection.title} / {notebookFormats[notebookFormat(note.id)].label}</span><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>
-            <div className="notebook-volume-composition"><div className="notebook-volume-copy"><h2>{note.title}</h2><p>{note.dek}</p></div><NotebookSketch id={note.id} collection={collection.id}/></div>
-            <div className="notebook-volume-footer"><span>{note.publication === "published" ? "Published" : "Working draft"} · <time dateTime={noteDate(note)}>{shortDate(noteDate(note))}</time></span><span className="notebook-volume-open">Open notebook <span aria-hidden="true">↗</span></span></div>
+            <div className="notebook-volume-composition"><div className="notebook-volume-copy"><h2>{note.title}</h2><p>{note.dek}</p></div><>{notebookFormat(note.id) === "lookbook" && getRecord(note.id)?.media[0] ? <Media id={getRecord(note.id)!.media[0]} caption/> : <NotebookSketch id={note.id} collection={collection.id}/>}</></div>
+            <div className="notebook-volume-footer"><span>{note.publication === "published" ? "Published" : "Working draft"} · <time dateTime={noteDate(note)}>{shortDate(noteDate(note))}</time></span><span className="notebook-volume-open">{notebookFormat(note.id) === "lookbook" ? "Enter exhibition" : "Open notebook"} <span aria-hidden="true">↗</span></span></div>
           </a>
         </article>
       </li>)}</ol>

@@ -34,6 +34,10 @@ class Page(html.parser.HTMLParser):
         self.preview_links = []
         self.conclusion_folios = []
         self.read_conclusions = 0
+        self.exhibitions = 0
+        self.rooms = 0
+        self.room_conclusions = []
+        self.opening_on_first_room = False
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -49,12 +53,17 @@ class Page(html.parser.HTMLParser):
         if tag == 'a' and attrs.get('href', '').startswith('#'):
             self.fragments.append(attrs['href'][1:])
         classes = attrs.get('class', '').split()
+        self.exhibitions += 'hause-notebook-exhibition' in classes
+        self.rooms += 'notebook-exhibition-room' in classes
         if attrs.get('data-notebook-conclusion'):
             if any('codex-folio' in parent[1] for parent in self.stack):
                 self.conclusion_folios.append(self.folios)
-            if any('codex-manuscript' in parent[1] for parent in self.stack):
+            if any('notebook-exhibition-room' in parent[1] for parent in self.stack):
+                self.room_conclusions.append(self.rooms)
+            if any('codex-manuscript' in parent[1] or 'notebook-exhibition-manuscript' in parent[1] for parent in self.stack):
                 self.read_conclusions += 1
         if attrs.get('id') == 'open-notebook':
+            self.opening_on_first_room = self.rooms == 1 and any('notebook-exhibition-room' in parent[1] for parent in self.stack)
             self.opening_on_first_folio = self.folios == 1 and any('codex-folio' in parent[1] for parent in self.stack)
         if 'notebook-preview-enter' in classes:
             self.preview_links.append(attrs.get('href', ''))
@@ -98,12 +107,22 @@ def audit(record, frozen=False):
     issues = []
     if page.h1 != 1:
         issues.append(f'{page.h1} H1 headings')
-    if page.books != (0 if frozen else 1):
+    exhibition = not frozen and record.get('format') == 'lookbook'
+    if page.books != (0 if frozen or exhibition else 1):
         issues.append(f'{page.books} notebook books')
+    if page.exhibitions != int(exhibition):
+        issues.append(f'{page.exhibitions} exhibition essays')
     duplicate = [key for key, count in collections.Counter(page.ids).items() if count > 1]
     if duplicate:
         issues.append('duplicate IDs: ' + ', '.join(duplicate))
-    if not frozen:
+    if exhibition:
+        if page.rooms < 2 or page.room_conclusions != [page.rooms] or page.read_conclusions != 1:
+            issues.append('exhibition needs rooms and a closing reflection in both editions')
+        if not page.opening_on_first_room:
+            issues.append('exhibition opening destination missing from first room')
+        if page.page_controls:
+            issues.append('continuous exhibition unexpectedly has page controls')
+    if not frozen and not exhibition:
         if page.conclusion_folios != [page.folios] or page.read_conclusions != 1:
             issues.append('conclusion missing from the final folio or manuscript')
         if not page.opening_on_first_folio:
@@ -112,6 +131,9 @@ def audit(record, frozen=False):
             issues.append('page controls are not at the top of the paper')
         if page.sizing != ['content']:
             issues.append('notebook does not expand to fit its figures')
+        if page.folios < 2:
+            issues.append(f'only {page.folios} spreads')
+    if not frozen:
         missing = [f'act-{i + 1}' for i in range(len(record['body'])) if f'act-{i + 1}' not in page.ids]
         if missing:
             issues.append('missing citation anchors: ' + ', '.join(missing))
@@ -119,8 +141,6 @@ def audit(record, frozen=False):
         for i, act in enumerate(record['body']):
             if 'text' in act and normal(act['text']) not in text:
                 issues.append(f'missing manuscript text for act {i + 1}')
-        if page.folios < 2:
-            issues.append(f'only {page.folios} spreads')
     dangling = sorted(set(page.fragments) - set(page.ids) - {''})
     if dangling:
         issues.append('missing fragment destinations: ' + ', '.join(dangling))
