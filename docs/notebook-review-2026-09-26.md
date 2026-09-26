@@ -111,3 +111,13 @@ and paper edges instead of ruled stock and coloured spines. These are scoped CSS
 changes; study data, media pixels, control handlers and preserved editions are intact.
 Production compilation and the 11 legibility contract tests pass. The screenshot
 provides the observed defect; browser visual verification remains unavailable.
+
+The collection previews now follow an exhibition composition: a large opening
+spread for each collection, followed by pairs of quieter objects. Ivory squared
+paper, restrained perspective, directional light and layered edges give the
+notebooks physical presence. Each preview includes a small SVG concept drawing
+appropriate to its note or collection; these illustrate relationships, not measured
+outcomes. Narrow previews stack the drawing and remove the crease; mobile flattens
+the paper. The graph still supplies every entry and its first-page destination.
+The production build, 26 selection/transition/legibility tests and HAUSE source
+parity pass. Local servers remain stopped; appearance needs browser visual review.
