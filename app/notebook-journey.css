@@ -4,6 +4,32 @@
 ::view-transition-old(.notebook-title) { animation: none; opacity: 0; }
 ::view-transition-new(.notebook-title) { animation: none; mix-blend-mode: normal; }
 
+/* The selected cover expands into the paper, and returns to its collection. */
+::view-transition-group(notebook-paper) { animation-duration: 520ms; animation-timing-function: cubic-bezier(.22,.7,.2,1); }
+::view-transition-image-pair(notebook-paper) { isolation: isolate; perspective: 1800px; }
+::view-transition-old(notebook-paper) { height: 100%; object-fit: cover; object-position: left top; transform-origin: left center; animation: notebook-cover-open 260ms ease-out both; }
+::view-transition-new(notebook-paper) { height: 100%; object-fit: cover; object-position: left top; mix-blend-mode: normal; animation: notebook-paper-arrive 320ms 100ms ease-out both; }
+html[data-notebook-journey=close]::view-transition-old(notebook-paper) { animation: notebook-paper-leave 220ms ease-out both; }
+html[data-notebook-journey=close]::view-transition-new(notebook-paper) { animation-delay: 60ms; }
+@keyframes notebook-cover-open { to { opacity: 0; transform: rotateY(-12deg); } }
+@keyframes notebook-paper-arrive { from { opacity: 0; } to { opacity: 1; } }
+@keyframes notebook-paper-leave { to { opacity: 0; } }
+
+/* A first-page fragment is visible in the initial HTML, before hydration.
+   The shared Codex then adopts the same folio state through its fragment handler. */
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-desk { display: grid; }
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-folio:has(#open-notebook) { display: grid; min-height: var(--codex-spread-height); }
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-pagination { display: flex; }
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-heading {
+ display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px 28px; align-items: end;
+ width: auto; min-height: 0; padding: 0; margin: 12px 0 20px; border: 0;
+ background: none; color: inherit; transform: none; box-shadow: none;
+}
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-heading h1 { font-size: 24px; line-height: 1.25; max-width: 42ch; }
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-collection { grid-column: 1/-1; margin: 0; font-size: 11px; }
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-byline { margin: 0; gap: 6px 16px; font-size: 11px; }
+.notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) :is(.codex-opening,.codex-cover-note) { display: none; }
+
 .notebook-return-bar, .notebook-byline { max-width: 1120px; margin-inline: auto; padding-inline: var(--margin); }
 .notebook-return-bar { padding-block: 16px; }
 .notebook-return-bar a { display: inline-flex; align-items: center; min-height: 44px; font: 14px/1.5 var(--font-system), sans-serif; }
@@ -18,6 +44,9 @@ body .notebook-reading-page > .record-header .dek { font: 17px/1.75 var(--font-s
 @media (max-width: 700px) {
   .notebook-return-bar { padding-block: 8px; }
   .notebook-byline { padding-bottom: 24px; }
+}
+@media (max-width: 900px) {
+ .notebook-reading-page .hause-codex[data-view=cover]:has(#open-notebook:target) .codex-heading { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(.notebook-title), ::view-transition-old(.notebook-title), ::view-transition-new(.notebook-title) { animation: none !important; }

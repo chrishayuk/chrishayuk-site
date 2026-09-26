@@ -36,7 +36,7 @@ assert.doesNotMatch(home.body, /name="robots" content="noindex/);
 assert.doesNotMatch(home.body, /ORIGINAL MEDIA TO FOLLOW|media-required|larql-scene/);
 assert.deepEqual([...home.body.matchAll(/data-scene="([^"]+)"/g)].map(match => match[1]), ["identity", "notebook", "film", "results", "programmes", "appearances", "systems"]);
 for (const path of ["/thread/machines", "/thread/cell80", "/thread/the-map", "/thread/agent-ecology", "/work/larql", "/work/vindex3", "/work/hause"]) assert.ok(home.body.includes(`href="${path}"`));
-const { latestNotes, notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
+const { notebookNotes, researchNotes } = await import('../lib/publication-index.ts');
 const { homeResultProgrammes, researchProgrammes, programmeHighlight, programmeInvitations } = await import('../lib/publication-index.ts');
 assert.equal(homeResultProgrammes.length, 4);
 for (const programme of researchProgrammes) assert.ok(home.body.includes(`href="${programme.href}"`), `${programme.id}: programme entrance`);
@@ -239,13 +239,24 @@ assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
 assert.equal(cite.status, 200);
 assert.deepEqual(JSON.parse(cite.body).author, [{literal: "IBM"}]);
-// The index separates its lead from the other recent notes; the archive retains every note.
+// All notebook collections expose every listed note exactly once.
 const notebook = await request("/notebook");
 assert.match(notebook.body, /id="current-threads"/);
 assert.match(notebook.body, /href="\/notebook\/archive"/);
-const notebookLatest = notebook.body.match(/<section id="latest-notes"[\s\S]*?<\/section>/)?.[0];
-assert.equal((notebookLatest?.match(/<li>/g) || []).length, latestNotes.length - 1);
-for (const note of latestNotes) assert.ok(notebook.body.includes(`/notebook/${note.slug}`));
+assert.ok(notebook.body.includes(`data-notebook-lead="${homeSelection.latest.id}"`), 'index and homepage share the graph-selected latest publication');
+const { notebookCollections } = await import('../lib/publication-index.ts');
+const collectionEntries = [...notebook.body.matchAll(/data-notebook-entry="([^"]+)"/g)].map(match => match[1]);
+assert.deepEqual(collectionEntries.toSorted(), notebookNotes.map(note => note.id).toSorted());
+for (const collection of notebookCollections) {
+ assert.ok(notebook.body.includes(`data-notebook-collection="${collection.id}"`));
+ assert.ok(notebook.body.includes(`href="#collection-${collection.id}"`));
+}
+for (const note of notebookNotes) {
+ assert.ok(notebook.body.includes(`href="/notebook/${note.slug}#open-notebook"`));
+ assert.ok(notebook.body.includes(`data-notebook-destination="/notebook/${note.slug}"`));
+}
+assert.match(notebook.body, /action="\/notebook\/archive"/);
+assert.match(notebook.body, /id="notebook-search"/);
 assert.doesNotMatch(notebook.body, /notebook-story|authority-card/);
 const notebookArchive = await request('/notebook/archive');
 assert.equal(notebookArchive.status, 200);

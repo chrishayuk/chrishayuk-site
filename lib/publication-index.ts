@@ -57,6 +57,18 @@ export function programmeNotes(programme: Programme) {
 }
 export const programmeFor = (record: PublicationRecord) => programmes.find(programme => programmeNotes(programme).some(note => note.id === record.id));
 
+/** One home for every listed notebook. New notes remain discoverable before a
+ * research-thread membership is authored; overlapping threads do not duplicate covers. */
+export const notebookCollections = programmes.map(programme => ({
+  ...programme, notes: notebookNotes.filter(note => programmeFor(note)?.id === programme.id),
+}));
+const looseNotes = notebookNotes.filter(note => !programmeFor(note));
+if (looseNotes.length) notebookCollections.push({
+  id: "working-notes", title: "Working notes", question: "What comes next?",
+  description: "New questions and observations, before they become a research thread.",
+  href: "/notebook/archive", threads: [], extra: [], continuation: undefined, notes: looseNotes,
+});
+
 /** The thread leads with its selected result; recency is a separate link. */
 export const nowNote = programmeHighlight(programmes.find(programme => programme.id === "machines")!);
 export const latestMachineNote = notebookNotes.find(note => machineThread.steps.some(step => step.id === note.id));

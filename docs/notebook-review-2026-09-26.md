@@ -85,3 +85,17 @@ to `#open-notebook`, a stable destination on the first folio of every current
 entry. The rendering audit checks this across all 30 notebooks and verifies the
 homepage destination. The production build, four selection tests and all 37
 rendered-page checks pass; browser visual verification remains unavailable.
+
+The notebook index now exposes all 30 listed notes in five complete collections,
+with collection shortcuts and search. Each note has one cover, explicit publication
+status and a first-page link. Notes without an authored programme membership fall
+into Working notes, so future publications cannot disappear from the index.
+
+Collection entrances use native document navigation and share the selected cover
+with the destination paper. The first-page fragment is styled before hydration,
+avoiding a cover flash while Codex adopts the folio state. Transition names are
+cleared after completion for history restoration; pause and reduced-motion
+preferences bypass animation. The event lifecycle follows the
+[Chrome cross-document transition guidance](https://developer.chrome.com/docs/web-platform/view-transitions/cross-document).
+Fifteen transition/selection tests, the production build and the full deployment
+contract pass. Browser geometry and animation appearance still require visual review.
