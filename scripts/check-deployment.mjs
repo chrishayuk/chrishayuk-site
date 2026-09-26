@@ -748,7 +748,7 @@ for(const node of notebookNodes) {
  assert.equal(page.status,200,path);
  checkLegibility(node,page.body);
  if (page.body.includes('visual-notebook-record')) {
-  const opening = page.body.match(/<header class="(?:record-header|agent-hero|codex-heading)"[\s\S]*?<\/header>/)?.[0];
+  const opening = page.body.match(/<header class="(?:record-header|agent-hero|codex-heading|notebook-exhibition-heading)"[\s\S]*?<\/header>/)?.[0];
   assert.ok(opening, `${node.id}: notebook opening`);
   assert.doesNotMatch(opening, /class="record-bar|class="notebook-synopsis|class="machine-brief/);
   assert.ok(page.body.includes('class="notebook-afterword"'), `${node.id}: research apparatus remains after the experiment`);
