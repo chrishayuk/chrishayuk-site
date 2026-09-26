@@ -121,3 +121,14 @@ outcomes. Narrow previews stack the drawing and remove the crease; mobile flatte
 the paper. The graph still supplies every entry and its first-page destination.
 The production build, 26 selection/transition/legibility tests and HAUSE source
 parity pass. Local servers remain stopped; appearance needs browser visual review.
+
+Collection and edition filters now render on the server using shareable query
+parameters. They work without JavaScript, intersect both choices, retain chronology,
+omit empty collections and provide a clear empty state and reset link. Filtered
+views retain the canonical notebook URL and are excluded from indexing. Eighteen
+gallery, graph-selection and navigation tests and the production build pass.
+
+The exhibition alternates broad spreads, portrait compositions and diagram studies,
+with restrained ivory/linen stock, opposing angles and asymmetric spacing. Small
+screens use a single column and flat paper. The supplied screenshot confirms the
+previous composition; the latest visual variations still need browser review.
