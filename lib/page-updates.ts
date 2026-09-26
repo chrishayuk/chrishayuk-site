@@ -8,7 +8,7 @@ import { getRecord, recordPath } from "./records.ts";
  */
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/about": { date: "2026-09-26", reason: "Personal About edition: studio portrait, practice, glasses photograph, publishing principle and conversations." },
- "/objects": { date: "2026-09-26", reason: "Personal objects entrance: Things I look through, with links to made works retained." },
+ "/objects": { date: "2026-09-26", reason: "The lead owned photograph opens the glasses lookbook; the single-collection entrance stays concise." },
  "/objects/things-i-look-through": { date: "2026-09-26", reason: "Personal glasses collection with Chris’s photographs of his Swanwicks, Ray-Bans and Frogskins, film of Swanwick in use, and credited references." },
  "/notebook/the-repairer-left-the-mechanism-kept-working": { date: "2026-09-25", reason: "Opt-in HAUSE codex prototype with operable folios, linear manuscript and actual publication history; preserved editions and results unchanged." },
  ...Object.fromEntries(Object.keys(machineBriefs).map(id => [recordPath(getRecord(id)!), { date: "2026-09-13", reason: "Visible question and bounded result; link to the field-experiment map." }])),
@@ -24,7 +24,7 @@ export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/notebook/the-page-could-ask-it-couldnt-authorise": { date: "2026-09-15", reason: "Opening states the competing sources of permission and task necessity." },
  "/notebook/does-an-invitation-count-as-permission": { date: "2026-09-15", reason: "Explains why later permission controls followed the original reward comparison." },
  "/research": { date: "2026-09-16", reason: "Shared programme framing and explicit open questions about selective preservation, uncertain repair and longer horizons." },
- "/": { date: "2026-09-26", reason: "An open notebook features the graph’s latest published entry; featured articles resolve from the same publication graph." },
+ "/": { date: "2026-09-26", reason: "A small photographic entrance to Objects joins the existing graph-driven notebook and featured articles." },
  // Notebook reading surfaces reviewed together on 26 September; manuscript dates are unchanged.
  ...Object.fromEntries([
   "/notebook/the-repairer-left-the-mechanism-kept-working",

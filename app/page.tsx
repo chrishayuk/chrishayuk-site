@@ -10,6 +10,7 @@ import { homeResultProgrammes, researchProgrammes, shortDate } from "@/lib/publi
 import { HOUSE_WORK } from "@/lib/house";
 import cell80Preview from "@/lib/data/cell80-home-preview.json";
 import { HomeNotebook, FeaturedArticles } from "@/components/HomeNotebook";
+import { HomeObjects } from "@/components/HomeObjects";
 import "./home-edition.css";
 
 const selected = homeResultProgrammes.filter(p => ["machines", "agent-ecology"].includes(p.id));
@@ -62,6 +63,7 @@ export default function Home() {
         <div><p className="edition-caption">In conversation · IBM</p><h2 id="appearances-heading"><Link href={videoPath(latestMoe)}>{latestMoe.title}</Link></h2><p className="edition-caption">Mixture of Experts · Episode {latestMoe.episode}<br/>With Chris Hay as a panelist</p><Link className="edition-link" href="/film/mixture-of-experts">More conversations</Link></div>
       </article>
     </section>
+    <HomeObjects/>
     <section id="systems" className="edition-section edition-systems" data-scene="systems" aria-labelledby="systems-heading">
       <h2 id="systems-heading">Systems & tools</h2>
       <nav aria-label="Systems and tools">{systems.map(work => <Link href={work.path} key={work.path}>{work.name}</Link>)}</nav>
