@@ -13,6 +13,7 @@ import { MotionProvider } from "@/components/Motion";
 import { SITE, socials } from "@/lib/records";
 import { pageTransitionScript } from "@/lib/page-transitions";
 import "./globals.css";
+import "./notebook-palette.css";
 import "@chrishayuk/hause/exhibition.css";
 import "./notebook-visuals.css";
 import "./notebook-studies.css";

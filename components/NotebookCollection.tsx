@@ -1,3 +1,4 @@
+import { notebookAppearance } from '@/lib/notebook-appearance';
 import Link from "next/link";
 import { Follow } from "./Follow";
 import { NotebookSketch } from "./NotebookSketch";
@@ -16,19 +17,10 @@ export function NotebookCollection(query: { collection?: string; publication?: s
   return <main id="main" className="publication-main notebook-edition">
     <header className="notebook-masthead">
       <div><p className="notebook-register">Chris Hay / Working papers</p><h1>Notebook<span>.</span></h1></div>
-      <div className="notebook-masthead-note"><p>Experiments, observations<br/>and questions still open.</p><Link href="/notebook/archive">Browse all {notebookNotes.length} notes <span aria-hidden="true">↗</span></Link></div>
+      <div className="notebook-masthead-note"><p>Experiments, observations and questions still open.</p>
+        {!filtered && lead && <a className="notebook-latest-link" data-notebook-lead={lead.id} data-notebook-destination={recordPath(lead)} href={`${recordPath(lead)}#open-notebook`}><span className="notebook-register">Latest notebook</span><span>{lead.title} ↗</span></a>}
+      </div>
     </header>
-    {!filtered && <section id="current-threads" className="notebook-threads" aria-labelledby="threads-heading">
-      <div className="notebook-section-heading"><h2 id="threads-heading">The collections</h2><p>{notebookCollections.length} collections / {notebookNotes.length} notes</p></div>
-      <nav aria-label="Notebook collections">{notebookCollections.map((item, index) => <a key={item.id} href={`#collection-${item.id}`} data-programme={item.id}>
-        <span className="notebook-thread-number">{String(index + 1).padStart(2, "0")} / {item.notes.length} notes</span>
-        <span className="notebook-thread-title">{item.title}<span aria-hidden="true">↓</span></span>
-      </a>)}</nav>
-    </section>}
-    {!filtered && lead && <aside className="notebook-latest-slip" aria-label="Latest notebook" data-notebook-lead={lead.id} data-notebook-destination={recordPath(lead)}>
-      <div><span className="notebook-register">{lead.publication === "published" ? "Latest publication" : "Working draft"}</span><time dateTime={noteDate(lead)}>{shortDate(noteDate(lead))}</time></div>
-      <a href={`${recordPath(lead)}#open-notebook`}><span>{lead.title}</span><span aria-hidden="true">↗</span></a>
-    </aside>}
     <section id="notebook-selection" className="notebook-selection" aria-label="Filter notebooks">
       <details className="notebook-filter-panel" key={`${gallery.collection}-${gallery.publication}-${gallery.q}`}>
         <summary><span className="notebook-filter-label">Filter notebooks <span aria-hidden="true" className="notebook-filter-indicator"/></span><span className="notebook-selection-count">{gallery.count} {gallery.count === 1 ? "notebook" : "notebooks"}{filtered ? " · Filtered selection" : " · All collections"}</span></summary>
@@ -48,7 +40,7 @@ export function NotebookCollection(query: { collection?: string; publication?: s
         <Link href={collection.href}>Follow the collection ↗</Link>
       </header>
       <ol className="notebook-shelf">{collection.notes.map((note, index) => <li key={note.id} id={`entry-${note.id.toLowerCase()}`} data-notebook-entry={note.id} data-presentation={index % 5 === 0 ? "spread" : index % 5 === 1 || index % 5 === 4 ? "portrait" : "study"}>
-        <article className="notebook-volume" data-programme={collection.id} data-notebook-destination={recordPath(note)}>
+        <article {...notebookAppearance(note.id)} className="notebook-volume" data-programme={collection.id} data-notebook-destination={recordPath(note)}>
           <a href={`${recordPath(note)}#open-notebook`} className="notebook-volume-cover">
             <div className="notebook-volume-register"><span>{collection.title}</span><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></div>
             <div className="notebook-volume-composition"><div className="notebook-volume-copy"><h3>{note.title}</h3><p>{note.dek}</p></div><NotebookSketch id={note.id} collection={collection.id}/></div>

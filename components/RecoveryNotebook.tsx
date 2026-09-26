@@ -1,3 +1,4 @@
+import { NotebookConclusion } from './NotebookConclusion';
 import Link from "next/link";
 import { FolioObject, Marginalia } from '@chrishayuk/hause/components/Codex';
 import { NotebookTemplate as Codex } from '@chrishayuk/hause/components/NotebookTemplate';
@@ -80,10 +81,12 @@ export function RecoveryNotebook() {
    <FolioObject place="right"><Marginalia label="The boundary of this experiment"><p>The repair program stayed protected in I12R. These results do not show successors repairing the program itself.</p><a href="#limits">Return to the limitations ↗</a></Marginalia></FolioObject>
    <FolioObject place="full"><Link className="recovery-folio-link" href="/thread/agent-ecology">Agent Ecology / the complete sequence ↗</Link></FolioObject>
   </> },
+  { id: 'recovery-conclusion', label: 'Conclusion', children: <FolioObject place="full"><NotebookConclusion record={record}/></FolioObject> },
  ];
  return <div className="recovery-notebook recovery-codex"><Codex id="recovery-codex" title={record.title} collection="Agent Ecology / a research codex" byline={<><span>Chris Hay</span><time dateTime={record.published || record.created}>{record.published || record.created}</time><span>I12 · I12R</span></>} folios={folios}
   manuscript={<Manuscript id="recovery-record" introduction={<><p>{record.dek}</p><p className="recovery-reading-edition">Chris Hay · {record.published} · Complete essay, v{record.version}</p></>} contents={<ol>{recoveryChapters(record).map(chapter => <li key={chapter.id}><a href={`#${chapter.id}`}>{chapter.title}</a></li>)}</ol>}>
    {recoveryChapters(record).map((chapter, chapterIndex) => <Fragment key={chapter.id}><section id={chapter.id} className="manuscript-chapter"><h3>{chapter.title}</h3>{chapter.acts.map(({act,index}) => act.kind === 'observation' ? <div key={index} id={actAnchor(index)}><p>{act.text}</p>{act.references?.map(ref => <p className="manuscript-reference" key={ref.url}><a href={ref.url}>{ref.label} ↗</a></p>)}</div> : act.kind === 'claim' ? <div id={actAnchor(index)} key={index}><p>{act.text}</p><p>{act.detail}</p></div> : <Acts key={index} acts={[act]} anchored offset={index} staticRefusals/>)}</section>{chapterIndex === 1 && <RecoveryExperimentPlate/>}{chapterIndex === 4 && <RecoveryExperimentPlate kind="worlds"/>}{chapterIndex === 5 && <RecoveryExperimentPlate kind="write"/>}</Fragment>)}
+   <NotebookConclusion record={record}/>
    <footer className="manuscript-end"><a href="#recovery-evidence">Examine the evidence ↗</a><a href="#recovery-codex-history">Publication history ↗</a><a href="#cite">Sources and citation ↗</a></footer>
   </Manuscript>}
   history={<><ol className="recovery-codex-history">{history.versions.map(entry => <li key={entry.version}><span>{entry.revised || entry.published} / v{entry.version}</span><h3>{entry.revision?.kind === 'initial' ? 'First publication' : 'Clarification'}</h3><p>{entry.revision?.summary}</p><a href={entry.url}>Read the preserved edition ↗</a><details><summary>Manuscript fingerprint</summary><code>{entry.hash}</code><a href={entry.manuscript}>Manuscript JSON ↗</a></details></li>)}</ol><p className="recovery-folio-small">The codex is a presentation of these records. It adds no experiment, revised outcome or superseded claim.</p><a className="recovery-folio-link" href={`/api/record/${record.id}/history`}>Complete publication history ↗</a></>}/></div>;
