@@ -209,3 +209,18 @@ stocks and three shades); 17 HAUSE tests. Browser discovery returned no availabl
 browser, so geometry, hover, animation and final visual appearance remain an
 explicit verification limitation. Source and live HTML audits are not substitutes
 for browser visual sign-off.
+
+Notebook format is now independent of collection: the exhibition entry is a
+lookbook with unruled stock, larger editorial pauses and a closing reflection;
+interpretive notes are thematic, open propositions experimental, and recorded
+studies retain the squared lab notebook. All remain authored exhibition
+compositions. Shared format labels and template variants live in HAUSE at
+9d43c2ed0b6d57dddcdf753e6e5130a485996a71 (124 source files). The colour and format
+follow a note through its collection preview and reader; future homepage excerpts
+also inherit the format. Existing chapter anchors, data and conclusions remain.
+
+A separate editorial draft for Practice / Systems explains the *new lab style*,
+with links to the repair, task-permission and Cell80 notebooks. It is saved in
+`docs/notebook-drafts/the-lab-notebook-as-exhibition.md`; it has not been added to
+public records or feeds. The Leonardo references are supported by the V&A and
+British Library catalogues. This is proposed authored copy for review.

@@ -155,3 +155,8 @@
 @media print {
  .notebook-collection-shelf > li:nth-child(even) .notebook-volume { transform: none; }
 }
+
+/* The cover previews the reading format as well as the collection's colour. */
+.notebook-volume[data-notebook-format=lookbook] .notebook-volume-cover,
+.notebook-volume[data-notebook-format=thematic] .notebook-volume-cover { background-image: linear-gradient(115deg,#fff8e645,transparent 48%,#665e4210); background-size: 100% 100%; }
+.notebook-volume[data-notebook-format=experimental] .notebook-volume-cover { background-image: radial-gradient(circle,#50564b38 .65px,transparent .85px); background-size: 20px 20px; }
