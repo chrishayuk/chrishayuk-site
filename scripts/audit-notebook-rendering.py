@@ -37,6 +37,9 @@ class Page(html.parser.HTMLParser):
         self.exhibitions = 0
         self.rooms = 0
         self.room_conclusions = []
+        self.specimens = 0
+        self.object_plates = 0
+        self.closings = 0
         self.opening_on_first_room = False
         self.feed(text)
 
@@ -53,6 +56,9 @@ class Page(html.parser.HTMLParser):
         if tag == 'a' and attrs.get('href', '').startswith('#'):
             self.fragments.append(attrs['href'][1:])
         classes = attrs.get('class', '').split()
+        self.specimens += 'hause-notebook-specimen' in classes or 'recovery-world-specimen' in classes
+        self.object_plates += 'hause-notebook-plate' in classes
+        self.closings += 'hause-notebook-closing' in classes
         self.exhibitions += 'hause-notebook-exhibition' in classes
         self.rooms += 'notebook-exhibition-room' in classes
         if attrs.get('data-notebook-conclusion'):
@@ -134,6 +140,10 @@ def audit(record, frozen=False):
         if page.folios < 2:
             issues.append(f'only {page.folios} spreads')
     if not frozen:
+        if page.specimens != record.get('objectCount') or page.object_plates < 1:
+            issues.append(f'inspectable objects missing: {page.specimens} specimens, {page.object_plates} plates')
+        if page.closings != 2:
+            issues.append(f'{page.closings} balanced closing spreads; expected folio and manuscript')
         missing = [f'act-{i + 1}' for i in range(len(record['body'])) if f'act-{i + 1}' not in page.ids]
         if missing:
             issues.append('missing citation anchors: ' + ', '.join(missing))

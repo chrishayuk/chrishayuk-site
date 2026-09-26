@@ -2,6 +2,8 @@ import { notebookFormat, notebookFormats } from '@/lib/notebook-formats';
 import type { ReactNode } from 'react';
 import { NotebookConclusion } from './NotebookConclusion';
 import { NotebookTemplate, NotebookExhibition } from '@chrishayuk/hause/components/NotebookTemplate';
+import { NotebookStage } from '@chrishayuk/hause/components/NotebookObjects';
+import { NotebookRecordObjects } from './NotebookRecordObjects';
 import { FolioObject } from '@chrishayuk/hause/components/Codex';
 import { Manuscript } from '@chrishayuk/hause/components/Manuscript';
 import { getRecord } from '@/lib/records';
@@ -24,10 +26,12 @@ export function NotebookEntry({ record: supplied, recordId, chapters, className 
  const opening = first?.kind === 'film' || first?.kind === 'photograph'
   ? [{ label: first.kind === 'film' ? 'The opening film' : 'The opening image', children: <><p className="notebook-entry-dek">{record.dek}</p><Acts acts={[first]} anchored/></> }]
   : [];
- const sections: NotebookChapter[] = [...opening, ...chapters, { id: `${id}-conclusion`, label: notebookFormats[format].closing, children: <NotebookConclusion record={record}/> }];
+ const sections: NotebookChapter[] = [...opening, ...chapters,
+  { id: `${id}-objects`, label: format === 'lab' ? 'Inspect the record' : format === 'lookbook' ? 'Design specimens' : 'The working passages', kind: format === 'lab' ? 'evidence' : undefined, children: <NotebookRecordObjects record={record}/> },
+  { id: `${id}-conclusion`, label: notebookFormats[format].closing, children: <NotebookConclusion record={record}/> }];
  const folios = sections.map((chapter: NotebookChapter, index) => ({
   id: chapter.id || `${id}-folio-${index + 1}`, label: chapter.label, kind: chapter.kind,
-  children: <FolioObject place="full" className="notebook-authored-page"><div id={index === 0 ? 'open-notebook' : undefined} className={`notebook-chapter-content ${className}`}>{index === 0 && introduction}{chapter.children}</div></FolioObject>,
+  children: <FolioObject place="full" className="notebook-authored-page"><div id={index === 0 ? 'open-notebook' : undefined} className={`notebook-chapter-content ${className}`}><NotebookStage layout={format === 'experimental' ? 'reading' : chapter.kind || index % 3 === 0 ? 'plate' : 'spread'}>{index === 0 && introduction}{chapter.children}</NotebookStage></div></FolioObject>,
  }));
  const history = publicationHistory(record.id);
  const manuscript = <Manuscript introduction={<><p>{record.dek}</p><p className="notebook-manuscript-state">{record.publication === 'published' ? 'Published manuscript' : 'Working manuscript'} · v{record.version}</p></>}>
