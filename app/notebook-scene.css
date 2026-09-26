@@ -1,0 +1,47 @@
+/* The same exhibition surrounds the collection, selected book and open reader.
+   Reading stays level; perspective belongs only to previews and closed covers. */
+.notebook-edition, .notebook-reading-page {
+ --bg: #0b0e0c; --fg: #eee7d8; --muted: #c0baad; --rule: #eee7d82e;
+ background-color: var(--bg); color: var(--fg);
+}
+/* This design essay demonstrates its own thesis: rooms, visual studies and
+   contrasting acts. It never inherits the lab's paper or bound-book framing. */
+body .notebook-reading-page[data-notebook-format=lookbook] > .record-body { max-width: none; padding-inline: 0; }
+.notebook-reading-page .hause-notebook-exhibition { --codex-ink: var(--fg); --codex-muted: var(--muted); --codex-rule: var(--rule); }
+.hause-notebook-exhibition .notebook-exhibition-content > .notebook-entry-dek { display: none; }
+.hause-notebook-exhibition .notebook-exhibition-room:first-of-type .media { max-height: none; margin: 0; }
+.hause-notebook-exhibition .notebook-exhibition-room:first-of-type .media img { width: 100%; height: auto; }
+.hause-notebook-exhibition .notebook-exhibition-room:first-of-type .media figcaption { max-width: none; }
+.hause-notebook-exhibition .notebook-conclusion { max-width: 1040px; margin-block: 0; }
+.hause-notebook-exhibition .notebook-conclusion h2 { font-size: clamp(44px,6vw,88px); }
+.hause-notebook-exhibition .notebook-conclusion-takeaway { max-width: 34ch; font-size: clamp(28px,3.8vw,48px); }
+.hause-notebook-exhibition .exhibition-reference-scene { height: clamp(220px,24vw,380px); }
+.notebook-reading-page .hause-notebook-template {
+ background: var(--notebook-scene-background);
+ padding-block: clamp(20px,3vw,48px) clamp(64px,7vw,112px);
+}
+.notebook-reading-page .hause-notebook-template .hause-codex {
+ --codex-gutter: clamp(24px,5vw,80px);
+ max-width: 1500px; margin-bottom: 0;
+}
+.notebook-reading-page .hause-notebook-template .hause-codex[data-enlarged=true] { max-width: none; padding-inline: 20px; }
+.notebook-reading-page .hause-notebook-template .codex-desk { gap: clamp(24px,3vw,48px); }
+.notebook-reading-page .hause-notebook-template .codex-modes { margin-bottom: 36px; }
+.notebook-reading-page .hause-notebook-template .codex-edge a { color: #c0baad; }
+.notebook-reading-page .hause-notebook-template .codex-edge a[aria-current=page] { color: #eee7d8; }
+.notebook-reading-page .hause-notebook-template .hause-codex[data-view=cover]:not(:has(#open-notebook:target)) .codex-heading {
+ background-image: var(--notebook-paper-light); box-shadow: var(--notebook-book-shadow);
+ border-radius: 2px 7px 8px 2px; margin-block: 64px 100px;
+}
+@media (max-width: 700px) {
+ .notebook-reading-page .hause-notebook-template { padding-block: 12px 48px; }
+ .notebook-reading-page .hause-notebook-template .hause-codex { padding-inline: 16px; }
+ .notebook-reading-page .hause-notebook-template .codex-modes { margin-bottom: 24px; }
+ .notebook-reading-page .hause-notebook-template .hause-codex[data-view=cover]:not(:has(#open-notebook:target)) .codex-heading { margin-block: 28px 56px; transform: none; }
+}
+@media print {
+ .notebook-edition, .notebook-reading-page { --bg: #fff; --fg: #222; --muted: #555; --rule: #2224; color: #222; background: none; }
+ .notebook-reading-page .hause-notebook-template { background: none; padding: 0; }
+ .notebook-reading-page .hause-notebook-template .hause-codex { max-width: none; padding: 0; }
+ .notebook-reading-page .hause-notebook-template .hause-codex[data-view=cover] .codex-heading { box-shadow: none; background-image: none; }
+}

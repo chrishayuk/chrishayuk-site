@@ -8,13 +8,13 @@
 .notebook-masthead-note > p { font: 17px/1.55 var(--font-display),Georgia,serif; margin-bottom: 12px; }
 .notebook-masthead-note > a { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 44px; font: 13px/1.6 var(--font-system),sans-serif; text-decoration: underline; text-underline-offset: 5px; }
 
-.notebook-shelf { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 88px 52px; list-style: none; margin: 0; padding: 40px 20px 48px; }
+.notebook-shelf { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: 112px 64px; list-style: none; max-width: 1520px; margin: 0 auto; padding: 64px clamp(24px,4vw,64px) 112px; }
 .notebook-shelf > li { min-width: 0; display: flex; perspective: 2200px; position: relative; }
-.notebook-shelf > li::before { content: ""; position: absolute; inset: -28px; background: radial-gradient(ellipse at 40% 45%,#d6bc8326,transparent 68%); pointer-events: none; }
-.notebook-volume { display: flex; width: 100%; background: var(--notebook-paper,#f2eee3); color: #22251f; position: relative; container-type: inline-size; transform: rotateX(3deg) rotateY(-3deg) rotateZ(-.6deg); transform-origin: center; border-radius: 1px 5px 5px 1px; box-shadow: 1px 2px 0 #d3cfc0,2px 4px 0 #8e9185,4px 7px 0 #bbbbae,6px 10px 0 #444b40,12px 22px 28px #0003,24px 40px 60px #0002; }
+.notebook-shelf > li::before { content: ""; position: absolute; inset: -48px -40px -64px; background: radial-gradient(ellipse at 25% 25%,#b7a07730,transparent 65%); pointer-events: none; }
+.notebook-volume { display: flex; width: 100%; background: var(--notebook-paper,#f2eee3); color: #22251f; position: relative; container-type: inline-size; transform: rotateX(5deg) rotateY(-4deg) rotateZ(-1deg); transform-origin: center; border-radius: 2px 7px 8px 2px; box-shadow: var(--notebook-book-shadow); }
 .notebook-volume::before { content: ""; position: absolute; top: 24px; bottom: 24px; left: 20px; border-left: 1px solid #a36b4b38; pointer-events: none; }
-.notebook-volume-cover::after { content: ""; position: absolute; top: 0; bottom: 0; left: calc(64% - 18px); width: 36px; background: linear-gradient(90deg,transparent,#22251f08 42%,#22251f18 49%,#fff8 51%,transparent); pointer-events: none; }
-.notebook-volume-cover { position: relative; display: flex; flex-direction: column; width: 100%; min-height: 380px; padding: 28px 32px 22px 36px; color: inherit; border-radius: inherit; background-image: linear-gradient(115deg,#fff8e645,transparent 48%,#665e4210),linear-gradient(#637b7010 1px,transparent 1px),linear-gradient(90deg,#637b7010 1px,transparent 1px); background-size: 100% 100%,20px 20px,20px 20px; background-position: 0 0; }
+.notebook-volume-cover::after { content: ""; position: absolute; top: 0; bottom: 0; left: calc(64% - 28px); width: 56px; background: var(--notebook-binding-light); pointer-events: none; }
+.notebook-volume-cover { position: relative; display: flex; flex-direction: column; width: 100%; min-height: 380px; padding: 28px 32px 22px 36px; color: inherit; border-radius: inherit; background-image: var(--notebook-paper-light),linear-gradient(#637b7010 1px,transparent 1px),linear-gradient(90deg,#637b7010 1px,transparent 1px); background-size: 100% 100%,20px 20px,20px 20px; background-position: 0 0; }
 .notebook-volume-register { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid #262b2530; font: 10px/1.7 var(--font-evidence),monospace; color: #50564b; }
 .notebook-volume-composition { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(0,1fr); gap: 32px; align-items: center; padding-block: 32px 36px; flex: 1; }
 .notebook-volume :is(h2,h3) { font: 400 clamp(28px,4.8cqi,42px)/1.1 var(--font-display),Georgia,serif; letter-spacing: -.03em; margin: 0 0 20px; text-wrap: balance; }
@@ -30,7 +30,7 @@
 .notebook-volume-cover:hover .notebook-volume-open { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 .notebook-volume-cover:focus-visible { outline: 3px solid var(--notebook-thread-ink); outline-offset: 7px; }
 /* Broad spreads alternate with portrait objects and diagram studies. */
-.notebook-shelf > li[data-presentation=spread] { grid-column: 1 / -1; margin: 0 4% 16px; }
+.notebook-shelf > li[data-presentation=spread] { grid-column: 1 / -1; width: min(100%,1080px); justify-self: center; margin: 0 0 16px; }
 .notebook-shelf > li[data-presentation=spread] .notebook-volume { transform: rotateX(4deg) rotateY(-2deg) rotateZ(-.8deg); }
 .notebook-shelf > li[data-presentation=spread] .notebook-volume-cover { min-height: 490px; padding: 36px 48px 28px; }
 .notebook-shelf > li[data-presentation=spread] .notebook-volume-composition { gap: clamp(40px,6vw,96px); padding-block: 56px; }
@@ -85,13 +85,13 @@
 .notebook-shelf > li[data-presentation=study] .notebook-volume { transform: rotateX(3deg) rotateY(-2deg) rotateZ(-.4deg); }
 .notebook-volume-register { color: var(--notebook-thread-ink); border-bottom-color: color-mix(in srgb,var(--notebook-thread-ink) 35%,transparent); }
 .notebook-shelf > li[data-presentation=study] .notebook-volume-composition { grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); }
-.notebook-shelf > li[data-presentation=study] .notebook-volume-cover::after { left: calc(57% - 18px); }
+.notebook-shelf > li[data-presentation=study] .notebook-volume-cover::after { left: calc(57% - 28px); }
 .notebook-shelf > li[data-presentation=spread]:not(:first-child) { margin-inline: 10% 0; }
 
 .notebook-collection:first-child { margin-top: 28px; }
 .notebook-collection:first-child .notebook-collection-heading { padding-top: 0; border-top: 0; margin-bottom: 12px; }
 .notebook-collection:first-child .notebook-collection-heading h2 { font-size: clamp(30px,3vw,42px); margin-block: 8px; }
-.notebook-collection:first-child .notebook-shelf { padding-top: 20px; }
+.notebook-collection:first-child .notebook-shelf { padding-top: 64px; }
 @media (max-width: 1000px) {
  .notebook-shelf > li[data-presentation] { grid-column: 1 / -1; margin: 0; }
  .notebook-shelf { grid-template-columns: minmax(0,1fr); max-width: 760px; margin-inline: auto; }
@@ -103,7 +103,9 @@
  .notebook-masthead { display: block; padding-bottom: 20px; }
  .notebook-masthead-note { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 16px; }
  .notebook-masthead-note > p { margin: 0; font-size: 17px; }
- .notebook-shelf { gap: 36px; padding-inline: 0; }
+ .notebook-shelf { gap: 64px; padding: 36px 0 64px; }
+ .notebook-shelf > li::before { inset: -20px 0 -32px; }
+ .notebook-collection:first-child .notebook-shelf { padding-top: 36px; }
  .notebook-volume, .notebook-shelf > li[data-presentation] .notebook-volume { transform: none; }
  .notebook-shelf > li[data-presentation=spread] { margin-bottom: 0; }
  .notebook-shelf > li[data-presentation=spread] .notebook-volume-cover { min-height: 0; padding: 28px 24px 22px 36px; }
@@ -128,7 +130,8 @@
 }
 
 /* Five collection objects form the entrance; individual notebooks live one level in. */
-.notebook-collection-shelf { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 56px 48px; padding-top: 36px; }
+.notebook-collection-shelf { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 100px 64px; padding-top: 64px; }
+.notebook-collection-shelf > li:first-child { grid-column: 1/-1; width: min(100%,1080px); justify-self: center; }
 .notebook-collection-shelf > li { align-self: stretch; }
 .notebook-collection-shelf > li:nth-child(even) .notebook-volume { transform: rotateX(2deg) rotateY(2deg) rotateZ(.5deg); }
 .notebook-collection-preview .notebook-volume-cover { min-height: 390px; }
@@ -149,6 +152,7 @@
  .notebook-collection-shelf { grid-template-columns: minmax(0,1fr); max-width: 680px; }
 }
 @media (max-width: 700px) {
+ .notebook-collection-shelf { gap: 64px; padding-top: 36px; }
  .notebook-collection-shelf > li:nth-child(even) .notebook-volume { transform: none; }
  .notebook-collection-preview .notebook-volume-cover { min-height: 0; }
 }
@@ -158,5 +162,18 @@
 
 /* The cover previews the reading format as well as the collection's colour. */
 .notebook-volume[data-notebook-format=lookbook] .notebook-volume-cover,
-.notebook-volume[data-notebook-format=thematic] .notebook-volume-cover { background-image: linear-gradient(115deg,#fff8e645,transparent 48%,#665e4210); background-size: 100% 100%; }
-.notebook-volume[data-notebook-format=experimental] .notebook-volume-cover { background-image: radial-gradient(circle,#50564b38 .65px,transparent .85px); background-size: 20px 20px; }
+.notebook-volume[data-notebook-format=thematic] .notebook-volume-cover { background-image: var(--notebook-paper-light); background-size: 100% 100%; }
+.notebook-volume[data-notebook-format=experimental] .notebook-volume-cover { background-image: var(--notebook-paper-light),radial-gradient(circle,#50564b38 .65px,transparent .85px); background-size: 100% 100%,20px 20px; }
+
+/* An exhibition essay previews its visual study, not a pretend lab spread. */
+.notebook-shelf .notebook-volume[data-notebook-format=lookbook] { --notebook-thread-ink: #c9beaa; background: #151714; color: #eee7d8; box-shadow: none; transform: none; border-radius: 0; }
+.notebook-volume[data-notebook-format=lookbook]::before,
+.notebook-volume[data-notebook-format=lookbook] .notebook-volume-cover::after { display: none; }
+.notebook-volume[data-notebook-format=lookbook] .notebook-volume-cover { background-image: none; border-block: 1px solid #eee7d82e; }
+.notebook-volume[data-notebook-format=lookbook] .notebook-volume-composition { grid-template-columns: 1fr 1.2fr; }
+.notebook-volume[data-notebook-format=lookbook] .media { margin: 0; min-width: 0; }
+.notebook-volume[data-notebook-format=lookbook] .media img { width: 100%; height: auto; }
+.notebook-volume[data-notebook-format=lookbook] .media-caption { color: #c0baad; font-size: 10px; line-height: 1.7; }
+.notebook-volume[data-notebook-format=lookbook] .notebook-volume-footer { border-color: #eee7d82e; }
+.notebook-volume[data-notebook-format=lookbook] .notebook-volume-footer > span:first-child { color: #c0baad; }
+@container (max-width: 600px) { .notebook-volume[data-notebook-format=lookbook] .notebook-volume-composition { grid-template-columns: 1fr; } }
