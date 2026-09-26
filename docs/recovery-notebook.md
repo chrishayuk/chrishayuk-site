@@ -41,8 +41,7 @@ Read opens the complete v1.1 authored account. History uses the actual preserved
 v1.0 and v1.1 records; no amendments or experimental outcomes were invented.
 Enlarge gives the spread more width. Evidence and instrument controls remain
 native HTML. Fragment links select the relevant spread and reveal disclosures.
-Without JavaScript, the manuscript and all spreads remain visible. This pilot is
-limited to the Repairer entry; other notebooks are not converted into books.
+Without JavaScript, the manuscript and all spreads remain visible. The September 26 release applies the shared notebook template across all current entries.
 
 Verification: library tests/typecheck, publication tests including exact source
 and paired-outcome checks, both builds, generated-page checks, and rendered HTML
@@ -57,7 +56,7 @@ for readers arriving directly at its fragment. No outcomes or source records cha
 
 Spread navigation updates the address without native fragment scrolling. Inert
 visual copies make a directional leaf turn while the real instruments stay mounted;
-the binding keeps one responsive height throughout the turn. Pause and reduced motion skip animation.
+the paper grows to fit its content. Pause and reduced motion skip animation.
 
 The full reading edition uses the current published record, grouped into eleven
 continuous sections. It retains every act and its original act-N anchor, with
@@ -93,10 +92,34 @@ rendered HTML checks. The supplied screenshot informed the correction; the updat
 live layout still requires browser visual verification, which is unavailable in
 this session.
 
-### Stable binding dimensions
+### Complete figures and page controls — 26 September 2026
 
-All seven folios use the same responsive book height. Longer content scrolls
-inside its folio rather than resizing the book, and scrollbar space is reserved
-so text width stays consistent. The turning leaf preserves the outgoing folio’s
-visible scroll position. Pagination labels reserve two lines. Read remains a
-continuous document, and printing restores every folio to its full height.
+Content determines the height of the paper, so figures and captions are not cut
+at the binding. Previous/Next now sit on the paper and remain visible while a long
+spread scrolls. Fixed internal scrolling is available only by explicit opt-in.
+
+### Earlier editorial source — 18 September 2026
+
+The six-movement reading source and atmospheric study assets from the main branch
+are retained in the repository. The later, user-reviewed notebook composition
+supersedes that display: it uses recorded-data figures on paper and the complete
+published manuscript in Read. It does not reintroduce atmospheric images as evidence.
+
+Earlier edition notes (historical, describing that layout):
+
+
+The main reading path now has six movements rather than ten. Its narrative prose
+is 1,208 words, down from 2,034 (40.6% less, excluding figure labels and captions).
+The equal-state 0/12 versus 7/12 result is the centrepiece. The recorded correct
+proposal followed by an incorrect commit is visible without opening a drawer;
+the modular arithmetic explorer is optional.
+
+`lib/recovery-reading.ts` supplies this shorter reading path. The complete v1.1
+manuscript in `lib/recovery-record.ts`, publication snapshots, and all source
+evidence remain unchanged and available in the evidence drawer. This is a reading
+layout update, recorded in `lib/page-updates.ts`, with no new experiment or claim.
+
+Two visual-study pauses now frame the reading path: the existing inheritance study
+after Sol leaves, and a new handoff study between equal-state recovery and the
+proposal-to-commit section. Both are atmospheric, AI-generated editorial images;
+neither is experimental evidence.

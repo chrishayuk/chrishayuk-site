@@ -17,6 +17,11 @@ const studies = {
     subject: "AGENT ECOLOGY / THE DESCENDANT",
     alt: "AI-generated visual study: successive glass plates carry a repeated branching mark and amber point into the distance.",
   },
+  handoff: {
+    title: "The mechanism remains. The handoff fails.",
+    subject: "AGENT ECOLOGY / THE HANDOFF",
+    alt: "AI-generated visual study: a powered calibration apparatus produces an aligned glass record while a second record lies misaligned beside it in an empty workshop.",
+  },
   interior: {
     title: "The interior.",
     subject: "LEARNED SYSTEMS / THE INTERIOR",
