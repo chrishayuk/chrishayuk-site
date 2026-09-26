@@ -2,10 +2,31 @@
  * browser scroll/focus restoration; no router interception or artificial delay. */
 export const pageTransitionScript = `(() => {
   window.__publicationEntry = { path: location.pathname, length: history.length };
-  window.addEventListener('pageswap', (event) => {
-    if (!event.viewTransition) return;
+  const motionPaused = () => {
     let paused = false;
     try { paused = sessionStorage.getItem('hause-motion') === 'paused'; } catch {}
+    return paused || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  };
+  const notebookSurface = (path) => {
+    const candidates = Array.from(document.querySelectorAll('[data-notebook-destination]')).filter(element => element.getAttribute('data-notebook-destination') === path);
+    return candidates.find(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    }) || candidates[0];
+  };
+  const sharePaper = (element, transition, direction) => {
+    if (!element) return;
+    const previous = element.style.viewTransitionName;
+    element.style.viewTransitionName = 'notebook-paper';
+    document.documentElement.dataset.notebookJourney = direction;
+    const clear = () => {
+      element.style.viewTransitionName = previous;
+      delete document.documentElement.dataset.notebookJourney;
+    };
+    transition.finished.then(clear, clear);
+  };
+  window.addEventListener('pageswap', (event) => {
+    if (!event.viewTransition) return;
     const destination = event.activation?.entry?.url;
     const film = document.querySelector('[data-film-destination]')?.getAttribute('href');
     const room = document.querySelector('[data-film-journey]');
@@ -13,16 +34,31 @@ export const pageTransitionScript = `(() => {
     let journey = false;
     if (destination) {
       const next = new URL(destination);
-      const listedNote = location.pathname === '/notebook' && Array.from(document.querySelectorAll('[data-notebook-destination]')).some(title => title.getAttribute('data-notebook-destination') === next.pathname);
+      const surface = location.pathname === '/notebook' ? notebookSurface(next.pathname) : null;
+      const listedNote = Boolean(surface);
       journey = next.origin === location.origin && (
         (location.pathname === '/' && film && next.pathname === film) ||
         (room && next.pathname === '/') ||
         listedNote || (note && next.pathname === '/notebook')
       );
+      if (journey && !motionPaused()) {
+        if (listedNote) sharePaper(surface, event.viewTransition, 'open');
+        else if (note && next.pathname === '/notebook') sharePaper(document.querySelector('.codex-book'), event.viewTransition, 'close');
+      }
     }
-    if (!journey || paused || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!journey || motionPaused()) {
       event.viewTransition.skipTransition();
     }
+  });
+  window.addEventListener('pagereveal', (event) => {
+    if (!event.viewTransition) return;
+    if (motionPaused()) { event.viewTransition.skipTransition(); return; }
+    const from = window.navigation?.activation?.from?.url;
+    if (!from) return;
+    const previous = new URL(from);
+    if (previous.origin !== location.origin) return;
+    if (location.pathname === '/notebook') sharePaper(notebookSurface(previous.pathname), event.viewTransition, 'close');
+    else if (previous.pathname === '/notebook' && document.querySelector('[data-notebook-page]')) sharePaper(document.querySelector('.codex-book'), event.viewTransition, 'open');
   });
 })();`;
 
