@@ -1,3 +1,4 @@
+import { NotebookPlate, NotebookSpecimens } from '@chrishayuk/hause/components/NotebookObjects';
 import evidence from '@/public/data/ecology/recovery/evidence.json';
 import inspection from '@/public/data/ecology/recovery/inspection.json';
 
@@ -50,10 +51,9 @@ function FirstTrace({ arm }: { arm: World['arms'][number] }) {
 }
 
 export function RecoveryWorlds() {
- return <div className="recovery-evidence-object">
-  <header className="recovery-object-heading"><span className="recovery-object-register">I12R / contact sheet / original block order 0–11</span><h2 id="paired-world-record">Twelve worlds.<br/>Keep every one.</h2><p>Open a specimen to compare its paired outcomes, all ten assessments and the first recorded exchange. Each tile is one world, not one agent call.</p></header>
+ return <NotebookPlate className="recovery-evidence-object" label="I12R / contact sheet / original block order 0–11" headingId="paired-world-record" title={<>Twelve worlds.<br/>Keep every one.</>} description={<p>Open a specimen to compare its paired outcomes, all ten assessments and the first recorded exchange. Each tile is one world, not one agent call.</p>}>
   <p className="recovery-sheet-key">B = written procedure · C = executable mechanism<br/>✓ Joint recovery at least once · — No joint recovery</p>
-  <div className="recovery-contact-sheet">
+  <NotebookSpecimens label="Twelve paired worlds" className="recovery-contact-sheet" density="compact">
    {inspection.worlds.map(world => <details key={world.block} id={`recovery-block-${world.block}`} name="recovery-world-specimen" className="recovery-world-specimen">
     <summary><span className="recovery-specimen-number"><span>Block</span> {String(world.block).padStart(2, '0')}</span><span className="recovery-specimen-record" aria-hidden="true">{world.damaged.map((value, index) => <i key={index} data-changed={index === world.target}>{value}</i>)}</span><span className="recovery-specimen-results">{world.arms.map(arm => <span key={arm.id}>{arm.id} <b aria-hidden="true">{arm.assessments.some(a => a.joint) ? '✓' : '—'}</b><span className="sr-only">{arm.assessments.some(a => a.joint) ? 'Joint recovery' : 'No joint recovery'}</span></span>)}</span><span className="recovery-specimen-admission">{world.admitted ? 'Package admitted' : 'Package rejected'}</span><span className="recovery-specimen-open">Inspect <span aria-hidden="true">+</span></span></summary>
     <div className="recovery-specimen-interior">
@@ -64,7 +64,7 @@ export function RecoveryWorlds() {
      <p className="recovery-object-note">Fresh-task reference at G11: <code>{vector(world.freshTruthG11)}</code>. The joint endpoint requires this task and the original record to be correct together.</p>
     </div>
    </details>)}
-  </div>
+  </NotebookSpecimens>
   <div className="recovery-object-foot"><p>Four rejected packages remain visible. Seven executable worlds recovered at least once; six of those seven met the joint endpoint again at G20. No prose world met it.</p><a href="/data/ecology/recovery/inspection.json">Download all twelve specimens ↗</a></div>
- </div>;
+ </NotebookPlate>;
 }

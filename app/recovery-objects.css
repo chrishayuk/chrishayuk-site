@@ -43,7 +43,7 @@
 
 /* Evidence contact sheet. Native disclosures remain useful without JavaScript. */
 .recovery-codex .recovery-sheet-key { font: 12px/1.8 var(--font-system),sans-serif; color: var(--muted); margin-bottom: 28px; }
-.recovery-codex .recovery-contact-sheet { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 28px 18px; }
+.recovery-codex .hause-notebook-specimens.recovery-contact-sheet { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 28px 18px; }
 .recovery-codex .recovery-world-specimen { min-width: 0; border-block: 1px solid var(--rule); }
 .recovery-codex .recovery-world-specimen > summary { list-style: none; cursor: pointer; padding: 18px 8px; }
 .recovery-codex .recovery-world-specimen > summary::-webkit-details-marker { display: none; }
@@ -83,30 +83,24 @@
 .recovery-codex .recovery-raw-trace { border-top: 1px solid var(--rule); margin-top: 24px; font: 12px/1.8 var(--font-system),sans-serif; }
 .recovery-codex .recovery-world-specimen summary:focus-visible, .recovery-codex .recovery-object-source summary:focus-visible, .recovery-codex .recovery-assessments-scroll:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
-/* The finding and its limits get equal space on the final spread. */
-.recovery-codex .recovery-closing-object .notebook-conclusion { max-width: none; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 32px 8%; margin: 36px 0 0; }
-.recovery-codex .recovery-closing-object .notebook-conclusion-register, .recovery-codex .recovery-closing-object .notebook-conclusion h2, .recovery-codex .recovery-closing-object .notebook-conclusion nav { grid-column: 1/-1; margin: 0; }
-.recovery-codex .recovery-closing-object .notebook-conclusion-takeaway { margin: 0; padding-top: 28px; border-top: 1px solid var(--rule); }
-.recovery-codex .recovery-closing-object .notebook-conclusion-scope { margin: 0; padding-top: 28px; }
-.recovery-codex .recovery-closing-object .notebook-conclusion-scope p { font: 400 clamp(20px,2vw,27px)/1.55 var(--font-display),serif; }
 .recovery-codex .recovery-closing-reference { font: 12px/1.8 var(--font-evidence),monospace; color: var(--muted); margin-top: 44px; max-width: none; }
 
 @media (max-width: 1100px) {
- .recovery-codex .recovery-contact-sheet { grid-template-columns: repeat(4,minmax(0,1fr)); }
+ .recovery-codex .hause-notebook-specimens.recovery-contact-sheet { grid-template-columns: repeat(4,minmax(0,1fr)); }
 }
 @media (max-width: 760px) {
- .recovery-codex .recovery-object-heading, .recovery-codex .recovery-apparatus-object figcaption, .recovery-codex .recovery-inheritance-pair, .recovery-codex .recovery-trace-pair, .recovery-codex .recovery-closing-object .notebook-conclusion { grid-template-columns: 1fr; }
- .recovery-codex .recovery-contact-sheet { grid-template-columns: repeat(3,minmax(0,1fr)); }
+ .recovery-codex .recovery-object-heading, .recovery-codex .recovery-apparatus-object figcaption, .recovery-codex .recovery-inheritance-pair, .recovery-codex .recovery-trace-pair { grid-template-columns: 1fr; }
+ .recovery-codex .hause-notebook-specimens.recovery-contact-sheet { grid-template-columns: repeat(3,minmax(0,1fr)); }
  .recovery-codex .recovery-apparatus-columns { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 36px 24px; }
  .recovery-codex .recovery-specimen-context { grid-template-columns: 1fr; }
  .recovery-codex .recovery-object-heading { margin-bottom: 32px; }
 }
 @media (max-width: 420px) {
- .recovery-codex .recovery-contact-sheet { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 12px; }
+ .recovery-codex .hause-notebook-specimens.recovery-contact-sheet { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 12px; }
  .recovery-codex .recovery-specimen-results { gap: 16px; }
 }
 @media print {
- .recovery-codex .recovery-contact-sheet { display: block; }
+ .recovery-codex .hause-notebook-specimens.recovery-contact-sheet { display: block; }
  .recovery-codex .recovery-world-specimen { break-inside: avoid; margin-block: 24px; }
  .recovery-codex .recovery-world-specimen::details-content { display: block; content-visibility: visible; }
  .recovery-codex .recovery-specimen-open { display: none; }
