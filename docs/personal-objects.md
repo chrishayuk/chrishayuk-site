@@ -6,7 +6,9 @@ retaining routes to made work, films and the notebook.
 
 Chris supplied the personal accounts on 26 September 2026. Light sensitivity
 is the framing: always sunglasses outside, usually Swanwicks indoors. Swanwick leads
-with Chris’s actual pair from his films. The wider collection is permitted to
+with Chris’s own photograph of the pair, followed by his film excerpt.
+Chris also supplied photographs of his Ray-Bans and Frogskins; these replace
+the catalogue images and are credited as his own photographs. The wider collection is permitted to
 use generic reference pairs; each image is labelled and source-attributed,
 with an explicit note that colours and finishes can differ from his own.
 Juliet remains second, with Chris’s account of wearing it to formal occasions.
@@ -29,3 +31,6 @@ publication feed.
 Reference images were inspected and downloaded on 26 September 2026. They
 remain unretouched and are not labelled as owned photography. Their source
 URLs and SHA-256 digests are recorded in `content/objects-media.json`.
+
+Original supplied photographs are preserved byte-for-byte. Next.js serves
+responsive image derivatives; the complete frame stays visible without crops.

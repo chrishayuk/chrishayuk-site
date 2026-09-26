@@ -107,6 +107,14 @@ assert.match(lookbook.body, /wear in my videos/);
 assert.match(lookbook.body, /sensitive to light/);
 assert.match(lookbook.body, /always wear sunglasses outside and usually wear my Swanwicks indoors/);
 assert.match(lookbook.body, /Reference pair/);
+for (const slug of ["swanwick", "wayfarer", "frogskins"]) {
+ const photo = `/media/objects/${slug}-my-pair.png`;
+ assert.ok(lookbook.body.includes(encodeURIComponent(photo)), `${slug}: actual photograph is served responsively`);
+ const image = await request(`/_next/image?url=${encodeURIComponent(photo)}&w=1080&q=75`, "chrishayuk.com", { Accept: "image/webp" });
+ assert.equal(image.status, 200, `${slug}: optimised photograph loads`);
+ assert.match(image.headers["content-type"], /image\/webp/);
+}
+
 assert.match(lookbook.body, /data-media-id="objects-swanwick"/);
 assert.match(lookbook.body, /hause-editorial-plate/);
 assert.doesNotMatch(lookbook.body, /hause-notebook-preview|codex-folio|ORIGINAL MEDIA TO FOLLOW/);

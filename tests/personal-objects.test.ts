@@ -38,9 +38,10 @@ test("lookbook imagery retains its existing source rather than fabricating owned
  assert.match(objectsFilm.alt, /original terminal overlay/);
  assert.ok(!objectsFilm.image.includes("latest"));
  assert.ok((await readFile(new URL(`../public${objectsFilm.video}`, import.meta.url))).length > 1000);
- for (const object of personalObjects.slice(1)) {
-  assert.ok(object.reference, `${object.id}: a sourced reference pair`);
-  assert.ok(object.reference.source.startsWith("https://"));
-  assert.ok((await readFile(new URL(`../public${object.reference.image}`, import.meta.url))).length > 1000);
+ for (const object of personalObjects) {
+  assert.ok(object.photograph, `${object.id}: a sourced photograph`);
+  if (object.photograph.kind === "reference") assert.ok(object.photograph.source?.startsWith("https://"));
+  else assert.equal(object.photograph.credit, "Chris Hay");
+  assert.ok((await readFile(new URL(`../public${object.photograph.image}`, import.meta.url))).length > 1000);
  }
 });

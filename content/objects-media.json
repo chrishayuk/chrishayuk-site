@@ -1,5 +1,5 @@
 {
-  "note": "Reference images identify styles, not Chris’s actual pairs. Visible credits and page sources are in lib/personal-objects.ts.",
+  "note": "Owned photographs and film show Chris\u2019s actual pairs. Remaining reference images identify styles only. Credits are visible beside each image.",
   "assets": [
     {
       "path": "/media/objects/swanwick-on-screen.webp",
@@ -15,7 +15,7 @@
       "sourceFilm": "https://www.youtube.com/watch?v=5_ZiJpl4hvs",
       "kind": "owned-film-excerpt",
       "creator": "Chris Hay",
-      "excerpt": "Approximately 00:01–00:09; exact source-keyframe boundaries may vary",
+      "excerpt": "Approximately 00:01\u201300:09; exact source-keyframe boundaries may vary",
       "sha256": "425e7934d8f8c9f7a91e3da687d627ffe4dae3b75d13377d8ebd33575493c393"
     },
     {
@@ -52,6 +52,30 @@
       "kind": "reference-pair",
       "retrieved": "2026-09-26",
       "sha256": "041c5120f48722a069dfd0621cdb41d0acba46608c43fc433437d2ab2b8154a5"
+    },
+    {
+      "path": "/media/objects/frogskins-my-pair.png",
+      "kind": "owned-photograph",
+      "creator": "Chris Hay",
+      "source": "Photograph supplied by Chris Hay in conversation",
+      "received": "2026-09-26",
+      "sha256": "1600dfb94e7a384c7be7e78cafb23495deeefb2cec4d4d73d85fee47bc6a61e7"
+    },
+    {
+      "path": "/media/objects/wayfarer-my-pair.png",
+      "kind": "owned-photograph",
+      "creator": "Chris Hay",
+      "source": "Photograph supplied by Chris Hay in conversation",
+      "received": "2026-09-26",
+      "sha256": "8c26cf4df37dd417cd720a599dada7ce6288628fea65777a8d78b380781f40ed"
+    },
+    {
+      "path": "/media/objects/swanwick-my-pair.png",
+      "kind": "owned-photograph",
+      "creator": "Chris Hay",
+      "source": "Photograph supplied by Chris Hay in conversation",
+      "received": "2026-09-26",
+      "sha256": "28f19d868d3e57719a6fd700ed8d25999610a7cf7271b66eed095cd31c786b48"
     }
   ]
 }

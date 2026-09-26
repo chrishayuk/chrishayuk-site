@@ -9,7 +9,7 @@ import { getRecord, recordPath } from "./records.ts";
 export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/about": { date: "2026-09-26", reason: "Personal note on light sensitivity and an entrance to the glasses lookbook." },
  "/objects": { date: "2026-09-26", reason: "Personal objects entrance: Things I look through, with links to made works retained." },
- "/objects/things-i-look-through": { date: "2026-09-26", reason: "Personal glasses collection: Swanwick in the videos, Juliet for special occasions, then the wider collection." },
+ "/objects/things-i-look-through": { date: "2026-09-26", reason: "Personal glasses collection with Chris’s photographs of his Swanwicks, Ray-Bans and Frogskins, film of Swanwick in use, and credited references." },
  "/notebook/the-repairer-left-the-mechanism-kept-working": { date: "2026-09-25", reason: "Opt-in HAUSE codex prototype with operable folios, linear manuscript and actual publication history; preserved editions and results unchanged." },
  ...Object.fromEntries(Object.keys(machineBriefs).map(id => [recordPath(getRecord(id)!), { date: "2026-09-13", reason: "Visible question and bounded result; link to the field-experiment map." }])),
  ...Object.fromEntries(Object.keys(ecologySeriesUpdates).map(id => [recordPath(getRecord(id)!), { date: "2026-09-14", reason: "Dated later-results context, preserving the original manuscript and snapshot." }])),
