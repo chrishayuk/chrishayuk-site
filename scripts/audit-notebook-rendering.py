@@ -28,10 +28,16 @@ class Page(html.parser.HTMLParser):
         self.skip = 0
         self.stack = []
         self.page_controls = 0
+        self.latest = []
+        self.featured = []
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if attrs.get('data-latest-notebook'):
+            self.latest.append(attrs['data-latest-notebook'])
+        if attrs.get('data-featured-article'):
+            self.featured.append(attrs['data-featured-article'])
         if tag in ('script', 'style'):
             self.skip += 1
         if attrs.get('id'):
@@ -113,4 +119,22 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
 target = inventory_path.with_name('render-audit.json')
 target.write_text(json.dumps(results, indent=2) + '\n')
 print(f"{len(results)} pages checked; report: {target}")
-sys.exit(any(row['issues'] for row in results))
+with urllib.request.urlopen(origin + '/api/graph', timeout=90) as response:
+    graph = json.load(response)
+with urllib.request.urlopen(origin + '/', timeout=90) as response:
+    home = Page(response.read().decode())
+published = {node['id']: node for node in graph['nodes'] if node['kind'] == 'notebook' and node.get('publication') == 'published' and node.get('published') and node.get('basis') == 'published-record'}
+latest = sorted(published.values(), key=lambda node: (-int(node['published'].replace('-', '')), node['id']))[0]['id'] if published else None
+home_issues = []
+if home.latest != ([latest] if latest else []):
+    home_issues.append('homepage latest does not match publication graph')
+if home.h1 != 1:
+    home_issues.append('homepage does not have exactly one H1')
+if len(home.featured) != len(set(home.featured)) or any(key not in published or key == latest for key in home.featured):
+    home_issues.append('featured articles contain duplicates, unpublished entries or the latest entry')
+if len(home.featured) != min(3, max(0, len(published) - 1)):
+    home_issues.append('featured article places are not filled')
+home_result = {'latest': home.latest, 'featured': home.featured, 'issues': home_issues}
+inventory_path.with_name('home-audit.json').write_text(json.dumps(home_result, indent=2) + '\n')
+print('Homepage', 'PASS' if not home_issues else home_issues)
+sys.exit(bool(home_issues) or any(row['issues'] for row in results))

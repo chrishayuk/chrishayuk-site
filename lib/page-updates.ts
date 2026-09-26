@@ -21,7 +21,7 @@ export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/notebook/the-page-could-ask-it-couldnt-authorise": { date: "2026-09-15", reason: "Opening states the competing sources of permission and task necessity." },
  "/notebook/does-an-invitation-count-as-permission": { date: "2026-09-15", reason: "Explains why later permission controls followed the original reward comparison." },
  "/research": { date: "2026-09-16", reason: "Shared programme framing and explicit open questions about selective preservation, uncertain repair and longer horizons." },
- "/": { date: "2026-09-16", reason: "Agent Ecology now asks the same persistence question as its programme page." },
+ "/": { date: "2026-09-26", reason: "An open notebook features the graph’s latest published entry; featured articles resolve from the same publication graph." },
  // Notebook reading surfaces reviewed together on 26 September; manuscript dates are unchanged.
  ...Object.fromEntries([
   "/notebook/the-repairer-left-the-mechanism-kept-working",

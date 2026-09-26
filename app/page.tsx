@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SelectedExperiments, CompactNotes } from "@/components/PublicationIndex";
+import { SelectedExperiments } from "@/components/PublicationIndex";
 import { FilmPlayer } from "@/components/FilmPlayer";
 import { FilmPoster } from "@/components/FilmPoster";
 import { Media } from "@/components/Media";
 import { previewFor } from "@/components/YouTubeCollection";
 import { latestVideo, latestMoe, videoPath, durationLabel } from "@/lib/youtube";
-import { homeResultProgrammes, latestNotes, researchProgrammes, shortDate } from "@/lib/publication-index";
+import { homeResultProgrammes, researchProgrammes, shortDate } from "@/lib/publication-index";
 import { HOUSE_WORK } from "@/lib/house";
 import cell80Preview from "@/lib/data/cell80-home-preview.json";
+import { HomeNotebook, FeaturedArticles } from "@/components/HomeNotebook";
 import "./home-edition.css";
 
 const selected = homeResultProgrammes.filter(p => ["machines", "agent-ecology"].includes(p.id));
@@ -25,6 +26,7 @@ export default function Home() {
       </div>
       <div className="edition-arrival-footer"><span>Research · Engineering · Design · Film</span><a href="#current-programmes">Explore the house ↓</a></div>
     </section>
+    <HomeNotebook/>
     <section id="film" className="edition-lead" data-scene="film" aria-labelledby="latest-youtube-heading">
       <article id="latest-youtube">
         <a href={videoPath(latestVideo)} className="film-entrance" data-film-destination aria-label={`Open film: ${latestVideo.title}`}><FilmPoster video={latestVideo} preview={previewFor(latestVideo)}/><span className="film-entrance-label">Watch the film <span aria-hidden="true">↗</span></span></a>
@@ -53,10 +55,7 @@ export default function Home() {
       <h2 id="programmes-heading">Ongoing work</h2>
       <nav aria-label="Research programmes">{researchProgrammes.map(programme => <Link href={programme.href} key={programme.id}><span>{programme.title}</span><span>{programme.question}</span></Link>)}</nav>
     </section>
-    <section id="latest" className="edition-section edition-notebook" data-scene="notebook" aria-labelledby="latest-heading">
-      <div className="edition-section-heading"><h2 id="latest-heading">Notebook</h2><Link className="edition-link" href="/notebook">All notes</Link></div>
-      <CompactNotes notes={latestNotes.slice(0, 3)}/>
-    </section>
+    <FeaturedArticles/>
     <section id="appearances" className="edition-section edition-conversation" data-scene="appearances" aria-labelledby="appearances-heading">
       <article id="latest-mixture-of-experts">
         <FilmPlayer video={latestMoe}/>

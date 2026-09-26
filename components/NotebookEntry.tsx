@@ -37,3 +37,17 @@ export function NotebookEntry({ record: supplied, recordId, chapters, className 
   </Manuscript>}
   history={<div className="notebook-entry-history">{history?.versions.length ? <ol>{history.versions.map(version => <li key={version.version}><span>{version.revised || version.published} · v{version.version}</span><h3>{version.revision?.kind === 'initial' ? 'First publication' : 'Revision'}</h3><p>{version.revision?.summary}</p><a href={version.url}>Read the preserved edition ↗</a><details><summary>Manuscript fingerprint</summary><code>{version.hash}</code><a href={version.manuscript}>Manuscript JSON ↗</a></details></li>)}</ol> : <><h3>A working note</h3><p>Recorded {record.created}. This note has no published editions yet.</p><p>Its status is {record.status || 'open'}; a notebook presentation does not establish a result.</p></>}<a href="#cite">Sources and publication record ↗</a></div>}/>
 }
+
+/** Newly published records get the shared book without adding a route-specific renderer. */
+export function DefaultNotebook({ record }: { record: PublicationRecord }) {
+ const openingMedia = ['film', 'photograph'].includes(record.body[0]?.kind);
+ const chapters: NotebookChapter[] = [
+  { label: 'The note', children: <><h2>{record.title}</h2><p className="notebook-entry-dek">{record.dek}</p></> },
+  ...record.body.flatMap((act, index) => openingMedia && index === 0 ? [] : [{
+   label: act.kind === 'observation' && act.label ? act.label : `Passage ${index + 1}`,
+   kind: act.kind === 'evidence' ? 'evidence' as const : undefined,
+   children: <Acts acts={[act]} anchored offset={index} staticRefusals/>,
+  }]),
+ ];
+ return <NotebookEntry record={record} chapters={chapters}/>;
+}
