@@ -32,13 +32,13 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
  const description=descriptions[section==="work"?"systems":section] || (section==="about" ? `${HOUSE.personLine} ${HOUSE.description}` : HOUSE_PUBLICATIONS.find(p=>p.path===`/${section}`)?.text || `Chris Hay / ${section}. ${HOUSE.descriptor}.`);
  if(section==="record") { const raw=await searchParams; const query=catalogue({q:first(raw.q),kind:first(raw.kind),page:first(raw.page)}); const metadata=pageMetadata(title,description,catalogueUrl(query.q,query.kind,query.page)); return {...metadata,...(query.q ? {robots:{index:false,follow:true}} : {})}; }
  if(section==="research") { const query=await searchParams; return {...pageMetadata(title,description,"/research"),...(query.outcome || query.publication ? {robots:{index:false,follow:true}} : {})}; }
- if(section==="notebook") { const query=await searchParams; return {...pageMetadata(title,description,"/notebook"),...(query.collection || query.publication ? {robots:{index:false,follow:true}} : {})}; }
+ if(section==="notebook") { const query=await searchParams; return {...pageMetadata(title,description,"/notebook"),...(query.collection || query.publication || query.q ? {robots:{index:false,follow:true}} : {})}; }
  return pageMetadata(title,description,section==="work"?"/systems":`/${section}`);
 }
 export default async function IndexPage({params,searchParams}:PageProps) {
  const {section}=await params; if(!sections.includes(section)) notFound();
  if(section==="ideas") return <Ideas/>;
- if(section==="notebook") { const query=await searchParams; return <NotebookCollection collection={first(query.collection)} publication={first(query.publication)}/>; }
+ if(section==="notebook") { const query=await searchParams; return <NotebookCollection collection={first(query.collection)} publication={first(query.publication)} q={first(query.q)}/>; }
  if(section==="research") { const query=await searchParams; return <ResearchCollection outcome={first(query.outcome)} publication={first(query.publication)}/>; }
  if(section==="systems"||section==="work") return <Systems/>;
  if(section==="objects") return <Objects/>;

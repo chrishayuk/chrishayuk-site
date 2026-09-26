@@ -8,9 +8,9 @@ import { selectHomeNotebook } from "@/lib/home-notebook";
 import { notebookGallery } from "@/lib/notebook-gallery";
 import "@/app/notebook-edition.css";
 
-export function NotebookCollection(query: { collection?: string; publication?: string }) {
+export function NotebookCollection(query: { collection?: string; publication?: string; q?: string }) {
   const gallery = notebookGallery(query);
-  const filtered = gallery.collection !== "all" || gallery.publication !== "all";
+  const filtered = gallery.collection !== "all" || gallery.publication !== "all" || !!gallery.q;
   const latest = selectHomeNotebook(recordGraph().nodes).latest;
   const lead = (latest && getRecord(latest.id)) || notebookNotes[0];
   return <main id="main" className="publication-main notebook-edition">
@@ -30,13 +30,16 @@ export function NotebookCollection(query: { collection?: string; publication?: s
       <a href={`${recordPath(lead)}#open-notebook`}><span>{lead.title}</span><span aria-hidden="true">↗</span></a>
     </aside>}
     <section id="notebook-selection" className="notebook-selection" aria-label="Filter notebooks">
-      <form action="/notebook#notebook-selection" className="notebook-filters" key={`${gallery.collection}-${gallery.publication}`}>
+      <details className="notebook-filter-panel" key={`${gallery.collection}-${gallery.publication}-${gallery.q}`}>
+        <summary><span className="notebook-filter-label">Filter notebooks <span aria-hidden="true" className="notebook-filter-indicator"/></span><span className="notebook-selection-count">{gallery.count} {gallery.count === 1 ? "notebook" : "notebooks"}{filtered ? " · Filtered selection" : " · All collections"}</span></summary>
+      <form action="/notebook#notebook-selection" className="notebook-filters">
+        <div><label htmlFor="notebook-title-filter">Find a notebook</label><input type="search" id="notebook-title-filter" name="q" defaultValue={gallery.q} maxLength={160} placeholder="Title or description"/></div>
         <div><label htmlFor="notebook-collection-filter">Collection</label><select id="notebook-collection-filter" name="collection" defaultValue={gallery.collection}><option value="all">All collections</option>{notebookCollections.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}</select></div>
         <div><label htmlFor="notebook-publication-filter">Edition</label><select id="notebook-publication-filter" name="publication" defaultValue={gallery.publication}><option value="all">Published & working drafts</option><option value="published">Published</option><option value="draft">Working drafts</option></select></div>
         <button type="submit">View selection <span aria-hidden="true">↗</span></button>
         {filtered && <a href="/notebook#notebook-selection">Clear filters</a>}
       </form>
-      <p className="notebook-selection-count">{gallery.count} {gallery.count === 1 ? "notebook" : "notebooks"} / {gallery.collections.length} {gallery.collections.length === 1 ? "collection" : "collections"}</p>
+      </details>
     </section>
     {!gallery.count && <p className="notebook-empty">No notebooks in this selection. <a href="/notebook#notebook-selection">Explore all collections ↗</a></p>}
     <div className="notebook-collections">{gallery.collections.map((collection) => <section key={collection.id} id={`collection-${collection.id}`} className="notebook-collection" data-notebook-collection={collection.id} aria-labelledby={`collection-title-${collection.id}`}>

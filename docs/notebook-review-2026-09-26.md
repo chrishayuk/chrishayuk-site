@@ -132,3 +132,14 @@ The exhibition alternates broad spreads, portrait compositions and diagram studi
 with restrained ivory/linen stock, opposing angles and asymmetric spacing. Small
 screens use a single column and flat paper. The supplied screenshot confirms the
 previous composition; the latest visual variations still need browser review.
+
+The filters now sit in a compact sticky disclosure so they remain reachable while
+browsing. The expanded form has a viewport-bounded scrolling panel, native keyboard
+controls and title/description search alongside collection and edition. All three
+criteria combine in the URL; clearing restores the complete exhibition. Nineteen
+gallery/selection/navigation checks and production compilation pass.
+
+Collections now use mineral blue, sage, clay, lilac and champagne paper, with three
+strengths across spreads, portraits and studies. Small captions and collection
+labels were darkened after contrast checks on the richest stock. Local previews
+remain off; browser geometry and visual appearance still need review.
