@@ -172,7 +172,7 @@ assert.match(stateStudy.body,/exhibition-comparison-panels/);
 const addressStudy = await request("/notebook/reading-by-address");
 assert.match(addressStudy.body,/hause-study-sequence/);
 assert.match(addressStudy.body,/Cross-relation/);
-assert.equal(graph.coverage.films, 241);
+assert.equal(graph.coverage.films, 242);
 assert.equal(graph.nodes.find(n=>n.id==="HOUSE-SYSTEMS").url,"https://chrishayuk.com/systems");
 assert.equal(graph.nodes.find(n=>n.id==="CATALOGUE-RECORD").url,"https://chrishayuk.com/record");
 const attributionNode=graph.nodes.find(n=>n.id==="N-ATTRIBUTION");
@@ -183,7 +183,7 @@ for(const concept of ["ai-agents","authorship","repository-policy","source-autho
   assert.ok(graph.edges.some(e=>e.from==="N-ATTRIBUTION"&&e.to===`CONCEPT-${concept}`&&e.kind==="about"),concept);
 const ask = await request("/ask?q=How%20many%20episodes%3F");
 assert.equal(ask.status, 200);
-assert.match(ask.body, /at least 46/);
+assert.match(ask.body, /at least 47/);
 const draftSearch=JSON.parse((await request("/api/search?q=operator%20knows&scope=records")).body);
 assert.ok(draftSearch.results.some(r=>r.recordId==="N-OPERATOR"&&r.basis==="draft-record"));
 const attributionSearch=JSON.parse((await request("/api/search?q=assistance%20authorship&scope=records")).body);
@@ -257,7 +257,7 @@ for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.m
   assert.match(response.headers["content-type"], /^(image|video)\//,asset);
 }
 const films = JSON.parse((await request("/api/records?kind=film")).body);
-assert.equal(films.count, 241);
+assert.equal(films.count, 242);
 const ibm = films.records.find(r => r.id.includes("W3iQbl5R_Jk"));
 assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);

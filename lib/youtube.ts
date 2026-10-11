@@ -2,7 +2,7 @@ import { citationFormats, type CitationRecord } from "../vendor/hause/cite.ts";
 import ibmCatalogue from "../content/ibm-catalogue.json" with { type: "json" };
 import catalogue from "../content/youtube-catalogue.json" with { type: "json" };
 import captions from "../content/youtube-transcripts.json" with { type: "json" };
-export type ChannelVideo = (typeof catalogue.videos)[number] & { producer?: string; collection?: string; participants?: string[]; episode?: string | null; sourcePage?: string; participationEvidence?: string; uploadedAt?: string | null };
+export type ChannelVideo = (typeof catalogue.videos)[number] & { producer?: string; collection?: string; participants?: string[]; episode?: string | null; sourcePage?: string; participationEvidence?: string; uploadedAt?: string | null; retrievedAt?: string };
 export type Passage = {start:number;end:number;text:string};
 export const youtube = catalogue;
 const localPosters:Record<string,string>={"8Ppw8254nLI":"larql-poster.webp","UvogrjCgaJQ":"studio-poster.webp","5_ZiJpl4hvs":"latest-poster.webp"};
@@ -10,7 +10,8 @@ export const channelVideos = catalogue.videos.map(v=>({...v,poster:localPosters[
 export const ibm = ibmCatalogue;
 export const ibmVideos:ChannelVideo[] = ibmCatalogue.videos;
 export const allVideos:ChannelVideo[] = [...channelVideos,...ibmVideos];
-export const videoRetrievedAt = (v:ChannelVideo) => v.producer === "IBM" ? ibm.retrievedAt : youtube.retrievedAt;
+// A film added after the last full playlist retrieval carries its own retrieval time.
+export const videoRetrievedAt = (v:ChannelVideo) => v.retrievedAt ?? (v.producer === "IBM" ? ibm.retrievedAt : youtube.retrievedAt);
 export const latestMoe = ibmVideos.filter(v=>v.participants?.includes("Chris Hay")).sort((a,b)=>(b.published||"").localeCompare(a.published||""))[0];
 export const popularMoe = [...ibmVideos].sort((a,b)=>(b.views??-1)-(a.views??-1))[0];
 export const videoPath = (v: ChannelVideo) => `/film/youtube/${v.youtubeId}`;
