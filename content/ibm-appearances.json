@@ -3,7 +3,7 @@
   "playlistUrl": "https://www.youtube.com/playlist?list=PLOspHqNVtKADvnJYHm3HButDlWykOTzlP",
   "playlistEntries": 128,
   "metadataChecked": 127,
-  "verifiedCount": 46,
+  "verifiedCount": 47,
   "countBasis": "Minimum confirmed appearances from original IBM YouTube participant credits; numbered episodes deduplicated. Includes separately published bonus episodes. Missing credits do not establish absence.",
   "firstEpisode": {
     "youtubeId": "hwNkFnR1U0I",
@@ -475,6 +475,26 @@
       "creditSource": "Original IBM YouTube description",
       "participant": "Chris Hay",
       "descriptionHash": "e303e06cd4cedd00f7b03c877247cc5f9c94ece9dbf4931b58514c3692879bda"
+    },
+    {
+      "youtubeId": "oBdLhD5nPYw",
+      "episode": "127",
+      "title": "OpenAI cancels Astra release, Sonnet 5.5 & what Meta Muse means for work",
+      "published": "2026-10-02",
+      "sourceUrl": "https://www.youtube.com/watch?v=oBdLhD5nPYw",
+      "creditSource": "Original IBM YouTube description",
+      "participant": "Chris Hay",
+      "descriptionHash": "4b859c2b09ceac80521784daf6a53848dc5d71b4c208cd79f11e28b494359c31"
+    }
+  ],
+  "supplements": [
+    {
+      "checkedAt": "2026-10-11T07:40:00+00:00",
+      "method": "IBM playlist RSS feed, latest 15 entries (2026-07-10 to 2026-10-09); credits read from each original description",
+      "added": [
+        "oBdLhD5nPYw"
+      ],
+      "note": "One new credited appearance. The full playlist audit (asOf) was not re-run; yt-dlp was blocked by YouTube."
     }
   ]
 }

@@ -142,18 +142,18 @@ test("transcript times stay within their source film and automatic provenance re
 test("full film players require explicit activation even when automatic motion is allowed",()=>{const player={id:"player",visible:1,area:1000,manualOnly:true};assert.equal(chooseMotion([player],null,false,false),null);assert.equal(chooseMotion([{...player,manual:true}],null,false,false),"player");assert.equal(chooseMotion([{...player,manual:true}],"player",false,true),null);});
 
 test("IBM selections use source dates and counts, with separate producer and participant attribution",()=>{
- assert.equal(latestMoe.episode,"123");assert.equal(latestMoe.published,"2026-09-04");assert.equal(latestMoe.title,'OpenAI\'s agentic "warning shot"');assert.match(latestMoe.poster,/^https:\/\/cfvod\.kaltura\.com\//);assert.equal(popularMoe.youtubeId,ibm.playlistMostViewedId);assert.equal(popularMoe.episode,"40");assert.ok(popularMoe.views!>latestMoe.views!);
+ assert.equal(latestMoe.episode,"127");assert.equal(latestMoe.published,"2026-10-02");assert.equal(latestMoe.title,"OpenAI cancels Astra release, Sonnet 5.5 & what Meta Muse means for work");assert.match(latestMoe.poster,/^https:\/\/cfvod\.kaltura\.com\//);assert.equal(popularMoe.youtubeId,ibm.playlistMostViewedId);assert.equal(popularMoe.episode,"40");assert.ok(popularMoe.views!>latestMoe.views!);
  const edges=recordGraph().edges as {from:string;to:string;kind:string}[];
  for(const v of ibmVideos){assert.equal(v.producer,"IBM");assert.ok(v.participants?.includes("Chris Hay"));assert.ok(v.participationEvidence);assert.ok(v.published);assert.equal(v.viewsApproximate,false);assert.ok(edges.some(e=>e.from===v.id&&e.to==="ORG-IBM"&&e.kind==="created-by"));assert.ok(edges.some(e=>e.from===v.id&&e.to==="PERSON-CHRIS"&&e.kind==="features"));assert.ok(!edges.some(e=>e.from===v.id&&e.to==="PERSON-CHRIS"&&e.kind==="created-by"));const cite=JSON.parse(videoReferences(v).find(f=>f.id==="csl-json")!.text);assert.deepEqual(cite.author,[{literal:"IBM"}]);assert.ok(!channelVideos.some(c=>c.id===v.id));}
- assert.ok(searchGraph("agent security").some(r=>r.id===latestMoe.id));
+ assert.ok(searchGraph("Sonnet 5.5").some(r=>r.id===latestMoe.id));
 });
 test("IBM panelist claim is backed by unique, dated original-source credits",async()=>{const audit=JSON.parse(await readFile(new URL("../content/ibm-appearances.json",import.meta.url),"utf8"));assert.equal(audit.verifiedCount,audit.appearances.length);assert.ok(audit.verifiedCount>=46);assert.equal(new Set(audit.appearances.map((r:{youtubeId:string})=>r.youtubeId)).size,audit.verifiedCount);assert.equal(audit.firstEpisode.episode,"1");assert.equal(audit.firstEpisode.published,"2024-05-03");const numbered=audit.appearances.filter((r:{episode:string|null})=>r.episode);assert.equal(new Set(numbered.map((r:{episode:string})=>r.episode)).size,numbered.length);for(const r of audit.appearances){assert.equal(r.participant,"Chris Hay");assert.equal(r.sourceUrl,`https://www.youtube.com/watch?v=${r.youtubeId}`);assert.match(r.descriptionHash,/^[a-f0-9]{64}$/);}assert.ok(audit.metadataChecked<=audit.playlistEntries);});
 
 test("every verified IBM appearance has a retrievable film record and local screening",async()=>{
  const audit=JSON.parse(await readFile(new URL("../content/ibm-appearances.json",import.meta.url),"utf8"));
- assert.equal(ibmVideos.length,audit.verifiedCount);assert.equal(allVideos.length,241);
+ assert.equal(ibmVideos.length,audit.verifiedCount);assert.equal(allVideos.length,242);
  for(const row of audit.appearances){const v=getVideo(row.youtubeId);assert.ok(v);assert.equal(v.episode,row.episode);assert.ok(records.some(r=>r.id===v.id&&r.publication==="catalogued"));assert.ok(searchGraph(v.title).some(r=>r.id===v.id));}
- const history=searchGraph("How many episodes?").find(r=>r.id==="COLLECTION-MOE");assert.ok(history);assert.match(history.text,/at least 46/i);assert.equal(history.basis,"verified-appearance-register");
+ const history=searchGraph("How many episodes?").find(r=>r.id==="COLLECTION-MOE");assert.ok(history);assert.match(history.text,/at least 47/i);assert.equal(history.basis,"verified-appearance-register");
 });
 const {citationFormats,citationMeta}=await import("../vendor/hause/cite.ts");
 const {videoObjectLd,publicationMetadata}=await import("../vendor/hause/seo.ts");
