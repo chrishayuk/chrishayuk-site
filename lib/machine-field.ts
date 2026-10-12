@@ -1,5 +1,9 @@
 /** Reader introductions are editorial summaries of the cited notes, not new results. */
 export const machineBriefs: Record<string, { question: string; result: string }> = {
+ "N-MACHINE-LINK": {
+  question: "Will ChatGPT retrieve a page when it knows the correct address?",
+  result: "In two plain-text relative-path trials, ChatGPT wrote the correct address but no code-page request arrived. In two hyperlink trials, requests arrived and exact codes were returned. A complete absolute URL in plain text was not tested, and the component preventing the failed requests is unknown.",
+ },
  "N-ECOLOGY-WORLD-REMEMBERS": {
   question: "Can useful information—and a repair—survive the model that supplied it?",
   result: "In a routing world with an explicit preservation objective, Qwen wrote 43 faithful renewals after the founder left. The same process preserved an injected error. Later, three Sol-plus-validator repairs survived in Qwen-written descendants at the start of generation six, versus zero in the controls. Bounded maintenance and repair, not spontaneous culture.",
@@ -63,6 +67,7 @@ export const machineFieldMap = {
  stages: [
   { id: "discover", label: "Discover", question: "What enters its view?", finding: "No withheld-address subject reached LLM Wilds; all domain-supplied controls completed the on-site funnel. The search view failed to expose this target.", notes: ["N-MACHINE-VISIT", "N-MACHINE-DISCOVERY"] },
   { id: "recognise", label: "Recognise", question: "Does it look usable?", finding: "Operative wording changed pre-open recognition and, among plausible providers, first selection: 6/6 versus 0/6. The later fetch block affected eventual use.", notes: ["N-MACHINE-RECOGNITION"] },
+  { id: "retrieve", label: "Retrieve", question: "Does a known address become a request?", finding: "Two plain-text relative paths produced correct addresses but no code-page requests. Two hyperlink trials produced requests and exact codes. The component preventing the failed requests is unknown.", notes: ["N-MACHINE-LINK"] },
   { id: "use", label: "Use", question: "Can it operate the tool?", finding: "All 18 visitors used the required mechanism, including routes that needed code.", notes: ["N-MACHINE-CAPABILITY"] },
   { id: "authority", label: "Authorise", question: "Does this action belong to the job?", finding: "Permission and task scope mattered. One subject also recognised the experiment.", notes: ["N-MACHINE-PERMISSION", "N-MACHINE-SELF-READ", "N-MACHINE-TASK"] },
   { id: "motivate", label: "Choose", question: "What makes acting worthwhile?", finding: "Useful information prompted action; reward alone did not reliably start sharing.", notes: ["N-MACHINE-MOTIVATION", "N-ECOLOGY-BOARD"] },

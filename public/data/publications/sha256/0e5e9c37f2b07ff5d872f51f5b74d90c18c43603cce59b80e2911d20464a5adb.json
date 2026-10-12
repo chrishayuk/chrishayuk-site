@@ -1,0 +1,78 @@
+{
+  "experiment": "NATIVE-001b",
+  "publication_date": "2026-10-11",
+  "source_repository": "https://github.com/chrishayuk/perpetual",
+  "source_commit": "1d201870a053e485008bade885b6147773fe548b",
+  "access": "The source repository is private; the reviewed copies below are public.",
+  "redaction": "Public copy, 11 October 2026. Operational hostnames and trial prefixes are replaced with stable aliases. Timestamps, answers, codes and verdicts are unchanged. Private schedules, datasets, run order and secrets are not included; their recorded hashes remain in the freeze. Original and public copy hashes are in provenance.json. Historical interpretations are retained; the article distinguishes observations from unproven mechanisms.",
+  "original_phase0b_verdict": "FAIL",
+  "main_trials": "not run",
+  "files": [
+    {
+      "source": "token/experiments/native-001b/PROTOCOL.md",
+      "original_sha256": "9911adb8b7efa0096c239cc8a6369c2671dac1ac412cc88ade89c852dfd6d4ad",
+      "url": "/data/machines/native-001b/protocol.md",
+      "public_sha256": "603ed1d0574c930cf55573424ece9ffcedc54a981e52735ff678f3ff5ae81878"
+    },
+    {
+      "source": "token/experiments/native-001b/SCORING.md",
+      "original_sha256": "982f410188455ba94453b90a3b17a16cee5be31b97a12b6592ff8e69b90f158c",
+      "url": "/data/machines/native-001b/scoring.md",
+      "public_sha256": "0f65d86a96d5c8f96d7ce03038406db8503f6be73e7304c439f403a5d8387c60"
+    },
+    {
+      "source": "token/experiments/native-001b/FREEZE.json",
+      "original_sha256": "c1e8efd831bdbfa23d4d2fcd5ce0e1646d3fcd70fe1f6fdc9e27c734aa8a0fba",
+      "url": "/data/machines/native-001b/freeze-v1.json",
+      "public_sha256": "17738bb5fe26e37309f5da8e468303f09573576e82e7c16222d1d1eac5e35290"
+    },
+    {
+      "source": "token/experiments/native-001b/AMENDMENT-v1.1.md",
+      "original_sha256": "e48e0901d580123dc22216397b9ed90b7a8c58af3d27aa95854c212ccf04c1a1",
+      "url": "/data/machines/native-001b/amendment-v1.1.md",
+      "public_sha256": "c0422a0de47d837e9e079b4f4d98fd9051def69e2b0ffdb55850c3abc656186e"
+    },
+    {
+      "source": "token/experiments/native-001b/FREEZE-v1.1.json",
+      "original_sha256": "d2acc0b6567a6df53692276f495f59bcc6856bb33118df91fb6e0c814d822393",
+      "url": "/data/machines/native-001b/freeze-v1.1.json",
+      "public_sha256": "c569fe81b337eb80407cc777ff29cf87fb75e6a43638b10626f8d891109a2e0c"
+    },
+    {
+      "source": "token/experiments/native-001b/results/PHASE0B.md",
+      "original_sha256": "9faed85c6d9b817e4753a35710ec0fa76b794db04f0a192fbccca02ee9290d8c",
+      "url": "/data/machines/native-001b/phase0b.md",
+      "public_sha256": "c536ed84d5ea73774bc48a504f5007b1fb29521d0bfe7ed11ec0acc3890ff62a"
+    },
+    {
+      "source": "token/experiments/native-001b/results/AMENDMENT-v1.1-RESULT.md",
+      "original_sha256": "5b15d0a983bfb353be431c7ecb2d58413c56f66bce76c08ad6af259b2e56efd5",
+      "url": "/data/machines/native-001b/amendment-result.md",
+      "public_sha256": "51fe1c2ee3b86e8ad883a2eb69ee36435d4b3c744a06f12dca41e27dd6b75ec2"
+    },
+    {
+      "source": "token/experiments/native-001b/results/P0b-1.md",
+      "original_sha256": "3f2d8c18d7edb6be0d03b11d7f3162033f9d67fb730fa4b519cfeea1ee74c572",
+      "url": "/data/machines/native-001b/P0b-1.md",
+      "public_sha256": "891baff4ba61cc039cbf7a62fc5da613c0a29059173c31dd01d08684ae2d02ae"
+    },
+    {
+      "source": "token/experiments/native-001b/results/P0b-2.md",
+      "original_sha256": "2e467ef20436f16158a6f7b21871f9e363a0369a65f84b38cb789ca03f6a8b1a",
+      "url": "/data/machines/native-001b/P0b-2.md",
+      "public_sha256": "a55ab860f05a512f0e3d81d2e174aad323b98d0aa858c901f23482e6ed976a22"
+    },
+    {
+      "source": "token/experiments/native-001b/results/P0c-1.md",
+      "original_sha256": "8c6bc9129aa3427897c9b5047d23c2e409583ceec53c678e411e1b7189e8eb55",
+      "url": "/data/machines/native-001b/P0c-1.md",
+      "public_sha256": "5bb038129ad3cfeffff2589c900db3c99fd4b679df9d9e37ffa9ef8da2f36823"
+    },
+    {
+      "source": "token/experiments/native-001b/results/P0c-2.md",
+      "original_sha256": "1a3b57be3dd71de8afec8e1ae3c52c23a1fd8ea4c92558f7a2a45e0840efb873",
+      "url": "/data/machines/native-001b/P0c-2.md",
+      "public_sha256": "93bb2ae80b40e0fb2f5f767d6ec24c36eb37219bf7efd952735395a2d599831c"
+    }
+  ]
+}

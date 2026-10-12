@@ -1,0 +1,73 @@
+.ml-notebook { --ml-space: clamp(18px, 2.5vw, 28px); }
+.ml-notebook code { overflow-wrap: anywhere; }
+.ml-instruction { margin: 20px 0; border-block: 1px solid var(--rule); padding: var(--ml-space) 0; }
+.ml-instruction blockquote { margin: 14px 0 0; max-width: 48ch; font: 400 clamp(22px, 2.6vw, 30px)/1.4 var(--font-fraunces), serif; }
+.ml-instruction code { font-size: .75em; }
+.ml-observations, .ml-presentations, .ml-route-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ml-space); margin: 20px 0; }
+.ml-observations > section, .ml-presentations > figure, .ml-route-branches > section { min-width: 0; border-top: 1px solid var(--rule); padding-top: 22px; }
+.ml-notebook h3 { font: 400 clamp(22px, 2.5vw, 28px)/1.3 var(--font-fraunces), serif; margin: 14px 0; }
+.ml-observations p, .ml-presentations p { font: 15px/1.8 var(--font-inter), sans-serif; margin: 18px 0; }
+.ml-observations blockquote { margin: 18px 0; font: italic 400 21px/1.5 var(--font-fraunces), serif; }
+.ml-verdict { border-top: 1px solid var(--rule); padding-top: 18px; }
+.ml-presentations > figure { margin: 0; }
+.ml-link-specimen { font-family: var(--font-geist-mono), monospace; color: var(--notebook-blue); text-decoration: underline; text-underline-offset: 4px; }
+.ml-table-wrap { max-width: 100%; overflow-x: auto; margin: 20px 0; }
+.ml-results { width: 100%; border-collapse: collapse; font: 14px/1.6 var(--font-inter), sans-serif; }
+.ml-results caption { text-align: left; font: 11px/1.6 var(--font-geist-mono), monospace; text-transform: uppercase; padding-bottom: 16px; }
+.ml-results th, .ml-results td { text-align: left; padding: 18px 12px; border-block: 1px solid var(--rule); }
+.ml-results th:first-child { padding-left: 0; }
+.ml-results thead th { font-size: 11px; font-weight: 400; vertical-align: bottom; }
+.ml-results tbody th { font-weight: 500; }
+.ml-results td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ml-results small { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 400; }
+.ml-route { margin: 20px 0 0; }
+.ml-route-start { margin: 20px auto 0; padding: 16px; border: 1px solid var(--rule); width: fit-content; text-align: center; font: 400 25px/1.3 var(--font-fraunces), serif; }
+.ml-route-start span, .ml-route small { display: block; margin-top: 8px; font: 11px/1.7 var(--font-geist-mono), monospace; color: var(--muted); }
+.ml-route-branches { position: relative; }
+.ml-route-branches::before { content: ''; position: absolute; height: 20px; border-left: 1px solid var(--rule); left: 50%; top: -20px; }
+.ml-route ol { list-style: none; padding: 0; margin: 24px 0; }
+.ml-route li { position: relative; border-left: 1px solid var(--rule); padding: 0 0 28px 20px; font: 15px/1.6 var(--font-inter), sans-serif; }
+.ml-route li::before { content: ''; position: absolute; left: -4px; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--fg); }
+.ml-route li:last-child { border-color: transparent; padding-bottom: 0; }
+.ml-route .ml-route-unknown { border-left-style: dashed; }
+.ml-route .ml-route-unknown::before { background: var(--bg); border: 1px solid var(--fg); }
+.ml-takeaway { font: italic 400 clamp(28px, 3.5vw, 40px)/1.2 var(--font-fraunces), serif; margin: 24px 0 0; }
+.ml-claims, .ml-scope { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ml-space); }
+.ml-claims > section, .ml-scope > section { min-width: 0; border-top: 1px solid var(--rule); padding-top: 16px; }
+.ml-claims section > p:not(.record-voice), .ml-scope section > p:not(.record-voice), .ml-scope li { font: 15px/1.75 var(--font-inter), sans-serif; }
+.ml-scope ul { margin: 16px 0; padding-left: 18px; }
+.ml-scope li + li { margin-top: 12px; }
+
+/* This entry's comparisons need the full sheet, not a second pair of columns
+   inside a narrow study column. Keep content-growing paper and readable type. */
+#n-machine-link-notebook .ml-notebook .hause-study-room { display: block; }
+#n-machine-link-notebook .ml-notebook .hause-study-room > header { display: block; margin-bottom: 24px; }
+#n-machine-link-notebook .ml-notebook .hause-study-room > header > .exhibition-label { margin-bottom: 12px; }
+#n-machine-link-notebook .ml-notebook .hause-study-room > header > h2 { font-size: clamp(28px, 3.5cqi, 40px); line-height: 1.15; max-width: 36ch; }
+#n-machine-link-notebook .ml-notebook .hause-study-room > header > p { margin-top: 16px; max-width: 72ch; }
+#n-machine-link-notebook .ml-notebook .hause-study-sequence { margin-block: 20px 0; }
+#n-machine-link-notebook .ml-notebook .hause-study-sequence figcaption { margin-bottom: 16px; }
+#n-machine-link-notebook .ml-notebook .hause-study-sequence li { padding-top: 16px; }
+#n-machine-link-notebook .ml-notebook .hause-study-sequence li > span { margin-bottom: 12px; }
+#n-machine-link-notebook .ml-notebook .hause-study-sequence strong { font-size: clamp(22px, 2.5cqi, 28px); }
+#n-machine-link-notebook .ml-notebook .hause-study-sequence li > p { margin-top: 12px; }
+
+/* Keep the four source passages inspectable without four poster-sized cards. */
+#n-machine-link-notebook .notebook-object-heading { margin-bottom: 24px; gap: 16px 28px; }
+#n-machine-link-notebook .notebook-object-heading > h2 { font-size: clamp(28px, 3.5cqi, 40px); }
+#n-machine-link-notebook .hause-notebook-specimens { gap: 16px 28px; }
+#n-machine-link-notebook .hause-notebook-specimen > summary { padding-block: 16px; }
+#n-machine-link-notebook .notebook-record-number { font-size: 28px; margin-bottom: 12px; }
+#n-machine-link-notebook .notebook-record-heading { font-size: 22px; margin-top: 12px; }
+#n-machine-link-notebook .notebook-record-excerpt { margin-top: 12px; line-height: 1.65; }
+#n-machine-link-notebook .notebook-record-open { margin-top: 12px; }
+#n-machine-link-notebook .notebook-object-note { margin-top: 20px; padding-top: 16px; }
+@container (max-width: 600px) {
+ .ml-claims, .ml-scope { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+ .ml-observations, .ml-presentations, .ml-route-branches, .ml-claims, .ml-scope { grid-template-columns: 1fr; }
+ .ml-route-branches::before { display: none; }
+ .ml-results th, .ml-results td { padding: 14px 6px; font-size: 12px; }
+ .ml-results thead th { font-size: 10px; }
+}

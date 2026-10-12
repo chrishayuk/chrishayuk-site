@@ -56,7 +56,7 @@ const homeGraph = JSON.parse((await request('/api/graph')).body);
 const homeSelection = selectHomeNotebook(homeGraph.nodes, Object.values(programmeHighlights));
 assert.equal(home.body.match(/data-latest-notebook="([^"]+)"/)?.[1], homeSelection.latest.id);
 assert.ok(home.body.includes('hause-notebook-preview'));
-assert.ok(home.body.includes(`href="${new URL(homeSelection.latest.url).pathname}"`));
+assert.ok(home.body.includes(`href="${new URL(homeSelection.latest.url).pathname}#open-notebook"`));
 assert.deepEqual([...home.body.matchAll(/data-featured-article="([^"]+)"/g)].map(match => match[1]), homeSelection.featured.map(node => node.id));
 // The Cell80 edition uses authored HAUSE rooms and preserves its draft record.
 for (const slug of ['can-you-name-the-mutation-that-changed-a-world','what-keeps-an-evolving-world-alive','when-does-improvement-become-invention']) {
@@ -203,7 +203,7 @@ assert.ok(noDrafts.results.every(r=>r.publication!=="draft"));
 const note=await request("/notebook/the-operator-and-the-model");
 assert.ok(note.body.includes('id="act-1"'));
 assert.ok(note.body.includes('id="source-1"'));
-assert.equal(graph.coverage.chapters,235);
+assert.equal(graph.coverage.chapters,239);
 assert.equal(graph.coverage.acts,graph.nodes.filter(n=>n.kind==="act").length);
 for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-survive"],["N-ADDRESS","reading-by-address"]]) {
   const page=await request(`/notebook/${slug}`);
@@ -664,7 +664,7 @@ assert.match(motivationPage.body.replace(/<!--[\s\S]*?-->/g,''),/PUBLISHED · V1
 assert.doesNotMatch(motivationPage.body,/UNLISTED PREVIEW|REFERENCE DRAFT|noindex/);
 assert.match(motivationPage.body,/name="robots" content="index, follow"/);
 assert.equal((motivationPage.body.match(/data-marked="(?:true|false)"/g)||[]).length,18);
-for (const note of [homeSelection.latest, ...homeSelection.featured]) assert.ok(home.body.includes(`href="${new URL(note.url).pathname}"`), `Current homepage note: ${note.id}`);
+for (const note of homeSelection.featured) assert.ok(home.body.includes(`href="${new URL(note.url).pathname}"`), `Featured homepage note: ${note.id}`);
 assert.match(home.body,/mm-card-results/);
 assert.match(notebookCollection.body,/Published/);
 assert.ok(sitemap.body.includes(motivationPath));
@@ -867,3 +867,14 @@ for (const html of [agentEcologyPage.body]) {
  assert.ok(html.includes(agentEcologyThread.abstract));
 }
 console.log('Incident comparison, primary citations, historical proposal, completed follow-up and shared home/thread ecology links verified.');
+
+const linkPath = '/notebook/it-wrote-the-right-address-only-the-link-was-opened';
+const linkPage = await request(linkPath);
+assert.equal(linkPage.status, 200);
+assert.match(linkPage.body.replace(/<!--[\s\S]*?-->/g, ''), /PUBLISHED · V1\.0/);
+assert.match(linkPage.body, /name="robots" content="index, follow"/);
+assert.doesNotMatch(linkPage.body, /UNLISTED PREVIEW|REFERENCE DRAFT|noindex|pending public copy/);
+for (const anchor of ['link-setup', 'link-request', 'link-comparison', 'link-route', 'link-limits', 'link-scope', 'act-10'])
+ assert.ok(linkPage.body.includes(`id="${anchor}"`), anchor);
+for (const surface of [sitemap, notebookFeed, recordFeed, notebookCollection]) assert.ok(surface.body.includes(linkPath));
+console.log('Link retrieval: published edition, indexing, notebook spreads and discovery surfaces verified.');

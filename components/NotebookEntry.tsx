@@ -4,6 +4,7 @@ import { NotebookConclusion } from './NotebookConclusion';
 import { NotebookTemplate, NotebookExhibition } from '@chrishayuk/hause/components/NotebookTemplate';
 import { NotebookStage } from '@chrishayuk/hause/components/NotebookObjects';
 import { NotebookRecordObjects } from './NotebookRecordObjects';
+import { notebookObjects } from '@/lib/notebook-objects';
 import { FolioObject } from '@chrishayuk/hause/components/Codex';
 import { Manuscript } from '@chrishayuk/hause/components/Manuscript';
 import { getRecord } from '@/lib/records';
@@ -15,8 +16,8 @@ import '@/app/notebook-template.css';
 export type NotebookChapter = { label: string; id?: string; kind?: 'operate' | 'evidence'; children: ReactNode };
 
 /** Editorial boundaries are supplied by each note; the shared library owns the book. */
-export function NotebookEntry({ record: supplied, recordId, chapters, className = '', introduction }: {
- record?: PublicationRecord; recordId?: string; chapters: NotebookChapter[]; className?: string; introduction?: ReactNode;
+export function NotebookEntry({ record: supplied, recordId, chapters, className = '', introduction, paginateRecordObjects = false }: {
+ record?: PublicationRecord; recordId?: string; chapters: NotebookChapter[]; className?: string; introduction?: ReactNode; paginateRecordObjects?: boolean;
 }) {
  const record = supplied || getRecord(recordId || '');
  if (!record || record.kind !== 'notebook') throw new Error(`Unknown notebook: ${recordId}`);
@@ -26,8 +27,15 @@ export function NotebookEntry({ record: supplied, recordId, chapters, className 
  const opening = first?.kind === 'film' || first?.kind === 'photograph'
   ? [{ label: first.kind === 'film' ? 'The opening film' : 'The opening image', children: <><p className="notebook-entry-dek">{record.dek}</p><Acts acts={[first]} anchored/></> }]
   : [];
- const sections: NotebookChapter[] = [...opening, ...chapters,
-  { id: `${id}-objects`, label: format === 'lab' ? 'Inspect the record' : format === 'lookbook' ? 'Design specimens' : 'The working passages', kind: format === 'lab' ? 'evidence' : undefined, children: <NotebookRecordObjects record={record}/> },
+ const objectPages = paginateRecordObjects ? Math.max(1, Math.ceil(notebookObjects(record).length / 2)) : 1;
+ const objectLabel = format === 'lab' ? 'Inspect the record' : format === 'lookbook' ? 'Design specimens' : 'The working passages';
+ const objectChapters: NotebookChapter[] = Array.from({ length: objectPages }, (_, page) => ({
+  id: `${id}-objects${page ? `-${page + 1}` : ''}`,
+  label: `${objectLabel}${objectPages > 1 ? ` ${page + 1}/${objectPages}` : ''}`,
+  kind: format === 'lab' ? 'evidence' : undefined,
+  children: <NotebookRecordObjects record={record} start={page * 2} count={paginateRecordObjects ? 2 : undefined}/>,
+ }));
+ const sections: NotebookChapter[] = [...opening, ...chapters, ...objectChapters,
   { id: `${id}-conclusion`, label: notebookFormats[format].closing, children: <NotebookConclusion record={record}/> }];
  const folios = sections.map((chapter: NotebookChapter, index) => ({
   id: chapter.id || `${id}-folio-${index + 1}`, label: chapter.label, kind: chapter.kind,

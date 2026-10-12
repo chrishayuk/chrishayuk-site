@@ -29,17 +29,18 @@ function Passage({ act }: { act: Act }) {
  return <Acts acts={[act]} staticRefusals/>;
 }
 
-export function NotebookRecordObjects({ record }: { record: PublicationRecord }) {
+export function NotebookRecordObjects({ record, start = 0, count }: { record: PublicationRecord; start?: number; count?: number }) {
  const format = notebookFormat(record.id);
  const copy = titles[format];
- const objects = notebookObjects(record);
+ const allObjects = notebookObjects(record);
+ const objects = allObjects.slice(start, count === undefined ? undefined : start + count);
  const id = `${record.id.toLowerCase()}-specimen`;
  return <div data-notebook-objects={record.id} data-object-format={format}>
   <NotebookPlate label={`${copy.label} / ${record.publication === 'published' ? 'Published record' : 'Working draft'}`} title={copy.title} description={<p>{copy.description}</p>}
    note={<><p>Plate numbers identify selected passages in reading order. These are authored extracts, not additional trials or raw model traces. The full manuscript retains every passage.</p><a href="#cite">Sources & publication record ↗</a></>}>
    <NotebookSpecimens label={copy.label}>
     {objects.map(({ act, number }, index) => <NotebookSpecimen id={`${id}-${number}`} key={number} group={id} summary={<>
-     <span className="notebook-record-number">{String(index + 1).padStart(2, '0')}</span>
+     <span className="notebook-record-number">{String(start + index + 1).padStart(2, '0')}</span>
      <span className="notebook-object-register">{act.kind === 'claim' || act.kind === 'question' ? `${act.kind} / ${act.status}` : `Authored ${act.kind}`}</span>
      <span className="notebook-record-heading">{heading(act, number)}</span>
      {'text' in act && <span className="notebook-record-excerpt">{act.text.length > 170 ? `${act.text.slice(0, 170).trimEnd()}…` : act.text}</span>}

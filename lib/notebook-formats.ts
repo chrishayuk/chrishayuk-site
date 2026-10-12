@@ -11,7 +11,7 @@ const formats: Record<string, NotebookFormat> = {
  'N-ECOLOGY-RECOVERY': 'lab', 'N-ECOLOGY-WORLD-REMEMBERS': 'lab',
  'N-ECOLOGY-INHERITANCE': 'lab', 'N-ECOLOGY-BOARD': 'lab',
  'N-ECOLOGY-TRANSMISSION': 'lab', 'N-ECOLOGY-MEMORY': 'lab',
- 'N-MACHINE-RECOGNITION': 'lab', 'N-MACHINE-DISCOVERY': 'lab',
+ 'N-MACHINE-LINK': 'lab', 'N-MACHINE-RECOGNITION': 'lab', 'N-MACHINE-DISCOVERY': 'lab',
  'N-MACHINE-CAPABILITY': 'lab', 'N-MACHINE-MOTIVATION': 'lab',
  'N-MACHINE-TASK': 'lab', 'N-MACHINE-SELF-READ': 'lab',
  'N-MACHINE-PERMISSION': 'lab', 'N-MACHINE-VISIT': 'lab',
