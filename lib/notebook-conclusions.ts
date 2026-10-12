@@ -3,6 +3,9 @@ import type { PublicationRecord } from './types.ts';
 type Conclusion = { takeaway: string; scope: string };
 /** Editorial summaries of the current records, not additional experimental claims. */
 export const notebookConclusions: Record<string, Conclusion> = {
+ 'N-MACHINE-LINK': {
+  takeaway: 'A correct address is not a request. In these four trials, the plain-text path produced no code-page requests; the same destination presented as a hyperlink was requested twice and both exact codes were returned.',
+  scope: 'Two trials per condition, one host, one day. The amendment followed the original failure, whose verdict remains FAIL. A complete absolute URL in plain text was not tested, and the component that prevented the requests is unknown. The source records preserve the post hoc comparison and its limits.' },
  'N-ECOLOGY-RECOVERY': {
   takeaway: 'A repair method can outlast its maker. From equal starting state and damage, inherited executable machinery supported recovery in seven of twelve worlds; prose supported none.',
   scope: 'The machinery stayed protected, the builder library was shared, and successors sometimes failed to apply correct proposals. Repairing the inherited program itself remains the next question.' },
