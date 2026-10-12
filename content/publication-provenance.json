@@ -572,5 +572,125 @@
         "url": "https://chuk-experiments-server.fly.dev/#/experiments/ecology-inheritance-i12r"
       }
     ]
+  },
+  {
+    "id": "N-MACHINE-LINK",
+    "version": "1.0",
+    "recordHash": "6597eb64a6938091945ca8c5a7818c3676dc820627858bc9008df0be402bee4f",
+    "revision": {
+      "kind": "initial",
+      "summary": "Publish the four-trial link retrieval comparison with reviewed source records, preserved evidence and explicit mechanism limits"
+    },
+    "sources": [
+      {
+        "title": "NATIVE-001b / Public evidence index, source hashes and redaction record",
+        "url": "/data/machines/native-001b/provenance.json",
+        "note": "Reviewed public copies from source commit 1d201870a053e485008bade885b6147773fe548b in the private perpetual repository. Operational hostnames and prefixes are replaced with stable aliases. Private schedules, datasets, run order and secrets are excluded; original hashes are retained. Historical mechanism interpretations remain hypotheses; the article separates observed arrival from tool-internal decisions.",
+        "preserved": {
+          "url": "/data/publications/sha256/0e5e9c37f2b07ff5d872f51f5b74d90c18c43603cce59b80e2911d20464a5adb.json",
+          "sha256": "0e5e9c37f2b07ff5d872f51f5b74d90c18c43603cce59b80e2911d20464a5adb",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Frozen protocol v1.0",
+        "url": "/data/machines/native-001b/protocol.md",
+        "preserved": {
+          "url": "/data/publications/sha256/603ed1d0574c930cf55573424ece9ffcedc54a981e52735ff678f3ff5ae81878.md",
+          "sha256": "603ed1d0574c930cf55573424ece9ffcedc54a981e52735ff678f3ff5ae81878",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Frozen scoring rules",
+        "url": "/data/machines/native-001b/scoring.md",
+        "preserved": {
+          "url": "/data/publications/sha256/0f65d86a96d5c8f96d7ce03038406db8503f6be73e7304c439f403a5d8387c60.md",
+          "sha256": "0f65d86a96d5c8f96d7ce03038406db8503f6be73e7304c439f403a5d8387c60",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Original freeze manifest",
+        "url": "/data/machines/native-001b/freeze-v1.json",
+        "preserved": {
+          "url": "/data/publications/sha256/17738bb5fe26e37309f5da8e468303f09573576e82e7c16222d1d1eac5e35290.json",
+          "sha256": "17738bb5fe26e37309f5da8e468303f09573576e82e7c16222d1d1eac5e35290",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Phase 0b result: FAIL, 0/2",
+        "url": "/data/machines/native-001b/phase0b.md",
+        "preserved": {
+          "url": "/data/publications/sha256/c536ed84d5ea73774bc48a504f5007b1fb29521d0bfe7ed11ec0acc3890ff62a.md",
+          "sha256": "c536ed84d5ea73774bc48a504f5007b1fb29521d0bfe7ed11ec0acc3890ff62a",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Plain-text trial P0b-1",
+        "url": "/data/machines/native-001b/P0b-1.md",
+        "preserved": {
+          "url": "/data/publications/sha256/891baff4ba61cc039cbf7a62fc5da613c0a29059173c31dd01d08684ae2d02ae.md",
+          "sha256": "891baff4ba61cc039cbf7a62fc5da613c0a29059173c31dd01d08684ae2d02ae",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Plain-text trial P0b-2",
+        "url": "/data/machines/native-001b/P0b-2.md",
+        "preserved": {
+          "url": "/data/publications/sha256/a55ab860f05a512f0e3d81d2e174aad323b98d0aa858c901f23482e6ed976a22.md",
+          "sha256": "a55ab860f05a512f0e3d81d2e174aad323b98d0aa858c901f23482e6ed976a22",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Amendment v1.1: link versus plain-text path",
+        "url": "/data/machines/native-001b/amendment-v1.1.md",
+        "preserved": {
+          "url": "/data/publications/sha256/c0422a0de47d837e9e079b4f4d98fd9051def69e2b0ffdb55850c3abc656186e.md",
+          "sha256": "c0422a0de47d837e9e079b4f4d98fd9051def69e2b0ffdb55850c3abc656186e",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Amendment freeze manifest",
+        "url": "/data/machines/native-001b/freeze-v1.1.json",
+        "preserved": {
+          "url": "/data/publications/sha256/c569fe81b337eb80407cc777ff29cf87fb75e6a43638b10626f8d891109a2e0c.json",
+          "sha256": "c569fe81b337eb80407cc777ff29cf87fb75e6a43638b10626f8d891109a2e0c",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Amendment result and comparison",
+        "url": "/data/machines/native-001b/amendment-result.md",
+        "preserved": {
+          "url": "/data/publications/sha256/51fe1c2ee3b86e8ad883a2eb69ee36435d4b3c744a06f12dca41e27dd6b75ec2.md",
+          "sha256": "51fe1c2ee3b86e8ad883a2eb69ee36435d4b3c744a06f12dca41e27dd6b75ec2",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Hyperlink trial P0c-1",
+        "url": "/data/machines/native-001b/P0c-1.md",
+        "preserved": {
+          "url": "/data/publications/sha256/5bb038129ad3cfeffff2589c900db3c99fd4b679df9d9e37ffa9ef8da2f36823.md",
+          "sha256": "5bb038129ad3cfeffff2589c900db3c99fd4b679df9d9e37ffa9ef8da2f36823",
+          "date": "2026-10-11"
+        }
+      },
+      {
+        "title": "NATIVE-001b / Hyperlink trial P0c-2",
+        "url": "/data/machines/native-001b/P0c-2.md",
+        "preserved": {
+          "url": "/data/publications/sha256/93bb2ae80b40e0fb2f5f767d6ec24c36eb37219bf7efd952735395a2d599831c.md",
+          "sha256": "93bb2ae80b40e0fb2f5f767d6ec24c36eb37219bf7efd952735395a2d599831c",
+          "date": "2026-10-11"
+        }
+      }
+    ]
   }
 ]

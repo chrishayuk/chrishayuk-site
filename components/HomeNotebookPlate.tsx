@@ -1,9 +1,20 @@
 import Link from 'next/link';
 import evidence from '@/public/data/ecology/recovery/evidence.json';
 import { NotebookSketch } from './NotebookSketch';
+import { machineLinkConditions } from '@/lib/machine-link-evidence';
 
 /** The plate follows the selected record. Only the recovery note owns this assay. */
 export function HomeNotebookPlate({ id, collection, href }: { id: string; collection: string; href: string }) {
+ if (id === 'N-MACHINE-LINK') return <figure className="edition-notebook-evidence" aria-labelledby="home-link-caption">
+  <figcaption id="home-link-caption" className="edition-plate-register">NATIVE-001b / Four trials</figcaption>
+  <p className="edition-plate-premise">Same destination.<br/>One became a link.</p>
+  <div className="edition-plate-results">{machineLinkConditions.map(condition => <div key={condition.id}>
+   <span>{condition.label}</span><p><strong>{condition.requests}</strong><span> / {condition.trials}</span></p>
+  </div>)}</div>
+  <p className="edition-plate-key">Code-page requests received by the server.</p>
+  <p className="edition-plate-scope">Both linked requests returned the exact code. Two trials per condition, one host. The original failure stands; the blocking component remains unknown.</p>
+  <Link className="edition-plate-source" href={`${href}#link-comparison`}>Read the comparison ↗</Link>
+ </figure>;
  if (id !== 'N-ECOLOGY-RECOVERY') return <div className="edition-notebook-drawing">
   <span className="edition-plate-register">A conceptual sketch</span>
   <NotebookSketch id={id} collection={collection}/>
