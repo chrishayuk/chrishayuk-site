@@ -54,8 +54,8 @@ export const cell80Thread = {
 };
 export const machineThread = {
   id: "THREAD-MACHINES", slug: "machines", title: "What makes a website useful to an AI visitor?",
-  path: "/thread/machines", version: "0.4", created: "2026-09-12",
-  abstract: "What makes a website useful to an AI visitor? Eight connected notes test whether agents can find an invitation, treat it as part of the job, operate a tool, discover a provider and recognise what its description offers.",
+  path: "/thread/machines", version: "0.5", created: "2026-09-12",
+  abstract: "What makes a website useful to an AI visitor? Nine connected notes test whether agents can find an invitation, treat it as part of the job, operate a tool, discover a provider, recognise what its description offers and retrieve a destination presented as a link.",
   context: "Each experiment separates a different obstacle: permission is not usefulness, use is not discovery, and seeing a result is not choosing it. Models, tasks and interfaces change across the series. Start with any question or follow why each result led to the next test.",
   steps: machineJourney.map<ThreadStep>(step => ({ id: step.id, label: step.experiment, text: `${step.question} ${step.finding} ${step.bridge}` })).filter(listedStep),
 };

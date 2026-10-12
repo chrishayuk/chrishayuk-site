@@ -3,6 +3,7 @@ import type { PublicationRecord } from './types';
 /** One-based authored passage selections. These are reading plates, never run counts.
  * Instruments and raw datasets retain their existing notebook-specific renderers. */
 export const notebookObjectSelections: Record<string, number[]> = {
+ 'N-MACHINE-LINK': [6, 7, 9, 10],
  'N-MACHINE-RECOGNITION': [3, 8, 10, 13],
  'N-MACHINE-DISCOVERY': [2, 4, 8],
  'N-MACHINE-PEER': [2, 3, 10, 11],

@@ -5,6 +5,13 @@ import type { Legibility } from "../vendor/hause/legibility.ts";
  * Concepts here are finding aids, not assertions of established results.
  */
 export const publicationLegibility: Record<string, Legibility> = {
+ "N-MACHINE-LINK": {
+  subject: "ChatGPT retrieval of hyperlinks versus plain-text relative paths",
+  question: "Does knowing the correct address mean ChatGPT can retrieve the page?",
+  searchTitle: "ChatGPT Link Following: Correct Addresses and Missing Requests",
+  description: "Four consumer ChatGPT trials: plain-text paths produced no code-page requests; hyperlinks produced two. Server logs separate correct addresses from actual retrieval.",
+  concepts: ["ChatGPT browsing", "hyperlink retrieval", "URL construction", "harness mediation", "NATIVE-001b"],
+ },
  "N-ECOLOGY-RECOVERY": { subject: "Inherited executable recovery after model departure", question: "Can weaker successors recover from new damage using a departed builder’s mechanism?", searchTitle: "Inherited AI Recovery: Equal-State Prose and Executable Experiments", description: "From identical state and damage, Qwen recovered 7/12 worlds with inherited code and 0/12 with prose. Explore I12 and I12R, their mechanisms and limitations.", concepts: ["inherited recovery", "executable capability", "I12", "I12R", "model turnover"] },
  "N-ECOLOGY-WORLD-REMEMBERS": {
   subject: "Cross-model environmental inheritance, maintenance and repair",
@@ -80,7 +87,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "AI agent permissions and task authority",
   question: "How do AI agents decide whether a website request belongs to their task?",
   searchTitle: "AI Agent Permissions, Task Scope and Website Instructions — Experiments",
-  description: "Eight connected notes test AI agent permissions, task value, tool use, discovery, capability recognition and provider selection. Each experiment isolates a different obstacle.",
+  description: "Nine connected notes test AI agent permissions, task value, tool use, discovery, capability recognition, provider selection and link retrieval. Each experiment isolates a different obstacle.",
   concepts: ["AI agent permissions", "task scope", "website instructions", "instruction authority", "agentic discovery", "search exposure"],
  },
  "THREAD-CELL80": {

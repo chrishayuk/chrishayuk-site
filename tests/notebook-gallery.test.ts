@@ -55,7 +55,7 @@ test('every notebook retains its collection paper when a filter moves it to the 
    assert.deepEqual(notebookAppearance(sameNote.id), appearance);
   }
  }
- assert.deepEqual(notebookAppearance('N-MACHINE-SELF-READ'), { 'data-notebook-format': 'lab', 'data-notebook-palette': 'machines', 'data-notebook-tone': 'full' });
+ assert.deepEqual(notebookAppearance('N-MACHINE-SELF-READ'), { 'data-notebook-format': 'lab', 'data-notebook-palette': 'machines', 'data-notebook-tone': 'medium' });
  assert.deepEqual(notebookAppearance('N-ECOLOGY-RECOVERY'), { 'data-notebook-format': 'lab', 'data-notebook-palette': 'agent-ecology', 'data-notebook-tone': 'light' });
  assert.deepEqual(notebookAppearance('N-FUTURE'), { 'data-notebook-format': 'thematic', 'data-notebook-palette': 'working-notes', 'data-notebook-tone': 'light' });
 });

@@ -17,6 +17,8 @@ for listing in playlist['entries']:
  if not re.search(r'\bChris Hay\b',description,re.I):continue
  number=re.search(r'\bepisode\s+(\d+)\b',description,re.I)
  episode='1' if re.search(r'\binaugural episode\b',description,re.I) else (number.group(1) if number else None)
+ # IBM's episode page states the number when the YouTube description does not.
+ episode={'oBdLhD5nPYw':'127'}.get(v['id'],episode)
  # For a bonus/non-numbered upload, the stable YouTube ID identifies the episode.
  key=f'episode-{episode}' if episode else f'video-{v["id"]}'
  if key in seen:continue

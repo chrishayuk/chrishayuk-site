@@ -24,18 +24,20 @@ for i,flat in enumerate(playlist['entries']):
  if v['id']=='hwNkFnR1U0I':episode=re.match(r'(1)','1')
  description=description.split('\n\nVisit Mixture of Experts')[0]
  episode_number=episode.group(1) if episode else None
+ # IBM's episode page states the number when the YouTube description does not.
+ episode_number={'oBdLhD5nPYw':'127'}.get(v['id'],episode_number)
  source_title={'123':'''OpenAI's agentic "warning shot"'''}.get(episode_number,v['title'])
- source_poster={'123':'https://cfvod.kaltura.com/p/1773841/sp/177384100/thumbnail/entry_id/1_rwy4uz25/width/1280'}.get(episode_number,v.get('thumbnail') or f'https://i.ytimg.com/vi/{v["id"]}/hqdefault.jpg')
+ source_poster={'123':'https://cfvod.kaltura.com/p/1773841/sp/177384100/thumbnail/entry_id/1_rwy4uz25/width/1280','127':'https://cfvod.kaltura.com/p/1773841/sp/177384100/thumbnail/entry_id/1_krlcdj8x/width/1280'}.get(episode_number,v.get('thumbnail') or f'https://i.ytimg.com/vi/{v["id"]}/hqdefault.jpg')
  item={'youtubeId':v['id'],'id':'YT-'+v['id'],'title':source_title,'format':'video','channelOrder':i,
  'duration':v.get('duration'),'views':v.get('view_count'),'viewsApproximate':False,
- 'published':f'{date[:4]}-{date[4:6]}-{date[6:]}','description':({'123':'Chris Hay joins Tim Hwang, Sascha Brodsky, Kaoutar El Maghraoui and Kush Varshney to discuss Claude model updates, AI agent security, hardware guidelines and Runway’s interface-generating model.','40':'Chris Hay joins Tim Hwang, Aaron Baughman and Kate Soule to examine the response to DeepSeek, distinguish early claims from established facts, and discuss model distillation and competition in open models.'}.get(episode.group(1) if episode else '', f'Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “{v["title"]}”.')),
+ 'published':f'{date[:4]}-{date[4:6]}-{date[6:]}','description':({'123':'Chris Hay joins Tim Hwang, Sascha Brodsky, Kaoutar El Maghraoui and Kush Varshney to discuss Claude model updates, AI agent security, hardware guidelines and Runway’s interface-generating model.','127':'Chris Hay joins host David Zax, Madison Gooch and Ash Minhas to discuss OpenAI cancelling the GPT-6.1 Astra release, Anthropic’s Sonnet 5.5 and what Meta Muse means for AI agents at work.','40':'Chris Hay joins Tim Hwang, Aaron Baughman and Kate Soule to examine the response to DeepSeek, distinguish early claims from established facts, and discuss model distillation and competition in open models.'}.get(episode_number or '', f'Chris Hay appears as a panelist in IBM’s Mixture of Experts episode “{v["title"]}”.')),
  'url':f'https://www.youtube.com/watch?v={v["id"]}','poster':source_poster,
  'chapters':[{'start':c['start_time'],'end':c['end_time'],'title':c['title']} for c in (v.get('chapters') or [])],
  'transcript':'missing','metadataLevel':'full','producer':'IBM','collection':'Mixture of Experts',
  'participants':['Chris Hay'],'episode':episode_number,
  'uploadedAt':datetime.fromtimestamp(v['timestamp'],timezone.utc).isoformat() if v.get('timestamp') else None,
  'participationEvidence':'Chris Hay is named as a participant in the original IBM YouTube description.',
- 'sourcePage':'https://www.ibm.com/think/podcasts/mixture-of-experts'+({'123':'/anthropic-claude-hardware-guidelines-openai-rogue-agents-runway-solaris','40':'/deepseek-facts-vs-hype-model-distillation-open-source-competition'}.get(episode_number or '', ''))}
+ 'sourcePage':'https://www.ibm.com/think/podcasts/mixture-of-experts'+({'123':'/anthropic-claude-hardware-guidelines-openai-rogue-agents-runway-solaris','40':'/deepseek-facts-vs-hype-model-distillation-open-source-competition','127':'/openai-astra-sonnet-meta-muse'}.get(episode_number or '', ''))}
  if episode_number=='123':item['sourcePageCheckedAt']='2026-09-07'
  item['sourceHash']=hashlib.sha256(json.dumps(item,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
  verified.append(item)
