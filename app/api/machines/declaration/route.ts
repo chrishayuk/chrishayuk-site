@@ -3,7 +3,7 @@ import { handleDeclaration, handleDeclaredValues } from "@/lib/machine/handler";
 import { writeDeclaration } from "@/lib/machine/store";
 import { observedFor } from "@/lib/machine/observed";
 import { contract } from "@/lib/machine/contract";
-import { DECLARED_FIELD } from "@/lib/machine/vocabulary";
+import { EXAMPLE_NOT_RECORDED, QUERY_FIELDS, classifyDeclarationQuery } from "@/lib/machine/published-examples";
 import { capabilityCorrections, corrections, describe, describeProvenance, parseDeclaration } from "@/lib/machine/declaration";
 
 /**
@@ -117,8 +117,6 @@ export async function POST(request: Request): Promise<Response> {
  * again. `agent_name` is appended because it is accepted but is not a
  * declared axis — it is the operator-only label.
  */
-const QUERY_FIELDS = [...DECLARED_FIELD, "agent_name"];
-
 /**
  * A bare GET is the contract. A GET carrying a recognised field is a
  * declaration — see handleDeclaredValues for why this endpoint breaks
@@ -126,44 +124,35 @@ const QUERY_FIELDS = [...DECLARED_FIELD, "agent_name"];
  * still declare nothing.
  */
 export async function GET(request: Request): Promise<Response> {
- const params = new URL(request.url).searchParams;
- const values: Record<string, unknown> = {};
- for (const field of QUERY_FIELDS) {
-  const value = params.get(field);
-  if (value !== null) values[field] = value;
- }
- // Capabilities collapse to one repeatable parameter, so a query string
- // does not need nesting: ?capability=can_navigate:yes
- const capabilities: Record<string, string> = {};
- for (const pair of params.getAll("capability")) {
-  const [name, claim] = pair.split(":");
-  if (name && claim) capabilities[name] = claim;
- }
- if (Object.keys(capabilities).length) values.capabilities = capabilities;
+ const query = classifyDeclarationQuery(new URL(request.url).searchParams);
 
- if (!Object.keys(values).length) {
-  // A bare GET is the contract. A GET carrying parameters that this site
-  // does not recognise is NOT the same thing, and returning the contract
-  // for both made a failed declaration indistinguishable from a request
-  // for documentation — 200 OK, and nothing recorded.
-  const sent = [...params.keys()].filter(key => key !== "validate");
-  if (sent.length > 0) {
-   return Response.json({
-    error: "no_recognised_fields",
-    sent: sent.length,
-    accepted: QUERY_FIELDS,
-    note: "None of the parameters you sent name a field this site accepts, so nothing was recorded. The accepted names are above; a bare GET returns the full contract.",
-    see: "/api/machines/declaration",
-   }, { status: 422, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
-  }
-  return contractResponse();
+ // A bare GET is the contract. A GET carrying parameters that this site
+ // does not recognise is NOT the same thing, and returning the contract
+ // for both made a failed declaration indistinguishable from a request
+ // for documentation — 200 OK, and nothing recorded.
+ if (query.kind === "contract") return contractResponse();
+ if (query.kind === "unrecognised") {
+  return Response.json({
+   error: "no_recognised_fields",
+   sent: query.sent,
+   accepted: QUERY_FIELDS,
+   note: "None of the parameters you sent name a field this site accepts, so nothing was recorded. The accepted names are above; a bare GET returns the full contract.",
+   see: "/api/machines/declaration",
+  }, { status: 422, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
  }
 
  // A DRY RUN, because the only way to reach the corrections was to record
  // a declaration. An agent probing the vocabulary left a mostly-`unknown`
  // row behind — exactly the noise every other part of this design works to
  // exclude — and said so. Same parse, same corrections, nothing stored.
- if (params.get("validate") === "1") return validation(values);
+ if (query.kind === "validate") return validation(query.values);
+
+ // A crawler following a published example is not a visitor describing
+ // itself. See lib/machine/published-examples.ts for the record.
+ if (query.kind === "published_example") {
+  return Response.json(EXAMPLE_NOT_RECORDED, { status: 200, headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } });
+ }
+ const { values } = query;
 
  // Same source, same declaration, same hour: recorded once. The receipt
  // still comes back, because a caller that retried should not be told it

@@ -1,5 +1,6 @@
 import { WriteQueue, admit, readBounded, sourceOf, type Facts } from "@/lib/machine/admission";
 import { MAX_DETAIL_CHARS, describeFeedback, parseFeedback, writeFeedback } from "@/lib/machine/feedback";
+import { EXAMPLE_NOT_RECORDED, isPublishedFeedbackExample } from "@/lib/machine/published-examples";
 import { FRICTION, TASK_CLASS } from "@/lib/machine/vocabulary";
 import { SITE } from "@/lib/records";
 
@@ -50,6 +51,9 @@ export async function GET(request: Request): Promise<Response> {
   task_class: params.get("task_class") ?? undefined,
   detail: params.get("detail") ?? undefined,
  });
+ // Fourteen copies of this site's own example were filed as feedback
+ // before this check. See lib/machine/published-examples.ts.
+ if (isPublishedFeedbackExample(feedback.detail)) return json(EXAMPLE_NOT_RECORDED, 200);
  const outcome = await queue.run(() => writeFeedback({ ...feedback, hour: Math.floor(Date.now() / HOUR) }));
  if (outcome === "unavailable") return json({ error: "unavailable", see: "/api/machines/feedback" }, 503);
 
@@ -66,7 +70,7 @@ function contractResponse(): Response {
    url: `${SITE}/api/machines/feedback`,
    content_type: "application/json",
    note: "If something about this site got in your way while you were doing something else, say so. You do not need to have declared anything first.",
-   or_by_get: `${SITE}/api/machines/feedback?friction=discovery&detail=...`,
+   or_by_get: `${SITE}/api/machines/feedback?friction=<word>&detail=<your+own+words>`,
    why_get: "Almost everything that visits this site can only GET. A report you cannot send is not a report, so a query string works too.",
   },
   fields: {
@@ -106,6 +110,7 @@ export async function POST(request: Request): Promise<Response> {
  try { body = text.length === 0 ? {} : JSON.parse(text); } catch { body = {}; }
 
  const feedback = parseFeedback(body);
+ if (isPublishedFeedbackExample(feedback.detail)) return json(EXAMPLE_NOT_RECORDED, 200);
  const outcome = await queue.run(() => writeFeedback({ ...feedback, hour: Math.floor(Date.now() / HOUR) }));
  if (outcome === "unavailable") return json({ error: "unavailable", see: "/api/machines/feedback" }, 503);
 
