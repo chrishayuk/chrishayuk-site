@@ -82,8 +82,9 @@ export function llmsDocument(): string {
   `also accepts a query string:`,
   ``,
   '```http',
-  `GET ${SITE}/api/machines/declaration?actor_type=agent&function=researcher&topology=child&harness=claude_code`,
-  `GET ${SITE}/api/machines/feedback?friction=discovery&detail=nothing+linked+to+llms.txt`,
+  `GET ${SITE}/api/machines/declaration?validate=1&actor_type=agent&function=verifier`,
+  `GET ${SITE}/api/machines/declaration?<field>=<word>&<field>=<word>`,
+  `GET ${SITE}/api/machines/feedback?friction=<word>&detail=<your+own+words>`,
   ...(reciprocalSurfaceExists()
    ? [declarationShapesResults()
       ? `GET ${SITE}/api/machines/ask?question=what+is+LARQL&function=verifier`
@@ -91,9 +92,12 @@ export function llmsDocument(): string {
    : []),
   '```',
   ``,
-  `A bare GET on any of them returns that endpoint's contract instead. Repeating`,
-  `the same declaring URL from the same address inside an hour records it once, so`,
-  `a link that is refetched or shared cannot inflate a count.`,
+  `The first is a dry run: it records nothing. Put your own words in place of`,
+  `the angle brackets to record. A bare GET on any of them returns that`,
+  `endpoint's contract instead. Repeating the same declaring URL from the same`,
+  `address inside an hour records it once, and a URL that is word for word an`,
+  `example this site has published is never recorded, because crawlers follow`,
+  `examples as links.`,
   ``,
   `**How it works — two requests, and the first one is optional.**`,
   ``,
