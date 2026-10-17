@@ -663,9 +663,14 @@ test("PARITY: the canonical field set appears everywhere it must, and nowhere as
 
  // 3. The GET route reads the canonical set. This is the exact defect run 4
  //    found, and the reason the list is now derived rather than written twice.
+ //    The list lives beside the published-example check, so the route and
+ //    the check read a URL the same way.
  const route = await readFile(new URL("../app/api/machines/declaration/route.ts", import.meta.url), "utf8");
- assert.match(route, /QUERY_FIELDS = \[\.\.\.DECLARED_FIELD/,
+ const queryFields = await readFile(new URL("../lib/machine/published-examples.ts", import.meta.url), "utf8");
+ assert.match(queryFields, /QUERY_FIELDS[^=]*= \[\.\.\.DECLARED_FIELD/,
   "the GET field list must be derived from the vocabulary, never restated");
+ assert.match(route, /classifyDeclarationQuery\(/, "the GET route must read the derived field list");
+ assert.doesNotMatch(route, /QUERY_FIELDS\s*=/, "the GET route must not restate the field list");
 
  // 4. The published contract documents every canonical field.
  const documented = Object.keys(contract().fields);

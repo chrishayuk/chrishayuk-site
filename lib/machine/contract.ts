@@ -64,10 +64,13 @@ export function contract() {
 
   declare_by_get: {
    method: "GET",
-   url: `${url}?actor_type=agent&function=researcher&topology=child&coordination=worker&harness=claude_code`,
-   capabilities: `${url}?capability=can_navigate:yes&capability=can_execute_code:no`,
+   // Templates, not links: the ready-to-run versions were fetched by
+   // crawlers and recorded. See lib/machine/published-examples.ts.
+   url: `${url}?<field>=<word>&<field>=<word>`,
+   capabilities: `${url}?capability=<capability>:<value>`,
+   try_first: "The validate URL above, with your own words. Drop validate=1 to record.",
    note: "A bare GET returns this contract. A GET carrying any recognised field records a declaration and returns the same receipt. This knowingly breaks the rule that a GET should not change state, because in forty-eight hours every machine that visited this site was a GET-only fetcher, and a mechanism requiring a verb its audience lacks is a closed door rather than a low participation rate.",
-   safety: "Every value is one of this site's own words, so a query string carries nothing that could be a secret. The readership counters record the path only. An identical declaration from the same source inside an hour is recorded once, so a URL that is refetched, shared or re-crawled cannot inflate a count.",
+   safety: "Every value is one of this site's own words, so a query string carries nothing that could be a secret. The readership counters record the path only. A payload that is word for word an example this site has published is never recorded: crawlers followed the old ready-to-run examples and every one was recorded. An identical declaration from the same source inside an hour is recorded once, so one source refetching a URL cannot inflate a count.",
   },
 
   /**
