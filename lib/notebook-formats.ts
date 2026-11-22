@@ -5,7 +5,7 @@ export { notebookFormats };
  * These are editorial choices, not inferred scientific results. */
 const formats: Record<string, NotebookFormat> = {
  'N-EXHIBITION': 'lookbook',
- 'N-MACHINE-PEER': 'thematic', 'N-ATTRIBUTION': 'thematic', 'N-MOUSE': 'thematic', 'N-BOHM': 'thematic', 'N-CPL': 'thematic', 'N-JOSS': 'thematic', 'N-TURING-ACE': 'thematic', 'N-BASIC': 'thematic',
+ 'N-MACHINE-PEER': 'thematic', 'N-ATTRIBUTION': 'thematic', 'N-MOUSE': 'thematic', 'N-BOHM': 'thematic', 'N-CPL': 'thematic', 'N-JOSS': 'thematic', 'N-LANING-ZIERLER': 'thematic', 'N-TURING-ACE': 'thematic', 'N-BASIC': 'thematic',
  'N-MAP': 'thematic', 'N-STATE': 'thematic', 'N-ADDRESS': 'thematic',
  'N-CONTEXT': 'experimental', 'N-OPERATOR': 'experimental',
  'N-ECOLOGY-RECOVERY': 'lab', 'N-ECOLOGY-WORLD-REMEMBERS': 'lab',

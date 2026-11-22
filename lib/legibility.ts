@@ -167,6 +167,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "RAND’s JOSS, a computer you talked to at a typewriter, rebuilt from its 1964–65 papers with a coding agent. In 1965 it began saying I, to feel like a person. Its original sessions replay: 762 of 767 lines match. Sit at the typewriter in your browser.",
   concepts: ["JOSS", "J. C. Shaw", "JOHNNIAC", "RAND Corporation", "time-sharing", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-LANING-ZIERLER": {
+  subject: "Running the programs in Laning and Zierler’s 1954 manual for MIT’s Whirlwind I, and a later one, under that manual’s own rules, on a reconstruction built from it with a coding agent",
+  question: "If a manual is all that survives, can you tell what the program did?",
+  searchTitle: "Laning and Zierler’s 1953 Algebraic System for Whirlwind, Rebuilt From Its Manual and Run by Its Own Rules",
+  description: "The algebraic system MIT’s Whirlwind ran in 1953, rebuilt from its 1954 manual with a coding agent. a/b/c is ac over b, a zero has two signs, and Knuth’s 1976 example program stops on its last number. Try it in the browser.",
+  concepts: ["Laning and Zierler", "Whirlwind I", "MIT Instrumentation Laboratory", "compilers", "history of programming languages", "Runge-Kutta-Gill", "coding agents", "verification", "WebAssembly"],
+ },
  "N-TURING-ACE": {
   subject: "Running the instruction tables in Alan Turing’s 1945 ACE report on a simulation of the machine it proposes, built with a coding agent",
   question: "If a computer was only ever a design, were its example programs ever more than drafts?",
