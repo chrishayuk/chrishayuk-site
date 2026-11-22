@@ -692,5 +692,40 @@
         }
       }
     ]
+  },
+  {
+    "id": "N-BOHM",
+    "version": "1.0",
+    "recordHash": "6159f352346c99e11fe2b95612b0e1d6dfb92a628d4c28c13793d94deaf86a43",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication: Böhm's 1951 compiler run on a simulation of his machine, the four corrections it needed, the one outside check, and the limits of three readings by one author"
+    },
+    "sources": [
+      {
+        "title": "Corrado Böhm, “Calculatrices digitales. Du déchiffrage de formules logico-mathématiques par la machine même dans la conception du programme”, dissertation, ETH Zürich, 1951; printed Bologna, 1954",
+        "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662",
+        "note": "Euclid’s algorithm is on p. 25. The compiler is chapter 7, pp. 39–43: group C on p. 40, group E′ on p. 43."
+      },
+      {
+        "title": "The same, translated into English by Peter Sestoft, 2016",
+        "url": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+        "note": "Appendix B: “We have made a simple implementation in Java of Böhm’s machine, and his compiler and loader”. The translation omits group W of chapter 7."
+      },
+      {
+        "title": "Donald E. Knuth and Luis Trabb Pardo, “The Early Development of Programming Languages”, Stanford report STAN-CS-76-562, August 1976, pp. 35–42",
+        "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "The bug is reported on p. 40, the hand-worked formula is on p. 41, and their TPK program in Böhm’s language is on pp. 36–39."
+      },
+      {
+        "title": "chrishayuk/bohm",
+        "url": "https://github.com/chrishayuk/bohm",
+        "note": "The machine, loader and compiler, their tests, 42 example programs, a tutorial, and reduced scans of the pages the corrections rest on."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7 were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]
