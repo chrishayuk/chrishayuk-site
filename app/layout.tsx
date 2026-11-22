@@ -20,6 +20,7 @@ import "@chrishayuk/hause/exhibition.css";
 import "./notebook-visuals.css";
 import "./notebook-studies.css";
 import "./address-build.css";
+import "./mouse-demo.css";
 import "./social-editions.css";
 import "./cell80.css";
 import "./machine-exhibitions.css";
