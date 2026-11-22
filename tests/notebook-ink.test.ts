@@ -23,7 +23,7 @@ test('transparent chart strokes and small labels remain readable on every collec
  t.mock.method(globalThis, 'getComputedStyle', () => ({ getPropertyValue: (name: string) => properties[name] }));
  const ink = chartInk({} as Element);
  const stocks = [...palettes.matchAll(/--notebook-stock:\s*(#[\da-f]{6})/g)].map(match => match[1]);
- assert.equal(stocks.length, 5);
+ assert.equal(stocks.length, 6);
  for (const stock of stocks) for (const tone of [.45, .72, 1]) {
   const paper = rgb(stock).map((channel, i) => channel * tone + rgb('#f5f0e5')[i] * (1 - tone));
   for (const colour of [ink.ink, ink.muted]) assert.ok(contrast(colour, paper) >= 4.5, `${colour} text on ${stock}/${tone}`);

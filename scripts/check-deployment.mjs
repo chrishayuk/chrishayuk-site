@@ -215,6 +215,7 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
 const systems=await request("/systems");
 assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
 assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
 const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
@@ -251,6 +252,10 @@ assert.equal(demo.status,200);
 assert.match(demo.body,/Interactive addressed memory/);
 assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
+assert.ok(home.body.includes('href="/notebook?collection=languages"'), 'home offers the Languages collection');
+const languages=await request("/notebook?collection=languages");
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
+assert.ok((await request("/notebook/the-port-matched-the-reference-was-wrong")).body.includes('href="/demos/mouse"'), 'Mouse note links to the playground');
 const mouse=await request("/demos/mouse");
 assert.equal(mouse.status,200);
 assert.match(mouse.body,/Mouse interpreter/);

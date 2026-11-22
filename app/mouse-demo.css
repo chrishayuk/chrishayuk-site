@@ -33,3 +33,8 @@
 .mouse-runner-bar output{flex:1;min-width:200px;font:13px/1.65 var(--font-geist-mono);white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto}
 .mouse-runner-idle{color:var(--muted);font-size:11px}
 .mouse-runner-note{margin:12px 0 0;font-size:13px;line-height:1.6;color:var(--muted)}
+
+/* Entrance from the note to the full playground. */
+.mouse-play-link { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin: 18px 0; }
+.mouse-play-link a { border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.mouse-play-link span { opacity: .7; }

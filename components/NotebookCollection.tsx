@@ -22,7 +22,8 @@ export function NotebookCollection(query: { collection?: string; publication?: s
       <div>{activeCollection ? <a className="notebook-back" href="/notebook">← All collections</a> : <p className="notebook-register">Chris Hay / Working papers</p>}<h1>{activeCollection?.title || "Notebook"}<span>.</span></h1></div>
       <div className="notebook-masthead-note"><p>{activeCollection?.description || "Experiments, observations and questions still open."}</p>
         {!activeCollection && !filtered && lead && <a className="notebook-latest-link" data-notebook-lead={lead.id} data-notebook-destination={recordPath(lead)} href={`${recordPath(lead)}#open-notebook`}><span className="notebook-register">Latest notebook</span><span>{lead.title} ↗</span></a>}
-        {activeCollection && <Link href={activeCollection.href}>Follow the collection ↗</Link>}
+        {activeCollection && activeCollection.href !== notebookCollectionHref(activeCollection.id) && <Link href={activeCollection.href}>Follow the collection ↗</Link>}
+        {activeCollection?.play?.map(item => <Link key={item.href} href={item.href} data-collection-play={item.href}>{item.label} ↗</Link>)}
       </div>
     </header>
     <section id="notebook-selection" className="notebook-selection" aria-label="Filter notebooks">
