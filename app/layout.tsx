@@ -21,6 +21,7 @@ import "./notebook-visuals.css";
 import "./notebook-studies.css";
 import "./address-build.css";
 import "./mouse-demo.css";
+import "./bohm-demo.css";
 import "./social-editions.css";
 import "./cell80.css";
 import "./machine-exhibitions.css";

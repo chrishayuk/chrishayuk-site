@@ -146,6 +146,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "A Rust port of Peter Grogono's Mouse matched its C reference, which carried a 1979 misprint and three bugs a BYTE reader described in 1980. Run the corrected interpreter in the browser.",
   concepts: ["Mouse programming language", "Peter Grogono", "BYTE magazine", "coding agents", "reference implementations", "WebAssembly"],
  },
+ "N-BOHM": {
+  subject: "Running the self-describing compiler in Corrado Böhm's 1951 dissertation with a coding agent",
+  question: "If a program has only ever existed on paper, how would you know it was right?",
+  searchTitle: "A Coding Agent Ran a Compiler From 1951. It Needed Four Corrections.",
+  description: "Corrado Böhm's 1951 compiler, written in its own language for a machine that was never built, run on a simulation with three independent readings. Try the language in the browser.",
+  concepts: ["Corrado Böhm", "self-hosting compilers", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
  "N-ATTRIBUTION": {
   subject: "Coding-agent guardrails and Git attribution policy in CI",
   question: "How can CI enforce repository attribution policy when a coding agent ignores it?",
