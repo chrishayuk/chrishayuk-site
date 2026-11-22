@@ -10,7 +10,7 @@ Set one field:
 { ...draft, visibility: "unlisted", id: "N-EXAMPLE", slug: "a-note-in-review", … }
 ```
 
-`N-AUTHORITY` was reviewed this way and is now listed. Nothing is unlisted at present; the
+`N-AUTHORITY` was reviewed this way and is now listed. `N-IPLV` was too. Nothing is unlisted at present; the
 mechanism and its test remain, because the next note will want it.
 
 ## What that changes

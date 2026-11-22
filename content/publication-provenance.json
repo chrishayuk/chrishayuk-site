@@ -1216,5 +1216,49 @@
         "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-IPLV",
+    "version": "1.0",
+    "recordHash": "c377bdcaf5a14ae8503979c45c2fa8d6c76d280f5483f36ff78e9b664cb5de94",
+    "revision": {
+      "kind": "initial",
+      "summary": "First published: a reconstruction of the IPL computer of the 1964 IPL-V manual agrees with all 46 lines of the manual's printed trace, cycle count included; the count settles how the 1963 Logic Theorist measured its effort, and the deck runs unchanged. Includes the independent review by a second model."
+    },
+    "sources": [
+      {
+        "title": "A. Newell (ed.), “Information Processing Language-V Manual”, second edition, Prentice-Hall, 1964",
+        "url": "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/IPL-V/manual",
+        "note": "Fig. 1 and Fig. 2 are on pages 21 and 23 of Part One, Fig. 3 on page 34, R62 on page 26, and J101 as Fig. 11 on pages 80 and 81. Part Two, the Programmers’ Reference Manual, is the specification the reconstruction follows."
+      },
+      {
+        "title": "A. Newell and F. M. Tonge, “An Introduction to Information Processing Language V”, Communications of the ACM 3(4), April 1960",
+        "url": "https://iiif.library.cmu.edu/file/Newell_box00040_fld03188_doc0001/Newell_box00040_fld03188_doc0001.pdf"
+      },
+      {
+        "title": "E. Stefferud, “The Logic Theory Machine: A Model Heuristic Program”, RAND RM-3731, 1963",
+        "url": "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/LogicTheorist",
+        "note": "The program and its output for 24 theorems."
+      },
+      {
+        "title": "David Moews, ipl-v-logic-theorist",
+        "url": "https://github.com/dmoews/ipl-v-logic-theorist",
+        "note": "Corrections to Rupert Lane and Jeff Shrager’s transcription of Stefferud’s deck, a transcription of its 1963 output, and notes on running it on Rob Storey’s IBM 7094 emulator."
+      },
+      {
+        "title": "Jeff Shrager, Executable Archaeology, and “Executable Archaeology: Reanimating the Logic Theorist from its IPL-V Source”, 2026",
+        "url": "https://github.com/jeffshrager/ExecutableArchaeology",
+        "note": "A Common Lisp IPL-V that runs the Logic Theorist, Simon’s Heuristic Coder and the Simon–Yngve sentence generator. The reconstruction’s output on the last two was compared with it."
+      },
+      {
+        "title": "chrishayuk/ipl-v",
+        "url": "https://github.com/chrishayuk/ipl-v",
+        "note": "The reconstruction, its tests against the manual’s figures, the programs of Part One transcribed, a tutorial, and the machine in WebAssembly."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The reconstruction, the transcriptions and the comparisons in this note were made in this session. Every result can be rerun with cargo test in the repository."
+      }
+    ]
   }
 ]
