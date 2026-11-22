@@ -61,7 +61,7 @@ export function CplNotebook({ record }: { record: PublicationRecord }) {
       <Excerpt src="slip-1-readtag-tags.jpg" width={1150} height={370}
         alt="The routine ReadTag as printed. Its body opens with a section bracket tagged R.T and closes with one tagged R.T. with a final dot."
         caption="APPENDIX 1, P. 2 / READTAG OPENS R.T AND CLOSES R.T."/>
-      <CplRunner label="THE PROGRAM AS PRINTED, GIVEN THE SAME LINE" programFile="appendix1/preprocessor-as-printed.cpl" programName="the 1966 preprocessor, every character as printed" input={LINE}
+      <CplRunner label="THE PROGRAM AS PRINTED, GIVEN THE SAME LINE" programFile="appendix1/preprocessor-as-printed.cpl" programName="the 1966 preprocessor, as printed" input={LINE}
         note="It does not get as far as reading the line. A dot is part of a tag by the program’s own rule, so R.T. is a different tag from R.T."/>
       {act(2)}
       <Excerpt src="slip-7-standard.jpg" width={601} height={140} narrow
@@ -88,7 +88,7 @@ export function CplNotebook({ record }: { record: PublicationRecord }) {
     </> },
     { label: "Where the notes disagree", children: <>
       <Excerpt src="slip-10-cannot-precede.jpg" width={1250} height={130}
-        alt="Part 3, definition c: CannotPrecedeCommand of LastOutput is true if LastOutput is any of semicolon, section bracket, do, colon, or."
+        alt="Part 3, definition c: the function the program calls CannotProceedCommand is true if LastOutput is any of semicolon, section bracket, do, colon, or."
         caption="APPENDIX 1, P. 6 / PART 3 (c)"/>
       <Excerpt src="slip-11-go-goto.jpg" width={1144} height={260}
         alt="Part 3, definition f: a table for the function Standard, with a row that gives go if x is goto."
@@ -98,16 +98,16 @@ export function CplNotebook({ record }: { record: PublicationRecord }) {
     { label: "It reads itself", kind: "evidence", children: <>
       <StudyMeasures label="THE PREPROCESSOR, GIVEN ITS OWN 189 LINES" items={[
         { label: "ITS TEXT CORRECTED", value: "≈ 1,100", detail: "Symbols written. The last one is finish." },
-        { label: "ITS TEXT AS PRINTED", value: "≈ 200", detail: "Symbols written before it stops, at the closing bracket of ReadTag." },
+        { label: "ITS TEXT AS PRINTED", value: "≈ 220", detail: "Symbols written before it stops, at the closing bracket of ReadTag." },
         { label: "MESSAGES", value: "0", detail: "The program has nothing to say about a tag that matches no section." },
       ]} note="Both runs use the corrected program. Only the text it is given differs. Both are runnable below."/>
       <CplRunner label="GIVEN ITS OWN TEXT" programFile="appendix1/preprocessor.cpl" programName="the 1966 preprocessor, corrected" inputFile="appendix1/itself.pub" inputName="Part 2 of the same program, corrected, as it would be printed"
         note="Scroll to the end: the last symbols are the label Error, a colon, and finish."/>
       <CplRunner label="GIVEN ITS OWN TEXT AS PRINTED" programFile="appendix1/preprocessor.cpl" programName="the 1966 preprocessor, corrected" inputFile="appendix1/itself-as-printed.pub" inputName="Part 2 of the same program, as printed"
-        note="It ends with three closing brackets in a row: each open section closing itself on the way out."/>
+        note="It ends with three closing brackets in a row: one for each of the two open sections and one more from the outermost level, on the way out."/>
       {act(5)}
       <CplRunner label="A LABEL PASSED AS A PARAMETER" program={LABELS}
-        note="This is the manual’s own small example of the feature the preprocessor relies on. R calls itself ten times, handing each call a label of its own, and the jumps unwind back out. Change 10 to 9."/>
+        note="This is the Reference Manual’s own small example, from section 9.3, of the feature the preprocessor relies on. R calls itself ten times, handing each call a label of its own, and the jumps unwind back out. Change 10 to 9."/>
     </> },
     { label: "Run it yourself", kind: "operate", children: <>{act(6)}</> },
     { label: "What this does not show", children: <>

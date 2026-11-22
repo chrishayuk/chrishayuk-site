@@ -10,7 +10,7 @@ import { Decoration, EditorView, hoverTooltip, keymap, type DecorationSet } from
 /**
  * An editor for CPL that understands the language.
  *
- * Colours, problems, hover help and completion all come from the Cpl
+ * Colours, problems, hover help and completion all come from the CPL
  * language server (github.com/chrishayuk/cpl, lsp/), the same
  * one the VS Code extension uses. It is compiled for WASI and runs in a
  * worker in the page: public/demos/cpl/lsp-worker.js and cpl-lsp.wasm,
@@ -22,7 +22,7 @@ import { Decoration, EditorView, hoverTooltip, keymap, type DecorationSet } from
 
 const FILES = "/demos/cpl";
 // The order of the server's semantic token legend.
-const TOKEN_TYPES = ["comment", "string", "number", "variable", "function", "parameter", "operator", "keyword"];
+const TOKEN_TYPES = ["comment", "string", "number", "variable", "function", "parameter", "operator", "keyword", "type", "label"];
 
 type Position = { line: number; character: number };
 type Range = { start: Position; end: Position };
@@ -71,6 +71,8 @@ const tokens = StateField.define<DecorationSet>({
   provide: field => EditorView.decorations.from(field),
 });
 const marks = TOKEN_TYPES.map(type => Decoration.mark({ class: `cpl-token-${type}` }));
+// Modifier 2 of the legend marks the basic functions, which get a class of their own.
+const basic = TOKEN_TYPES.map(type => Decoration.mark({ class: `cpl-token-${type} cpl-token-basic` }));
 
 /** The server's five-numbers-per-token list, as editor decorations. */
 function decorate(doc: Text, data: number[]): DecorationSet {
@@ -82,7 +84,8 @@ function decorate(doc: Text, data: number[]): DecorationSet {
     if (line >= doc.lines) break;
     const from = offsetOf(doc, { line, character });
     const to = Math.min(from + data[i + 2], doc.line(line + 1).to);
-    if (to > from && marks[data[i + 3]]) ranges.push(marks[data[i + 3]].range(from, to));
+    const mark = (data[i + 4] & 2 ? basic : marks)[data[i + 3]];
+    if (to > from && mark) ranges.push(mark.range(from, to));
   }
   return Decoration.set(ranges, true);
 }
@@ -112,9 +115,10 @@ function render(markdown: string) {
     if (fence) { box.appendChild(element("pre", fence[1])); continue; }
     const paragraph = element("p");
     const fill = (parent: HTMLElement, text: string) => {
-      for (const piece of text.split(/(\*\*[^*]+\*\*|`[^`]+`)/)) {
-        if (piece.startsWith("**")) fill(parent.appendChild(element("strong")), piece.slice(2, -2));
-        else if (piece.startsWith("`")) parent.appendChild(element("code", piece.slice(1, -1)));
+      // Code may hold stars (`**`, `*n`), so it is looked for inside bold too.
+      for (const piece of text.split(/(\*\*(?:`[^`]+`|[^*`])+\*\*|`[^`]+`)/)) {
+        if (piece.startsWith("**") && piece.length > 4) fill(parent.appendChild(element("strong")), piece.slice(2, -2));
+        else if (piece.startsWith("`") && piece.length > 2) parent.appendChild(element("code", piece.slice(1, -1)));
         else if (piece) parent.appendChild(document.createTextNode(piece));
       }
     };
@@ -134,21 +138,28 @@ const hover = hoverTooltip(async (view, offset) => {
 
 type LspCompletion = { label: string; kind?: number; detail?: string; documentation?: string; insertText?: string; insertTextFormat?: number };
 
-/** Macros after `#`, parameters after `%`, and templates when asked. */
+const kinds: Record<number, string> = { 3: "function", 6: "variable", 14: "keyword", 15: "text", 21: "constant" };
+
+/** Names in scope, basic functions, basic symbols and templates: offered when
+ * asked for, or once a large name or two small letters are typed. */
 async function complete(context: CompletionContext): Promise<CompletionResult | null> {
-  const before = context.state.sliceDoc(Math.max(0, context.pos - 1), context.pos);
-  if (!context.explicit && before !== "#" && before !== "%") return null;
+  const word = context.matchBefore(/[A-Za-z][A-Za-z0-9.']*/);
+  const started = word && (/^[A-Z]/.test(word.text) || word.text.length >= 2);
+  if (!context.explicit && !started) return null;
   const doc = context.state.doc;
   const answer = await ask(doc.toString(), [{ method: "textDocument/completion", params: { position: positionOf(doc, context.pos) } }]);
   const items = (answer?.results[0] as LspCompletion[] | null | undefined) || [];
   if (!items.length) return null;
   return {
-    from: context.pos,
-    options: items.map((item): Completion => ({
+    from: word ? word.from : context.pos,
+    validFor: /^[A-Za-z][A-Za-z0-9.' ]*$/,
+    options: items.map((item, n): Completion => ({
       label: item.label,
       detail: item.detail,
       info: item.documentation || undefined,
-      type: item.kind === 3 ? "function" : item.kind === 6 ? "variable" : "keyword",
+      type: kinds[item.kind ?? 0] || "text",
+      // The server lists what is in scope first; keep its order among equal matches.
+      boost: -n / items.length,
       // The server writes snippets the way editors expect; CodeMirror's form differs slightly.
       apply: item.insertTextFormat === 2 && item.insertText
         ? snippet(item.insertText.replace(/\$0/g, "${}").replace(/\\\$/g, "$"))
@@ -177,7 +188,7 @@ export function CplEditor({ value, onChange, onRun, label, className = "" }: {
           keymap.of([{ key: "Mod-Enter", run: () => { latest.current.onRun(); return true; } }, ...defaultKeymap, ...historyKeymap]),
           tokens, problems, hover,
           autocompletion({ override: [complete] }),
-          EditorState.tabSize.of(2),
+          EditorState.tabSize.of(3),
           EditorView.contentAttributes.of({ "aria-label": label, spellcheck: "false", autocapitalize: "off", autocorrect: "off" }),
           EditorView.updateListener.of(update => { if (update.docChanged) latest.current.onChange(update.state.doc.toString()); }),
         ],

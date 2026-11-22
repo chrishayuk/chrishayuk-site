@@ -10,7 +10,7 @@
 || Part 3: "A number of identifiers in Part 2 were left undefined; these
 || are defined informally in this section." The definitions below are
 || written for this reconstruction from those informal descriptions, and
-|| from nothing at all for the six identifiers the appendix never
+|| from nothing at all for the seven identifiers the appendix never
 || mentions: CPL.Source, EndofStreamChar, Report, BigLetter, SmallLetter
 || and the two functions of underlined letters.
 || ---------------------------------------------------------------------
