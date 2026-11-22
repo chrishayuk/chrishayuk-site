@@ -84,7 +84,7 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
         caption="E-364, P. 13 / “THE VALUE ZERO IS PERMISSIBLE IF ASSIGNED BY THE SPECIFIC EQUATION n = 0”"/>
       {act(4)}
       <LzRunner label="TPK, WITH KNUTH’S ELEVEN NUMBERS, FED WITH EACH KIND OF ZERO" program={TPK} compare
-        note="The pages agree until i is zero. A computed zero as an index stops the run on the left; on the right every zero is +0 and the last line is typed. The eleven numbers are Knuth’s own example of v|N: 1 (.5) 2 (.25) 3.5 (1) 5.5."/>
+        note="The pages agree until i is zero. A computed zero as an index stops the run on the left, as page 13 says it must. The right is a what-if, not the manual: page 13 forbids a computed zero index whatever its sign, and making every zero +0 lets it through because the zero it computes is then +0, the sign a zero set by n = 0, has. The eleven numbers are Knuth’s own example of v|N: 1 (.5) 2 (.25) 3.5 (1) 5.5."/>
       <LzRunner label="THE SAME TAPE UNDER THE RULES OF JANUARY 1954" program={TPK} settings={{ rules: true }}
         note="“The x|N is not yet in operation.” Here the translator stops at the first line, and nothing is run. What Whirlwind did with such a tape in January 1954 is not recorded."/>
     </> },
@@ -100,11 +100,11 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
     </> },
     { label: "What else the rules turned up", children: <>
       {act(6)}
-      <StudyMeasures label="THREE THINGS THE MANUAL SAYS, FOLLOWED TO THE LETTER" items={[
-        { label: "EXPONENTS, P. 5", value: "ALARM", detail: "(ab³)⁵ is about 10⁻³⁴, below the 24, 6 system, so (ab³)⁻⁵ divides by zero." },
-        { label: "SUMMER SCHOOL, 1954", value: "nothing", detail: "The reprinted program has no PRINT, and lacks two commas the rules require." },
+      <StudyMeasures label="THREE THINGS THE MANUAL’S RULES TURN UP" items={[
+        { label: "EXPONENTS, P. 5", value: "ALARM", detail: "(ab³)⁵ is about 10⁻³⁴, below the 24, 6 system: in this reconstruction it becomes zero and (ab³)⁻⁵ divides by it. Either way the alarm comes, since 7 · 10³³ is beyond 2⁶³ − 2³⁹." },
+        { label: "SUMMER SCHOOL, 1954", value: "nothing", detail: "Its own, shorter version of the program has no PRINT, and lacks two commas the rules require." },
         { label: ".05, P. 6", value: "+.50000000−01", detail: "Only if the digits are cut off. Rounded, the nearest 24-bit number would print +.50000001−01." },
-      ]} note="None of the three is a fault in the system. Each is the manual, read exactly."/>
+      ]} note="None of the three is a fault in the system. Each follows from the manual’s rules, plus choices the reconstruction lists."/>
       <LzRunner label="THE MANUAL’S EXPONENT EXAMPLES, RUN IN ORDER" program={EXPONENTS}
         note="Equation 100 is a PRINT, so after the alarm it is carried out, as section 16 says: a and b, as far as the program got."/>
     </> },

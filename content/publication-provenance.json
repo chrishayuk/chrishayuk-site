@@ -972,10 +972,10 @@
   {
     "id": "N-LANING-ZIERLER",
     "version": "1.0",
-    "recordHash": "c3f1ce2cf3ccb1a025972bf6fd723321f2360679282c8c09a5648792dc2a5297",
+    "recordHash": "dab1aee3933df8327af41cadfa9a52027e8d8e5bc0dae25f51a3e83b0be819b6",
     "revision": {
       "kind": "initial",
-      "summary": "Initial publication of the note on rebuilding Laning and Zierler's algebraic system for Whirlwind I from its 1954 manual and running its programs under its own rules, after a fact check against the scans."
+      "summary": "Initial publication of the note on rebuilding Laning and Zierler's algebraic system for Whirlwind I from its 1954 manual and running its programs under its own rules, after two fact checks against the scans"
     },
     "sources": [
       {
@@ -996,7 +996,7 @@
       {
         "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
         "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
-        "note": "TPK in the Laning and Zierler system is on pages 56 and 57; Adams and Laning’s ten to one on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+        "note": "TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
       },
       {
         "title": "chrishayuk/laning-zierler",
