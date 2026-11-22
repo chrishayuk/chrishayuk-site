@@ -23,7 +23,7 @@ export const turingAceRecord: PublicationRecord = {
   related: ["N-BOHM", "N-CPL"],
   media: [],
   body: [
-    { kind: "observation", label: "01 / A COMPUTER ON PAPER", text: "In 1945, at the National Physical Laboratory, Alan Turing wrote a report called Proposed Electronic Calculator: a design for a stored-program computer he called the Automatic Computing Engine. It describes the memory, the logical control, the arithmetic and the circuits, down to the valves. It was never built as written. The Pilot ACE that ran at NPL in 1950 was a smaller and different design. I asked a coding agent to build the machine the report describes and to run the programs in it.", references: [
+    { kind: "observation", label: "01 / A COMPUTER ON PAPER", text: "In 1945, at the National Physical Laboratory, Alan Turing wrote a report called Proposed Electronic Calculator: a design for a stored-program computer, which the report’s cover calls an Automatic Computing Engine. It describes the memory, the logical control, the arithmetic and the circuits, down to the valves. It was never built as written. The Pilot ACE that ran at NPL in 1950 was a smaller and different design. I asked a coding agent to build the machine the report describes and to run the programs in it.", references: [
       { label: "Turing, Proposed Electronic Calculator, transcribed", url: "https://en.wikisource.org/wiki/Proposed_Electronic_Calculator" },
       { label: "The report and its figures at the Turing Archive", url: "https://www.alanturing.net/ace" },
     ] },
