@@ -39,14 +39,14 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
         { label: "KEEP IT", value: "1.1 Type x, x*2.", detail: "A number in front makes it a step, kept for later. Steps 1.1 and 1.2 belong to part 1. * is “to the power”; times is a raised dot." },
         { label: "REPEAT", value: "Do part 1 for x = 1(1)5.", detail: "Do the steps of part 1 with x from 1, in steps of 1, to 5." },
         { label: "SAY HOW", value: "Form 1:", detail: "The next line typed is a picture of a line of output, with blanks of underscores where the numbers go." },
-      ]} note="Direct or kept, it is the same language. That was new."/>
+      ]} note="Direct or kept, it is the same language."/>
       <JossRunner label="TRY IT / THE PAPER STAYS OPEN: KEEP TYPING" program={FIRST}
-        note="Green is what was typed and black is JOSS, as the console’s two ribbons had it. Arithmetic is in nine decimal digits, so a tenth is exactly a tenth."/>
+        note="Green is what was typed and black is JOSS, as the console’s two-colour ribbon had it. Arithmetic is in nine decimal digits, so a tenth is exactly a tenth."/>
       <p className="joss-play-link record-voice"><Link href="/demos/joss">MORE SITTINGS IN THE PLAYGROUND ↗</Link></p>
     </> },
     { label: "Go", children: <>
       <Excerpt src="p-3149-figure-2.jpg" width={940} height={1400} narrow
-        alt="Figure 2 of Shaw's 1965 paper: a console session. The user enters three steps to solve a quadratic equation and types Do part 1. JOSS answers Error at step 1.1: a is undefined. The user sets a and types Go, and JOSS finds the next thing wrong, eight more times, before typing the roots 3.0000 and -2.0000."
+        alt="Figure 2 of Shaw's 1965 paper: a console session. The user enters three steps to solve a quadratic equation and types Do part 1. JOSS answers Error at step 1.1: a is undefined. The user sets a and types Go, and JOSS finds the next thing wrong, six more times, before typing the roots 3.0000 and -2.0000."
         caption="SHAW, P-3149, MAY 1965, FIG. 2 / JOSS IS THE DARKER TYPE"/>
       {act(1)}
       <JossRunner label="THE FIRST SIX LINES OF FIGURE 2 / THE REST IS YOURS TO TYPE" program={QUADRATIC}
@@ -54,12 +54,12 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
         note="JOSS stops at step 1.1 because a has no value. Give it one and type Go. Zero gives the next complaint, and −1 the one after. With a = 1 it gets as far as step 1.3 and finds there is no form 1. On the paper, type Form 1: and then a line with five blanks, such as a = __ b = __ c = __ roots: ___.____ ___.____ and fix step 1.3 to type five values."/>
       <Excerpt src="p-3131-root-finding.jpg" width={860} height={1680} narrow
         alt="A page typed at a JOSS console on 28 April 1965, in two colours. The user's lines are green and JOSS's are black. Halfway down JOSS types Error at step 1.4: e is undefined. The user types Set e=.00005. and Go., and the search for a root carries on from where it stopped."
-        caption="SHAW, P-3131, APRIL 1965, P. 5 / THE USER IN GREEN, JOSS IN BLACK"/>
+        caption="SHAW, P-3131, APRIL 1965, PDF P. 6 / THE USER IN GREEN, JOSS IN BLACK"/>
     </> },
     { label: "Forty messages", children: <>
       <Excerpt src="listing-1965-messages.jpg" width={1560} height={790}
         alt="Part of an assembly listing. Columns of octal numbers, and beside them in capitals: I NEED MORE STORAGE SPACE. I HAVE AN OVERFLOW. IS UNDEFINED. I HAVE A ZERO DIVISOR. INDEX VALUE MUST BE INTEGER AND 0-INDEX-99."
-        caption="JOSS 666 LISTING, 9 JANUARY 1965, P. 38 / EACH MESSAGE AS OCTAL WORDS, FIVE CHARACTERS TO A WORD"/>
+        caption="JOSS 666 LISTING, 9 JANUARY 1965, PDF P. 38 / EACH MESSAGE AS OCTAL WORDS, FIVE CHARACTERS TO A WORD"/>
       {act(2)}
     </> },
     { label: "Two JOSSes", kind: "evidence", children: <>
@@ -67,7 +67,7 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
       <StudyMeasures label="THE SAME THREE LINES, A YEAR APART" items={[
         { label: "Type 7/0.", value: "Zero divisor.", detail: "By 1965: I have a zero divisor." },
         { label: "Type t.  (t is 1/50)", value: "2·10*(-2)", detail: "By 1965: .02" },
-        { label: "Type 2+2.", value: "column 17", detail: "Where the 4 falls, counting from 1. By 1965: column 18." },
+        { label: "Type 2+2.", value: "column 17", detail: "Where the 4 falls, counting from 1, in August 1964. By 1965: column 18." },
       ]} note="The first column is the JOSS of 1964. Run the three lines below, change the year in the playground, and run them again."/>
       <JossRunner label="THE JOSS OF MARCH 1964" program={YEARS} year="1964"
         note="The wording of 1964 is known only where a page of 1964 shows it. Elsewhere this setting uses the words of 1965."/>
@@ -77,19 +77,19 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
       <StudyMeasures label="FIVE SESSIONS, EVERY LINE JOSS TYPED" items={[
         { label: "COLUMN FOR COLUMN", value: "686", detail: "Against the typewriter’s own output, reproduced in the papers." },
         { label: "CHARACTER FOR CHARACTER", value: "76", detail: "Against pages a typist had copied, closing up the columns." },
-        { label: "DIFFERENT", value: "5", detail: "Each by one unit in the ninth digit of a logarithm or an exponential." },
-      ]} note="A further six blank lines fall off the cut edge of a figure, where the page cannot show them."/>
+        { label: "DIFFERENT", value: "5", detail: "Each by one unit in the last digit of a result that goes through a logarithm or an exponential." },
+      ]} note="A further six blank lines fall off the cut edges of figures, where the page cannot show them."/>
       {act(5)}
       <Excerpt src="rm-4162-row-72.jpg" width={960} height={220}
         alt="Five rows of a table typed by JOSS, for 71 to 75, with square roots, logarithms and exponentials. The exponential for 72 is 1.8586717 31."
-        caption="BAKER, RM-4162-PR, JUNE 1964, P. 15 / THE ROW FOR 72 ENDS IN A 7"/>
+        caption="BAKER, RM-4162-PR, JUNE 1964, PDF P. 23 / THE ROW FOR 72 ENDS IN A 7"/>
       <JossRunner label="THE THREE THINGS THAT DIFFER, AND ONE THAT DOES NOT" program={LOGS}
-        note="The pages have .69314718 for log 2, a 7 in place of the 8 that exp(72) rounds to, and 357 where this ends in 356. The last three lines add a tenth ten times. Shaw: “the result is indeed 1.”"/>
+        note="The pages have .69314718 for log 2; a 7 for exp(72) where a correct exponential, rounded to nine digits and then to the form as JOSS did, gives an 8; and 357 where this ends in 356. The last three lines add a tenth ten times. Shaw: “the result is indeed 1.”"/>
     </> },
     { label: "Check it", children: <>
       <Excerpt src="shaw-note-1964-11-19.jpg" width={1440} height={1660} narrow
         alt="A handwritten page headed F1 and signed JCS 11-19-64. It works out a bound with the square root of 2 and powers of 2 and 10, lists a short table, and ends: Check it. Looks like coefficient between 1 and root 2 gets doubled several times."
-        caption="JOSS PROGRAM NOTES AND TESTS, P. 13 / J. C. SHAW, 19 NOVEMBER 1964"/>
+        caption="JOSS PROGRAM NOTES AND TESTS, PDF P. 13 / J. C. SHAW, 19 NOVEMBER 1964"/>
       {act(6)}
     </> },
     { label: "Run it yourself", kind: "operate", children: <>{act(7)}</> },

@@ -10,7 +10,7 @@ export default function Page() {
       <p className="kicker record-voice">CHRIS HAY / JOSS / INTERACTIVE STUDY</p>
       <h1>A computer<br/><em>you talked to.</em></h1>
       <p className="dek">Written for RAND’s JOHNNIAC by J. C. Shaw. In daily use from January 1964. Running here.</p>
-      <p>JOSS is a conversation at a typewriter: you type in green, JOSS answers in black. A line that begins with a number is kept as a step of a program. Anything else is done at once. Start with <strong>1965-quadratic-with-mistakes</strong>, from a paper of May 1965: press <strong>TYPE IT ALL IN</strong> and watch nine things go wrong and get put right without the program ever starting over. Then type on the paper yourself. Try <strong>Type 2+2.</strong></p>
+      <p>JOSS is a conversation at a typewriter: you type in green, JOSS answers in black. A line that begins with a number is kept as a step of a program. Anything else is done at once. Start with <strong>1965-quadratic-with-mistakes</strong>, from a paper of May 1965: press <strong>TYPE IT ALL IN</strong> and watch the program stop seven times, and carry on each time from where it stopped once the mistake is put right. Then type on the paper yourself. Try <strong>Type 2+2.</strong></p>
       <div className="inline-links"><Link className="text-link" href="/notebook/762-lines-matched-five-did-not">THE WORKING NOTE ↗</Link><a className="text-link" href="https://github.com/chrishayuk/joss">SOURCE AND TUTORIAL ↗</a><a className="text-link" href="https://github.com/chrishayuk/joss/tree/main/docs/scans">THE ORIGINAL PAGES ↗</a></div>
     </header>
     <JossPlayground/>
