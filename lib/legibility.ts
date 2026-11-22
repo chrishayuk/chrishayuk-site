@@ -177,7 +177,7 @@ export const publicationLegibility: Record<string, Legibility> = {
  "N-TURING-ACE": {
   subject: "Running the instruction tables in Alan Turing’s 1945 ACE report on a simulation of the machine it proposes, built with a coding agent",
   question: "If a computer was only ever a design, were its example programs ever more than drafts?",
-  searchTitle: "Turing’s 1945 ACE Report, Run as Written: Its Programs Needed Eight Corrections",
+  searchTitle: "Turing’s 1945 ACE Report, Run as Written: Neither of Its Printed Programs Runs",
   description: "The computer Alan Turing proposed in 1945, simulated from his report, running the two programs the report prints. Neither runs as printed, and three of the cards he drew for one disagree with its table. Try the machine in the browser.",
   concepts: ["Alan Turing", "Automatic Computing Engine", "Proposed Electronic Calculator", "history of computing", "coding agents", "verification", "WebAssembly"],
  },

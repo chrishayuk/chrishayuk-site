@@ -970,6 +970,63 @@
     ]
   },
   {
+    "id": "N-TURING-ACE",
+    "version": "1.1",
+    "recordHash": "ed123228365c56b0c8696f146f9d1eb1c5dd2c18bdcb6556ab6a8b5ca25f0218",
+    "revision": {
+      "kind": "correction",
+      "summary": "Corrections are now given by kind: INDEXIN's three are slips; of CALPOL's five changes three are slips, one follows the other side of a conflict in the report, and one is needed only because of the agent's own UNBURY. Adds Turing's caveat that section 13 is 'very incomplete and crude', that Figure 38 was read twice, that CALPOL's endless running is proven, an independent review by a second model which corrected the simulation's timing, and the prior work. The title no longer counts eight corrections.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. M. Turing, “Proposed Electronic Calculator”, report to the Executive Committee of the National Physical Laboratory (E.882), 1945; transcribed on Wikisource",
+        "url": "https://en.wikisource.org/wiki/Proposed_Electronic_Calculator",
+        "note": "INDEXIN is on p. 29 of the report and CALPOL on p. 31. Instruction forms are in section 13, the card layout in section 7, the operation types in section 12. Figures 19, 37 and 38 give the digits of each instruction."
+      },
+      {
+        "title": "The report and its original figures, The Turing Archive for the History of Computing",
+        "url": "https://www.alanturing.net/ace",
+        "note": "Figures 19 and 38 are redrawn in this note from a transcription; the originals are here."
+      },
+      {
+        "title": "B. E. Carpenter and R. W. Doran (eds.), “A. M. Turing’s ACE Report of 1946 and Other Papers”, MIT Press, 1986",
+        "note": "The editors’ introduction and notes 11 to 18 on the text, which point out conflicts in sections 11 and 12 and two of the corrections to INDEXIN."
+      },
+      {
+        "title": "B. E. Carpenter and R. W. Doran, “The other Turing machine”, The Computer Journal 20(3), 1977, pp. 269–279",
+        "url": "https://doi.org/10.1093/comjnl/20.3.269",
+        "note": "Analyses CALPOL. Not read for this note."
+      },
+      {
+        "title": "B. J. Copeland (ed.), “Alan Turing’s Automatic Computing Engine”, Oxford University Press, 2005",
+        "note": "Not read for this note."
+      },
+      {
+        "title": "T. Haigh, M. Priestley and C. Rope, “ENIAC in Action: Making and Remaking the Modern Computer”, MIT Press, 2016",
+        "note": "Reconstructs ENIAC’s programs from its documents: the closest scholarly model for this kind of work."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, Stanford, 1976",
+        "note": "One program written in every early notation, read closely."
+      },
+      {
+        "title": "Fig. 38, read twice",
+        "url": "https://github.com/chrishayuk/turing-ace/blob/main/docs/fig38-read-twice.md",
+        "note": "The figure transcribed blind by a second model, and compared row by row with the agent’s reading."
+      },
+      {
+        "title": "chrishayuk/turing-ace",
+        "url": "https://github.com/chrishayuk/turing-ace",
+        "note": "The machine, the assembler, the tables as printed and corrected, the tables written from Turing’s descriptions, the corrections and their kinds, the nine decisions and the conventions, with tests."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The machine, the assembler, the transcription of the tables and the tables the report only describes were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
     "id": "N-LANING-ZIERLER",
     "version": "1.0",
     "recordHash": "dab1aee3933df8327af41cadfa9a52027e8d8e5bc0dae25f51a3e83b0be819b6",

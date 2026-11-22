@@ -252,13 +252,17 @@ export function mountConsole(host, options = {}) {
   let jobStart = Infinity;
 
   function stepInfo(k) {
-    const [began, fetched, done, scd, sci] = run.steps[k];
+    const [, fetched, done, scd, sci] = run.steps[k];
+    // Looking for an instruction overlaps the operation before it (section
+    // 11), so steps overlap in time: each is shown from where the one before
+    // it ended, so that the clock only goes forwards.
+    const began = k > 0 ? Math.max(run.steps[k - 1][2], 0) : 0;
     const type = typeOf(sci);
     const card = type === "P" || type === "O";
     const loading = k < jobStart;
     const s = speed();
     const real = card ? (loading ? s.deckCard : s.card) : Math.max(1, done - began) * (loading ? s.deckMc : s.mc);
-    return { began, fetched, done, cd: scd, ci: sci, type, card, real, loading };
+    return { began, fetched, done: Math.max(done, began), cd: scd, ci: sci, type, card, real, loading };
   }
 
   function reset() {
@@ -342,7 +346,7 @@ export function mountConsole(host, options = {}) {
     }
     if (!isB(sci)) cd = (cd + (1 << 18)) & ~(1 << 16) & 0xffff0000;
     else cd = sci & 0xffff0000;
-    t = done;
+    t = Math.max(t, done);
   }
 
   function frame(now) {
@@ -400,7 +404,7 @@ export function mountConsole(host, options = {}) {
         : `One of the job's own cards, into DL ${posOf(info.ci).dl}.`;
     }
     if (info.type === "O") sound.card(info.real / 1000, true);
-    const wait = info.fetched - info.began;
+    const wait = info.fetched - run.steps[k][0];
     const what = run.forms[run.steps[k][5]];
     if (k < jobStart) {
       status.innerHTML = `Loading from cold: card <b>${Math.min(cardsRead + (info.type === "P" ? 1 : 0), run.deck)}</b> of ${run.deck}. ${info.type === "P" ? "Reading." : `Obeying the card's own order: <b>${what}</b>.`}`;
