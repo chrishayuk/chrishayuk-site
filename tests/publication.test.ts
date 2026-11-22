@@ -560,3 +560,13 @@ test("the motivation publication has an immutable snapshot and preserves evidenc
   assert.ok(results.filter(result=>result.recordId===note.id).every(result=>result.publication==='published'&&result.basis==='published-record'));
  }
 });
+
+test("llms.txt lists every language playground beside its note", async () => {
+ const { llmsDocument } = await import("../lib/llms.ts");
+ const { programmes } = await import("../lib/publication-index.ts");
+ const document = llmsDocument();
+ const languages = programmes.find(programme => programme.id === "languages")!;
+ assert.ok(document.includes("## Interactive studies — the languages, running in the browser"));
+ for (const play of languages.play ?? []) assert.ok(document.includes(`(https://chrishayuk.com${play.href}): ${play.name}, ${play.year}.`), play.href);
+ assert.match(document, /\/demos\/joss\): JOSS, 1964\. .* The note: \[762 lines matched\. Five did not\.\]/);
+});

@@ -1,5 +1,6 @@
 import { canonicalPaths } from "../canonical.ts";
 import { publicationSnapshots, records, recordPath } from "../records.ts";
+import { programmes } from "../publication-index.ts";
 import { allVideos, videoPath } from "../youtube.ts";
 
 /**
@@ -56,6 +57,9 @@ export function visiblePaths(): ReadonlySet<string> {
   // Markdown is to find out whether agents use it, and that needs counting.
   ...records.map(record => `${recordPath(record)}.md`),
   "/api/markdown",
+  // The language playgrounds, which /llms.txt offers beside their notes: an
+  // agent that follows one of those links should be counted where it lands.
+  ...(programmes.find(programme => programme.id === "languages")?.play ?? []).map(play => play.href),
  ]);
  return cache;
 }
