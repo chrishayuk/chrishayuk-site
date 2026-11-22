@@ -31,7 +31,7 @@ export const programmes = [
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
     description: "Old programming languages rebuilt from their original printed sources, checked against the page, and running in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE"], continuation: undefined,
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
       { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
@@ -40,6 +40,7 @@ export const programmes = [
       { label: "Laning and Zierler playground", href: "/demos/laning-zierler", name: "Laning and Zierler", year: "1953", detail: "Algebra for MIT’s Whirlwind I, rebuilt from its 1954 manual. Punch a tape, feed it, and read what the printer types." },
       { label: "Turing ACE playground", href: "/demos/turing-ace", name: "Turing’s ACE", year: "1945", detail: "The computer Alan Turing proposed at the National Physical Laboratory, with the programs from his report." },
       { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
+      { label: "IPL-V playground", href: "/demos/ipl-v", name: "IPL-V", year: "1964", detail: "The list-processing machine of the IPL-V manual, the language of the first artificial intelligence programs. Step it and watch storage change." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",

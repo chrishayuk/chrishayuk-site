@@ -78,16 +78,16 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
     { label: "What the replay found in the film", children: <>{act(4)}</> },
     { label: "Five lines", kind: "evidence", children: <>
       <StudyMeasures label="FIVE SESSIONS, EVERY LINE JOSS TYPED" items={[
-        { label: "COLUMN FOR COLUMN", value: "686", detail: "Against the typewriter’s own output, reproduced in the papers." },
-        { label: "CHARACTER FOR CHARACTER", value: "76", detail: "Against pages a typist had copied, closing up the columns." },
-        { label: "DIFFERENT", value: "5", detail: "Each by one unit in the last digit of a result that goes through a logarithm or an exponential." },
+        { label: "COLUMN FOR COLUMN", value: "689", detail: "Against the typewriter’s own output, reproduced in the papers." },
+        { label: "CHARACTER FOR CHARACTER", value: "78", detail: "Against pages a typist had copied, closing up the columns." },
+        { label: "FROM JOSS’S OWN ROUTINES", value: "5", detail: "One unit away with a modern library; as printed once the logarithm, exponential and powers of the 1965 listing are followed." },
       ]} note="A further six blank lines fall off the cut edges of figures, where the page cannot show them."/>
       {act(5)}
       <Excerpt src="rm-4162-row-72.jpg" width={960} height={220}
         alt="Five rows of a table typed by JOSS, for 71 to 75, with square roots, logarithms and exponentials. The exponential for 72 is 1.8586717 31."
         caption="BAKER, RM-4162-PR, JUNE 1964, PDF P. 23 / THE ROW FOR 72 ENDS IN A 7"/>
-      <JossRunner label="THE THREE THINGS THAT DIFFER, AND ONE THAT DOES NOT" program={LOGS}
-        note="The pages have .69314718 for log 2; a 7 for exp(72) where a correct exponential, rounded to nine digits and then to the form as JOSS did, gives an 8; and 357 where this ends in 356. The last three lines add a tenth ten times. Shaw: “the result is indeed 1.”"/>
+      <JossRunner label="THE THREE THINGS JOSS’S OWN ROUTINES DECIDE, AND ONE THEY DO NOT" program={LOGS}
+        note="The pages have .69314718 for log 2, a 7 for exp(72), and 357. A correctly rounded library gives …181, an 8 and 356; the routines of the 1965 listing, followed here, give what the pages print. The last three lines add a tenth ten times. Shaw: “the result is indeed 1.”"/>
     </> },
     { label: "Check it", children: <>
       <Excerpt src="shaw-note-1964-11-19.jpg" width={1440} height={1660} narrow

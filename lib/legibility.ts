@@ -164,7 +164,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Replaying the console sessions printed in RAND’s JOSS papers of 1964–65 on a reconstruction built from those papers with a coding agent",
   question: "How much of a conversation survives on paper?",
   searchTitle: "In 1965, the Computer Learned to Say I: JOSS, Rebuilt and Replayed Against Its Original Pages",
-  description: "RAND’s JOSS, a computer you talked to at a typewriter, rebuilt from its 1964–65 papers with a coding agent. In 1965 it began saying I, to feel like a person. Its original sessions replay: 762 of 767 lines match. Sit at the typewriter in your browser.",
+  description: "RAND’s JOSS, a computer you talked to at a typewriter, rebuilt from its 1964–65 papers with a coding agent. In 1965 it began saying I, to feel like a person. Its original sessions replay: all 767 lines match, the last five once its own log routine is followed. Sit at the typewriter in your browser.",
   concepts: ["JOSS", "J. C. Shaw", "JOHNNIAC", "RAND Corporation", "time-sharing", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
  "N-LANING-ZIERLER": {
@@ -180,6 +180,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   searchTitle: "Turing’s 1945 ACE Report, Run as Written: Neither of Its Printed Programs Runs",
   description: "The computer Alan Turing proposed in 1945, simulated from his report, running the two programs the report prints. Neither runs as printed, and three of the cards he drew for one disagree with its table. Try the machine in the browser.",
   concepts: ["Alan Turing", "Automatic Computing Engine", "Proposed Electronic Calculator", "history of computing", "coding agents", "verification", "WebAssembly"],
+ },
+ "N-IPLV": {
+  subject: "Rebuilding the IPL computer of the 1964 IPL-V manual with a coding agent, and holding it to the runs the manual and a 1963 RAND memorandum print",
+  question: "How much of a system from the early 1960s can be recovered exactly from a manual that printed one run of it?",
+  searchTitle: "IPL-V, the Language of the First AI Programs, Rebuilt and Held to Its 1964 Manual’s Trace",
+  description: "IPL-V held symbols in linked lists, which is how the first artificial intelligence programs held what they knew. Its 1964 manual prints a full trace of one run; a reconstruction built with a coding agent matches all 46 lines and runs the 1963 Logic Theorist unchanged. Step the machine in your browser.",
+  concepts: ["IPL-V", "Information Processing Language", "Allen Newell", "Herbert Simon", "J. C. Shaw", "Logic Theorist", "list processing", "history of artificial intelligence", "coding agents", "verification", "WebAssembly"],
  },
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
