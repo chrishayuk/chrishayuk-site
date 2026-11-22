@@ -215,6 +215,7 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
 const systems=await request("/systems");
 assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
 assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
 const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
@@ -253,7 +254,7 @@ assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
 assert.ok(home.body.includes('href="/notebook?collection=languages"'), 'home offers the Languages collection');
 const languages=await request("/notebook?collection=languages");
-for (const play of ["/demos/mouse", "/demos/basic"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
 assert.ok((await request("/notebook/the-port-matched-the-reference-was-wrong")).body.includes('href="/demos/mouse"'), 'Mouse note links to the playground');
 const mouse=await request("/demos/mouse");
 assert.equal(mouse.status,200);
@@ -265,6 +266,11 @@ assert.match(basic.body,/BASIC interpreter/);
 assert.match(basic.body,/name="robots" content="noindex, follow"/);
 for (const asset of ["/demos/basic/chuk-basic.wasm","/demos/basic/worker.js","/demos/basic/session.js","/demos/basic/wasi.js","/demos/basic/examples.json","/demos/basic/scans/p01-preface.jpg","/media/notebook/basic/manual-1964-title.jpg"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/demos/mouse/mouse.wasm","/demos/mouse/worker.js","/demos/mouse/wasi.js","/demos/mouse/examples.json"]) assert.equal((await request(asset)).status,200,asset);
+const bohm=await request("/demos/bohm");
+assert.equal(bohm.status,200);
+assert.match(bohm.body,/Böhm’s language/);
+assert.match(bohm.body,/name="robots" content="noindex, follow"/);
+for (const asset of ["/demos/bohm/bohm.wasm","/demos/bohm/worker.js","/demos/bohm/wasi.js","/demos/bohm/examples.json"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.mp4","/media/notebook/address.mp4","/media/notebook/stills/HJlWDSyDcD4-156.webp","/media/notebook/stills/HJlWDSyDcD4-286.webp","/media/notebook/stills/HJlWDSyDcD4-434.webp","/media/notebook/stills/HJlWDSyDcD4-1222.webp"]) {
   const response=await request(asset);
   assert.equal(response.status,200,asset);
