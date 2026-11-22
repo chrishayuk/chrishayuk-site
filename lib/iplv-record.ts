@@ -1,0 +1,64 @@
+import type { PublicationRecord } from "./types.ts";
+
+/** A note about rebuilding the IPL computer of the IPL-V manual (second
+ * edition, 1964) with a coding agent, and holding it to the runs printed in
+ * that manual and in a RAND memorandum of 1963. Every quoted sentence is
+ * copied from its source. Every count can be reproduced with `cargo test` in
+ * the linked repository, and the manual's programs run on /demos/ipl-v.
+ *
+ * Unlisted: a draft for review in place. See docs/previews.md. */
+export const iplvRecord: PublicationRecord = {
+  id: "N-IPLV",
+  slug: "its-manual-printed-a-trace",
+  kind: "notebook",
+  visibility: "unlisted",
+  title: "Its manual printed a trace. So I could check.",
+  dek: "IPL-V, the language of the first artificial intelligence programs, rebuilt from its 1964 manual by a coding agent and held to the runs that manual prints.",
+  abstract: "A note about building the IPL computer, the machine the IPL-V manual of 1964 describes, with a coding agent. The manual prints one run of its own system in full: the address each card was loaded at, and a trace of every instruction with a count of interpretation cycles. The reconstruction loads that program at the same addresses, and all 46 lines of the trace agree in level, instruction, test cell and count. The count settled how cycles were tallied, which the text leaves loose, and with it the effort figures of a 1963 version of the Logic Theorist, which runs unmodified and finds the same proofs by the same search. Transcribing the manual’s own programs found two things wrong with the reconstruction. The machine runs in the browser.",
+  created: "2026-11-22",
+  version: "0.1",
+  status: "OPEN",
+  publication: "draft",
+  authors: ["Chris Hay"],
+  lineage: "MANUAL → SCAN → AGENT → MACHINE",
+  concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
+  related: ["N-CPL", "N-JOSS", "N-BOHM"],
+  media: [],
+  body: [
+    { kind: "observation", label: "01 / A MACHINE NOBODY HAD", text: "IPL-V was made between 1957 and 1964 at the RAND Corporation and the Carnegie Institute of Technology, by Allen Newell, J. C. Shaw, Herbert Simon, Fred Tonge and others, for programs that solve problems by search and rules of thumb. Its manual is frank that there was no such computer: “No computer currently available can process the IPL language directly”. What it describes is an IPL computer: cells that each hold one word, P Q SYMB LINK; one list of every cell not in use; a push-down list under every storage cell; and a cycle that interprets lists of instructions punched one to a card. I asked a coding agent to build that machine as a machine, with storage an array of cells, so that a program uses space, gives it back and runs out of it as it did then.", references: [
+      { label: "Information Processing Language-V Manual, second edition, 1964 (scan)", url: "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/IPL-V/manual" },
+    ] },
+    { kind: "observation", label: "02 / ONE RUN, PRINTED IN FULL", text: "Part One of the manual takes one small program, which removes the repeated symbols from a list, “all the way through to assembly and execution on the computer”, and prints both. Fig. 1 is the assembly listing, with the address every card went to. Fig. 2 is a trace of every instruction the program executes, with the test cell, the communication cell and a count of interpretation cycles. The reconstruction loads the program at the same addresses, from cell 64, and ends its listing with the same line: NUMBER OF CELLS ON AVAILABLE SPACE=21858. All 46 lines of the trace agree in level, instruction address, test cell, instruction and count." },
+    { kind: "observation", label: "03 / WHAT THE COUNT SAYS", text: "The text defines the count loosely: the interpreter tallies one into H3 “every time an ADVANCE occurs”. The column in Fig. 2 is exact. It goes up by one at an instruction and by two at one that executes a basic process, and the first instruction is the fifth cycle. The agent read the rule off the column. It matters beyond the figure, because the Logic Theorist reports its effort as this count. Counted this way, its effort comes to between 98.3 and 98.7 per cent of the figures printed in 1963, on every theorem. Jeff Shrager’s reconstruction, which runs the same deck and counts differently, reports about two thirds." },
+    { kind: "observation", label: "04 / THE LOGIC THEORIST OF 1963", text: "Einar Stefferud’s IPL-V version of the Logic Theorist of Newell, Shaw and Simon was printed in a RAND memorandum in 1963, with its output. David Moews transcribed it, and Shrager’s Executable Archaeology already runs it. On this reconstruction it runs unmodified. Of the 24 theorems from Principia Mathematica it was given, it proves the same 23 and gives up on the same one, *2.15, at its effort limit, each by the same search: the same number of subproblems and of substitutions for every theorem. The 533 lines of its printout agree with the transcribed pages apart from the effort figures, the core addresses it prints for rejected subproblems, and three slips in the transcription.", references: [
+      { label: "Moews, ipl-v-logic-theorist", url: "https://github.com/dmoews/ipl-v-logic-theorist" },
+      { label: "Shrager, Executable Archaeology", url: "https://github.com/jeffshrager/ExecutableArchaeology" },
+    ] },
+    { kind: "observation", label: "05 / THE MANUAL WRITES ITS OWN PROCESSES", text: "Part One teaches by programs, and the agent transcribed every one printed in full and ran it. Twice the manual writes one of the machine’s own basic processes in IPL. Its J101, which generates every cell of a list structure, gave a cell the reconstruction’s built-in J101 did not: after the head of each list, the head’s own word, pushed down by the mark that says the list has been visited. Part Two says the same, and the reconstruction had missed it. A step-by-step trace of a recursive search, Fig. 3, showed a second thing: a basic process reached through a LINK is part of the step that leads to it. Both are put right, the manual’s J101 and the built-in one now agree, and all 27 steps that Fig. 3 lists match." },
+    { kind: "observation", label: "06 / A MISTAKE PRINTED ON PURPOSE", text: "One routine, R62, is printed with a wrong Q code, and the reader is asked to find it. Run as printed, it does not do what the error suggests, which is to go round for ever. It stops and answers W1. The wrong instruction sends it into the push-down list of the working cell W1, and the copy it finds there is a word of zeros, because W1 was empty. A word of zeros is how this machine marks the end of a list, so the search ends there. Put a symbol in W1 first and it does go round for ever." },
+    { kind: "connection", text: "The machine runs in the browser, compiled from the same Rust source as the command-line version, with every program from Part One of the manual among its decks. Step one and watch storage change.", links: [
+      { href: "/demos/ipl-v?deck=manual-04-1", label: "Step the recursive search of Fig. 3 — interactive study" },
+      { href: "/demos/ipl-v", label: "The IPL computer, with all its decks" },
+      { href: "https://github.com/chrishayuk/ipl-v/tree/main/manual", label: "The manual’s programs, transcribed, with page numbers" },
+      { href: "https://github.com/chrishayuk/ipl-v", label: "Source, tests, tutorial and examples" },
+    ] },
+    { kind: "refusal", title: "WHAT THIS DOES NOT SHOW", lines: [
+      "Figs. 1 to 3 are three runs of one system the manual does not name, on three small programs. Agreeing with them shows the reconstruction does what that system did on these programs.",
+      "The last 1.5 per cent of the Logic Theorist’s effort is not explained. Some basic processes may have been IPL routines in the system of 1963, costing more cycles than a primitive; the counts do not show which.",
+      "The Logic Theorist deck is Moews’s transcription, and this is not the first reconstruction to run it: Moews’s own interpreter and Shrager’s did so first.",
+      "The list F1 makes is cell 148 in Fig. 2 and cell 145 here. What the system of 1964 had done with three more cells, the manual does not say.",
+      "Not all of IPL-V is here. Auxiliary storage, tapes, blocks and restart are left out, as the repository says.",
+      "The reconstruction, the transcriptions of Part One and these comparisons were made by one coding agent in one session, from scans read by that agent. Each figure has a page number so that it can be checked by eye.",
+    ], principle: "A manual that prints its own run can be held to it, line by line." },
+    { kind: "question", text: "How much of a system from the early 1960s can be recovered exactly from a manual that printed one run of it?", status: "OPEN", detail: "Fig. 2 fixed the load addresses, the order of interpretation and the count of cycles. It could not fix what the program it traces never does: auxiliary storage, the error traps, or the cost of each basic process in a particular system. For those there is only the text, and programs like the Logic Theorist whose printed output depends on them." },
+  ],
+  sources: [
+    { title: "A. Newell (ed.), “Information Processing Language-V Manual”, second edition, Prentice-Hall, 1964", url: "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/IPL-V/manual", note: "Fig. 1 and Fig. 2 are on pages 21 and 23 of Part One, Fig. 3 on page 34, R62 on page 26, and J101 as Fig. 11 on pages 80 and 81. Part Two, the Programmers’ Reference Manual, is the specification the reconstruction follows." },
+    { title: "A. Newell and F. M. Tonge, “An Introduction to Information Processing Language V”, Communications of the ACM 3(4), April 1960", url: "https://iiif.library.cmu.edu/file/Newell_box00040_fld03188_doc0001/Newell_box00040_fld03188_doc0001.pdf" },
+    { title: "E. Stefferud, “The Logic Theory Machine: A Model Heuristic Program”, RAND RM-3731, 1963", url: "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/LogicTheorist", note: "The program and its output for 24 theorems." },
+    { title: "David Moews, ipl-v-logic-theorist", url: "https://github.com/dmoews/ipl-v-logic-theorist", note: "The transcription of Stefferud’s deck and its 1963 output that this reconstruction was run against." },
+    { title: "Jeff Shrager, Executable Archaeology, and “Executable Archaeology: Reanimating the Logic Theorist from its IPL-V Source”, 2026", url: "https://github.com/jeffshrager/ExecutableArchaeology", note: "A Common Lisp IPL-V that runs the Logic Theorist, Simon’s Heuristic Coder and the Simon–Yngve sentence generator. The reconstruction’s output on the last two was compared with it." },
+    { title: "chrishayuk/ipl-v", url: "https://github.com/chrishayuk/ipl-v", note: "The reconstruction, its tests against the manual’s figures, the programs of Part One transcribed, a tutorial, and the machine in WebAssembly." },
+    { title: "Coding-agent session, 22 November 2026", note: "The reconstruction, the transcriptions and the comparisons in this note were made in this session. Every result can be rerun with cargo test in the repository." },
+  ],
+};
