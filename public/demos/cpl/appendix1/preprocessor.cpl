@@ -63,9 +63,11 @@ let Types = List['index', 'integer', 'real', 'double', 'complex', 'doublecomplex
                  'logical', 'longlogical', 'string', 'label', 'general', 'function', 'routine',
                  'array', 'vector', 'matrix', 'type']
 
-|| a)
+|| a) The list ends "index integer real etc."; the etc. is read here as the
+||    other types and the Boolean constants true and false.
 let CanEndCommand[string x] = Number[x] \/ Name[x] \/ StringConstant[x] \/
-        Among[x, List['§̸', ']', ')', ':', 'repeat', 'break', 'return', 'rhs', 'finish']] \/ Among[x, Types]
+        Among[x, List['§̸', ']', ')', ':', 'repeat', 'break', 'return', 'rhs', 'finish',
+                      'true', 'false']] \/ Among[x, Types]
 || b)
 let CanStartCommand[string x] = Number[x] \/ Name[x] \/ StringConstant[x] \/
         Among[x, List['pos', 'neg', '+', '-', '(', '§', 'if', 'unless', 'while', 'until', 'test', 'for',

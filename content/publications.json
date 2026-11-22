@@ -3213,5 +3213,790 @@
     },
     "hash": "ed123228365c56b0c8696f146f9d1eb1c5dd2c18bdcb6556ab6a8b5ca25f0218",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-MOUSE",
+      "slug": "the-port-matched-the-reference-was-wrong",
+      "kind": "notebook",
+      "title": "The port matched. The reference was wrong.",
+      "dek": "A 1979 language, a coding agent, and a misprint a reader had already caught in 1980.",
+      "abstract": "A note about finishing a Rust port of Mouse, the language Peter Grogono published in BYTE in July 1979, with a coding agent. The port matched the C interpreter it was checked against. The C carried a misprint from the printed listing and three bugs that a reader, Tom Lane, had described in BYTE in June 1980. The agent guessed the misprint and said it had not checked; it inherited the other three without comment. The corrected interpreter runs in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "MAGAZINE → C PORT → AGENT PORT → MAGAZINE",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-ATTRIBUTION",
+        "N-AUTHORITY"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / WHAT I ASKED",
+          "text": "Mouse is a programming language that fits on a magazine page. Peter Grogono published it in BYTE in July 1979, with the interpreter printed as 198 lines of Pascal. I had a C version of it and an unfinished Rust port of my own. I asked a coding agent to finish the port, using the C as the reference."
+        },
+        {
+          "kind": "observation",
+          "label": "02 / IT MATCHED",
+          "text": "The agent finished the port and compared it with the C on every example I had. The output was identical, byte for byte. Every example I had only printed text."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / BELIEVE, BUT DID NOT CHECK",
+          "text": "The agent’s report listed the places where it had chosen not to copy the C. One was the code that finds a macro’s parameter: “I used an increment, which I believe matches Grogono’s original listing but did not check against a source.” So I asked it to check against the magazine, not against the C."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / LINE 176",
+          "text": "The printed listing has the same subtraction as the C. Lines 175 and 176 both take one away, and the article’s own explanation only works if one of them adds. The agent had guessed right, and the C carries the same minus as the misprint.",
+          "references": [
+            {
+              "label": "BYTE, July 1979, pp. 198–220",
+              "url": "https://archive.org/details/byte-magazine-1979-07"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / A READER, TWO EVENINGS",
+          "text": "Somebody had already noticed. In June 1980 BYTE printed a letter from a reader, Tom Lane: line 176 should have a plus sign, not a minus (one of several misprints), and there were three further bugs in the logic. He found them “during two evenings of studying the interpreter listing, with no machine use whatever.” Grogono replied that they were “all genuine bugs”, and that the misprint came from a poor photocopy of the proof. The correction was in print within a year. It did not reach the C.",
+          "references": [
+            {
+              "label": "BYTE, June 1980, pp. 238 and 240",
+              "url": "https://archive.org/details/byte-magazine-1980-06"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / THIRTY-THREE OR ONE",
+          "text": "The agent had guessed the misprint. This bug it copied from the C without knowing it was there. With Lane’s corrections in, the port prints 1, and the article’s example listings run as described, with two exceptions that are the article’s own: listing 5, the bubble sort, fails when given fewer than two numbers, and the array program on page 204 reads with one full stop too many and accepts a twenty-sixth number where its text says twenty-five. Listing 2, which runs for ever, prints primes until it is stopped."
+        },
+        {
+          "kind": "connection",
+          "text": "The corrected interpreter runs in the browser, compiled from the same Rust source as the command-line version. Lane’s test is one of the examples.",
+          "links": [
+            {
+              "href": "/demos/mouse?example=lane-test",
+              "label": "Run Lane’s test — interactive study"
+            },
+            {
+              "href": "https://github.com/chrishayuk/mouse-interpreter",
+              "label": "Source, tutorial and the scanned pages"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The agent did not discover these bugs. Tom Lane did, and they were in print by 1980.",
+            "This is one port in one session. It says nothing general about how often an agent copies a reference’s mistakes.",
+            "I have not established where the C version came from, only that it has the same subtraction as the printed listing.",
+            "A second model, OpenAI’s Codex, later reviewed the repository independently. It found the slips in the bubble sort and the array program, and that the examples had added spaces to the printed prompts. The examples now keep the printed strings, each change is listed, and the review and what was done about each point are in the repository."
+          ],
+          "principle": "Matching a reference is evidence about the port. It is not evidence about the reference."
+        },
+        {
+          "kind": "question",
+          "text": "When a port matches its reference, who checks the reference?",
+          "status": "OPEN",
+          "detail": "Two habits came out of this: asking the agent what it did not check, and asking what the reference was copied from. Whether either would have been enough without a reader’s letter from 1980 is not something this note can answer."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Peter Grogono, “Mouse: A Language for Microcomputers”, BYTE, July 1979, pp. 198–220",
+          "url": "https://archive.org/details/byte-magazine-1979-07",
+          "note": "Listing 6 is on pp. 209, 210 and 212; line 176 on p. 212; Figure 1 on p. 216."
+        },
+        {
+          "title": "Tom Lane, “Comment and Correction for Mouse”, with Peter Grogono’s reply, BYTE, June 1980, pp. 238 and 240",
+          "url": "https://archive.org/details/byte-magazine-1980-06"
+        },
+        {
+          "title": "chrishayuk/mouse-interpreter",
+          "url": "https://github.com/chrishayuk/mouse-interpreter",
+          "note": "The interpreter, its tests, 42 example programs, and reduced scans of both sources."
+        },
+        {
+          "title": "Coding-agent session, 21 November 2026",
+          "note": "The agent’s report is quoted as written. The first completed port was rebuilt unchanged from the session transcript to confirm that it prints 33 on Lane’s test."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "529ce5da8e8f8f920bdc9b89aab6569cf434032d8fecbc2c1ce656907dcb6f8d",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-BOHM",
+      "slug": "a-compiler-from-1951-ran-it-needed-four-corrections",
+      "kind": "notebook",
+      "title": "A compiler from 1951 ran. It needed four corrections.",
+      "dek": "A language, a machine and a compiler that existed on paper, a coding agent, and three ways of being wrong that had to agree.",
+      "abstract": "A note about running the compiler in Corrado Böhm’s 1951 dissertation, which is written in the language it compiles, for a machine that was only ever a design. A coding agent built the machine, typed in the compiler from the 1954 printing, and wrote two independent readings to check it against. As printed, the compiler does not work. With three corrections, one of them reported by Knuth and Trabb Pardo in 1976, and a fourth change that is needed only because of how this reconstruction compiles the compiler’s own formulas, it compiles itself. The language, the machine and the compiler run in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "THESIS → SCAN → AGENT → MACHINE",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-MOUSE",
+        "N-AUTHORITY"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A COMPILER ON PAPER",
+          "text": "In 1951 Corrado Böhm submitted a doctoral dissertation at ETH Zürich. It describes a computer, a language for it in which every statement is an assignment, and a compiler written in that language. Knuth and Trabb Pardo call it “the first compiler in its own language”. The computer was a design, and the compiler stayed on the page. I asked a coding agent to build the machine and run it.",
+          "references": [
+            {
+              "label": "Böhm, Calculatrices digitales, 1954 printing",
+              "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THREE READINGS",
+          "text": "A compiler typed in by an agent, running on a machine the same agent built, proves nothing by itself: if they are wrong in the same way, they agree. So there are three readings of every program. One works out each formula as written, as algebra, with no machine. One is a second compiler, written from the prose of the thesis and not from Böhm’s code. The third is Böhm’s compiler, as instruction numbers on the simulated machine. They have to agree number for number."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / AS PRINTED",
+          "text": "They did not. For the simplest program there is, the compiler as printed writes four numbers and none of them is an instruction. The group that encodes a plain copy adds up the two addresses and leaves out the operation code. An earlier section of the thesis encodes the same formula with the code in it."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TWO BRANCHES AT ONCE",
+          "text": "There is no “if” in this language. A program chooses by multiplying each destination by 0 or 1 and adding, so exactly one multiplier may be 1. In group C of the compiler two of them are 1 for every symbol that is not a parenthesis, and the compiler continues at the sum of two groups. This one the agent did not see coming. It showed up in a trace of the first run."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / KNUTH’S PAGE",
+          "text": "The third was already known. In 1976 Knuth and Trabb Pardo wrote: “It appears to be necessary to add one more statement in order to fix a bug in his program, caused by overlaying information when a left parenthesis follows an operator symbol”. They did not print the fix, so the one here is ours. They did work one formula through by hand, and with the fix in, the compiler’s six instructions for that formula match their page line for line. That page is the only check in this note that did not come from the agent.",
+          "references": [
+            {
+              "label": "Knuth and Trabb Pardo, 1976, pp. 39–41",
+              "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / THE FOURTH NEEDS A MACHINE",
+          "text": "With three corrections the compiler works when its own formulas are read as algebra. On the machine it stops after one number. Böhm’s method computes every product in a variable called X, and the compiler keeps its place among the parentheses in a variable it also calls X. Once the compiler has itself been turned into instructions, its own code overwrites its own bookmark. The thesis names the two letters its method uses. It does not say a program must avoid them. This fourth change is of a different kind from the other three: an independent review later found that writing the compiler’s formulas fully bracketed, which the thesis also allows, avoids the clash without renaming anything."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / IT COMPILES ITSELF",
+          "text": "With its X renamed, the compiler gets through its own text. Read as algebra over its own source it writes 401 instruction numbers. Those numbers, run on the machine over the same source, write the compiler again, and that copy does the same. The third copy is identical to the first, and all of them are identical to what the second compiler writes."
+        },
+        {
+          "kind": "connection",
+          "text": "The language, the machine and the compiler run in the browser. You can write a program, see the instructions Böhm’s compiler makes of it, run the compiler as printed, and have it compile itself.",
+          "links": [
+            {
+              "href": "/demos/bohm",
+              "label": "Write a program — interactive study"
+            },
+            {
+              "href": "/demos/bohm?example=knuth-tpk&mode=verify",
+              "label": "Knuth and Trabb Pardo’s own program, three ways"
+            },
+            {
+              "href": "https://github.com/chrishayuk/bohm",
+              "label": "Source, tutorial and the scanned pages"
+            },
+            {
+              "href": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+              "label": "The thesis in English, translated by Peter Sestoft"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "This may not be the first time the compiler has run. Peter Sestoft’s 2016 translation says he implemented it in Java. I could not find that code and do not know which corrections it needed.",
+            "Of the three slips, one was reported in 1976. I have not found the other two written down, but I read two sources, not the literature. The fourth change, renaming X, depends on how this reconstruction compiles the compiler’s formulas.",
+            "All three readings were written by the same agent in one session. They are three routes, not three authors. A second model, OpenAI’s Codex, later reviewed the repository independently and found that the algebra and the machine read input in different orders inside brackets; they now agree. Its review, and what was done about each point, is in the repository.",
+            "The compiler was typed in from a scan. For the two formulas that were not known to be wrong, the French printing and the English translation agree. Two arrows the printing leaves out of group J′ are supplied, the loader’s printed constant 94999010000 is read as Sestoft’s 9490010000, and a repeated label in Böhm’s second Euclid program is corrected; each is now listed as a slip in the repository.",
+            "The corrections are a reading of what Böhm meant. He is not here to ask."
+          ],
+          "principle": "Agreement between things one author wrote is evidence of consistency. The page somebody else worked by hand is evidence of correctness."
+        },
+        {
+          "kind": "question",
+          "text": "If a program has only ever existed on paper, how would you know it was right?",
+          "status": "OPEN",
+          "detail": "Having an agent produce a compiler was the cheap part. The work was arranging three ways to be wrong and making them agree, and even then the one outside check was a single hand-worked formula from 1976. Knuth and Trabb Pardo’s own test program in Böhm’s language is correct as algebra and prints nothing on the machine, because it uses the letters S and X."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Corrado Böhm, “Calculatrices digitales. Du déchiffrage de formules logico-mathématiques par la machine même dans la conception du programme”, dissertation, ETH Zürich, 1951; printed Bologna, 1954",
+          "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662",
+          "note": "Euclid’s algorithm is on p. 25. The compiler is chapter 7, pp. 39–43: group C on p. 40, group E′ on p. 43."
+        },
+        {
+          "title": "The same, translated into English by Peter Sestoft, 2016",
+          "url": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+          "note": "Appendix B: “We have made a simple implementation in Java of Böhm’s machine, and his compiler and loader”. The translation omits group W of chapter 7."
+        },
+        {
+          "title": "Donald E. Knuth and Luis Trabb Pardo, “The Early Development of Programming Languages”, Stanford report STAN-CS-76-562, August 1976, pp. 35–42",
+          "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+          "note": "The bug is reported on p. 40, the hand-worked formula is on p. 41, and their TPK program in Böhm’s language is on pp. 36–39."
+        },
+        {
+          "title": "chrishayuk/bohm",
+          "url": "https://github.com/chrishayuk/bohm",
+          "note": "The machine, loader and compiler, their tests, 42 example programs, a tutorial, and reduced scans of the pages the corrections rest on."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7 were written in this session. Every result in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "06a3b01bba71907e59b48f0f97b4c5d9f94acc4ce035877f3df2c7ce384d0125",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-CPL",
+      "slug": "a-1966-program-said-it-had-not-been-checked",
+      "kind": "notebook",
+      "title": "A 1966 program said it had not been checked. So I ran it.",
+      "dek": "The one large program in the papers that define CPL, a handwritten warning across the top of it, and a coding agent with a scan.",
+      "abstract": "A note about building an interpreter for CPL, the language BCPL was cut down from, out of its 1966 working papers with a coding agent. The papers contain one program of any size, a preprocessor written in CPL, and someone has written across the top of it that the draft has not been fully checked. Typed in as printed it does not compile. With seven slips put right it runs and gives wrong answers in two ways, and in two more places its informal notes disagree with its own text. Corrected, it reads its own text to the last word. The interpreter and the program run in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "TYPESCRIPT → SCAN → AGENT → INTERPRETER",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-BOHM",
+        "N-MOUSE"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A LANGUAGE IN WORKING PAPERS",
+          "text": "CPL was designed in the early 1960s by a group at Cambridge and London. Martin Richards cut it down to make BCPL, and BCPL led to B and then C. In July 1966 the group put out a technical report called CPL Working Papers, most of which is a draft of the reference manual. I asked a coding agent to build an interpreter for the language those papers describe: the 1966 language, not the subset that became BCPL.",
+          "references": [
+            {
+              "label": "CPL Working Papers, July 1966",
+              "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf"
+            },
+            {
+              "label": "Richards, How BCPL evolved from CPL",
+              "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / ONE PROGRAM OF ANY SIZE",
+          "text": "An interpreter built from a manual can only be tested on programs. The examples in the manual are a few lines each, and everything longer the agent wrote itself. The papers contain one exception. Appendix 1 is a preprocessor, about 190 lines of CPL, “intended to be both a description of the transformation from an implementation alphabet to canonical CPL and a general example of a CPL program”. Across the top of its first page someone has written by hand: “This draft has not been fully checked”."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / AS PRINTED, IT DOES NOT COMPILE",
+          "text": "The agent typed the program in from the scan, keeping the text as printed, with the corrections already written on the copy by hand. It does not compile. Three sections open with one tag and close with another: R.T and R.T., R.U.W and R.U.W., R.S. and R.S. One call is to Proprocessor. One case has no colon. And twice a name that should begin with a capital is typed small, goto switch and standard, which matters in CPL because a small letter is a whole name: standard is eight names side by side."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / IT RUNS, AND IS WRONG",
+          "text": "With those seven put right the program runs, and what it writes is wrong in two ways. The routine that reads an underlined word starts from the first letter instead of from nothing, so every word begins twice. And after an ordinary comma it loses a character. That one can be followed on the page with a finger: ReadSpaces has already moved on to the next character, and then NextChar moves on again."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHERE THE NOTES DISAGREE WITH THE PROGRAM",
+          "text": "Part 3 of the appendix describes the functions the program uses but does not declare, a sentence or a list for each. In two places those descriptions cannot be what the program needs. One says a function is true for the symbols that can come before a command, where the program uses it for the symbols that cannot. The other turns goto into go, after which nothing recognises it as a jump. These are perhaps better called open questions than slips. Part 3 says of itself that it is informal."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / IT READS ITSELF",
+          "text": "A preprocessor for CPL written in CPL can be given its own text. Corrected, it reads all 189 lines of itself and writes about 1,100 symbols, ending with finish. What it writes is not wholly canonical: jump on and the rest come out as two symbols each. And whether the “etc.” of Part 3 covers true and false, after which the program would otherwise lose a semicolon, is a reading, not something the page says. Given its own text as printed, it stops a little over 200 symbols in, at the first tag that does not match, and says nothing, because the program has no message for that case. It is doing what it was written to do. A closing bracket with the wrong tag makes every open section jump out through a label it was handed by its caller, and the outermost label is the end of the program."
+        },
+        {
+          "kind": "connection",
+          "text": "The interpreter runs in the browser, compiled from the same Rust source as the command-line version, with the preprocessor as one of its examples. The programs on this page are run by it where they sit.",
+          "links": [
+            {
+              "href": "/demos/cpl?example=appendix-1-preprocessor",
+              "label": "Run the 1966 preprocessor — interactive study"
+            },
+            {
+              "href": "/demos/cpl",
+              "label": "Write CPL in the playground"
+            },
+            {
+              "href": "https://github.com/chrishayuk/cpl/tree/main/appendix1",
+              "label": "The program, the eleven corrections (nine slips, two conflicts) and a detail of the page for each"
+            },
+            {
+              "href": "https://github.com/chrishayuk/cpl",
+              "label": "Source, tutorial and example programs"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "These are readings of a scan of a typescript, made by one reader, and that reader was a coding agent. Each slip has a page number and a detail of the scan so that it can be checked by eye.",
+            "Whether the program was ever run in 1966, the documents I have do not say. A later draft may have put all of this right.",
+            "The appendix describes thirteen of its functions only informally and never defines seven more names it uses. All of them were supplied. A different reading of those sentences gives a different program.",
+            "The interpreter and the transcription came from the same agent in one session. The seven slips that stop the program compiling can be seen on the page. The two wrong answers also rest on the interpreter doing what the manual means.",
+            "The interpreter is not all of CPL. What it leaves out is listed in the repository, and where the 1966 papers say a section is out of date without giving the new rules, it follows the old ones.",
+            "I have not searched for an earlier list of these slips. Somebody may have made one.",
+            "A second model, OpenAI’s Codex, later reviewed the repository independently. It found that the interpreter grouped division the wrong way, a/bc as (a/b)c where the manual’s table gives a/(bc), that it skipped the second operand of and and or, and that some example programs had been edited without saying so. These are corrected or disclosed, and the review, with what was done about each point, is in the repository."
+          ],
+          "principle": "A program that has never been run has only been proofread. Running it is a different kind of reading."
+        },
+        {
+          "kind": "question",
+          "text": "How much of a language that was still a draft can you check by running the one program its authors left?",
+          "status": "OPEN",
+          "detail": "The preprocessor exercises the parts of CPL its authors reached for when they had real work to do: recursion, strings, a switch, sections with tags, and a label passed as a parameter so that a routine can jump out of its caller. It says nothing about the parts they did not need that day. For those, the interpreter has only the manual’s short examples and programs written by the same agent that wrote the interpreter."
+        }
+      ],
+      "sources": [
+        {
+          "title": "University of London Institute of Computer Science and The Mathematical Laboratory, Cambridge, “CPL Working Papers”, technical report, July 1966",
+          "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf",
+          "note": "Appendix 1, “The Preprocessor”, begins on page 120 of the PDF. The program is Part 2, on pages 2 to 6 of the appendix; the informal definitions are Part 3, on pages 6 and 7."
+        },
+        {
+          "title": "“CPL Elementary Programming Manual”, Edition II, Cambridge, January 1966",
+          "url": "https://www.ancientgeek.org.uk/CPL/CPL_Elementary_Programming_Manual.pdf"
+        },
+        {
+          "title": "D. W. Barron, J. N. Buxton, D. F. Hartley, E. Nixon and C. Strachey, “The main features of CPL”, The Computer Journal 6, 1963",
+          "url": "https://www.ancientgeek.org.uk/CPL/The_Main_Features_of_CPL.pdf"
+        },
+        {
+          "title": "Martin Richards, “How BCPL evolved from CPL”",
+          "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+        },
+        {
+          "title": "chrishayuk/cpl",
+          "url": "https://github.com/chrishayuk/cpl",
+          "note": "The interpreter, its tests, 73 example programs, a tutorial, and the preprocessor as printed and corrected with a detail of the page for each slip."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The interpreter, the transcription of Appendix 1 and the functions it leaves informal were written in this session. Every result in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "c2e4680fe1e639761fa9f090dd6e4f7c1be23c785e17f064be96b6533fb9bda7",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-BASIC",
+      "slug": "the-manual-stopped-at-line-40",
+      "kind": "notebook",
+      "title": "The manual stopped at line 40.",
+      "dek": "Dartmouth BASIC, typed in from its first instruction manual of May 1964, and the one program a later BASIC would not run.",
+      "abstract": "A note about Dartmouth BASIC, with the language running in the page. The first instruction manual, from May 1964, explains the language in a few pages and prints three example programs with their results; they are typed in here beside the pages they came from, and print the same figures. The interpreter running them was written in Rust with a coding agent and checked against later BASICs, which it matched. The manual’s own second example then stopped at line 40: in 1964 a square root was taken of the absolute value, and the later BASICs it had been checked against call that an error.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "1964 MANUAL → LATER BASICS → AGENT PORT → 1964 MANUAL",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-MOUSE",
+        "N-ATTRIBUTION"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / MAY 1964",
+          "text": "BASIC’s first instruction manual is a typescript from the Dartmouth College Computation Center, dated May 1964 and marked First Draft. Its preface says the college was building a system that “will enable 20 or more people to use the computer at the same time”, and lists what the language for it had to do. The first requirement: “It should be very easy to learn.” Then, as evidence, and “without any explanation”, it prints a whole program. Three lines, to work out seven plus eight, divided by three.",
+          "references": [
+            {
+              "label": "First BASIC instruction manual, Dartmouth, May 1964",
+              "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "demonstration": "basic",
+          "text": "That program, with the line numbers the manual gives it on page 4. It is running in your browser, not replayed. Change the sum and run it again.",
+          "links": [
+            {
+              "href": "/demos/basic?example=preface",
+              "label": "Open the full study — every program, and the pages"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / FOURTEEN WORDS",
+          "text": "A Dartmouth BASIC program is a list of numbered instructions. The computer starts at the lowest number and works upwards, so the numbers are the order, whatever order the lines were typed in. The manual suggests leaving gaps, such as counting in tens, “so that further instructions may be inserted if the need arises.” Each instruction is one operation and what it applies to, and there are not many: “The last instruction in any BASIC program is ‘END’. There are only 13 other operations.” LET puts a value in a variable. PRINT shows it. FOR and NEXT repeat the lines between them. IF … THEN and GO TO decide which line comes next. READ takes numbers from DATA lines, and DEF gives a formula a name. A variable is “any single letter, or a letter followed by one digit.”",
+          "references": [
+            {
+              "label": "First BASIC instruction manual, Dartmouth, May 1964",
+              "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE PAGE PRINTS ITS OWN ANSWERS",
+          "text": "The reprint Dartmouth hosts, which is the beginners’ part, ends with three example programs and, under each, what it printed and how long it took. Program number 1 averages the logarithms of the numbers 1 to 100 and prints 1.5797, in three seconds. I typed all three in from the scan. They are a test nobody had to write, because the expected output is on the page."
+        },
+        {
+          "kind": "connection",
+          "demonstration": "basic",
+          "text": "Program number 1, from page 21. The 1964 page prints 1.5797, and so does this. Switch off AS IN 1964 and a later BASIC prints the same number to nine figures.",
+          "links": [
+            {
+              "href": "/demos/basic?example=example1",
+              "label": "Open the full study"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / WHAT IS NOT THERE",
+          "text": "What the beginners’ part leaves out says as much as what it has. There is no way to ask the person at the teletype a question: a program’s numbers come from its DATA lines, and to try other numbers you change the program. There are no variables for words, only for numbers. Powers are written with an arrow, X↑2, because “on a tele-type typewriter it is impossible to print superscripts”. The manual treats changing the program as the normal way to use it. Under program number 3 it says, “We can find the root of a different function by changing a single instruction”, prints the new line 30, and prints the new result.",
+          "references": [
+            {
+              "label": "First BASIC instruction manual, Dartmouth, May 1964",
+              "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "demonstration": "basic",
+          "text": "Program number 3, from page 23. Run it, then do what the manual does: replace line 30 with 30 DEF FNF(Z) = EXP(X) -2 and run it again. The page prints .837585, then .693176. The new line is typed here as it is printed, with an X where the first one had a Z. It still works, because the program only ever asks for FNF(X).",
+          "links": [
+            {
+              "href": "/demos/basic?example=example3",
+              "label": "Open the full study"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / HOW IT RUNS HERE",
+          "text": "This is not Dartmouth’s compiler. It is an interpreter written in Rust and compiled to WebAssembly, and nothing you type is sent anywhere. I had started it in Python: a tokenizer and a parser, which never ran a program. I asked a coding agent to move it to Rust and finish it. Neither of us began from the 1964 manual."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / CHECKED AGAINST LATER BASICS",
+          "text": "How would I know it was right? The agent wrote tests, and they passed. Then it ran 103 listings from David Ahl’s BASIC Computer Games of 1978, which nobody involved had written, and every one loads and runs without changes, as the coding-horror collection has them; that collection was normalised for Vintage BASIC, so they are not the printed book line for line. Then it ran test programs through PC-BASIC, an independent emulation of Microsoft’s GW-BASIC. Twenty-two of them print the same on standard output in both, byte for byte once PC-BASIC’s line endings and closing prompt are set aside, and the comparison found one real mistake. Error messages were not compared. Everything agreed. All of it was BASIC from fourteen years or more after the manual.",
+          "references": [
+            {
+              "label": "The 1978 listings: coding-horror/basic-computer-games",
+              "url": "https://github.com/coding-horror/basic-computer-games"
+            },
+            {
+              "label": "PC-BASIC",
+              "url": "https://robhagemans.github.io/pcbasic/"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / LINE 40",
+          "text": "Then I asked for pages of the 1964 manual, for this note, and the example programs came with them. Programs 1 and 3 gave the page’s figures. Program 2 solves quadratic equations, and on its third set of numbers it stopped: Illegal function call: SQR, in line 40. Line 40 takes a square root before the program has looked at whether the number is negative. Page 5 says why that was fine in 1964: “SQR(A) stands for √A, where the square-root is always taken of the absolute value of A.” The games and the second interpreter come from later BASICs, where, in the two I could run, the square root of a negative number is an error. They agreed with each other, and my interpreter agreed with them. The oldest page disagreed with all of it.",
+          "references": [
+            {
+              "label": "First BASIC instruction manual, Dartmouth, May 1964",
+              "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "demonstration": "basic",
+          "text": "Program number 2, as later BASICs run it. Press RUN: it stops at line 40. Switch on AS IN 1964 and run it again, and the last result reads IMAGINARY PART= 1.41421, as the page does. It goes back for more numbers until there are none, and then, as page 15 says the computer does when READ runs out of data, it stops.",
+          "links": [
+            {
+              "href": "/demos/basic?example=example2&arithmetic=later",
+              "label": "Open the full study"
+            },
+            {
+              "href": "https://github.com/chrishayuk/chuk-basic-rs",
+              "label": "Source, tutorial and the scanned pages"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "This is not Dartmouth’s 1964 BASIC. It is an interpreter written sixty-two years later. In 1964 mode it follows the manual on square roots, powers, printing and the end of the data, and Thomas Kurtz’s later account on INT, RND and a leading minus sign, which the beginners’ part does not cover. Taking Kurtz’s account as a description of May 1964 is a reading.",
+            "How numbers are printed in 1964 mode, six figures and a point after a whole number, is copied from the results on pages 21 to 23. The beginners’ part does not state the rule, and I have not seen Part II.",
+            "In 1964 mode it still accepts everything the later BASICs added. It does not refuse INPUT or a variable called NAME$.",
+            "Three examples agreeing is three examples, and agreeing in their figures: the page’s layout, its TIME: lines, and its READ PART where the program says REAL PART, are not reproduced. The rule for square roots turned up because one program happened to need it. Other differences may be waiting for a program that needs them.",
+            "The checks were run by the coding agent and reported to me. It also miscounted its own tests twice, saying 120 and then 122 when there were 88, and corrected itself when it ran them again.",
+            "A second model, OpenAI’s Codex, later reviewed the repository independently. It found that 1964 mode differed from Kurtz’s account on INT, RND and a leading minus, that RANDOMIZE could change numbers the playground had already shown, and that the games were described as unmodified. These are put right, and its review, with what was done about each point, is in the repository."
+          ],
+          "principle": "Sources that agree with each other are evidence about those sources."
+        },
+        {
+          "kind": "question",
+          "text": "Which BASIC is the reference for BASIC?",
+          "status": "OPEN",
+          "detail": "The interpreter now has a switch: later BASIC unless asked, Dartmouth’s 1964 arithmetic and printing on request. That is a decision, not a discovery. Every check I had was a later BASIC agreeing with a later BASIC, and the manual was on Dartmouth’s website the whole time."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Dartmouth College Computation Center, “BASIC”, instruction manual, May 1964, first draft. Commemorative reprint hosted by Dartmouth College",
+          "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf",
+          "note": "The preface is on p. 1; “only 13 other operations” on p. 4; numbers, variables, the arrow and SQR on p. 5; the example programs and their results on pp. 21–23."
+        },
+        {
+          "title": "chrishayuk/chuk-basic-rs",
+          "url": "https://github.com/chrishayuk/chuk-basic-rs",
+          "note": "The interpreter, a compiler to WebAssembly, their tests, a tutorial, 150 sample programs including the manual’s, and reduced scans of the manual."
+        },
+        {
+          "title": "David H. Ahl (ed.), BASIC Computer Games, 1978. Listings from coding-horror/basic-computer-games",
+          "url": "https://github.com/coding-horror/basic-computer-games",
+          "note": "103 program listings (the collection counts 96 games), run unmodified, as a check on the interpreter."
+        },
+        {
+          "title": "PC-BASIC 2.0.8, an emulation of Microsoft GW-BASIC",
+          "url": "https://robhagemans.github.io/pcbasic/",
+          "note": "Run on the manual’s program 2 for this note: it stops with “Illegal function call in 40”."
+        },
+        {
+          "title": "Coding-agent session, 21–22 November 2026",
+          "note": "The counts in section 06 are the agent’s, as reported. The programs from the manual were run again for this note, and can be run above."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "0bb96fc30f38e83573833cd65d54eb8b9f420ab4b59ec6f73dbc3339dd0c8e26",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-JOSS",
+      "slug": "762-lines-matched-five-did-not",
+      "kind": "notebook",
+      "title": "In 1965, the computer learned to say I.",
+      "dek": "A computer you talked to at a typewriter, rebuilt from RAND’s papers by a coding agent and replayed against the pages it typed. A year in, it began to say I, for the reason chat assistants do.",
+      "abstract": "A note about rebuilding JOSS, the conversational computing system J. C. Shaw wrote for RAND’s JOHNNIAC, from its scanned papers with a coding agent. You typed a line at a typewriter in green, and JOSS answered in black. In 1964 it said “Zero divisor.” By 1965 it said “I have a zero divisor.”, and Shaw gives the reason: personal pronouns were introduced “to reinforce the model”, because the timeliness of its remarks gave “a feeling of interacting with a person”. The papers print pages typed at the console, mistakes included. Typed in again, line by line, the reconstruction answers as the page does on all 767 lines the pages show JOSS typing. Five of them come out right only when JOSS’s own logarithm, exponential and power routines are followed from a listing of the program: its logarithm cuts off where it should round. Most of the words JOSS used are not in the papers: they were decoded from a listing of the program. The console runs in the browser, at a typewriter.",
+      "created": "2026-11-22",
+      "version": "1.2",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "TYPEWRITER → SCAN → AGENT → INTERPRETER → TYPEWRITER",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-CPL",
+        "N-BASIC",
+        "N-MOUSE"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A COMPUTING AIDE",
+          "text": "JOSS ran on the JOHNNIAC at RAND from 1963. You sat at an electric typewriter with a two-colour ribbon and typed a line in green; JOSS did what it said, or kept it as a step of a program, and answered in black. J. C. Shaw, who wrote it, wanted the user to “interact with JOSS as with a computing aide”. I asked a coding agent to rebuild the JOSS of 1964 and 1965 from RAND’s scanned papers, and to hold it to one test: type the sessions printed in those papers again, and get the same page.",
+          "references": [
+            {
+              "label": "Shaw, JOSS: Experience with an Experimental Computing Service, P-3149, May 1965",
+              "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / GO",
+          "text": "The session that mattered most is figure 2 of Shaw’s 1965 paper. A user sets out to solve a quadratic equation and gets nine things wrong, one after another. The first two are typing slips, put right by typing the line again. Then the program runs, and seven times it stops. A value is missing. A divisor is zero. The argument of a square root is negative. The form for the answers does not exist, then is given too few values, then has no room for them, then has blanks that touch. Each time JOSS says what is wrong and stops where it is. The user puts that one thing right and types Go. The program is never started again from the top. A parser and an evaluator do not get you this. The task has to be kept, broken off in the middle of a step, while the user changes the program underneath it."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / FORTY MESSAGES, FOURTEEN IN PRINT",
+          "text": "Shaw wrote that JOSS “simply selects from a stock of forty ‘canned’ messages”. Figure 2 alone shows fourteen of them, and the papers between them not many more. The rest were not lost. A listing of the program survives, headed in his hand “JOSS 666” and “JCS 1-9-65”, and it holds each message as octal numbers, five characters to a word. The agent decoded them with the listing’s own table of characters. There are forty.",
+          "references": [
+            {
+              "label": "JOSS 666 listing, January 1965",
+              "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TWO JOSSES",
+          "text": "The first replays would not settle, because the pages disagree with each other. A film made in March 1964 has JOSS say “Zero divisor.” The paper of May 1965 has “I have a zero divisor.” Shaw explains it: “After a year’s experience with neutral, impersonal messages, we introduced personal pronouns and some informal diction.” And why: “This was done not facetiously, but rather to reinforce the model.” The model was a person. JOSS, he says on the same page, cannot carry on a real conversation and picks from forty canned messages, “But the timeliness and appropriateness of its remarks give a feeling of interacting with a person.” So in 1965 the computer began to say I, to feel like someone you were talking to. Every chat assistant makes the same choice now. The wording was not all that changed. In the pages of 1965 every answer typed without a form sits one column further to the right than in 1964. And the JOSS of the film types one fiftieth as 2·10*(-2), where by 1965 a number that small is typed as .02. So the reconstruction has a year. A session from one does not replay on the other."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHAT THE REPLAY FOUND IN THE FILM",
+          "text": "The film’s scenario was printed as a report, with the typewriter’s real output pasted in as figures. Replayed as printed, it goes wrong halfway: a listing in the report shows none of the first program’s steps, though nothing typed before it removes them. Something like a Delete all was cut from the scenario. The report also has a comma that the listing of the same step does not have, a space where there should be a multiplication dot, and an answer labelled without the space the user typed. With those four put right, and a decimal point the scan has lost from a form restored, each marked, it replays."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / FIVE LINES",
+          "text": "The five transcripts have 385 lines typed by the user and 767 typed by JOSS that the pages show, not counting the blank lines of pages a typist had copied. All 767 come out the same: 689 column for column against the typewriter’s own output, and the rest against pages a typist had copied, where only the characters can be compared. Five of them took more than a modern library, and they are all the same kind of thing. The page has log 2 as .69314718, three times, and the correctly rounded figure ends in a 1. It has one long expression ending in 357 where the reconstruction gets 356. And in a table of a hundred exponentials, the row for 72 ends in a 7. JOSS rounded to nine digits and then to the form, and a correct exponential, rounded that way, gives an 8. Each is one unit in the last digit, of a logarithm, an exponential, or a power worked out through both. With a correctly rounded library, all five came out one unit away. So the agent followed JOSS’s own routines from the listing of January 1965, card by card. Its logarithm, for a result below 1, multiplies out nine digits and does not round them: log 2 is .69314718056, and cut off it is .69314718. Its exponential and its powers, followed the same way, give the 7 in the row for 72 and the 357. All five come out as printed."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / CHECK IT",
+          "text": "Among Shaw’s working papers there is a handwritten page headed F1, dated 11-19-64. F1 is the logarithm routine in the listing. The page works through its range reduction and ends: “Check it. Looks like coefficient between 1 and √2 gets doubled several times.” That is three months after the paper with log 2 in it. It is not the same fault. The doubling the note describes brings the number into range and works as written; the cutting off comes a few cards later."
+        },
+        {
+          "kind": "connection",
+          "text": "The console runs in the browser, at a typewriter: your lines in green and JOSS’s in black, ten characters a second, and a gong when it hands the typewriter back. It is compiled from the same Rust source as the command-line version. Each of the five original sessions can be replayed there and compared with its page.",
+          "links": [
+            {
+              "href": "/demos/joss?example=1965-quadratic-with-mistakes",
+              "label": "Sit at the console — interactive study"
+            },
+            {
+              "href": "https://github.com/chrishayuk/joss/tree/main/transcripts",
+              "label": "The five sessions, as typed in from the scans"
+            },
+            {
+              "href": "https://github.com/chrishayuk/joss/tree/main/docs/scans",
+              "label": "The pages they were typed in from"
+            },
+            {
+              "href": "https://github.com/chrishayuk/joss",
+              "label": "Source, tutorial and example programs"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The pages were read by the same coding agent that wrote the interpreter, with sub-agents doing the measuring. No person has checked the transcriptions against the scans by eye; a second model, OpenAI’s Codex, spot-checked twenty places independently. The pages are in the repository so that somebody can.",
+            "The column rules were set from these pages, so their matching is partly the reconstruction being fitted to them. The digits were not fitted: they come out of the arithmetic, which for logarithms, exponentials and powers follows JOSS’s own routines. Those routines are a reading of the listing, checked against a small emulator built from the same reading, not a run of the original program.",
+            "Matching five sessions says nothing about what they do not exercise. Stop and Cancel, most of the forty messages, and what happens when a step is deleted from under a loop are built from the listing and Shaw’s notes, and no page shows them.",
+            "The sine, cosine and arg here are a modern library’s, rounded to nine digits. JOSS’s own routines for them are in the listing and have not yet been followed.",
+            "The messages were decoded by machine from a scan of a printed listing. Each was checked against the capitals printed beside it, which have no small letters and no ≤.",
+            "A second model, OpenAI’s Codex, reviewed the repository independently. Besides the spot check, it found that large powers could come out as zero, that Form would not take an expression, and that the listing answers arg(0,0) where the reconstruction had made a message up; these follow the listing now. Its review, and what was done about each point, is in the repository.",
+            "Where no page of 1964 shows a message, the 1964 setting uses the words of 1965. How much storage each step, value and level of a task takes is an estimate.",
+            "This is the JOSS of the JOHNNIAC. The later JOSS on the PDP-6 is a larger language and is not here. Nor are the punched cards, the sign-on, or the other seven users."
+          ],
+          "principle": "A manual tells you what a system was meant to do. A page it typed tells you what it did, mistakes included."
+        },
+        {
+          "kind": "question",
+          "text": "How much of a conversation survives on paper?",
+          "status": "OPEN",
+          "detail": "The pages keep what was typed, by whom, and in which column. They do not keep the gong that rang when JOSS handed the typewriter back, the half second it took to fetch your work from the drum, or what it was like to be told “Eh?” by a machine in 1965. A reconstruction that matches the page has matched the part that was written down."
+        }
+      ],
+      "sources": [
+        {
+          "title": "J. C. Shaw, “JOSS: Experience with an Experimental Computing Service for Users at Remote Typewriter Consoles”, RAND P-3149, May 1965",
+          "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf",
+          "note": "Figure 1 is on page 6 of the PDF, figure 2 on page 8, and the one-page summary of the language on page 11."
+        },
+        {
+          "title": "J. C. Shaw, “JOSS: Examples of the Use of an Experimental On-Line Computing Service”, RAND P-3131, April 1965",
+          "url": "https://bitsavers.org/pdf/rand/joss/P-3131_JOSS_Examples_Of_The_Use_Of_An_Experimental_On-Line_Computing_Service_Apr65.pdf",
+          "note": "Eight pages typed at a console on 28 April 1965, reproduced in two colours."
+        },
+        {
+          "title": "J. C. Shaw, “JOSS: A Designer’s View of an Experimental On-Line Computing System”, RAND P-2922, August 1964",
+          "url": "https://bitsavers.org/pdf/rand/joss/P-2922_JOSS_A_Designers_View_Of_An_Experimental_On-Line_Computing_System_Aug64.pdf",
+          "note": "Figures 3a to 3i. log(2) is in figure 3b, on page 17 of the PDF."
+        },
+        {
+          "title": "C. L. Baker, “JOSS: Scenario of a Filmed Report”, RAND RM-4162-PR, June 1964",
+          "url": "https://bitsavers.org/pdf/rand/joss/RM-4162-PR_JOSS_Scenario_Of_A_Filmed_Report_Jun64.pdf",
+          "note": "The session filmed on 21 March 1964. The row for 72 is on page 23 of the PDF."
+        },
+        {
+          "title": "“JOSS 666”, JOHNNIAC assembly listing, J. C. Shaw, 9 January 1965",
+          "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf",
+          "note": "The error messages are on pages 37 to 42 of the PDF; the others on pages 10 to 12, 79 and 122 to 126."
+        },
+        {
+          "title": "“JOSS Program Notes and Tests”, J. C. Shaw’s working papers",
+          "url": "https://bitsavers.org/pdf/rand/joss/JOSS_Program_Notes_and_Tests.pdf",
+          "note": "The note of 11-19-64 is page 13 of the PDF."
+        },
+        {
+          "title": "chrishayuk/joss",
+          "url": "https://github.com/chrishayuk/joss",
+          "note": "The interpreter, the five sessions as transcripts, its tests, a tutorial, example programs, a language server, and reduced scans of the pages."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "16fc35940cf496d0e91c0dbebb2b1d201f09f8af02f208e450f32c52d6ddb299",
+    "algorithm": "sha256"
   }
 ]

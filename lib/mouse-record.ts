@@ -30,7 +30,7 @@ export const mouseRecord: PublicationRecord = {
     { kind: "observation", label: "05 / A READER, TWO EVENINGS", text: "Somebody had already noticed. In June 1980 BYTE printed a letter from a reader, Tom Lane: line 176 should have a plus sign, not a minus (one of several misprints), and there were three further bugs in the logic. He found them “during two evenings of studying the interpreter listing, with no machine use whatever.” Grogono replied that they were “all genuine bugs”, and that the misprint came from a poor photocopy of the proof. The correction was in print within a year. It did not reach the C.", references: [
       { label: "BYTE, June 1980, pp. 238 and 240", url: "https://archive.org/details/byte-magazine-1980-06" },
     ] },
-    { kind: "observation", label: "06 / THIRTY-THREE OR ONE", text: "The agent had guessed the misprint. This bug it copied from the C without knowing it was there. With Lane’s corrections in, the port prints 1, and the article’s example listings run as expected: listing 2, which runs for ever, prints primes until it is stopped." },
+    { kind: "observation", label: "06 / THIRTY-THREE OR ONE", text: "The agent had guessed the misprint. This bug it copied from the C without knowing it was there. With Lane’s corrections in, the port prints 1, and the article’s example listings run as described, with two exceptions that are the article’s own: listing 5, the bubble sort, fails when given fewer than two numbers, and the array program on page 204 reads with one full stop too many and accepts a twenty-sixth number where its text says twenty-five. Listing 2, which runs for ever, prints primes until it is stopped." },
     { kind: "connection", text: "The corrected interpreter runs in the browser, compiled from the same Rust source as the command-line version. Lane’s test is one of the examples.", links: [
       { href: "/demos/mouse?example=lane-test", label: "Run Lane’s test — interactive study" },
       { href: "https://github.com/chrishayuk/mouse-interpreter", label: "Source, tutorial and the scanned pages" },
@@ -39,6 +39,7 @@ export const mouseRecord: PublicationRecord = {
       "The agent did not discover these bugs. Tom Lane did, and they were in print by 1980.",
       "This is one port in one session. It says nothing general about how often an agent copies a reference’s mistakes.",
       "I have not established where the C version came from, only that it has the same subtraction as the printed listing.",
+      "A second model, OpenAI’s Codex, later reviewed the repository independently. It found the slips in the bubble sort and the array program, and that the examples had added spaces to the printed prompts. The examples now keep the printed strings, each change is listed, and the review and what was done about each point are in the repository.",
     ], principle: "Matching a reference is evidence about the port. It is not evidence about the reference." },
     { kind: "question", text: "When a port matches its reference, who checks the reference?", status: "OPEN", detail: "Two habits came out of this: asking the agent what it did not check, and asking what the reference was copied from. Whether either would have been enough without a reader’s letter from 1980 is not something this note can answer." },
   ],
