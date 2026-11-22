@@ -39,7 +39,6 @@ export const mouseRecord: PublicationRecord = {
       "The agent did not discover these bugs. Tom Lane did, and they were in print by 1980.",
       "This is one port in one session. It says nothing general about how often an agent copies a reference’s mistakes.",
       "I have not established where the C version came from, only that it has the same subtraction as the printed listing.",
-      "The subtraction that came out backwards on the C is a property of that C program and compiler, not of Grogono’s listing.",
     ], principle: "Matching a reference is evidence about the port. It is not evidence about the reference." },
     { kind: "question", text: "When a port matches its reference, who checks the reference?", status: "OPEN", detail: "Two habits came out of this: asking the agent what it did not check, and asking what the reference was copied from. Whether either would have been enough without a reader’s letter from 1980 is not something this note can answer." },
   ],

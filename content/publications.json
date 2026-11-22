@@ -2692,8 +2692,7 @@
           "lines": [
             "The agent did not discover these bugs. Tom Lane did, and they were in print by 1980.",
             "This is one port in one session. It says nothing general about how often an agent copies a reference’s mistakes.",
-            "I have not established where the C version came from, only that it has the same subtraction as the printed listing.",
-            "The subtraction that came out backwards on the C is a property of that C program and compiler, not of Grogono’s listing."
+            "I have not established where the C version came from, only that it has the same subtraction as the printed listing."
           ],
           "principle": "Matching a reference is evidence about the port. It is not evidence about the reference."
         },
@@ -2726,7 +2725,7 @@
       ],
       "published": "2026-11-22"
     },
-    "hash": "25df10998e7ca7b25c9f332d67537a80ff45476e3aa7d10e341592c08864ec27",
+    "hash": "67535d3a983d1b8d57c277b81a57a7fe9f51943d6d19bd35fc201d5daf8a651e",
     "algorithm": "sha256"
   }
 ]

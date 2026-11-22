@@ -853,7 +853,7 @@
   {
     "id": "N-MOUSE",
     "version": "1.0",
-    "recordHash": "25df10998e7ca7b25c9f332d67537a80ff45476e3aa7d10e341592c08864ec27",
+    "recordHash": "67535d3a983d1b8d57c277b81a57a7fe9f51943d6d19bd35fc201d5daf8a651e",
     "revision": {
       "kind": "initial",
       "summary": "Initial publication of the note on porting Mouse and the misprint Tom Lane caught in 1980, after a fact check against the BYTE scans."
