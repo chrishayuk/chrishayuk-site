@@ -23,7 +23,7 @@ type Example = {
   name: string; title: string; input: boolean; program: string;
   /** The heading it is listed under when every program is offered. */
   group?: string;
-  /** The arithmetic the program was written for; absent means later BASICs. */
+  /** The BASIC the program was written for; absent means later BASICs. */
   dialect?: Dialect;
   /** A page of the 1964 manual, and crops of it, under scans/. */
   scan?: string; details?: string[];
@@ -59,16 +59,17 @@ function statusLine(outcome: Outcome | null, busy: boolean) {
 /**
  * @param example  the program to show first
  * @param choose   offer the other examples too
- * @param arithmetic  start a 1964 program in "later" arithmetic, to see it stop
+ * @param arithmetic  start a 1964 program as a later BASIC runs it, to see it stop
  * @param source   a program written into the page, in place of a listed example
  */
 export function BasicStudy({ example, choose = false, arithmetic, source }: { example?: string; choose?: boolean; arithmetic?: "later"; source?: { title: string; program: string } }) {
   const inlineTitle = source?.title;
   const inlineProgram = source?.program;
   const [examples, setExamples] = useState<Example[]>([]);
-  const [current, setCurrent] = useState<Example | null>(inlineProgram === undefined ? null : { name: "inline", title: inlineTitle ?? "", input: false, program: inlineProgram });
+  const [current, setCurrent] = useState<Example | null>(inlineProgram === undefined ? null : { name: "inline", title: inlineTitle ?? "", input: false, program: inlineProgram, dialect: "dartmouth" });
   const [program, setProgram] = useState(inlineProgram ?? "");
-  const [dartmouth, setDartmouth] = useState(false);
+  // a program written into the page is Dartmouth BASIC, like the manual's
+  const [dartmouth, setDartmouth] = useState(inlineProgram !== undefined);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [busy, setBusy] = useState(false);
   const [line, setLine] = useState("");
@@ -190,7 +191,7 @@ export function BasicStudy({ example, choose = false, arithmetic, source }: { ex
         <button type="button" className="basic-run" onClick={run} disabled={busy || !current}>RUN</button>
         <button type="button" onClick={stop} disabled={!busy && !waiting}>STOP</button>
         {current && program !== current.program && <button type="button" onClick={() => show(current, arithmetic === "later")}>RESET</button>}
-        {current?.dialect === "dartmouth" && <label className="basic-switch"><input type="checkbox" checked={dartmouth} onChange={event => setDartmouth(event.target.checked)}/> 1964 ARITHMETIC</label>}
+        {current?.dialect === "dartmouth" && <label className="basic-switch"><input type="checkbox" checked={dartmouth} onChange={event => setDartmouth(event.target.checked)}/> AS IN 1964</label>}
         <span className="record-voice basic-status" aria-live="polite">{statusLine(outcome, busy)}</span>
       </div>
       <div className="basic-panes">
