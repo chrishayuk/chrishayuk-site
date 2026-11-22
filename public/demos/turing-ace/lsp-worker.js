@@ -1,4 +1,4 @@
-// The language server for the 1945 ACE tables in a web page, off the main thread.
+// The language server of the ACE notation in a web page, off the main thread.
 //
 // Receives {id, wasmUrl, text, requests: [{method, params}]}.
 // Posts    {id, diagnostics, results} or {id, error}.
