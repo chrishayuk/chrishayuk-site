@@ -139,6 +139,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Four instructed AI visitors tested llms.txt discovery, declarations and feedback. Their reports exposed interface faults; voluntary participation was unmeasured.",
   concepts: ["AI agent discovery", "llms.txt", "machine interfaces", "usability testing"],
  },
+ "N-MOUSE": {
+  subject: "Porting the 1979 Mouse language with a coding agent, and a misprinted reference",
+  question: "If a coding agent's port matches the reference implementation, is it right?",
+  searchTitle: "A Coding Agent Ported a 1979 Language. The Reference Was Wrong.",
+  description: "A Rust port of Peter Grogono's Mouse matched its C reference, which carried a 1979 misprint and three bugs a BYTE reader described in 1980. Run the corrected interpreter in the browser.",
+  concepts: ["Mouse programming language", "Peter Grogono", "BYTE magazine", "coding agents", "reference implementations", "WebAssembly"],
+ },
  "N-ATTRIBUTION": {
   subject: "Coding-agent guardrails and Git attribution policy in CI",
   question: "How can CI enforce repository attribution policy when a coding agent ignores it?",
