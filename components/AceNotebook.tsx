@@ -4,6 +4,8 @@ import { NotebookEntry } from "./NotebookEntry";
 import { Acts } from "./Acts";
 import { AceRunner } from "./AceRunner";
 import { AceDelayLine } from "./AceDelayLine";
+import { AceMachine } from "./AceMachine";
+import Link from "next/link";
 import { AceCardsFigure, AceQuoted, AceWordFigure, CALPOL_PRINTED, INDEXIN_PRINTED } from "./AceFigures";
 
 const ANSWER = "# Six times seven, punched on a card.\nANSWER\n  1   DL 1,1 - TS 2\n  3   DL 1,2 - TS 3\n  5   MULTIPLY 'A'\n  6   TS 4 - DL 2,1\n  8   O, DL 2\n  9   B, ANSWER 9\n\nDL 1,1   6\nDL 1,2   7\n";
@@ -23,6 +25,11 @@ export function AceNotebook({ record }: { record: PublicationRecord }) {
         { label: "TEMPORARY STORAGES", value: "32", detail: "Short delay lines of one minor cycle each, TS 1 to TS 32 (section 12)." },
         { label: "ESTIMATED COST", value: "£11,200", detail: "Delay lines, valves, power supply and Hollerith equipment (section 10)." },
       ]} note="Figures from the report. The simulation has the 200 delay lines and 32 temporary storages; it does not have valves."/>
+      <figure className="ace-machine-figure">
+        <figcaption className="record-voice">STAND AT THE MACHINE / CLOSE THE SWITCH TO START</figcaption>
+        <AceMachine compact title="Six times seven, from cold"/>
+        <p className="ace-machine-note">The machine starts empty, on an order of zeros that reads a card (section 7). The deck carries the job, and BINDEC punches the answer for the tabulator. Loading takes far longer than the sum. <Link href="/demos/turing-ace">The machine room, with every job ↗</Link></p>
+      </figure>
     </> },
     { label: "Memory that goes round", children: <>
       <AceDelayLine/>

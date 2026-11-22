@@ -1,3 +1,4 @@
+import { AceMachine } from "@/components/AceMachine";
 import { AcePlayground } from "@/components/AcePlayground";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
@@ -10,9 +11,15 @@ export default function Page() {
       <p className="kicker record-voice">CHRIS HAY / TURING’S ACE / INTERACTIVE STUDY</p>
       <h1>Turing’s computer,<br/><em>as he proposed it in 1945.</em></h1>
       <p className="dek">Designed at the National Physical Laboratory. Never built as written. Running here.</p>
+      <p>The machine starts empty. Turing arranged that its first order “consists of 0 throughout”, which reads a card, so a job goes in as a deck: close the switch and watch it load itself, card by card, into the mercury, and then run. At the machine’s own speed the loading takes over a minute and the job about a second.</p>
       <p>The memory is delay lines of 32 minor cycles going round, and a program is a set of instruction tables in what Turing called popular form: <strong>TS 6 - TS 2</strong> moves a word, <strong>ADD</strong> adds into the partial sum, <strong>B, BURY</strong> enters a subsidiary table. Choose a job, change it, and run it. Choose <strong>Show the job in machine form</strong> to see every instruction as its 32 digits, or tick <strong>Tables as printed in 1945</strong> to run INDEXIN and CALPOL exactly as the report prints them.</p>
       <div className="inline-links"><Link className="text-link" href="/notebook/turings-1945-computer-run-as-written">THE WORKING NOTE ↗</Link><a className="text-link" href="https://github.com/chrishayuk/turing-ace">SOURCE AND TABLES ↗</a><a className="text-link" href="https://en.wikisource.org/wiki/Proposed_Electronic_Calculator">THE REPORT ↗</a><a className="text-link" href="https://www.alanturing.net/ace">ITS FIGURES, TURING ARCHIVE ↗</a></div>
     </header>
+    <section className="ace-lab" aria-label="The machine room">
+      <p className="record-voice">01 / STAND AT THE MACHINE / CLOSE THE SWITCH TO START</p>
+      <AceMachine chooser/>
+      <p className="ace-machine-note">The empty machine, the order of zeros and the cards are from section 7 of the report; the delay lines, the lamps of CD and CI, the card reader and punch and the listing paper from sections 3, 7, 11 and 13. The format of the deck, the speed of the card reader and the sounds are ours. Every detail and its source is listed at the top of <a className="text-link" href="https://github.com/chrishayuk/turing-ace/blob/main/web/console.js">console.js ↗</a>.</p>
+    </section>
     <AcePlayground/>
     <footer className="demo-provenance">
       <p className="record-voice">INTERACTIVE STUDY / RUNS IN YOUR BROWSER</p>
