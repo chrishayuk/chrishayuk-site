@@ -75,6 +75,9 @@ export const notebookConclusions: Record<string, Conclusion> = {
  'N-MOUSE': {
   takeaway: 'A port can match its reference exactly and still be wrong, because the reference was. The agent guessed one inherited misprint and said it had not checked; it copied three other bugs without knowing they were there.',
   scope: 'One port, one session, one small interpreter. The bugs were found by a reader in 1980, not by the agent. Where the C reference came from has not been established.' },
+ 'N-BOHM': {
+  takeaway: 'A compiler written in 1951 for a machine that was never more than a design runs, and compiles itself, once four slips in its printed text are corrected. Three of them were found by running it; the fourth had been reported in 1976.',
+  scope: 'One thesis, one session, one agent that wrote all three readings the result rests on. The only outside check is one formula Knuth and Trabb Pardo worked by hand. An earlier implementation is reported and was not found.' },
  'N-ATTRIBUTION': {
   takeaway: 'The repository makes the authorship policy enforceable at the pull-request boundary. The check rejects disallowed metadata until it is rewritten; it cannot edit an immutable commit itself.',
   scope: 'The broader proposal is to distinguish accountable authorship from tool provenance. This particular disagreement shows which policy prevailed in this workflow, without establishing a general theory of agent authority.' },
