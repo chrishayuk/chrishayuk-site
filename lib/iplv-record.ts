@@ -47,7 +47,7 @@ export const iplvRecord: PublicationRecord = {
       "The last 1.5 per cent of the Logic Theorist’s effort is not explained. Some basic processes may have been IPL routines in the system of 1963, costing more cycles than a primitive; the counts do not show which.",
       "The Logic Theorist deck is Moews’s transcription, and this is not the first reconstruction to run it: Moews’s own interpreter and Shrager’s did so first.",
       "The list F1 makes is cell 148 in Fig. 2 and cell 145 here. What the system of 1964 had done with three more cells, the manual does not say.",
-      "Not all of IPL-V is here. Auxiliary storage, tapes, blocks and restart are left out, as the repository says.",
+      "Where the manual leaves a choice to each machine’s write-up, such as the compressed and binary card forms, the formats of J162 and the console, the reconstruction makes one, and the repository lists each.",
       "The reconstruction, the transcriptions of Part One and these comparisons were made by one coding agent in one session, from scans read by that agent. Each figure has a page number so that it can be checked by eye.",
     ], principle: "A manual that prints its own run can be held to it, line by line." },
     { kind: "question", text: "How much of a system from the early 1960s can be recovered exactly from a manual that printed one run of it?", status: "OPEN", detail: "Fig. 2 fixed the load addresses, the order of interpretation and the count of cycles. It could not fix what the program it traces never does: auxiliary storage, the error traps, or the cost of each basic process in a particular system. For those there is only the text, and programs like the Logic Theorist whose printed output depends on them." },

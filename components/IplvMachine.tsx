@@ -79,6 +79,8 @@ export function IplvMachine() {
     for (let a = 0; a < Math.min(top, s.brk); a++) kind[a] = 1;
     for (const a of loaded.current) if (a < top) kind[a] = 2;
     for (let c = words.link(H2), n = 0; c !== 0 && n < words.length; c = words.link(c), n++) if (c < top) kind[c] = 0;
+    // The cells withheld for the trap on H2 are available space kept back.
+    for (const c of s.reserve ?? []) if (c < top) kind[c] = 0;
     for (let a = s.brk; a < top; a++) if (kind[a] === 3 && words.q(a) === 1 && !loaded.current.has(a)) kind[a] = 4;
     const under = (cell: number, k: number) => {
       for (let c = words.link(cell), n = 0; c !== 0 && n < top; c = words.link(c), n++) if (c < top) kind[c] = k;
@@ -257,8 +259,8 @@ export function IplvMachine() {
           <p className="iplv-now">{s.error ? <b>Stopped.</b> : s.halted ? <b>Halted.</b> : <><b>{s.cia.place}</b> {s.cia.q === 5 ? "" : `${s.cia.p}${s.cia.q} `}{s.cia.symb}</>}</p>
           <p className="iplv-means">{s.error ? <span className="iplv-error">{s.error}</span> : s.halted ? "H1 is empty: the routine the start card named has finished." : <>{meaning(s.cia)}{s.cia.comment && ` — “${s.cia.comment}”`}</>}</p>
           <dl className="iplv-facts"><dt>H5</dt><dd>{s.h5}</dd><dt>Level</dt><dd>{s.level}</dd><dt>H3</dt><dd>{s.h3.toLocaleString()}</dd><dt>Cards to read</dt><dd>{s.cards}</dd></dl>
-          <p className="record-voice">AVAILABLE SPACE: {s.free.toLocaleString()} OF {s.space.toLocaleString()} CELLS</p>
-          <div className="iplv-space" title={`${s.space - s.free} cells in use; ${s.space - s.low} at the most`}><i style={{ width: `${(100 * (s.space - s.free)) / s.space}%` }}/></div>
+          <p className="record-voice">AVAILABLE SPACE: {s.free.toLocaleString()} OF {s.space.toLocaleString()} CELLS{s.reserve?.length ? `, AND ${s.reserve.length} WITHHELD FOR THE TRAP ON H2` : ""}</p>
+          <div className="iplv-space" title={`${s.space - s.free - (s.reserve?.length ?? 0)} cells in use; ${s.space - s.low} at the most`}><i style={{ width: `${(100 * (s.space - s.free - (s.reserve?.length ?? 0))) / s.space}%` }}/></div>
           <p className="record-voice">H0, THE COMMUNICATION CELL</p>
           <table><tbody>{s.h0.items.map((item, i) => <tr key={i}><td className="iplv-k">({i})</td><td><button type="button" className="iplv-sym" onClick={() => show(item.name)}>{item.name}</button></td><td className="iplv-t">{item.text}</td></tr>)}
             {s.h0.depth > s.h0.items.length && <tr><td className="iplv-k">…</td><td className="iplv-t" colSpan={2}>{s.h0.depth - s.h0.items.length} more</td></tr>}</tbody></table>

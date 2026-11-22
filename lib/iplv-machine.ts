@@ -18,7 +18,7 @@ export type Item = { a: number; name: string; text: string };
 export type Stack = { depth: number; items: Item[] };
 export type State = {
   cycles: number; h3: number; level: number; halted: boolean; error: string | null;
-  free: number; low: number; space: number; brk: number; top: number; h5: "+" | "-";
+  free: number; reserve: number[]; low: number; space: number; brk: number; top: number; h5: "+" | "-";
   cia: { a: number; place: string; line: number; p: number; q: number; symb: string; link: string; comment: string };
   calls: { a: number; cell: number; place: string; line: number; native: boolean }[];
   h0: Stack; w: Stack[]; regions: { ch: string; origin: number; size: number }[]; cards: number;
