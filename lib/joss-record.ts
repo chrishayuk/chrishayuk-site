@@ -19,7 +19,7 @@ export const jossRecord: PublicationRecord = {
   authors: ["Chris Hay"],
   lineage: "TYPEWRITER → SCAN → AGENT → INTERPRETER → TYPEWRITER",
   concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
-  related: ["N-CPL", "N-BASIC", "N-MOUSE"],
+  related: ["N-CPL", "N-BASIC", "N-MOUSE", "N-LANING-ZIERLER"],
   media: [],
   body: [
     { kind: "observation", label: "01 / A COMPUTING AIDE", text: "JOSS ran on the JOHNNIAC at RAND from 1963. You sat at an electric typewriter with a two-colour ribbon and typed a line in green; JOSS did what it said, or kept it as a step of a program, and answered in black. J. C. Shaw, who wrote it, wanted the user to “interact with JOSS as with a computing aide”. I asked a coding agent to rebuild the JOSS of 1964 and 1965 from RAND’s scanned papers, and to hold it to one test: type the sessions printed in those papers again, and get the same page.", references: [

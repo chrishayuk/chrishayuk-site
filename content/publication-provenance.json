@@ -1260,5 +1260,127 @@
         "note": "The reconstruction, the transcriptions and the comparisons in this note were made in this session. Every result can be rerun with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.0",
+    "recordHash": "dab1aee3933df8327af41cadfa9a52027e8d8e5bc0dae25f51a3e83b0be819b6",
+    "revision": {
+      "kind": "initial",
+      "summary": "Initial publication of the note on rebuilding Laning and Zierler's algebraic system for Whirlwind I from its 1954 manual and running its programs under its own rules, after two fact checks against the scans"
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "a/b/c is on pages 4 and 5, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "The program without its PRINT is on page 13-3; the first runs and the six to eight times on page 13-4; the discussion follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.1",
+    "recordHash": "7be7e793ceac8ff353f73939897cda991790b20fedce1bc305f319bc465df300",
+    "revision": {
+      "kind": "interpretation",
+      "summary": "Retitled after what it found: the manual asked for trouble reports, and these are troubles. Adds a slip in the manual's own arithmetic (page 6 gives 2^63 - 2^39 as roughly 9.2233995e18; it is 9.2233715e18), makes the summer school's version of the differential-equation program its own section with a tape to feed, counts what the manual's programs give (three complete programs run; three printed numbers match; the rest checked against mathematics), says that the TPK alarm rests on the reconstruction's inference about the sign of a computed zero, adds Knuth and Trabb Pardo's page 57 and a pursuit tape, and cuts the text by a quarter.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.2",
+    "recordHash": "ffd5cd267c75b146fd9bc2cda86dac4851a6b8f1d17b0f2895067f05d5240c69",
+    "revision": {
+      "kind": "correction",
+      "summary": "After an independent review by a second model: Knuth and Trabb Pardo's TPK is described as incompatible with the 1954 specification, since page 13 forbids a computed zero index whatever its sign; only the reconstruction's alarm rests on its model of -0, and the index rule is said to be approximated by that sign. The manual's three punctuation slips are listed, truncated printing is called a choice that fits the page, and the summer school's missing PRINT is no longer called an error. The review is described.",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]
