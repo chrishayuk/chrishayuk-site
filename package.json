@@ -26,6 +26,11 @@
   },
   "dependencies": {
     "@chrishayuk/hause": "file:vendor/hause",
+    "@codemirror/autocomplete": "6.20.4",
+    "@codemirror/commands": "6.11.1",
+    "@codemirror/lint": "6.9.8",
+    "@codemirror/state": "6.7.6",
+    "@codemirror/view": "6.43.15",
     "drizzle-orm": "0.45.2",
     "next": "16.2.6",
     "react": "19.2.6",
