@@ -148,7 +148,7 @@ export function LzPlayground() {
           {view === "zeros" && (other.zeros ? <div className="lz-compare">
             <div><p className="record-voice">n − n IS −0</p>{other.zeros.ones.translated ? <LzPaper label="One’s complement" page={other.zeros.ones.page} alarm={other.zeros.ones.alarm} speed="instant" highlight={other.zeros.differ}/> : problems(other.zeros.ones.problems)}</div>
             <div><p className="record-voice">EVERY ZERO +0</p>{other.zeros.plus.translated ? <LzPaper label="Every zero +0" page={other.zeros.plus.page} alarm={other.zeros.plus.alarm} speed="instant" highlight={other.zeros.differ}/> : problems(other.zeros.plus.problems)}</div>
-            <p className="lz-margin">{other.zeros.differ.length ? `${other.zeros.differ.length} line${other.zeros.differ.length > 1 ? "s" : ""} differ.` : "The two pages are the same."}</p>
+            <p className="lz-margin">{other.zeros.differ.length ? (other.zeros.differ.length === 1 ? "1 line differs." : `${other.zeros.differ.length} lines differ.`) : "The two pages are the same."}</p>
           </div> : <p className="lz-idle">Feeding the tape twice…</p>)}
           {view === "check" && (other.check ? (other.check.length ? problems(other.check) : <p className="lz-idle">Nothing to report.</p>) : <p className="lz-idle">Reading…</p>)}
         </div>
