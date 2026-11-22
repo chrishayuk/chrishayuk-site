@@ -929,5 +929,44 @@
         "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-TURING-ACE",
+    "version": "1.0",
+    "recordHash": "278112c0e85fff8f0ee02a14a6788f7229f3e5a12905816b47a646528f166908",
+    "revision": {
+      "kind": "initial",
+      "summary": "First published: Turing's two printed instruction tables run on a simulation of the machine his 1945 report describes, with the corrections each needed and the three cards of Fig. 38 that disagree with INDEXIN."
+    },
+    "sources": [
+      {
+        "title": "A. M. Turing, “Proposed Electronic Calculator”, report to the Executive Committee of the National Physical Laboratory (E.882), 1945; transcribed on Wikisource",
+        "url": "https://en.wikisource.org/wiki/Proposed_Electronic_Calculator",
+        "note": "INDEXIN is on p. 29 of the report and CALPOL on p. 31. Instruction forms are in section 13, the card layout in section 7, the operation types in section 12. Figures 19, 37 and 38 give the digits of each instruction."
+      },
+      {
+        "title": "The report and its original figures, The Turing Archive for the History of Computing",
+        "url": "https://www.alanturing.net/ace",
+        "note": "Figures 19 and 38 are redrawn in this note from a transcription; the originals are here."
+      },
+      {
+        "title": "B. E. Carpenter and R. W. Doran (eds.), “A. M. Turing’s ACE Report of 1946 and Other Papers”, MIT Press, 1986",
+        "note": "The editors’ introduction and notes 11 to 18 on the text, which point out conflicts in sections 11 and 12 and two of the corrections to INDEXIN."
+      },
+      {
+        "title": "B. E. Carpenter and R. W. Doran, “The other Turing machine”, The Computer Journal 20(3), 1977, pp. 269–279",
+        "url": "https://doi.org/10.1093/comjnl/20.3.269",
+        "note": "Analyses CALPOL. Not read for this note."
+      },
+      {
+        "title": "chrishayuk/turing-ace",
+        "url": "https://github.com/chrishayuk/turing-ace",
+        "note": "The machine, the assembler, the tables as printed and corrected, the tables written from Turing’s descriptions, the corrections and the nine decisions, with tests."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The machine, the assembler, the transcription of the tables and the tables the report only describes were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]

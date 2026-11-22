@@ -25,6 +25,7 @@ import "./bohm-demo.css";
 import "./cpl-demo.css";
 import "./joss-demo.css";
 import "./iplv-demo.css";
+import "./turing-ace-demo.css";
 import "./basic-demo.css";
 import "./social-editions.css";
 import "./cell80.css";
