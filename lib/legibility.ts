@@ -167,6 +167,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "RAND’s JOSS of 1964–65 rebuilt from its scanned papers with a coding agent. Five original console sessions replay on it: 762 of 767 lines match. Try the console in the browser.",
   concepts: ["JOSS", "J. C. Shaw", "JOHNNIAC", "RAND Corporation", "time-sharing", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-TURING-ACE": {
+  subject: "Running the instruction tables in Alan Turing’s 1945 ACE report on a simulation of the machine it proposes, built with a coding agent",
+  question: "If a computer was only ever a design, were its example programs ever more than drafts?",
+  searchTitle: "Turing’s 1945 ACE Report, Run as Written: Its Programs Needed Eight Corrections",
+  description: "The computer Alan Turing proposed in 1945, simulated from his report, running the two programs the report prints. Neither runs as printed, and three of the cards he drew for one disagree with its table. Try the machine in the browser.",
+  concepts: ["Alan Turing", "Automatic Computing Engine", "Proposed Electronic Calculator", "history of computing", "coding agents", "verification", "WebAssembly"],
+ },
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",
