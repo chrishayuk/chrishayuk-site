@@ -16,7 +16,8 @@ export default function Page() {
       <p className="kicker record-voice">CHRIS HAY / BASIC / INTERACTIVE STUDY</p>
       <h1>The manual,<br/><em>still running.</em></h1>
       <p className="dek">First issued at Dartmouth in May 1964. Typed in from the page. Running here.</p>
-      <p>BASIC’s first instruction manual ends with three example programs and the results they printed. Choose one, change it, and run it; the page it came from is beside it. Then try <strong>example 2</strong> with 1964 arithmetic switched off: it stops at line 40, for a reason the manual gives on page 5. The games are from a 1978 book, and they ask you questions.</p>
+      <p>BASIC’s first instruction manual ends with three example programs and the results they printed. Choose one, change it, and run it; the page it came from is beside it. Then try <strong>example 2</strong> with 1964 arithmetic switched off: it stops at line 40, for a reason the manual gives on page 5.</p>
+      <p>There are 142 programs in the list: the manual’s four, the fourteen programs of the tutorial, seventeen short classics, and all 103 games from a 1978 book, which ask you questions.</p>
       <div className="inline-links"><a className="text-link" href="https://github.com/chrishayuk/chuk-basic-rs">SOURCE AND TUTORIAL ↗</a><a className="text-link" href="https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf">THE MANUAL, AT DARTMOUTH ↗</a></div>
     </header>
     <BasicStudy choose/>
