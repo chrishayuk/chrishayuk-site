@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * A JOSS console as it looked in 1964: paper on a platen, the user in green
@@ -53,4 +53,31 @@ export function JossTypewriter({ year = "1965", lines, signOn = true, compact = 
   }, [year, signOn, compact, label, autoplay, speed]);
 
   return <div ref={host} className="joss-typewriter" data-joss-typewriter/>;
+}
+
+/**
+ * A typewriter to sit at, with a few lines beside it to try: typed in for the
+ * reader at the press of a button, or typed by the reader. For the opening of
+ * the note, so that a first visit sees JOSS do something.
+ */
+export function JossTry({ lines, label, note }: { lines: string[]; label: string; note?: React.ReactNode }) {
+  const [desk, setDesk] = useState<Console | null>(null);
+  const [busy, setBusy] = useState(false);
+  const type = async () => {
+    if (!desk || busy) return;
+    setBusy(true);
+    try { await desk.play(lines); } finally { setBusy(false); }
+  };
+  return <figure className="joss-runner joss-try">
+    <figcaption className="record-voice">{label}</figcaption>
+    <JossTypewriter compact onReady={setDesk} label="A JOSS console"/>
+    <div className="joss-try-lines">
+      <pre aria-label="Lines to try">{lines.join("\n")}</pre>
+      <div className="joss-runner-bar">
+        <button type="button" onClick={type} disabled={!desk || busy}>{busy ? "TYPING…" : "TYPE THESE IN FOR ME"}</button>
+        <span className="joss-runner-idle">Or click the paper and type them yourself.</span>
+      </div>
+    </div>
+    {note && <p className="joss-runner-note">{note}</p>}
+  </figure>;
 }
