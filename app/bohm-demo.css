@@ -29,8 +29,6 @@
 .bohm-excerpt figcaption a{border-bottom:1px solid var(--rule)}
 .bohm-runner{margin:30px 0;border:1px solid var(--rule);padding:18px 18px 16px}
 .bohm-runner figcaption{font-size:9px;margin-bottom:12px}
-.bohm-runner textarea{display:block;width:100%;border:0;border-left:2px solid var(--accent);border-radius:0;padding:4px 0 4px 14px;background:transparent;color:inherit;font:13px/1.65 var(--font-geist-mono);resize:vertical;tab-size:2}
-.bohm-runner textarea:focus{outline:none;border-left-color:var(--fg)}
 .bohm-runner-input{margin:10px 0 0;font:11px/1.5 var(--font-geist-mono);color:var(--muted)}
 .bohm-runner-bar{display:flex;gap:12px;align-items:baseline;margin-top:14px;flex-wrap:wrap}
 .bohm-runner-bar button{border:1px solid currentColor;border-radius:0;padding:8px 16px;background:transparent;color:inherit;font:11px/1.2 var(--font-geist-mono);letter-spacing:.1em;cursor:pointer}
@@ -42,4 +40,39 @@
 /* Geist Mono draws ∩ and ∪ at the height of a small letter, where they read
    as n and u. Take just those two from a font that draws them full height. */
 @font-face{font-family:"Bohm Set Symbols";src:local("Menlo"),local("DejaVu Sans Mono"),local("Consolas"),local("Liberation Mono"),local("Courier New");unicode-range:U+2229-222A}
-.bohm-program,.bohm-input,.bohm-output,.bohm-keys button,.bohm-runner textarea,.bohm-runner-bar output{font-family:"Bohm Set Symbols",var(--font-geist-mono),monospace}
+.bohm-program,.bohm-input,.bohm-output,.bohm-keys button,.bohm-runner-bar output,.bohm-editor>pre,.bohm-editor .cm-scroller,.bohm-hover code,.bohm-hover pre,.bohm-editor .cm-tooltip-autocomplete ul li{font-family:"Bohm Set Symbols",var(--font-geist-mono),monospace}
+
+/* The Böhm editor: CodeMirror, coloured and checked by the language server. */
+.bohm-editor{--bohm-code:13px/1.65 var(--font-geist-mono);position:relative}
+.bohm-editor>pre{margin:0;font:var(--bohm-code);white-space:pre;overflow:auto;tab-size:2}
+.bohm-editor .cm-editor{background:transparent;color:inherit}
+.bohm-editor .cm-editor.cm-focused{outline:none}
+.bohm-editor .cm-scroller{font:var(--bohm-code)}
+.bohm-editor .cm-content{padding:0;caret-color:currentColor}
+.bohm-editor .cm-line{padding:0}
+.bohm-editor .cm-cursor{border-left-color:currentColor}
+.bohm-editor .cm-selectionBackground,.bohm-editor .cm-content ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)!important}
+.bohm-program.bohm-editor{height:340px;padding:0;margin-bottom:26px;resize:vertical;overflow:hidden}
+.bohm-program.bohm-editor>pre,.bohm-program.bohm-editor .cm-content{padding:16px}
+.bohm-program.bohm-editor .cm-editor{height:100%}
+.bohm-program.bohm-editor:focus-within{outline:1px solid var(--accent);outline-offset:0}
+.bohm-runner .bohm-editor{border-left:2px solid var(--accent);padding:4px 0 4px 14px}
+.bohm-runner .bohm-editor:focus-within{border-left-color:currentColor}
+.bohm-runner .bohm-editor .cm-scroller{max-height:340px}
+.bohm-editor-hint{color:var(--muted)}
+/* Token colours are mixed with the text colour, so they hold on paper and on the dark edition. */
+.bohm-token-comment{color:color-mix(in srgb,currentColor 55%,transparent);font-style:italic}
+.bohm-token-number{color:color-mix(in srgb,#2f7fb8 70%,currentColor)}
+.bohm-token-function{color:color-mix(in srgb,#c96a14 80%,currentColor);font-weight:600}
+.bohm-token-parameter{color:color-mix(in srgb,#a0489a 75%,currentColor);font-weight:600}
+.bohm-token-keyword{color:color-mix(in srgb,#b8323a 70%,currentColor)}
+.bohm-token-operator{color:color-mix(in srgb,currentColor 75%,transparent)}
+.bohm-editor .cm-tooltip{border:1px solid #22251f55;border-radius:0;background:#fbf9f3;color:#22251f;box-shadow:0 6px 24px #0003;max-width:min(460px,86vw)}
+.bohm-hover{padding:10px 14px;font:13px/1.55 var(--type-sans),sans-serif}
+.bohm-hover p{margin:0 0 6px}
+.bohm-hover p:last-child{margin-bottom:0}
+.bohm-hover code,.bohm-hover pre{font:12px/1.5 var(--font-geist-mono);background:#22251f14;padding:1px 4px}
+.bohm-hover pre{margin:0 0 6px;padding:6px 8px;overflow:auto}
+.bohm-editor .cm-diagnostic{font:12px/1.5 var(--type-sans),sans-serif;padding:6px 10px}
+.bohm-editor .cm-tooltip-autocomplete ul li{font:12px/1.6 var(--font-geist-mono);padding:2px 8px}
+.bohm-editor .cm-tooltip-autocomplete ul li[aria-selected]{background:#22251f;color:#fbf9f3}
