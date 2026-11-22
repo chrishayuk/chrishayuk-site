@@ -5,13 +5,11 @@ import type { PublicationRecord } from "./types.ts";
  * that manual and in a RAND memorandum of 1963. Every quoted sentence is
  * copied from its source. Every count can be reproduced with `cargo test` in
  * the linked repository, and the manual's programs run on /demos/ipl-v.
- *
- * Unlisted: a draft for review in place. See docs/previews.md. */
+ */
 export const iplvRecord: PublicationRecord = {
   id: "N-IPLV",
   slug: "its-manual-printed-a-trace",
   kind: "notebook",
-  visibility: "unlisted",
   title: "Its manual printed a trace. So I could check.",
   dek: "The first artificial intelligence programs held what they knew as symbols linked into lists. Their language, IPL-V, was written for a machine its 1964 manual describes. A coding agent rebuilt that machine and held it to the runs the manual prints.",
   abstract: "Computers were built to calculate; IPL was built to hold symbols, in lists a program makes, changes and gives back as it runs. This is a note about building the IPL computer, the machine the IPL-V manual of 1964 describes, with a coding agent. The manual prints one run of its own system in full: the address each card was loaded at, and a trace of every instruction with a count of interpretation cycles. The reconstruction loads that program at the same addresses, and all 46 lines of the trace agree in level, instruction, test cell and count. The count settled how cycles were tallied, which the text leaves loose, and with it the effort figures of a 1963 version of the Logic Theorist, which runs with no change to its deck and finds the same proofs by the same search. Transcribing the manual’s own programs found two things wrong with the reconstruction. The machine runs in the browser.",
