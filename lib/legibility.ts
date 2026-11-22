@@ -150,7 +150,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",
   searchTitle: "Dartmouth BASIC: Run the 1964 Manual’s Programs in Your Browser",
-  description: "Dartmouth BASIC explained from its first instruction manual, with the manual’s programs running in WebAssembly beside the pages they were printed on. One of them stopped at line 40 on every later BASIC.",
+  description: "Dartmouth BASIC explained from its first instruction manual, with the manual’s programs running in WebAssembly beside the pages they were printed on. One of them stopped at line 40 on the later BASICs it was tried on.",
   concepts: ["BASIC programming language", "Dartmouth BASIC", "Dartmouth time-sharing", "coding agents", "reference implementations", "WebAssembly"],
  },
  "N-ATTRIBUTION": {
