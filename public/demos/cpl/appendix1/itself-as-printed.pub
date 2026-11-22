@@ -1,0 +1,189 @@
+l̲e̲t̲ c, s, s' a̲l̲l̲ b̲e̲ s̲t̲r̲i̲n̲g̲
+l̲e̲t̲ LastOutput, InputBuffer b̲o̲t̲h̲ = ''  || i.e. the empty string
+l̲e̲t̲ TerminatorPending, TerminatorSuppressed = f̲a̲l̲s̲e̲, t̲r̲u̲e̲
+
+l̲e̲t̲ r̲t̲ NextChar[s̲t̲r̲i̲n̲g̲ r̲e̲f̲ c] b̲e̲
+   §N.ch  c := InputBuffer
+           Readchar[CPL.Source, InputBuffer]
+           i̲f̲ c = '*|' = InputBuffer d̲o̲
+              § u̲n̲t̲i̲l̲ c = '*n' d̲o̲ Readchar[CPL.Source, c]
+                 Readchar[CPL.Source, InputBuffer] §̸N.ch
+
+l̲e̲t̲ r̲t̲ Output[s̲t̲r̲i̲n̲g̲ x] b̲e̲
+   §O.p  i̲f̲ x = 'c̲' d̲o̲ § TerminatorSuppressed := t̲r̲u̲e̲
+                           r̲e̲t̲u̲r̲n̲ §̸
+
+          i̲f̲ TerminatorPending ∧ ∼TerminatorSuppressed ∧
+             CanEndCommand[LastOutput] ∧ CanStartCommand[x] d̲o̲
+                § Write['; ø']
+                   LastOutput := ';' §̸
+          TerminatorPending, TerminatorSuppressed b̲o̲t̲h̲ := f̲a̲l̲s̲e̲
+          x := MonadicTransformation[LastOutput, x]
+
+          i̲f̲ MustStartCommand[x] ∧ CannotProceedCommand[LastOutput]
+                d̲o̲ § Write['do ø']
+                      LastOutput := 'do' §̸
+
+          Write[x <=> 'ø']
+          LastOutput := x  §̸O.p
+
+l̲e̲t̲ r̲t̲ ReadTag[s̲t̲r̲i̲n̲g̲ r̲e̲f̲ s] b̲e̲
+   §R.T  s := ''
+          § NextChar[c]
+             u̲n̲l̲e̲s̲s̲ Letter.Digit.Dot[c] b̲r̲e̲a̲k̲
+             s := s <=> c §̸ r̲e̲p̲e̲a̲t̲
+
+          u̲n̲t̲i̲l̲ c ≠ '*'' d̲o̲ § s := s <=> c
+                                NextChar[c] §̸R.T.
+
+l̲e̲t̲ r̲t̲ ReadUnderlinedWord[s̲t̲r̲i̲n̲g̲ r̲e̲f̲ s] b̲e̲
+   §R.U.W  s := c
+            w̲h̲i̲l̲e̲ UnderlinedLetter[c] d̲o̲
+               § s := s <=> Small.UnderlinedLetter[c]
+                  NextChar[c] §̸R.U.W.
+
+l̲e̲t̲ r̲t̲ ReadSpaces[s̲t̲r̲i̲n̲g̲ r̲e̲f̲ c] b̲e̲
+   §R.S. § NextChar[c]
+           i̲f̲ c ≠ '*s' r̲e̲t̲u̲r̲n̲ §̸ r̲e̲p̲e̲a̲t̲  §̸R.S
+
+l̲e̲t̲ r̲e̲c̲ r̲t̲ Preprocessor[s̲t̲r̲i̲n̲g̲ BracketType, BracketTag,
+                        l̲a̲b̲e̲l̲ MismatchReturn] b̲e̲
+
+ §P.P  Switch: j̲u̲m̲p̲ o̲n̲ c i̲n̲t̲o̲
+   § c̲a̲s̲e̲ '§':   ReadTag[s]
+                  Output['§']
+                  Proprocessor['§', s, Mismatch]
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ '§̸':   ReadTag[s]
+                  i̲f̲ BracketType ≠ '§' d̲o̲ Report[1]
+      Mismatch:   Output['§̸']
+                  i̲f̲ BracketTag ≠ s g̲o̲t̲o̲ MismatchReturn
+                  r̲e̲t̲u̲r̲n̲
+
+      c̲a̲s̲e̲ ';':   c̲a̲s̲e̲ '*n':
+                  TerminatorPending := t̲r̲u̲e̲
+                  NextChar[c]
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ '(':   c̲a̲s̲e̲ '[': c̲a̲s̲e̲ '→':
+                  Output[c]; s := c
+                  NextChar[c]
+                  Preprocessor[s, '', Error]
+      Error:      g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ ')'    u̲n̲l̲e̲s̲s̲ BracketType = '(' d̲o̲ Report[2]
+                  Output[c]; NextChar[c]
+                  r̲e̲t̲u̲r̲n̲
+
+      c̲a̲s̲e̲ ']':   u̲n̲l̲e̲s̲s̲ BracketType = '[' d̲o̲ Report[3]
+                  Output[c]; NextChar[c]
+                  r̲e̲t̲u̲r̲n̲
+
+      c̲a̲s̲e̲ ',':   i̲f̲ BracketType = '→' d̲o̲
+                     § Output['comma']; NextChar[c]
+                        r̲e̲t̲u̲r̲n̲ §̸
+                  ReadSpaces[c]
+                  u̲n̲l̲e̲s̲s̲ c = '.' d̲o̲ § Output[',']; NextChar[c]
+                                       g̲o̲t̲o̲ Switch §̸
+                  NextChar[c]
+                  i̲f̲ Digit[c] d̲o̲
+                     §Dgt  Output[',']
+                            s := '.'
+                            w̲h̲i̲l̲e̲ Digit[c] d̲o̲ § s := s <=> c
+                                                 NextChar[c] §̸
+                            Output['K̸' <=> s]
+                            g̲o̲t̲o̲ Switch  §̸Dgt
+                  i̲f̲ c = '*s' d̲o̲ ReadSpaces[c]
+                  i̲f̲ c ≠ '.' d̲o̲ Report[4]
+                  w̲h̲i̲l̲e̲ c = '.' d̲o̲ ReadSpaces[c]
+                  u̲n̲l̲e̲s̲s̲ c = ',' d̲o̲ Report[5]
+                  Output['dot string']; NextChar[c]
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ '*'':  s := ''
+                  NextChar[c]
+                  u̲n̲t̲i̲l̲ c = '*'' d̲o̲
+                     §1  t̲e̲s̲t̲ EscapeCharacter[c]
+                             t̲h̲e̲n̲d̲o̲ § NextChar[c]
+                                       s := s <=> SpecialChar[c] §̸
+                             o̲r̲ d̲o̲ s := s <=> c
+                          NextChar[c]  §̸1
+                  Output['S̸' <=> s]; NextChar[c]
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ '<':   NextChar[c]
+                  i̲f̲ c = '<' d̲o̲ § Output['<<']; NextChar[c]
+                                   g̲o̲t̲o̲ Switch §̸
+                  i̲f̲ c = '=' d̲o̲
+                     § NextChar[c]
+                        i̲f̲ c = '>' d̲o̲ § Output['<=>']; NextChar[c]
+                                         g̲o̲t̲o̲ Switch §̸
+                        Report[6] §̸
+                  Output['<']
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ '>':   NextChar[c]
+                  i̲f̲ c = '>' d̲o̲ § Output['>>']; NextChar[c]
+                                   g̲o̲t̲o̲ Switch §̸
+                  Output['>']
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ ':':   NextChar[c]
+                  i̲f̲ c = '=' d̲o̲ § Output[':=']; NextChar[c]
+                                   g̲o̲t̲o̲ s̲w̲i̲t̲c̲h̲ §̸
+                  Output[':']
+                  g̲o̲t̲o̲ Switch
+
+      c̲a̲s̲e̲ '*s':  c̲a̲s̲e̲ '_':   NextChar[c]
+                              g̲o̲t̲o̲ Switch
+
+      t̲h̲e̲ r̲e̲s̲t̲:   i̲f̲ BigLetter[c] d̲o̲
+                     § s := c
+                        ReadTag[s']
+                        Output['N̸' <=> s <=> s']
+                        g̲o̲t̲o̲ Switch §̸
+                  i̲f̲ SmallLetter[c] d̲o̲
+                     § s := c
+                        NextChar[c]
+                        w̲h̲i̲l̲e̲ c = '*'' d̲o̲ § s := s <=> c
+                                             NextChar[c] §̸
+                        Output['N̸' <=> s]
+                        g̲o̲t̲o̲ Switch §̸
+
+                  i̲f̲ Digit.Dot[c] d̲o̲
+                     § s := ''
+                        w̲h̲i̲l̲e̲ Digit.Dot[c] d̲o̲ § s := s <=> c
+                                                 NextChar[c] §̸
+                        Output['K̸' <=> s]
+                        g̲o̲t̲o̲ Switch §̸
+
+                  i̲f̲ UnderlinedLetter[c] d̲o̲
+                     §1  ReadUnderlinedWord[s]
+                          s := Standard[s]
+                          w̲h̲i̲l̲e̲ Combinable[s] d̲o̲
+                             §2  i̲f̲ c = '*s' d̲o̲ ReadSpaces[c]
+                                  u̲n̲l̲e̲s̲s̲ UnderlinedLetter[c] d̲o̲
+                                     § Output[s]
+                                        g̲o̲t̲o̲ Switch §̸
+                                  ReadUnderlinedWord[s']
+                                  s' := Standard[s']
+                                  t̲e̲s̲t̲ Standardizable[s <=> s']
+                                     t̲h̲e̲n̲d̲o̲ s := standard[s <=> s']
+                                     o̲r̲d̲o̲ § Output[s]
+                                             s := s' §̸2
+                          Output[s]
+                          g̲o̲t̲o̲ Switch  §̸1
+
+                  i̲f̲ c = EndofStreamChar d̲o̲
+                     § u̲n̲l̲e̲s̲s̲ BracketType = 'StreamStart' d̲o̲
+                           Report[7]
+                        r̲e̲t̲u̲r̲n̲ §̸
+                  Output[c]
+                  NextChar[c]
+                  g̲o̲t̲o̲ Switch  §̸P.P
+
+|| Main program
+LastOutput, InputBuffer b̲o̲t̲h̲ := ''
+NextChar[c]; NextChar[c]
+Preprocessor['StreamStart', '', Error]; Error: f̲i̲n̲i̲s̲h̲

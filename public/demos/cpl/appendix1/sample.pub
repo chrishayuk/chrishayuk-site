@@ -1,0 +1,16 @@
+|| A small program in the implementation alphabet, to show each thing
+|| the preprocessor does.
+
+l̲e̲t̲ r̲e̲c̲ HCF[i̲n̲t̲e̲g̲e̲r̲ n, m] = (m > n → HCF[m, n],
+                             m = 0 → n,
+                             HCF[m, Rem[n, m]])
+l̲e̲t̲ a, b = 1071, 462
+i̲f̲ a < b g̲o̲t̲o̲ Swap
+Next: Write['The answer is ', HCF[a, b], '*n']
+§1 f̲o̲r̲ i = 1, 2, ..., 5 d̲o̲
+       §2 a := -a + .5
+           u̲n̲l̲e̲s̲s̲ a > 0 b̲r̲e̲a̲k̲ §̸1
+v̲a̲l̲u̲e̲ o̲f̲ § r̲e̲s̲u̲l̲t̲ i̲s̲ a §̸
+f̲i̲n̲i̲s̲h̲
+Swap: a, b := b, a
+g̲o̲ t̲o̲ Next

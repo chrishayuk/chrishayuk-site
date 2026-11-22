@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import data from '../public/data/ecology/world-remembers/figures.json' with {type:'json'};
 import { getRecord } from '../lib/records.ts';
 import { recordGraph, retrieveGraph } from '../lib/graph.ts';
-import { homeResultProgrammes, programmeHighlight, latestNotes } from '../lib/publication-index.ts';
+import { homeResultProgrammes, programmeHighlight, notebookNotes } from '../lib/publication-index.ts';
 import { ecologySeriesUpdates } from '../lib/ecology-series-updates.ts';
 
 test('article sources retain the exact bytes of the completed canonical writeups',()=>{
@@ -42,7 +42,7 @@ test('defender endpoint is the START of generation six, with map two still damag
 });
 test('home, graph, retrieval and dated followups point to the new note without revising old snapshots',()=>{
  const id='N-ECOLOGY-WORLD-REMEMBERS',note=getRecord(id)!;
- assert.equal(note.publication,'published');assert.equal(note.version,'1.0');assert.equal(note.published,'2026-09-15');assert.ok(latestNotes.some(n=>n.id===id));
+ assert.equal(note.publication,'published');assert.equal(note.version,'1.0');assert.equal(note.published,'2026-09-15');assert.ok(notebookNotes.some(n=>n.id===id));
  assert.ok(homeResultProgrammes.some(p=>p.id==='agent-ecology'));
  const graph=recordGraph();
  assert.ok(graph.nodes.some(n=>n.id===id&&n.publication==='published'&&n.version==='1.0'));
