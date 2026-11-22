@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { MouseEditor } from "./MouseEditor";
 
 /**
  * One small Mouse program that can be edited and run where it sits in a note.
@@ -34,12 +35,9 @@ export function MouseRunner({ label, program, input = "", note }: { label: strin
     next.postMessage({ wasmUrl: new URL(`${FILES}/mouse.wasm`, window.location.href).href, program: source, input });
   }, [input, source, stop]);
 
-  const rows = Math.min(12, Math.max(2, source.split("\n").length));
   return <figure className="mouse-runner">
     <figcaption className="record-voice">{label}</figcaption>
-    <textarea aria-label={`${label}: Mouse program`} value={source} rows={rows} wrap="off" spellCheck={false}
-      onChange={event => setSource(event.target.value)}
-      onKeyDown={event => { if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) run(); }}/>
+    <MouseEditor label={`${label}: Mouse program`} value={source} onChange={setSource} onRun={run}/>
     <div className="mouse-runner-bar">
       <button type="button" onClick={running ? stop : run}>{running ? "STOP" : "RUN"}</button>
       {source !== program && <button type="button" className="mouse-runner-reset" onClick={() => { setSource(program); setOutput(null); }}>RESET</button>}

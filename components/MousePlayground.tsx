@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { MouseEditor } from "./MouseEditor";
 
 /**
  * A Mouse interpreter in the page.
@@ -9,7 +10,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * compiled unchanged for WASI. The files in public/demos/mouse/ (mouse.wasm,
  * wasi.js, worker.js, examples.json) are copied from that repository's web/
  * folder: rebuild them there with `node web/build.mjs` and copy them across,
- * rather than editing them here.
+ * rather than editing them here. The editor's colours, problems and hover
+ * help come from the language server in the same repository (MouseEditor).
  *
  * Every run happens in a worker, so a program that never ends can be stopped
  * by terminating it.
@@ -95,10 +97,8 @@ export function MousePlayground() {
     </div>
     <div className="mouse-panes">
       <div>
-        <label htmlFor="mouse-program" className="record-voice">02 / PROGRAM</label>
-        <textarea id="mouse-program" className="mouse-program" value={program} wrap="off" spellCheck={false}
-          onChange={event => setProgram(event.target.value)}
-          onKeyDown={event => { if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) run(); }}/>
+        <p className="record-voice">02 / PROGRAM <span className="mouse-editor-hint">/ HOVER OVER ANY CHARACTER</span></p>
+        <MouseEditor className="mouse-program" label="Mouse program" value={program} onChange={setProgram} onRun={run}/>
         <label htmlFor="mouse-input" className="record-voice">03 / INPUT, READ BY ?</label>
         <textarea id="mouse-input" className="mouse-input" value={input} spellCheck={false} onChange={event => setInput(event.target.value)}/>
       </div>

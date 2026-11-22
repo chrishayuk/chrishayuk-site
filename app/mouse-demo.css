@@ -38,3 +38,39 @@
 .mouse-play-link { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin: 18px 0; }
 .mouse-play-link a { border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .mouse-play-link span { opacity: .7; }
+
+/* The Mouse editor: CodeMirror, coloured and checked by the language server. */
+.mouse-editor{--mouse-code:13px/1.65 var(--font-geist-mono);position:relative}
+.mouse-editor>pre{margin:0;font:var(--mouse-code);white-space:pre;overflow:auto;tab-size:2}
+.mouse-editor .cm-editor{background:transparent;color:inherit}
+.mouse-editor .cm-editor.cm-focused{outline:none}
+.mouse-editor .cm-scroller{font:var(--mouse-code)}
+.mouse-editor .cm-content{padding:0;caret-color:currentColor}
+.mouse-editor .cm-line{padding:0}
+.mouse-editor .cm-cursor{border-left-color:currentColor}
+.mouse-editor .cm-selectionBackground,.mouse-editor .cm-content ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)!important}
+.mouse-program.mouse-editor{height:340px;padding:0;margin-bottom:26px;resize:vertical;overflow:hidden}
+.mouse-program.mouse-editor>pre,.mouse-program.mouse-editor .cm-content{padding:16px}
+.mouse-program.mouse-editor .cm-editor{height:100%}
+.mouse-program.mouse-editor:focus-within{outline:1px solid var(--accent);outline-offset:0}
+.mouse-runner .mouse-editor{border-left:2px solid var(--accent);padding:4px 0 4px 14px}
+.mouse-runner .mouse-editor:focus-within{border-left-color:currentColor}
+.mouse-runner .mouse-editor .cm-scroller{max-height:300px}
+.mouse-editor-hint{color:var(--muted)}
+/* Token colours are mixed with the text colour, so they hold on paper and on the dark edition. */
+.mouse-token-comment{color:color-mix(in srgb,currentColor 55%,transparent);font-style:italic}
+.mouse-token-string{color:color-mix(in srgb,#3f8f4f 70%,currentColor)}
+.mouse-token-number{color:color-mix(in srgb,#2f7fb8 70%,currentColor)}
+.mouse-token-function{color:color-mix(in srgb,#c96a14 80%,currentColor);font-weight:600}
+.mouse-token-parameter{color:color-mix(in srgb,#a0489a 75%,currentColor)}
+.mouse-token-keyword{color:color-mix(in srgb,#b8323a 70%,currentColor)}
+.mouse-token-operator{color:color-mix(in srgb,currentColor 75%,transparent)}
+.mouse-editor .cm-tooltip,.cm-tooltip.cm-tooltip-hover,.cm-tooltip.cm-tooltip-autocomplete,.cm-tooltip.cm-tooltip-lint{border:1px solid #22251f55;border-radius:0;background:#fbf9f3;color:#22251f;box-shadow:0 6px 24px #0003;max-width:min(420px,86vw)}
+.mouse-hover{padding:10px 14px;font:13px/1.55 var(--type-sans),sans-serif}
+.mouse-hover p{margin:0 0 6px}
+.mouse-hover p:last-child{margin-bottom:0}
+.mouse-hover code,.mouse-hover pre{font:12px/1.5 var(--font-geist-mono);background:#22251f14;padding:1px 4px}
+.mouse-hover pre{margin:0 0 6px;padding:6px 8px;overflow:auto}
+.mouse-editor .cm-diagnostic{font:12px/1.5 var(--type-sans),sans-serif;padding:6px 10px}
+.mouse-editor .cm-tooltip-autocomplete ul li{font:12px/1.6 var(--font-geist-mono);padding:2px 8px}
+.mouse-editor .cm-tooltip-autocomplete ul li[aria-selected]{background:#22251f;color:#fbf9f3}
