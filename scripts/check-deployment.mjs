@@ -251,6 +251,11 @@ assert.equal(demo.status,200);
 assert.match(demo.body,/Interactive addressed memory/);
 assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
+const mouse=await request("/demos/mouse");
+assert.equal(mouse.status,200);
+assert.match(mouse.body,/Mouse interpreter/);
+assert.match(mouse.body,/name="robots" content="noindex, follow"/);
+for (const asset of ["/demos/mouse/mouse.wasm","/demos/mouse/worker.js","/demos/mouse/wasi.js","/demos/mouse/examples.json"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.mp4","/media/notebook/address.mp4","/media/notebook/stills/HJlWDSyDcD4-156.webp","/media/notebook/stills/HJlWDSyDcD4-286.webp","/media/notebook/stills/HJlWDSyDcD4-434.webp","/media/notebook/stills/HJlWDSyDcD4-1222.webp"]) {
   const response=await request(asset);
   assert.equal(response.status,200,asset);
