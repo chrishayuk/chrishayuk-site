@@ -849,5 +849,34 @@
         "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-MOUSE",
+    "version": "1.0",
+    "recordHash": "67535d3a983d1b8d57c277b81a57a7fe9f51943d6d19bd35fc201d5daf8a651e",
+    "revision": {
+      "kind": "initial",
+      "summary": "Initial publication of the note on porting Mouse and the misprint Tom Lane caught in 1980, after a fact check against the BYTE scans."
+    },
+    "sources": [
+      {
+        "title": "Peter Grogono, “Mouse: A Language for Microcomputers”, BYTE, July 1979, pp. 198–220",
+        "url": "https://archive.org/details/byte-magazine-1979-07",
+        "note": "Listing 6 is on pp. 209, 210 and 212; line 176 on p. 212; Figure 1 on p. 216."
+      },
+      {
+        "title": "Tom Lane, “Comment and Correction for Mouse”, with Peter Grogono’s reply, BYTE, June 1980, pp. 238 and 240",
+        "url": "https://archive.org/details/byte-magazine-1980-06"
+      },
+      {
+        "title": "chrishayuk/mouse-interpreter",
+        "url": "https://github.com/chrishayuk/mouse-interpreter",
+        "note": "The interpreter, its tests, 42 example programs, and reduced scans of both sources."
+      },
+      {
+        "title": "Coding-agent session, 21 November 2026",
+        "note": "The agent’s report is quoted as written. The first completed port was rebuilt unchanged from the session transcript to confirm that it prints 33 on Lane’s test."
+      }
+    ]
   }
 ]

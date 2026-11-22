@@ -46,8 +46,8 @@ export function MouseNotebook({ record }: { record: PublicationRecord }) {
     </> },
     { label: "Line 176", children: <>
       <Excerpt src="byte-1979-listing-176.jpg" width={1600} height={415} href={BYTE_1979}
-        alt="Lines 169 to 179 of the Pascal listing. Line 175 reads MACRO : PARBAL := PARBAL - 1 and line 176 reads PARAM : PARBAL := PARBAL - 1."
-        caption="BYTE, JULY 1979, P. 212 / LISTING 6, LINES 169–179"/>
+        alt="Lines 169 to 178 of the Pascal listing. Line 175 reads MACRO : PARBAL := PARBAL - 1 and line 176 reads PARAM : PARBAL := PARBAL - 1."
+        caption="BYTE, JULY 1979, P. 212 / LISTING 6, LINES 169–178"/>
       {act(3)}
       <Excerpt src="byte-1979-figure-1.jpg" width={1600} height={909} href={BYTE_1979}
         alt="Figure 1 of the article: the program #A,3; $A #B,%A; @ $B %A ! @ $$ beside a stack of four frames, two PARAM above two MACRO."
@@ -69,7 +69,7 @@ export function MouseNotebook({ record }: { record: PublicationRecord }) {
         { label: "THE C REFERENCE", value: "33", detail: "As Lane said the published interpreter would." },
         { label: "THE AGENT’S FIRST PORT", value: "33", detail: "Copied from the C without knowing." },
         { label: "WITH LANE’S CORRECTIONS", value: "1", detail: "Each macro keeps its own variables." },
-      ]} note="One six-line program, run on each. The first two are not runnable here; the third is, below."/>
+      ]} note="One four-line program, run on each. The first two are not runnable here; the third is, below."/>
       <MouseRunner label="LANE’S TEST, FROM HIS LETTER" program={"#A,#B;;\n\n$A Q 1 = %A Q. ! @\n$B Q 33 = @\n$$"}
         note="A sets its Q to 1, then runs its parameter, which calls B. B sets its own Q to 33. A should still print 1."/>
       {act(5)}
