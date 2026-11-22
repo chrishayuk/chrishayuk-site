@@ -31,10 +31,11 @@ export const programmes = [
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
     description: "Old programming languages rebuilt from their original printed sources, checked against the page, and running in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM"], continuation: undefined,
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
       { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
+      { label: "CPL playground", href: "/demos/cpl", name: "CPL", year: "1966", detail: "The language BCPL was cut down from, built from its working papers, with the one large program they contain." },
       { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",

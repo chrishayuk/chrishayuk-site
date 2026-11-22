@@ -153,6 +153,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Corrado Böhm's 1951 compiler, written in its own language for a machine that was never built, run on a simulation with three independent readings. Try the language in the browser.",
   concepts: ["Corrado Böhm", "self-hosting compilers", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-CPL": {
+  subject: "Running the preprocessor in the 1966 CPL Working Papers on an interpreter built from those papers with a coding agent",
+  question: "How much of a language that was still a draft can you check by running the one program its authors left?",
+  searchTitle: "A 1966 CPL Program Said It Had Not Been Checked. A Coding Agent Ran It.",
+  description: "The one large program in the 1966 papers that define CPL, the ancestor of BCPL and C, typed in from a scan and run. It needed eleven corrections. Try CPL and the program in the browser.",
+  concepts: ["CPL programming language", "Christopher Strachey", "BCPL", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",
