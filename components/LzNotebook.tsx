@@ -57,7 +57,7 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
         caption="E-364, P. 21 / TEMPORARY RULES AND RESTRICTIONS"/>
       {act(1)}
       <StudyMeasures label="WHAT THE MANUAL’S OWN PROGRAMS GIVE" items={[
-        { label: "COMPLETE PROGRAMS, PP. 11 AND 18", value: "3 of 3 run", detail: "The two tables of cosines and the two differential equations, and the page-19 variant of the last. The manual’s other examples are fragments." },
+        { label: "COMPLETE PROGRAMS, PP. 11 AND 18", value: "3 of 3 run", detail: "The two tables of cosines and the two differential equations, and the page-19 variant of the last. The second table has a semicolon where a comma belongs, read here as a comma. The manual’s other examples are fragments." },
         { label: "PRINTED NUMBERS, P. 6", value: "3 of 3", detail: "5, .05 and −π, typed digit for digit as the manual prints them. The manual prints nothing else its programs typed." },
         { label: "AGAINST MATHEMATICS", value: "7 · 10⁻⁸", detail: "The largest difference between the cosine tables and cos x. The differential equations are within about .004 of sin(t − 2) and cos(t − 2) − 1, what a step of one half costs." },
       ]} note="Everything but those three printed numbers is checked against mathematics, not against Whirlwind."/>
@@ -93,7 +93,7 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
         caption="E-364, P. 13 / “THE VALUE ZERO IS PERMISSIBLE IF ASSIGNED BY THE SPECIFIC EQUATION n = 0”"/>
       {act(4)}
       <LzRunner label="TPK, WITH KNUTH’S ELEVEN NUMBERS, FED WITH EACH KIND OF ZERO" program={TPK} compare
-        note="The pages agree until i is zero. On the left, the zero i reaches by i = i − 1 is −0, which this reconstruction takes to mark a computed zero, and page 13 stops the run. On the right every zero is +0, so a computed zero looks like one set by n = 0 and the run goes on: a what-if, since page 13 forbids a computed zero index whatever its sign. The eleven numbers are Knuth’s own example of v|N: 1 (.5) 2 (.25) 3.5 (1) 5.5."/>
+        note="The pages agree until i is zero. Page 13 forbids that zero as an index whatever its sign, because it was computed by i = i − 1. On the left it is −0, which this reconstruction refuses, so the run stops with an alarm of its own wording. On the right every zero is +0, so the reconstruction cannot tell it from one set by n = 0 and the run goes on, still breaking the rule. The eleven numbers are Knuth’s own example of v|N: 1 (.5) 2 (.25) 3.5 (1) 5.5."/>
       <LzRunner label="THE SAME TAPE UNDER THE RULES OF JANUARY 1954" program={TPK} settings={{ rules: true }}
         note="“The x|N is not yet in operation.” Here the translator stops at the first line, and nothing is run. What Whirlwind did with such a tape in January 1954 is not recorded."/>
     </> },
@@ -117,8 +117,8 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
       <StudyMeasures label="TROUBLES TO REPORT" items={[
         { label: "SUMMER SCHOOL, 1954", value: "not accepted", detail: "Two commas missing. With them put back, there is no PRINT, so nothing is typed." },
         { label: "LARGEST NUMBER, P. 6", value: "9.2233715 · 10¹⁸", detail: "Not 9.2233995 · 10¹⁸, as the page has it: wrong in the fifth decimal place." },
-        { label: ".05, P. 6", value: "+.50000000−01", detail: "Only if the digits are cut off. Rounded, the nearest 24-bit number would print +.50000001−01." },
-      ]} note="One is a slip in the manual and one in a copy of it. The third is the manual’s rule for printing, read closely."/>
+        { label: ".05, P. 6", value: "+.50000000−01", detail: "Only if the digits are cut off. Rounded, the nearest 24-bit number would print +.50000001−01. Cutting off fits the page; it does not prove how Whirlwind printed." },
+      ]} note="One is a slip in the manual and one in a copy of it. The third is a reading of the manual’s printed examples, and the reconstruction’s choice."/>
     </> },
     { label: "It ran the first time", children: <>
       <Excerpt src="knuth-1976-p59-lead-pursuit.jpg" width={1300} height={130}
