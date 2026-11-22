@@ -78,6 +78,9 @@ export const notebookConclusions: Record<string, Conclusion> = {
  'N-BOHM': {
   takeaway: 'A compiler written in 1951 for a machine that was never more than a design runs, and compiles itself, once four slips in its printed text are corrected. Three of them were found by running it; the fourth had been reported in 1976.',
   scope: 'One thesis, one session, one agent that wrote all three readings the result rests on. The only outside check is one formula Knuth and Trabb Pardo worked by hand. An earlier implementation is reported and was not found.' },
+ 'N-BASIC': {
+  takeaway: 'An interpreter can run every later program it is shown, agree with a second implementation, and still stop on the language’s first manual. In 1964 a square root was taken of the absolute value; the later BASICs that everything had been checked against call that an error.',
+  scope: 'One interpreter, three example programs from a reprint of the beginners’ part of the manual. The checks were run by a coding agent and reported. Other differences from the 1964 language may not have been met yet.' },
  'N-ATTRIBUTION': {
   takeaway: 'The repository makes the authorship policy enforceable at the pull-request boundary. The check rejects disallowed metadata until it is rewritten; it cannot edit an immutable commit itself.',
   scope: 'The broader proposal is to distinguish accountable authorship from tool provenance. This particular disagreement shows which policy prevailed in this workflow, without establishing a general theory of agent authority.' },

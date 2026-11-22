@@ -31,7 +31,7 @@ export const programmes = [
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",
-    threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION", "N-MOUSE", "N-BOHM"], continuation: undefined },
+    threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION", "N-MOUSE", "N-BOHM", "N-BASIC"], continuation: undefined },
 ];
 export const researchProgrammes = programmes.filter(programme => programme.id !== "practice");
 /** The selected results now include the population-inheritance sequence. */
