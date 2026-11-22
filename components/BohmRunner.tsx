@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { BohmEditor } from "./BohmEditor";
 
 /**
  * One small Böhm program that can be edited and run where it sits in a note.
@@ -35,12 +36,9 @@ export function BohmRunner({ label, program = "", input = "", args = ["run", "-"
     next.postMessage({ wasmUrl: new URL(`${FILES}/bohm.wasm`, window.location.href).href, args, program: source, input });
   }, [args, input, source, stop]);
 
-  const rows = Math.min(14, Math.max(2, source.split("\n").length));
   return <figure className="bohm-runner">
     <figcaption className="record-voice">{label}</figcaption>
-    {program && <textarea aria-label={`${label}: program`} value={source} rows={rows} wrap="off" spellCheck={false}
-      onChange={event => setSource(event.target.value)}
-      onKeyDown={event => { if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) run(); }}/>}
+    {program && <BohmEditor label={`${label}: program`} value={source} onChange={setSource} onRun={run}/>}
     {input && <p className="bohm-runner-input">INPUT TAPE: {input}</p>}
     <div className="bohm-runner-bar">
       <button type="button" onClick={running ? stop : run}>{running ? "STOP" : "RUN"}</button>
