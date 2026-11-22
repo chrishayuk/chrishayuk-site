@@ -1,12 +1,21 @@
 import { Connection } from "@chrishayuk/hause/components/forms/Connection";
 import { addressedMemory as data, readAddress } from "@/lib/addressed-memory";
 import { authorityGate, gateArm } from "@/lib/authority-gate";
+import { BasicStudy } from "./BasicStudy";
 
-type Demonstration = "addressed-memory" | "authority-gate";
+type Demonstration = "addressed-memory" | "authority-gate" | "basic";
 type Link = { href: string; label: string };
 
 /** A visual entrance to a working example, composed as HAUSE Connection. */
 export function DemoConnection({ text, links, demonstration }: { text: string; links: Link[]; demonstration: Demonstration }) {
+  if (demonstration === "basic") {
+    // the program runs here, in the notebook: the link names which one
+    const query = new URLSearchParams(links[0].href.split("?")[1] ?? "");
+    return <section className="basic-inline" data-hause-act="connection">
+      <BasicStudy example={query.get("example") ?? undefined} arithmetic={query.get("arithmetic") === "later" ? "later" : undefined}/>
+      <Connection text={text} links={links}/>
+    </section>;
+  }
   const stage = demonstration === "authority-gate" ? <AuthorityStage/> : <MemoryStage/>;
   const heading = demonstration === "authority-gate"
     ? { kicker: "FROM THE REGISTER / INTO YOUR HANDS", title: <>Retire one read.<br/><em>Watch who answers.</em></>,
