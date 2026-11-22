@@ -59,6 +59,8 @@ function decode(chunks) {
  * @param {Object<string, string|Uint8Array>} [options.files]
  *        files by path relative to "/", e.g. { "program.bas": "10 PRINT 1" }
  * @param {string[]} [options.stdin]   lines for standard input, without newlines
+ * @param {Uint8Array} [options.input]  or: the whole of standard input, byte for
+ *        byte, after which the program sees the end of its input
  * @param {number} [options.outputLimit]  stop after this many bytes of output
  * @returns {{
  *   exit: "exit" | "need-input" | "output-limit" | "trap",
@@ -69,7 +71,7 @@ function decode(chunks) {
  *   trap: string | null,
  * }}
  */
-export function runWasi(module, { args, files = {}, stdin = [], outputLimit = Infinity }) {
+export function runWasi(module, { args, files = {}, stdin = [], input = null, outputLimit = Infinity }) {
   const argv = args.map((arg) => encoder.encode(arg + "\0"));
   const fileData = new Map();
   for (const [path, content] of Object.entries(files)) {
@@ -85,6 +87,7 @@ export function runWasi(module, { args, files = {}, stdin = [], outputLimit = In
   let written = 0;
 
   let linesRead = 0;
+  let inputAt = 0;
   let pending = null; // the rest of a line too long for one read
   let memory = null;
 
@@ -100,6 +103,11 @@ export function runWasi(module, { args, files = {}, stdin = [], outputLimit = In
 
   /** The next piece of stdin, at most `max` bytes. */
   function readStdin(max) {
+    if (input !== null) {
+      const piece = input.subarray(inputAt, inputAt + max);
+      inputAt += piece.length;
+      return piece; // empty at the end: the program reads end-of-file
+    }
     if (pending === null) {
       if (linesRead >= stdin.length) throw new NeedInput();
       const line = stdin[linesRead++];
