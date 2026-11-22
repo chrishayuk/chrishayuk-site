@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { BasicEditor } from "./BasicEditor";
 
 /**
  * A BASIC interpreter in the page.
@@ -196,10 +197,9 @@ export function BasicStudy({ example, choose = false, arithmetic, source }: { ex
       </div>
       <div className="basic-panes">
         <div>
-          <label htmlFor={`${id}-program`} className="record-voice">PROGRAM / CHANGE IT</label>
-          <textarea id={`${id}-program`} className="basic-program" value={program} rows={lines} wrap="off" spellCheck={false}
-            onChange={event => setProgram(event.target.value)}
-            onKeyDown={event => { if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) run(); }}/>
+          <p className="record-voice">PROGRAM / CHANGE IT <span className="basic-editor-hint">/ HOVER OVER ANY WORD</span></p>
+          <BasicEditor className="basic-program" label={`${current?.title ?? "BASIC"}: program`} value={program} onChange={setProgram} onRun={run}
+            dialect={dartmouth ? "dartmouth" : "later"} style={{ height: `calc(${lines} * 1.65em + 34px)` }}/>
         </div>
         <div>
           <p className="record-voice">OUTPUT / RUNS IN YOUR BROWSER</p>
