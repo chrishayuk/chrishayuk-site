@@ -1382,5 +1382,35 @@
         "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-RHIND-PAPYRUS",
+    "version": "1.0",
+    "recordHash": "bd8762a8bba3e261075e955978906764769bec72a148ff9f2d8ff422ac397637",
+    "revision": {
+      "kind": "initial",
+      "summary": "First published: the working of the Rhind Mathematical Papyrus, as transcribed from Chace's and Peet's editions by a coding agent, run with only the scribe's operations: 838 of 965 lines right and 133 wrong figures, 87 of them pointed out by an edition; the commonest slip is the sign for part left off, and 35 of 38 wrong rows where it can be told are not carried. Counts are against an unchecked transcription; nothing is claimed as new."
+    },
+    "sources": [
+      {
+        "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+        "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+        "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+      },
+      {
+        "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+        "url": "https://archive.org/details/Peet_1923",
+        "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+      },
+      {
+        "title": "chrishayuk/rhind-papyrus, release v0.1.0",
+        "url": "https://github.com/chrishayuk/rhind-papyrus",
+        "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]

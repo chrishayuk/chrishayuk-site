@@ -4683,5 +4683,163 @@
     },
     "hash": "ffd5cd267c75b146fd9bc2cda86dac4851a6b8f1d17b0f2895067f05d5240c69",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-RHIND-PAPYRUS",
+      "slug": "rhind-papyrus",
+      "kind": "notebook",
+      "title": "The Rhind Mathematical Papyrus, run",
+      "dek": "Every figure the scribe Ahmose wrote in his working, about 1550 BCE, worked again with the operations he had, and compared exactly with what he wrote. Of 965 lines, 838 are right. The rest are mostly slips of the pen.",
+      "abstract": "The Rhind Mathematical Papyrus has no division and no fractions but parts of one. To divide, the scribe doubles the divisor until the rows can be picked to make the dividend, and to double an odd part he looks it up in the table of 2 divided by odd numbers at the head of the papyrus. This is a note about a program, rhind, that does the same and has no other way to do it, run over a transcription of the papyrus from two editions, Chace (1929) and Peet (1923), made by a coding agent and its sub-agents. It checks 965 lines of working: 838 are right, and 127 have 133 wrong figures between them. The editions point out 87 of those figures; 46 they do not, as transcribed here, and each is a question for the photographs. The commonest slip is the sign for “part” left off a number. Sixty is written for eighty in five places. Where it can be told, a wrong figure is almost never carried into the total after it. The counts are against this transcription, which no person has checked, and nothing here is claimed as new. The papyrus can be checked page by page in the browser.",
+      "created": "2026-11-22",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "PAPYRUS → EDITIONS → AGENT → TRANSCRIPTION → RHIND",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-TURING-ACE",
+        "N-JOSS",
+        "N-BOHM"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / THE SCRIBE’S WORKING",
+          "text": "The Rhind Mathematical Papyrus was copied by the scribe Ahmose about 1550 BCE, by his own account from an older original. It opens with a table of 2 divided by each odd number from 3 to 101, and goes on to problems: loaves shared among men, quantities and their parts, granaries, fields and pyramids. The working is written out, in columns of doublings with a tick against the rows to be added. So every figure can be worked again. I asked a coding agent to transcribe the working from two editions and to build a program, rhind, that works each figure with the operations the scribe had and compares it, exactly, with what he wrote. This is not a calculator for Egyptian fractions. It is a reading of one document: what the scribe wrote, what his working gives, and where they part.",
+          "references": [
+            {
+              "label": "rhind, the program and the transcription",
+              "url": "https://github.com/chrishayuk/rhind-papyrus"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / NO DIVISION, NO FRACTIONS BUT PARTS",
+          "text": "The papyrus has no division, and no fractions but parts of one: 5̅, the sign for “part” over 5, is a fifth, and ⅔ is the one fraction with a sign of its own. To divide, the scribe doubles the divisor until the rows can be picked to make the dividend. To double an odd part, he looks it up in the table at the head of the papyrus. rhind does the same, and has no other way to do it. So when it reaches a different figure from the scribe’s, the difference is in the figure, not in the method. It then asks what slip of the pen would turn the right figure into the one written. A transcription never corrects the scribe: where the papyrus has 15, the file has 15. Finding these is rhind’s job, not the transcriber’s."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / 965 LINES OF WORKING",
+          "text": "The papyrus as transcribed has 91 problem sections and the two tables. rhind checks 965 lines of working: 838 are right and 127 have something wrong. In those 127 lines are 133 wrong figures. Chace or Peet points out 87 of them; 46 are not pointed out by either edition, as transcribed here. Each of those 46 is a question for the photographs. Most will be things the editions corrected silently, or misreadings by this project, before any is something new."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / THE SIGN FOR “PART” LEFT OFF",
+          "text": "For each wrong figure, rhind tries models of how a figure goes wrong and reports every one that turns the right figure into the written one. The first that fits is, for 71 figures, the sign for “part” left off a number, so that 3̅0̅ is written 30. Then come one hieratic number sign written for another (9 figures), a total right for other rows than those ticked (6), a row right for a multiplier one sign away (4), and one figure wrong in a list whose total is right (3). Seven more are the wrong row doubled or halved, the next row’s figure copied, or a fraction dropped. For 33, no single slip of these kinds fits. The editions note the dropped sign case by case, as “fractional dot omitted”. Run as a whole, it is about half of everything that goes wrong."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / SIXTY FOR EIGHTY",
+          "text": "In hieratic each of 1 to 9, 10 to 90 and 100 to 900 has a sign of its own, so a one-sign slip is one sign written for another. The pair that recurs is 60 for 80: 6̅6̅ for 8̅6̅ in 2 ÷ 43, 63 for 83 in 2 ÷ 83, and 1̅6̅6̅ for 1̅8̅6̅ in 2 ÷ 93, five places in all. Chace noticed this: his note to 2 ÷ 83 refers to the one on 2 ÷ 43. What rhind adds is that it finds all of them by working the rows, with no other help, and that the tally sets them beside every other slip in the papyrus. No other pair of signs is confused more than twice."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / SLIPS OF THE PEN",
+          "text": "Whether an error is carried tells which figure the scribe was working from. Where a wrong row has a total or result after it, rhind can say whether the total was made from the wrong figure or from the right one. Of the 38 wrong rows where it can tell, 35 are not carried: the total is right, so the working was right and the figure was miswritten. In Problem 27 no total is written, but the answer the scribe gives in words, 17 2̅, is 3 2̅ and 14, not the 15 written in the row above. These are slips of the pen more than of the arithmetic, which fits Ahmose’s own description of the papyrus as a copy."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHERE THE SLIPS AND THE EDITIONS MEET",
+          "text": "In Problem 63, four shares are listed and totalled, 700. They add to 680. rhind asks which one figure, changed by one slip, makes the total right. Four could, but only one correction is written elsewhere on the page: 113 3̅ for 133 3̅, which is the result of Multiply 400 by 3̅ a few lines up. Chace: “Mistake for 133.” In Problem 65, ten shares are totalled 100, and the one that is wrong is 7 ⅔ 39 for 7 ⅔ 3̅9̅, again on the page two lines up. Chace: “The scribe omitted the fractional dot.” In Problem 35 the scribe’s total, 1, is right for two rows he did not tick. Peet: (sic). rhind names the two rows."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / 2 ÷ 59",
+          "text": "The red answer to 2 ÷ 59 has 2̅2̅6̅; the working under it has 2̅3̅6̅, and 4 × 59 is 236. rhind says the figure is right for a multiplier one sign away: 20 written for 30. Neither edition comments. Chace prints 226; Peet prints 236, perhaps silently corrected. The transcriber of that range read 226 on Chace’s plate independently, at 400 dpi, before rhind could run. This is the place most worth checking against the British Museum photograph. It is a question, not a finding."
+        },
+        {
+          "kind": "observation",
+          "label": "09 / THE SCRIBE’S ROUTES",
+          "text": "Doing the arithmetic right is one thing; setting it out the scribe’s way is another. For every column the problems write in full, rhind works the same multiplication or division by its own procedure and compares the rows. Doubling alone gives 40 of 65 columns row for row. Three more conventions, each visible in the papyrus, bring it to 47: the tens done by a row for 10, 3̅ taken straight from the first row, and a division read as halving down to the remainder. One more column has the same rows, with rows written that are not used. In the rest the scribe chose differently: he uses 10 another way in 5, goes by ⅔ where rhind halves, or the reverse, in 6, and takes another route in 6."
+        },
+        {
+          "kind": "observation",
+          "label": "10 / THE TABLE OF 2 ÷ n",
+          "text": "Why does the papyrus write 2 ÷ 13 as 8̅ 5̅2̅ 1̅0̅4̅, when 7̅ 9̅1̅ has fewer parts? This has been asked since the 1870s. rhind runs candidate rules for every odd n from 5 to 101 and compares them with all 49 entries. The largest part that fits, again and again, gives 4 of 49. Fewest parts gives 25 or 29, depending on how ties are broken. Writing 2/n as m̅ + (2m − n)/mn, with 2m − n made of divisors of m, gives 32, and 34 if the smallest last part is preferred. That divisor method is what the scribe’s red auxiliary numbers look like. No rule tried here gives 2 ÷ 13 or 2 ÷ 95. The rules are named for what they do. Scholars have proposed rules of this kind since the 1870s, and none here is claimed to be any one scholar’s, or new."
+        },
+        {
+          "kind": "connection",
+          "text": "rhind runs in the browser, compiled unchanged from the same Rust source as the command-line version: every page of the papyrus, checked, with the wrong figures marked and the slips that would make them; the transcription in an editor whose colours, problems and hover help come from rhind’s language server, running in the page too; and a box that works any multiplication or division the scribe’s way, a row at a time.",
+          "links": [
+            {
+              "href": "/demos/rhind-papyrus?page=27",
+              "label": "Problem 27, checked — interactive study"
+            },
+            {
+              "href": "/demos/rhind-papyrus?page=table-2n-b",
+              "label": "The table of 2 ÷ n, 51 to 101"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus/tree/main/papyrus",
+              "label": "The transcription, page by page"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus/tree/main/sources/notes",
+              "label": "The notes on each range, with every disagreement between the editions"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus",
+              "label": "Source, tutorial and language server"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The papyrus itself was not read. Two editions were, Chace’s and Peet’s, from page images. All of that reading was done by a coding agent and its sub-agents, and no person has checked the transcription against the pages.",
+            "Every count here is against this transcription, not against the papyrus. A wrong figure may be the transcriber’s. Where an edition says the scribe erred and rhind found the line right, several were places the transcription had silently corrected, and they have been put back; others may remain.",
+            "Nothing here is claimed as new until it has been checked against the photographs and against the literature. The 46 wrong figures the editions do not point out are questions, and most will turn out to be silent corrections in the editions or misreadings by this project.",
+            "2 ÷ 59 is a question for the British Museum photograph, not a discovery.",
+            "The papyrus has been edited and studied for 150 years: Eisenlohr, Peet, Chace, Gillings, Robins and Shute, and much since. Annette Imhausen’s Ägyptische Algorithmen (2003) reads the problems as algorithms, which is the idea this project runs with, and is the scholarly work closest to it. It was not read. The rules for the 2 ÷ n table have a literature of their own, and the rules here have not been checked against it.",
+            "The slips are models: a slip that turns the right figure into the written one is a way it could have happened, not a record of what did. Where several fit, all are reported.",
+            "What does not fit the notation is kept as the scribe’s words in quotes and not computed: the hundred-hekat notation of Problems 68 to 86, ditto marks, drawings, and some columns set side by side. rhind decisions lists every choice this reconstruction makes that the papyrus does not fix."
+          ],
+          "principle": "Running the working shows where the figures and the working part. It does not show who made the difference: the scribe, the editors, or the transcriber."
+        },
+        {
+          "kind": "question",
+          "text": "When a copy’s working disagrees with its figures, can you tell a slip of the pen from a slip of the arithmetic?",
+          "status": "OPEN",
+          "detail": "For 35 of the 38 wrong rows where it can be told, the total after the row is right, so the working was right and the figure was miswritten. That fits a copy. It does not say whether the slip was Ahmose’s or in the original he copied, and for the 46 figures the editions do not point out, it does not yet say whether the slip is on the papyrus at all. Only the photographs can say that."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+          "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+          "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+        },
+        {
+          "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+          "url": "https://archive.org/details/Peet_1923",
+          "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+        },
+        {
+          "title": "chrishayuk/rhind-papyrus, release v0.1.0",
+          "url": "https://github.com/chrishayuk/rhind-papyrus",
+          "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+        }
+      ],
+      "published": "2026-11-22"
+    },
+    "hash": "bd8762a8bba3e261075e955978906764769bec72a148ff9f2d8ff422ac397637",
+    "algorithm": "sha256"
   }
 ]
