@@ -7,7 +7,7 @@ import { AceDelayLine } from "./AceDelayLine";
 import { AceCardsFigure, AceQuoted, AceWordFigure, CALPOL_PRINTED, INDEXIN_PRINTED } from "./AceFigures";
 
 const ANSWER = "# Six times seven, punched on a card.\nANSWER\n  1   DL 1,1 - TS 2\n  3   DL 1,2 - TS 3\n  5   MULTIPLY 'A'\n  6   TS 4 - DL 2,1\n  8   O, DL 2\n  9   B, ANSWER 9\n\nDL 1,1   6\nDL 1,2   7\n";
-const TRIAL = "# INDEXIN fetches the minor cycle whose position is in TS 27 into TS 28.\n# Here it fetches the 1945 kept in DL 3,5, and the job punches it.\nTRIAL\n  1   B, BURY\n  2   B, INDEXIN\n  3   TS 28 - DL 2,1\n  5   O, DL 2\n  6   B, TRIAL 6\n\nTS 27   L, DL 3,5\nDL 3,5  1945\n";
+const TRIAL = "# INDEXIN fetches the minor cycle whose position is in TS 27 into TS 28.\n# Here it fetches the 1945 kept in DL 3,5, and the job punches it.\nTRIAL\n  1   B, BURY\n  2   B, INDEXIN\n  3   TS 28 - DL 2,1\n  5   O, DL 2\n  6   B, TRIAL 6\n\nTS 27   DL 3,5\nDL 3,5  1945\n";
 const POLY = "# cards: listing\n# CALPOL: x^3 - 2x + 5 at x = 7. The sixteen coefficients lie in DL 3\n# in pairs, highest power first; the last four are 1, 0, -2, 5.\nPOLY\n  1   B, BURY\n  2   B, CALPOL\n  3   TS 25 - TS 13\n  5   B, BURY\n  6   B, BINDEC\n  7   O, DL 10\n  8   B, POLY 8\n\nTS 13    7\nDL 3,25  +1\nDL 3,29  -2\nDL 3,31  +5\n";
 const ASK = "# DISCRIM: if TS 8 contains any digit 1, TS 15 goes to TS 24, otherwise\n# TS 16. TS 8 has one digit 1, in digit 32, so the card should say 1.\nASK\n  1   B, BURY\n  2   B, DISCRIM\n  3   TS 24 - DL 2,1\n  5   O, DL 2\n  6   B, ASK 6\n\nTS 8    0000,0000,0000,0000,0000,0000,0000,0001\nTS 15   +1\nTS 16   +0\n";
 
