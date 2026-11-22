@@ -52,3 +52,10 @@ body .publication-main .moe-pair > article:nth-child(2) { margin-top: 48px; }
   body .publication-main .moe-pair > article:nth-child(2) { margin-top: 0; width: 100%; }
   body .publication-main .section-heading { flex-wrap: wrap; }
 }
+
+/* Systems: the languages that run in the browser. */
+.systems-languages ul { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.systems-languages li a { display: grid; gap: 10px; align-content: start; height: 100%; padding: 22px 0 0; border-top: 1px solid var(--rule); }
+.systems-languages li strong { font: 400 32px/1.1 var(--type-editorial), Georgia, serif; }
+.systems-languages li a > span:last-child { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 34ch; }
+@media (max-width: 760px) { .systems-languages ul { grid-template-columns: 1fr; } }

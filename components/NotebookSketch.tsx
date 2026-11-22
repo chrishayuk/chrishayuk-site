@@ -25,6 +25,9 @@ export function NotebookSketch({ id, collection }: { id: string; collection: str
  } else if (collection === 'learned-systems') {
   caption = 'State / transformation / reading';
   drawing = <><path d="M24 44h28v80H24zM81 44h28v80H81zM139 44h28v80h-28zM55 84h23M112 84h24M33 62h10M33 82h10M33 102h10M90 62h10M90 82h10M90 102h10M148 62h10M148 82h10M148 102h10"/><path className="notebook-sketch-dashed" d="M38 135v10h115v-10"/><text x="95" y="166">through depth</text></>;
+ } else if (collection === 'languages') {
+  caption = 'Printed listing / running program';
+  drawing = <><path d="M26 40h50v84H26zM35 54h30M35 64h22M35 74h32M35 84h18M35 94h28M35 104h22M88 82h22M107 77l6 5-6 5M122 52h48v60h-48zM122 64h48M130 78l8 6-8 6M143 92h16"/><path className="notebook-sketch-dashed" d="M51 132v12h95v-24"/><text x="51" y="30">page</text><text x="146" y="42">run</text></>;
  } else {
   caption = id === 'N-ATTRIBUTION' ? 'Draft / revision / record' : 'An idea made into a form';
   drawing = <><path d="M31 45h45v68H31zM38 57h27M38 68h20M38 79h25M92 78h21M110 73l6 5-6 5M124 57h42v66h-42zM132 69h25M132 80h18M132 91h24"/><path className="notebook-sketch-dashed" d="M54 123v17h91v-9"/><text x="52" y="31">draft</text><text x="145" y="44">form</text></>;
