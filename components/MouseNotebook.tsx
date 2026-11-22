@@ -3,6 +3,7 @@ import type { PublicationRecord } from "@/lib/types";
 import { StudyMeasures, StudySequence } from "@chrishayuk/hause/components/exhibition/Study";
 import { NotebookEntry } from "./NotebookEntry";
 import { Acts } from "./Acts";
+import Link from "next/link";
 import { MouseRunner } from "./MouseRunner";
 
 const BYTE_1979 = "https://archive.org/details/byte-magazine-1979-07";
@@ -24,6 +25,7 @@ export function MouseNotebook({ record }: { record: PublicationRecord }) {
       <Excerpt src="byte-1979-title.jpg" width={1600} height={889} href={BYTE_1979}
         alt="The opening of the article: the title Mouse, A Language for Microcomputers, by Peter Grogono, above the first two columns of text."
         caption="BYTE, JULY 1979, P. 198"/>
+      <p className="mouse-play-link record-voice"><Link href="/demos/mouse">OPEN THE MOUSE PLAYGROUND ↗</Link><span>Write Mouse and run it in your browser.</span></p>
       {act(0)}
     </> },
     { label: "Mouse in five lines", children: <>
@@ -36,6 +38,7 @@ export function MouseNotebook({ record }: { record: PublicationRecord }) {
       ]} note="That is nearly the whole language. A program ends with $$."/>
       <MouseRunner label="TRY IT / CHANGE IT AND RUN AGAIN" program={'"Counting down: "\nN 5 =\n( N. ^\n  N. ! " "\n  N N. 1 - = )\n"lift off!"\n$$'}
         note="The loop runs while N is above zero. N N. 1 - = is N = N − 1."/>
+      <p className="mouse-play-link record-voice"><Link href="/demos/mouse">MORE PROGRAMS IN THE PLAYGROUND ↗</Link></p>
     </> },
     { label: "It matched", children: <>
       {act(1)}

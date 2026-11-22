@@ -4,6 +4,7 @@
 [data-notebook-palette=agent-ecology] { --notebook-thread-ink: #43583b; --notebook-stock: #d3dec7; }
 [data-notebook-palette=cell80] { --notebook-thread-ink: #80412e; --notebook-stock: #e8cebd; }
 [data-notebook-palette=learned-systems] { --notebook-thread-ink: #60506a; --notebook-stock: #dcd1e4; }
+[data-notebook-palette=languages] { --notebook-thread-ink: #6a5a24; --notebook-stock: #e6dba6; }
 [data-notebook-tone=light] { --notebook-paper: color-mix(in srgb,var(--notebook-stock) 45%,#f5f0e5); }
 [data-notebook-tone=medium] { --notebook-paper: color-mix(in srgb,var(--notebook-stock) 72%,#f5f0e5); }
 [data-notebook-palette] :is(.hause-codex,.hause-notebook-preview) {

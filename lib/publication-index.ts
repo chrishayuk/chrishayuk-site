@@ -29,11 +29,17 @@ export const programmes = [
   { id: "learned-systems", title: "Learned systems", question: "How does a model find what it knows?",
     description: "Look inside a model’s memory. Trace how it builds an answer—and test what changes it.", href: mapThread.path,
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
+  { id: "languages", title: "Languages", question: "What did the printed page actually say?",
+    description: "Old programming languages rebuilt from their original listings, checked against the page, and running in your browser.", href: "/notebook?collection=languages",
+    threads: [], extra: ["N-MOUSE"], continuation: undefined,
+    play: [{ label: "Mouse playground", href: "/demos/mouse" }] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",
-    threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION", "N-MOUSE"], continuation: undefined },
+    threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION"], continuation: undefined },
 ];
-export const researchProgrammes = programmes.filter(programme => programme.id !== "practice");
+export const researchProgrammes = programmes.filter(programme => !["languages", "practice"].includes(programme.id));
+/** Home's "Ongoing work" also offers the collections that are not research threads. */
+export const ongoingProgrammes = programmes.filter(programme => programme.id !== "practice");
 /** The selected results now include the population-inheritance sequence. */
 export const homeResultProgrammes = researchProgrammes;
 export type Programme = typeof programmes[number];
