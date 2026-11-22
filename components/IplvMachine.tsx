@@ -42,9 +42,28 @@ function rgb(element: Element, name: string): number[] {
 
 type Shown = { s: State; tree: Structure | null; root: string };
 
+/** A guided way in: each stop loads a deck and steps it to a moment worth
+ *  looking at, with the symbol whose list structure is drawn. The numbers in
+ *  the words are what the machine shows at that moment (checked by the
+ *  video's capture of this page, demo/playground/capture.mjs). */
+type Stop = { title: string; deck?: string; steps?: number; show?: string; text: string };
+const GUIDE: Stop[] = [
+  { title: "A list", deck: "lists", steps: 0, show: "L1",
+    text: "L1 is a head and four cells. Each cell holds a symbol, S1 to S4, and the address of the next; the last holds 0, the end. The order is in the links, not in where the cells are, so a symbol goes in or comes out by changing one link. The address of the head is the list's name." },
+  { title: "Taken from available space", deck: "lists", steps: 43, show: "131",
+    text: "43 steps in, the program is making a reversed copy of L1. J90 took a head, cell 131, from available space, the cells nobody is using; each J64 took another cell and linked it in just after the head, so S4 comes first. Press STEP to go on." },
+  { title: "And given back", deck: "lists", steps: 68, show: "L1",
+    text: "It printed the copy and erased it with J71, and halted. L1 is as it was, and every cell it took is back on available space: 21,860 of 21,936, as before it began. A program shapes storage into structure while it runs, and hands it back." },
+  { title: "The manual's program", deck: "manual-f1", steps: 46, show: "145",
+    text: "The program the 1964 manual prints in full (Part One, Figs. 1 and 2). Its input, K1, is B1 C1 B1 A1 A1 B1; its output list, cell 145 here and 148 in the manual, is B1 C1 A1. It took 46 steps, one for each line of the manual's trace. LOAD and STEP to watch the list grow." },
+  { title: "A theorem is a list structure",
+    text: "The Logic Theorist of 1963 holds an expression as “a list of subexpressions with a connective in its head” (RAND RM-3731, page 5). Its deck is not ours to publish: take lt.iplv and lt-input.txt from David Moews’s transcription, choose both with Open a deck…, click beside the card M70 PRINT EXPRESSION (cell 364) and press RUN nine times. Theorem *2.01, (P implies not P) implies not P, is drawn as lists: implies in the head, then its two sides. Twenty four more RUNs, to TO PROVE, and its description list holds Q2 = 4 (levels), Q3 = 1 (variables) and Q4 = 3 (places), which the program looks for with J10 and, if they are not there, counts and assigns with J11." },
+];
+
 export function IplvMachine() {
   const [examples, setExamples] = useState<Example[]>([]);
   const [chosen, setChosen] = useState(0);
+  const [guided, setGuided] = useState(-1);
   const [deck, setDeck] = useState("");
   const [input, setInput] = useState("");
   const [editing, setEditing] = useState(false);
@@ -149,17 +168,31 @@ export function IplvMachine() {
     look(m);
   }, [look, traceAll]);
 
+  /** Load a deck and step it: `steps` instructions, then draw `show` (or
+   *  follow H0). The last step is taken on its own, so that what it changed
+   *  is marked. */
+  const goTo = useCallback(async (list: Example[], index: number, steps: number, show: string) => {
+    const e = list[index];
+    setChosen(index); setDeck(e.deck); setInput(e.input); setEditing(false);
+    setSymbol(show); symbolRef.current = show;
+    await load(e.deck, e.input);
+    const m = machine.current;
+    if (!m || steps <= 0) return;
+    if (steps > 1) m.advance(Math.min(steps - 1, 5_000_000), 0);
+    look(m);
+    m.advance(1, 0);
+    look(m);
+  }, [load, look]);
+
   useEffect(() => {
     let cancelled = false;
     fetch(`${FILES}/examples.json`).then(r => r.json() as Promise<Example[]>).then(list => {
       if (cancelled) return;
       setExamples(list);
-      const wanted = new URLSearchParams(window.location.search).get("deck");
-      const index = Math.max(0, list.findIndex(e => e.name === wanted));
-      setChosen(index);
-      setDeck(list[index].deck);
-      setInput(list[index].input);
-      void load(list[index].deck, list[index].input);
+      // ?deck=lists&steps=43&show=131 opens a deck part of the way through.
+      const asked = new URLSearchParams(window.location.search);
+      const index = Math.max(0, list.findIndex(e => e.name === asked.get("deck")));
+      void goTo(list, index, Number(asked.get("steps")) || 0, asked.get("show") ?? "");
     });
     return () => { cancelled = true; };
     // Once, on arrival.
@@ -200,8 +233,14 @@ export function IplvMachine() {
   const now = s && !s.halted ? (s.cia.line || (s.calls.find(c => c.line)?.line ?? 0)) : 0;
   const choose = (index: number) => {
     const e = examples[index];
-    setChosen(index); setDeck(e.deck); setInput(e.input); setSymbol(""); setEditing(false);
+    setChosen(index); setDeck(e.deck); setInput(e.input); setSymbol(""); setEditing(false); setGuided(-1);
     void load(e.deck, e.input);
+  };
+  const guide = (n: number) => {
+    setGuided(n);
+    const stop = GUIDE[n];
+    const index = examples.findIndex(e => e.name === stop.deck);
+    if (index >= 0) void goTo(examples, index, stop.steps ?? 0, stop.show ?? "");
   };
   const toggle = (a: number) => {
     const next = new Set(breaks);
@@ -213,15 +252,21 @@ export function IplvMachine() {
   const show = (text: string) => { setSymbol(text); symbolRef.current = text; if (machine.current) look(machine.current); };
 
   return <section ref={lab} className="iplv-lab" aria-label="The IPL computer">
+    <div className="iplv-guide">
+      <p className="record-voice">START HERE / THE SAME MACHINE, STOPPED WHERE THERE IS SOMETHING TO SEE</p>
+      <ol>{GUIDE.map((stop, n) => <li key={stop.title}><button type="button" aria-pressed={guided === n} onClick={() => guide(n)}>{`${n + 1}. ${stop.title}`}</button></li>)}</ol>
+      {guided >= 0 && <p className="iplv-guide-text">{GUIDE[guided].text}</p>}
+    </div>
     <div className="iplv-bar">
       <label>Deck<select value={chosen} onChange={event => choose(Number(event.target.value))}>
+        {chosen < 0 && <option value={-1}>a deck you opened</option>}
         <optgroup label="Examples">{examples.map((e, i) => e.expected === undefined && <option key={e.name} value={i}>{e.name}: {e.title.toLowerCase()}</option>)}</optgroup>
         <optgroup label="The manual’s programs (Part One)">{examples.map((e, i) => e.expected !== undefined && <option key={e.name} value={i}>{e.name}: {e.title.toLowerCase()}</option>)}</optgroup>
       </select></label>
       <label className="iplv-file">Open a deck…<input type="file" multiple onChange={async event => {
         const texts = await Promise.all([...(event.target.files ?? [])].map(file => file.text()));
         if (!texts.length) return;
-        setDeck(texts[0]); setInput(texts.slice(1).join("")); setSymbol(""); setEditing(false);
+        setDeck(texts[0]); setInput(texts.slice(1).join("")); setSymbol(""); setEditing(false); setChosen(-1); setGuided(-1);
         void load(texts[0], texts.slice(1).join(""));
       }}/></label>
       <button type="button" onClick={() => void load(deck, input)}>LOAD</button>
@@ -231,7 +276,7 @@ export function IplvMachine() {
       <button type="button" onClick={() => setRunning(r => !r)} disabled={!s || s.halted}>{running ? "STOP" : "RUN"}</button>
       <label className="iplv-speed">Speed<input type="range" min={0} max={10} value={speed} onChange={event => setSpeed(Number(event.target.value))}/></label>
       <label className="iplv-check"><input type="checkbox" checked={editing} onChange={event => setEditing(event.target.checked)}/> Edit the deck</label>
-      <span className="record-voice" aria-live="polite">{s ? (s.error ? "STOPPED ON AN ERROR" : s.halted ? `HALTED AFTER ${s.cycles.toLocaleString()} CYCLES` : `${s.cycles.toLocaleString()} CYCLES`) : "LOADING"}</span>
+      <span className="record-voice" aria-live="polite" title="H3 counts the cycles too, starting from the 4 the system spends before the start card">{!s ? "LOADING" : s.error ? "STOPPED ON AN ERROR" : `${s.halted ? "HALTED AFTER " : ""}${s.cycles.toLocaleString()} CYCLES SINCE THE START CARD · H3 ${s.h3.toLocaleString()}`}</span>
     </div>
 
     <div className="iplv-grid">
@@ -302,7 +347,7 @@ export function IplvMachine() {
 }
 
 /** A list structure as boxes and arrows: one row of cells to a list. */
-function Tree({ tree, changed, onPick }: { tree: Structure; changed: Set<number>; onPick: (symbol: string) => void }) {
+export function Tree({ tree, changed, onPick }: { tree: Structure; changed: Set<number>; onPick: (symbol: string) => void }) {
   const [W, H, GAP, LEFT, PER] = [70, 38, 20, 64, 6];
   let y = 8;
   const heads = new Map<number, [number, number]>();
