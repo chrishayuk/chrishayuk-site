@@ -2,7 +2,7 @@ export type Status = "OPEN" | "PROPOSED" | "TESTING" | "ONGOING" | "SUPPORTED" |
 export type Act =
   | { kind: "statement"; text: string }
   | { kind: "observation"; label?: string; text: string; references?: { label: string; url: string }[] }
-  | { kind: "connection"; text: string; links: { href: string; label: string }[]; demonstration?: "addressed-memory" | "authority-gate" }
+  | { kind: "connection"; text: string; links: { href: string; label: string }[]; demonstration?: "addressed-memory" | "authority-gate" | "basic" }
   | { kind: "summary"; label: string; lines: string[]; detail?: string }
   | { kind: "question"; text: string; status: Status; detail?: string }
   | { kind: "claim"; text: string; status: Status; detail?: string }
