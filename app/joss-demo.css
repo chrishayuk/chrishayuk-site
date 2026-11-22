@@ -1,0 +1,114 @@
+/* /demos/joss: the JOSS interpreter. Follows mouse-demo.css. */
+.joss-lab{margin:0 var(--margin) 75px;border-block:1px solid var(--rule);padding:32px 0 44px}
+.joss-lab .record-voice{display:block;font-size:10px;margin-bottom:12px}
+.joss-bar{display:flex;flex-wrap:wrap;gap:16px;align-items:end;margin:18px 0 34px}
+.joss-bar label{display:flex;flex-direction:column;gap:10px;min-width:240px;font:10px/1.5 var(--font-geist-mono);text-transform:uppercase}
+.joss-bar select,.joss-bar button{border:1px solid var(--rule);border-radius:0;padding:13px 18px;background:var(--bg);color:var(--fg);font:13px/1.2 var(--font-geist-mono)}
+.joss-bar select{text-transform:none}
+.joss-bar button{cursor:pointer;letter-spacing:.1em;border-color:var(--fg)}
+.joss-bar button.joss-run{background:var(--fg);color:var(--bg)}
+.joss-bar button:disabled{opacity:.35;cursor:default}
+.joss-bar .record-voice{margin:0 0 14px;color:var(--muted)}
+.joss-panes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px}
+.joss-program,.joss-input,.joss-output{display:block;width:100%;margin:0;border:1px solid var(--rule);border-radius:0;padding:16px;background:var(--bg);color:var(--fg);font:13px/1.65 var(--font-geist-mono);tab-size:2}
+.joss-program{height:340px;resize:vertical;margin-bottom:26px}
+.joss-input{height:76px;resize:vertical}
+.joss-output{height:488px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.joss-program:focus,.joss-input:focus{outline:1px solid var(--accent);outline-offset:0}
+.joss-error{color:var(--accent)}
+@media (max-width:820px){.joss-panes{grid-template-columns:1fr}.joss-output{height:320px}}
+
+/* The JOSS working note: details of the 1964 and 1965 console pages and programs that run in place. */
+.joss-excerpt{margin:0 0 34px}
+.joss-excerpt img{display:block;width:100%;height:auto;border:1px solid var(--rule);background:#f4efe3}
+.joss-excerpt figcaption{margin-top:10px;font-size:9px;color:var(--muted)}
+.joss-excerpt figcaption a{border-bottom:1px solid var(--rule)}
+.joss-runner{margin:30px 0;border:1px solid var(--rule);padding:18px 18px 16px}
+.joss-runner figcaption{font-size:9px;margin-bottom:12px}
+.joss-runner textarea{display:block;width:100%;border:0;border-left:2px solid var(--accent);border-radius:0;padding:4px 0 4px 14px;background:transparent;color:inherit;font:13px/1.65 var(--font-geist-mono);resize:vertical;tab-size:2}
+.joss-runner textarea:focus{outline:none;border-left-color:var(--fg)}
+.joss-runner-bar{display:flex;gap:12px;align-items:baseline;margin-top:14px;flex-wrap:wrap}
+.joss-runner-bar button{border:1px solid currentColor;border-radius:0;padding:8px 16px;background:transparent;color:inherit;font:11px/1.2 var(--font-geist-mono);letter-spacing:.1em;cursor:pointer}
+.joss-runner-bar button:first-child{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.joss-runner-bar output{flex:1 1 100%;font:12px/1.65 var(--font-geist-mono);white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto}
+.joss-runner-input-label{display:block;margin:14px 0 6px;font-size:9px;color:var(--muted)}
+.joss-runner-fixed{margin:0 0 4px;font:11px/1.5 var(--font-geist-mono);color:var(--muted)}
+.joss-runner-idle{color:var(--muted);font-size:11px}
+.joss-runner-note{margin:12px 0 0;font-size:13px;line-height:1.6;color:var(--muted)}
+
+/* Entrance from the note to the full playground. */
+.joss-play-link { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin: 18px 0; }
+.joss-play-link a { border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.joss-play-link span { opacity: .7; }
+
+/* The JOSS editor: CodeMirror, coloured and checked by the language server. */
+.joss-editor{--joss-code:13px/1.65 var(--font-geist-mono);position:relative}
+.joss-editor>pre{margin:0;font:var(--joss-code);white-space:pre;overflow:auto;tab-size:2}
+.joss-editor .cm-editor{background:transparent;color:inherit}
+.joss-editor .cm-editor.cm-focused{outline:none}
+.joss-editor .cm-scroller{font:var(--joss-code)}
+.joss-editor .cm-content{padding:0;caret-color:currentColor}
+.joss-editor .cm-line{padding:0}
+.joss-editor .cm-cursor{border-left-color:currentColor}
+.joss-editor .cm-selectionBackground,.joss-editor .cm-content ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)!important}
+.joss-program.joss-editor{height:340px;padding:0;margin-bottom:26px;resize:vertical;overflow:hidden}
+.joss-program.joss-editor>pre,.joss-program.joss-editor .cm-content{padding:16px}
+.joss-program.joss-editor .cm-editor{height:100%}
+.joss-program.joss-editor:focus-within{outline:1px solid var(--accent);outline-offset:0}
+.joss-runner .joss-editor{border-left:2px solid var(--accent);padding:4px 0 4px 14px}
+.joss-runner .joss-editor:focus-within{border-left-color:currentColor}
+.joss-runner .joss-editor .cm-scroller{max-height:300px}
+.joss-editor-hint{color:var(--muted)}
+/* Token colours are mixed with the text colour, so they hold on paper and on the dark edition. */
+.joss-token-comment{color:color-mix(in srgb,currentColor 55%,transparent);font-style:italic}
+.joss-token-string{color:color-mix(in srgb,#3f8f4f 70%,currentColor)}
+.joss-token-number{color:color-mix(in srgb,#2f7fb8 70%,currentColor)}
+.joss-token-function{color:color-mix(in srgb,#c96a14 80%,currentColor);font-weight:600}
+.joss-token-parameter{color:color-mix(in srgb,#a0489a 75%,currentColor)}
+.joss-token-keyword{color:color-mix(in srgb,#b8323a 70%,currentColor)}
+.joss-token-type{color:color-mix(in srgb,#1f8a7a 75%,currentColor)}
+.joss-token-label{color:color-mix(in srgb,#8a6d1f 80%,currentColor);font-weight:600}
+.joss-token-operator{color:color-mix(in srgb,currentColor 75%,transparent)}
+.joss-editor .cm-tooltip,.cm-tooltip.cm-tooltip-hover,.cm-tooltip.cm-tooltip-autocomplete,.cm-tooltip.cm-tooltip-lint{border:1px solid #22251f55;border-radius:0;background:#fbf9f3;color:#22251f;box-shadow:0 6px 24px #0003;max-width:min(420px,86vw)}
+.joss-hover{padding:10px 14px;font:13px/1.55 var(--type-sans),sans-serif}
+.joss-hover p{margin:0 0 6px}
+.joss-hover p:last-child{margin-bottom:0}
+.joss-hover code,.joss-hover pre{font:12px/1.5 var(--font-geist-mono);background:#22251f14;padding:1px 4px}
+.joss-hover pre{margin:0 0 6px;padding:6px 8px;overflow:auto}
+.joss-editor .cm-diagnostic{font:12px/1.5 var(--type-sans),sans-serif;padding:6px 10px}
+.joss-editor .cm-tooltip-autocomplete ul li{font:12px/1.6 var(--font-geist-mono);padding:2px 8px}
+.joss-editor .cm-tooltip-autocomplete ul li[aria-selected]{background:#22251f;color:#fbf9f3}
+
+.joss-excerpt.joss-excerpt-narrow img{max-width:620px}
+.joss-bar label.joss-year{min-width:120px}
+.joss-hint{margin:0;font-size:13px;line-height:1.6;color:var(--muted)}
+.joss-compare{margin-top:40px;border-top:1px solid var(--rule);padding-top:28px}
+.joss-report{margin:0;border:1px solid var(--rule);padding:16px;font:12px/1.65 var(--font-geist-mono);white-space:pre-wrap;overflow-wrap:anywhere;max-height:420px;overflow:auto}
+
+/* The paper in the console. It is paper in both editions of the site: cream, with
+   the user's ribbon in green and JOSS's in black. A typewriter face, so that the
+   columns JOSS lines its answers up in are columns here. */
+.joss-console{--joss-paper:#f4efe3;--joss-ink:#1b1a17;--joss-green:#1a6a3a}
+.joss-state{display:flex!important;align-items:center;gap:8px;margin-bottom:10px!important}
+.joss-lamp{width:9px;height:9px;border-radius:50%;background:#b63a2b;flex:none}
+.joss-lamp-green{background:#2f9a57}
+.joss-paper{height:300px;overflow:auto;border:1px solid var(--rule);padding:22px 20px;background:var(--joss-paper);color:var(--joss-ink);font:13px/1.5 "Courier Prime","Courier New",Courier,monospace;cursor:text}
+.joss-paper-tall{height:488px}
+.joss-line{white-space:pre;min-height:1.5em}
+.joss-black{color:var(--joss-ink);font-weight:700}
+.joss-green{color:var(--joss-green)}
+.joss-sheet{margin:12px 0;border-top:1px dashed #1b1a1744;padding-top:4px;font:9px/1.5 var(--font-geist-mono);letter-spacing:.1em;color:#1b1a1788}
+.joss-key-line{font:9px/1.9 var(--font-geist-mono);letter-spacing:.1em;color:#9a5b00}
+.joss-entry{display:flex}
+.joss-entry input{flex:1;min-width:6ch;border:0;border-radius:0;padding:0;background:transparent;color:var(--joss-green);font:inherit;caret-color:var(--joss-green)}
+.joss-entry input:focus{outline:none}
+.joss-entry input:disabled{opacity:.5}
+.joss-keys{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.joss-keys button{border:1px solid var(--rule);border-radius:0;padding:8px 14px;background:transparent;color:inherit;font:11px/1.2 var(--font-geist-mono);letter-spacing:.1em;cursor:pointer}
+.joss-keys button.joss-key{min-width:38px;padding:8px 0;font-size:14px;letter-spacing:0}
+.joss-keys button:disabled{opacity:.35;cursor:default}
+.joss-speed{display:flex;align-items:center;gap:6px;margin-left:auto;font:9px/1.5 var(--font-geist-mono);letter-spacing:.1em;color:var(--muted)}
+.joss-runner .joss-console{margin-top:16px}
+.joss-runner-next{margin:12px 0 0;font-size:10px;color:var(--accent)}
+@media (max-width:820px){.joss-paper-tall{height:340px}}
+.joss-token-variable.joss-token-definition{text-decoration:underline dotted;text-underline-offset:3px}

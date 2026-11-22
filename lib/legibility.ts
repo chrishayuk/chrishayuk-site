@@ -160,6 +160,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "The one large program in the 1966 papers that define CPL, the ancestor of BCPL and C, typed in from a scan and run. It needed eleven corrections. Try CPL and the program in the browser.",
   concepts: ["CPL programming language", "Christopher Strachey", "BCPL", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-JOSS": {
+  subject: "Replaying the console sessions printed in RAND’s JOSS papers of 1964–65 on a reconstruction built from those papers with a coding agent",
+  question: "How much of a conversation survives on paper?",
+  searchTitle: "JOSS, the 1964 Conversational Computer, Rebuilt and Replayed Against Its Original Sessions",
+  description: "RAND’s JOSS of 1964–65 rebuilt from its scanned papers with a coding agent. Five original console sessions replay on it: 762 of 767 lines match. Try the console in the browser.",
+  concepts: ["JOSS", "J. C. Shaw", "JOHNNIAC", "RAND Corporation", "time-sharing", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",

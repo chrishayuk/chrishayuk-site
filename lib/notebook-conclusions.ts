@@ -81,6 +81,9 @@ export const notebookConclusions: Record<string, Conclusion> = {
  'N-CPL': {
   takeaway: 'The one large program in the 1966 papers that define CPL does not compile as printed, and with its typing slips put right it gives wrong answers in two ways. With eleven corrections it runs, and reads its own text to the last word.',
   scope: 'One appendix, read from a scan by one coding agent in one session, on an interpreter the same agent built. Each slip has a page number and a detail of the page. Whether the program was run in 1966 is not known.' },
+ 'N-JOSS': {
+  takeaway: 'Five console sessions printed in RAND’s papers of 1964 and 1965, typed again on a reconstruction of JOSS, come out the same on 762 of 767 lines. The five that differ are each one unit in the last digit of a result that goes through a logarithm or an exponential, where JOSS’s own routines were slightly off.',
+  scope: 'Five sessions, read from scans and replayed by one coding agent in one session. The columns were fitted to these pages; the digits were not. What the sessions do not exercise rests on a listing of the program and has no page to check it against.' },
  'N-BASIC': {
   takeaway: 'An interpreter can run every later program it is shown, agree with a second implementation, and still stop on the language’s first manual. In 1964 a square root was taken of the absolute value; the later BASICs that everything had been checked against call that an error.',
   scope: 'One interpreter, three example programs from a reprint of the beginners’ part of the manual. The checks were run by a coding agent and reported. Other differences from the 1964 language may not have been met yet.' },
