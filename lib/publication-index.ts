@@ -30,15 +30,21 @@ export const programmes = [
     description: "Look inside a model’s memory. Trace how it builds an answer—and test what changes it.", href: mapThread.path,
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
-    description: "Old programming languages rebuilt from their original listings, checked against the page, and running in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC"], continuation: undefined,
-    play: [{ label: "Mouse playground", href: "/demos/mouse" }, { label: "BASIC playground", href: "/demos/basic" }] },
+    description: "Old programming languages rebuilt from their original printed sources, checked against the page, and running in your browser.", href: "/notebook?collection=languages",
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM"], continuation: undefined,
+    play: [
+      { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
+      { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
+      { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
+    ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",
     threads: [], extra: ["N-EXHIBITION", "N-ATTRIBUTION"], continuation: undefined },
 ];
 export const researchProgrammes = programmes.filter(programme => !["languages", "practice"].includes(programme.id));
 /** Home's "Ongoing work" also offers the collections that are not research threads. */
+/** Languages that run in the browser; Systems and the collection share one list. */
+export const languagePlaygrounds = programmes.find(programme => programme.id === "languages")!.play!;
 export const ongoingProgrammes = programmes.filter(programme => programme.id !== "practice");
 /** The selected results now include the population-inheritance sequence. */
 export const homeResultProgrammes = researchProgrammes;
