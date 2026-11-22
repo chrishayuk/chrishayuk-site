@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 /**
  * The page the delayed printer typed. It is typed out a character at a time:
- * at ten characters a second, the Flexowriter's speed, or faster. An alarm
+ * at ten characters a second, about a typewriter's pace, or faster. An alarm
  * is the post-mortem the manual describes, with the reason in words beside
  * it (the reason is this reconstruction's: Whirlwind typed only the numbers).
  */

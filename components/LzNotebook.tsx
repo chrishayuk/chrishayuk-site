@@ -72,7 +72,7 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
         alt="From the manual: If n had the value 5 in the above example then e = n - 5 = 0. In this case the CP may or may not behave like an SP since 0 may appear as +0 or -0. This ambiguity need cause no difficulty in general."
         caption="E-364, P. 8 / “0 MAY APPEAR AS +0 OR −0”"/>
       {act(3)}
-      <LzRunner label="THE MANUAL’S OWN EXAMPLE, WITH n EQUAL TO 5, FED WITH EACH KIND OF ZERO" program={ZERO} compare
+      <LzRunner label="THE MANUAL’S EXAMPLE FROM PAGE 8, WITH n EQUAL TO 5, FED WITH EACH KIND OF ZERO" program={ZERO} compare
         note="With −0, CP jumps to equation 5 and x = 3ab is never computed, so y is 0. With +0 it does not jump: x is 6 and y is 12. The manual leaves it open; the reconstruction has to choose."/>
     </> },
     { label: "Knuth’s program", kind: "evidence", children: <>
@@ -86,7 +86,7 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
       <LzRunner label="TPK, WITH KNUTH’S ELEVEN NUMBERS, FED WITH EACH KIND OF ZERO" program={TPK} compare
         note="The pages agree until i is zero. A computed zero as an index stops the run on the left; on the right every zero is +0 and the last line is typed. The eleven numbers are Knuth’s own example of v|N: 1 (.5) 2 (.25) 3.5 (1) 5.5."/>
       <LzRunner label="THE SAME TAPE UNDER THE RULES OF JANUARY 1954" program={TPK} settings={{ rules: true }}
-        note="“The x|N is not yet in operation.” The translator stops at the first line, and nothing is run."/>
+        note="“The x|N is not yet in operation.” Here the translator stops at the first line, and nothing is run. What Whirlwind did with such a tape in January 1954 is not recorded."/>
     </> },
     { label: "The innocuous change", kind: "evidence", children: <>
       <Excerpt src="e364-p19-innocuous.jpg" width={1260} height={409}

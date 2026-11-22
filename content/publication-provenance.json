@@ -968,5 +968,45 @@
         "note": "The machine, the assembler, the transcription of the tables and the tables the report only describes were written in this session. Every result in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.0",
+    "recordHash": "c3f1ce2cf3ccb1a025972bf6fd723321f2360679282c8c09a5648792dc2a5297",
+    "revision": {
+      "kind": "initial",
+      "summary": "Initial publication of the note on rebuilding Laning and Zierler's algebraic system for Whirlwind I from its 1954 manual and running its programs under its own rules, after a fact check against the scans."
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "a/b/c is on pages 4 and 5, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "The program without its PRINT is on page 13-3; the first runs and the six to eight times on page 13-4; the discussion follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "TPK in the Laning and Zierler system is on pages 56 and 57; Adams and Laning’s ten to one on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]
