@@ -3202,5 +3202,636 @@
     },
     "hash": "dab1aee3933df8327af41cadfa9a52027e8d8e5bc0dae25f51a3e83b0be819b6",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-JOSS",
+      "slug": "762-lines-matched-five-did-not",
+      "kind": "notebook",
+      "title": "In 1965, the computer learned to say I.",
+      "dek": "A computer you talked to at a typewriter, rebuilt from RAND’s papers by a coding agent and replayed against the pages it typed. A year in, it began to say I, for the reason chat assistants do.",
+      "abstract": "A note about rebuilding JOSS, the conversational computing system J. C. Shaw wrote for RAND’s JOHNNIAC, from its scanned papers with a coding agent. You typed a line at a typewriter in green, and JOSS answered in black. In 1964 it said “Zero divisor.” By 1965 it said “I have a zero divisor.”, and Shaw gives the reason: personal pronouns were introduced “to reinforce the model”, because the timeliness of its remarks gave “a feeling of interacting with a person”. The papers print pages typed at the console, mistakes included. Typed in again, line by line, the reconstruction answers as the page does on 762 of the 767 lines the pages show JOSS typing; the five that differ are each one unit in the last digit of a result that goes through a logarithm or an exponential. Most of the words JOSS used are not in the papers: they were decoded from a listing of the program. The console runs in the browser, at a typewriter.",
+      "created": "2026-11-22",
+      "version": "1.2",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "TYPEWRITER → SCAN → AGENT → INTERPRETER → TYPEWRITER",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-CPL",
+        "N-BASIC",
+        "N-MOUSE",
+        "N-LANING-ZIERLER"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A COMPUTING AIDE",
+          "text": "JOSS ran on the JOHNNIAC at RAND from 1963. You sat at an electric typewriter with a two-colour ribbon and typed a line in green; JOSS did what it said, or kept it as a step of a program, and answered in black. J. C. Shaw, who wrote it, wanted the user to “interact with JOSS as with a computing aide”. I asked a coding agent to rebuild the JOSS of 1964 and 1965 from RAND’s scanned papers, and to hold it to one test: type the sessions printed in those papers again, and get the same page.",
+          "references": [
+            {
+              "label": "Shaw, JOSS: Experience with an Experimental Computing Service, P-3149, May 1965",
+              "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / GO",
+          "text": "The session that mattered most is figure 2 of Shaw’s 1965 paper. A user sets out to solve a quadratic equation and gets nine things wrong, one after another. The first two are typing slips, put right by typing the line again. Then the program runs, and seven times it stops. A value is missing. A divisor is zero. The argument of a square root is negative. The form for the answers does not exist, then is given too few values, then has no room for them, then has blanks that touch. Each time JOSS says what is wrong and stops where it is. The user puts that one thing right and types Go. The program is never started again from the top. A parser and an evaluator do not get you this. The task has to be kept, broken off in the middle of a step, while the user changes the program underneath it."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / FORTY MESSAGES, FOURTEEN IN PRINT",
+          "text": "Shaw wrote that JOSS “simply selects from a stock of forty ‘canned’ messages”. Figure 2 alone shows fourteen of them, and the papers between them not many more. The rest were not lost. A listing of the program survives, headed in his hand “JOSS 666” and “JCS 1-9-65”, and it holds each message as octal numbers, five characters to a word. The agent decoded them with the listing’s own table of characters. There are forty.",
+          "references": [
+            {
+              "label": "JOSS 666 listing, January 1965",
+              "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TWO JOSSES",
+          "text": "The first replays would not settle, because the pages disagree with each other. A film made in March 1964 has JOSS say “Zero divisor.” The paper of May 1965 has “I have a zero divisor.” Shaw explains it: “After a year’s experience with neutral, impersonal messages, we introduced personal pronouns and some informal diction.” And why: “This was done not facetiously, but rather to reinforce the model.” The model was a person. JOSS, he says on the same page, cannot carry on a real conversation and picks from forty canned messages, “But the timeliness and appropriateness of its remarks give a feeling of interacting with a person.” So in 1965 the computer began to say I, to feel like someone you were talking to. Every chat assistant makes the same choice now. The wording was not all that changed. In the pages of 1965 every answer typed without a form sits one column further to the right than in 1964. And the JOSS of the film types one fiftieth as 2·10*(-2), where by 1965 a number that small is typed as .02. So the reconstruction has a year. A session from one does not replay on the other."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHAT THE REPLAY FOUND IN THE FILM",
+          "text": "The film’s scenario was printed as a report, with the typewriter’s real output pasted in as figures. Replayed as printed, it goes wrong halfway: a listing in the report shows none of the first program’s steps, though nothing typed before it removes them. Something like a Delete all was cut from the scenario. The report also has a comma that the listing of the same step does not have, a space where there should be a multiplication dot, and an answer labelled without the space the user typed. With those four put right, and marked, it replays."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / FIVE LINES",
+          "text": "The five transcripts have 385 lines typed by the user and 767 typed by JOSS that the pages show, not counting the blank lines of pages a typist had copied. 762 come out the same: 686 column for column against the typewriter’s own output, and 76 against pages a typist had copied, where only the characters can be compared. The other five are all the same kind of thing. The page has log 2 as .69314718, three times, and the correctly rounded figure ends in a 1. It has one long expression ending in 357 where the reconstruction gets 356. And in a table of a hundred exponentials, the row for 72 ends in a 7. JOSS rounded to nine digits and then to the form, and a correct exponential, rounded that way, gives an 8. Each is one unit in the last digit, of a logarithm, an exponential, or a power worked out through both. JOSS’s own routines were a hair off, and the reconstruction’s are not."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / CHECK IT",
+          "text": "Among Shaw’s working papers there is a handwritten page headed F1, dated 11-19-64. F1 is the logarithm routine in the listing. The page works through its range reduction and ends: “Check it. Looks like coefficient between 1 and √2 gets doubled several times.” That is three months after the paper with log 2 in it. I cannot say it is the same fault. I can say he was looking at that routine."
+        },
+        {
+          "kind": "connection",
+          "text": "The console runs in the browser, at a typewriter: your lines in green and JOSS’s in black, ten characters a second, and a gong when it hands the typewriter back. It is compiled from the same Rust source as the command-line version. Each of the five original sessions can be replayed there and compared with its page.",
+          "links": [
+            {
+              "href": "/demos/joss?example=1965-quadratic-with-mistakes",
+              "label": "Sit at the console — interactive study"
+            },
+            {
+              "href": "https://github.com/chrishayuk/joss/tree/main/transcripts",
+              "label": "The five sessions, as typed in from the scans"
+            },
+            {
+              "href": "https://github.com/chrishayuk/joss/tree/main/docs/scans",
+              "label": "The pages they were typed in from"
+            },
+            {
+              "href": "https://github.com/chrishayuk/joss",
+              "label": "Source, tutorial and example programs"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The pages were read by the same coding agent that wrote the interpreter, with sub-agents doing the measuring. Nobody has checked the transcriptions against the scans by eye. The pages are in the repository so that somebody can.",
+            "The column rules were set from these pages, so their matching is partly the reconstruction being fitted to them. The digits were not fitted: they come out of the arithmetic, and only five differ.",
+            "Matching five sessions says nothing about what they do not exercise. Stop and Cancel, most of the forty messages, and what happens when a step is deleted from under a loop are built from the listing and Shaw’s notes, and no page shows them.",
+            "The logarithm, exponential, sine and cosine here are a modern library’s, rounded to nine digits. They are not JOSS’s routines, which is why five lines differ. Those routines are in the listing and have not been read.",
+            "The messages were decoded by machine from a scan of a printed listing. Each was checked against the capitals printed beside it, which have no small letters and no ≤.",
+            "Where no page of 1964 shows a message, the 1964 setting uses the words of 1965. How much storage each step, value and level of a task takes is an estimate.",
+            "This is the JOSS of the JOHNNIAC. The later JOSS on the PDP-6 is a larger language and is not here. Nor are the punched cards, the sign-on, or the other seven users."
+          ],
+          "principle": "A manual tells you what a system was meant to do. A page it typed tells you what it did, mistakes included."
+        },
+        {
+          "kind": "question",
+          "text": "How much of a conversation survives on paper?",
+          "status": "OPEN",
+          "detail": "The pages keep what was typed, by whom, and in which column. They do not keep the gong that rang when JOSS handed the typewriter back, the half second it took to fetch your work from the drum, or what it was like to be told “Eh?” by a machine in 1965. A reconstruction that matches the page has matched the part that was written down."
+        }
+      ],
+      "sources": [
+        {
+          "title": "J. C. Shaw, “JOSS: Experience with an Experimental Computing Service for Users at Remote Typewriter Consoles”, RAND P-3149, May 1965",
+          "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf",
+          "note": "Figure 1 is on page 6 of the PDF, figure 2 on page 8, and the one-page summary of the language on page 11."
+        },
+        {
+          "title": "J. C. Shaw, “JOSS: Examples of the Use of an Experimental On-Line Computing Service”, RAND P-3131, April 1965",
+          "url": "https://bitsavers.org/pdf/rand/joss/P-3131_JOSS_Examples_Of_The_Use_Of_An_Experimental_On-Line_Computing_Service_Apr65.pdf",
+          "note": "Eight pages typed at a console on 28 April 1965, reproduced in two colours."
+        },
+        {
+          "title": "J. C. Shaw, “JOSS: A Designer’s View of an Experimental On-Line Computing System”, RAND P-2922, August 1964",
+          "url": "https://bitsavers.org/pdf/rand/joss/P-2922_JOSS_A_Designers_View_Of_An_Experimental_On-Line_Computing_System_Aug64.pdf",
+          "note": "Figures 3a to 3i. log(2) is in figure 3b, on page 17 of the PDF."
+        },
+        {
+          "title": "C. L. Baker, “JOSS: Scenario of a Filmed Report”, RAND RM-4162-PR, June 1964",
+          "url": "https://bitsavers.org/pdf/rand/joss/RM-4162-PR_JOSS_Scenario_Of_A_Filmed_Report_Jun64.pdf",
+          "note": "The session filmed on 21 March 1964. The row for 72 is on page 23 of the PDF."
+        },
+        {
+          "title": "“JOSS 666”, JOHNNIAC assembly listing, J. C. Shaw, 9 January 1965",
+          "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf",
+          "note": "The error messages are on pages 37 to 42 of the PDF; the others on pages 10 to 12, 79 and 122 to 126."
+        },
+        {
+          "title": "“JOSS Program Notes and Tests”, J. C. Shaw’s working papers",
+          "url": "https://bitsavers.org/pdf/rand/joss/JOSS_Program_Notes_and_Tests.pdf",
+          "note": "The note of 11-19-64 is page 13 of the PDF."
+        },
+        {
+          "title": "chrishayuk/joss",
+          "url": "https://github.com/chrishayuk/joss",
+          "note": "The interpreter, the five sessions as transcripts, its tests, a tutorial, example programs, a language server, and reduced scans of the pages."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "da1225e4b896f2d26d50899e33928f645a90621939887d070099bb3a4f7faed2",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-CPL",
+      "slug": "a-1966-program-said-it-had-not-been-checked",
+      "kind": "notebook",
+      "title": "A 1966 program said it had not been checked. So I ran it.",
+      "dek": "The one large program in the papers that define CPL, a handwritten warning across the top of it, and a coding agent with a scan.",
+      "abstract": "A note about building an interpreter for CPL, the language BCPL was cut down from, out of its 1966 working papers with a coding agent. The papers contain one program of any size, a preprocessor written in CPL, and someone has written across the top of it that the draft has not been fully checked. Typed in as printed it does not compile. With seven slips put right it runs and gives wrong answers in two ways, and in two more places its informal notes disagree with its own text. Corrected, it reads its own text to the last word. The interpreter and the program run in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "TYPESCRIPT → SCAN → AGENT → INTERPRETER",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-BOHM",
+        "N-MOUSE",
+        "N-LANING-ZIERLER"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A LANGUAGE IN WORKING PAPERS",
+          "text": "CPL was designed in the early 1960s by a group at Cambridge and London. Martin Richards cut it down to make BCPL, and BCPL led to B and then C. In July 1966 the group put out a technical report called CPL Working Papers, most of which is a draft of the reference manual. I asked a coding agent to build an interpreter for the language those papers describe: the 1966 language, not the subset that became BCPL.",
+          "references": [
+            {
+              "label": "CPL Working Papers, July 1966",
+              "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf"
+            },
+            {
+              "label": "Richards, How BCPL evolved from CPL",
+              "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / ONE PROGRAM OF ANY SIZE",
+          "text": "An interpreter built from a manual can only be tested on programs. The examples in the manual are a few lines each, and everything longer the agent wrote itself. The papers contain one exception. Appendix 1 is a preprocessor, about 190 lines of CPL, “intended to be both a description of the transformation from an implementation alphabet to canonical CPL and a general example of a CPL program”. Across the top of its first page someone has written by hand: “This draft has not been fully checked”."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / AS PRINTED, IT DOES NOT COMPILE",
+          "text": "The agent typed the program in from the scan, keeping the text as printed, with the corrections already written on the copy by hand. It does not compile. Three sections open with one tag and close with another: R.T and R.T., R.U.W and R.U.W., R.S. and R.S. One call is to Proprocessor. One case has no colon. And twice a name that should begin with a capital is typed small, goto switch and standard, which matters in CPL because a small letter is a whole name: standard is eight names side by side."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / IT RUNS, AND IS WRONG",
+          "text": "With those seven put right the program runs, and what it writes is wrong in two ways. The routine that reads an underlined word starts from the first letter instead of from nothing, so every word begins twice. And after an ordinary comma it loses a character. That one can be followed on the page with a finger: ReadSpaces has already moved on to the next character, and then NextChar moves on again."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHERE THE NOTES DISAGREE WITH THE PROGRAM",
+          "text": "Part 3 of the appendix describes the functions the program uses but does not declare, a sentence or a list for each. In two places those descriptions cannot be what the program needs. One says a function is true for the symbols that can come before a command, where the program uses it for the symbols that cannot. The other turns goto into go, after which nothing recognises it as a jump. These are perhaps better called open questions than slips. Part 3 says of itself that it is informal."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / IT READS ITSELF",
+          "text": "A preprocessor for CPL written in CPL can be given its own text. Corrected, it reads all 189 lines of itself and writes about 1,100 symbols, ending with finish. Given its own text as printed, it stops a little over 200 symbols in, at the first tag that does not match, and says nothing, because the program has no message for that case. It is doing what it was written to do. A closing bracket with the wrong tag makes every open section jump out through a label it was handed by its caller, and the outermost label is the end of the program."
+        },
+        {
+          "kind": "connection",
+          "text": "The interpreter runs in the browser, compiled from the same Rust source as the command-line version, with the preprocessor as one of its examples. The programs on this page are run by it where they sit.",
+          "links": [
+            {
+              "href": "/demos/cpl?example=appendix-1-preprocessor",
+              "label": "Run the 1966 preprocessor — interactive study"
+            },
+            {
+              "href": "/demos/cpl",
+              "label": "Write CPL in the playground"
+            },
+            {
+              "href": "https://github.com/chrishayuk/cpl/tree/main/appendix1",
+              "label": "The program, the eleven slips and a detail of the page for each"
+            },
+            {
+              "href": "https://github.com/chrishayuk/cpl",
+              "label": "Source, tutorial and example programs"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "These are readings of a scan of a typescript, made by one reader, and that reader was a coding agent. Each slip has a page number and a detail of the scan so that it can be checked by eye.",
+            "Whether the program was ever run in 1966, the documents I have do not say. A later draft may have put all of this right.",
+            "The appendix describes thirteen of its functions only informally and never defines seven more names it uses. All of them were supplied. A different reading of those sentences gives a different program.",
+            "The interpreter and the transcription came from the same agent in one session. The seven slips that stop the program compiling can be seen on the page. The two wrong answers also rest on the interpreter doing what the manual means.",
+            "The interpreter is not all of CPL. What it leaves out is listed in the repository, and where the 1966 papers say a section is out of date without giving the new rules, it follows the old ones.",
+            "I have not searched for an earlier list of these slips. Somebody may have made one."
+          ],
+          "principle": "A program that has never been run has only been proofread. Running it is a different kind of reading."
+        },
+        {
+          "kind": "question",
+          "text": "How much of a language that was still a draft can you check by running the one program its authors left?",
+          "status": "OPEN",
+          "detail": "The preprocessor exercises the parts of CPL its authors reached for when they had real work to do: recursion, strings, a switch, sections with tags, and a label passed as a parameter so that a routine can jump out of its caller. It says nothing about the parts they did not need that day. For those, the interpreter has only the manual’s short examples and programs written by the same agent that wrote the interpreter."
+        }
+      ],
+      "sources": [
+        {
+          "title": "University of London Institute of Computer Science and The Mathematical Laboratory, Cambridge, “CPL Working Papers”, technical report, July 1966",
+          "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf",
+          "note": "Appendix 1, “The Preprocessor”, begins on page 120 of the PDF. The program is Part 2, on pages 2 to 6 of the appendix; the informal definitions are Part 3, on pages 6 and 7."
+        },
+        {
+          "title": "“CPL Elementary Programming Manual”, Edition II, Cambridge, January 1966",
+          "url": "https://www.ancientgeek.org.uk/CPL/CPL_Elementary_Programming_Manual.pdf"
+        },
+        {
+          "title": "D. W. Barron, J. N. Buxton, D. F. Hartley, E. Nixon and C. Strachey, “The main features of CPL”, The Computer Journal 6, 1963",
+          "url": "https://www.ancientgeek.org.uk/CPL/The_Main_Features_of_CPL.pdf"
+        },
+        {
+          "title": "Martin Richards, “How BCPL evolved from CPL”",
+          "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+        },
+        {
+          "title": "chrishayuk/cpl",
+          "url": "https://github.com/chrishayuk/cpl",
+          "note": "The interpreter, its tests, 73 example programs, a tutorial, and the preprocessor as printed and corrected with a detail of the page for each slip."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The interpreter, the transcription of Appendix 1 and the functions it leaves informal were written in this session. Every result in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "a6a01143c6de3d8b0197d228e3385c28c59cdb16f1fbdda5e599e967b4d55e97",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-BOHM",
+      "slug": "a-compiler-from-1951-ran-it-needed-four-corrections",
+      "kind": "notebook",
+      "title": "A compiler from 1951 ran. It needed four corrections.",
+      "dek": "A language, a machine and a compiler that existed on paper, a coding agent, and three ways of being wrong that had to agree.",
+      "abstract": "A note about running the compiler in Corrado Böhm’s 1951 dissertation, which is written in the language it compiles, for a machine that was only ever a design. A coding agent built the machine, typed in the compiler from the 1954 printing, and wrote two independent readings to check it against. As printed, the compiler does not work. With four corrections, one of them reported by Knuth and Trabb Pardo in 1976, it compiles itself. The language, the machine and the compiler run in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "THESIS → SCAN → AGENT → MACHINE",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-MOUSE",
+        "N-AUTHORITY",
+        "N-LANING-ZIERLER"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A COMPILER ON PAPER",
+          "text": "In 1951 Corrado Böhm submitted a doctoral dissertation at ETH Zürich. It describes a computer, a language for it in which every statement is an assignment, and a compiler written in that language. Knuth and Trabb Pardo call it “the first compiler in its own language”. The computer was a design, and the compiler stayed on the page. I asked a coding agent to build the machine and run it.",
+          "references": [
+            {
+              "label": "Böhm, Calculatrices digitales, 1954 printing",
+              "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THREE READINGS",
+          "text": "A compiler typed in by an agent, running on a machine the same agent built, proves nothing by itself: if they are wrong in the same way, they agree. So there are three readings of every program. One works out each formula as written, as algebra, with no machine. One is a second compiler, written from the prose of the thesis and not from Böhm’s code. The third is Böhm’s compiler, as instruction numbers on the simulated machine. They have to agree number for number."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / AS PRINTED",
+          "text": "They did not. For the simplest program there is, the compiler as printed writes four numbers and none of them is an instruction. The group that encodes a plain copy adds up the two addresses and leaves out the operation code. An earlier section of the thesis encodes the same formula with the code in it."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TWO BRANCHES AT ONCE",
+          "text": "There is no “if” in this language. A program chooses by multiplying each destination by 0 or 1 and adding, so exactly one multiplier may be 1. In group C of the compiler two of them are 1 for every symbol that is not a parenthesis, and the compiler continues at the sum of two groups. This one the agent did not see coming. It showed up in a trace of the first run."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / KNUTH’S PAGE",
+          "text": "The third was already known. In 1976 Knuth and Trabb Pardo wrote: “It appears to be necessary to add one more statement in order to fix a bug in his program, caused by overlaying information when a left parenthesis follows an operator symbol”. They did not print the fix, so the one here is ours. They did work one formula through by hand, and with the fix in, the compiler’s six instructions for that formula match their page line for line. That page is the only check in this note that did not come from the agent.",
+          "references": [
+            {
+              "label": "Knuth and Trabb Pardo, 1976, pp. 39–41",
+              "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / THE FOURTH NEEDS A MACHINE",
+          "text": "With three corrections the compiler works when its own formulas are read as algebra. On the machine it stops after one number. Böhm’s method computes every product in a variable called X, and the compiler keeps its place among the parentheses in a variable it also calls X. Once the compiler has itself been turned into instructions, its own code overwrites its own bookmark. The thesis names the two letters its method uses. It does not say a program must avoid them."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / IT COMPILES ITSELF",
+          "text": "With its X renamed, the compiler gets through its own text. Read as algebra over its own source it writes 401 instruction numbers. Those numbers, run on the machine over the same source, write the compiler again, and that copy does the same. The third copy is identical to the first, and all of them are identical to what the second compiler writes."
+        },
+        {
+          "kind": "connection",
+          "text": "The language, the machine and the compiler run in the browser. You can write a program, see the instructions Böhm’s compiler makes of it, run the compiler as printed, and have it compile itself.",
+          "links": [
+            {
+              "href": "/demos/bohm",
+              "label": "Write a program — interactive study"
+            },
+            {
+              "href": "/demos/bohm?example=knuth-tpk&mode=verify",
+              "label": "Knuth and Trabb Pardo’s own program, three ways"
+            },
+            {
+              "href": "https://github.com/chrishayuk/bohm",
+              "label": "Source, tutorial and the scanned pages"
+            },
+            {
+              "href": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+              "label": "The thesis in English, translated by Peter Sestoft"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "This may not be the first time the compiler has run. Peter Sestoft’s 2016 translation says he implemented it in Java. I could not find that code and do not know which corrections it needed.",
+            "One of the four corrections was reported in 1976. I have not found the other three written down, but I read two sources, not the literature.",
+            "All three readings were written by the same agent in one session. They are three routes, not three authors.",
+            "The compiler was typed in from a scan. For the two formulas that were not known to be wrong, the French printing and the English translation agree.",
+            "The corrections are a reading of what Böhm meant. He is not here to ask."
+          ],
+          "principle": "Agreement between things one author wrote is evidence of consistency. The page somebody else worked by hand is evidence of correctness."
+        },
+        {
+          "kind": "question",
+          "text": "If a program has only ever existed on paper, how would you know it was right?",
+          "status": "OPEN",
+          "detail": "Having an agent produce a compiler was the cheap part. The work was arranging three ways to be wrong and making them agree, and even then the one outside check was a single hand-worked formula from 1976. Knuth and Trabb Pardo’s own test program in Böhm’s language is correct as algebra and prints nothing on the machine, because it uses the letters S and X."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Corrado Böhm, “Calculatrices digitales. Du déchiffrage de formules logico-mathématiques par la machine même dans la conception du programme”, dissertation, ETH Zürich, 1951; printed Bologna, 1954",
+          "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662",
+          "note": "Euclid’s algorithm is on p. 25. The compiler is chapter 7, pp. 39–43: group C on p. 40, group E′ on p. 43."
+        },
+        {
+          "title": "The same, translated into English by Peter Sestoft, 2016",
+          "url": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+          "note": "Appendix B: “We have made a simple implementation in Java of Böhm’s machine, and his compiler and loader”. The translation omits group W of chapter 7."
+        },
+        {
+          "title": "Donald E. Knuth and Luis Trabb Pardo, “The Early Development of Programming Languages”, Stanford report STAN-CS-76-562, August 1976, pp. 35–42",
+          "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+          "note": "The bug is reported on p. 40, the hand-worked formula is on p. 41, and their TPK program in Böhm’s language is on pp. 36–39."
+        },
+        {
+          "title": "chrishayuk/bohm",
+          "url": "https://github.com/chrishayuk/bohm",
+          "note": "The machine, loader and compiler, their tests, 42 example programs, a tutorial, and reduced scans of the pages the corrections rest on."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7 were written in this session. Every result in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "995565eefeec5456598807227a15d4219a25331293c32871b0d6ad6ffac50775",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-LANING-ZIERLER",
+      "slug": "a-1954-manual-asked-for-trouble-reports",
+      "kind": "notebook",
+      "title": "A 1954 manual asked for trouble reports. So I sent some.",
+      "dek": "Algebra typed on tape for MIT’s Whirlwind in 1953, rebuilt from its manual by a coding agent. Its programs run. Its rules turn up a slip in its own arithmetic, a 1954 copy that would not have run, and a last number in Knuth and Trabb Pardo’s 1976 example that it forbids.",
+      "abstract": "A note about rebuilding the algebraic system J. H. Laning Jr. and N. Zierler wrote for MIT’s Whirlwind I, from the manual they published in January 1954, with a coding agent. You typed equations on a Flexowriter and the answers came back typewritten. The manual ends by admitting that “exhaustive tests have not been made” and asking for information about “any troubles encountered in the use of this program”. Its three complete programs run on the reconstruction, and their answers check against mathematics. Its rules mean what they say: a/b/c is ac over b, and a zero has two signs, which its own loops step round. The troubles worth reporting are elsewhere. The manual’s decimal for its largest number is wrong in the fifth place. The 1954 summer school’s version of its differential-equation program would not have been accepted. And Knuth and Trabb Pardo’s 1976 example in the language reaches, on its last number, an index the manual does not permit. The system runs in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "MANUAL → SCAN → AGENT → INTERPRETER → TAPE",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-JOSS",
+        "N-BOHM",
+        "N-CPL"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A COMPUTER WITHIN A COMPUTER",
+          "text": "In 1952 J. H. Laning Jr. of the MIT Instrumentation Laboratory wrote a program that let Whirlwind I take mathematics typed as mathematics, and with N. Zierler made it a usable system by May 1953. Equations typed on a Flexowriter were punched on paper tape, translated into Whirlwind’s own instructions, and the answers typed back. “The effect of our program is to create a computer within a computer …” In 1954 John Backus came to MIT with two colleagues to see it run. I asked a coding agent to rebuild the system from its manual, Engineering Memorandum E-364, and to run the manual’s programs under the manual’s own rules.",
+          "references": [
+            {
+              "label": "Laning and Zierler, E-364, January 1954",
+              "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / EXHAUSTIVE TESTS HAVE NOT BEEN MADE",
+          "text": "The manual ends with Temporary Rules and Restrictions, among them “The x|N is not yet in operation.” Then: “All other portions of the program are believed to be operating satisfactorily but exhaustive tests have not been made. Information relative to any troubles encountered in the use of this program would be appreciated by the authors.” A progress report for the first quarter of 1954 says every routine had been tested and worked except the x|N routine. Zierler’s report on the program’s inner workings I have not found, and that summer it was said that “there are no annotated copies of the conversion routine”. So the manual is the specification, and what it does not say is this reconstruction’s choice.",
+          "references": [
+            {
+              "label": "Project Whirlwind Summary Report No. 37, first quarter 1954",
+              "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf"
+            },
+            {
+              "label": "MIT Summer Session 1954, lecture 13",
+              "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / A PERFECTLY REASONABLE EXPRESSION",
+          "text": "Multiplication is writing things side by side: 2ay is 2 times a times y, and a space between two digits is a multiplication sign, so 2 3 is six. Inside a term a slash sends everything after it to the other side of the fraction, until the next slash. So cd/a(b + c) is cd over a(b + c), and “a/b/c is properly interpreted as the product ac divided by b”, not a over bc, as FORTRAN would have it. In 1976 Laning wrote: “The notion of operator precedence as a formal concept did not occur to me at the time; I lived in fear that someone would write a perfectly reasonable algebraic expression that my system would not analyze correctly.”"
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TWO ZEROS",
+          "text": "Numbers have 24 binary digits and an exponent, about seven decimal places, and zero has a sign. CP jumps if the last quantity computed was negative, and on a zero “the CP may or may not behave like an SP since 0 may appear as +0 or −0.” The manual’s loops step round this: to go round ten times they test n − 9.5, never n − 10. The reconstruction has to decide, and my inference is a one’s-complement adder’s: a zero typed as 0 is +0, and the difference of two equal numbers is −0. So n − 5 with n equal to 5 is typed −.00000000+00, and CP jumps."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / KNUTH’S PROGRAM STOPS ON ITS LAST NUMBER",
+          "text": "Knuth and Trabb Pardo’s 1976 example in the language, TPK, reads eleven numbers with v|N, copies them to a|0 to a|10, and works back down with i = i − 1. Page 13 allows a letter as an index, but: “Negative values of n are not permitted in this connection, nor are values between zero and one half inclusive, with the exception that the value zero is permissible if assigned by the specific equation n = 0,.” The last time round, i is zero, and it got there by i = i − 1. The reconstruction tells the two zeros apart by sign, so it stops: ten lines, then ALARM EQUATION 2 PRECEDED BY 109. The stop rests on page 13 and on my inference that a computed zero is −0. Make every zero +0 and they cannot be told apart, so TPK runs to the end: a what-if the manual would not allow. Its checker now points at i = i − 1 before anything runs. And under the rules of January 1954 TPK could not have run at all, because it begins with v|N."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / THE INNOCUOUS CHANGE",
+          "text": "Write dy/dt as D y = …, and the stretch from the first D equation to the last is gone through four times a step, by “the method of Gill - a variation of the 4th order Runge-Kutta technique”. The manual’s example has the answers sin(t − 2) and cos(t − 2) − 1, and the reconstruction is within about .004 of them at every t it prints: what a step of one half costs. Then the manual warns. Move y|2 + 1 into a helper, a = y|2 + 1, just before the first D equation, and the change “would appear to be innocuous”. It is not, because the later passes start at the first D equation and never recompute a. At t = 10, y|1 is 2.58 where sin 8 is .99. The checker warns about it, quoting the page."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / A PROGRAM THAT WOULD NOT HAVE RUN",
+          "text": "The MIT summer school notes of 1954 give their own, shorter version of the manual’s differential-equation program. As printed, its last two lines lack the commas the rules require, so the translator would not have accepted it, and it has no PRINT: with the commas put back, it integrates from t = 2 to past t = 10 and types nothing. The manual has a slip of its own, on page 6. Its largest number, 2⁶³ − 2³⁹, is “(or, roughly, 9.2233995 · 10¹⁸)”. It is 9.2233715 · 10¹⁸, wrong in the fifth decimal place. And the manual prints .05 as +.50000000−01, which the nearest 24-bit number to .05 gives only if the digits are cut off rather than rounded, so the reconstruction cuts them off.",
+          "references": [
+            {
+              "label": "MIT Summer Session 1954, lecture 13",
+              "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "08 / IT RAN THE FIRST TIME",
+          "text": "These are the troubles the authors asked for, seventy years late: a slip in the manual, one in a copy of it, and the rest its rules doing what they say. The system itself did real work. Laning recalled a three-dimensional lead-pursuit problem, coded with its sceptical owners “in a 2-1/2 hour coding session, at least half of which was spent in defining notation”, which “ran successfully the first time”: 79 statements, with seven uses of the differential-equation feature. The summer school heard that “with a single exception, all programs coded in the Laning-Zierler system have been completed successfully on their first run”. The price was speed: “a reduction of computing speed of the order of magnitude of ten to one from an efficient computer program”, as C. W. Adams put it in May 1954, and six to eight times the Laboratory’s usual interpretive system, as the summer school did."
+        },
+        {
+          "kind": "connection",
+          "text": "The system runs in the browser, compiled from the same Rust source as the command-line version, with the manual’s programs among its tapes. Type a tape, feed it, and the printer types the answers, as slowly as ten characters a second if you like. The translation shows each equation’s block of orders, and the same tape can be fed with each kind of zero side by side.",
+          "links": [
+            {
+              "href": "/demos/laning-zierler?example=1976-knuth-tpk",
+              "label": "Feed Knuth’s TPK — interactive study"
+            },
+            {
+              "href": "https://github.com/chrishayuk/laning-zierler/tree/main/examples",
+              "label": "Every program in the manual, with the page it types"
+            },
+            {
+              "href": "https://github.com/chrishayuk/laning-zierler/tree/main/docs/scans",
+              "label": "The pages quoted here"
+            },
+            {
+              "href": "https://github.com/chrishayuk/laning-zierler",
+              "label": "Source, tutorial and language server"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The translator itself has not been found. This is built from a programmer’s manual, which says what the system does and not how. Matching the manual’s examples says nothing about what it does not describe.",
+            "The manual prints almost none of what its programs typed. Three numbers on page 6, 5, .05 and −π, can be compared digit for digit, and match; everything else is checked against mathematics, not against Whirlwind.",
+            "The sign of a computed zero is an inference from the manual’s two warnings and from the arithmetic of the time, not from a listing. The reconstruction also uses that sign to tell a zero set by n = 0 from a computed one, so the TPK alarm rests on it. The alarm’s wording is this reconstruction’s.",
+            "TPK was never run on Whirlwind, as far as I know. Knuth and Trabb Pardo wrote it to show what the language looked like, not to test it.",
+            "How Gill’s method was arranged inside the system, the rounding of each operation, the function routines, and what happened to a number too small to hold are this reconstruction’s choices, each listed in the repository. Nothing is timed.",
+            "The pages were read by the same coding agent that wrote the interpreter, from the page images. Nobody has checked the reading against the scans by eye. The pages are in the repository so that somebody can."
+          ],
+          "principle": "When only the manual survives, its rules are the program. Running them shows what the rules say, not what Whirlwind did."
+        },
+        {
+          "kind": "question",
+          "text": "If a manual is all that survives, can you tell what the program did?",
+          "status": "OPEN",
+          "detail": "The three complete programs in E-364 run on the reconstruction and give answers that check against mathematics. That shows the manual is consistent with itself and with arithmetic. It does not show that Whirlwind typed the same eight digits, or did the same thing when a tape broke a rule. Only a printout from 1953 or 1954, or the translator’s tape, would show that."
+        }
+      ],
+      "sources": [
+        {
+          "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+          "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+          "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+        },
+        {
+          "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+          "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+          "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+        },
+        {
+          "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+          "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+          "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+        },
+        {
+          "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+          "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+          "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+        },
+        {
+          "title": "chrishayuk/laning-zierler",
+          "url": "https://github.com/chrishayuk/laning-zierler",
+          "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+        },
+        {
+          "title": "Coding-agent session, 22 November 2026",
+          "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-22"
+    },
+    "hash": "7be7e793ceac8ff353f73939897cda991790b20fedce1bc305f319bc465df300",
+    "algorithm": "sha256"
   }
 ]

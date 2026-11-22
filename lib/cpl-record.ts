@@ -18,7 +18,7 @@ export const cplRecord: PublicationRecord = {
   authors: ["Chris Hay"],
   lineage: "TYPESCRIPT → SCAN → AGENT → INTERPRETER",
   concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
-  related: ["N-BOHM", "N-MOUSE"],
+  related: ["N-BOHM", "N-MOUSE", "N-LANING-ZIERLER"],
   media: [],
   body: [
     { kind: "observation", label: "01 / A LANGUAGE IN WORKING PAPERS", text: "CPL was designed in the early 1960s by a group at Cambridge and London. Martin Richards cut it down to make BCPL, and BCPL led to B and then C. In July 1966 the group put out a technical report called CPL Working Papers, most of which is a draft of the reference manual. I asked a coding agent to build an interpreter for the language those papers describe: the 1966 language, not the subset that became BCPL.", references: [

@@ -18,7 +18,7 @@ export const bohmRecord: PublicationRecord = {
   authors: ["Chris Hay"],
   lineage: "THESIS → SCAN → AGENT → MACHINE",
   concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
-  related: ["N-MOUSE", "N-AUTHORITY"],
+  related: ["N-MOUSE", "N-AUTHORITY", "N-LANING-ZIERLER"],
   media: [],
   body: [
     { kind: "observation", label: "01 / A COMPILER ON PAPER", text: "In 1951 Corrado Böhm submitted a doctoral dissertation at ETH Zürich. It describes a computer, a language for it in which every statement is an assignment, and a compiler written in that language. Knuth and Trabb Pardo call it “the first compiler in its own language”. The computer was a design, and the compiler stayed on the page. I asked a coding agent to build the machine and run it.", references: [

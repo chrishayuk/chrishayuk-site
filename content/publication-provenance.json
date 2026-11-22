@@ -1008,5 +1008,171 @@
         "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-JOSS",
+    "version": "1.2",
+    "recordHash": "da1225e4b896f2d26d50899e33928f645a90621939887d070099bb3a4f7faed2",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Links to the note on Laning and Zierler's algebraic system for Whirlwind (1954), another language rebuilt from its papers. No other change.",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "J. C. Shaw, “JOSS: Experience with an Experimental Computing Service for Users at Remote Typewriter Consoles”, RAND P-3149, May 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf",
+        "note": "Figure 1 is on page 6 of the PDF, figure 2 on page 8, and the one-page summary of the language on page 11."
+      },
+      {
+        "title": "J. C. Shaw, “JOSS: Examples of the Use of an Experimental On-Line Computing Service”, RAND P-3131, April 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-3131_JOSS_Examples_Of_The_Use_Of_An_Experimental_On-Line_Computing_Service_Apr65.pdf",
+        "note": "Eight pages typed at a console on 28 April 1965, reproduced in two colours."
+      },
+      {
+        "title": "J. C. Shaw, “JOSS: A Designer’s View of an Experimental On-Line Computing System”, RAND P-2922, August 1964",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-2922_JOSS_A_Designers_View_Of_An_Experimental_On-Line_Computing_System_Aug64.pdf",
+        "note": "Figures 3a to 3i. log(2) is in figure 3b, on page 17 of the PDF."
+      },
+      {
+        "title": "C. L. Baker, “JOSS: Scenario of a Filmed Report”, RAND RM-4162-PR, June 1964",
+        "url": "https://bitsavers.org/pdf/rand/joss/RM-4162-PR_JOSS_Scenario_Of_A_Filmed_Report_Jun64.pdf",
+        "note": "The session filmed on 21 March 1964. The row for 72 is on page 23 of the PDF."
+      },
+      {
+        "title": "“JOSS 666”, JOHNNIAC assembly listing, J. C. Shaw, 9 January 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf",
+        "note": "The error messages are on pages 37 to 42 of the PDF; the others on pages 10 to 12, 79 and 122 to 126."
+      },
+      {
+        "title": "“JOSS Program Notes and Tests”, J. C. Shaw’s working papers",
+        "url": "https://bitsavers.org/pdf/rand/joss/JOSS_Program_Notes_and_Tests.pdf",
+        "note": "The note of 11-19-64 is page 13 of the PDF."
+      },
+      {
+        "title": "chrishayuk/joss",
+        "url": "https://github.com/chrishayuk/joss",
+        "note": "The interpreter, the five sessions as transcripts, its tests, a tutorial, example programs, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-CPL",
+    "version": "1.1",
+    "recordHash": "a6a01143c6de3d8b0197d228e3385c28c59cdb16f1fbdda5e599e967b4d55e97",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Links to the note on Laning and Zierler's algebraic system for Whirlwind (1954), another language rebuilt from its papers. No other change.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "University of London Institute of Computer Science and The Mathematical Laboratory, Cambridge, “CPL Working Papers”, technical report, July 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf",
+        "note": "Appendix 1, “The Preprocessor”, begins on page 120 of the PDF. The program is Part 2, on pages 2 to 6 of the appendix; the informal definitions are Part 3, on pages 6 and 7."
+      },
+      {
+        "title": "“CPL Elementary Programming Manual”, Edition II, Cambridge, January 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Elementary_Programming_Manual.pdf"
+      },
+      {
+        "title": "D. W. Barron, J. N. Buxton, D. F. Hartley, E. Nixon and C. Strachey, “The main features of CPL”, The Computer Journal 6, 1963",
+        "url": "https://www.ancientgeek.org.uk/CPL/The_Main_Features_of_CPL.pdf"
+      },
+      {
+        "title": "Martin Richards, “How BCPL evolved from CPL”",
+        "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+      },
+      {
+        "title": "chrishayuk/cpl",
+        "url": "https://github.com/chrishayuk/cpl",
+        "note": "The interpreter, its tests, 73 example programs, a tutorial, and the preprocessor as printed and corrected with a detail of the page for each slip."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, the transcription of Appendix 1 and the functions it leaves informal were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-BOHM",
+    "version": "1.1",
+    "recordHash": "995565eefeec5456598807227a15d4219a25331293c32871b0d6ad6ffac50775",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Links to the note on Laning and Zierler's algebraic system for Whirlwind (1954), another language rebuilt from its papers. No other change.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "Corrado Böhm, “Calculatrices digitales. Du déchiffrage de formules logico-mathématiques par la machine même dans la conception du programme”, dissertation, ETH Zürich, 1951; printed Bologna, 1954",
+        "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662",
+        "note": "Euclid’s algorithm is on p. 25. The compiler is chapter 7, pp. 39–43: group C on p. 40, group E′ on p. 43."
+      },
+      {
+        "title": "The same, translated into English by Peter Sestoft, 2016",
+        "url": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+        "note": "Appendix B: “We have made a simple implementation in Java of Böhm’s machine, and his compiler and loader”. The translation omits group W of chapter 7."
+      },
+      {
+        "title": "Donald E. Knuth and Luis Trabb Pardo, “The Early Development of Programming Languages”, Stanford report STAN-CS-76-562, August 1976, pp. 35–42",
+        "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "The bug is reported on p. 40, the hand-worked formula is on p. 41, and their TPK program in Böhm’s language is on pp. 36–39."
+      },
+      {
+        "title": "chrishayuk/bohm",
+        "url": "https://github.com/chrishayuk/bohm",
+        "note": "The machine, loader and compiler, their tests, 42 example programs, a tutorial, and reduced scans of the pages the corrections rest on."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7 were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.1",
+    "recordHash": "7be7e793ceac8ff353f73939897cda991790b20fedce1bc305f319bc465df300",
+    "revision": {
+      "kind": "interpretation",
+      "summary": "Retitled after what it found: the manual asked for trouble reports, and these are troubles. Adds a slip in the manual's own arithmetic (page 6 gives 2^63 - 2^39 as roughly 9.2233995e18; it is 9.2233715e18), makes the summer school's version of the differential-equation program its own section with a tape to feed, counts what the manual's programs give (three complete programs run; three printed numbers match; the rest checked against mathematics), says that the TPK alarm rests on the reconstruction's inference about the sign of a computed zero, adds Knuth and Trabb Pardo's page 57 and a pursuit tape, and cuts the text by a quarter.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]
