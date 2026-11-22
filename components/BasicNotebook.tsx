@@ -81,7 +81,7 @@ export function BasicNotebook({ record }: { record: PublicationRecord }) {
       {act(7)}
       <StudyMeasures label="WHAT IT HAD BEEN CHECKED AGAINST" items={[
         { label: "ITS OWN TESTS", value: "88", detail: "Written by the agent that wrote the interpreter. All passed." },
-        { label: "GAMES FROM 1978", value: "103", detail: "From BASIC Computer Games. Every one loads and runs unchanged." },
+        { label: "LISTINGS FROM 1978", value: "103", detail: "From BASIC Computer Games. Every one loads and runs unchanged." },
         { label: "PROGRAMS ON A SECOND INTERPRETER", value: "22", detail: "Print the same as PC-BASIC, byte for byte." },
       ]} note="Every one of these is a BASIC from fourteen years or more after the manual."/>
       {act(8)}

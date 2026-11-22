@@ -1,7 +1,7 @@
 import { BasicStudy } from "@/components/BasicStudy";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = { ...pageMetadata("Dartmouth BASIC — the 1964 manual’s programs, in the browser", "Run the programs printed in the first BASIC instruction manual (Dartmouth, May 1964) in the browser, beside the pages they were printed on: a Rust interpreter compiled to WebAssembly. Later programs, including 103 games from 1978, are there too.", "/demos/basic"), robots: { index: false, follow: true } };
+export const metadata = { ...pageMetadata("Dartmouth BASIC — the 1964 manual’s programs, in the browser", "Run the programs printed in the first BASIC instruction manual (Dartmouth, May 1964) in the browser, beside the pages they were printed on: a Rust interpreter compiled to WebAssembly. Later programs, including 103 game listings from 1978, are there too.", "/demos/basic"), robots: { index: false, follow: true } };
 
 const PAGES = [
   { file: "cover.jpg", caption: "THE REPRINT’S COVER" },
@@ -16,8 +16,8 @@ export default function Page() {
       <p className="kicker record-voice">CHRIS HAY / DARTMOUTH BASIC / INTERACTIVE STUDY</p>
       <h1>The manual,<br/><em>still running.</em></h1>
       <p className="dek">First issued at Dartmouth in May 1964. Typed in from the page. Running here.</p>
-      <p>Dartmouth BASIC’s first instruction manual ends with three example programs and the results they printed. Choose one, change it, and run it; the page it came from is beside it, and the figures should match. Then try <strong>example 2</strong> with AS IN 1964 switched off: a later BASIC stops at line 40, for a reason the manual gives on page 5.</p>
-      <p>There are 142 programs in the list: the manual’s four, the fourteen programs of the tutorial, seventeen short classics, and all 103 games from a 1978 book, which ask you questions.</p>
+      <p>The beginners’ part of Dartmouth BASIC’s first instruction manual ends with three example programs and the results they printed. Choose one, change it, and run it; the page it came from is beside it, and the figures should match. Then try <strong>example 2</strong> with AS IN 1964 switched off: a later BASIC stops at line 40, for a reason the manual gives on page 5.</p>
+      <p>There are 142 programs in the list: the manual’s four, the fourteen programs of the tutorial, seventeen short classics, and all 103 listings from a 1978 book of games, which ask you questions.</p>
       <div className="inline-links"><a className="text-link" href="https://github.com/chrishayuk/chuk-basic-rs">SOURCE AND TUTORIAL ↗</a><a className="text-link" href="https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf">THE MANUAL, AT DARTMOUTH ↗</a></div>
     </header>
     <BasicStudy choose/>
