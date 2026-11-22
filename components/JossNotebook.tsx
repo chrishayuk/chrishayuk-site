@@ -5,10 +5,11 @@ import { NotebookEntry } from "./NotebookEntry";
 import { Acts } from "./Acts";
 import Link from "next/link";
 import { JossRunner } from "./JossRunner";
-import { JossTypewriter } from "./JossTypewriter";
+import { JossTry } from "./JossTypewriter";
 
 const ARCHIVE = "https://bitsavers.org/pdf/rand/joss/";
 
+const TRY = ["Type 2+2.", "1.1 Type x, 1/x.", "Do part 1.", "Set x = 4.", "Go.", "Do part 1 for x = 1(1)3."];
 const FIRST = "Type 2+2.\nSet x = 3.\nType x*2, sqrt(x), 1/x.\n1.1 Type x, x*2 in form 1.\nForm 1:\n__ squared is ____\nDo step 1.1 for x = 1(1)5.";
 const QUADRATIC = "1.1 Set x(1) = [-b+sqrt(b*2-4·a·c)] / [2·a].\n1.2 Set x(2) = [-b-sqrt(b*2-4·a·c)] / [2·a].\n1.3 Type x(1), x(2) in form 1.\nSet b = -1.\nSet c = -6.\nDo part 1.";
 const LOGS = "Type log(2), exp(72).\nType [.7*5-2.3*(-.7)]/[7*6-|9*5-5*7|*(2/3)].\nSet s = 0.\n1.1 Set s = s+.1.\nDo step 1.1 for i = 1(1)10.\nType s.";
@@ -31,11 +32,8 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
         alt="A photograph of a JOSS console: an IBM electric typewriter with sprocket-fed paper rising from it, and a small box of lights and switches to its right."
         caption="SHAW, P-2922, AUGUST 1964, FIG. 1 / JOSS CONSOLE AND STATION LOCAL CONTROL BOX"/>
       {act(0)}
-      <figure className="joss-runner">
-        <figcaption className="record-voice">SIT AT THE CONSOLE / SIGN ON WITH YOUR INITIALS, THEN TRY Type 2+2.</figcaption>
-        <JossTypewriter compact label="A JOSS console"/>
-        <p className="joss-runner-note">The ribbon’s two colours, the speed of ten characters a second, the red light and the gong are from Shaw’s papers; the sign-on is from the listing of January 1965. Everything after it is the interpreter. <Link href="/demos/joss">The full console ↗</Link></p>
-      </figure>
+      <JossTry label="SIT AT THE CONSOLE / SIGN ON WITH YOUR INITIALS, THEN TYPE A LITTLE PROGRAM" lines={TRY}
+        note={<>A step kept for later (1.1), a mistake (x has no value), the fix, <strong>Go.</strong> to carry on from where it stopped, and the step done for three values of x. The ribbon’s two colours, the speed of ten characters a second, the red light and the gong are from Shaw’s papers; the sign-on is from the listing of January 1965. Everything after it is the interpreter. <Link href="/demos/joss">The full console ↗</Link></>}/>
     </> },
     { label: "JOSS in five lines", children: <>
       <StudySequence label="EVERY INSTRUCTION IS A SENTENCE" steps={[

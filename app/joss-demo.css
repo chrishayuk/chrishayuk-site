@@ -119,3 +119,5 @@
 .joss-console-lab .joss-bar{margin-top:18px}
 .joss-typewriter{max-width:880px}
 .joss-runner .joss-typewriter{margin-top:16px}
+.joss-try-lines{margin-top:14px}
+.joss-try-lines pre{margin:0;padding:10px 14px;border-left:2px solid var(--accent);font:13px/1.65 var(--font-geist-mono);white-space:pre-wrap}
