@@ -146,6 +146,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "A Rust port of Peter Grogono's Mouse matched its C reference, which carried a 1979 misprint and three bugs a BYTE reader described in 1980. Run the corrected interpreter in the browser.",
   concepts: ["Mouse programming language", "Peter Grogono", "BYTE magazine", "coding agents", "reference implementations", "WebAssembly"],
  },
+ "N-BASIC": {
+  subject: "Dartmouth BASIC’s 1964 manual and 1978 BASIC games, run in the browser by a Rust interpreter",
+  question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",
+  searchTitle: "Run the First BASIC Manual’s Programs (Dartmouth, 1964) in Your Browser",
+  description: "BASIC explained from its first instruction manual, with the manual’s programs and 1978 games running in WebAssembly. 103 games ran; the 1964 manual’s own example stopped at line 40.",
+  concepts: ["BASIC programming language", "Dartmouth BASIC", "BASIC Computer Games", "coding agents", "reference implementations", "WebAssembly"],
+ },
  "N-ATTRIBUTION": {
   subject: "Coding-agent guardrails and Git attribution policy in CI",
   question: "How can CI enforce repository attribution policy when a coding agent ignores it?",
