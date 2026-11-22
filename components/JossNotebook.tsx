@@ -5,6 +5,7 @@ import { NotebookEntry } from "./NotebookEntry";
 import { Acts } from "./Acts";
 import Link from "next/link";
 import { JossRunner } from "./JossRunner";
+import { JossTypewriter } from "./JossTypewriter";
 
 const ARCHIVE = "https://bitsavers.org/pdf/rand/joss/";
 
@@ -29,8 +30,12 @@ export function JossNotebook({ record }: { record: PublicationRecord }) {
       <Excerpt src="console-1964.jpg" width={1550} height={1790} narrow
         alt="A photograph of a JOSS console: an IBM electric typewriter with sprocket-fed paper rising from it, and a small box of lights and switches to its right."
         caption="SHAW, P-2922, AUGUST 1964, FIG. 1 / JOSS CONSOLE AND STATION LOCAL CONTROL BOX"/>
-      <p className="joss-play-link record-voice"><Link href="/demos/joss">SIT AT THE CONSOLE ↗</Link><span>Type at JOSS in your browser.</span></p>
       {act(0)}
+      <figure className="joss-runner">
+        <figcaption className="record-voice">SIT AT THE CONSOLE / SIGN ON WITH YOUR INITIALS, THEN TRY Type 2+2.</figcaption>
+        <JossTypewriter compact label="A JOSS console"/>
+        <p className="joss-runner-note">The ribbon’s two colours, the speed of ten characters a second, the red light and the gong are from Shaw’s papers; the sign-on is from the listing of January 1965. Everything after it is the interpreter. <Link href="/demos/joss">The full console ↗</Link></p>
+      </figure>
     </> },
     { label: "JOSS in five lines", children: <>
       <StudySequence label="EVERY INSTRUCTION IS A SENTENCE" steps={[

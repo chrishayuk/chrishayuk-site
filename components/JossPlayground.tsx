@@ -83,7 +83,7 @@ export function JossPlayground() {
 
   return <section className="joss-lab" aria-label="JOSS console">
     <div className="joss-controls">
-      <p className="record-voice">01 / CHOOSE A SITTING, OR TYPE ON THE PAPER</p>
+      <p className="record-voice">02 / OR TYPE IN A FILE, WITH AN EDITOR THAT UNDERSTANDS JOSS</p>
       <div className="joss-bar">
         <label>Sitting<select value={selected} onChange={event => { const example = examples.find(candidate => candidate.name === event.target.value); if (example) load(example); }}>
           {!selected && <option value="">an original session</option>}
@@ -99,17 +99,17 @@ export function JossPlayground() {
     </div>
     <div className="joss-panes">
       <div>
-        <p className="record-voice">02 / WHAT TO TYPE <span className="joss-editor-hint">/ HOVER OVER ANY WORD</span></p>
+        <p className="record-voice">WHAT TO TYPE <span className="joss-editor-hint">/ HOVER OVER ANY WORD</span></p>
         <JossEditor className="joss-program" label="Lines to type at JOSS" value={program} onChange={setProgram} onRun={run}/>
         <p className="joss-hint">A line that begins with a number is kept as a step. Anything else is done at once. Times is <strong>·</strong> (or type <strong>@</strong>); <strong>*</strong> is “to the power”. Type <strong>!=</strong>, <strong>&lt;=</strong> and <strong>&gt;=</strong> for ≠, ≤ and ≥.</p>
       </div>
       <div>
-        <p className="record-voice">03 / THE PAPER / GREEN IS YOU, BLACK IS JOSS</p>
+        <p className="record-voice">THE PAPER / GREEN IS YOU, BLACK IS JOSS</p>
         <JossPaper console={desk} label="The paper in the JOSS console" tall/>
       </div>
     </div>
     <div className="joss-compare">
-      <p className="record-voice">04 / AN ORIGINAL SESSION, REPLAYED AND COMPARED WITH THE PAGE</p>
+      <p className="record-voice">03 / AN ORIGINAL SESSION, REPLAYED AND COMPARED WITH THE PAGE</p>
       <div className="joss-bar">
         <label>Session<select value={original} onChange={event => setOriginal(event.target.value)}>
           {transcripts.map(transcript => <option key={transcript.name}>{transcript.name}</option>)}
