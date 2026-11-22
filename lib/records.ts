@@ -18,6 +18,7 @@ import snapshots from "../content/publications.json" with { type: "json" };
 import type { PublicationRecord } from "./types";
 import { addressBuildRecord } from "./address-build-record.ts";
 import { agentAttributionRecord } from "./agent-attribution-record.ts";
+import { mouseRecord } from "./mouse-record.ts";
 import { exhibitionRecord } from "./exhibition-record.ts";
 import { visualNotebooks } from "./visual-notebooks.ts";
 import { compareVersions } from "../vendor/hause/provenance.ts";
@@ -59,7 +60,7 @@ const filmSources = [
 ];
 for (const f of filmSources) authored.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
-authored.unshift(machineLinkRecord, recoveryRecord, machineRecognitionRecord, machineDiscoveryRecord, machinePeerRecord, ...ecologyRecords, machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, addressBuildRecord, ...visualNotebooks);
+authored.unshift(machineLinkRecord, recoveryRecord, machineRecognitionRecord, machineDiscoveryRecord, machinePeerRecord, ...ecologyRecords, machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, mouseRecord, addressBuildRecord, ...visualNotebooks);
 authored.push(...videoRecords);
 
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };

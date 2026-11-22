@@ -26,6 +26,7 @@ export const notebookObjectSelections: Record<string, number[]> = {
  'N-CELL80-BOUND': [7, 10, 14, 18, 21],
  'N-EXHIBITION': [9, 10, 13, 17],
  'N-ATTRIBUTION': [1, 2, 3, 4],
+ 'N-MOUSE': [3, 4, 5, 6],
  'N-ADDRESS-BUILD': [2, 3, 4, 5, 6],
  'N-MAP': [5, 15, 19, 20],
  'N-STATE': [3, 4, 5, 6],

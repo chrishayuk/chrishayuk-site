@@ -72,6 +72,9 @@ export const notebookConclusions: Record<string, Conclusion> = {
  'N-EXHIBITION': {
   takeaway: 'A website can stage an idea through the form its information needs: evidence, uncertainty, transformation and refusal each deserve a distinct voice. Making the notebook extended HAUSE’s shared language.',
   scope: 'This is a design thesis and a record of making. Cinematic movement must explain a relationship, with a designed resting state when motion is reduced. Whether a machine can learn to stage ideas remains an open question.' },
+ 'N-MOUSE': {
+  takeaway: 'A port can match its reference exactly and still be wrong, because the reference was. The agent guessed one inherited misprint and said it had not checked; it copied three other bugs without knowing they were there.',
+  scope: 'One port, one session, one small interpreter. The bugs were found by a reader in 1980, not by the agent. Where the C reference came from has not been established.' },
  'N-ATTRIBUTION': {
   takeaway: 'The repository makes the authorship policy enforceable at the pull-request boundary. The check rejects disallowed metadata until it is rewritten; it cannot edit an immutable commit itself.',
   scope: 'The broader proposal is to distinguish accountable authorship from tool provenance. This particular disagreement shows which policy prevailed in this workflow, without establishing a general theory of agent authority.' },
