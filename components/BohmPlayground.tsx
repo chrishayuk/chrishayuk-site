@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { BohmEditor, type BohmEditorHandle } from "./BohmEditor";
 
 /**
  * Böhm's 1951 language, machine and compiler in the page.
@@ -9,6 +10,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * files in public/demos/bohm/ (bohm.wasm, wasi.js, worker.js, examples.json)
  * are copied from that repository's web/ folder: rebuild them there with
  * `node web/build.mjs` and copy them across, rather than editing them here.
+ * The editor's colours, problems and hover help come from the language
+ * server in the same program (BohmEditor).
  *
  * Every run happens in a worker, so a program that never ends can be stopped
  * by terminating it.
@@ -46,7 +49,7 @@ export function BohmPlayground() {
   const [running, setRunning] = useState(false);
   const worker = useRef<Worker | null>(null);
   const pane = useRef<HTMLPreElement | null>(null);
-  const editor = useRef<HTMLTextAreaElement | null>(null);
+  const editor = useRef<BohmEditorHandle | null>(null);
 
   const load = useCallback((example: Example) => {
     setSelected(example.name);
@@ -103,14 +106,7 @@ export function BohmPlayground() {
     next.postMessage({ wasmUrl: new URL(`${FILES}/bohm.wasm`, window.location.href).href, args, program, input });
   }, [finish, input, mode, printed, program]);
 
-  const type = useCallback((key: string) => {
-    const box = editor.current;
-    if (!box) return;
-    const text = key === "mod" ? " mod " : key;
-    const at = box.selectionStart + text.length;
-    setProgram(box.value.slice(0, box.selectionStart) + text + box.value.slice(box.selectionEnd));
-    requestAnimationFrame(() => { box.focus(); box.setSelectionRange(at, at); });
-  }, []);
+  const type = useCallback((key: string) => editor.current?.insert(key === "mod" ? " mod " : key), []);
 
   return <section className="bohm-lab" aria-label="Böhm’s language">
     <div className="bohm-controls">
@@ -130,11 +126,9 @@ export function BohmPlayground() {
     </div>
     <div className="bohm-panes">
       <div>
-        <label htmlFor="bohm-program" className="record-voice">02 / PROGRAM</label>
+        <p className="record-voice">02 / PROGRAM <span className="bohm-editor-hint">/ HOVER OVER ANY FORMULA</span></p>
         <div className="bohm-keys" aria-label="Symbols">{KEYS.map(key => <button type="button" key={key} onClick={() => type(key)}>{key}</button>)}</div>
-        <textarea id="bohm-program" ref={editor} className="bohm-program" value={program} wrap="off" spellCheck={false}
-          onChange={event => setProgram(event.target.value)}
-          onKeyDown={event => { if (event.key === "Enter" && (event.metaKey || event.ctrlKey)) run(); }}/>
+        <BohmEditor className="bohm-program" label="Program in Böhm’s notation" value={program} onChange={setProgram} onRun={run} handle={editor}/>
         <label htmlFor="bohm-input" className="record-voice">03 / INPUT TAPE, READ BY ?</label>
         <textarea id="bohm-input" className="bohm-input" value={input} spellCheck={false} onChange={event => setInput(event.target.value)}/>
       </div>
