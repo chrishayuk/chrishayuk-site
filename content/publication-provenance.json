@@ -727,5 +727,40 @@
         "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7 were written in this session. Every result in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-BASIC",
+    "version": "1.0",
+    "recordHash": "3a6d7eb1e9d90cdda5bcd0c4cd99926c07f746561684c8e6f952f366dcdbf391",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication: Dartmouth BASIC from its May 1964 instruction manual, the manual's programs running beside their pages, the example that stopped at line 40 on an interpreter checked only against later BASICs, and what the 1964 mode does and does not reproduce"
+    },
+    "sources": [
+      {
+        "title": "Dartmouth College Computation Center, “BASIC”, instruction manual, May 1964, first draft. Commemorative reprint hosted by Dartmouth College",
+        "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf",
+        "note": "The preface is on p. 1; “only 13 other operations” on p. 4; numbers, variables, the arrow and SQR on p. 5; the example programs and their results on pp. 21–23."
+      },
+      {
+        "title": "chrishayuk/chuk-basic-rs",
+        "url": "https://github.com/chrishayuk/chuk-basic-rs",
+        "note": "The interpreter, a compiler to WebAssembly, their tests, a tutorial, 150 sample programs including the manual’s, and reduced scans of the manual."
+      },
+      {
+        "title": "David H. Ahl (ed.), BASIC Computer Games, 1978. Listings from coding-horror/basic-computer-games",
+        "url": "https://github.com/coding-horror/basic-computer-games",
+        "note": "103 program listings (the collection counts 96 games), run unmodified, as a check on the interpreter."
+      },
+      {
+        "title": "PC-BASIC 2.0.8, an emulation of Microsoft GW-BASIC",
+        "url": "https://robhagemans.github.io/pcbasic/",
+        "note": "Run on the manual’s program 2 for this note: it stops with “Illegal function call in 40”."
+      },
+      {
+        "title": "Coding-agent session, 21–22 November 2026",
+        "note": "The counts in section 06 are the agent’s, as reported. The programs from the manual were run again for this note, and can be run above."
+      }
+    ]
   }
 ]
