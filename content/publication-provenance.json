@@ -1025,5 +1025,196 @@
         "note": "The machine, the assembler, the transcription of the tables and the tables the report only describes were written in this session. Every result in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-MOUSE",
+    "version": "1.1",
+    "recordHash": "529ce5da8e8f8f920bdc9b89aab6569cf434032d8fecbc2c1ce656907dcb6f8d",
+    "revision": {
+      "kind": "correction",
+      "summary": "Two slips in the article's own programs, which an independent review by a second model found: listing 5 fails when given fewer than two numbers, and the array program on page 204 reads one full stop too many and accepts a twenty-sixth number. The examples now keep the printed prompts.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "Peter Grogono, “Mouse: A Language for Microcomputers”, BYTE, July 1979, pp. 198–220",
+        "url": "https://archive.org/details/byte-magazine-1979-07",
+        "note": "Listing 6 is on pp. 209, 210 and 212; line 176 on p. 212; Figure 1 on p. 216."
+      },
+      {
+        "title": "Tom Lane, “Comment and Correction for Mouse”, with Peter Grogono’s reply, BYTE, June 1980, pp. 238 and 240",
+        "url": "https://archive.org/details/byte-magazine-1980-06"
+      },
+      {
+        "title": "chrishayuk/mouse-interpreter",
+        "url": "https://github.com/chrishayuk/mouse-interpreter",
+        "note": "The interpreter, its tests, 42 example programs, and reduced scans of both sources."
+      },
+      {
+        "title": "Coding-agent session, 21 November 2026",
+        "note": "The agent’s report is quoted as written. The first completed port was rebuilt unchanged from the session transcript to confirm that it prints 33 on Lane’s test."
+      }
+    ]
+  },
+  {
+    "id": "N-BOHM",
+    "version": "1.1",
+    "recordHash": "06a3b01bba71907e59b48f0f97b4c5d9f94acc4ce035877f3df2c7ce384d0125",
+    "revision": {
+      "kind": "correction",
+      "summary": "Of the four corrections, three are slips; the fourth, renaming X, is needed only because of how this reconstruction compiles the compiler's own formulas. Two arrows supplied in group J', the loader's constant and a repeated label in the second Euclid program are now disclosed, and an independent review by a second model is described.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "Corrado Böhm, “Calculatrices digitales. Du déchiffrage de formules logico-mathématiques par la machine même dans la conception du programme”, dissertation, ETH Zürich, 1951; printed Bologna, 1954",
+        "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662",
+        "note": "Euclid’s algorithm is on p. 25. The compiler is chapter 7, pp. 39–43: group C on p. 40, group E′ on p. 43."
+      },
+      {
+        "title": "The same, translated into English by Peter Sestoft, 2016",
+        "url": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+        "note": "Appendix B: “We have made a simple implementation in Java of Böhm’s machine, and his compiler and loader”. The translation omits group W of chapter 7."
+      },
+      {
+        "title": "Donald E. Knuth and Luis Trabb Pardo, “The Early Development of Programming Languages”, Stanford report STAN-CS-76-562, August 1976, pp. 35–42",
+        "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "The bug is reported on p. 40, the hand-worked formula is on p. 41, and their TPK program in Böhm’s language is on pp. 36–39."
+      },
+      {
+        "title": "chrishayuk/bohm",
+        "url": "https://github.com/chrishayuk/bohm",
+        "note": "The machine, loader and compiler, their tests, 42 example programs, a tutorial, and reduced scans of the pages the corrections rest on."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7 were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-CPL",
+    "version": "1.1",
+    "recordHash": "c2e4680fe1e639761fa9f090dd6e4f7c1be23c785e17f064be96b6533fb9bda7",
+    "revision": {
+      "kind": "correction",
+      "summary": "The preprocessor's output for its own text is not wholly canonical; reading Part 3's etc. as including true and false is an interpretation. The eleven corrections are nine slips and two conflicts. An independent review by a second model found the interpreter grouping division the wrong way and skipping operands of and and or; both are corrected.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "University of London Institute of Computer Science and The Mathematical Laboratory, Cambridge, “CPL Working Papers”, technical report, July 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf",
+        "note": "Appendix 1, “The Preprocessor”, begins on page 120 of the PDF. The program is Part 2, on pages 2 to 6 of the appendix; the informal definitions are Part 3, on pages 6 and 7."
+      },
+      {
+        "title": "“CPL Elementary Programming Manual”, Edition II, Cambridge, January 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Elementary_Programming_Manual.pdf"
+      },
+      {
+        "title": "D. W. Barron, J. N. Buxton, D. F. Hartley, E. Nixon and C. Strachey, “The main features of CPL”, The Computer Journal 6, 1963",
+        "url": "https://www.ancientgeek.org.uk/CPL/The_Main_Features_of_CPL.pdf"
+      },
+      {
+        "title": "Martin Richards, “How BCPL evolved from CPL”",
+        "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+      },
+      {
+        "title": "chrishayuk/cpl",
+        "url": "https://github.com/chrishayuk/cpl",
+        "note": "The interpreter, its tests, 73 example programs, a tutorial, and the preprocessor as printed and corrected with a detail of the page for each slip."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, the transcription of Appendix 1 and the functions it leaves informal were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-BASIC",
+    "version": "1.1",
+    "recordHash": "0bb96fc30f38e83573833cd65d54eb8b9f420ab4b59ec6f73dbc3339dd0c8e26",
+    "revision": {
+      "kind": "correction",
+      "summary": "The 103 games run as the coding-horror collection has them, normalised for Vintage BASIC, not as the 1978 book prints them; the PC-BASIC comparison is byte for byte on standard output after normalising line endings and the prompt; 1964 mode now also follows Kurtz on INT, RND and a leading minus. An independent review by a second model is described.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "Dartmouth College Computation Center, “BASIC”, instruction manual, May 1964, first draft. Commemorative reprint hosted by Dartmouth College",
+        "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf",
+        "note": "The preface is on p. 1; “only 13 other operations” on p. 4; numbers, variables, the arrow and SQR on p. 5; the example programs and their results on pp. 21–23."
+      },
+      {
+        "title": "chrishayuk/chuk-basic-rs",
+        "url": "https://github.com/chrishayuk/chuk-basic-rs",
+        "note": "The interpreter, a compiler to WebAssembly, their tests, a tutorial, 150 sample programs including the manual’s, and reduced scans of the manual."
+      },
+      {
+        "title": "David H. Ahl (ed.), BASIC Computer Games, 1978. Listings from coding-horror/basic-computer-games",
+        "url": "https://github.com/coding-horror/basic-computer-games",
+        "note": "103 program listings (the collection counts 96 games), run unmodified, as a check on the interpreter."
+      },
+      {
+        "title": "PC-BASIC 2.0.8, an emulation of Microsoft GW-BASIC",
+        "url": "https://robhagemans.github.io/pcbasic/",
+        "note": "Run on the manual’s program 2 for this note: it stops with “Illegal function call in 40”."
+      },
+      {
+        "title": "Coding-agent session, 21–22 November 2026",
+        "note": "The counts in section 06 are the agent’s, as reported. The programs from the manual were run again for this note, and can be run above."
+      }
+    ]
+  },
+  {
+    "id": "N-JOSS",
+    "version": "1.2",
+    "recordHash": "16fc35940cf496d0e91c0dbebb2b1d201f09f8af02f208e450f32c52d6ddb299",
+    "revision": {
+      "kind": "correction",
+      "summary": "All 767 lines now match: the five that differed come out as printed when JOSS's own logarithm, exponential and power routines are followed from the January 1965 listing. Its logarithm cuts a result below 1 off at nine digits instead of rounding, which is why log 2 is .69314718. Shaw's note on F1 is quoted in full and is about a different part of the routine. An independent review by a second model is described.",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "J. C. Shaw, “JOSS: Experience with an Experimental Computing Service for Users at Remote Typewriter Consoles”, RAND P-3149, May 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf",
+        "note": "Figure 1 is on page 6 of the PDF, figure 2 on page 8, and the one-page summary of the language on page 11."
+      },
+      {
+        "title": "J. C. Shaw, “JOSS: Examples of the Use of an Experimental On-Line Computing Service”, RAND P-3131, April 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-3131_JOSS_Examples_Of_The_Use_Of_An_Experimental_On-Line_Computing_Service_Apr65.pdf",
+        "note": "Eight pages typed at a console on 28 April 1965, reproduced in two colours."
+      },
+      {
+        "title": "J. C. Shaw, “JOSS: A Designer’s View of an Experimental On-Line Computing System”, RAND P-2922, August 1964",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-2922_JOSS_A_Designers_View_Of_An_Experimental_On-Line_Computing_System_Aug64.pdf",
+        "note": "Figures 3a to 3i. log(2) is in figure 3b, on page 17 of the PDF."
+      },
+      {
+        "title": "C. L. Baker, “JOSS: Scenario of a Filmed Report”, RAND RM-4162-PR, June 1964",
+        "url": "https://bitsavers.org/pdf/rand/joss/RM-4162-PR_JOSS_Scenario_Of_A_Filmed_Report_Jun64.pdf",
+        "note": "The session filmed on 21 March 1964. The row for 72 is on page 23 of the PDF."
+      },
+      {
+        "title": "“JOSS 666”, JOHNNIAC assembly listing, J. C. Shaw, 9 January 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf",
+        "note": "The error messages are on pages 37 to 42 of the PDF; the others on pages 10 to 12, 79 and 122 to 126."
+      },
+      {
+        "title": "“JOSS Program Notes and Tests”, J. C. Shaw’s working papers",
+        "url": "https://bitsavers.org/pdf/rand/joss/JOSS_Program_Notes_and_Tests.pdf",
+        "note": "The note of 11-19-64 is page 13 of the PDF."
+      },
+      {
+        "title": "chrishayuk/joss",
+        "url": "https://github.com/chrishayuk/joss",
+        "note": "The interpreter, the five sessions as transcripts, its tests, a tutorial, example programs, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, the transcriptions and the reading of the listings were made in this session. Every count in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]
