@@ -24,7 +24,7 @@ function Runner({ label, program, note }: { label: string; program: string; note
   </div>;
 }
 
-/** The note in pictures: the pages it quotes, and the language running where it is described. */
+/** Dartmouth BASIC in pictures: the pages the note quotes, and the language running where it is described. */
 export function BasicNotebook({ record }: { record: PublicationRecord }) {
   const act = (index: number) => <Acts acts={[record.body[index]]} anchored offset={index} staticRefusals/>;
   return <NotebookEntry record={record} className="basic-notebook" chapters={[
@@ -43,57 +43,47 @@ export function BasicNotebook({ record }: { record: PublicationRecord }) {
         caption="P. 1 / “WITHOUT ANY EXPLANATION”"/>
       {act(1)}
     </> },
-    { label: "BASIC in five lines", children: <>
+    { label: "Dartmouth BASIC in five lines", children: <>
       <Excerpt src="manual-1964-thirteen-operations.jpg" width={1360} height={800}
         alt="Page 4: the last instruction in any BASIC program is END; there are only 13 other operations. Below, the preface's program on a programming sheet, as instructions 10, 20 and 30."
         caption="P. 4 / “THERE ARE ONLY 13 OTHER OPERATIONS”"/>
       <StudySequence label="A NUMBER, AN OPERATION, AND WHAT IT APPLIES TO" steps={[
-        { label: "PRINT", value: "10 PRINT \"HELLO\"", detail: "Shows text or a number. The 10 is where this line comes in the order." },
-        { label: "LET", value: "20 LET X = (7+8)/3", detail: "Works out a formula and keeps the answer in a variable: one letter, or a letter and a digit." },
+        { label: "LET", value: "10 LET X = (7+8)/3", detail: "Works out a formula and keeps the answer in a variable: one letter, or a letter and a digit." },
+        { label: "PRINT", value: "20 PRINT X", detail: "Types the answer. Text in quotes is typed as it stands." },
         { label: "FOR … NEXT", value: "30 FOR N = 1 TO 5", detail: "Repeats every line down to NEXT N, with N counting up." },
         { label: "IF … THEN", value: "40 IF X > 4 THEN 90", detail: "Chooses the next line. GO TO does the same without asking." },
-        { label: "READ / DATA", value: "50 READ A, B", detail: "Takes the next numbers from the DATA lines. In 1964 that was how a program got its numbers." },
+        { label: "READ / DATA", value: "50 READ A, B", detail: "Takes the next numbers from the DATA lines. That is how a program gets its numbers." },
       ]} note="DEF names a formula, DIM makes room for a list, and END is always last. That is most of the 1964 language."/>
       {act(2)}
-      <Runner label="TRY IT / CHANGE IT AND RUN AGAIN" program={"10 FOR N = 1 TO 5\n20 LET S = N * N\n30 PRINT N; \"SQUARED IS\"; S\n40 NEXT N\n50 PRINT \"DONE\"\n60 END"}
-        note="Change the 5 on line 10, or the formula on line 20. Add a line 35 and it runs between 30 and 40: the numbers are the order."/>
+      <Runner label="TRY IT / CHANGE IT AND RUN AGAIN" program={"10 FOR N = 1 TO 5\n20 LET S = N * N\n30 PRINT N, S\n40 NEXT N\n50 PRINT \"DONE\"\n60 END"}
+        note="Change the 5 on line 10, or the formula on line 20: N↑3 is N cubed. Add a line 35 and it runs between 30 and 40, because the numbers are the order. The point after each whole number is how the 1964 results are printed."/>
     </> },
     { label: "The page prints its own answers", kind: "evidence", children: <>
       <Excerpt src="manual-1964-program-1.jpg" width={1300} height={840}
         alt="Page 21: Program number 1, nine lines that average the logarithms of 1 to 100, and its result: AVERAGE OF 100 LOGS, 1.5797, TIME: 3 SECS."
         caption="P. 21 / PROGRAM NUMBER 1 AND ITS RESULT"/>
       {act(3)}
-      <StudyMeasures label="WHAT THE 1964 PAGE PRINTS, AND WHAT THIS PRINTS" items={[
-        { label: "PROGRAM 1 / HERE 1.57970004", value: "1.5797", detail: "Average of the logarithms of 1 to 100." },
-        { label: "PROGRAM 3 / HERE .837585449", value: ".837585", detail: "Root of a function, by halving the step." },
-        { label: "PROGRAM 3, CHANGED / HERE .69317627", value: ".693176", detail: "The manual changes line 30 and prints a new result." },
-      ]} note="The large figures are from the page. The 1964 system printed six figures; this prints the same numbers to more places."/>
+      <StudyMeasures label="WHAT THE 1964 PAGES PRINT" items={[
+        { label: "PROGRAM 1, P. 21", value: "1.5797", detail: "Average of the logarithms of 1 to 100. Three seconds in 1964." },
+        { label: "PROGRAM 3, P. 23", value: ".837585", detail: "Root of a function, found by halving the step." },
+        { label: "PROGRAM 3, LINE 30 CHANGED", value: ".693176", detail: "The manual changes one instruction and prints a new result." },
+      ]} note="The programs below print these figures. A later BASIC prints the same numbers to nine places: 1.57970004."/>
       {act(4)}
     </> },
-    { label: "1978", kind: "operate", children: <>
+    { label: "What is not there", kind: "operate", children: <>
       {act(5)}
-      <StudyMeasures label="BASIC COMPUTER GAMES, RUN UNCHANGED" items={[
-        { label: "LISTINGS", value: "103", detail: "From the public-domain collection of the 1978 book’s programs." },
-        { label: "LINES IN THE LONGEST", value: "425", detail: "Super Star Trek." },
-        { label: "LINES EDITED", value: "0", detail: "Every one loads and runs as it was printed." },
-      ]} note="All 103 are in the full study. Hammurabi is below."/>
+      <Excerpt src="manual-1964-program-3-change.jpg" width={1300} height={710}
+        alt="Page 23: the result of program 3, ROOT = .837585, then: we can find the root of a different function by changing a single instruction. For example, 30 DEF FNF(Z) = EXP(X) -2. New result: ROOT = .693176."
+        caption="P. 23 / “BY CHANGING A SINGLE INSTRUCTION”"/>
       {act(6)}
     </> },
-    { label: "How it runs here", children: <>
+    { label: "Checked against later BASICs", kind: "evidence", children: <>
       {act(7)}
-      <StudySequence label="A PROGRAM THAT CANNOT WAIT, MADE TO LOOK AS IF IT DOES" steps={[
-        { label: "RUN", value: "no answers yet", detail: "The program runs from line 10 until it asks its first question, and stops there." },
-        { label: "YOU TYPE", value: "20", detail: "The page keeps the line. Nothing is sent anywhere." },
-        { label: "RUN AGAIN", value: "answers: 20", detail: "From line 10 again, with the same random numbers. It prints the same, takes your 20, and stops at the second question." },
-        { label: "AND AGAIN", value: "answers: 20, 500", detail: "Each answer is one more complete run. Only the new part is new on the screen." },
-      ]} note="A ten-year game of Hammurabi is about forty runs of the program."/>
-    </> },
-    { label: "Three checks", kind: "evidence", children: <>
-      <StudyMeasures label="IN THE ORDER THEY HAPPENED" items={[
+      <StudyMeasures label="WHAT IT HAD BEEN CHECKED AGAINST" items={[
         { label: "ITS OWN TESTS", value: "88", detail: "Written by the agent that wrote the interpreter. All passed." },
-        { label: "OF 105 GAME FILES", value: "100", detail: "Loaded first time. Two files were not vintage BASIC; three needed the habits of old listings." },
-        { label: "PROGRAMS ON A SECOND INTERPRETER", value: "22", detail: "Print the same as PC-BASIC, byte for byte. It found one real mistake." },
-      ]} note="Each check was further from the agent’s own work than the one before."/>
+        { label: "GAMES FROM 1978", value: "103", detail: "From BASIC Computer Games. Every one loads and runs unchanged." },
+        { label: "PROGRAMS ON A SECOND INTERPRETER", value: "22", detail: "Print the same as PC-BASIC, byte for byte." },
+      ]} note="Every one of these is a BASIC from fourteen years or more after the manual."/>
       {act(8)}
     </> },
     { label: "Line 40", kind: "evidence", children: <>
@@ -111,7 +101,7 @@ export function BasicNotebook({ record }: { record: PublicationRecord }) {
         { label: "THE 1964 PAGE", value: "1.41421", detail: "The square root of the absolute value of −8, over 2." },
         { label: "PC-BASIC, AS GW-BASIC", value: "ERROR", detail: "“Illegal function call in 40”. In a later BASIC the square root of a negative number is an error." },
         { label: "THIS INTERPRETER, AT FIRST", value: "ERROR", detail: "“Illegal function call: SQR”, in line 40. It had been checked against later BASICs, and agreed with them." },
-      ]} note="The first is on the page above. The second is not runnable here. The third is, below: run it, then switch on 1964 ARITHMETIC."/>
+      ]} note="The first is on the page above. The second is not runnable here. The third is, below: run it, then switch on AS IN 1964."/>
       {act(10)}
     </> },
     { label: "What this does not show", children: <>

@@ -147,11 +147,11 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Mouse programming language", "Peter Grogono", "BYTE magazine", "coding agents", "reference implementations", "WebAssembly"],
  },
  "N-BASIC": {
-  subject: "Dartmouth BASIC’s 1964 manual and 1978 BASIC games, run in the browser by a Rust interpreter",
+  subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",
-  searchTitle: "Run the First BASIC Manual’s Programs (Dartmouth, 1964) in Your Browser",
-  description: "BASIC explained from its first instruction manual, with the manual’s programs and 1978 games running in WebAssembly. 103 games ran; the 1964 manual’s own example stopped at line 40.",
-  concepts: ["BASIC programming language", "Dartmouth BASIC", "BASIC Computer Games", "coding agents", "reference implementations", "WebAssembly"],
+  searchTitle: "Dartmouth BASIC: Run the 1964 Manual’s Programs in Your Browser",
+  description: "Dartmouth BASIC explained from its first instruction manual, with the manual’s programs running in WebAssembly beside the pages they were printed on. One of them stopped at line 40 on every later BASIC.",
+  concepts: ["BASIC programming language", "Dartmouth BASIC", "Dartmouth time-sharing", "coding agents", "reference implementations", "WebAssembly"],
  },
  "N-ATTRIBUTION": {
   subject: "Coding-agent guardrails and Git attribution policy in CI",
