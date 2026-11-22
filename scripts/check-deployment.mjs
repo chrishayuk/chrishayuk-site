@@ -253,12 +253,17 @@ assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
 assert.ok(home.body.includes('href="/notebook?collection=languages"'), 'home offers the Languages collection');
 const languages=await request("/notebook?collection=languages");
-assert.ok(languages.body.includes('data-collection-play="/demos/mouse"'), 'Languages collection links to the Mouse playground');
+for (const play of ["/demos/mouse", "/demos/basic"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
 assert.ok((await request("/notebook/the-port-matched-the-reference-was-wrong")).body.includes('href="/demos/mouse"'), 'Mouse note links to the playground');
 const mouse=await request("/demos/mouse");
 assert.equal(mouse.status,200);
 assert.match(mouse.body,/Mouse interpreter/);
 assert.match(mouse.body,/name="robots" content="noindex, follow"/);
+const basic=await request("/demos/basic");
+assert.equal(basic.status,200);
+assert.match(basic.body,/BASIC interpreter/);
+assert.match(basic.body,/name="robots" content="noindex, follow"/);
+for (const asset of ["/demos/basic/chuk-basic.wasm","/demos/basic/worker.js","/demos/basic/session.js","/demos/basic/wasi.js","/demos/basic/examples.json","/demos/basic/scans/p01-preface.jpg","/media/notebook/basic/manual-1964-title.jpg"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/demos/mouse/mouse.wasm","/demos/mouse/worker.js","/demos/mouse/wasi.js","/demos/mouse/examples.json"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.mp4","/media/notebook/address.mp4","/media/notebook/stills/HJlWDSyDcD4-156.webp","/media/notebook/stills/HJlWDSyDcD4-286.webp","/media/notebook/stills/HJlWDSyDcD4-434.webp","/media/notebook/stills/HJlWDSyDcD4-1222.webp"]) {
   const response=await request(asset);
