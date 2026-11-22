@@ -16,7 +16,7 @@ export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/notebook/the-ai-left-its-knowledge-didnt": { date: "2026-09-25", reason: "Reading edition simplifies recorded routing figures, groups supporting methods and uses shared HAUSE figure motion; manuscript and evidence unchanged." },
  "/thread/machines": { date: "2026-09-15", reason: "Eight experimental premises, a cinematic threshold study and distinct maintenance links to the key-world limit and routing-world persistence." },
  "/thread/agent-ecology": { date: "2026-09-15", reason: "Cinematic inheritance study and written-descendant preview; closing question now reflects population renewal and guarded repair." },
- "/notebook": { date: "2026-09-16", reason: "Agent Ecology entrance shares the programme’s persistence question." },
+ "/notebook": { date: "2026-11-22", reason: "Languages collection: old programming languages rebuilt from their printed listings, with a link to each playground." },
  "/notebook/archive": { date: "2026-09-15", reason: "Complete notebook archive with programme and text filters." },
  "/notebook/a-result-can-look-relevant-without-looking-usable": { date: "2026-09-15", reason: "Reading edition explains why recognition and competitive selection needed separate tests; published manuscript unchanged." },
  "/notebook/the-tool-was-not-the-problem": { date: "2026-09-15", reason: "Opening states the mechanism-competence question before the task details." },
@@ -24,7 +24,7 @@ export const pageUpdates: Record<string, { date: string; reason: string }> = {
  "/notebook/the-page-could-ask-it-couldnt-authorise": { date: "2026-09-15", reason: "Opening states the competing sources of permission and task necessity." },
  "/notebook/does-an-invitation-count-as-permission": { date: "2026-09-15", reason: "Explains why later permission controls followed the original reward comparison." },
  "/research": { date: "2026-09-16", reason: "Shared programme framing and explicit open questions about selective preservation, uncertain repair and longer horizons." },
- "/": { date: "2026-09-26", reason: "A small photographic entrance to Objects joins the existing graph-driven notebook and featured articles." },
+ "/": { date: "2026-11-22", reason: "Ongoing work adds the Languages collection beside the research programmes." },
  // Notebook reading surfaces reviewed together on 26 September; manuscript dates are unchanged.
  ...Object.fromEntries([
   "/notebook/the-repairer-left-the-mechanism-kept-working",

@@ -6,7 +6,7 @@ import { FilmPoster } from "@/components/FilmPoster";
 import { Media } from "@/components/Media";
 import { previewFor } from "@/components/YouTubeCollection";
 import { latestVideo, latestMoe, videoPath, durationLabel } from "@/lib/youtube";
-import { homeResultProgrammes, researchProgrammes, shortDate } from "@/lib/publication-index";
+import { homeResultProgrammes, ongoingProgrammes, shortDate } from "@/lib/publication-index";
 import { HOUSE_WORK } from "@/lib/house";
 import cell80Preview from "@/lib/data/cell80-home-preview.json";
 import { HomeNotebook, FeaturedArticles } from "@/components/HomeNotebook";
@@ -54,7 +54,7 @@ export default function Home() {
     </section>
     <section id="current-programmes" className="edition-section edition-programmes" data-scene="programmes" aria-labelledby="programmes-heading">
       <h2 id="programmes-heading">Ongoing work</h2>
-      <nav aria-label="Research programmes">{researchProgrammes.map(programme => <Link href={programme.href} key={programme.id}><span>{programme.title}</span><span>{programme.question}</span></Link>)}</nav>
+      <nav aria-label="Ongoing work">{ongoingProgrammes.map(programme => <Link href={programme.href} key={programme.id}><span>{programme.title}</span><span>{programme.question}</span></Link>)}</nav>
     </section>
     <FeaturedArticles/>
     <section id="appearances" className="edition-section edition-conversation" data-scene="appearances" aria-labelledby="appearances-heading">
