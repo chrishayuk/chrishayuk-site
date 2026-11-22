@@ -275,6 +275,8 @@ test("unlisted previews resolve at their own URL and are absent from every listi
  assert.ok(allRecords.filter(r=>!isListed(r)).every(r=>!canonicalPaths().includes(recordPath(r))));
  const page = await readFile(new URL("../components/RecordPage.tsx", import.meta.url), "utf8");
  assert.match(page, /UNLISTED PREVIEW · NOT PUBLISHED/);
+ // Notebook pages have no record header; the notice must stand on them too.
+ assert.match(page, /codexEdition \? unlistedNotice :/);
  const route = await readFile(new URL("../app/[section]/[slug]/page.tsx", import.meta.url), "utf8");
  assert.match(route, /visibility==="unlisted"\?\{\.\.\.meta,robots:\{index:false,follow:false\}\}/);
  assert.match(await readFile(new URL("../lib/graph.ts", import.meta.url), "utf8"), /demoStudies\.filter\(s=>s\.visibility!=="unlisted"\)/);

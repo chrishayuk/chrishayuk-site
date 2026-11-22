@@ -404,6 +404,7 @@
 }
 .unlisted-banner{border:1px solid var(--accent);padding:20px 22px;margin:32px 0 0;max-width:820px;display:grid;gap:10px}
 .unlisted-banner>.record-voice{font-size:9px;color:var(--accent)}
+.unlisted-banner-notebook{margin:32px clamp(22px,4vw,72px) 0;width:auto}
 .unlisted-banner>p:not(.record-voice){font-size:13px;line-height:1.8;max-width:700px}
 .notebook-record .unlisted-banner{margin-top:38px}
 
