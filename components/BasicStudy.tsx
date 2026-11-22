@@ -21,6 +21,8 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 type Dialect = "microsoft" | "dartmouth";
 type Example = {
   name: string; title: string; input: boolean; program: string;
+  /** The heading it is listed under when every program is offered. */
+  group?: string;
   /** The arithmetic the program was written for; absent means later BASICs. */
   dialect?: Dialect;
   /** A page of the 1964 manual, and crops of it, under scans/. */
@@ -58,11 +60,14 @@ function statusLine(outcome: Outcome | null, busy: boolean) {
  * @param example  the program to show first
  * @param choose   offer the other examples too
  * @param arithmetic  start a 1964 program in "later" arithmetic, to see it stop
+ * @param source   a program written into the page, in place of a listed example
  */
-export function BasicStudy({ example, choose = false, arithmetic }: { example?: string; choose?: boolean; arithmetic?: "later" }) {
+export function BasicStudy({ example, choose = false, arithmetic, source }: { example?: string; choose?: boolean; arithmetic?: "later"; source?: { title: string; program: string } }) {
+  const inlineTitle = source?.title;
+  const inlineProgram = source?.program;
   const [examples, setExamples] = useState<Example[]>([]);
-  const [current, setCurrent] = useState<Example | null>(null);
-  const [program, setProgram] = useState("");
+  const [current, setCurrent] = useState<Example | null>(inlineProgram === undefined ? null : { name: "inline", title: inlineTitle ?? "", input: false, program: inlineProgram });
+  const [program, setProgram] = useState(inlineProgram ?? "");
   const [dartmouth, setDartmouth] = useState(false);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [busy, setBusy] = useState(false);
@@ -95,6 +100,8 @@ export function BasicStudy({ example, choose = false, arithmetic }: { example?: 
 
   useEffect(() => {
     let cancelled = false;
+    // a program written into the page is already showing
+    if (inlineProgram !== undefined) return () => { worker.current?.terminate(); };
     loadExamples().then(list => {
       if (cancelled) return;
       setExamples(list);
@@ -102,7 +109,7 @@ export function BasicStudy({ example, choose = false, arithmetic }: { example?: 
       show(list.find(candidate => candidate.name === wanted) ?? list[0], arithmetic === "later");
     }).catch(() => setFailed(true));
     return () => { cancelled = true; worker.current?.terminate(); };
-  }, [example, arithmetic, show]);
+  }, [example, arithmetic, show, inlineProgram]);
 
   useEffect(() => { if (pane.current) pane.current.scrollTop = pane.current.scrollHeight; }, [outcome]);
   useEffect(() => { if (outcome?.status === "waiting" && !busy) typing.current?.focus({ preventScroll: true }); }, [outcome, busy]);
@@ -176,10 +183,13 @@ export function BasicStudy({ example, choose = false, arithmetic }: { example?: 
     <div className="basic-bench">
       <div className="basic-bar">
         {choose ? <label>Program<select value={current?.name ?? ""} onChange={event => { const next = examples.find(candidate => candidate.name === event.target.value); if (next) show(next, false); }}>
-          {examples.map(candidate => <option key={candidate.name} value={candidate.name}>{candidate.title}</option>)}
+          {[...new Set(examples.map(candidate => candidate.group ?? "Programs"))].map(group => <optgroup key={group} label={group}>
+            {examples.filter(candidate => (candidate.group ?? "Programs") === group).map(candidate => <option key={candidate.name} value={candidate.name}>{candidate.title}</option>)}
+          </optgroup>)}
         </select></label> : <p className="record-voice basic-title">{current?.title.toUpperCase()}</p>}
         <button type="button" className="basic-run" onClick={run} disabled={busy || !current}>RUN</button>
         <button type="button" onClick={stop} disabled={!busy && !waiting}>STOP</button>
+        {current && program !== current.program && <button type="button" onClick={() => show(current, arithmetic === "later")}>RESET</button>}
         {current?.dialect === "dartmouth" && <label className="basic-switch"><input type="checkbox" checked={dartmouth} onChange={event => setDartmouth(event.target.checked)}/> 1964 ARITHMETIC</label>}
         <span className="record-voice basic-status" aria-live="polite">{statusLine(outcome, busy)}</span>
       </div>

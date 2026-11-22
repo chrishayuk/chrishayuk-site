@@ -259,7 +259,7 @@ const basic=await request("/demos/basic");
 assert.equal(basic.status,200);
 assert.match(basic.body,/BASIC interpreter/);
 assert.match(basic.body,/name="robots" content="noindex, follow"/);
-for (const asset of ["/demos/basic/chuk-basic.wasm","/demos/basic/worker.js","/demos/basic/session.js","/demos/basic/wasi.js","/demos/basic/examples.json","/demos/basic/scans/p01-preface.jpg"]) assert.equal((await request(asset)).status,200,asset);
+for (const asset of ["/demos/basic/chuk-basic.wasm","/demos/basic/worker.js","/demos/basic/session.js","/demos/basic/wasi.js","/demos/basic/examples.json","/demos/basic/scans/p01-preface.jpg","/media/notebook/basic/manual-1964-title.jpg"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/demos/mouse/mouse.wasm","/demos/mouse/worker.js","/demos/mouse/wasi.js","/demos/mouse/examples.json"]) assert.equal((await request(asset)).status,200,asset);
 for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.mp4","/media/notebook/address.mp4","/media/notebook/stills/HJlWDSyDcD4-156.webp","/media/notebook/stills/HJlWDSyDcD4-286.webp","/media/notebook/stills/HJlWDSyDcD4-434.webp","/media/notebook/stills/HJlWDSyDcD4-1222.webp"]) {
   const response=await request(asset);
