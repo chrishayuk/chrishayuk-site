@@ -164,7 +164,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Replaying the console sessions printed in RAND’s JOSS papers of 1964–65 on a reconstruction built from those papers with a coding agent",
   question: "How much of a conversation survives on paper?",
   searchTitle: "In 1965, the Computer Learned to Say I: JOSS, Rebuilt and Replayed Against Its Original Pages",
-  description: "RAND’s JOSS, a computer you talked to at a typewriter, rebuilt from its 1964–65 papers with a coding agent. In 1965 it began saying I, to feel like a person. Its original sessions replay: 762 of 767 lines match. Sit at the typewriter in your browser.",
+  description: "RAND’s JOSS, a computer you talked to at a typewriter, rebuilt from its 1964–65 papers with a coding agent. In 1965 it began saying I, to feel like a person. Its original sessions replay: all 767 lines match, the last five once its own log routine is followed. Sit at the typewriter in your browser.",
   concepts: ["JOSS", "J. C. Shaw", "JOHNNIAC", "RAND Corporation", "time-sharing", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
  "N-TURING-ACE": {
