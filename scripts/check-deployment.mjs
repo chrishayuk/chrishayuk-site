@@ -172,7 +172,7 @@ assert.match(stateStudy.body,/exhibition-comparison-panels/);
 const addressStudy = await request("/notebook/reading-by-address");
 assert.match(addressStudy.body,/hause-study-sequence/);
 assert.match(addressStudy.body,/Cross-relation/);
-assert.equal(graph.coverage.films, 242);
+assert.equal(graph.coverage.films, 246);
 assert.equal(graph.nodes.find(n=>n.id==="HOUSE-SYSTEMS").url,"https://chrishayuk.com/systems");
 assert.equal(graph.nodes.find(n=>n.id==="CATALOGUE-RECORD").url,"https://chrishayuk.com/record");
 const attributionNode=graph.nodes.find(n=>n.id==="N-ATTRIBUTION");
@@ -183,7 +183,7 @@ for(const concept of ["ai-agents","authorship","repository-policy","source-autho
   assert.ok(graph.edges.some(e=>e.from==="N-ATTRIBUTION"&&e.to===`CONCEPT-${concept}`&&e.kind==="about"),concept);
 const ask = await request("/ask?q=How%20many%20episodes%3F");
 assert.equal(ask.status, 200);
-assert.match(ask.body, /at least 47/);
+assert.match(ask.body, /at least 48/);
 const draftSearch=JSON.parse((await request("/api/search?q=operator%20knows&scope=records")).body);
 assert.ok(draftSearch.results.some(r=>r.recordId==="N-OPERATOR"&&r.basis==="draft-record"));
 const attributionSearch=JSON.parse((await request("/api/search?q=assistance%20authorship&scope=records")).body);
@@ -203,7 +203,7 @@ assert.ok(noDrafts.results.every(r=>r.publication!=="draft"));
 const note=await request("/notebook/the-operator-and-the-model");
 assert.ok(note.body.includes('id="act-1"'));
 assert.ok(note.body.includes('id="source-1"'));
-assert.equal(graph.coverage.chapters,239);
+assert.equal(graph.coverage.chapters,293);
 assert.equal(graph.coverage.acts,graph.nodes.filter(n=>n.kind==="act").length);
 for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-survive"],["N-ADDRESS","reading-by-address"]]) {
   const page=await request(`/notebook/${slug}`);
@@ -262,7 +262,7 @@ for (const asset of ["/media/notebook/map-trajectory.mp4","/media/notebook/map.m
   assert.match(response.headers["content-type"], /^(image|video)\//,asset);
 }
 const films = JSON.parse((await request("/api/records?kind=film")).body);
-assert.equal(films.count, 242);
+assert.equal(films.count, 246);
 const ibm = films.records.find(r => r.id.includes("W3iQbl5R_Jk"));
 assert.ok(ibm);
 const cite = await request(`/api/citations/${ibm.id}?format=csl-json`);
