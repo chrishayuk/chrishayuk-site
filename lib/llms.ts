@@ -3,7 +3,8 @@ import { HOUSE, HOUSE_PARTS } from "./house.ts";
 import { legibilityFor } from "./legibility.ts";
 import { threads } from "./threads.ts";
 import { entryState } from "./feeds.ts";
-import { records, recordPath, SITE } from "./records.ts";
+import { records, recordPath, SITE, getRecord } from "./records.ts";
+import { programmes } from "./publication-index.ts";
 import type { PublicationRecord } from "./types.ts";
 import { siteInvites } from "./machine/invitation.ts";
 import { declarationShapesResults, reciprocalSurfaceExists, rewardCondition } from "./machine/reward.ts";
@@ -43,6 +44,22 @@ const section = (heading: string, lines: string[]): string | null =>
 
 const of = (kind: PublicationRecord["kind"]) =>
  records.filter(record => record.kind === kind && !record.youtubeId).map(entry);
+
+/** Which note each language playground belongs to: the languages collection
+ * lists the notes and the playgrounds side by side, in the same order. */
+const playgroundNotes: Record<string, string> = { Mouse: "N-MOUSE", BASIC: "N-BASIC", "Böhm": "N-BOHM", CPL: "N-CPL", JOSS: "N-JOSS" };
+
+/** The playgrounds of the languages collection. They are tools, not records:
+ * each runs the interpreter its note was written about, in the browser, and
+ * is kept out of search results as a page; the note is the thing to cite. */
+function playgrounds(): string[] {
+ const languages = programmes.find(programme => programme.id === "languages");
+ return (languages?.play ?? []).map(play => {
+  const note = getRecord(playgroundNotes[play.name] ?? "");
+  const about = note ? ` The note: [${note.title}](${SITE}${recordPath(note)}), ${entryState(note)}.` : "";
+  return `- [${play.label}](${SITE}${play.href}): ${play.name}, ${play.year}. ${play.detail}${about}`;
+ });
+}
 
 export function llmsDocument(): string {
  const lines: (string | null)[] = [
@@ -280,6 +297,7 @@ export function llmsDocument(): string {
   `  about its machine readers without asking, and what it stores.`,
   ``,
   section("The notebook — thinking in progress", of("notebook")),
+  section("Interactive studies — the languages, running in the browser", playgrounds()),
   section("Machines / field experiments", [`- [${machineFieldMap.title}](${SITE}${machineFieldMap.path}): ${machineFieldMap.description} ${machineFieldMap.scope}`, ...records.filter(record => machineBriefs[record.id]).map(record => `- [${machineBriefs[record.id].question}](${SITE}${recordPath(record)}#in-brief): ${entryState(record)} — ${machineBriefs[record.id].result}`)]),
   section("Reading threads — editorial guides", threads.map(thread => `- [${thread.title}](${SITE}${thread.path}): Working editorial guide · V${thread.version}${meaningLine(thread.id)} — ${thread.abstract}`)),
   section("Open questions", of("question")),
