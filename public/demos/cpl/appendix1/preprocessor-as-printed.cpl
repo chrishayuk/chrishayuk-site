@@ -1,0 +1,291 @@
+|| The Preprocessor, Appendix 1 of the CPL Reference Manual (Draft), with
+|| Part 2 AS PRINTED in the CPL Working Papers of July 1966 (and with the
+|| corrections written on that copy by hand). It does not compile: see
+|| README.md, and preprocessor.cpl for the version that runs.
+||
+|| Part 3 here follows the informal definitions to the letter, including
+|| the two places where they disagree with Part 2.
+
+|| ---------------------------------------------------------------------
+|| Part 3: "A number of identifiers in Part 2 were left undefined; these
+|| are defined informally in this section." The definitions below are
+|| written for this reconstruction from those informal descriptions, and
+|| from nothing at all for the seven identifiers the appendix never
+|| mentions: CPL.Source, EndofStreamChar, Report, BigLetter, SmallLetter
+|| and the two functions of underlined letters.
+|| ---------------------------------------------------------------------
+
+let CPL.Source = 'INPUT'              || there is one input stream
+let EndofStreamChar = ''              || what Readchar gives at the end
+let Underline = String[818]           || the overstrike that underlines
+
+let rt Report[index n] be Write['*n?? Report ', n, '*n']
+
+let rec Among[string x, general l] = Null[l] -> false, Hd[l] = x -> true, Among[x, Tl[l]]
+let Starts[string x, p] = Length[x] >= Length[p] /\ Initials[Length[p], x] = p
+
+let Digit[string c] = Length[c] = 1 /\ '0' <= c <= '9'
+let Digit.Dot[string c] = Digit[c] \/ c = '.'
+let BigLetter[string c] = Length[c] = 1 /\ 'A' <= c <= 'Z'
+let SmallLetter[string c] = Length[c] = 1 /\ 'a' <= c <= 'z'
+let Letter.Digit.Dot[string c] = BigLetter[c] \/ SmallLetter[c] \/ Digit.Dot[c]
+let UnderlinedLetter[string c] = Length[c] = 2 /\ Last[c] = Underline
+let Small.UnderlinedLetter[string c] = value of
+   $( let l = First[c]
+      result is ('A' <= l <= 'Z' -> String[Index[l] + 32], l) $)
+
+let EscapeCharacter[string c] = c = '**'
+let SpecialChar[string c] = c = 'n' \/ c = 'N' -> '*n',
+                            c = 's' \/ c = 'S' -> '*s',
+                            c = 't' \/ c = 'T' -> '*t',
+                            c = 'b' \/ c = 'B' -> '*b',
+                            c
+
+let Number[string x] = Starts[x, 'K̸']
+let Name[string x] = Starts[x, 'N̸']
+let StringConstant[string x] = Starts[x, 'S̸']
+let Types = List['index', 'integer', 'real', 'double', 'complex', 'doublecomplex', 'boolean',
+                 'logical', 'longlogical', 'string', 'label', 'general', 'function', 'routine',
+                 'array', 'vector', 'matrix', 'type']
+
+|| a)
+let CanEndCommand[string x] = Number[x] \/ Name[x] \/ StringConstant[x] \/
+        Among[x, List['§̸', ']', ')', ':', 'repeat', 'break', 'return', 'rhs', 'finish']] \/ Among[x, Types]
+|| b)
+let CanStartCommand[string x] = Number[x] \/ Name[x] \/ StringConstant[x] \/
+        Among[x, List['pos', 'neg', '+', '-', '(', '§', 'if', 'unless', 'while', 'until', 'test', 'for',
+                      'forext', 'break', 'finish', 'return', 'resultis', 'valof', 'refof', 'goto']]
+|| c)
+let CannotProceedCommand[string x] = Among[x, List[';', '§', 'do', ':', 'or']]
+|| d)
+let MustStartCommand[string x] = Among[x, List['if', 'unless', 'while', 'until', 'test', 'for', 'forext',
+                                               'return', 'break', 'finish', 'resultis', 'goto']]
+|| e)
+let MonadicTransformation[string l, x] =
+        x ~= '+' /\ x ~= '-' -> x,
+        Number[l] \/ Name[l] \/ Among[l, List[']', '§̸', ')']] -> x,
+        x = '+' -> 'pos', 'neg'
+|| f)
+let Standard[string x] = value of
+   $( switch on x into
+      $( case 'are': case 'bothbe': result is 'allbe'
+         case 'is': result is 'be'
+         case 'constant': result is 'const'
+         case 'then': case 'thendo': case 'dodo': result is 'do'
+         case 'forexternal': result is 'forext'
+         case 'goto': result is 'go'
+         case 'ordo': case 'else': case 'otherwise': result is 'or'
+         case 'recursive': result is 'rec'
+         case 'reference': result is 'ref'
+         case 'referenceof': result is 'refof'
+         case 'resultbe': result is 'resultis'
+         case 'routine': result is 'rt'
+         case 'thru': result is 'to'
+         case 'value': result is 'val'
+         case 'valueof': result is 'valof'
+         default: result is x $) $)
+|| g)
+let Combinable[string x] = Among[x, List['all', 'd', 'do', 'double', 'for', 'go', 'long', 'or', 'ref',
+                                         'result', 'repeat', 'val']]
+|| h) "the basic symbol set of canonical CPL" is taken to be these words.
+let Canonical = List['let', 'be', 'allbe', 'all', 'both', 'and', 'in', 'where', 'rec', 'function', 'rt',
+                     'val', 'ref', 'const', 'fixed', 'free', 'load', 'update', 'fix', 'rhs', 'valof', 'refof',
+                     'resultis', 'if', 'unless', 'do', 'test', 'or', 'while', 'until', 'repeat', 'repeatwhile',
+                     'repeatuntil', 'for', 'forext', 'step', 'to', 'go', 'break', 'return', 'finish',
+                     'jumpon', 'into', 'case', 'default', 'therest', 'true', 'false', 'comma', 'sic',
+                     Members[Types]]
+let Standardizable[string x] = Among[Standard[x], Canonical]
+
+|| ---------------------------------------------------------------------
+|| Part 2: The Preprocessor Program.
+|| ---------------------------------------------------------------------
+
+let c, s, s' all be string
+let LastOutput, InputBuffer both = ''  || i.e. the empty string
+let TerminatorPending, TerminatorSuppressed = false, true
+
+let rt NextChar[string ref c] be
+   $(N.ch  c := InputBuffer
+           Readchar[CPL.Source, InputBuffer]
+           if c = '*|' = InputBuffer do
+              $( until c = '*n' do Readchar[CPL.Source, c]
+                 Readchar[CPL.Source, InputBuffer] $)N.ch
+
+let rt Output[string x] be
+   $(O.p  if x = 'c̲' do $( TerminatorSuppressed := true
+                           return $)
+
+          if TerminatorPending /\ ~TerminatorSuppressed /\
+             CanEndCommand[LastOutput] /\ CanStartCommand[x] do
+                $( Write['; ø']
+                   LastOutput := ';' $)
+          TerminatorPending, TerminatorSuppressed both := false
+          x := MonadicTransformation[LastOutput, x]
+
+          if MustStartCommand[x] /\ CannotProceedCommand[LastOutput]
+                do $( Write['do ø']
+                      LastOutput := 'do' $)
+
+          Write[x <=> 'ø']
+          LastOutput := x  $)O.p
+
+let rt ReadTag[string ref s] be
+   $(R.T  s := ''
+          $( NextChar[c]
+             unless Letter.Digit.Dot[c] break
+             s := s <=> c $) repeat
+
+          until c ~= '*'' do $( s := s <=> c
+                                NextChar[c] $)R.T.
+
+let rt ReadUnderlinedWord[string ref s] be
+   $(R.U.W  s := c
+            while UnderlinedLetter[c] do
+               $( s := s <=> Small.UnderlinedLetter[c]
+                  NextChar[c] $)R.U.W.
+
+let rt ReadSpaces[string ref c] be
+   $(R.S. $( NextChar[c]
+           if c ~= '*s' return $) repeat  $)R.S
+
+let rec rt Preprocessor[string BracketType, BracketTag,
+                        label MismatchReturn] be
+
+ $(P.P  Switch: jump on c into
+   $( case '§':   ReadTag[s]
+                  Output['§']
+                  Proprocessor['§', s, Mismatch]
+                  goto Switch
+
+      case '§̸':   ReadTag[s]
+                  if BracketType ~= '§' do Report[1]
+      Mismatch:   Output['§̸']
+                  if BracketTag ~= s goto MismatchReturn
+                  return
+
+      case ';':   case '*n':
+                  TerminatorPending := true
+                  NextChar[c]
+                  goto Switch
+
+      case '(':   case '[': case '→':
+                  Output[c]; s := c
+                  NextChar[c]
+                  Preprocessor[s, '', Error]
+      Error:      goto Switch
+
+      case ')'    unless BracketType = '(' do Report[2]
+                  Output[c]; NextChar[c]
+                  return
+
+      case ']':   unless BracketType = '[' do Report[3]
+                  Output[c]; NextChar[c]
+                  return
+
+      case ',':   if BracketType = '→' do
+                     $( Output['comma']; NextChar[c]
+                        return $)
+                  ReadSpaces[c]
+                  unless c = '.' do $( Output[',']; NextChar[c]
+                                       goto Switch $)
+                  NextChar[c]
+                  if Digit[c] do
+                     $(Dgt  Output[',']
+                            s := '.'
+                            while Digit[c] do $( s := s <=> c
+                                                 NextChar[c] $)
+                            Output['K̸' <=> s]
+                            goto Switch  $)Dgt
+                  if c = '*s' do ReadSpaces[c]
+                  if c ~= '.' do Report[4]
+                  while c = '.' do ReadSpaces[c]
+                  unless c = ',' do Report[5]
+                  Output['dot string']; NextChar[c]
+                  goto Switch
+
+      case '*'':  s := ''
+                  NextChar[c]
+                  until c = '*'' do
+                     $(1  test EscapeCharacter[c]
+                             thendo $( NextChar[c]
+                                       s := s <=> SpecialChar[c] $)
+                             or do s := s <=> c
+                          NextChar[c]  $)1
+                  Output['S̸' <=> s]; NextChar[c]
+                  goto Switch
+
+      case '<':   NextChar[c]
+                  if c = '<' do $( Output['<<']; NextChar[c]
+                                   goto Switch $)
+                  if c = '=' do
+                     $( NextChar[c]
+                        if c = '>' do $( Output['<=>']; NextChar[c]
+                                         goto Switch $)
+                        Report[6] $)
+                  Output['<']
+                  goto Switch
+
+      case '>':   NextChar[c]
+                  if c = '>' do $( Output['>>']; NextChar[c]
+                                   goto Switch $)
+                  Output['>']
+                  goto Switch
+
+      case ':':   NextChar[c]
+                  if c = '=' do $( Output[':=']; NextChar[c]
+                                   goto switch $)
+                  Output[':']
+                  goto Switch
+
+      case '*s':  case '_':   NextChar[c]
+                              goto Switch
+
+      the rest:   if BigLetter[c] do
+                     $( s := c
+                        ReadTag[s']
+                        Output['N̸' <=> s <=> s']
+                        goto Switch $)
+                  if SmallLetter[c] do
+                     $( s := c
+                        NextChar[c]
+                        while c = '*'' do $( s := s <=> c
+                                             NextChar[c] $)
+                        Output['N̸' <=> s]
+                        goto Switch $)
+
+                  if Digit.Dot[c] do
+                     $( s := ''
+                        while Digit.Dot[c] do $( s := s <=> c
+                                                 NextChar[c] $)
+                        Output['K̸' <=> s]
+                        goto Switch $)
+
+                  if UnderlinedLetter[c] do
+                     $(1  ReadUnderlinedWord[s]
+                          s := Standard[s]
+                          while Combinable[s] do
+                             $(2  if c = '*s' do ReadSpaces[c]
+                                  unless UnderlinedLetter[c] do
+                                     $( Output[s]
+                                        goto Switch $)
+                                  ReadUnderlinedWord[s']
+                                  s' := Standard[s']
+                                  test Standardizable[s <=> s']
+                                     thendo s := standard[s <=> s']
+                                     ordo $( Output[s]
+                                             s := s' $)2
+                          Output[s]
+                          goto Switch  $)1
+
+                  if c = EndofStreamChar do
+                     $( unless BracketType = 'StreamStart' do
+                           Report[7]
+                        return $)
+                  Output[c]
+                  NextChar[c]
+                  goto Switch  $)P.P
+
+|| Main program
+LastOutput, InputBuffer both := ''
+NextChar[c]; NextChar[c]
+Preprocessor['StreamStart', '', Error]; Error: finish

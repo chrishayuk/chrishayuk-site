@@ -762,5 +762,42 @@
         "note": "The counts in section 06 are the agent’s, as reported. The programs from the manual were run again for this note, and can be run above."
       }
     ]
+  },
+  {
+    "id": "N-CPL",
+    "version": "1.0",
+    "recordHash": "56bc934517daa5056aabc84d63360931e0f421235843df5afebe110f2d06f319",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication: the preprocessor of Appendix 1 of the 1966 CPL Working Papers run on an interpreter built from those papers, the eleven corrections it needed, and the limits of one reading by one agent"
+    },
+    "sources": [
+      {
+        "title": "University of London Institute of Computer Science and The Mathematical Laboratory, Cambridge, “CPL Working Papers”, technical report, July 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf",
+        "note": "Appendix 1, “The Preprocessor”, begins on page 120 of the PDF. The program is Part 2, on pages 2 to 6 of the appendix; the informal definitions are Part 3, on pages 6 and 7."
+      },
+      {
+        "title": "“CPL Elementary Programming Manual”, Edition II, Cambridge, January 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Elementary_Programming_Manual.pdf"
+      },
+      {
+        "title": "D. W. Barron, J. N. Buxton, D. F. Hartley, E. Nixon and C. Strachey, “The main features of CPL”, The Computer Journal 6, 1963",
+        "url": "https://www.ancientgeek.org.uk/CPL/The_Main_Features_of_CPL.pdf"
+      },
+      {
+        "title": "Martin Richards, “How BCPL evolved from CPL”",
+        "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+      },
+      {
+        "title": "chrishayuk/cpl",
+        "url": "https://github.com/chrishayuk/cpl",
+        "note": "The interpreter, its tests, 73 example programs, a tutorial, and the preprocessor as printed and corrected with a detail of the page for each slip."
+      },
+      {
+        "title": "Coding-agent session, 22 November 2026",
+        "note": "The interpreter, the transcription of Appendix 1 and the functions it leaves informal were written in this session. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]
