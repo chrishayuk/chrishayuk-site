@@ -215,7 +215,7 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
 const systems=await request("/systems");
 assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
 assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/turing-ace"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/turing-ace", "/demos/ipl-v"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
 const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
@@ -254,7 +254,7 @@ assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
 assert.ok(home.body.includes('href="/notebook?collection=languages"'), 'home offers the Languages collection');
 const languages=await request("/notebook?collection=languages");
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/turing-ace"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/turing-ace", "/demos/ipl-v"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
 assert.ok((await request("/notebook/the-port-matched-the-reference-was-wrong")).body.includes('href="/demos/mouse"'), 'Mouse note links to the playground');
 const mouse=await request("/demos/mouse");
 assert.equal(mouse.status,200);
@@ -290,7 +290,7 @@ assert.match(joss.body,/data-joss-editor/,"the playground uses the language-awar
 assert.match(joss.body,/data-joss-typewriter/,"the playground opens on the typewriter");
 for (const asset of ["/demos/joss/joss.wasm","/demos/joss/worker.js","/demos/joss/session.js","/demos/joss/typewriter.js","/demos/joss/wasi.js","/demos/joss/examples.json","/demos/joss/transcripts.json","/demos/joss/joss-lsp.wasm","/demos/joss/lsp-worker.js","/media/notebook/joss/p-3149-figure-2.jpg"]) assert.equal((await request(asset)).status,200,asset);
 assert.ok((await request("/notebook/762-lines-matched-five-did-not")).body.includes('href="/demos/joss"'), 'JOSS note links to the playground');
-// IPL-V: the playground, and its working note, which is an unlisted preview.
+// IPL-V: the playground, and its working note, published and listed.
 const iplv=await request("/demos/ipl-v");
 assert.equal(iplv.status,200);
 assert.match(iplv.body,/The IPL computer/);
@@ -298,9 +298,9 @@ assert.match(iplv.body,/name="robots" content="noindex, follow"/);
 for (const asset of ["/demos/ipl-v/iplv.wasm","/demos/ipl-v/examples.json","/media/notebook/ipl-v/fig-2-trace-of-f1.jpg","/media/notebook/ipl-v/fig-3-trace-of-r3.jpg","/media/notebook/ipl-v/fig-11-j101.jpg"]) assert.equal((await request(asset)).status,200,asset);
 const iplvNote=await request("/notebook/its-manual-printed-a-trace");
 assert.equal(iplvNote.status,200);
-assert.match(iplvNote.body,/UNLISTED PREVIEW · NOT PUBLISHED/,"the IPL-V note says it is a preview");
-assert.match(iplvNote.body,/name="robots" content="noindex, nofollow"/);
-assert.ok(!(await request("/sitemap.xml")).body.includes("its-manual-printed-a-trace"),"the IPL-V preview is not in the sitemap");
+assert.ok(!iplvNote.body.includes("UNLISTED PREVIEW"),"the IPL-V note is no longer a preview");
+assert.ok(!iplvNote.body.includes('content="noindex, nofollow"'),"the IPL-V note may be indexed");
+assert.ok((await request("/sitemap.xml")).body.includes("its-manual-printed-a-trace"),"the IPL-V note is in the sitemap");
 const bohm=await request("/demos/bohm");
 assert.equal(bohm.status,200);
 assert.match(bohm.body,/Böhm’s language/);
