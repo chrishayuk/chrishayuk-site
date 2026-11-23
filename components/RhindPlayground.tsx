@@ -8,8 +8,8 @@ import { check, loadExamples, loadPapyrus, type Checked, type Example, type Page
 
 /**
  * The Rhind Mathematical Papyrus, run, in the page: every page as
- * transcribed, checked by rhind, with the scribe's wrong figures marked and
- * the slips that would make them; the transcription in an editor coloured and
+ * transcribed, checked by rhind, with the figures that disagree with the
+ * working marked and the explanations that fit them; the transcription in an editor coloured and
  * checked by rhind's language server; and a box that works a multiplication
  * or division the scribe's way.
  *

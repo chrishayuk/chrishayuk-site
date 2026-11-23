@@ -41,7 +41,7 @@ export const programmes = [
       { label: "Turing ACE playground", href: "/demos/turing-ace", name: "Turing’s ACE", year: "1945", detail: "The computer Alan Turing proposed at the National Physical Laboratory, with the programs from his report." },
       { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
       { label: "IPL-V playground", href: "/demos/ipl-v", name: "IPL-V", year: "1964", detail: "The list-processing machine of the IPL-V manual, the language of the first artificial intelligence programs. Step it and watch storage change." },
-      { label: "Rhind Papyrus playground", href: "/demos/rhind-papyrus", name: "Rhind Papyrus", year: "c. 1550 BCE", detail: "The working of the Rhind Mathematical Papyrus, every figure checked with the scribe’s own operations. Choose a wrong figure and see what slip would make it." },
+      { label: "Rhind Papyrus playground", href: "/demos/rhind-papyrus", name: "Rhind Papyrus", year: "c. 1550 BCE", detail: "The working of the Rhind Mathematical Papyrus, about 1550 BCE, checked figure by figure against itself. Choose a line that disagrees and see what the working gives." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",

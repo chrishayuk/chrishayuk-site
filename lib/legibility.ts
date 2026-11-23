@@ -189,12 +189,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["IPL-V", "Information Processing Language", "Allen Newell", "Herbert Simon", "J. C. Shaw", "Logic Theorist", "list processing", "history of artificial intelligence", "coding agents", "verification", "WebAssembly"],
  },
  "N-RHIND-PAPYRUS": {
-  subject: "Running the working of the Rhind Mathematical Papyrus with only the scribe’s own operations, on a transcription from Chace’s and Peet’s editions made with a coding agent, and comparing every figure with what the scribe wrote",
-  question: "When a copy’s working disagrees with its figures, can you tell a slip of the pen from a slip of the arithmetic?",
-  searchTitle: "The Rhind Mathematical Papyrus, Run: Every Figure of the Scribe’s Working Checked with His Own Operations",
-  description: "Every figure the scribe Ahmose wrote in the Rhind papyrus’s working, about 1550 BCE, worked again by doubling, halving and the papyrus’s own table of 2 ÷ n. Of 965 lines, 838 are right; the commonest slip is the sign for “part” left off. Check any page in your browser.",
+  subject: "Checking the working of the Rhind Mathematical Papyrus exactly against itself, on a transcription from Chace’s and Peet’s editions made by a coding agent and reviewed by a second model",
+  question: "Where a copy’s figures and its working part, how much of the difference is on the papyrus?",
+  searchTitle: "A Scribe Wrote 15 Where His Working Says 14: The Rhind Mathematical Papyrus, Checked Figure by Figure",
+  description: "The Rhind Mathematical Papyrus, about 1550 BCE, writes out its working. Transcribed by a coding agent and checked exactly, 845 of 956 lines agree with it; most of the rest is a dropped part sign, which Chace says need not be an error, or figures the editions already note. Check any page in your browser.",
   concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
+
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",

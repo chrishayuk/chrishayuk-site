@@ -9,22 +9,24 @@ function ink(text: string): ReactNode[] {
     piece.startsWith("{") && piece.endsWith("}") ? <span key={i} className="rh-red-ink">{piece.slice(1, -1)}</span> : piece);
 }
 
-/** What rhind says about a wrong figure: the message, whether it was carried, the slips that fit. */
+/** What rhind says about a figure that disagrees with the working: the message, whether it was
+ * carried, and the explanations that fit (ways it could have come to differ, not its cause). */
 export function RhindFinding({ found, note }: { found: Finding[]; note?: string }) {
   return <div className="rh-detail" aria-live="polite">
     {found.map((f, i) => <Fragment key={i}>
       <p className="rh-detail-message">{f.message}</p>
-      {f.carried != null && <p>{f.carried ? "The error is carried into what follows." : "What follows is right: the error is not carried. The scribe worked from the right figure and wrote another."}</p>}
+      {f.carried != null && <p>{f.carried ? "The total after it is made from the figure as written." : "The total after it is made from the right figure, not the one written."}</p>}
       {f.slips.length
-        ? <><p>A slip that would make it:</p><ul>{f.slips.map((s, j) => <li key={j}><b>{s.model}</b>: {s.explanation}</li>)}</ul></>
-        : <p>No single slip of the kinds modelled turns the right figure into this one.</p>}
+        ? <><p>Explanations that fit (not the cause):</p><ul>{f.slips.map((s, j) => <li key={j}><b>{s.model}</b>: {s.explanation}</li>)}</ul></>
+        : <p>None of the explanations rhind models fits.</p>}
     </Fragment>)}
     {note && <p className="rh-detail-note">Transcriber’s note: {note}</p>}
   </div>;
 }
 
 /**
- * A page of the papyrus, checked: each figure the scribe wrote with ✓ or ✗
+ * A page of the papyrus, checked: each figure the scribe wrote that the notation
+ * can hold, with ✓ or ✗
  * in the margin, and red ink in red. A wrong line can be chosen, and what
  * rhind found there is shown under the page. Rows rhind worked itself, for
  * a Multiply or Reckon with no working under it, are set in italic.
@@ -64,8 +66,8 @@ export function RhindChecked({ run, label, first = true }: { run: Checked; label
   </div>;
 }
 
-/** The count under a page: figures checked, right, wrong. */
+/** The count under a page: figures checked, how many agree with the working, how many do not. */
 export function RhindCount({ run }: { run: Checked }) {
   const wrong = run.checked - run.right;
-  return <span className="rh-count"><b>{run.checked}</b> {run.checked === 1 ? "figure" : "figures"} checked · <b>{run.right}</b> right · <b>{wrong}</b> wrong</span>;
+  return <span className="rh-count"><b>{run.checked}</b> {run.checked === 1 ? "figure" : "figures"} checked · <b>{run.right}</b> agree · <b>{wrong}</b> do not</span>;
 }

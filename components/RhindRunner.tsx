@@ -47,7 +47,7 @@ export function RhindWork({ question = "reckon with 6 to find 21", label = "04 /
       <input value={asked} onChange={event => setAsked(event.target.value)} aria-label="multiply A by B, or reckon with A to find B" spellCheck={false} autoCapitalize="off" autoCorrect="off"/>
       <button type="submit">WORK</button>
     </form>
-    <p className="rh-keys">Try <code>multiply 3 &apos;2 by 5</code>, <code>reckon with 6 to find 21</code> or <code>reckon with 59 to find 2</code>. There is no division: to divide, the scribe doubles the divisor until the rows can be picked to make the dividend.</p>
+    <p className="rh-keys">Try <code>multiply 3 &apos;2 by 5</code>, <code>reckon with 6 to find 21</code> or <code>reckon with 59 to find 2</code>. This is rhind’s generator, separate from the check. The papyrus divides by multiplying: the scribe doubles the divisor until the rows can be picked to make the dividend.</p>
     {rows.length > 0 && <div className={failed ? "rh-working rh-papyrus rh-working-failed" : "rh-working rh-papyrus"} aria-live="polite">
       {rows.slice(0, Math.max(shown, 1)).map((row, i) => <div key={`${round}-${i}`} className="rh-work-row">{row || " "}</div>)}
     </div>}
