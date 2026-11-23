@@ -30,7 +30,7 @@ export const programmes = [
     description: "Look inside a model’s memory. Trace how it builds an answer—and test what changes it.", href: mapThread.path,
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
-    description: "Old programming languages rebuilt from their original printed sources, checked against the page, and running in your browser.", href: "/notebook?collection=languages",
+    description: "Historical computational systems reconstructed from their original sources, tested against the surviving evidence, and made executable in your browser.", href: "/notebook?collection=languages",
     threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-NINE-CHAPTERS"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
