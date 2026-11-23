@@ -11,7 +11,7 @@ export default function Page() {
       <h1>Twelve cells,<br/><em>last in, first out.</em></h1>
       <p className="dek">GEORGE, the General Order Generator. Written by Charles Hamblin for the English Electric DEUCE at the New South Wales University of Technology, 1957–58. Running here.</p>
       <p>A G-program has no addresses. Each number or variable goes into the next empty cell of a running accumulator of twelve, and each operator works on the last cell or the last two: <strong>a b +</strong> adds a and b, and leaves the sum where a was. A program is run as soon as it is chosen. Step through it below and watch the cells fill and empty. Then try <strong>subroutine</strong>, <strong>converge</strong>, and <strong>simpson</strong>, the manual’s Example 3, which punches a quarter of each integral.</p>
-      <div className="inline-links"><Link className="text-link" href="/notebook/george">THE WORKING NOTE ↗</Link><a className="text-link" href="https://www.uraone.com/computers/deuce/deucdocs.html">THE 1958 DOCUMENTS ↗</a></div>
+      <div className="inline-links"><Link className="text-link" href="/notebook/a-handwritten-program-from-1958-runs-again">THE WORKING NOTE ↗</Link><a className="text-link" href="https://github.com/chrishayuk/george">SOURCE AND TUTORIAL ↗</a><a className="text-link" href="https://www.uraone.com/computers/deuce/deucdocs.html">THE 1958 DOCUMENTS ↗</a></div>
     </header>
     <GeorgePlayground/>
     <footer className="demo-provenance">

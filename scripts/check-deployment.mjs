@@ -327,7 +327,7 @@ assert.match(george.body,/GEORGE interpreter/);
 assert.match(george.body,/name="robots" content="noindex, follow"/);
 assert.match(george.body,/data-george-editor/,"the playground uses the language-aware editor");
 for (const asset of ["/demos/george/george.wasm","/demos/george/george-lsp.wasm","/demos/george/worker.js","/demos/george/lsp-worker.js","/demos/george/george.js","/demos/george/wasi.js","/demos/george/examples.json","/media/notebook/george/manual-p11-example-3-simpson-vector.jpg","/media/notebook/george/manual-p21-coding-table.jpg","/media/notebook/george/coding-sheet-21-sin-cos-coefficients.jpg","/media/notebook/george/flow-diagram-p22-relations-and-logic.jpg"]) assert.equal((await request(asset)).status,200,asset);
-assert.ok((await request("/notebook/george")).body.includes('href="/demos/george"'), 'GEORGE note links to the playground');
+assert.ok((await request("/notebook/a-handwritten-program-from-1958-runs-again")).body.includes('href="/demos/george"'), 'GEORGE note links to the playground');
 const bohm=await request("/demos/bohm");
 assert.equal(bohm.status,200);
 assert.match(bohm.body,/Böhm’s language/);

@@ -6,13 +6,13 @@ import type { PublicationRecord } from "./types.ts";
  * scanned manual, with its page. Every result named here comes from the george
  * repository's README, ERRATA, DECISIONS and reading notes, and can be rerun on
  * /demos/george; results from Hamblin’s own code can be rerun with
- * `george deuce george` in the repository. */
+ * `george deuce george` from github.com/chrishayuk/george. */
 export const georgeRecord: PublicationRecord = {
   id: "N-GEORGE",
-  slug: "george",
+  slug: "a-handwritten-program-from-1958-runs-again",
   kind: "notebook",
-  title: "A 1958 example punched a quarter of each integral.",
-  dek: "GEORGE, Charles Hamblin’s language for DEUCE, rebuilt from his manual with a coding agent, and checked against the flow diagrams and coding sheets of his own program.",
+  title: "A handwritten program from 1958 runs again, to the last binary digit.",
+  dek: "Charles Hamblin’s GEORGE, a stack language for the English Electric DEUCE: rebuilt from its manual with a coding agent, then his own translator transcribed from 22 coding sheets and run on a simulated DEUCE, until the two agreed word for word.",
   abstract: "A working note about rebuilding GEORGE, the General Order Generator that Charles Hamblin wrote for the English Electric DEUCE in 1957–58, from the three documents that survive: the programming manual, 52 pages of flow diagrams and 22 coding sheets. GEORGE programs are reverse Polish, with no addresses, run on a running accumulator of twelve cells. An interpreter built from the manual runs the manual’s programs, and Example 3 punches a quarter of what Simpson’s rule gives, because its coefficients are for the wrong step. Then the coding sheets, transcribed, were run as a deck of cards on a simulated DEUCE. Hamblin’s own translator runs the manual’s programs, and tracing his routines one instruction at a time brought the interpreter to the same 32-digit words as his code, for every one of 5,000 random programs. On the way it found four places where a sheet contradicts its flow diagram, and arithmetic in this version that is not what the manual says: an addition that drops a binary digit, and a multiplication that can lose the sign.",
   created: "2026-11-23",
   version: "0.1",
@@ -38,6 +38,7 @@ export const georgeRecord: PublicationRecord = {
       { href: "/demos/george?example=simpson", label: "Run Example 3 as printed — interactive study" },
       { href: "/demos/george?example=simpson-corrected", label: "Run Example 3 with 1/12" },
       { href: "/demos/george", label: "Write a G-program and step through its accumulator" },
+      { href: "https://github.com/chrishayuk/george", label: "Source, transcription, simulator and tutorial" },
       { href: "https://www.uraone.com/computers/deuce/deucdocs.html", label: "The manual, flow diagrams and coding sheets, on David Green’s DEUCE archive" },
     ] },
     { kind: "refusal", title: "WHAT THIS DOES NOT SHOW", lines: [
@@ -57,7 +58,7 @@ export const georgeRecord: PublicationRecord = {
     { title: "“UTECOM Programme GEORGE”, coding sheets, c. 1958", url: "http://uraone.com/computers/deuce/GEORGEProgramCode.pdf", note: "22 pages, handwritten DEUCE instructions. The sin and cos coefficients are on sheet 21, DL8, track 15/13." },
     { title: "David Green’s DEUCE archive, section GEORGE", url: "https://www.uraone.com/computers/deuce/deucdocs.html", note: "Scanned from the UTECOM originals and supplied by Robin Vowels. Downloaded on 22 November 2026." },
     { title: "English Electric, “DEUCE Programming Manual”, May 1956; “DEUCE Logical Design Manual, Part I”, NS-y-37/11-57", url: "https://www.uraone.com/computers/deuce/deucdocs.html", note: "The simulator’s sources. The multiplier is chapter 10 of the Logical Design Manual." },
-    { title: "george, the reconstruction", note: "The interpreter, the DEUCE simulator, the transcription of the coding sheets, its language server, 16 example programs, a tutorial, the errata, the decisions, the reading notes and an independent review. Not yet public." },
+    { title: "chrishayuk/george", url: "https://github.com/chrishayuk/george", note: "The interpreter, the DEUCE simulator, the transcription of the coding sheets, the word-for-word tests against Hamblin’s code, 16 example programs, a tutorial, a language server, the errata, the decisions, the reading notes and an independent review." },
     { title: "Coding-agent sessions, November 2026", note: "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george." },
   ],
 };
