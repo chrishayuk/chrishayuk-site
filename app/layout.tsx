@@ -19,6 +19,7 @@ import "./notebook-scene.css";
 import "@chrishayuk/hause/exhibition.css";
 import "./notebook-visuals.css";
 import "./notebook-studies.css";
+import "./note-guides.css";
 import "./address-build.css";
 import "./mouse-demo.css";
 import "./bohm-demo.css";
