@@ -1,0 +1,123 @@
+/* /demos/nine-chapters: chapter 8 of the Nine Chapters on a counting board. Follows rhind-papyrus-demo.css,
+   and the stage of the nine-chapters repository's web/index.html. */
+.nc-lab{margin:0 var(--margin) 75px;border-block:1px solid var(--rule);padding:32px 0 44px}
+.nc-lab .record-voice{display:block;font-size:10px;margin-bottom:12px}
+.nc-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:18px 0 18px}
+.nc-bar label{display:flex;flex-direction:column;gap:10px;min-width:0;font:10px/1.5 var(--font-geist-mono);text-transform:uppercase}
+.nc-bar label.nc-pick{flex:0 1 460px}
+.nc-steps{display:flex;flex-wrap:wrap;gap:6px}
+.nc-bar select,.nc-bar button{border:1px solid var(--rule);border-radius:0;padding:13px 16px;background:var(--bg);color:var(--fg);font:13px/1.2 var(--font-geist-mono);max-width:100%}
+.nc-bar select{text-transform:none;width:100%}
+.nc-bar button{cursor:pointer;letter-spacing:.06em;border-color:var(--fg);min-width:44px}
+.nc-bar button.nc-play{background:var(--fg);color:var(--bg);min-width:110px}
+.nc-bar button:disabled{opacity:.35;cursor:default}
+.nc-bar .nc-status{margin:0 0 14px;color:var(--muted)}
+.nc-count{font:11px/1.4 var(--font-geist-mono);letter-spacing:.04em;text-transform:none}
+.nc-count b{color:var(--fg);font-weight:600}
+.nc-keys{margin:10px 0 0;font-size:12px;line-height:1.6;color:var(--muted);max-width:90ch}
+.nc-keys code{font:12px var(--font-geist-mono)}
+.nc-hint{color:var(--muted)}
+.nc-idle{color:var(--muted);font-size:14px;line-height:1.6}
+.nc-problems{margin:10px 0;font:12px/1.6 var(--font-geist-mono);color:var(--accent)}
+.nc-panes{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:32px;align-items:start;margin-top:34px}
+@media (max-width:900px){.nc-panes{grid-template-columns:minmax(0,1fr)}}
+.nc-panes>div,.nc-runner{min-width:0}
+
+/* The stage: the board in three dimensions, or as text where WebGL is missing. Dark in both editions, as the felt is. */
+.nc-stage{position:relative;height:min(62vh,560px);min-height:340px;overflow:hidden;border:1px solid var(--rule);background:radial-gradient(ellipse at 50% 30%,#4a3c2e 0%,#2a2119 70%);color:#efe6d4}
+.nc-stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.nc-fallback{margin:0;padding:56px 18px 90px;color:#efe6d4;font:14px/1.5 var(--font-geist-mono);overflow:auto;height:100%}
+.nc-loading{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:#d9c69b;font-size:10px}
+.nc-caption{position:absolute;left:12px;right:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;background:rgba(20,16,12,.78);color:#efe6d4;padding:8px 12px;font:13px/1.4 var(--font-geist-mono);pointer-events:none;white-space:pre-wrap}
+.nc-what{font-weight:600}
+.nc-zh{font-family:"Songti SC","Noto Serif CJK SC","Iowan Old Style",serif;color:#d9c69b}
+.nc-marks{color:#8cc79a}
+.nc-marks.nc-marks-wrong{color:#ef7a6c}
+.nc-tally{position:absolute;right:12px;top:12px;background:rgba(20,16,12,.72);color:#efe6d4;padding:8px 12px;font:11px/1.6 var(--font-geist-mono);text-align:right;pointer-events:none}
+.nc-tally b{color:#fff}
+.nc-legend{position:absolute;left:12px;top:12px;color:#d9c69b;font:11px/1.5 var(--font-geist-mono);pointer-events:none;max-width:calc(100% - 230px)}
+.nc-legend i{display:inline-block;width:22px;height:4px;vertical-align:middle;margin:0 4px 0 8px}
+.nc-legend i:first-child{margin-left:0}
+.nc-key-pos{background:#b3261e}.nc-key-neg{background:#1d1a17;outline:1px solid #777}.nc-key-actor{background:#d9a45a}.nc-key-target{background:#ef7a6c}
+@media (max-width:640px){.nc-legend{display:none}.nc-caption{font-size:11px}.nc-tally{font-size:10px}}
+
+/* The page, checked: ✓ in green, ✗ and what the board gives in red, the current line lit. */
+.nc-page{--nc-red:#b3261e;--nc-right:#2f6b3a;border:1px solid var(--rule);padding:10px 0;max-height:560px;overflow:auto}
+.nc-line,.nc-line-button{display:grid;grid-template-columns:2.6em minmax(0,1fr);gap:0 10px;padding:0 12px 0 0;font:12px/1.7 var(--font-geist-mono)}
+.nc-line:has(.nc-line-button){display:block;padding:0}
+.nc-line-button{width:100%;border:0;margin:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.nc-line-button:hover{background:color-mix(in srgb,currentColor 6%,transparent)}
+.nc-line-button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.nc-no{color:var(--muted);opacity:.6;text-align:right;font-size:10px}
+.nc-txt{white-space:pre-wrap;word-break:break-word}
+.nc-mk{display:block;font-size:11px;color:var(--muted);white-space:pre-wrap}
+.nc-words .nc-txt{font-family:"Songti SC","Noto Serif CJK SC","Iowan Old Style",serif;color:color-mix(in srgb,#8a5a1c 80%,currentColor)}
+.nc-note .nc-txt{color:var(--muted)}
+.nc-heading .nc-txt{font-weight:700}
+.nc-right .nc-mk{color:var(--nc-right)}
+.nc-wrong{background:rgba(179,38,30,.09)}
+.nc-wrong .nc-mk,.nc-stopped .nc-mk{color:var(--nc-red);font-weight:600}
+.nc-now{background:rgba(217,164,90,.22)}
+.nc-text-board{margin:0;padding:12px 14px;background:#2a2119;color:#efe6d4;font:13px/1.5 var(--font-geist-mono);overflow:auto}
+
+/* The working note: crops of the scans and pages run in place. */
+.nc-excerpt{margin:0 0 34px}
+.nc-excerpt img{display:block;width:auto;max-width:100%;max-height:640px;height:auto;border:1px solid var(--rule);background:#fff}
+.nc-excerpt figcaption{margin-top:10px;font-size:9px;color:var(--muted)}
+.nc-excerpt figcaption a{border-bottom:1px solid var(--rule)}
+.nc-excerpts{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin:0 0 34px}
+.nc-excerpts .nc-excerpt{margin:0;flex:0 1 auto}
+.nc-runner{margin:30px 0;border:1px solid var(--rule);padding:18px 18px 16px}
+.nc-runner figcaption{font-size:9px;margin-bottom:12px}
+.nc-runner-bar{display:flex;gap:12px;align-items:baseline;margin:14px 0;flex-wrap:wrap}
+.nc-runner-bar button{border:1px solid currentColor;border-radius:0;padding:8px 16px;background:transparent;color:inherit;font:11px/1.2 var(--font-geist-mono);letter-spacing:.1em;cursor:pointer}
+.nc-runner-bar button:first-child{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.nc-runner-idle{color:var(--muted);font-size:11px}
+.nc-runner-play{font:10px/1.2 var(--font-geist-mono);letter-spacing:.08em;border-bottom:1px solid currentColor;margin-left:auto}
+.nc-runner-note{margin:12px 0 0;font-size:13px;line-height:1.6;color:var(--muted)}
+.nc-runner-result{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:start}
+.nc-runner-result .record-voice{font-size:9px;margin:0 0 8px}
+@media (max-width:760px){.nc-runner-result{grid-template-columns:minmax(0,1fr)}}
+.nc-runner .nc-page{max-height:420px}
+
+/* Entrance from the note to the full playground. */
+.nc-play-link{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;margin:18px 0}
+.nc-play-link a{border-bottom:1px solid currentColor;padding-bottom:2px}
+.nc-play-link span{opacity:.7}
+
+/* The editor: CodeMirror, coloured and checked by jiuzhang's language server. */
+.nc-editor{--nc-code:13px/1.65 var(--font-geist-mono);position:relative}
+.nc-editor>pre{margin:0;font:var(--nc-code);white-space:pre;overflow:auto;tab-size:4}
+.nc-editor .cm-editor{background:transparent;color:inherit}
+.nc-editor .cm-editor.cm-focused{outline:none}
+.nc-editor .cm-scroller{font:var(--nc-code)}
+.nc-editor .cm-content{padding:0;caret-color:currentColor}
+.nc-editor .cm-line{padding:0}
+.nc-editor .cm-cursor{border-left-color:currentColor}
+.nc-editor .cm-selectionBackground,.nc-editor .cm-content ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)!important}
+.nc-program.nc-editor{display:block;width:100%;height:560px;border:1px solid var(--rule);resize:vertical;overflow:hidden}
+.nc-program.nc-editor>pre,.nc-program.nc-editor .cm-content{padding:16px}
+.nc-program.nc-editor .cm-editor{height:100%}
+.nc-program.nc-editor:focus-within{outline:1px solid var(--accent);outline-offset:0}
+.nc-runner .nc-editor{border-left:2px solid var(--accent);padding:4px 0 4px 14px}
+.nc-runner .nc-editor:focus-within{border-left-color:currentColor}
+.nc-runner .nc-editor .cm-scroller{max-height:320px}
+/* Token colours are mixed with the text colour, so they hold on paper and on the dark edition.
+   a note, the source's words, an operation, a figure, the | between readings, a column, a thing, a heading. */
+.nc-token-comment{color:color-mix(in srgb,currentColor 55%,transparent);font-style:italic}
+.nc-token-string{color:color-mix(in srgb,#7d5a9e 75%,currentColor)}
+.nc-token-keyword{color:color-mix(in srgb,#8a5a1c 80%,currentColor);font-weight:600}
+.nc-token-number{color:color-mix(in srgb,#b3261e 80%,currentColor)}
+.nc-token-operator{color:color-mix(in srgb,currentColor 60%,transparent);font-weight:700}
+.nc-token-namespace{color:color-mix(in srgb,#2d6a8a 80%,currentColor)}
+.nc-token-variable{color:color-mix(in srgb,#5d7a2a 80%,currentColor)}
+.nc-token-macro{font-weight:700}
+.nc-editor .cm-tooltip,.cm-tooltip.cm-tooltip-hover,.cm-tooltip.cm-tooltip-autocomplete,.cm-tooltip.cm-tooltip-lint{border:1px solid #22251f55;border-radius:0;background:#fbf9f3;color:#22251f;box-shadow:0 6px 24px #0003;max-width:min(460px,86vw)}
+.nc-hover{padding:10px 14px;font:13px/1.55 var(--type-sans),sans-serif}
+.nc-hover p{margin:0 0 6px}
+.nc-hover p:last-child{margin-bottom:0}
+.nc-hover code,.nc-hover pre{font:12px/1.5 var(--font-geist-mono);background:#22251f14;padding:1px 4px}
+.nc-hover pre{margin:0 0 6px;padding:6px 8px;overflow:auto}
+.nc-editor .cm-diagnostic{font:12px/1.5 var(--type-sans),sans-serif;padding:6px 10px}
+.nc-editor .cm-tooltip-autocomplete ul li{font:12px/1.6 var(--font-geist-mono);padding:2px 8px}
+.nc-editor .cm-tooltip-autocomplete ul li[aria-selected]{background:#22251f;color:#fbf9f3}

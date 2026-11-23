@@ -195,6 +195,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "The Rhind Mathematical Papyrus, about 1550 BCE, writes out its working. Transcribed by a coding agent and checked exactly, 845 of 956 lines agree with it; most of the rest is a dropped part sign, which Chace says need not be an error, or figures the editions already note. Check any page in your browser.",
   concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
+ "N-NINE-CHAPTERS": {
+  subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking every figure the text and its commentators state",
+  question: "When a procedure is run exactly as the text gives it, where do the text and the board part?",
+  searchTitle: "The Nine Chapters Writes 18/52 as the Board Leaves It: Chapter 8 (Fangcheng) Worked on a Counting Board",
+  description: "Chapter 8 of the Nine Chapters on the Mathematical Art (方程), set out in counting rods and worked as the text says. Of 38 figures the board reaches, 37 agree; the answers are the board’s with one common factor taken out, not in lowest terms. Step through it on a 3D board in your browser.",
+  concepts: ["Nine Chapters on the Mathematical Art", "Jiuzhang suanshu", "fangcheng", "counting rods", "Liu Hui", "Dai Zhen", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
+ },
 
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
