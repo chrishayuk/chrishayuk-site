@@ -195,6 +195,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "The Rhind Mathematical Papyrus, about 1550 BCE, writes out its working. Transcribed by a coding agent and checked exactly, 845 of 956 lines agree with it; most of the rest is a dropped part sign, which Chace says need not be an error, or figures the editions already note. Check any page in your browser.",
   concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
+ "N-ALGOL-60": {
+  subject: "ALGOL 60 rebuilt from the 1962 Revised Report with a coding agent, and its first implementation, the Dijkstra–Zonneveld system for the Electrologica X1, rebuilt from that system’s documents because no copy of its run-time routines has been found, then checked against the real compiler on a simulator and against output the X1 printed in 1964",
+  question: "How much of a lost run-time can be rebuilt from what its documents say, and how would you know?",
+  searchTitle: "The First ALGOL 60 System, Rebuilt from Its Documents and Checked Against Its 1964 Printout",
+  description: "Dijkstra and Zonneveld’s ALGOL 60 for the Electrologica X1 went into operation in 1960; no copy of its run-time routines has been found. Rebuilt from its manuals with a coding agent, it reproduces 80 of the 82 numbers the X1 printed for Zonneveld’s outer planets in 1964. Run any program both ways in your browser.",
+  concepts: ["ALGOL 60", "Edsger Dijkstra", "Jaap Zonneveld", "Electrologica X1", "Mathematical Centre Amsterdam", "call by name", "man or boy test", "Donald Knuth", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
  "N-NINE-CHAPTERS": {
   subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking what the text and its commentators state where the notation can hold it, reviewed by a second model",
   question: "When a procedure is run exactly as the text gives it, where do the text and the board part?",
@@ -203,6 +210,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Nine Chapters on the Mathematical Art", "Jiuzhang suanshu", "fangcheng", "counting rods", "Liu Hui", "Dai Zhen", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
 
+ "N-GEORGE": {
+  subject: "Rebuilding GEORGE, Charles Hamblin’s 1957–58 reverse Polish scheme for the English Electric DEUCE, from his manual with a coding agent, and running his own translator, transcribed from his handwritten coding sheets, on a simulated DEUCE",
+  question: "When a run of handwritten code disagrees with its manual, which one was GEORGE?",
+  searchTitle: "GEORGE, Hamblin’s 1958 Stack Language for DEUCE: His Handwritten Translator Runs Again, Matched to the Last Binary Digit",
+  description: "GEORGE ran reverse Polish programs on a running accumulator of twelve cells in 1957–58. Rebuilt from Hamblin’s manual with a coding agent, its Example 3 punches a quarter of what Simpson’s rule gives. His own translator, transcribed from 22 coding sheets, runs again on a simulated DEUCE, and the interpreter now does his arithmetic as his code does. Step through the cells in your browser.",
+  concepts: ["GEORGE", "General Order Generator", "Charles Hamblin", "English Electric DEUCE", "reverse Polish notation", "stack machines", "history of programming languages", "coding agents", "verification", "emulation", "WebAssembly"],
+ },
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",

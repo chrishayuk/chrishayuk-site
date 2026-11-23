@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { RhindEditor } from "./RhindEditor";
 import { RhindChecked, RhindCount } from "./RhindChecked";
 import { check, work, type Checked } from "./rhindJob";
+import { NoteGuide, type GuideStep } from "./NoteGuide";
 
 /**
  * The scribe's way: `multiply 3 '2 by 5` or `reckon with 6 to find 21`,
@@ -57,32 +58,42 @@ export function RhindWork({ question = "reckon with 6 to find 21", label = "04 /
 /**
  * One page that can be edited and checked where it sits in a note. It uses
  * the same worker and WebAssembly program as /demos/rhind-papyrus, loaded
- * only when CHECK THE PAGE is pressed.
+ * only when CHECK THE PAGE is pressed. With `steps`, a short guided sequence
+ * sits above the page: each step puts its text in the editor and checks it.
  */
-export function RhindRunner({ label, page, note }: { label: string; page: string; note?: string }) {
+export function RhindRunner({ label, page, note, steps }: { label: string; page: string; note?: string; steps?: GuideStep[] }) {
   const [source, setSource] = useState(page);
   const [run, setRun] = useState<Checked | null>(null);
   const [runs, setRuns] = useState(0);
   const [failure, setFailure] = useState("");
   const [running, setRunning] = useState(false);
+  const [step, setStep] = useState(-1);
+  const [checkedText, setCheckedText] = useState<string | null>(null);
 
-  const go = useCallback(async () => {
+  const checkText = useCallback(async (text: string) => {
     setFailure(""); setRunning(true);
     try {
-      setRun(await check(source)); setRuns(n => n + 1);
+      setRun(await check(text)); setRuns(n => n + 1); setCheckedText(text);
     } catch (error) {
       setFailure(String((error as Error).message || error));
     } finally {
       setRunning(false);
     }
-  }, [source]);
+  }, []);
+  const go = useCallback(() => checkText(source), [checkText, source]);
+  const take = useCallback((index: number) => {
+    const text = steps![index].text;
+    setStep(index); setSource(text); checkText(text);
+  }, [steps, checkText]);
 
   return <figure className="rh-runner">
     <figcaption className="record-voice">{label}</figcaption>
+    {steps && <NoteGuide steps={steps} current={step} running={running} onStep={take}
+      ran={step >= 0 && checkedText === steps[step].text && source === steps[step].text}/>}
     <RhindEditor label={`${label}: the page`} value={source} onChange={setSource} onRun={go}/>
     <div className="rh-runner-bar">
       <button type="button" onClick={go} disabled={running}>{run ? "CHECK IT AGAIN" : "CHECK THE PAGE"}</button>
-      {source !== page && <button type="button" className="rh-runner-reset" onClick={() => { setSource(page); setRun(null); }}>RESET</button>}
+      {source !== page && <button type="button" className="rh-runner-reset" onClick={() => { setSource(page); setRun(null); setStep(-1); setCheckedText(null); }}>RESET</button>}
       {run ? <span className="rh-runner-idle"><RhindCount run={run}/></span> : !running && <span className="rh-runner-idle">Runs in your browser.</span>}
     </div>
     {failure && <p className="rh-problems">{failure}</p>}

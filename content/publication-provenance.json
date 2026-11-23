@@ -1419,6 +1419,145 @@
     ]
   },
   {
+    "id": "N-GEORGE",
+    "version": "1.0",
+    "recordHash": "73a8b359f81671a9307ec33046b01a4d42b58980381d05c3589599251a1b3069",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication: GEORGE rebuilt from Hamblin's 1958 manual, Example 3's factor-of-four erratum, and his own GEORGE IA transcribed from 22 coding sheets and run on a simulated DEUCE, agreeing with the interpreter word for word, with the four sheet/flow-diagram contradictions and the limits of a reading by coding agents"
+    },
+    "sources": [
+      {
+        "title": "C. L. Hamblin, “GEORGE IA and II: A semi-translation programming scheme for DEUCE. Programming and Operation Manual”, University of New South Wales, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEProgrammingManual.pdf",
+        "note": "23 pages, typed. The running accumulator is on printed p. 2 (PDF p. 5); the comma on p. 4 (PDF p. 7); Example 3 on pp. 7-8 (PDF pp. 10-11); the twelve cells on p. 10 (PDF p. 13); the coding table, Appendix I, on p. 18 (PDF p. 21)."
+      },
+      {
+        "title": "“GEORGE flow diagrams”, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEFlowCharts.pdf",
+        "note": "52 pages, handwritten DEUCE instruction listings. Relations and logic on p. 22; ] on p. 23; skips on p. 25; rep on pp. 26-27; sin and cos on p. 38."
+      },
+      {
+        "title": "“UTECOM Programme GEORGE”, coding sheets, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEProgramCode.pdf",
+        "note": "22 pages, handwritten DEUCE instructions. The sin and cos coefficients are on sheet 21, DL8, track 15/13."
+      },
+      {
+        "title": "David Green’s DEUCE archive, section GEORGE",
+        "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+        "note": "Scanned from the UTECOM originals and supplied by Robin Vowels. Downloaded on 22 November 2026."
+      },
+      {
+        "title": "English Electric, “DEUCE Programming Manual”, May 1956; “DEUCE Logical Design Manual, Part I”, NS-y-37/11-57",
+        "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+        "note": "The simulator’s sources. The multiplier is chapter 10 of the Logical Design Manual."
+      },
+      {
+        "title": "chrishayuk/george",
+        "url": "https://github.com/chrishayuk/george",
+        "note": "The interpreter, the DEUCE simulator, the transcription of the coding sheets, the word-for-word tests against Hamblin’s code, 16 example programs, a tutorial, a language server, the errata, the decisions, the reading notes and an independent review."
+      },
+      {
+        "title": "Coding-agent sessions, November 2026",
+        "note": "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george."
+      }
+    ]
+  },
+  {
+    "id": "N-ALGOL-60",
+    "version": "1.0",
+    "recordHash": "cb951f55c42e2692ab6c64739b5d0c20e027c363e4560489062c78cbd9d39bc7",
+    "revision": {
+      "kind": "initial",
+      "summary": "First published: ALGOL 60 from the 1962 Revised Report, and the Dijkstra–Zonneveld system for the Electrologica X1 rebuilt from its documents with a coding agent; 39 probes against the real compiler on Vakulenko's simulator, and 80 of the 82 numbers of the X1's own 1964 output for Zonneveld's outer planets reproduced, the other two last digits just above a decimal tie; with a playground that runs each program both ways."
+    },
+    "sources": [
+      {
+        "title": "P. Naur (ed.), “Revised Report on the Algorithmic Language ALGOL 60”, 1962",
+        "url": "https://www.masswerk.at/algol60/report.htm"
+      },
+      {
+        "title": "D. E. Knuth, “Man or boy?”, Algol Bulletin 17.2.4, July 1964, p. 7",
+        "url": "https://archive.computerhistory.org/resources/text/algol/algol_bulletin/A17/A17P7.GIF"
+      },
+      {
+        "title": "F. E. J. Kruseman Aretz, “The Dijkstra–Zonneveld ALGOL 60 compiler for the Electrologica X1”, CWI report SEN-N0301, 2003",
+        "url": "https://ir.cwi.nl/pub/4155",
+        "note": "The full text of a 1964 version of the compiler, with a Pascal equivalent, the 23 special properties of the 1962 user manual (section 1.3) and the outer-planets program (appendix B)."
+      },
+      {
+        "title": "F. E. J. Kruseman Aretz, “A comparison between the ALGOL 60 implementations on the Electrologica X1 and the Electrologica X8”",
+        "url": "https://ir.cwi.nl/pub/13677",
+        "note": "Its appendix B.1 is an extract of the X1 user manual describing the arithmetic of the run-time routines: real zero, overflow, integer intermediates."
+      },
+      {
+        "title": "E. W. Dijkstra, “Cursus programmeren in ALGOL 60”, 2nd edition, Mathematisch Centrum, February 1962",
+        "url": "https://ir.cwi.nl/pub/9591",
+        "note": "x := 7/2 is undefined for an integer x."
+      },
+      {
+        "title": "E. W. Dijkstra, “Cursus programmeren in ALGOL 60”, 11th edition, Mathematisch Centrum, undated",
+        "url": "https://ir.cwi.nl/pub/9606",
+        "note": "Pp. 17–18, shown in the note: the same passage on 7/2. Pp. 68–69 of the scan: numbers beyond the range of variables typed as 0 or ‘inf’."
+      },
+      {
+        "title": "J. A. Zonneveld, “Automatic Numerical Integration”, Mathematical Centre Tracts 8, 1964",
+        "url": "https://ir.cwi.nl/pub/13099",
+        "note": "Pp. 102–107: the outer-planets program, JAZ164, and what the X1 printed for it. The first run (eps = 10⁻³) is on p. 103, two more tolerances on p. 104, and the run with the mass of Pluto set to zero on p. 106."
+      },
+      {
+        "title": "S. Vakulenko, x1-algol-compiler",
+        "url": "https://github.com/sergev/x1-algol-compiler",
+        "note": "The 1964 compiler in C, with a simulator of the X1 and a reconstructed run-time."
+      },
+      {
+        "title": "chrishayuk/algol-60, release v0.1.1",
+        "url": "https://github.com/chrishayuk/algol-60",
+        "note": "The interpreter, --x1 with a source for every rule, the 39 probes run three ways, the 1964 output as a test, and the playground."
+      },
+      {
+        "title": "Coding-agent sessions, 22–23 November 2026",
+        "note": "The interpreter, --x1, the probes and the transcription of the 1964 output were made in these sessions. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-RHIND-PAPYRUS",
+    "version": "1.1",
+    "recordHash": "a07d156de46c0e274c0362cb236afdecf769f1ec39ae9548b9593357e8cd248d",
+    "revision": {
+      "kind": "clarification",
+      "summary": "The note is easier to follow, after a reader's review; no count or claim changes. A ledger before the counts shows what was checked, what was left out and what each count is of (lines, columns, table entries); three steps under Problem 27 run the page as printed, with 14 for 15 and with a tick taken off, in the real checker; rhind's language server is shown over the 15, as an editor shows it; and a closing section says what has been made: the working as a structured, executable object whose steps can be challenged and tested systematically, without claiming anything new about the papyrus.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+        "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+        "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. The part sign is discussed on printed p. xi. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+      },
+      {
+        "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+        "url": "https://archive.org/details/Peet_1923",
+        "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. Wrong dots are discussed on p. 38. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+      },
+      {
+        "title": "chrishayuk/rhind-papyrus, release v0.1.1",
+        "url": "https://github.com/chrishayuk/rhind-papyrus",
+        "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+      },
+      {
+        "title": "Independent review of release 0.1.0 by OpenAI Codex, 22–23 November 2026",
+        "url": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md",
+        "note": "72 places checked against the scans, probe pages and the code; each finding, and what was done about it. Release 0.1.1 is the result."
+      },
+      {
+        "title": "Coding-agent session, 22–23 November 2026",
+        "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
     "id": "N-NINE-CHAPTERS",
     "version": "1.0",
     "recordHash": "d6381780806ac2a039c67ac627d9f3a5a70060ed5d52233a3ee02ae09e1f11a1",

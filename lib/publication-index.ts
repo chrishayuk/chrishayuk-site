@@ -31,7 +31,7 @@ export const programmes = [
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
     description: "Historical computational systems reconstructed from their original sources, tested against the surviving evidence, and made executable in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-NINE-CHAPTERS"], continuation: undefined,
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-NINE-CHAPTERS"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
       { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
@@ -42,6 +42,8 @@ export const programmes = [
       { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
       { label: "IPL-V playground", href: "/demos/ipl-v", name: "IPL-V", year: "1964", detail: "The list-processing machine of the IPL-V manual, the language of the first artificial intelligence programs. Step it and watch storage change." },
       { label: "Rhind Papyrus playground", href: "/demos/rhind-papyrus", name: "Rhind Papyrus", year: "c. 1550 BCE", detail: "The working of the Rhind Mathematical Papyrus, about 1550 BCE, checked figure by figure against itself. Choose a line that disagrees and see what the working gives." },
+      { label: "GEORGE playground", href: "/demos/george", name: "GEORGE", year: "1958", detail: "Charles Hamblin’s reverse Polish scheme for the English Electric DEUCE, from his manual and, word for word, his own coding sheets. Step through the twelve cells of its running accumulator a symbol at a time." },
+      { label: "ALGOL 60 playground", href: "/demos/algol-60", name: "ALGOL 60", year: "1962", detail: "Each program run twice: as the 1962 Report defines it and as the first implementation, on the Electrologica X1, ran it. The lines that differ are marked." },
       { label: "Nine Chapters playground", href: "/demos/nine-chapters", name: "Nine Chapters", year: "Han dynasty", detail: "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says, what it states checked against the board. Step through it on a board in three dimensions." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",

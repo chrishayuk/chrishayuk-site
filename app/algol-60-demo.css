@@ -1,0 +1,47 @@
+/* /demos/algol-60: ALGOL 60 run as the Report and as the X1. Follows cpl-demo.css. */
+.algol-lab{margin:0 var(--margin) 75px;border-block:1px solid var(--rule);padding:32px 0 44px}
+.algol-lab .record-voice{display:block;font-size:10px;margin-bottom:12px}
+.algol-bar{display:flex;flex-wrap:wrap;gap:16px;align-items:end;margin:0 0 34px}
+.algol-bar label{display:flex;flex-direction:column;gap:10px;min-width:240px;font:10px/1.5 var(--font-geist-mono);text-transform:uppercase}
+.algol-bar select,.algol-bar button{border:1px solid var(--rule);border-radius:0;padding:13px 18px;background:var(--bg);color:var(--fg);font:13px/1.2 var(--font-geist-mono)}
+.algol-bar select{text-transform:none}
+.algol-bar button{cursor:pointer;letter-spacing:.1em;border-color:var(--fg)}
+.algol-bar button.algol-run{background:var(--fg);color:var(--bg)}
+.algol-bar button:disabled{opacity:.35;cursor:default}
+.algol-bar .record-voice{margin:0 0 14px;color:var(--muted)}
+.algol-source{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:32px;margin-bottom:30px}
+.algol-program,.algol-input,.algol-output{display:block;width:100%;margin:0;border:1px solid var(--rule);border-radius:0;padding:16px;background:var(--bg);color:var(--fg);font:13px/1.65 var(--font-geist-mono);tab-size:2}
+.algol-program{height:380px;resize:vertical}
+.algol-input{height:380px;resize:vertical}
+.algol-program:focus,.algol-input:focus{outline:1px solid var(--accent);outline-offset:0}
+.algol-output{height:360px;overflow:auto;white-space:pre}
+.algol-output-head{margin-top:0}
+.algol-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.algol-columns-three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.algol-columns .record-voice{font-size:9px;margin-bottom:8px}
+/* A line that differs from the other column's: marked, not coloured alone, so it holds in print. */
+.algol-differs{background:color-mix(in srgb,var(--accent) 16%,transparent);box-shadow:inset 3px 0 0 var(--accent)}
+.algol-warning{color:var(--muted);font-style:italic;white-space:pre-wrap}
+.algol-error{color:var(--accent)}
+@media (max-width:900px){.algol-source,.algol-columns,.algol-columns-three{grid-template-columns:1fr}.algol-program,.algol-input{height:260px}.algol-output{height:260px}}
+
+/* The note: details of the printed pages, and programs that run in place. */
+.algol-excerpt{margin:0 0 34px}
+.algol-excerpt img{display:block;width:100%;height:auto;border:1px solid var(--rule);background:#f4efe3}
+.algol-excerpt.algol-excerpt-narrow img{max-width:620px}
+.algol-excerpt figcaption{margin-top:10px;font-size:9px;color:var(--muted)}
+.algol-excerpt figcaption a{border-bottom:1px solid var(--rule)}
+.algol-runner{margin:30px 0;border:1px solid var(--rule);padding:18px 18px 16px}
+.algol-runner figcaption{font-size:9px;margin-bottom:12px}
+.algol-runner textarea{display:block;width:100%;border:0;border-left:2px solid var(--accent);border-radius:0;padding:4px 0 4px 14px;background:transparent;color:inherit;font:13px/1.65 var(--font-geist-mono);resize:vertical;tab-size:2;white-space:pre;overflow:auto}
+.algol-runner textarea:focus{outline:none;border-left-color:var(--fg)}
+.algol-runner-bar{display:flex;gap:12px;align-items:baseline;margin:14px 0;flex-wrap:wrap}
+.algol-runner-bar button{border:1px solid currentColor;border-radius:0;padding:8px 16px;background:transparent;color:inherit;font:11px/1.2 var(--font-geist-mono);letter-spacing:.1em;cursor:pointer}
+.algol-runner-bar button:first-child{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.algol-runner .algol-output{height:auto;max-height:300px;font-size:12px;padding:12px}
+.algol-runner-fixed{margin:0 0 4px;font:11px/1.5 var(--font-geist-mono);color:var(--muted)}
+.algol-runner-idle{color:var(--muted);font-size:11px}
+.algol-runner-note{margin:12px 0 0;font-size:13px;line-height:1.6;color:var(--muted)}
+.algol-play-link{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;margin:18px 0}
+.algol-play-link a{border-bottom:1px solid currentColor;padding-bottom:2px}
+.algol-play-link span{opacity:.7}

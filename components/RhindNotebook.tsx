@@ -5,6 +5,9 @@ import { NotebookEntry } from "./NotebookEntry";
 import { Acts } from "./Acts";
 import Link from "next/link";
 import { RhindRunner, RhindWork } from "./RhindRunner";
+import { RhindHover } from "./RhindHover";
+import { NoteLedger, type LedgerLane } from "./NoteLedger";
+import type { GuideStep } from "./NoteGuide";
 
 const CHACE = "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei";
 
@@ -12,6 +15,48 @@ const CHACE = "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparke
 const PROBLEM_27 = "No. 27\n\"{A quantity, '5 of it added to it,} becomes it: 21.\"\n  1      5\n  '5     1\nTotal 6.\n% 6 is then reckoned with to find 21, with no sentence\n\\ 1      6\n\\ 2      12\n\\ '2     3\nTotal 21.\n% the ticked multipliers give 3 '2, which is then multiplied by 5\n\\ 1      3 '2\n  2      7\n\\ 4      15             % Peet: \"15 (sic)\", \"15 has been erroneously written for 14\"; Chace prints 15 without comment\n% no total written\n\"{The quantity is 17 '2,} '5 of it is 3 '2, {the total is 21.}\"\n";
 const TWO_BY_59 = "2 ÷ 59\n% Chace PDF p. 81 (pl. 17, p. 82); Peet p. 44 (Pl. C)\n\"59\"\n{'36}   1 '2 '12 '18\n{'226}  '4        % so in Chace's translation and plate (red 226; the working has 236); no comment by Chace; Peet: '236\n{'531}  '9\n\"Find\"\n\\ '36   1 '2 '12 '18\n\\ 4     '236  '4\n\\ 9     531   '9       % Peet: '531\n";
 const OWN = "No. 1\n\"A quantity whose fourth part is added to it becomes 15.\"\n  1   4\n '4   1\nTotal 5.\nReckon with 5 to find 15.\n\\ 1   5\n\\ 2   10\nResult 3.\n";
+
+// Three edits to Problem 27, each checked by rhind in the page. What each
+// notice says was checked by running the same text through rhind.wasm.
+const FOURTEEN = PROBLEM_27.replace("\\ 4      15", "\\ 4      14");
+const UNTICKED = FOURTEEN.replace("\\ '2     3", "  '2     3");
+const STEPS: GuideStep[] = [
+  { label: "RUN IT AS PRINTED", action: "Problem 27 as transcribed, 15 and all.", text: PROBLEM_27,
+    notice: "Nine of the ten figures agree with the working; line 14 is marked ✗ 14, since four times 3 2̅ is 14, and the one explanation that fits, 5 written for 4, is listed as a fit, not a cause." },
+  { label: "WRITE 14 FOR 15", action: "The last row becomes \\ 4 14.", text: FOURTEEN,
+    notice: "All ten agree and the ✗ is gone: once the figure follows from the rows above it, the check has nothing to say." },
+  { label: "TAKE A TICK OFF", action: "Keep 14, and take the tick off the row for 2̅ in the second column.", text: UNTICKED,
+    notice: "The ticked rows now make 18, so Total 21 on line 10 is marked ✗ 18, and the explanation that fits is a tick left off line 9: the check follows the scribe’s ticks, not only his arithmetic." },
+];
+
+/** What was checked, what was left out, and what the counts are of: lines, columns and table entries. */
+const LANES: LedgerLane[] = [
+  { unit: "LINES OF WORKING",
+    checked: [{ value: "956", label: "lines", detail: "Every figure the notation can hold, in 91 problem sections and the two tables, worked again as an exact fraction from the rows above it." }],
+    excluded: [{ value: "Not computed", label: "kept as the scribe’s words", detail: "The hundred-hekat notation of Problems 68 to 86, ditto marks, drawings, and some columns set side by side." }],
+    counts: [
+      { value: "845 · 111", label: "agree · do not", parts: [{ value: 845, label: "agree", tone: "agree" }, { value: 111, label: "do not", tone: "differ" }] },
+      { value: "113", label: "records on the 111 lines", detail: "One written figure can give two.", parts: [{ value: 75, label: "a part sign", tone: "notation" }, { value: 4, label: "the ticks", tone: "differ" }, { value: 34, label: "a figure", tone: "differ" }] },
+    ],
+    meaning: "75 are a notation the editions read differently, not errors; 4 are totals right for other rows than those ticked; 34 are figures, most pointed out by Chace or Peet." },
+  { unit: "COLUMNS OF ROWS",
+    checked: [{ value: "65", label: "eligible columns", detail: "Compared with rhind’s generator by their multipliers and ticks only." }],
+    excluded: [
+      { value: "139", label: "columns of two rows or more in the problems" },
+      { value: "128", label: "of them can be read in full" },
+      { value: "Not compared", label: "the rest of the 128", detail: "Columns that do not begin with a row for 1, say what they multiply and tick at least one row." },
+    ],
+    counts: [
+      { value: "40 of 65", label: "the same multipliers and ticks, by doubling" },
+      { value: "47 of 65", label: "the same, with three conventions", detail: "Tens by a row for 10, 3̅ straight from the first row, and a division read as halving." },
+    ],
+    meaning: "This describes the subset, whose targets often come from the scribe’s own ticks; it does not validate the procedure." },
+  { unit: "ENTRIES OF THE TABLE",
+    checked: [{ value: "49", label: "entries of 2 ÷ n", detail: "Against candidate rules for every odd n from 5 to 101." }],
+    excluded: [{ value: "Bounded", label: "at most four parts, none past 1000", detail: "The scores depend on these bounds." }],
+    counts: [{ value: "4 to 34", label: "of 49, by rule", detail: "The largest part again and again gives 4; a divisor rule 34. No rule here gives 2 ÷ 13 or 2 ÷ 95." }],
+    meaning: "Agreement describes a rule; it does not show the scribe used it." },
+];
 
 /** A crop of a plate in Chace's edition, credited to it. */
 function Plate({ src, alt, width, height, caption, narrow }: { src: string; alt: string; width: number; height: number; caption: ReactNode; narrow?: boolean }) {
@@ -31,7 +76,10 @@ export function RhindNotebook({ record }: { record: PublicationRecord }) {
         caption="CHACE, VOL. II, 1929, PLATE 50 / PROBLEM 27: THE HIERATIC ABOVE, CHACE’S HIEROGLYPHIC TRANSCRIPTION BELOW"/>
       <p className="rh-play-link record-voice"><Link href="/demos/rhind-papyrus">OPEN THE PLAYGROUND ↗</Link><span>Every page of the papyrus, checked, in your browser.</span></p>
       {act(0)}
-      <RhindRunner label="PROBLEM 27, AS TRANSCRIBED / CHANGE IT AND CHECK IT AGAIN" page={PROBLEM_27}
+      <RhindHover label="WHAT THE EDITOR SAYS OVER THE 15: RHIND’S LANGUAGE SERVER, ASKED IN THIS PAGE" page={PROBLEM_27} lines={[10, 13]}
+        targets={[{ label: "15", line: 13, character: 9, length: 2 }, { label: "4", line: 13, character: 2, length: 1 }, { label: "3 '2", line: 11, character: 9, length: 4 }]}
+        note="This is what the editor shows when the pointer rests on a figure, and what the VS Code extension shows: the same language server, rhind lsp, running here in the page. Over the 15 it says what the figure is, what the working gives, and the explanation that fits, and it underlines the line as a problem; over 3 '2 it gives the fraction’s value, 7/2."/>
+      <RhindRunner label="PROBLEM 27, AS TRANSCRIBED / CHANGE IT AND CHECK IT AGAIN" page={PROBLEM_27} steps={STEPS}
         note="A quantity and its fifth make 21. The first column is the false position: try 5, and 5 and its fifth make 6. The second reckons with 6 to find 21, which gives 3 2̅. The third multiplies 3 2̅ by 5, and its last row has 15 where 4 times 3 2̅ is 14. Choose the line marked ✗."/>
     </> },
     { label: "A check and a generator", children: <>
@@ -47,6 +95,8 @@ export function RhindNotebook({ record }: { record: PublicationRecord }) {
       <RhindWork question="multiply 3 '2 by 5" label="THE GENERATOR: WORK IT THE SCRIBE’S WAY" />
     </> },
     { label: "956 lines of working", kind: "evidence", children: <>
+      <NoteLedger label="BEFORE THE COUNTS: WHAT WAS CHECKED, WHAT WAS LEFT OUT, AND WHAT EACH COUNT IS OF" lanes={LANES}
+        note="Three counts, of three different things: lines of working, columns of rows, and entries of the table. Every figure is from the repository’s README, against this project’s transcription."/>
       {act(2)}
       <StudyMeasures label="THE WHOLE PAPYRUS, AS TRANSCRIBED: 113 DIAGNOSTIC RECORDS ON 111 LINES" items={[
         { label: "A PART SIGN", value: "75", detail: "The figure differs from the working only by the sign for “part”. A notation the editions treat differently, not necessarily an error." },
@@ -102,5 +152,6 @@ export function RhindNotebook({ record }: { record: PublicationRecord }) {
       {act(11)}
       {act(12)}
     </> },
+    { label: "What the working has become", children: <>{act(13)}</> },
   ]}/>;
 }

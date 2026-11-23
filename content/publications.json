@@ -4861,6 +4861,551 @@
   },
   {
     "record": {
+      "id": "N-GEORGE",
+      "slug": "a-handwritten-program-from-1958-runs-again",
+      "kind": "notebook",
+      "title": "A handwritten program from 1958 runs again, to the last binary digit.",
+      "dek": "Charles Hamblin’s GEORGE, a stack language for the English Electric DEUCE: rebuilt from its manual with a coding agent, then his own translator transcribed from 22 coding sheets and run on a simulated DEUCE, until the two agreed word for word.",
+      "abstract": "A working note about rebuilding GEORGE, the General Order Generator that Charles Hamblin wrote for the English Electric DEUCE in 1957–58, from the three documents that survive: the programming manual, 52 pages of flow diagrams and 22 coding sheets. GEORGE programs are reverse Polish, with no addresses, run on a running accumulator of twelve cells. An interpreter built from the manual runs the manual’s programs, and Example 3 punches a quarter of what Simpson’s rule gives, because its coefficients are for the wrong step. Then the coding sheets, transcribed, were run as a deck of cards on a simulated DEUCE. Hamblin’s own translator runs the manual’s programs, and tracing his routines one instruction at a time brought the interpreter to the same 32-digit words as his code, for every one of 5,000 random programs. On the way it found four places where a sheet contradicts its flow diagram, and arithmetic in this version that is not what the manual says: an addition that drops a binary digit, and a multiplication that can lose the sign.",
+      "created": "2026-11-23",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "TYPESCRIPT · FLOW DIAGRAMS · CODING SHEETS → SCAN → AGENT → INTERPRETER · SIMULATED DEUCE",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-TURING-ACE",
+        "N-CPL",
+        "N-LANING-ZIERLER"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / THREE DOCUMENTS",
+          "text": "GEORGE was written by Charles Hamblin at the New South Wales University of Technology in 1957 and 1958, for its English Electric DEUCE. The manual opens: “GEORGE, or the General Order Generator, is a program for DEUCE permitting mathematical problems to be presented to the machine in a simple “addressless” instruction language, here called “G-code”.” Three documents survive, all on David Green’s DEUCE archive, scanned from the originals and supplied by Robin Vowels: the programming and operation manual, 23 typed pages; the flow diagrams, 52 handwritten pages; and the coding sheets, 22 handwritten pages of DEUCE instructions. The archive says the last two are “the only extant copy” and “correspond to the penultimate version of GEORGE IA”. I asked a coding agent to build the language from the manual, and then to read the other two against it.",
+          "references": [
+            {
+              "label": "David Green’s DEUCE archive, section GEORGE",
+              "url": "https://www.uraone.com/computers/deuce/deucdocs.html"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / TWELVE CELLS",
+          "text": "A G-program is written in reverse Polish and names no addresses. The manual asks the reader to picture a pseudo-machine with a “running accumulator”: “a set of storage locations (known as “cells”) arranged in a linear order and operated on the “last-in-first-out” principle.” A number or a variable goes into the first empty cell; an operator works on the last cell or the last two. So a b + leaves the sum where a was. “The accumulator is limited to 12 cells. This is more than enough for all normal calculations”. Beside it are a link list of six for subroutines and repetitions, and a store of 32 plain variables, 1,024 with one suffix and 4,096 with two. Numbers are floating point with a 22-digit binary mantissa. The interpreter obeys a program a symbol at a time, as GEORGE II did, and the playground shows the twelve cells after every symbol."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / EXAMPLE 3 IS OUT BY A FACTOR OF FOUR",
+          "text": "Example 3 of the manual integrates exp(−x²/2) / (1 + exp(−ax)) from 1 to 5 by Simpson’s rule with 16 intervals, for five values of a read from cards. The argument is worked out as j 4 ÷ 1 +, so the step is a quarter. Simpson’s rule then weights the ordinates by a twelfth: 1/12, 4/12, 2/12 and so on. The manual’s Simpson vector holds 1/48, 4/48, 2/48, and its program for preparing the vector begins 1, 48 ÷. Run as printed, every result is a quarter of what Simpson’s rule gives: 0.0497078 for a = 0, where Simpson’s rule worked in double precision gives 0.198831. Everything else in the program is right. 1/48 would be the weight for a step of a sixteenth, which suggests the example was changed from another range at some point. That is a guess."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / NUMERALS RUN TOGETHER",
+          "text": "A number is written one digit to a symbol, and two numerals side by side are one number. The manual says so: “When two numbers must be written consecutively they should be separated by a comma (special symbol, omitted in translation)”. It is easy to forget when writing. 3, 4 14 ↓ looks like a call of subroutine 14 with 3 and 4 in the accumulator. It calls subroutine 414, taken modulo 32, which is 30. The interpreter does what the machine would, and its language server warns when numerals run together."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHAT THE FLOW DIAGRAMS SETTLED",
+          "text": "The manual leaves open how a repetition counts and what truth is. The flow diagrams are DEUCE instruction listings, not boxes and arrows, and they answer both. On page 26, a b rep (x) sets x to a and stores the count b − a in the link list with no test on the way in; the count is first looked at by ], on pages 23 and 27. So the body of a repetition is always obeyed at least once. When a is greater than b, the 16-digit count wraps round, to about 65,536 − (a − b) passes. On page 22, = and > leave a word with only the sign digit set for truth, which reads as −1, and zero for falsehood, and a conditional skip tests only the sign digit. ~ complements every digit of the word, exponent and all, so ~ of truth is just under a half. It still acts correctly in a skip. All of this was later confirmed by running Hamblin’s own code (07)."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / WHAT THE CODING SHEETS HOLD",
+          "text": "The flow diagram for sin and cos, page 38, shows a polynomial taken from a track but not its coefficients. The coding sheets were transcribed minor cycle by minor cycle, about 1,830 written rows, with the 20 doubtful cells marked. Sheet 21, DL8, track 15/13, holds five constants written as base-32 digits at minor cycles 1, 3, 5, 7 and 13. At 30 binary places they are −1.2337005, +0.2536693, −0.0208627, +0.00091768 and −0.0000238. They are close to the Taylor coefficients of cos(πx/2), but not equal to them, in the way of a polynomial fitted to the whole interval; with them, 1 plus the polynomial in x² is within 3.0·10⁻⁸ of cos(πx/2) from 0 to 1. Beside them, on track 15/12, is 2/π, which turns the argument into quarter periods. Tracing the routine on the simulator (07) confirmed the order in which they are used."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / HAMBLIN’S OWN TRANSLATOR, RUNNING",
+          "text": "A DEUCE was simulated from English Electric’s programming manual and course notes, and the 22 transcribed coding sheets were fed to it as a deck of 193 cards, as an operator would have, followed by each G-program and its data. This version took its program as 8-bit codes, four to a card row, not the decimal pairs the manual describes; the read routine says so. Four places on the sheets, each clear on the scan, contradict their flow diagrams: divide falls into the multiply routine, R| and P| do nothing, any number below about a quarter punches zeros without end, and wait reads the wrong track. For the last, the flow diagram carries Hamblin’s own correction, written over the old value; the sheet still has the old one. With the flow diagrams’ versions, applied at run time, Hamblin’s translator runs all 16 of the manual’s programs. sin and cos needed the DEUCE Logical Design Manual as well: his routine reads the multiplier’s store while it is still multiplying."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / TO THE LAST BINARY DIGIT",
+          "text": "At first the interpreter and Hamblin’s code disagreed in the sixth figure of Example 3. Tracing his addition register by register showed why: when it shifts the smaller number into line, it drops that number’s lowest binary digit and doubles another, and then rounds half up. The same method was used on multiplication, division, the punch’s decimal conversion, every function, and the reading of numerals and data cards, and each was written into the interpreter as his code does it, then checked word for word on random inputs: 200,324 sums and differences, 122,576 products, 112,819 quotients, 160,056 punched cards, 60,000 arguments for each function, 200,145 numerals, 180,105 data cards, all the same. Random programs with arithmetic, functions, suffixes, repetitions, skips, logic and subroutines now punch the same both ways, 5,000 of 5,000. It also brought out what the manual does not say. Indexing numbers go through the same fetch-integer routine as rem’s divisor, right only within the range the manual allows. 0 ÷ 0 is 0. Copying from an empty accumulator gives 0. 0 sin is −2⁻²⁵. The punch nearly always takes an exact half down. And some of it is plainly wrong: 0.609211 times −0.820734, which is −0.50000018, is punched as +0.5, the sign lost in standardising; 2, 5 max is −5."
+        },
+        {
+          "kind": "connection",
+          "text": "The interpreter runs in the browser, compiled from the same Rust source as the command-line version, with the manual’s programs as examples. Every run is traced, so the twelve cells can be stepped through a symbol at a time.",
+          "links": [
+            {
+              "href": "/demos/george?example=simpson",
+              "label": "Run Example 3 as printed — interactive study"
+            },
+            {
+              "href": "/demos/george?example=simpson-corrected",
+              "label": "Run Example 3 with 1/12"
+            },
+            {
+              "href": "/demos/george",
+              "label": "Write a G-program and step through its accumulator"
+            },
+            {
+              "href": "https://github.com/chrishayuk/george",
+              "label": "Source, transcription, simulator and tutorial"
+            },
+            {
+              "href": "https://www.uraone.com/computers/deuce/deucdocs.html",
+              "label": "The manual, flow diagrams and coding sheets, on David Green’s DEUCE archive"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The two routes share the program reader and the symbol codes. Their agreement cannot check those. The interpreter now copies Hamblin’s arithmetic, so the agreement of the two is no longer independent evidence about the arithmetic: it says the model is faithful to his code, not that his code was right. An independent model, OpenAI’s Codex, reviewed the repository and checked samples of the transcription against the scans; its findings and what was done about them are in the repository.",
+            "Running Hamblin’s code needed choices the sheets cannot show. A binary digit, P31, has no column on the form, and for one class of words its value rests only on the program running. One doubtful cell is filled from the flow diagram. The three corrections are applied at run time, not written into the transcription.",
+            "All of the reading, of the manual, the flow diagrams and the coding sheets, was done by coding agents. No person has yet checked it against the pages. The transcription of the coding sheets marks 20 lines as doubtful.",
+            "The flow diagrams and coding sheets are the penultimate version of GEORGE IA. Nothing describes GEORGE II, and margin notes mention variants 1B and 1C.",
+            "The interpreter follows the manual, not Hamblin’s code, in two places: max, and the zero that a single shot gives after the square root of a negative number (his code gives 0.5).",
+            "The simulator is built from manuals, not from a DEUCE. Where they do not say, for instance the reader’s timing between its minimum and maximum, it chooses, and the choices are written down.",
+            "That Example 3 changed its range at some point is a guess. The documents do not say how the 1/48 came about, or whether anyone ran the example as printed."
+          ],
+          "principle": "A manual describes a language. Only the program says what the machine did, and the program has to be run to say it."
+        },
+        {
+          "kind": "question",
+          "text": "When a run of handwritten code disagrees with its manual, which one was GEORGE?",
+          "status": "OPEN",
+          "detail": "A disagreement has four places to look: the transcription, the simulator, the reading of DEUCE, and the 1958 program itself. Most of the disagreements found so far were traced to one of the first three and put right. A few, max and the lost sign in multiplication among them, are the program as written, the version before the last, which Hamblin may well have corrected himself."
+        }
+      ],
+      "sources": [
+        {
+          "title": "C. L. Hamblin, “GEORGE IA and II: A semi-translation programming scheme for DEUCE. Programming and Operation Manual”, University of New South Wales, c. 1958",
+          "url": "http://uraone.com/computers/deuce/GEORGEProgrammingManual.pdf",
+          "note": "23 pages, typed. The running accumulator is on printed p. 2 (PDF p. 5); the comma on p. 4 (PDF p. 7); Example 3 on pp. 7-8 (PDF pp. 10-11); the twelve cells on p. 10 (PDF p. 13); the coding table, Appendix I, on p. 18 (PDF p. 21)."
+        },
+        {
+          "title": "“GEORGE flow diagrams”, c. 1958",
+          "url": "http://uraone.com/computers/deuce/GEORGEFlowCharts.pdf",
+          "note": "52 pages, handwritten DEUCE instruction listings. Relations and logic on p. 22; ] on p. 23; skips on p. 25; rep on pp. 26-27; sin and cos on p. 38."
+        },
+        {
+          "title": "“UTECOM Programme GEORGE”, coding sheets, c. 1958",
+          "url": "http://uraone.com/computers/deuce/GEORGEProgramCode.pdf",
+          "note": "22 pages, handwritten DEUCE instructions. The sin and cos coefficients are on sheet 21, DL8, track 15/13."
+        },
+        {
+          "title": "David Green’s DEUCE archive, section GEORGE",
+          "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+          "note": "Scanned from the UTECOM originals and supplied by Robin Vowels. Downloaded on 22 November 2026."
+        },
+        {
+          "title": "English Electric, “DEUCE Programming Manual”, May 1956; “DEUCE Logical Design Manual, Part I”, NS-y-37/11-57",
+          "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+          "note": "The simulator’s sources. The multiplier is chapter 10 of the Logical Design Manual."
+        },
+        {
+          "title": "chrishayuk/george",
+          "url": "https://github.com/chrishayuk/george",
+          "note": "The interpreter, the DEUCE simulator, the transcription of the coding sheets, the word-for-word tests against Hamblin’s code, 16 example programs, a tutorial, a language server, the errata, the decisions, the reading notes and an independent review."
+        },
+        {
+          "title": "Coding-agent sessions, November 2026",
+          "note": "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george."
+        }
+      ],
+      "published": "2026-11-23"
+    },
+    "hash": "73a8b359f81671a9307ec33046b01a4d42b58980381d05c3589599251a1b3069",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-ALGOL-60",
+      "slug": "the-first-algol-60-system",
+      "kind": "notebook",
+      "title": "The first ALGOL 60 system’s run-time is missing. Its 1964 printout is not.",
+      "dek": "ALGOL 60 rebuilt from its Report, and its first implementation, Dijkstra and Zonneveld’s for the Electrologica X1, rebuilt from that system’s documents, then checked against what the X1 printed in 1964: 80 of 82 numbers to the last digit.",
+      "abstract": "A note about building an ALGOL 60 interpreter from the 1962 Revised Report with a coding agent, and then a second mode that runs programs as the first ALGOL 60 system ran them: the one Dijkstra and Zonneveld wrote for the Electrologica X1 in Amsterdam, which went into operation in 1960. The X1’s compiler survives and has been run again; the run-time routines its programs called were printed by the Mathematical Centre, but no copy has been found. So the second mode was built from what the system’s documents say those routines did, and checked two ways: against the real compiler on a simulator, and against output the X1 printed in 1964. Of the 82 numbers of its first run, it reproduces 80. The other two are last digits that sit just above a decimal tie. Both modes run in the browser, side by side.",
+      "created": "2026-11-23",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "REPORT → MANUALS → AGENT → INTERPRETER → 1964 PRINTOUT",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-CPL",
+        "N-BOHM",
+        "N-JOSS"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / MAN OR BOY",
+          "text": "ALGOL 60 is defined by a report of seventeen pages, the Revised Report of 1962. What makes it hard to implement is not the syntax but call by name: a parameter is not a value but a piece of the caller’s program, worked out again every time it is used. In 1964 Donald Knuth wrote to the Algol Bulletin with a ten-line test that would “separate the man-compilers from the boy-compilers”. He had no man-compiler himself, worked it by hand, and guessed −121, “probably wrong”. The answer compilers found is −67. I asked a coding agent to build an interpreter from the Report alone, with call by name done the way the Report’s copy rule describes it. It gives −67.",
+          "references": [
+            {
+              "label": "Revised Report on the Algorithmic Language ALGOL 60, 1962",
+              "url": "https://www.masswerk.at/algol60/report.htm"
+            },
+            {
+              "label": "Knuth, “Man or boy?”, Algol Bulletin 17, July 1964",
+              "url": "https://archive.computerhistory.org/resources/text/algol/algol_bulletin/A17/A17P7.GIF"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THE FIRST IMPLEMENTATION",
+          "text": "A report can be implemented many ways. The first implementation of ALGOL 60 was written by Edsger Dijkstra and Jaap Zonneveld at the Mathematical Centre in Amsterdam, for the Electrologica X1, and went into operation in the summer of 1960. Its compiler survives: Kruseman Aretz, who looked after the system in the 1960s, published the full text of a 1964 version in 2003, with an equivalent in Pascal, and Serge Vakulenko has since run that again on a simulator of the X1. The other half of the system is missing. The run-time routines that compiled programs called for arithmetic, for statements, procedure calls and printing were printed by the Mathematical Centre as a series of its own, and Kruseman Aretz typed them in again to rerun the system, but no copy has been found. So I asked the agent for a second mode, --x1, that runs a program the way the X1 did, as far as the system’s own documents say: the system as its 1962 manual describes it, not the first version of 1960."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE MANUAL’S RULES WERE NOT THE COMPILER’S CHECKS",
+          "text": "The X1’s user manual of 1962 lists 23 “special properties”: rules a program had to keep, such as declaring simple variables before procedures and specifying every parameter. The first version of --x1 refused programs that broke them. Then the real compiler, run on Vakulenko’s simulator, compiled a procedure declared before a variable, and Knuth’s program as printed, with five parameters unspecified, and both ran: −67. Most of the manual’s rules were advice to programmers, not checks the compiler made, though not all: it stops on a label that is a number, as the manual says it will. --x1 now warns about the rules the compiler did not check, and says that what followed on the X1 is not known."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / WHERE THE X1 PARTS FROM THE REPORT",
+          "text": "Some of the X1’s properties, and the way it stored numbers, change what a program means. In a for statement with a step, the X1 worked the step out once each time round, and the first time before assigning the starting value; the Report works it out twice each time round, after. Parameters called by value were evaluated in the order of their specifications, not the order written. Only the first nine characters of a name counted. An integer procedure could return 1.5. A real kept a 40-bit mantissa in store, so x := 1/3 followed by x − 1/3 gives about 1.5⏨−13, not 0. One example program, x1-probes, prints a line for each of these, six in all, and every line differs between the two modes."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / A REAL IS NEVER ZERO",
+          "text": "An extract of the X1 user manual, printed in an appendix of Kruseman Aretz’s comparison of the X1 and X8 systems, describes the arithmetic of the lost run-time routines. On the X1 a real number is never 0: zero as a real is the least positive number the machine has, and “the relation ‘a = 0’ can never have the value true for variable a of type real”. So 1/0 is not an error. A real too large to store becomes the largest one there is, and an integer result too large for 26 bits quietly becomes a real. --x1 does all of this, each rule with the sentence it comes from."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / AGAINST THE REAL COMPILER",
+          "text": "Vakulenko’s simulator runs the real 1964 compiler, but with run-time routines he reconstructed himself, as --x1’s are. So a program run there is evidence about the X1 only where the compiler decides the answer. The agent wrote 39 probe programs, each asking one question, and ran them on both. Of the 14 the compiler decides, such as the order in which f(1) − f(2) × f(3) calls f, all agree, and so do the 7 decided by both halves. Of the 18 the run-time decides, 7 differ. One is a jump the manual leaves undefined. In the other six the X1 manual’s words are on the side of --x1: x1sim’s abs returns a real where the manual says it keeps the type of its argument, and its sqrt refuses a negative number where the manual says it takes the absolute value.",
+          "references": [
+            {
+              "label": "Vakulenko, the X1 ALGOL compiler and simulator",
+              "url": "https://github.com/sergev/x1-algol-compiler"
+            },
+            {
+              "label": "The 39 probes, three ways",
+              "url": "https://github.com/chrishayuk/algol-60/tree/main/compare"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHAT THE X1 PRINTED IN 1964",
+          "text": "Two reconstructions agreeing is not the X1. What would settle the run-time is the X1’s own output, and some survives. Zonneveld’s thesis of 1964, Automatic Numerical Integration, prints his program for the motion of the five outer planets with what the X1 printed for it, four runs on three pages. --x1 had been checked against a version of that program on the simulator all along: the one in Kruseman Aretz’s report, which types its output where the thesis’s punches it, with the same layout. The first run fills page 103 and has 82 numbers, besides the tolerance and the times. --x1 prints 80 of them digit for digit. The other two differ in the last digit, 6.641455425 against 6.641455426 and 16.281370896 against 16.281370897, and both values lie a hair above a decimal tie, less than one unit of the 40-bit mantissa, where the answer turns on how precisely the X1 converted binary to decimal, which is not known. Making stores truncate instead of round would explain the first, but two other input values the X1 printed back exactly would then come out one lower; so stores round, as the manual says.",
+          "references": [
+            {
+              "label": "Zonneveld, Automatic Numerical Integration, MC Tract 8, 1964, pp. 102–107",
+              "url": "https://ir.cwi.nl/pub/13099"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "08 / WHAT THE PAGE CORRECTED",
+          "text": "The page also corrected the reconstruction. --x1 had put the sign of a fixed-point number beside its first digit; the X1 put it in the first column, + 3.429474152. It had printed the X1’s smallest real as .3094⏨−616; Dijkstra’s ALGOL course says such a number is typed as “the integer 0 or ‘inf’”, and page 106 shows the mass of Pluto, set to zero, as a plus sign and a 0. And where the documents are silent, the designer can be. --x1 rounds a real that is exactly halfway between two integers away from zero. Dijkstra’s course says that for an integer x, x := 7/2 “is undefined: x can just as well become 3 as 4”. The X1 promised nothing, so the choice is recorded as --x1’s own.",
+          "references": [
+            {
+              "label": "Dijkstra, Cursus programmeren in ALGOL 60, 2nd edition, 1962",
+              "url": "https://ir.cwi.nl/pub/9591"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "Both modes run in the browser, compiled from the same Rust source as the command-line version, each program twice, side by side, with the lines that differ marked. For the outer planets a third column holds the X1’s page of 1964.",
+          "links": [
+            {
+              "href": "/demos/algol-60?example=x1-probes",
+              "label": "Where the X1 parts from the Report — interactive study"
+            },
+            {
+              "href": "/demos/algol-60?example=jaz164",
+              "label": "The outer planets, against the X1’s printout of 1964"
+            },
+            {
+              "href": "https://github.com/chrishayuk/algol-60/blob/main/docs/x1.md",
+              "label": "Every X1 rule and the sentence it comes from"
+            },
+            {
+              "href": "https://github.com/chrishayuk/algol-60/blob/main/docs/decisions.md",
+              "label": "What the documents leave undecided, and what was chosen"
+            },
+            {
+              "href": "https://github.com/chrishayuk/algol-60",
+              "label": "Source, examples and the probes"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "--x1 is not the X1. The compiler’s decisions were checked against the real compiler; the run-time’s are rebuilt from what documents say, and documents describe, they do not execute.",
+            "The 1964 page is one program. It exercises real arithmetic, procedures and printing, not switches, own variables or deep recursion. Agreement on 80 of its numbers says nothing about what it does not use.",
+            "The two last digits are explained, not reproduced. The explanation, a conversion of unknown precision, fits both, but another rule might too.",
+            "Everything here was read and built by a coding agent over two days, including the transcription of the 1964 page from the scan’s text layer. The page is linked so that it can be checked by eye.",
+            "The original run-time routines were printed by the Mathematical Centre, but I have not found them. Gauthier van den Hove’s 2019 thesis has a chapter on how the X1 executed ALGOL 60 programs; it is held back until 2027, and was not read. It may answer what this cannot.",
+            "Nothing here is claimed as new. Kruseman Aretz recovered and described the compiler, and Vakulenko made it run again; this project builds on both."
+          ],
+          "principle": "A reconstruction checked only against another reconstruction has been checked for consistency. A page the machine printed is a different kind of witness."
+        },
+        {
+          "kind": "question",
+          "text": "How much of a lost run-time can be rebuilt from what its documents say, and how would you know?",
+          "status": "OPEN",
+          "detail": "For the X1 the answer so far is: enough to reproduce 80 of 82 printed numbers, with the other two at the limit of what the documents fix. Two more of Zonneveld’s programs, with their X1 output, are in a 1963 report of the Mathematical Centre, and are the next test. The run-time’s own text, if it surfaces, would be the last."
+        }
+      ],
+      "sources": [
+        {
+          "title": "P. Naur (ed.), “Revised Report on the Algorithmic Language ALGOL 60”, 1962",
+          "url": "https://www.masswerk.at/algol60/report.htm"
+        },
+        {
+          "title": "D. E. Knuth, “Man or boy?”, Algol Bulletin 17.2.4, July 1964, p. 7",
+          "url": "https://archive.computerhistory.org/resources/text/algol/algol_bulletin/A17/A17P7.GIF"
+        },
+        {
+          "title": "F. E. J. Kruseman Aretz, “The Dijkstra–Zonneveld ALGOL 60 compiler for the Electrologica X1”, CWI report SEN-N0301, 2003",
+          "url": "https://ir.cwi.nl/pub/4155",
+          "note": "The full text of a 1964 version of the compiler, with a Pascal equivalent, the 23 special properties of the 1962 user manual (section 1.3) and the outer-planets program (appendix B)."
+        },
+        {
+          "title": "F. E. J. Kruseman Aretz, “A comparison between the ALGOL 60 implementations on the Electrologica X1 and the Electrologica X8”",
+          "url": "https://ir.cwi.nl/pub/13677",
+          "note": "Its appendix B.1 is an extract of the X1 user manual describing the arithmetic of the run-time routines: real zero, overflow, integer intermediates."
+        },
+        {
+          "title": "E. W. Dijkstra, “Cursus programmeren in ALGOL 60”, 2nd edition, Mathematisch Centrum, February 1962",
+          "url": "https://ir.cwi.nl/pub/9591",
+          "note": "x := 7/2 is undefined for an integer x."
+        },
+        {
+          "title": "E. W. Dijkstra, “Cursus programmeren in ALGOL 60”, 11th edition, Mathematisch Centrum, undated",
+          "url": "https://ir.cwi.nl/pub/9606",
+          "note": "Pp. 17–18, shown in the note: the same passage on 7/2. Pp. 68–69 of the scan: numbers beyond the range of variables typed as 0 or ‘inf’."
+        },
+        {
+          "title": "J. A. Zonneveld, “Automatic Numerical Integration”, Mathematical Centre Tracts 8, 1964",
+          "url": "https://ir.cwi.nl/pub/13099",
+          "note": "Pp. 102–107: the outer-planets program, JAZ164, and what the X1 printed for it. The first run (eps = 10⁻³) is on p. 103, two more tolerances on p. 104, and the run with the mass of Pluto set to zero on p. 106."
+        },
+        {
+          "title": "S. Vakulenko, x1-algol-compiler",
+          "url": "https://github.com/sergev/x1-algol-compiler",
+          "note": "The 1964 compiler in C, with a simulator of the X1 and a reconstructed run-time."
+        },
+        {
+          "title": "chrishayuk/algol-60, release v0.1.1",
+          "url": "https://github.com/chrishayuk/algol-60",
+          "note": "The interpreter, --x1 with a source for every rule, the 39 probes run three ways, the 1964 output as a test, and the playground."
+        },
+        {
+          "title": "Coding-agent sessions, 22–23 November 2026",
+          "note": "The interpreter, --x1, the probes and the transcription of the 1964 output were made in these sessions. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+        }
+      ],
+      "published": "2026-11-23"
+    },
+    "hash": "cb951f55c42e2692ab6c64739b5d0c20e027c363e4560489062c78cbd9d39bc7",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-RHIND-PAPYRUS",
+      "slug": "a-scribe-wrote-15-where-his-working-says-14",
+      "kind": "notebook",
+      "title": "A scribe wrote 15 where his working says 14",
+      "dek": "The Rhind Mathematical Papyrus shows its working, about 1550 BCE. Transcribed by a coding agent and checked exactly, 845 of 956 lines agree with the working above them. Most of the rest is a notation the editions read differently, or is already known.",
+      "abstract": "The Rhind Mathematical Papyrus writes out its working, so its figures can be worked again. This is a note about a program, rhind, that checks each figure the notation can hold, as an exact fraction, against what the working above it gives, under interpretive choices it lists; and, separately, writes working the scribe’s way, by doubling, halving, two-thirds and the papyrus’s own table. It ran over a transcription of the papyrus from two editions, Chace (1929) and Peet (1923), made by a coding agent and its sub-agents. It checks 956 lines: 845 agree with the working and 111 do not. Of the 113 diagnostic records on those lines, 75 differ only in the sign for “part”, a notation Chace says need not be an error; 4 are ticks; 34 are figures, most of them pointed out by Chace or Peet. In Problem 27 the scribe wrote 15 where four times 3 2̅ is 14, as Peet notes. A second model reviewed the reconstruction independently, found no misread digit at the 72 places it checked, and found the first census and several of the checker’s rules unsound; this note gives the numbers after those were fixed. No person has checked the transcription, and nothing here is claimed as new. The papyrus can be checked page by page in the browser.",
+      "created": "2026-11-22",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "PAPYRUS → EDITIONS → AGENT → TRANSCRIPTION → RHIND → REVIEW",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-TURING-ACE",
+        "N-JOSS",
+        "N-BOHM"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / FIFTEEN FOR FOURTEEN",
+          "text": "The Rhind Mathematical Papyrus was copied by the scribe Ahmose about 1550 BCE, by his own account from an older original. It opens with a table of 2 divided by each odd number from 3 to 101, and goes on to problems: loaves shared among men, quantities and their parts, granaries, fields and pyramids. The working is written out, in columns of doublings with a tick against the rows to be added, so its figures can be worked again. In Problem 27 a quantity and its fifth make 21. The scribe finds 3 2̅ and multiplies it by 5, and his row for 4 has 15, where four times 3 2̅ is 14. Peet marks it (sic); Chace prints 15 without comment. The answer the scribe gives in words, 17 2̅, is 3 2̅ and 14. I asked a coding agent to transcribe the working from two editions and to build a program, rhind, that checks every figure the notation can hold against the working above it. This is not a calculator for Egyptian fractions. It is a reading of one document: what the scribe wrote, what his working gives, and where they part.",
+          "references": [
+            {
+              "label": "rhind, the program and the transcription",
+              "url": "https://github.com/chrishayuk/rhind-papyrus"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / A CHECK AND A GENERATOR",
+          "text": "The papyrus writes fractions only as parts of one, with two-thirds the one exception: 5̅, the sign for “part” over 5, is a fifth. It divides by multiplying: to divide, the scribe doubles the divisor until the rows can be picked to make the dividend, and to double an odd part he looks it up in the table at the head of the papyrus. rhind does two separate things. It checks: each figure the scribe wrote is compared, as an exact fraction, with what the working above it gives. That is exact arithmetic under the interpretive choices rhind decisions lists, not a trace of the scribe’s operations, so a disagreement can come from the figure, the transcription or one of those choices. And it works: where a page asks for a multiplication or a division, it writes the working the scribe’s way, by doubling, halving, two-thirds and the table. A transcription never corrects the scribe: where the papyrus has 15, the file has 15."
+        },
+        {
+          "kind": "observation",
+          "label": "03 / 956 LINES OF WORKING",
+          "text": "These are counts against this project’s transcription, under the rules in rhind decisions. rhind checks 956 lines of working across 91 problem sections and the two tables: 845 agree with the working, 111 do not. Those 111 lines give 113 diagnostic records, since one written figure can give two. They are of three kinds. In 75 the figure differs from the working only by the sign for “part”: 30 where 3̅0̅ is meant, or the reverse. In 4 the total written is right for other rows than those ticked. In 34 a figure differs in more than its part sign."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / THE SIGN FOR “PART”",
+          "text": "The first kind is not a count of errors. Chace (vol. II, p. xi) says the part sign is often left off where the context makes the fraction clear, and that its omission need not be an error; Peet (p. 38) counts wrong dots among the scribe’s errors and corrects them silently. The editions disagree about what these are, and rhind reports them apart, as notation."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / THE 34 FIGURES",
+          "text": "Most of the 34 are known: 2 ÷ 79 (2̅3̅3̅ and 4̅1̅6̅ for 2̅3̅7̅ and 3̅1̅6̅), No. 27 (four times 3 2̅ written 15), No. 31 (a total of 99 for 97), No. 43 (4̅5̅ for 1̅8̅0̅), No. 58 (1 4̅ for 1 2̅ 4̅), No. 63 (113 3̅ for 133 3̅ in a list totalled 700), No. 79 (2301 for 2401), and the 9̅-for-1̅4̅ sequence of Nos. 10 to 14, all pointed out by Chace or Peet. For each record, rhind errata lists the explanations that fit, not the cause: one hieratic number sign for another, the multiplier one sign away from the one written, one figure of a list, and others; of all 113, none of these fits 13. The transcribers’ notes quote an edition commenting at 97 of the 113, but that is a keyword search of the notes, not a census of what Chace and Peet say, and the 16 it misses are not “unnoted”."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / SIXTY FOR EIGHTY",
+          "text": "“One sign for another” is inferred from the decimal places of the numbers, not from the shapes of the hieratic signs. Among the candidates rhind emits, the pair that recurs is 60 for 80: 6̅6̅ for 8̅6̅ in 2 ÷ 43, 63 for 83 in 2 ÷ 83 and 1̅6̅6̅ for 1̅8̅6̅ in 2 ÷ 93, five places. Chace saw this: his note to 2 ÷ 43 names all five. No other pair is emitted more than twice."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / 2 ÷ 59",
+          "text": "The red answer at the head of the entry for 2 ÷ 59 has 2̅2̅6̅; the working under it has 2̅3̅6̅, and 4 × 59 is 236. Chace prints 226 in the answer and 236 in the working; Peet prints 236 in both, without remark on this page. The transcriber read 226 on Chace’s plate before rhind could run, and the review read it again. This is a discrepancy between the editions, and a question for the British Museum photograph. It is not shown to be an error of the scribe’s."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / THE ROUTES",
+          "text": "rhind routes asks whether the scribe sets out a column the way rhind’s generator would. The problems have 139 columns of two rows or more. 128 can be read in full, and 65 of those begin with a row for 1, say what they multiply and tick at least one row; only those 65 are compared, by their multipliers and ticks. Doubling alone gives the same multipliers and ticks in 40. Three conventions, each visible in the papyrus, bring it to 47: the tens done by a row for 10, 3̅ taken straight from the first row, and a division read as halving. The targets are often taken from the scribe’s own ticks, so this describes the subset, and does not validate the procedure. The columns that differ may differ because of the transcription or the model as well as the scribe’s choice."
+        },
+        {
+          "kind": "observation",
+          "label": "09 / THE TABLE OF 2 ÷ n",
+          "text": "Why does the papyrus write 2 ÷ 13 as 8̅ 5̅2̅ 1̅0̅4̅, when 7̅ 9̅1̅ has fewer parts? rhind 2/n runs candidate rules for every odd n from 5 to 101 against the 49 entries, with at most four parts and none past 1000. The largest part that fits, again and again, gives 4 of 49. Fewest parts gives 25 or 29, depending on how ties are broken. Writing 2/n as m̅ + (2m − n)/mn, with 2m − n made of up to three divisors of m, gives 32, and 34 if the smallest last part is preferred. The scores depend on the bounds: with parts up to 10,000, the first divisor rule falls from 32 to 25. The targets take 2 ÷ 43, 59 and 93 as the working, not the answers, gives them. No rule here gives 2 ÷ 13 or 2 ÷ 95. Agreement describes a rule; it does not show the scribe used it. Rules of these kinds have been proposed for a long time, and none here is claimed to be any one scholar’s, or new."
+        },
+        {
+          "kind": "observation",
+          "label": "10 / AN INDEPENDENT REVIEW",
+          "text": "A second model, OpenAI’s Codex, reviewed the first release independently. It checked 72 places in the transcription against the scans of both editions, wrote probe pages to make the checker fail, recomputed the 2 ÷ n scores with a program of its own, and read the code. It found no misread digit, and confirmed 2 ÷ 59 and the five 60-for-80 places. It also found the first census unsound. That release called the part sign the commonest slip; split the figures into those the editions point out and those they do not, by what was only a keyword search; and concluded, from a test of whether an error was carried into the total, that the scribe worked from the right figure and wrote another. That test was wrong. Fixed, it applies at 12 places, 11 of them a part sign, and says nothing general about how the scribe worked. Several of the checker’s rules put errors on correct figures or let wrong ones through. Every finding was checked and acted on, and the numbers in this note are after those changes.",
+          "references": [
+            {
+              "label": "The independent review, and what was done about each finding",
+              "url": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "rhind runs in the browser, compiled unchanged from the same Rust source as the command-line version: every page of the papyrus, checked, with the figures that do not agree marked and the explanations that fit them; the transcription in an editor whose colours, problems and hover help come from rhind’s language server, running in the page too; and a box that works any multiplication or division the scribe’s way, a row at a time.",
+          "links": [
+            {
+              "href": "/demos/rhind-papyrus?page=27",
+              "label": "Problem 27, checked — interactive study"
+            },
+            {
+              "href": "/demos/rhind-papyrus?page=table-2n-b",
+              "label": "The table of 2 ÷ n, 51 to 101"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus/tree/main/papyrus",
+              "label": "The transcription, page by page"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus/tree/main/sources/notes",
+              "label": "The notes on each range, with every disagreement between the editions"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md",
+              "label": "The independent review"
+            },
+            {
+              "href": "https://github.com/chrishayuk/rhind-papyrus",
+              "label": "Source, tutorial and language server"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The papyrus itself was not read. Two editions were, Chace’s and Peet’s, from page images. The transcription was made by a coding agent and its sub-agents, and reviewed at 72 places by a second model. No person has checked it against the pages.",
+            "Every count here is against this transcription, under the interpretive choices rhind decisions lists, not against the papyrus. A disagreement can come from the figure, the transcription or one of those choices.",
+            "The 75 part-sign records are a notation the editions read differently, not errors, and are not a rate of anything.",
+            "There is no count here of figures the editions do not point out. The first release gave one; it came from a keyword search of the transcribers’ notes, and is withdrawn.",
+            "The explanations rhind lists are ways a figure could have come to differ, not records of what happened. “One sign for another” is inferred from decimal places, not from the shapes of the signs.",
+            "2 ÷ 59 is a discrepancy between the editions and a question for the British Museum photograph, not a discovery and not shown to be the scribe’s error.",
+            "The routes describe 65 eligible columns of 139 and do not validate the procedure; the 2 ÷ n scores depend on the bounds chosen.",
+            "The papyrus has been edited and studied for 150 years: Eisenlohr, Peet, Chace, Gillings, Robins and Shute, and much since. Annette Imhausen’s Ägyptische Algorithmen (2003) reads the problems as algorithms, the idea this project runs with. It was not read, so nothing here says how close it is. The rules for the 2 ÷ n table have a literature of their own, and the rules here have not been checked against it. Nothing here is claimed as new until it has been checked against that literature and the photographs.",
+            "What does not fit the notation is kept as the scribe’s words in quotes and not computed: the hundred-hekat notation of Problems 68 to 86, ditto marks, drawings, and some columns set side by side."
+          ],
+          "principle": "Running the working shows where the figures and the working part. It does not show who made the difference: the scribe, the editors, the transcriber, or the rules of the check."
+        },
+        {
+          "kind": "question",
+          "text": "Where a copy’s figures and its working part, how much of the difference is on the papyrus?",
+          "status": "OPEN",
+          "detail": "rhind can say exactly where this transcription’s figures and its working disagree, and list the explanations that fit. It cannot say whether a difference is the scribe’s, the editions’ or the transcriber’s, nor whether a dropped part sign was an error at all; the editions themselves disagree about that. Only the photographs, read by someone who reads hieratic, can settle the places where they differ."
+        },
+        {
+          "kind": "observation",
+          "label": "11 / WHAT THE WORKING HAS BECOME",
+          "text": "Nothing in this note is a new fact about the papyrus. What has changed is the form its working is in. The 956 lines are now a structured, executable object: each row a multiplier and a product, each tick a choice of rows, each total a sum, and every figure worked again, exactly, from the rows above it. A step of the working is no longer only something to read and remark on; it can be challenged. Change a figure or a tick, as the steps under Problem 27 do, and the check says at once what follows and what no longer holds. The same check runs over every page, so a question about one figure becomes a question asked of all of them, under rules that are written down, answered with a count, and asked again when a rule or a reading changes, as it was after the independent review. The editions point out the scribe’s slips where they meet them, and most of the 34 figures are theirs. What this adds is a way to test the intermediate steps systematically, every one the notation can hold, and anyone can do it in the browser."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+          "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+          "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. The part sign is discussed on printed p. xi. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+        },
+        {
+          "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+          "url": "https://archive.org/details/Peet_1923",
+          "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. Wrong dots are discussed on p. 38. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+        },
+        {
+          "title": "chrishayuk/rhind-papyrus, release v0.1.1",
+          "url": "https://github.com/chrishayuk/rhind-papyrus",
+          "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+        },
+        {
+          "title": "Independent review of release 0.1.0 by OpenAI Codex, 22–23 November 2026",
+          "url": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md",
+          "note": "72 places checked against the scans, probe pages and the code; each finding, and what was done about it. Release 0.1.1 is the result."
+        },
+        {
+          "title": "Coding-agent session, 22–23 November 2026",
+          "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+        }
+      ],
+      "published": "2026-11-23",
+      "revised": "2026-11-23"
+    },
+    "hash": "a07d156de46c0e274c0362cb236afdecf769f1ec39ae9548b9593357e8cd248d",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
       "id": "N-NINE-CHAPTERS",
       "slug": "the-nine-chapters-writes-18-52-as-the-board-leaves-it",
       "kind": "notebook",
