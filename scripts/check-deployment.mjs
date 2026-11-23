@@ -215,7 +215,7 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
 const systems=await request("/systems");
 assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
 assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus", "/demos/george"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
 const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
@@ -254,7 +254,7 @@ assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
 assert.ok(home.body.includes('href="/notebook?collection=languages"'), 'home offers the Languages collection');
 const languages=await request("/notebook?collection=languages");
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus", "/demos/george"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
 assert.ok((await request("/notebook/the-port-matched-the-reference-was-wrong")).body.includes('href="/demos/mouse"'), 'Mouse note links to the playground');
 const mouse=await request("/demos/mouse");
 assert.equal(mouse.status,200);
@@ -320,6 +320,14 @@ assert.ok(rhindNote.body.includes('href="/demos/rhind-papyrus"'),"the Rhind papy
 assert.ok(!rhindNote.body.includes("UNLISTED PREVIEW"),"the Rhind papyrus note is not a preview");
 assert.ok(!rhindNote.body.includes('content="noindex, nofollow"'),"the Rhind papyrus note may be indexed");
 assert.ok((await request("/sitemap.xml")).body.includes("/notebook/a-scribe-wrote-15-where-his-working-says-14"),"the Rhind papyrus note is in the sitemap");
+// GEORGE: the playground and its assets, and the working note links to it.
+const george=await request("/demos/george");
+assert.equal(george.status,200);
+assert.match(george.body,/GEORGE interpreter/);
+assert.match(george.body,/name="robots" content="noindex, follow"/);
+assert.match(george.body,/data-george-editor/,"the playground uses the language-aware editor");
+for (const asset of ["/demos/george/george.wasm","/demos/george/george-lsp.wasm","/demos/george/worker.js","/demos/george/lsp-worker.js","/demos/george/george.js","/demos/george/wasi.js","/demos/george/examples.json","/media/notebook/george/manual-p11-example-3-simpson-vector.jpg","/media/notebook/george/manual-p21-coding-table.jpg","/media/notebook/george/coding-sheet-21-sin-cos-coefficients.jpg","/media/notebook/george/flow-diagram-p22-relations-and-logic.jpg"]) assert.equal((await request(asset)).status,200,asset);
+assert.ok((await request("/notebook/a-handwritten-program-from-1958-runs-again")).body.includes('href="/demos/george"'), 'GEORGE note links to the playground');
 const bohm=await request("/demos/bohm");
 assert.equal(bohm.status,200);
 assert.match(bohm.body,/Böhm’s language/);

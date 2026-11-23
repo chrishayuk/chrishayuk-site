@@ -47,7 +47,7 @@ const of = (kind: PublicationRecord["kind"]) =>
 
 /** Which note each language playground belongs to: the languages collection
  * lists the notes and the playgrounds side by side, in the same order. */
-const playgroundNotes: Record<string, string> = { Mouse: "N-MOUSE", BASIC: "N-BASIC", "Böhm": "N-BOHM", CPL: "N-CPL", JOSS: "N-JOSS", "Turing’s ACE": "N-TURING-ACE", "IPL-V": "N-IPLV", "Laning and Zierler": "N-LANING-ZIERLER", "Rhind Papyrus": "N-RHIND-PAPYRUS" };
+const playgroundNotes: Record<string, string> = { Mouse: "N-MOUSE", BASIC: "N-BASIC", "Böhm": "N-BOHM", CPL: "N-CPL", JOSS: "N-JOSS", "Turing’s ACE": "N-TURING-ACE", "IPL-V": "N-IPLV", "Laning and Zierler": "N-LANING-ZIERLER", "Rhind Papyrus": "N-RHIND-PAPYRUS", GEORGE: "N-GEORGE" };
 
 /** The playgrounds of the languages collection. They are tools, not records:
  * each runs the interpreter its note was written about, in the browser, and

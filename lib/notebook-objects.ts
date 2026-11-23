@@ -34,6 +34,7 @@ export const notebookObjectSelections: Record<string, number[]> = {
  'N-TURING-ACE': [4, 5, 6, 7],
  'N-IPLV': [3, 4, 6, 7],
  'N-RHIND-PAPYRUS': [3, 5, 6, 10],
+ 'N-GEORGE': [2, 3, 5, 6],
  'N-BASIC': [1, 3, 9, 10],
  'N-ADDRESS-BUILD': [2, 3, 4, 5, 6],
  'N-MAP': [5, 15, 19, 20],
