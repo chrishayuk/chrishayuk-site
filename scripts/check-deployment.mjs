@@ -215,7 +215,7 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
 const systems=await request("/systems");
 assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
 assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus", "/demos/nine-chapters"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
 const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
@@ -254,7 +254,7 @@ assert.match(demo.body,/Paris/);
 assert.match(demo.body,/name="robots" content="noindex, follow"/);
 assert.ok(home.body.includes('href="/notebook?collection=languages"'), 'home offers the Languages collection');
 const languages=await request("/notebook?collection=languages");
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus", "/demos/nine-chapters"]) assert.ok(languages.body.includes(`data-collection-play="${play}"`), `Languages collection links to ${play}`);
 assert.ok((await request("/notebook/the-port-matched-the-reference-was-wrong")).body.includes('href="/demos/mouse"'), 'Mouse note links to the playground');
 const mouse=await request("/demos/mouse");
 assert.equal(mouse.status,200);
@@ -320,6 +320,18 @@ assert.ok(rhindNote.body.includes('href="/demos/rhind-papyrus"'),"the Rhind papy
 assert.ok(!rhindNote.body.includes("UNLISTED PREVIEW"),"the Rhind papyrus note is not a preview");
 assert.ok(!rhindNote.body.includes('content="noindex, nofollow"'),"the Rhind papyrus note may be indexed");
 assert.ok((await request("/sitemap.xml")).body.includes("/notebook/a-scribe-wrote-15-where-his-working-says-14"),"the Rhind papyrus note is in the sitemap");
+// The Nine Chapters: the playground and its assets, and its working note, published and listed.
+const nineChapters=await request("/demos/nine-chapters");
+assert.equal(nineChapters.status,200);
+assert.match(nineChapters.body,/The Nine Chapters,/);
+assert.match(nineChapters.body,/name="robots" content="noindex, follow"/);
+for (const asset of ["/demos/nine-chapters/jiuzhang.wasm","/demos/nine-chapters/wasi.js","/demos/nine-chapters/worker.js","/demos/nine-chapters/lsp-worker.js","/demos/nine-chapters/corpus.json","/media/notebook/nine-chapters/p06-p07-problem-2-answer.jpg","/media/notebook/nine-chapters/p14-problem-6-procedure.jpg","/media/notebook/nine-chapters/p32-seventy-seven-suan.jpg","/media/notebook/nine-chapters/p48-one-hundred-forty-five-suan.jpg"]) assert.equal((await request(asset)).status,200,asset);
+const nineChaptersNote=await request("/notebook/the-nine-chapters-writes-18-52-as-the-board-leaves-it");
+assert.equal(nineChaptersNote.status,200);
+assert.ok(nineChaptersNote.body.includes('href="/demos/nine-chapters"'),"the Nine Chapters note links to the playground");
+assert.ok(!nineChaptersNote.body.includes("UNLISTED PREVIEW"),"the Nine Chapters note is not a preview");
+assert.ok(!nineChaptersNote.body.includes('content="noindex, nofollow"'),"the Nine Chapters note may be indexed");
+assert.ok((await request("/sitemap.xml")).body.includes("/notebook/the-nine-chapters-writes-18-52-as-the-board-leaves-it"),"the Nine Chapters note is in the sitemap");
 const bohm=await request("/demos/bohm");
 assert.equal(bohm.status,200);
 assert.match(bohm.body,/Böhm’s language/);
