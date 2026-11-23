@@ -195,6 +195,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "The Rhind Mathematical Papyrus, about 1550 BCE, writes out its working. Transcribed by a coding agent and checked exactly, 845 of 956 lines agree with it; most of the rest is a dropped part sign, which Chace says need not be an error, or figures the editions already note. Check any page in your browser.",
   concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
+ "N-ALGOL-60": {
+  subject: "ALGOL 60 rebuilt from the 1962 Revised Report with a coding agent, and its first implementation, the Dijkstra–Zonneveld system for the Electrologica X1, rebuilt from that system’s documents because its run-time routines were never published, then checked against the real compiler on a simulator and against output the X1 printed in 1964",
+  question: "How much of a lost run-time can be rebuilt from what its documents say, and how would you know?",
+  searchTitle: "The First ALGOL 60 System, Rebuilt from Its Documents and Checked Against Its 1964 Printout",
+  description: "Dijkstra and Zonneveld’s ALGOL 60 for the Electrologica X1 ran in 1960; its run-time routines were never published. Rebuilt from its manuals with a coding agent, it reproduces 80 of the 82 numbers the X1 printed for Zonneveld’s outer planets in 1964. Run any program both ways in your browser.",
+  concepts: ["ALGOL 60", "Edsger Dijkstra", "Jaap Zonneveld", "Electrologica X1", "Mathematical Centre Amsterdam", "call by name", "man or boy test", "Donald Knuth", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
 
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
