@@ -1462,5 +1462,41 @@
         "note": "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george."
       }
     ]
+  },
+  {
+    "id": "N-RHIND-PAPYRUS",
+    "version": "1.1",
+    "recordHash": "a07d156de46c0e274c0362cb236afdecf769f1ec39ae9548b9593357e8cd248d",
+    "revision": {
+      "kind": "clarification",
+      "summary": "The note is easier to follow, after a reader's review; no count or claim changes. A ledger before the counts shows what was checked, what was left out and what each count is of (lines, columns, table entries); three steps under Problem 27 run the page as printed, with 14 for 15 and with a tick taken off, in the real checker; rhind's language server is shown over the 15, as an editor shows it; and a closing section says what has been made: the working as a structured, executable object whose steps can be challenged and tested systematically, without claiming anything new about the papyrus.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+        "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+        "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. The part sign is discussed on printed p. xi. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+      },
+      {
+        "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+        "url": "https://archive.org/details/Peet_1923",
+        "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. Wrong dots are discussed on p. 38. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+      },
+      {
+        "title": "chrishayuk/rhind-papyrus, release v0.1.1",
+        "url": "https://github.com/chrishayuk/rhind-papyrus",
+        "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+      },
+      {
+        "title": "Independent review of release 0.1.0 by OpenAI Codex, 22–23 November 2026",
+        "url": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md",
+        "note": "72 places checked against the scans, probe pages and the code; each finding, and what was done about it. Release 0.1.1 is the result."
+      },
+      {
+        "title": "Coding-agent session, 22–23 November 2026",
+        "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]
