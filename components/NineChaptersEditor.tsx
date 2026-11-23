@@ -38,8 +38,9 @@ let worker: Worker | null = null;
 let nextId = 0;
 const waiting = new Map<number, (answer: Answer | null) => void>();
 
-/** Opens `text` in the language server and asks it the given requests. */
-function ask(text: string, requests: { method: string; params?: object }[]): Promise<Answer | null> {
+/** Opens `text` in the language server and asks it the given requests. The
+ * hover card in the note (NineChaptersHover) asks through it too. */
+export function ask(text: string, requests: { method: string; params?: object }[]): Promise<Answer | null> {
   if (!worker) {
     worker = new Worker(`${FILES}/lsp-worker.js`, { type: "module" });
     worker.onmessage = (event: MessageEvent<Reply>) => {

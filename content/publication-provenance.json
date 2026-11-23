@@ -1421,10 +1421,10 @@
   {
     "id": "N-NINE-CHAPTERS",
     "version": "1.0",
-    "recordHash": "d35ee386d4dedb6d3ce5d4bfd7f44f74e44e529c22755dac7009ca6e0a29ad01",
+    "recordHash": "d6381780806ac2a039c67ac627d9f3a5a70060ed5d52233a3ee02ae09e1f11a1",
     "revision": {
       "kind": "initial",
-      "summary": "First published, against nine-chapters a71e4bb, after an independent review by a second model that found no mistranscription and made the checker give a false ✓, since fixed: chapter 8 of the Nine Chapters on the Mathematical Art, as transcribed from the Sibu congkan reprint of the Weiboxie edition by a coding agent, worked on a counting board as the text says; of 39 statements the board reaches on 26 pages, 38 agree, the one that does not being Problem 6 by this edition's signs. The answers are written over one denominator each, not always in lowest terms; Problem 2's 52 is the 法 as the board leaves it. Counts are against a transcription no person has checked; nothing is claimed as new."
+      "summary": "First published, against nine-chapters 542b9ad, after an independent review by a second model that found no mistranscription and made the checker give a false ✓, since fixed, and a literature check by a second model: chapter 8 of the Nine Chapters on the Mathematical Art, as transcribed from the Sibu congkan reprint of the Weiboxie edition by a coding agent, worked on a counting board as the text says; of 39 statements the board reaches on 26 pages, 38 agree, the one that does not being Problem 6 by this edition's signs, which Li Huang corrected and Chemla and Guo (2004) print. The answers are written over one denominator each, not always in lowest terms; Problem 2's 52 is the 法 as the board leaves it, and Hart (2011) relates the denominators to the board. Liu Hui's 77 passage fails as printed; Chemla and Guo emend it and Guo (2020) works it to 77, which was not run here. Counts are against a transcription no person has checked; nothing is claimed as new."
     },
     "sources": [
       {
@@ -1438,14 +1438,39 @@
         "note": "A transcription of the same pages, marked unproofread; used to find places, never for figures."
       },
       {
-        "title": "chrishayuk/nine-chapters, commit a71e4bb",
+        "title": "chrishayuk/nine-chapters, commit 542b9ad",
         "url": "https://github.com/chrishayuk/nine-chapters",
-        "note": "jiuzhang, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review. jiuzhang verify, answers, counts and readings print every result in this note."
+        "note": "jiuzhang, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review and the literature check. jiuzhang verify, answers, counts and readings print every result in this note; the program and the playground are unchanged since commit a71e4bb."
       },
       {
         "title": "Independent review of commit 8532977 by OpenAI Codex, 23 November 2026",
         "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md",
         "note": "The answers, Problem 6’s signs, the commentary figures, the 77 passage and the four counts checked against the scans; the tables and censuses reproduced; probe pages that made the checker fail. Each finding and what was done about it; the reviewer’s report as written is at https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review-report.md. Commit a71e4bb is the result."
+      },
+      {
+        "title": "Literature check by OpenAI Codex with web search, 23 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-check.md",
+        "note": "A search for each of the project’s results in the literature, with the passages read and the sources it could not open. “Not found” there means not found in what could be read."
+      },
+      {
+        "title": "李潢 (Li Huang), 九章算術細草圖說, juan 8",
+        "note": "On Problem 6: 正正皆當作負. Read by the literature check in an online transcription, not by this project."
+      },
+      {
+        "title": "K. Chemla and Guo Shuchun, “Les neuf chapitres: le classique mathématique de la Chine ancienne et ses commentaires”, Dunod, 2004",
+        "note": "Problem 6’s 負, crediting Li Huang, p. 632, n. 51; the emendation of Liu Hui’s 77 passage, pp. 652–655, nn. 93–104. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "R. Hart, “The Chinese Roots of Linear Algebra”, Johns Hopkins University Press, 2011",
+        "note": "Problem 14’s 33/111 and the determinant, pp. 173–174. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+        "note": "Liu Hui’s 77 passage, emended and tallied to 77, ch. 8, nn. 22–40; the 124, nn. 41–82; the rates 7:4:3:5:6, nn. 63–69. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "Wei Xuegang and Guo Shirong, 自然科学史研究 35(1), 2016, pp. 10–17; Zhu Yiwen, “A new perspective on Liu Hui’s mathematical achievements”, Cultures of Science 8(S2), 2025, pp. 161–171",
+        "note": "算 in the 77 and 124 passages read as counting rods. The first read only in its abstract by the literature check."
       },
       {
         "title": "Coding-agent session, 23 November 2026",

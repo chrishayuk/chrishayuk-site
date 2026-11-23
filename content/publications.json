@@ -4866,7 +4866,7 @@
       "kind": "notebook",
       "title": "The Nine Chapters writes 18/52 as the board leaves it",
       "dek": "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says. Of 39 statements of the text the board reaches, 38 agree. Its answers are written over one denominator each, and not always in lowest terms.",
-      "abstract": "Chapter 8 of the Nine Chapters on the Mathematical Art (九章算術, 方程) solves what we would call simultaneous linear equations on a counting board: columns of rods, worked against each other until one figure is left over another. This is a note about a program, jiuzhang, that sets out each problem of the chapter, and the boards its commentators work, as the text sets them, works them a step at a time as the text says, and compares what the text states, where the notation can hold it, with what the board gives. It ran over a transcription of the Sibu congkan reprint of the Weiboxie edition, made from the scans by a coding agent and its sub-agents. On 26 pages it checks 39 statements the board reaches: 38 agree, and the one that does not is Problem 6, whose signs in this edition give −8 and −3 where the answer is 8 and 3. That is not a census of every number in the text. The text writes its eleven fractional answers over one denominator each, and not always in lowest terms: Problem 2 is 1 18/52, not 1 9/26, and 52 is the 法 as the board leaves it. Of three readings of the last step, the 法 and the 實s divided by what they share writes all 11 as the text does; that describes how the answers are written, not where a reduction was made. Dai Zhen’s 145 算 is given by two rules of counting, his 99 only by one proposed after both were known; none of 100,000,000 combinations of a small menu of operations makes Liu Hui’s passage on 77 算 work. A second model reviewed the reconstruction independently, found no mistranscription, and found the checker could give a false ✓; this note gives the results after that was fixed. No person has checked the transcription, the literature on the chapter has not been read, and nothing here is claimed as new. Every page can be run on the board in the browser.",
+      "abstract": "Chapter 8 of the Nine Chapters on the Mathematical Art (九章算術, 方程) solves what we would call simultaneous linear equations on a counting board: columns of rods, worked against each other until one figure is left over another. This is a note about a program, jiuzhang, that sets out each problem of the chapter, and the boards its commentators work, as the text sets them, works them a step at a time as the text says, and compares what the text states, where the notation can hold it, with what the board gives. It ran over a transcription of the Sibu congkan reprint of the Weiboxie edition, made from the scans by a coding agent and its sub-agents. On 26 pages it checks 39 statements the board reaches: 38 agree, and the one that does not is Problem 6, whose signs in this edition give −8 and −3 where the answer is 8 and 3. That is not a census of every number in the text. The text writes its eleven fractional answers over one denominator each, and not always in lowest terms: Problem 2 is 1 18/52, not 1 9/26, and 52 is the 法 as the board leaves it. Of three readings of the last step, the 法 and the 實s divided by what they share writes all 11 as the text does; that describes how the answers are written, not where a reduction was made. Dai Zhen’s 145 算 is given by two rules of counting, his 99 only by one proposed after both were known; none of 100,000,000 combinations of a small menu of operations makes Liu Hui’s passage on 77 算 work as printed. A second model reviewed the reconstruction independently, found no mistranscription, and found the checker could give a false ✓; this note gives the results after that was fixed. A literature check by a second model found that several of these results are already known: Problem 6’s signs were corrected by Li Huang, and Chemla and Guo (2004) print his correction; Hart (2011) discusses how the denominators follow the board, for Problem 14’s 33/111 and the determinant; and Liu Hui’s 77 passage has been emended by Chemla and Guo and worked through to 77 by Guo Shuchun (2020), where this project ran only the unemended text. No person has checked the transcription, and nothing here is claimed as new. Every page can be run on the board in the browser.",
       "created": "2026-11-23",
       "version": "1.0",
       "status": "OPEN",
@@ -4912,17 +4912,17 @@
         {
           "kind": "observation",
           "label": "04 / HOW THE ANSWERS ARE WRITTEN",
-          "text": "Eleven answers have fractions. The text writes them over one denominator, and not always in lowest terms: Problem 2 is 1 斗 and 18/52, not 9/26; Problem 14 is 33/111, not 11/37. Which reading of the last step writes them so? Every 實 over the 法 as the board leaves it writes 7 of the 11 as the text does. Each answer in its lowest terms writes 9. The 法 and all the 實s divided by what they share (約) writes all 11. So the answers are written over one denominator for each problem, and it is not the board’s 法 as it stands (Problem 1’s board leaves 36, the text writes quarters; Problem 16’s 976, the text 122), and not each fraction in its own lowest terms (52 and 111 survive). The 約 reading gives the same denominators as reducing each answer and then writing them all over the least of their common denominators: the table shows how the answers are written, not where in the working a reduction was made. In Problem 2 the denominator the text writes, 52, is the 法 as the board leaves it. Problem 13’s answer is the extreme case: the depth of the well, 721, is the 法 itself, given as a rate (舉率以言之), and Liu Hui’s 法得七百二十一實七十六 is the board’s left column, checked."
+          "text": "Eleven answers have fractions. The text writes them over one denominator, and not always in lowest terms: Problem 2 is 1 斗 and 18/52, not 9/26; Problem 14 is 33/111, not 11/37. Which reading of the last step writes them so? Every 實 over the 法 as the board leaves it writes 7 of the 11 as the text does. Each answer in its lowest terms writes 9. The 法 and all the 實s divided by what they share (約) writes all 11. So the answers are written over one denominator for each problem, and it is not the board’s 法 as it stands (Problem 1’s board leaves 36, the text writes quarters; Problem 16’s 976, the text 122), and not each fraction in its own lowest terms (52 and 111 survive). The 約 reading gives the same denominators as reducing each answer and then writing them all over the least of their common denominators: the table shows how the answers are written, not where in the working a reduction was made. That the denominators reflect the board is known: Hart (2011, pp. 173–174) discusses Problem 14’s 33/111, not 11/37, and its relation to the determinant. The count across all eleven answers was not found in the literature searched, which does not make it new. In Problem 2 the denominator the text writes, 52, is the 法 as the board leaves it. Problem 13’s answer is the extreme case: the depth of the well, 721, is the 法 itself, given as a rate (舉率以言之), and Liu Hui’s 法得七百二十一實七十六 is the board’s left column, checked."
         },
         {
           "kind": "observation",
           "label": "05 / PROBLEM 6",
-          "text": "In this edition, the Weiboxie text, Problem 6’s procedure sets its 實 as 正 in both columns: 益實六斗正 … 益實一斗正. Run as printed, the board gives −8 and −3 where the answer is 8 and 3. This is the one statement of the 39 that does not agree. The other text consulted has 負 in both places, and with 負 the board gives the answer. The scan was read twice."
+          "text": "In this edition, the Weiboxie text, Problem 6’s procedure sets its 實 as 正 in both columns: 益實六斗正 … 益實一斗正. Run as printed, the board gives −8 and −3 where the answer is 8 and 3. This is the one statement of the 39 that does not agree. The other text consulted has 負 in both places, and with 負 the board gives the answer. The scan was read twice. This is known: Li Huang (李潢, 九章算術細草圖說, juan 8) says both 正 should be 負 (正正皆當作負), and Chemla and Guo (2004, p. 632, n. 51) print 負, credit him, and record 正 in other witnesses too, so it is not peculiar to this edition. The board finds the same thing by another road: it cannot get 8 and 3 from the signs as printed."
         },
         {
           "kind": "observation",
           "label": "06 / DAI ZHEN’S 145 AND 99",
-          "text": "In his collation notes, Dai Zhen says that Problem 18 by the plain method, cross-multiplying each pair of columns (互乘) and then finding the prices from the bottom up, takes “145 算, counting multiplications, takings and divisions together” (兼乘減除言之), and that a shorter way, working from a column whose head is one, takes 99. He does not say what one 算 is beyond that, so jiuzhang rules tries several conventions and prefers none. Plain counts each multiplication, taking and division of one figure, less the heads that cross-multiplying makes equal: 145 for the plain method, 101 for the shorter way. Worked also saves everything multiplied or divided by one: 140 and 98. Readoff is plain with a division by one read off, not worked: 145 and 99. Plain is the nearest to his words, but leaving out the heads’ takings as well as their multiplications is this project’s convention, not his; worked extends his economies, which are about multiplying, to dividing, which he does not mention. Readoff was proposed by the independent review after both numbers were known. It gives both, and is reported as a rule fitted after the fact, not as Dai Zhen’s."
+          "text": "In his collation notes, Dai Zhen says that Problem 18 by the plain method, cross-multiplying each pair of columns (互乘) and then finding the prices from the bottom up, takes “145 算, counting multiplications, takings and divisions together” (兼乘減除言之), and that a shorter way, working from a column whose head is one, takes 99. He does not say what one 算 is beyond that, so jiuzhang rules tries several conventions and prefers none. Plain counts each multiplication, taking and division of one figure, less the heads that cross-multiplying makes equal: 145 for the plain method, 101 for the shorter way. Worked also saves everything multiplied or divided by one: 140 and 98. Readoff is plain with a division by one read off, not worked: 145 and 99. Plain is the nearest to his words, but leaving out the heads’ takings as well as their multiplications is this project’s convention, not his; worked extends his economies, which are about multiplying, to dividing, which he does not mention. Readoff was proposed by the independent review after both numbers were known. It gives both, and is reported as a rule fitted after the fact, not as Dai Zhen’s. A reading of his 145 as a count of single-figure operations was not found in the literature the check could read; two of the likeliest places, Shen, Crossley and Lun and Guo Shuchun’s 彙校, could not be opened."
         },
         {
           "kind": "observation",
@@ -4932,7 +4932,7 @@
         {
           "kind": "observation",
           "label": "08 / LIU HUI’S 77",
-          "text": "In his commentary to Problem 18, Liu Hui works it “by the old method, made short” (以舊術爲之…今欲要約), clause by clause, and says it takes 77 算. Dai Zhen calls the passage corrupt (訛舛不可通). The page gives each clause in every reading this project could find: the columns as written, and, for the clause 及減第三行, which as written takes the 3rd column from itself, other columns or nothing; and each 減 or 去 done once, until the head is gone, as far as it goes, in turn, or crosswise. That is 100,000,000 combinations of a small menu of operations, not 100,000,000 interpretations. 229,906 of them can be done to the end. None leaves the 4th column giving the price of 黍, as the passage says it should. So none of these readings works; that does not show that no reading does, and Liu Hui’s 77 is not tested. Among what the menu leaves out: 頭位 as anything but the first figure of the column worked on; the columns set one at a time, as 先置第三行 … 次置第二行 … 次置右行 says, with copies kept; other repairs of 及減第三行; mutual subtraction ending in either column. The independent review tried a wider search of its own, heads of either column and other orders, and found no working reading either. His new method, 124 算, was given the same treatment and stops, under every reading offered, by the passage’s fourth clause. Its last part, where the columns are set afresh, checks: the 3rd less the 4th leaves 麻 1, 菽 4, 荅 −3, 實 4, as he says."
+          "text": "In his commentary to Problem 18, Liu Hui works it “by the old method, made short” (以舊術爲之…今欲要約), clause by clause, and says it takes 77 算. Dai Zhen calls the passage corrupt (訛舛不可通). The page gives each clause in every reading this project could find: the columns as written, and, for the clause 及減第三行, which as written takes the 3rd column from itself, other columns or nothing; and each 減 or 去 done once, until the head is gone, as far as it goes, in turn, or crosswise. That is 100,000,000 combinations of a small menu of operations, not 100,000,000 interpretations. 229,906 of them can be done to the end. None leaves the 4th column giving the price of 黍, as the passage says it should. So none of these readings of the passage as printed works; that does not show that no reading does, and Liu Hui’s 77 is not tested here. The passage has been emended and worked by others. Chemla and Guo (2004, pp. 652–655) repair its opening, 及減第三行 among other words, and restore 六 for 空, crediting Dai Dunyuan; Guo Shuchun (2020) works the emended passage through and tallies 77, counting each placing of rods, each operation on a whole column and each division of a 實 by a 法 as one 算. Wei Xuegang and Guo Shirong (2016) and Zhu Yiwen (2025) read 算 as counting rods. The census here ran the text as printed, not these emendations: it says only that the unemended passage does not work under the readings offered, which is what Dai Zhen said. Among what the menu leaves out: 頭位 as anything but the first figure of the column worked on; the columns set one at a time, as 先置第三行 … 次置第二行 … 次置右行 says, with copies kept; other repairs of 及減第三行; mutual subtraction ending in either column. The independent review tried a wider search of its own, heads of either column and other orders, and found no working reading either. His new method, 124 算, which Guo (2020) also works through, was given the same treatment and stops, under every reading offered, by the passage’s fourth clause. Its last part, where the columns are set afresh, checks: the 3rd less the 4th leaves 麻 1, 菽 4, 荅 −3, 實 4, as he says, and as Guo (2020) explains."
         },
         {
           "kind": "observation",
@@ -4957,6 +4957,17 @@
             {
               "label": "Wikisource’s transcription, unproofread",
               "url": "https://zh.wikisource.org/wiki/%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93_(%E5%9B%9B%E9%83%A8%E5%8F%A2%E5%88%8A%E6%9C%AC)/%E5%8D%B7%E7%AC%AC%E5%85%AB"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "11 / EARLIER WORK",
+          "text": "The literature on chapter 8 is large, and this project did not read it. A second model, OpenAI’s Codex with web search, looked for each result in what it could reach: parts of Li Huang, Chemla and Guo, Hart, Guo Shuchun’s revised translation and Zhu Yiwen. It could not open Shen, Crossley and Lun, or Guo’s 彙校. Problem 6’s 正 for 負 is known, from Li Huang to Chemla and Guo. That the denominators reflect the board is partly known, from Hart; the count across all eleven answers was not found. Dai Zhen’s 145 as a count of single-figure operations was not found. Liu Hui’s 77 passage has been emended by Chemla and Guo and worked through to 77 by Guo (2020), and his 124 worked through by Guo; the census here ran only the text as printed. Liu Hui’s rates 7:4:3:5:6 are in Guo (2020) and in Chemla and Guo. “Not found” means not found in what could be read, never that a result is new.",
+          "references": [
+            {
+              "label": "The literature check, with its sources",
+              "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-check.md"
             }
           ]
         },
@@ -5006,19 +5017,24 @@
             "The 39 statements are what the notation can hold. Some figures the sources give are quoted and not checked, so 38 of 39 is not a census of every number in the text.",
             "Every result here is against that transcription, under the choices jiuzhang decisions lists: that the rule of signs is signed arithmetic, how 徧乘 and 直除 are read, what “head” means, the three readings of the last step, that no rule of counting is preferred, that the readings offered for a corrupt passage are the transcriber’s, and the units.",
             "That 約 writes all 11 answers as the text does describes how they are written. It gives the same denominators as reducing each answer and writing them over their least common denominator, so it does not show where in the working a reduction was made, or how the answers were found.",
-            "Problem 6 is a difference between this edition’s signs and the answer. It is not shown to be the text’s error rather than the edition’s or the reading’s.",
+            "Problem 6 is a difference between this edition’s signs and the answer, and it is not a finding of this project: Li Huang corrected the signs, and Chemla and Guo (2004) print his correction and record 正 in other witnesses.",
             "Dai Zhen’s words define no one rule of counting. Plain gives his 145 and not his 99; readoff gives both, but was proposed after both were known, and is not shown to be his.",
             "The rods and places are those of the recorded boards, not the workspace a reckoner needed: the last step works a product of 16 places off the board.",
-            "None of 100,000,000 combinations of a small menu of operations makes Liu Hui’s 77 passage work, and the review’s wider search found none either. That does not show that no reading does, and his 77 is not tested.",
-            "Chapter 8 and its commentaries have been edited, translated and studied at length: Qian Baocong’s and Guo Shuchun’s critical editions; Shen Kangshen, Crossley and Lun (1999); Chemla and Guo Shuchun (2004); Hart (2011); and, on the gap between written procedures and the rods, Yiwen Zhu (2025). None was read beyond Zhu’s abstract. The emendations of Problem 6 and of the 77 and 124 passages are very likely discussed there. Nothing here is claimed as new until it has been checked against that literature."
+            "None of 100,000,000 combinations of a small menu of operations makes Liu Hui’s 77 passage work as printed, and the review’s wider search found none either. That is not a finding of this project: Dai Zhen called the passage corrupt, Chemla and Guo (2004) emend it, and Guo (2020) works the emended passage to 77. Those emendations were not run here, and his 77 is not tested.",
+            "Chapter 8 and its commentaries have been edited, translated and studied at length: Qian Baocong’s and Guo Shuchun’s critical editions; Shen Kangshen, Crossley and Lun (1999); Chemla and Guo Shuchun (2004); Hart (2011); Guo’s revised translation (2020); and Zhu Yiwen on the rods (2010, 2025). This project did not read them. The literature check was a second model’s search, which read parts of some and could not open others; what it did not find may still be there. Nothing here is claimed as new."
           ],
           "principle": "Running the procedure shows where the text and the board part. It does not show whether the difference is the text’s, the edition’s, the transcriber’s, or the reading’s."
         },
         {
           "kind": "question",
-          "text": "Is there a reading of Liu Hui’s passage that takes 77 算 and leaves the price of 黍?",
+          "text": "Does the emended passage, run on the board, take 77 算 and leave the price of 黍?",
           "status": "OPEN",
-          "detail": "jiuzhang can run every combination of the readings a page offers and say which can be done to the end and agree with what the source states. Of the 100,000,000 combinations offered here, none does, and the review’s wider search found none. The menu is the transcriber’s and leaves readings out; the critical editions and the literature on the passage, not read here, are where others would be found."
+          "detail": "Chemla and Guo (2004) emend Liu Hui’s passage, and Guo Shuchun (2020) works it through and tallies 77, counting each placing of rods, each operation on a whole column and each division as one 算. jiuzhang has run only the text as printed, where none of the readings offered works. Run as a page, under Guo’s way of counting, the emended passage can be checked step by step against both his tally and the price of 黍; that is the next page to write."
+        },
+        {
+          "kind": "observation",
+          "label": "12 / WHAT THE CHAPTER HAS BECOME",
+          "text": "Nothing in this note is a new fact about the Nine Chapters: Problem 6’s signs were corrected by Li Huang, the link between the denominators and the board is in Hart, and Liu Hui’s 77 has been worked by Guo Shuchun. What has changed is the form the chapter is in. Its eighteen procedures, and the boards its commentators describe, are now a structured, executable object: each line an operation on a board of rods, done as the text says, with the board after it, and every statement the board reaches checked against it. A step is no longer only something to read; it can be challenged. Change a sign, or the way an answer is written, as the steps in the second section do, and the run says at once what follows and what no longer holds. The same check runs over every page, under choices that are written down, so a question about one answer becomes a question asked of all eleven, answered with a count, and asked again when a choice changes, as it was after the independent review. A reading of a corrupt passage becomes something that can be run, and the published emendation of Liu Hui’s is the next to run. What this adds is a way to test the chapter’s intermediate steps systematically, and anyone can do it in the browser."
         }
       ],
       "sources": [
@@ -5033,14 +5049,39 @@
           "note": "A transcription of the same pages, marked unproofread; used to find places, never for figures."
         },
         {
-          "title": "chrishayuk/nine-chapters, commit a71e4bb",
+          "title": "chrishayuk/nine-chapters, commit 542b9ad",
           "url": "https://github.com/chrishayuk/nine-chapters",
-          "note": "jiuzhang, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review. jiuzhang verify, answers, counts and readings print every result in this note."
+          "note": "jiuzhang, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review and the literature check. jiuzhang verify, answers, counts and readings print every result in this note; the program and the playground are unchanged since commit a71e4bb."
         },
         {
           "title": "Independent review of commit 8532977 by OpenAI Codex, 23 November 2026",
           "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md",
           "note": "The answers, Problem 6’s signs, the commentary figures, the 77 passage and the four counts checked against the scans; the tables and censuses reproduced; probe pages that made the checker fail. Each finding and what was done about it; the reviewer’s report as written is at https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review-report.md. Commit a71e4bb is the result."
+        },
+        {
+          "title": "Literature check by OpenAI Codex with web search, 23 November 2026",
+          "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-check.md",
+          "note": "A search for each of the project’s results in the literature, with the passages read and the sources it could not open. “Not found” there means not found in what could be read."
+        },
+        {
+          "title": "李潢 (Li Huang), 九章算術細草圖說, juan 8",
+          "note": "On Problem 6: 正正皆當作負. Read by the literature check in an online transcription, not by this project."
+        },
+        {
+          "title": "K. Chemla and Guo Shuchun, “Les neuf chapitres: le classique mathématique de la Chine ancienne et ses commentaires”, Dunod, 2004",
+          "note": "Problem 6’s 負, crediting Li Huang, p. 632, n. 51; the emendation of Liu Hui’s 77 passage, pp. 652–655, nn. 93–104. Read in part by the literature check, not by this project."
+        },
+        {
+          "title": "R. Hart, “The Chinese Roots of Linear Algebra”, Johns Hopkins University Press, 2011",
+          "note": "Problem 14’s 33/111 and the determinant, pp. 173–174. Read in part by the literature check, not by this project."
+        },
+        {
+          "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+          "note": "Liu Hui’s 77 passage, emended and tallied to 77, ch. 8, nn. 22–40; the 124, nn. 41–82; the rates 7:4:3:5:6, nn. 63–69. Read in part by the literature check, not by this project."
+        },
+        {
+          "title": "Wei Xuegang and Guo Shirong, 自然科学史研究 35(1), 2016, pp. 10–17; Zhu Yiwen, “A new perspective on Liu Hui’s mathematical achievements”, Cultures of Science 8(S2), 2025, pp. 161–171",
+          "note": "算 in the 77 and 124 passages read as counting rods. The first read only in its abstract by the literature check."
         },
         {
           "title": "Coding-agent session, 23 November 2026",
@@ -5049,7 +5090,7 @@
       ],
       "published": "2026-11-23"
     },
-    "hash": "d35ee386d4dedb6d3ce5d4bfd7f44f74e44e529c22755dac7009ca6e0a29ad01",
+    "hash": "d6381780806ac2a039c67ac627d9f3a5a70060ed5d52233a3ee02ae09e1f11a1",
     "algorithm": "sha256"
   }
 ]
