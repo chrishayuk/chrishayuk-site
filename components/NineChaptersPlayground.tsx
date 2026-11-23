@@ -9,7 +9,7 @@ import { check, firstStep, loadCorpus, stepsOf, widthsOf, type Page, type Run } 
 /**
  * Chapter 8 of the Nine Chapters, on a counting board in the page: every
  * page of the transcription, run by jiuzhang and stepped through on the
- * board, with each figure the text and its commentators state checked; the
+ * board, with what the text and its commentators state checked; the
  * page in an editor coloured and checked by jiuzhang's language server.
  * The same behaviour as the repository's web/index.html.
  *
@@ -181,7 +181,7 @@ export function NineChaptersPlayground() {
       </div>
     </div>
     <NineChaptersBoard board={step?.board ?? null} widths={widths} actor={lit ? step.actor : null} target={lit ? step.target : null} instant={instant} sweep={sweep} label="The counting board after this step">
-      {step && <div className="nc-tally" aria-live="polite">算 so far: <b>{tally.plain}</b> plain · <b>{tally.worked}</b> worked<br/>rods on the board: <b>{step.board.rods}</b> (most {tally.most})<br/>widest figure: <b>{tally.places}</b> places</div>}
+      {step && <div className="nc-tally" aria-live="polite">算 so far: <b>{tally.plain}</b> plain · <b>{tally.worked}</b> worked<br/>rods on the board: <b>{step.board.rods}</b> (most {tally.most})<br/>widest figure on the recorded boards: <b>{tally.places}</b> places</div>}
       {step && caption && <div className="nc-caption">
         <span className="nc-what">{at + 1}/{steps.length}  {step.what}</span>
         {caption.line.quote && <span className="nc-zh">「{caption.line.quote}」</span>}

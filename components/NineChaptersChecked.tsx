@@ -5,7 +5,7 @@ import type { Run } from "./nineChaptersJob";
 
 /**
  * A page, worked and checked: each line with what jiuzhang made of it, ✓
- * where a figure the source states agrees with the board, ✗ and what the
+ * where what the source states agrees with the board, ✗ and what the
  * board gives where it does not, and the 法, 實s and steps of a Solve. A
  * line that works the board can be chosen, to show the board after it.
  */
@@ -34,8 +34,8 @@ export function NineChaptersChecked({ run, label, now = -1, onChoose }: { run: R
   </div>;
 }
 
-/** The count under a page: figures checked, how many agree with the board, how many do not, and where it stops. */
+/** The count under a page: statements checked, how many agree with the board, how many do not, and where it stops. */
 export function NineChaptersCount({ run }: { run: Run }) {
   const checked = run.right + run.wrong;
-  return <span className="nc-count"><b>{checked}</b> {checked === 1 ? "figure" : "figures"} checked · <b>{run.right}</b> agree · <b>{run.wrong}</b> do not{run.stopped != null && <> · stops at line <b>{run.stopped + 1}</b></>}</span>;
+  return <span className="nc-count"><b>{checked}</b> {checked === 1 ? "statement" : "statements"} checked · <b>{run.right}</b> agree · <b>{run.wrong}</b> do not{run.stopped != null && <> · stops at line <b>{run.stopped + 1}</b></>}</span>;
 }

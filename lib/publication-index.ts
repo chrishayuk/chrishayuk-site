@@ -42,7 +42,7 @@ export const programmes = [
       { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
       { label: "IPL-V playground", href: "/demos/ipl-v", name: "IPL-V", year: "1964", detail: "The list-processing machine of the IPL-V manual, the language of the first artificial intelligence programs. Step it and watch storage change." },
       { label: "Rhind Papyrus playground", href: "/demos/rhind-papyrus", name: "Rhind Papyrus", year: "c. 1550 BCE", detail: "The working of the Rhind Mathematical Papyrus, about 1550 BCE, checked figure by figure against itself. Choose a line that disagrees and see what the working gives." },
-      { label: "Nine Chapters playground", href: "/demos/nine-chapters", name: "Nine Chapters", year: "Han dynasty", detail: "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says, every figure it states checked. Step through it on a board in three dimensions." },
+      { label: "Nine Chapters playground", href: "/demos/nine-chapters", name: "Nine Chapters", year: "Han dynasty", detail: "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says, what it states checked against the board. Step through it on a board in three dimensions." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",

@@ -44,21 +44,21 @@ export function NineChaptersNotebook({ record }: { record: PublicationRecord }) 
         { label: "WHAT THE SOURCE STATES", value: "Answer 1 18/52, 41/52", detail: "Checked against the board, and how each fraction is written: 1 18/52 is not to be reduced to 1 9/26." },
       ]} note="A transcription never corrects the text. Where the text’s signs give the wrong answer, the page has the text’s signs."/>
     </> },
-    { label: "38 figures", kind: "evidence", children: <>
+    { label: "39 statements", kind: "evidence", children: <>
       {act(2)}
       <StudyMeasures label="JIUZHANG VERIFY: 26 PAGES, THE 18 PROBLEMS AND 8 PAGES OF COMMENTARY" items={[
-        { label: "AGREE WITH THE BOARD", value: "37", detail: "Answers, columns a commentator says the board holds, rates and counts of 算." },
+        { label: "AGREE WITH THE BOARD", value: "38", detail: "Answers, columns a commentator gives, rates and counts of 算." },
         { label: "DO NOT", value: "1", detail: "Problem 6’s answer, by this edition’s signs." },
         { label: "NOT REACHED", value: "5", detail: "They come after a step that cannot be done." },
-      ]} note="Every count is against this project’s transcription, under the choices in jiuzhang decisions."/>
+      ]} note="Statements, not figures: one can hold several, and some figures the sources give are quoted and not checked. Not a census of every number in the text. Every count is against this project’s transcription, under the choices in jiuzhang decisions."/>
     </> },
     { label: "How the answers are written", kind: "evidence", children: <>
       {act(3)}
       <StudyMeasures label="ELEVEN ANSWERS WITH FRACTIONS: WHICH READING OF THE LAST STEP WRITES THEM AS THE TEXT DOES" items={[
-        { label: "EVERY 實 OVER THE 法 AS THE BOARD LEAVES IT", value: "7 of 11", detail: "Problem 1’s board leaves 36; the text writes quarters." },
+        { label: "EVERY 實 OVER THE 法 AS THE BOARD LEAVES IT", value: "7 of 11", detail: "Problem 1’s board leaves 36; the text writes quarters. Problem 2’s 52 is the board’s." },
         { label: "EACH ANSWER IN ITS LOWEST TERMS", value: "9 of 11", detail: "Problem 2’s 52 and Problem 14’s 111 survive." },
-        { label: "THE 法 AND THE 實S DIVIDED BY WHAT THEY SHARE (約)", value: "11 of 11", detail: "One common factor taken out of the board." },
-      ]} note="This describes how the answers are written. It does not show how they were found."/>
+        { label: "THE 法 AND THE 實S DIVIDED BY WHAT THEY SHARE (約)", value: "11 of 11", detail: "The same denominators as each answer reduced and all written over their least common denominator." },
+      ]} note="This shows how the answers are written, not where in the working a reduction was made, or how they were found."/>
     </> },
     { label: "Problem 6", kind: "evidence", children: <>
       <Scan src="p14-problem-6-procedure.jpg" width={740} height={1240}
@@ -68,35 +68,44 @@ export function NineChaptersNotebook({ record }: { record: PublicationRecord }) 
       <NineChaptersRunner label="PROBLEM 6, AS THIS EDITION PRINTS IT" page={PROBLEM_6} play="/demos/nine-chapters?page=no-06"
         note="Change the 實 of both columns to −6 and −1, the 負 of the other text consulted, and run it again: the board gives 8 and 3."/>
     </> },
-    { label: "Dai Zhen’s 145", kind: "evidence", children: <>
+    { label: "Dai Zhen’s 145 and 99", kind: "evidence", children: <>
       <Scan src="p48-one-hundred-forty-five-suan.jpg" width={506} height={613}
         alt="Part of page 48 of the Sibu congkan reprint, Dai Zhen's collation notes in small characters; the second column from the left reads 則一百四十五算."
         caption="SIBU CONGKAN, P. 48 / DAI ZHEN’S 訂訛: …兼乘減除言之則一百四十五算"/>
       {act(5)}
-      <StudyMeasures label="PROBLEM 18: 算 BY ONE RULE OF COUNTING" items={[
-        { label: "THE TEXT’S 徧乘 AND 直除", value: "158" },
-        { label: "DAI ZHEN’S 互乘", value: "145", detail: "As he says." },
-        { label: "DAI ZHEN’S SHORTER WAY", value: "101 or 98", detail: "He says 99. Three operations by ±1 separate the two." },
-      ]} note="Every multiplication, taking and division of one figure, leaving out the heads that cross-multiplying makes equal. jiuzhang counts gives every rule."/>
+      <StudyMeasures label="PROBLEM 18 BY DAI ZHEN’S TWO WAYS: 算 UNDER THREE RULES OF COUNTING" items={[
+        { label: "PLAIN", value: "145 / 101", detail: "Each multiplication, taking and division of one figure, less the heads cross-multiplying makes equal." },
+        { label: "WORKED", value: "140 / 98", detail: "Also saving everything multiplied or divided by one." },
+        { label: "READOFF", value: "145 / 99", detail: "Plain, with a division by one read off. Proposed by the review after both counts were known." },
+      ]} note="He says 145 and 99. His words define none of these rules fully, and none is preferred. jiuzhang counts gives every rule."/>
       <NineChaptersRunner label="PROBLEM 18, BY DAI ZHEN’S PLAIN METHOD" page={DAI_ZHEN_145} play="/demos/nine-chapters?page=dai-zhen-18"
-        note="Solve by cross cross-multiplies each pair of columns; Count 145 is checked against every rule of counting, and the line says what each gives."/>
+        note="Solve by cross cross-multiplies each pair of columns; Count 145 is checked against every rule of counting, and the line says which give it."/>
+      {act(6)}
     </> },
     { label: "Liu Hui’s 77", kind: "evidence", children: <>
       <Scan src="p32-seventy-seven-suan.jpg" width={273} height={1266}
         alt="Four columns of page 32 of the Sibu congkan reprint, Liu Hui's commentary to Problem 18; the second from the left reads 此凡用七十七算以新術爲此先以第四."
         caption="SIBU CONGKAN, P. 32 / LIU HUI: 此凡用七十七算"/>
-      {act(6)}
-      <StudyMeasures label="EVERY READING OF THE PASSAGE THIS PROJECT COULD FIND" items={[
-        { label: "READINGS", value: "100,000,000" },
+      {act(7)}
+      <StudyMeasures label="A SMALL MENU OF OPERATIONS FOR EACH CLAUSE OF THE PASSAGE" items={[
+        { label: "COMBINATIONS", value: "100,000,000", detail: "Of the menu’s operations, not 100,000,000 interpretations." },
         { label: "DONE TO THE END", value: "229,906" },
         { label: "LEAVE THE PRICE OF 黍", value: "0", detail: "As the passage says the 4th column should." },
-      ]} note="None of these readings works. That does not show that no reading does; Liu Hui’s 77 is not tested."/>
+      ]} note="None of these readings works, nor any in the review’s wider search. That does not show that no reading does; Liu Hui’s 77 is not tested."/>
     </> },
-    { label: "Reading the text", children: <>{act(7)}</> },
-    { label: "Run it yourself", kind: "operate", children: <>{act(8)}</> },
+    { label: "An independent review", children: <>
+      {act(8)}
+      <StudyMeasures label="WHAT A SECOND MODEL FOUND IN COMMIT 8532977" items={[
+        { label: "MISTRANSCRIPTIONS AT THE PLACES CHECKED", value: "0", detail: "Every answer, Problem 6’s signs, the commentary figures, the 77 passage and the four counts, against the scans." },
+        { label: "PROBE PAGES THAT MADE THE CHECKER FAIL", value: "fixed", detail: "A contradictory board ticked, a stale answer, wrong arity and unwritten forms unmarked, unchecked fractions." },
+        { label: "CLAIMS WIDER THAN THE PROGRAM", value: "reworded", detail: "Statements, not figures; recorded boards; the census’s menu; Dai Zhen’s rules." },
+      ]} note="The review is a model’s, like the transcription. No person has checked either."/>
+    </> },
+    { label: "Reading the text", children: <>{act(9)}</> },
+    { label: "Run it yourself", kind: "operate", children: <>{act(10)}</> },
     { label: "What this does not show", children: <>
-      {act(9)}
-      {act(10)}
+      {act(11)}
+      {act(12)}
     </> },
   ]}/>;
 }

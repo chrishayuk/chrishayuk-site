@@ -196,10 +196,10 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
  "N-NINE-CHAPTERS": {
-  subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking every figure the text and its commentators state",
+  subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking what the text and its commentators state where the notation can hold it, reviewed by a second model",
   question: "When a procedure is run exactly as the text gives it, where do the text and the board part?",
   searchTitle: "The Nine Chapters Writes 18/52 as the Board Leaves It: Chapter 8 (Fangcheng) Worked on a Counting Board",
-  description: "Chapter 8 of the Nine Chapters on the Mathematical Art (方程), set out in counting rods and worked as the text says. Of 38 figures the board reaches, 37 agree; the answers are the board’s with one common factor taken out, not in lowest terms. Step through it on a 3D board in your browser.",
+  description: "Chapter 8 of the Nine Chapters on the Mathematical Art (方程), set out in counting rods and worked as the text says. Of 39 statements the board reaches, 38 agree; Problem 2’s answer is written over 52, the 法 as the board leaves it, not in lowest terms. Step through it on a 3D board in your browser.",
   concepts: ["Nine Chapters on the Mathematical Art", "Jiuzhang suanshu", "fangcheng", "counting rods", "Liu Hui", "Dai Zhen", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
 
