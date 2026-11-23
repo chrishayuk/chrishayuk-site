@@ -188,6 +188,14 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "IPL-V held symbols in linked lists, which is how the first artificial intelligence programs held what they knew. Its 1964 manual prints a full trace of one run; a reconstruction built with a coding agent matches all 46 lines and runs the 1963 Logic Theorist unchanged. Step the machine in your browser.",
   concepts: ["IPL-V", "Information Processing Language", "Allen Newell", "Herbert Simon", "J. C. Shaw", "Logic Theorist", "list processing", "history of artificial intelligence", "coding agents", "verification", "WebAssembly"],
  },
+ "N-RHIND-PAPYRUS": {
+  subject: "Checking the working of the Rhind Mathematical Papyrus exactly against itself, on a transcription from Chace’s and Peet’s editions made by a coding agent and reviewed by a second model",
+  question: "Where a copy’s figures and its working part, how much of the difference is on the papyrus?",
+  searchTitle: "A Scribe Wrote 15 Where His Working Says 14: The Rhind Mathematical Papyrus, Checked Figure by Figure",
+  description: "The Rhind Mathematical Papyrus, about 1550 BCE, writes out its working. Transcribed by a coding agent and checked exactly, 845 of 956 lines agree with it; most of the rest is a dropped part sign, which Chace says need not be an error, or figures the editions already note. Check any page in your browser.",
+  concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
+ },
+
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",

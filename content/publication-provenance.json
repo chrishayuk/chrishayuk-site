@@ -1382,5 +1382,40 @@
         "note": "The interpreter, its tests and the reading of the manual were made in this session. Every result in this note can be rerun on the interactive study."
       }
     ]
+  },
+  {
+    "id": "N-RHIND-PAPYRUS",
+    "version": "1.0",
+    "recordHash": "1681c6ccdc6290e5e56bec464aa7fc180950518ef85e8b207c2461daddaa9106",
+    "revision": {
+      "kind": "initial",
+      "summary": "First published, against rhind 0.1.1, after an independent review by a second model that found the 0.1.0 census unsound: 845 of 956 lines of the Rhind papyrus's working, as transcribed by a coding agent, agree with it exactly; the 113 diagnostic records on the rest are 75 part signs (a notation, not counted as errors), 4 ticks and 34 figures, most pointed out by Chace or Peet. Counts are against a transcription no person has checked; nothing is claimed as new."
+    },
+    "sources": [
+      {
+        "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+        "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+        "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. The part sign is discussed on printed p. xi. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+      },
+      {
+        "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+        "url": "https://archive.org/details/Peet_1923",
+        "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. Wrong dots are discussed on p. 38. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+      },
+      {
+        "title": "chrishayuk/rhind-papyrus, release v0.1.1",
+        "url": "https://github.com/chrishayuk/rhind-papyrus",
+        "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+      },
+      {
+        "title": "Independent review of release 0.1.0 by OpenAI Codex, 22–23 November 2026",
+        "url": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md",
+        "note": "72 places checked against the scans, probe pages and the code; each finding, and what was done about it. Release 0.1.1 is the result."
+      },
+      {
+        "title": "Coding-agent session, 22–23 November 2026",
+        "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]

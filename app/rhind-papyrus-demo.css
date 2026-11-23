@@ -1,0 +1,119 @@
+/* /demos/rhind-papyrus: the Rhind Mathematical Papyrus, run. Follows laning-zierler-demo.css. */
+.rh-lab{margin:0 var(--margin) 75px;border-block:1px solid var(--rule);padding:32px 0 44px}
+.rh-lab .record-voice,.rh-work .record-voice{display:block;font-size:10px;margin-bottom:12px}
+.rh-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:18px 0 18px}
+.rh-bar label{display:flex;flex-direction:column;gap:10px;min-width:0;font:10px/1.5 var(--font-geist-mono);text-transform:uppercase}
+.rh-bar label.rh-pick{flex:0 1 420px}
+.rh-bar select,.rh-bar button,.rh-work-form input,.rh-work-form button{border:1px solid var(--rule);border-radius:0;padding:13px 18px;background:var(--bg);color:var(--fg);font:13px/1.2 var(--font-geist-mono);max-width:100%}
+.rh-bar select{text-transform:none;width:100%}
+.rh-bar button,.rh-work-form button{cursor:pointer;letter-spacing:.1em;border-color:var(--fg)}
+.rh-work-form button{background:var(--fg);color:var(--bg)}
+.rh-bar button:disabled{opacity:.35;cursor:default}
+.rh-bar .rh-status{margin:0 0 14px;color:var(--muted)}
+.rh-count{font:11px/1.4 var(--font-geist-mono);letter-spacing:.04em;text-transform:none}
+.rh-count b{color:var(--fg);font-weight:600}
+.rh-about{margin:0 0 30px;max-width:72ch;font-size:13px;line-height:1.6;color:var(--muted)}
+.rh-panes{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:start}
+.rh-hint{color:var(--muted)}
+.rh-program{display:block;width:100%;margin:0;border:1px solid var(--rule);border-radius:0;background:var(--bg);color:var(--fg)}
+.rh-keys{margin:10px 0 0;font-size:12px;line-height:1.6;color:var(--muted)}
+.rh-keys code{font:12px var(--font-geist-mono)}
+.rh-idle{color:var(--muted);font-size:14px;line-height:1.6}
+.rh-problems{margin:10px 0;font:12px/1.6 var(--font-geist-mono);color:var(--accent)}
+@media (max-width:860px){.rh-panes{grid-template-columns:minmax(0,1fr)}}
+.rh-panes>div,.rh-runner,.rh-work{min-width:0}
+
+/* The page, checked: papyrus-coloured, with red ink in red and ✓ or ✗ in the margin. */
+.rh-papyrus{--rh-paper:#efe3c6;--rh-edge:#d9c69b;--rh-ink:#1f1a14;--rh-soft:#6b6152;--rh-red:#b3261e;--rh-right:#2f6b3a;
+  background:var(--rh-paper);color:var(--rh-ink);border:1px solid var(--rh-edge);padding:14px 0;overflow-x:auto;box-shadow:inset 0 0 40px rgba(120,90,40,.12);max-height:640px;overflow-y:auto}
+.rh-line,.rh-line-button{display:grid;grid-template-columns:2.6em minmax(0,1fr) auto;gap:0 10px;padding:0 14px 0 0;font:13px/1.75 var(--font-geist-mono);white-space:pre;min-width:max-content;width:100%}
+.rh-line-button{border:0;margin:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.rh-line.rh-wrong-line{display:block;padding:0}
+.rh-line-button:focus-visible{outline:2px solid var(--rh-red);outline-offset:-2px}
+.rh-no{color:var(--rh-soft);opacity:.6;text-align:right;font-size:10px}
+.rh-mark{font-size:12px;padding-left:12px}
+.rh-red .rh-txt,.rh-red-ink{color:var(--rh-red)}
+.rh-words .rh-txt{font:italic 14px/1.75 Georgia,"Iowan Old Style",serif;white-space:pre-wrap}
+.rh-heading .rh-txt{font-weight:700;letter-spacing:.02em}
+.rh-note{color:var(--rh-soft);font-style:italic;white-space:pre-wrap}
+.rh-wrong-line{background:rgba(179,38,30,.09)}
+.rh-wrong .rh-mark,.rh-wrong-line .rh-mark{color:var(--rh-red);font-weight:600}
+.rh-right .rh-mark{color:var(--rh-right)}
+.rh-unchecked .rh-mark{color:var(--rh-soft)}
+.rh-written{color:var(--rh-soft);font-style:italic}
+.rh-written .rh-mark{color:#8a5a1c}
+.rh-selected{outline:2px solid var(--rh-red);outline-offset:-2px}
+.rh-detail{overflow-wrap:anywhere;margin-top:12px;border:1px solid var(--rule);border-left:3px solid #b3261e;padding:12px 16px;font-size:14px;line-height:1.55}
+.rh-detail p{margin:0 0 6px}
+.rh-detail ul{margin:4px 0 8px;padding-left:18px}
+.rh-detail-message{font:13px/1.55 var(--font-geist-mono)}
+.rh-detail-note{color:var(--muted);font-size:13px}
+
+/* Work it the scribe's way. */
+.rh-work{margin-top:40px}
+.rh-work-form{display:flex;flex-wrap:wrap;gap:10px}
+.rh-work-form input{flex:1 1 260px;text-transform:none}
+.rh-working{margin-top:14px;padding:14px 18px;max-height:none}
+.rh-checked{min-width:0}
+.rh-work-row{font:14px/1.8 var(--font-geist-mono);white-space:pre;animation:rh-row .25s ease-out}
+.rh-working-failed .rh-work-row{color:var(--rh-red)}
+@keyframes rh-row{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rh-work-row{animation:none}}
+
+/* The working note: crops of Chace's plates and pages checked in place. */
+.rh-excerpt{margin:0 0 34px}
+.rh-excerpt img{display:block;width:100%;height:auto;border:1px solid var(--rule);background:#f4efe3}
+.rh-excerpt figcaption{margin-top:10px;font-size:9px;color:var(--muted)}
+.rh-excerpt figcaption a{border-bottom:1px solid var(--rule)}
+.rh-excerpt.rh-excerpt-narrow img{max-width:620px}
+.rh-runner{margin:30px 0;border:1px solid var(--rule);padding:18px 18px 16px}
+.rh-runner figcaption{font-size:9px;margin-bottom:12px}
+.rh-runner-bar{display:flex;gap:12px;align-items:baseline;margin:14px 0;flex-wrap:wrap}
+.rh-runner-bar button{border:1px solid currentColor;border-radius:0;padding:8px 16px;background:transparent;color:inherit;font:11px/1.2 var(--font-geist-mono);letter-spacing:.1em;cursor:pointer}
+.rh-runner-bar button:first-child{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.rh-runner-idle{color:var(--muted);font-size:11px}
+.rh-runner-note{margin:12px 0 0;font-size:13px;line-height:1.6;color:var(--muted)}
+.rh-runner .rh-papyrus{max-height:420px}
+.rh-notebook .rh-work{margin:30px 0;border:1px solid var(--rule);padding:18px}
+
+/* Entrance from the note to the full playground. */
+.rh-play-link{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;margin:18px 0}
+.rh-play-link a{border-bottom:1px solid currentColor;padding-bottom:2px}
+.rh-play-link span{opacity:.7}
+
+/* The editor: CodeMirror, coloured and checked by rhind's language server. */
+.rh-editor{--rh-code:13px/1.65 var(--font-geist-mono);position:relative}
+.rh-editor>pre{margin:0;font:var(--rh-code);white-space:pre;overflow:auto;tab-size:4}
+.rh-editor .cm-editor{background:transparent;color:inherit}
+.rh-editor .cm-editor.cm-focused{outline:none}
+.rh-editor .cm-scroller{font:var(--rh-code)}
+.rh-editor .cm-content{padding:0;caret-color:currentColor}
+.rh-editor .cm-line{padding:0}
+.rh-editor .cm-cursor{border-left-color:currentColor}
+.rh-editor .cm-selectionBackground,.rh-editor .cm-content ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)!important}
+.rh-program.rh-editor{height:560px;padding:0;margin-bottom:0;resize:vertical;overflow:hidden}
+.rh-program.rh-editor>pre,.rh-program.rh-editor .cm-content{padding:16px}
+.rh-program.rh-editor .cm-editor{height:100%}
+.rh-program.rh-editor:focus-within{outline:1px solid var(--accent);outline-offset:0}
+.rh-runner .rh-editor{border-left:2px solid var(--accent);padding:4px 0 4px 14px}
+.rh-runner .rh-editor:focus-within{border-left-color:currentColor}
+.rh-runner .rh-editor .cm-scroller{max-height:320px}
+/* Token colours are mixed with the text colour, so they hold on paper and on the dark edition.
+   comment, the scribe's quoted words, statements, figures, the tick, a heading, red ink, restored or lost. */
+.rh-token-comment{color:color-mix(in srgb,currentColor 55%,transparent);font-style:italic}
+.rh-token-string{color:color-mix(in srgb,#8a6d1f 75%,currentColor);font-style:italic}
+.rh-token-keyword{color:color-mix(in srgb,#8a5a1c 80%,currentColor);font-weight:600}
+.rh-token-number{color:inherit}
+.rh-token-operator{color:color-mix(in srgb,#2f6b3a 80%,currentColor);font-weight:700}
+.rh-token-namespace{font-weight:700}
+.rh-token-macro{color:color-mix(in srgb,#b3261e 80%,currentColor)}
+.rh-token-parameter{color:color-mix(in srgb,currentColor 65%,transparent);text-decoration:underline dotted}
+.rh-editor .cm-tooltip,.cm-tooltip.cm-tooltip-hover,.cm-tooltip.cm-tooltip-autocomplete,.cm-tooltip.cm-tooltip-lint{border:1px solid #22251f55;border-radius:0;background:#fbf9f3;color:#22251f;box-shadow:0 6px 24px #0003;max-width:min(420px,86vw)}
+.rh-hover{padding:10px 14px;font:13px/1.55 var(--type-sans),sans-serif}
+.rh-hover p{margin:0 0 6px}
+.rh-hover p:last-child{margin-bottom:0}
+.rh-hover code,.rh-hover pre{font:12px/1.5 var(--font-geist-mono);background:#22251f14;padding:1px 4px}
+.rh-hover pre{margin:0 0 6px;padding:6px 8px;overflow:auto}
+.rh-editor .cm-diagnostic{font:12px/1.5 var(--type-sans),sans-serif;padding:6px 10px}
+.rh-editor .cm-tooltip-autocomplete ul li{font:12px/1.6 var(--font-geist-mono);padding:2px 8px}
+.rh-editor .cm-tooltip-autocomplete ul li[aria-selected]{background:#22251f;color:#fbf9f3}

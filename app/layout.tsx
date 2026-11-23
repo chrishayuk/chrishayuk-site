@@ -25,6 +25,7 @@ import "./bohm-demo.css";
 import "./cpl-demo.css";
 import "./joss-demo.css";
 import "./laning-zierler-demo.css";
+import "./rhind-papyrus-demo.css";
 import "./iplv-demo.css";
 import "./turing-ace-demo.css";
 import "./basic-demo.css";
