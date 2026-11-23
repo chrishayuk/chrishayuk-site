@@ -11,7 +11,7 @@ const ARCHIVE = "https://www.uraone.com/computers/deuce/deucdocs.html";
 const FORMULA = "3 (a) ; 4 (b) ; 5 (c) ;\na b + c × (P) ;";
 const SUBROUTINE = "R R 6 ↓ (P) ;                       # main program\n]                                   # end of main program\n* 6 dup × rev dup × + .5 pow ]      # subroutine";
 const COMMA = "2 (x) ;\n4.3, 16 x - ÷ (P) ;       # with the comma\n4.3 16 x - ÷ (P) ;        # without it";
-const TRUTH = "2, 1 > (P) ;      # truth\n1, 2 > (P) ;      # falsehood\n0 ~ (P) ;         # not falsehood\n1 neg ~ (P) ;     # not truth";
+const TRUTH = "2, 1 > (P) ;      # truth\n1, 2 > (P) ;      # falsehood\n0 ~ neg (P) ;     # not falsehood, negated\n1 neg ~ (P) ;     # not truth";
 const REP = "5, 5 rep (j) j (P) ; ]";
 const SIMPSON_DATA = "0\n0.5\n1\n2\n4\n";
 const simpson = (n: number) => `1, ${n} ÷ 0|(s) 16|(s) 2 × 1, 7 rep (j) j 2 ×|(s) ]
@@ -98,7 +98,7 @@ export function GeorgeNotebook({ record }: { record: PublicationRecord }) {
         alt="Flow diagram page 22, relations and logical operations: the routines for not, and, or, equals and greater than, with corrections in the routines for equals and greater than."
         caption="FLOW DIAGRAMS, P. 22 / RELATIONS AND LOGICAL OPERATIONS"/>
       <GeorgeRunner label="TRUTH, FALSEHOOD, AND THEIR COMPLEMENTS" program={TRUTH}
-        note="Truth is −1, the sign digit alone. ~ complements every digit, so neither result is 0 or −1, though each still acts correctly in a skip."/>
+        note="Truth is −1, the sign digit alone. ~ complements every digit, exponent and all: not-falsehood is −2⁻²², which Hamblin’s punch prints as 0, so it is negated here to show it, and not-truth is just under a half. Each still acts correctly in a skip."/>
     </> },
     { label: "The coding sheets", children: <>
       <Excerpt src="coding-sheet-21-sin-cos-coefficients.jpg" width={445} height={980} narrow
@@ -114,10 +114,15 @@ export function GeorgeNotebook({ record }: { record: PublicationRecord }) {
       ]} note="Read as signed words at 30 binary places. P31 at minor cycle 31 is the 1.0 the polynomial starts from."/>
     </> },
     { label: "Hamblin’s own translator", children: <>{act(6)}</> },
-    { label: "Run it yourself", kind: "operate", children: <>{act(7)}</> },
+    { label: "To the last binary digit", children: <>
+      {act(7)}
+      <GeorgeRunner label="A LOST SIGN, AS IN 1958" program={"0.609211, 0.820734 neg × (P) ;\n"}
+        note="−0.50000018 should punch as −0.5. Hamblin’s multiplication loses the sign in standardising, and so does this interpreter, which now does his arithmetic word for word."/>
+    </> },
+    { label: "Run it yourself", kind: "operate", children: <>{act(8)}</> },
     { label: "What this does not show", children: <>
-      {act(8)}
       {act(9)}
+      {act(10)}
     </> },
   ]}/>;
 }
