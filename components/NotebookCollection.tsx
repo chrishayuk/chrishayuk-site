@@ -23,7 +23,9 @@ export function NotebookCollection(query: { collection?: string; publication?: s
       <div className="notebook-masthead-note"><p>{activeCollection?.description || "Experiments, observations and questions still open."}</p>
         {!activeCollection && !filtered && lead && <a className="notebook-latest-link" data-notebook-lead={lead.id} data-notebook-destination={recordPath(lead)} href={`${recordPath(lead)}#open-notebook`}><span className="notebook-register">Latest notebook</span><span>{lead.title} ↗</span></a>}
         {activeCollection && activeCollection.href !== notebookCollectionHref(activeCollection.id) && <Link href={activeCollection.href}>Follow the collection ↗</Link>}
-        {activeCollection?.play?.map(item => <Link key={item.href} href={item.href} data-collection-play={item.href}>{item.label} ↗</Link>)}
+        {/* A collection leads with its notebooks. Its playgrounds are systems,
+            and live on the Systems page; one link points there. */}
+        {activeCollection?.play?.length ? <Link href={`/systems#${activeCollection.id}`} data-collection-systems={activeCollection.id}>The playgrounds, in Systems ↗</Link> : null}
       </div>
     </header>
     <section id="notebook-selection" className="notebook-selection" aria-label="Filter notebooks">
