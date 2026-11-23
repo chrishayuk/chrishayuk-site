@@ -203,6 +203,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["ALGOL 60", "Edsger Dijkstra", "Jaap Zonneveld", "Electrologica X1", "Mathematical Centre Amsterdam", "call by name", "man or boy test", "Donald Knuth", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
 
+ "N-GEORGE": {
+  subject: "Rebuilding GEORGE, Charles Hamblin’s 1957–58 reverse Polish scheme for the English Electric DEUCE, from his manual with a coding agent, and reading his flow diagrams and coding sheets against it",
+  question: "When the program itself survives only as handwriting, how far can you check a language’s manual by reading its implementation rather than running it?",
+  searchTitle: "GEORGE, Hamblin’s 1958 Reverse Polish Language for DEUCE, Rebuilt: Example 3 Punches a Quarter of Each Integral",
+  description: "GEORGE ran reverse Polish programs on a running accumulator of twelve cells in 1958, more than ten years before Forth. Rebuilt from Hamblin’s manual with a coding agent, its Example 3 punches a quarter of each integral; his flow diagrams settle how repetition counts, and his coding sheets hold the sin and cos coefficients. Step through the cells in your browser.",
+  concepts: ["GEORGE", "General Order Generator", "Charles Hamblin", "English Electric DEUCE", "reverse Polish notation", "stack machines", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
  "N-BASIC": {
   subject: "Dartmouth BASIC as its 1964 instruction manual describes it, with the manual’s programs run in the browser by a Rust interpreter",
   question: "If an interpreter runs a hundred later programs and matches a second implementation, does it run the original language?",
