@@ -53,7 +53,7 @@ export function AlgolNotebook({ record }: { record: PublicationRecord }) {
     { label: "Rules, not checks", children: <>
       {act(2)}
       <AlgolRunner label="A PROCEDURE BEFORE A VARIABLE, AND A PARAMETER WITHOUT A TYPE" program={RULES}
-        note="Two of the 23 rules broken: procedures were to come after variables (property 15), and every parameter was to be specified (property 19). The real compiler compiles it. --x1 runs it and warns."/>
+        note="Two of the 23 rules broken: procedures were to come after variables (property 15), and every parameter was to be specified (property 19). The real compiler compiled probe programs that break each of them. --x1 runs this and warns."/>
     </> },
     { label: "Where the X1 parts from the Report", children: <>
       <StudySequence label="THE SAME PROGRAM, TWO MEANINGS" steps={[
@@ -62,7 +62,7 @@ export function AlgolNotebook({ record }: { record: PublicationRecord }) {
         { label: "NAMES", value: "9 characters", detail: "abcdefghiX and abcdefghiY are the same name." },
         { label: "INTEGER PROCEDURES", value: "1.5", detail: "The value is whatever the arithmetic gave this time, so an integer procedure can return 1.5." },
         { label: "STORED REALS", value: "40 bits", detail: "x := 1/3; x − 1/3 is about 1.5⏨−13, not 0." },
-      ]} note="Each is one of the 23 properties of the X1 manual, numbered in the repository."/>
+      ]} note="The first four are properties of the X1 manual; the fifth is how the X1 stored a real. Each is numbered in the repository."/>
       {act(3)}
       <AlgolRunner label="ONE LINE FOR EACH WAY THEY PART" example="x1-probes"
         note="Every line differs. Each line begins with the number of the manual’s property it tests, or 3.2, the section of Kruseman Aretz’s X1–X8 comparison on how values were stored."/>
@@ -70,13 +70,13 @@ export function AlgolNotebook({ record }: { record: PublicationRecord }) {
     { label: "A real is never zero", children: <>
       {act(4)}
       <AlgolRunner label="ZERO, AND DIVIDING BY IT" program={ZERO}
-        note="The Report stops at 1/0. The X1 divides by its least positive number and stores the greatest real there is."/>
+        note="The Report stops at 1/0. By its manual, the X1 would divide by its least positive number and store the greatest real there is."/>
     </> },
     { label: "Against the real compiler", kind: "evidence", children: <>
       <StudyMeasures label="39 PROBES, RUN ON --x1 AND ON THE REAL COMPILER" items={[
         { label: "DECIDED BY THE COMPILER", value: "14 of 14", detail: "Agree. Order of evaluation, names, declarations, what is accepted." },
         { label: "DECIDED BY BOTH HALVES", value: "7 of 7", detail: "Agree. Switches, name parameters, the for statement’s step." },
-        { label: "DECIDED BY THE RUN-TIME", value: "12 of 18", detail: "Agree. In the 6 that do not, the X1 manual’s words are on the side of --x1." },
+        { label: "DECIDED BY THE RUN-TIME", value: "11 of 18", detail: "Agree. Of the 7 that differ, one is a jump the manual leaves undefined; in the other six the manual’s words are on the side of --x1." },
       ]} note="The simulator’s run-time is a reconstruction too, so only the first row is evidence about the X1 itself."/>
       {act(5)}
     </> },
@@ -84,8 +84,8 @@ export function AlgolNotebook({ record }: { record: PublicationRecord }) {
       <Excerpt src="tract8-p106-printout.jpg" width={900} height={1258} narrow href="https://ir.cwi.nl/pub/13099"
         alt="A page of X1 output from Zonneveld’s thesis: the heading JAZ164, R743, Outer Planets; fifteen pairs of floating-point numbers, the starting positions and velocities; six masses, the last printed as a plus sign and 0; the gravitational constant; eps = +.10⏨−7; and the positions of Jupiter, Saturn, Uranus, Neptune and Pluto at three times."
         caption="ZONNEVELD, MC TRACT 8, 1964, P. 106 / THE RUN WITH PLUTO’S MASS SET TO 0"/>
-      <StudyMeasures label="THE FIRST RUN, PP. 103–104, AGAINST --x1" items={[
-        { label: "NUMBERS ON THE PAGE", value: "82", detail: "Starting values, masses, and the five planets at three times." },
+      <StudyMeasures label="THE FIRST RUN, P. 103, AGAINST --x1" items={[
+        { label: "NUMBERS ON THE PAGE", value: "82", detail: "Starting values, masses, and the five planets at three times, besides the tolerance and the times." },
         { label: "THE SAME, DIGIT FOR DIGIT", value: "80", detail: "Including the layout: sign in the first column, two-digit exponents." },
         { label: "ONE LOWER IN THE LAST DIGIT", value: "2", detail: "6.641455425 and 16.281370896. Both lie just above a decimal tie." },
       ]} note="The comparison is a test in the repository, tests/x1.rs, so it is checked on every change."/>
@@ -99,7 +99,7 @@ export function AlgolNotebook({ record }: { record: PublicationRecord }) {
     { label: "What the page corrected", children: <>
       <Excerpt src="dijkstra-course-p17-18-seven-halves.jpg" width={1000} height={280} href="https://ir.cwi.nl/pub/9606"
         alt="A passage in Dutch from Dijkstra’s course: assigning a real to an integer variable implies rounding to the nearest integer, and the program stops if that lies outside the range of integers; because of the finite precision of reals, for an integer x the effect of x := 7/2 is undefined: x can just as well become 3 as 4."
-        caption="DIJKSTRA, CURSUS PROGRAMMEREN IN ALGOL 60, 1962, PP. 17–18"/>
+        caption="DIJKSTRA, CURSUS PROGRAMMEREN IN ALGOL 60, 11TH EDITION, PP. 17–18"/>
       {act(7)}
       <AlgolRunner label="HALVES" program={HALVES}
         note="The Report rounds by entier(x + 0.5): 4 and −2. --x1 rounds a half away from zero: 4 and −3. The X1 itself promised neither."/>

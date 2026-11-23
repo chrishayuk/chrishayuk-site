@@ -24,7 +24,7 @@ export function AlgolColumns({ report, x1, printed1964 }: { report: Run | null; 
       <AlgolOutput run={report} other={x1?.lines}/>
     </div>
     <div>
-      <p className="record-voice">THE X1, 1960 / --x1{report && x1 && !printed ? ` / ${differ ? `${differ} LINE${differ === 1 ? "" : "S"} DIFFER` : "THE SAME"}` : ""}</p>
+      <p className="record-voice">THE X1, AS ITS 1962 MANUAL DESCRIBES IT / --x1{report && x1 && !printed ? ` / ${differ ? `${differ} LINE${differ === 1 ? "" : "S"} DIFFER` : "THE SAME"}` : ""}</p>
       <AlgolOutput run={x1} other={printed ?? report?.lines}/>
     </div>
     {printed && <div>

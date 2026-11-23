@@ -42,7 +42,7 @@ export const programmes = [
       { label: "Böhm playground", href: "/demos/bohm", name: "Böhm", year: "1951", detail: "Corrado Böhm’s language, machine and self-compiling compiler, from his dissertation." },
       { label: "IPL-V playground", href: "/demos/ipl-v", name: "IPL-V", year: "1964", detail: "The list-processing machine of the IPL-V manual, the language of the first artificial intelligence programs. Step it and watch storage change." },
       { label: "Rhind Papyrus playground", href: "/demos/rhind-papyrus", name: "Rhind Papyrus", year: "c. 1550 BCE", detail: "The working of the Rhind Mathematical Papyrus, about 1550 BCE, checked figure by figure against itself. Choose a line that disagrees and see what the working gives." },
-      { label: "ALGOL 60 playground", href: "/demos/algol-60", name: "ALGOL 60", year: "1960", detail: "Each program run twice: as the 1962 Report defines it and as the first implementation, on the Electrologica X1, ran it. The lines that differ are marked." },
+      { label: "ALGOL 60 playground", href: "/demos/algol-60", name: "ALGOL 60", year: "1962", detail: "Each program run twice: as the 1962 Report defines it and as the first implementation, on the Electrologica X1, ran it. The lines that differ are marked." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
     description: "HAUSE, coding agents, design and making.", href: "/notebook/archive?programme=practice",

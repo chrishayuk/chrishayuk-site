@@ -196,10 +196,10 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Rhind Mathematical Papyrus", "Ahmose", "Egyptian mathematics", "Egyptian fractions", "hieratic", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
  "N-ALGOL-60": {
-  subject: "ALGOL 60 rebuilt from the 1962 Revised Report with a coding agent, and its first implementation, the Dijkstra–Zonneveld system for the Electrologica X1, rebuilt from that system’s documents because its run-time routines were never published, then checked against the real compiler on a simulator and against output the X1 printed in 1964",
+  subject: "ALGOL 60 rebuilt from the 1962 Revised Report with a coding agent, and its first implementation, the Dijkstra–Zonneveld system for the Electrologica X1, rebuilt from that system’s documents because no copy of its run-time routines has been found, then checked against the real compiler on a simulator and against output the X1 printed in 1964",
   question: "How much of a lost run-time can be rebuilt from what its documents say, and how would you know?",
   searchTitle: "The First ALGOL 60 System, Rebuilt from Its Documents and Checked Against Its 1964 Printout",
-  description: "Dijkstra and Zonneveld’s ALGOL 60 for the Electrologica X1 ran in 1960; its run-time routines were never published. Rebuilt from its manuals with a coding agent, it reproduces 80 of the 82 numbers the X1 printed for Zonneveld’s outer planets in 1964. Run any program both ways in your browser.",
+  description: "Dijkstra and Zonneveld’s ALGOL 60 for the Electrologica X1 went into operation in 1960; no copy of its run-time routines has been found. Rebuilt from its manuals with a coding agent, it reproduces 80 of the 82 numbers the X1 printed for Zonneveld’s outer planets in 1964. Run any program both ways in your browser.",
   concepts: ["ALGOL 60", "Edsger Dijkstra", "Jaap Zonneveld", "Electrologica X1", "Mathematical Centre Amsterdam", "call by name", "man or boy test", "Donald Knuth", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
 
