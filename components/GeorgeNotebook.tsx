@@ -75,7 +75,7 @@ export function GeorgeNotebook({ record }: { record: PublicationRecord }) {
         { label: "SIMPSON’S RULE, DOUBLE PRECISION", value: "0.198831", detail: "The same 17 ordinates, worked outside GEORGE." },
       ]} note="The ratio is four for every value of a. The trace of either run is about 2,300 symbols."/>
       <GeorgeRunner label="EXAMPLE 3 AS PRINTED" program={simpson(48)} data={SIMPSON_DATA}
-        note="The five values of a are on the data cards. Each result is a quarter of the integral."/>
+        note="The five values of a are on the data cards. Each result is a quarter of what Simpson’s rule gives."/>
       <GeorgeRunner label="EXAMPLE 3 WITH 1/12" program={simpson(12)} data={SIMPSON_DATA}
         note="Only the first line differs."/>
     </> },
@@ -113,7 +113,7 @@ export function GeorgeNotebook({ record }: { record: PublicationRecord }) {
         { label: "M.C. 13", value: "−0.0000238", detail: "−(π/2)¹⁰/10! is −0.0000252." },
       ]} note="Read as signed words at 30 binary places. P31 at minor cycle 31 is the 1.0 the polynomial starts from."/>
     </> },
-    { label: "Pending", children: <>{act(6)}</> },
+    { label: "Hamblin’s own translator", children: <>{act(6)}</> },
     { label: "Run it yourself", kind: "operate", children: <>{act(7)}</> },
     { label: "What this does not show", children: <>
       {act(8)}
