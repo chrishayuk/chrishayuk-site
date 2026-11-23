@@ -4865,8 +4865,8 @@
       "slug": "the-nine-chapters-writes-18-52-as-the-board-leaves-it",
       "kind": "notebook",
       "title": "The Nine Chapters writes 18/52 as the board leaves it",
-      "dek": "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says. Of 38 figures the board reaches, 37 agree. The answers are the board’s, with one common factor taken out, and not in lowest terms.",
-      "abstract": "Chapter 8 of the Nine Chapters on the Mathematical Art (九章算術, 方程) solves what we would call simultaneous linear equations on a counting board: columns of rods, worked against each other until one figure is left over another. This is a note about a program, jiuzhang, that sets out each problem of the chapter, and each board its commentators describe, as the text sets it, works it a step at a time as the text says, and compares every figure the text states with what the board gives. It ran over a transcription of the Sibu congkan reprint of the Weiboxie edition, made from the scans by a coding agent and its sub-agents. Of 38 figures on 26 pages that the board reaches, 37 agree; the one that does not is Problem 6, whose signs in this edition give −8 and −3 where the answer is 8 and 3. The text writes its eleven fractional answers over one denominator, and not always in lowest terms: Problem 2 is 1 18/52, not 1 9/26. Every 實 over the 法 as the board leaves it writes 7 of the 11 so; each in lowest terms, 9; the 法 and the 實s divided by what they share, all 11. One rule of counting gives Dai Zhen’s 145 算 exactly; none of 100,000,000 readings of Liu Hui’s passage on 77 算 works. No person has checked the transcription, the literature on the chapter has not been read, and nothing here is claimed as new. Every page can be run on the board in the browser.",
+      "dek": "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says. Of 39 statements of the text the board reaches, 38 agree. Its answers are written over one denominator each, and not always in lowest terms.",
+      "abstract": "Chapter 8 of the Nine Chapters on the Mathematical Art (九章算術, 方程) solves what we would call simultaneous linear equations on a counting board: columns of rods, worked against each other until one figure is left over another. This is a note about a program, jiuzhang, that sets out each problem of the chapter, and the boards its commentators work, as the text sets them, works them a step at a time as the text says, and compares what the text states, where the notation can hold it, with what the board gives. It ran over a transcription of the Sibu congkan reprint of the Weiboxie edition, made from the scans by a coding agent and its sub-agents. On 26 pages it checks 39 statements the board reaches: 38 agree, and the one that does not is Problem 6, whose signs in this edition give −8 and −3 where the answer is 8 and 3. That is not a census of every number in the text. The text writes its eleven fractional answers over one denominator each, and not always in lowest terms: Problem 2 is 1 18/52, not 1 9/26, and 52 is the 法 as the board leaves it. Of three readings of the last step, the 法 and the 實s divided by what they share writes all 11 as the text does; that describes how the answers are written, not where a reduction was made. Dai Zhen’s 145 算 is given by two rules of counting, his 99 only by one proposed after both were known; none of 100,000,000 combinations of a small menu of operations makes Liu Hui’s passage on 77 算 work. A second model reviewed the reconstruction independently, found no mistranscription, and found the checker could give a false ✓; this note gives the results after that was fixed. No person has checked the transcription, the literature on the chapter has not been read, and nothing here is claimed as new. Every page can be run on the board in the browser.",
       "created": "2026-11-23",
       "version": "1.0",
       "status": "OPEN",
@@ -4874,7 +4874,7 @@
       "authors": [
         "Chris Hay"
       ],
-      "lineage": "TEXT → SCANS → AGENT → TRANSCRIPTION → JIUZHANG → BOARD",
+      "lineage": "TEXT → SCANS → AGENT → TRANSCRIPTION → JIUZHANG → BOARD → REVIEW",
       "concepts": [
         "ai-agents",
         "source-authority",
@@ -4891,7 +4891,7 @@
         {
           "kind": "observation",
           "label": "01 / EIGHTEEN FIFTY-SECONDS",
-          "text": "The Nine Chapters on the Mathematical Art is a Chinese book of problems and procedures, put together under the Han from older material, with a commentary by Liu Hui (263), notes by Li Chunfeng (656) and, in the 1770s, Dai Zhen’s collation notes. Chapter 8, 方程 (fangcheng), is on what we would call simultaneous linear equations. Its procedure is done on a counting board: the conditions are set out as columns of rods, right to left, and worked against each other until one figure is left over another, the 法 (divisor) over the 實. In Problem 2, two kinds of grain, the text’s answer for a bundle of the top grade is 1 斗 and 18/52: 一斗五十二分斗之十八. Not 9/26. Worked as the text says, the board leaves its 法 at 52. I asked a coding agent to transcribe the chapter from the scans and to build a program, jiuzhang, that does what each line of the text says to the board and compares every figure the text states with what the board gives. This is not a solver for linear equations. It is a reading of one chapter: what the text says to do, what doing it gives, and where they part.",
+          "text": "The Nine Chapters on the Mathematical Art is a Chinese book of problems and procedures, put together under the Han from older material, with a commentary by Liu Hui (263), notes by Li Chunfeng (656) and, in the 1770s, Dai Zhen’s collation notes. Chapter 8, 方程 (fangcheng), is on what we would call simultaneous linear equations. Its procedure is done on a counting board: the conditions are set out as columns of rods, right to left, and worked against each other until one figure is left over another, the 法 (divisor) over the 實. In Problem 2, two kinds of grain, the text’s answer for a bundle of the top grade is 1 斗 and 18/52: 一斗五十二分斗之十八. Not 9/26. Worked as the text says, the board leaves its 法 at 52. I asked a coding agent to transcribe the chapter from the scans and to build a program, jiuzhang, that does what each line of the text says to the board and compares what the text states, where the notation can hold it, with what the board gives. This is not a solver for linear equations. It is a reading of one chapter: what the text says to do, what doing it gives, and where they part.",
           "references": [
             {
               "label": "jiuzhang, the program and the transcription",
@@ -4902,36 +4902,52 @@
         {
           "kind": "observation",
           "label": "02 / A BOARD AND WHAT IS DONE TO IT",
-          "text": "A page in jiuzhang’s notation is a board and what is done to it, one operation to a line, in the order the text gives them. Set right 3 2 1 39 sets the first column, the 實 last. Multiply middle by the head of right is the text’s 徧乘; Take right from middle until the head is gone is its 直除. Negative quantities are black rods, positive red, and the rule of signs (正負術) is the signed arithmetic jiuzhang does without being told. jiuzhang does three things. It runs a page: each operation on the board, as transcribed. It checks what the source states: a column a commentator says the board now holds, an answer as the text writes it, a count of operations (算). And it reads in the alternative: where a clause of a commentary can be read more than one way, the page gives every reading, and jiuzhang readings runs every combination. A transcription never corrects the text. Where the text’s signs give the wrong answer, the page has the text’s signs."
+          "text": "A page in jiuzhang’s notation is a board and what is done to it, one operation to a line, in the order the text gives them. Set right 3 2 1 39 sets the first column, the 實 last. Multiply middle by the head of right is the text’s 徧乘; Take right from middle until the head is gone is its 直除. Negative quantities are black rods, positive red, and the rule of signs (正負術) is the signed arithmetic jiuzhang does without being told. jiuzhang does three things. It runs a page: each operation on the board, as transcribed. It checks what the source states: a column a commentator says the board now holds, an answer as the text writes it, a set of rates, a count of operations (算). Some figures the notation cannot hold, rates read crosswise and arithmetic in fractions off the board, and those are kept as the source’s words, unchecked. And it reads in the alternative: where a clause of a commentary can be read more than one way, the page gives every reading, and jiuzhang readings runs every combination. A transcription never corrects the text. Where the text’s signs give the wrong answer, the page has the text’s signs."
         },
         {
           "kind": "observation",
-          "label": "03 / 38 FIGURES",
-          "text": "These are results against this project’s transcription, under the choices jiuzhang decisions lists. jiuzhang verify runs 26 pages: the 18 problems and 8 pages of commentary. Of 38 figures the text and its commentators state that the board reaches, 37 agree and 1 does not. Five more are not reached: they come after a step that cannot be done."
+          "label": "03 / 39 STATEMENTS",
+          "text": "These are results against this project’s transcription, under the choices jiuzhang decisions lists. jiuzhang verify runs 26 pages: the 18 problems and 8 pages of commentary. They make 39 checked statements, a column a commentator gives, an answer, a set of rates or a count: 38 agree with the board and 1 does not. Five more are not reached: they come after a step that cannot be done. A statement can hold several figures, and some figures the sources give are quoted and not checked, so this is not a census of every number in the text."
         },
         {
           "kind": "observation",
           "label": "04 / HOW THE ANSWERS ARE WRITTEN",
-          "text": "Eleven answers have fractions. The text writes them over one denominator, and not always in lowest terms: Problem 2 is 1 斗 and 18/52, not 9/26; Problem 14 is 33/111, not 11/37. Which reading of the last step writes them so? Every 實 over the 法 as the board leaves it writes 7 of the 11 as the text does. Each answer in its lowest terms writes 9. The 法 and all the 實s divided by what they share (約) writes all 11. So the answers are what the board gives with one common factor taken out: not the board’s 法 as it stands (Problem 1’s board leaves 36, the text writes quarters; Problem 16’s 976, the text 122), and not each fraction reduced on its own (52 and 111 survive). Problem 13’s answer is the extreme case: the depth of the well, 721, is the 法 itself, given as a rate (舉率以言之), and Liu Hui’s 法得七百二十一實七十六 is the board’s left column, checked."
+          "text": "Eleven answers have fractions. The text writes them over one denominator, and not always in lowest terms: Problem 2 is 1 斗 and 18/52, not 9/26; Problem 14 is 33/111, not 11/37. Which reading of the last step writes them so? Every 實 over the 法 as the board leaves it writes 7 of the 11 as the text does. Each answer in its lowest terms writes 9. The 法 and all the 實s divided by what they share (約) writes all 11. So the answers are written over one denominator for each problem, and it is not the board’s 法 as it stands (Problem 1’s board leaves 36, the text writes quarters; Problem 16’s 976, the text 122), and not each fraction in its own lowest terms (52 and 111 survive). The 約 reading gives the same denominators as reducing each answer and then writing them all over the least of their common denominators: the table shows how the answers are written, not where in the working a reduction was made. In Problem 2 the denominator the text writes, 52, is the 法 as the board leaves it. Problem 13’s answer is the extreme case: the depth of the well, 721, is the 法 itself, given as a rate (舉率以言之), and Liu Hui’s 法得七百二十一實七十六 is the board’s left column, checked."
         },
         {
           "kind": "observation",
           "label": "05 / PROBLEM 6",
-          "text": "In this edition, the Weiboxie text, Problem 6’s procedure sets its 實 as 正 in both columns: 益實六斗正 … 益實一斗正. Run as printed, the board gives −8 and −3 where the answer is 8 and 3. This is the one figure of the 38 that does not agree. The other text consulted has 負 in both places, and with 負 the board gives the answer. The scan was read twice."
+          "text": "In this edition, the Weiboxie text, Problem 6’s procedure sets its 實 as 正 in both columns: 益實六斗正 … 益實一斗正. Run as printed, the board gives −8 and −3 where the answer is 8 and 3. This is the one statement of the 39 that does not agree. The other text consulted has 負 in both places, and with 負 the board gives the answer. The scan was read twice."
         },
         {
           "kind": "observation",
-          "label": "06 / DAI ZHEN’S 145",
-          "text": "In his collation notes, Dai Zhen says that Problem 18 by the plain method, cross-multiplying each pair of columns (互乘) and then finding the prices from the bottom up, takes “145 算, counting multiplications, takings and divisions together”, and that a shorter way, working from a column whose head is one, takes 99. One rule of counting gives 145 exactly: every multiplication, taking and division of one figure, leaving out the heads that cross-multiplying makes equal, which he says need not be multiplied. The same rule gives 101 for his shorter way; leaving out also everything multiplied or divided by one, which he says can be saved, gives 98. Three operations by ±1 separate the two, and no rule here counts two of them and not the third. No rule was written to give 99. By the text’s own 徧乘 and 直除, the same rule counts 158 算 for Problem 18; read literally, as taking one column from another one time after another, the text’s 直除 on Problem 18 is 180,403 takings."
+          "label": "06 / DAI ZHEN’S 145 AND 99",
+          "text": "In his collation notes, Dai Zhen says that Problem 18 by the plain method, cross-multiplying each pair of columns (互乘) and then finding the prices from the bottom up, takes “145 算, counting multiplications, takings and divisions together” (兼乘減除言之), and that a shorter way, working from a column whose head is one, takes 99. He does not say what one 算 is beyond that, so jiuzhang rules tries several conventions and prefers none. Plain counts each multiplication, taking and division of one figure, less the heads that cross-multiplying makes equal: 145 for the plain method, 101 for the shorter way. Worked also saves everything multiplied or divided by one: 140 and 98. Readoff is plain with a division by one read off, not worked: 145 and 99. Plain is the nearest to his words, but leaving out the heads’ takings as well as their multiplications is this project’s convention, not his; worked extends his economies, which are about multiplying, to dividing, which he does not mention. Readoff was proposed by the independent review after both numbers were known. It gives both, and is reported as a rule fitted after the fact, not as Dai Zhen’s."
         },
         {
           "kind": "observation",
-          "label": "07 / LIU HUI’S 77",
-          "text": "In his commentary to Problem 18, Liu Hui works it “by the old method, made short” (以舊術爲之…今欲要約), clause by clause, and says it takes 77 算. Dai Zhen calls the passage corrupt (訛舛不可通). The page gives each clause in every reading this project could find: the columns as written, and, for the clause that takes the 3rd column from itself, other columns or nothing; and each 減 or 去 done once, until the head is gone, as far as it goes, in turn, or crosswise. That is 100,000,000 readings. 229,906 of them can be done to the end. None leaves the 4th column giving the price of 黍, as the passage says it should. So none of these readings of the passage works; that does not show that no reading does, and Liu Hui’s 77 is not tested. His new method, 124 算, was given the same treatment and stops, under every reading offered, by the passage’s fourth clause. Its last part, where the columns are set afresh, checks: the 3rd less the 4th leaves 麻 1, 菽 4, 荅 −3, 實 4, as he says."
+          "label": "07 / THE BOARD’S WORKSPACE",
+          "text": "By the text’s own 徧乘 and 直除, Problem 18 counts 158 算 under each of the three rules, with at most 160 rods and an 11-place figure on the recorded boards. Those are the boards as recorded after each step. The working of the last step is not on them: finding the 荅 by the text’s method forms a product of 16 places, and cross-multiplying forms products the board never shows, so these are not the workspace a reckoner needed. Under the repeated rule, which counts a taking done several times over as that many takings of single figures, the text’s method on Problem 18 comes to 180,403 operations, 180,330 of them takings, or 89,773 takings of a whole column."
         },
         {
           "kind": "observation",
-          "label": "08 / READING THE TEXT",
+          "label": "08 / LIU HUI’S 77",
+          "text": "In his commentary to Problem 18, Liu Hui works it “by the old method, made short” (以舊術爲之…今欲要約), clause by clause, and says it takes 77 算. Dai Zhen calls the passage corrupt (訛舛不可通). The page gives each clause in every reading this project could find: the columns as written, and, for the clause 及減第三行, which as written takes the 3rd column from itself, other columns or nothing; and each 減 or 去 done once, until the head is gone, as far as it goes, in turn, or crosswise. That is 100,000,000 combinations of a small menu of operations, not 100,000,000 interpretations. 229,906 of them can be done to the end. None leaves the 4th column giving the price of 黍, as the passage says it should. So none of these readings works; that does not show that no reading does, and Liu Hui’s 77 is not tested. Among what the menu leaves out: 頭位 as anything but the first figure of the column worked on; the columns set one at a time, as 先置第三行 … 次置第二行 … 次置右行 says, with copies kept; other repairs of 及減第三行; mutual subtraction ending in either column. The independent review tried a wider search of its own, heads of either column and other orders, and found no working reading either. His new method, 124 算, was given the same treatment and stops, under every reading offered, by the passage’s fourth clause. Its last part, where the columns are set afresh, checks: the 3rd less the 4th leaves 麻 1, 菽 4, 荅 −3, 實 4, as he says."
+        },
+        {
+          "kind": "observation",
+          "label": "09 / AN INDEPENDENT REVIEW",
+          "text": "A second model, OpenAI’s Codex, reviewed the repository at commit 8532977 independently. It checked every answer, the Problem 6 signs, the commentary figures, the 77 passage and the four stated counts against the scans, and found no mistranscription. It reproduced the answers table, the counts and the censuses with programs of its own. And it wrote probe pages that made the checker fail. A board with contradictory conditions was solved and its answer ticked; an answer could be checked against a board that had since changed; an answer with the wrong number of figures got no mark; an answer written in a form no reading gives got ✓; and the fractions of the last step could overflow without saying so. Each was confirmed here and fixed: a contradictory board is not solved, an answer belongs to the board it was found on, wrong arity and unwritten forms are ✗, and the fractions are checked. It also found the claims wider than the program: figures it called checked that are only quoted, the workspace measured on recorded boards, the census of the 77 passage narrower than its size, and Dai Zhen’s words defining no one rule. Those were reworded, and the census now counts as done to the end only what it ran. The results in this note are after those changes.",
+          "references": [
+            {
+              "label": "The independent review, and what was done about each finding",
+              "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "10 / READING THE TEXT",
           "text": "The text read is the Sibu congkan photographic reprint of the Weiboxie edition, with Liu Hui’s commentary, Li Chunfeng’s notes and Dai Zhen’s collation notes, from Wikimedia Commons, read from the page images. Wikisource’s transcription of the same pages is marked unproofread, and was used only to find places: it drops 直 (in 直除, and 直 “worth”) throughout, drops 兔 throughout Problem 17, and has 八之 for 入之 and 損妓之 for 損益之. A second, punctuated text of the main text, from another edition, is a third witness.",
           "references": [
             {
@@ -4973,6 +4989,10 @@
               "label": "The tutorial: ten chapters, every page in it run by cargo test"
             },
             {
+              "href": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md",
+              "label": "The independent review"
+            },
+            {
               "href": "https://github.com/chrishayuk/nine-chapters",
               "label": "Source, language server and editor extensions"
             }
@@ -4982,12 +5002,14 @@
           "kind": "refusal",
           "title": "WHAT THIS DOES NOT SHOW",
           "lines": [
-            "The transcription was made by a coding agent and its sub-agents, from the scans. No person has checked it.",
+            "The transcription was made by a coding agent and its sub-agents, from the scans, and checked against them at the answers, the signs of Problem 6, the commentary figures, the 77 passage and the four counts by a second model. No person has checked it.",
+            "The 39 statements are what the notation can hold. Some figures the sources give are quoted and not checked, so 38 of 39 is not a census of every number in the text.",
             "Every result here is against that transcription, under the choices jiuzhang decisions lists: that the rule of signs is signed arithmetic, how 徧乘 and 直除 are read, what “head” means, the three readings of the last step, that no rule of counting is preferred, that the readings offered for a corrupt passage are the transcriber’s, and the units.",
-            "That 約 writes all 11 answers as the text does describes the answers. It does not show how they were found.",
+            "That 約 writes all 11 answers as the text does describes how they are written. It gives the same denominators as reducing each answer and writing them over their least common denominator, so it does not show where in the working a reduction was made, or how the answers were found.",
             "Problem 6 is a difference between this edition’s signs and the answer. It is not shown to be the text’s error rather than the edition’s or the reading’s.",
-            "One rule of counting gives Dai Zhen’s 145; it is one rule among those tried, not shown to be his. No rule here gives his 99.",
-            "None of 100,000,000 readings of Liu Hui’s 77 passage works. That does not show that no reading does, and his 77 is not tested.",
+            "Dai Zhen’s words define no one rule of counting. Plain gives his 145 and not his 99; readoff gives both, but was proposed after both were known, and is not shown to be his.",
+            "The rods and places are those of the recorded boards, not the workspace a reckoner needed: the last step works a product of 16 places off the board.",
+            "None of 100,000,000 combinations of a small menu of operations makes Liu Hui’s 77 passage work, and the review’s wider search found none either. That does not show that no reading does, and his 77 is not tested.",
             "Chapter 8 and its commentaries have been edited, translated and studied at length: Qian Baocong’s and Guo Shuchun’s critical editions; Shen Kangshen, Crossley and Lun (1999); Chemla and Guo Shuchun (2004); Hart (2011); and, on the gap between written procedures and the rods, Yiwen Zhu (2025). None was read beyond Zhu’s abstract. The emendations of Problem 6 and of the 77 and 124 passages are very likely discussed there. Nothing here is claimed as new until it has been checked against that literature."
           ],
           "principle": "Running the procedure shows where the text and the board part. It does not show whether the difference is the text’s, the edition’s, the transcriber’s, or the reading’s."
@@ -4996,7 +5018,7 @@
           "kind": "question",
           "text": "Is there a reading of Liu Hui’s passage that takes 77 算 and leaves the price of 黍?",
           "status": "OPEN",
-          "detail": "jiuzhang can run every combination of the readings a page offers and say which can be done to the end and agree with every figure the source states. Of the 100,000,000 offered here, none does. The readings are the transcriber’s; the critical editions and the literature on the passage, not read here, are where others would be found."
+          "detail": "jiuzhang can run every combination of the readings a page offers and say which can be done to the end and agree with what the source states. Of the 100,000,000 combinations offered here, none does, and the review’s wider search found none. The menu is the transcriber’s and leaves readings out; the critical editions and the literature on the passage, not read here, are where others would be found."
         }
       ],
       "sources": [
@@ -5011,18 +5033,23 @@
           "note": "A transcription of the same pages, marked unproofread; used to find places, never for figures."
         },
         {
-          "title": "chrishayuk/nine-chapters, commit 8532977",
+          "title": "chrishayuk/nine-chapters, commit a71e4bb",
           "url": "https://github.com/chrishayuk/nine-chapters",
-          "note": "jiuzhang, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground. jiuzhang verify, answers, counts and readings print every result in this note."
+          "note": "jiuzhang, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review. jiuzhang verify, answers, counts and readings print every result in this note."
+        },
+        {
+          "title": "Independent review of commit 8532977 by OpenAI Codex, 23 November 2026",
+          "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md",
+          "note": "The answers, Problem 6’s signs, the commentary figures, the 77 passage and the four counts checked against the scans; the tables and censuses reproduced; probe pages that made the checker fail. Each finding and what was done about it; the reviewer’s report as written is at https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review-report.md. Commit a71e4bb is the result."
         },
         {
           "title": "Coding-agent session, 23 November 2026",
-          "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+          "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents, and changed after the review. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
         }
       ],
       "published": "2026-11-23"
     },
-    "hash": "97676d640c4c09db01109893291d093b73a8f8b8deaae61a83539e3f1d6b87d4",
+    "hash": "d35ee386d4dedb6d3ce5d4bfd7f44f74e44e529c22755dac7009ca6e0a29ad01",
     "algorithm": "sha256"
   }
 ]
