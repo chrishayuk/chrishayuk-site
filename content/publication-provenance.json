@@ -1662,5 +1662,76 @@
         "note": "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george."
       }
     ]
+  },
+  {
+    "id": "N-NINE-CHAPTERS",
+    "version": "1.1",
+    "recordHash": "0de39a9dcc237b483c7b302dfe425acf38d272676fa15275cd77c75bf25ba6b9",
+    "revision": {
+      "kind": "interpretation",
+      "summary": "Both published reconstructions of Liu Hui's 77 are now run: Guo Shuchun's emended working (算 as operations) reaches the prices, and his rule accounts for 67 of the 77, leaving 10 for placings; every one of Hart's fifteen rod counts (算 as rods) agrees, and his 77-rod bound holds only if each step is worked a position at a time from the bottom. Each reaches 77 only on its own path, so the number does not choose between them. The open question is now Liu Hui's 124.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "九章算術, Sibu congkan (四部叢刊) photographic reprint of the Weiboxie (微波榭) edition, with Liu Hui’s commentary (263), Li Chunfeng’s notes (656) and Dai Zhen’s collation notes (訂訛, 1770s)",
+        "url": "https://commons.wikimedia.org/wiki/File:Sibu_Congkan0392-%E5%8A%89%E5%BE%BD-%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93-3-3.djvu",
+        "note": "Chapter 8 is djvu pages 2 to 53 of Sibu Congkan0392-劉徽-九章算術-3-3.djvu on Wikimedia Commons: the witness, from which every figure was read. Problem 2’s answer is on pages 6 and 7, Problem 6’s procedure on 14, Liu Hui’s 77 on 32, Dai Zhen’s 145 and 99 on 48 and 49. Public domain."
+      },
+      {
+        "title": "九章算術 (四部叢刊本)/卷第八, Wikisource",
+        "url": "https://zh.wikisource.org/wiki/%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93_(%E5%9B%9B%E9%83%A8%E5%8F%A2%E5%88%8A%E6%9C%AC)/%E5%8D%B7%E7%AC%AC%E5%85%AB",
+        "note": "A transcription of the same pages, marked unproofread; used to find places, never for figures."
+      },
+      {
+        "title": "chrishayuk/nine-chapters, commit 138731f",
+        "url": "https://github.com/chrishayuk/nine-chapters",
+        "note": "jiuzhang, the transcription of every page, Guo’s and Hart’s reconstructions of Liu Hui’s 77 as pages, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review and the literature check. jiuzhang verify, answers, counts, readings and rods print every result in this note."
+      },
+      {
+        "title": "Independent review of commit 8532977 by OpenAI Codex, 23 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md",
+        "note": "The answers, Problem 6’s signs, the commentary figures, the 77 passage and the four counts checked against the scans; the tables and censuses reproduced; probe pages that made the checker fail. Each finding and what was done about it; the reviewer’s report as written is at https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review-report.md. Commit a71e4bb is the result."
+      },
+      {
+        "title": "Literature check by OpenAI Codex with web search, 23 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-check.md",
+        "note": "A search for each of the project’s results in the literature, with the passages read and the sources it could not open. “Not found” there means not found in what could be read."
+      },
+      {
+        "title": "李潢 (Li Huang), 九章算術細草圖說, juan 8",
+        "note": "On Problem 6: 正正皆當作負. Read by the literature check in an online transcription, not by this project."
+      },
+      {
+        "title": "K. Chemla and Guo Shuchun, “Les neuf chapitres: le classique mathématique de la Chine ancienne et ses commentaires”, Dunod, 2004",
+        "note": "Problem 6’s 負, crediting Li Huang, p. 632, n. 51; the emendation of Liu Hui’s 77 passage, pp. 652–655, nn. 93–104. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "R. Hart, “The Chinese Roots of Linear Algebra”, Johns Hopkins University Press, 2011",
+        "note": "Problem 14’s 33/111 and the determinant, pp. 173–174. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+        "note": "Liu Hui’s 77 passage, emended and tallied to 77, ch. 8, nn. 22–40; the 124, nn. 41–82; the rates 7:4:3:5:6, nn. 63–69. Read in part by the literature check and the source extraction, not by this project."
+      },
+      {
+        "title": "R. Hart, “Tracing Practices Purloined by the ‘Three Pillars’”, The Korean Journal for the History of Science 34(2), 2012, pp. 287–357",
+        "url": "https://www.rhart.org/papers/KJHS-Hart.pdf",
+        "note": "A reconstruction of Liu Hui’s old method in rods, never more than 77 on the board, with the count after each of fifteen steps, pp. 322–329. Read by the source extraction, not by this project."
+      },
+      {
+        "title": "Source extraction for Guo’s and Hart’s reconstructions, by OpenAI Codex with web search, 24 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/guo-77.md",
+        "note": "Guo’s emended passage and the apparatus of Chemla and Guo, his tally by block, and Hart’s steps and counts, each marked as read from the source, reconstructed, or not readable. The two pages assert only what it marks as read."
+      },
+      {
+        "title": "Wei Xuegang and Guo Shirong, 自然科学史研究 35(1), 2016, pp. 10–17; Zhu Yiwen, “A new perspective on Liu Hui’s mathematical achievements”, Cultures of Science 8(S2), 2025, pp. 161–171",
+        "note": "算 in the 77 and 124 passages read as counting rods. The first read only in its abstract by the literature check."
+      },
+      {
+        "title": "Coding-agent sessions, 23 and 24 November 2026",
+        "note": "The transcription, the program and its tests were made in these sessions by a coding agent and its sub-agents, and changed after the review. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]
