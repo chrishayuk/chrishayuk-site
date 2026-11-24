@@ -12,11 +12,13 @@ import type { GuideStep } from "./NoteGuide";
 const SCANS = "https://commons.wikimedia.org/wiki/File:Sibu_Congkan0392-%E5%8A%89%E5%BE%BD-%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93-3-3.djvu";
 
 // Pages as transcribed in github.com/chrishayuk/nine-chapters, corpus/ (no-01.jz, no-02.jz,
-// no-06.jz, and dai-zhen-18.jz up to its Count 145).
+// no-06.jz, dai-zhen-18.jz up to its Count 145, and hart-18-old.jz).
 const PROBLEM_1 = "No. 8.1\n% Sibu congkan pp. 2-6 (statement p. 2, answer and procedure pp. 3-6; Liu Hui's commentary throughout)\n\"今有上禾三秉，中禾二秉，下禾一秉，實三十九斗，上禾二秉，中禾三秉，下禾一秉，實三十四斗，上禾一秉，中禾二秉，下禾三秉，實二十六斗，問上中下禾實一秉各幾何\"\n% Suppose 3 bundles of top-grade grain, 2 of middle-grade and 1 of low-grade yield 39 dou of grain;\n% 2 top, 3 middle and 1 low yield 34 dou; 1 top, 2 middle and 3 low yield 26 dou.\n% How much grain does one bundle of each grade yield?\n\"荅曰，上禾一秉九斗四分斗之一，中禾一秉四斗四分斗之一，下禾一秉二斗四分斗之三\"\n% Answer: one bundle of top grain, 9 1/4 dou; of middle, 4 1/4 dou; of low, 2 3/4 dou.\n\"術曰，置上禾三秉，中禾二秉，下禾一秉，實三十九斗，於右方，中左禾列如右方，以右行上禾徧乘中行，而以直除，又乘其次，亦以直除，然以中行中禾不盡者，徧乘左行，而以直除，左方下禾不盡者，上爲法，下爲實，實卽下禾之實，求中禾，以法乘中行下實，而除下禾之實，餘如中禾秉數而一，卽中禾之實，求上禾，亦以法乘右行下實，而除下禾中禾之實，餘如上禾秉數而一，卽上禾之實，實皆如法，各得一斗\"\n% The image reads 而以直除 / 亦以直除 / 而以直除 (pp. 3-4); the Wikisource text drops 直 each time.\n% in 斗\nThings 上禾 中禾 下禾 實\nSet right   3 2 1 39          \"置上禾三秉，中禾二秉，下禾一秉，實三十九斗，於右方\"\nSet middle  2 3 1 34          \"中左禾列如右方\"\nSet left    1 2 3 26\nMultiply middle by the head of right.            \"以右行上禾徧乘中行\"\nTake right from middle until the head is gone.   \"而以直除\"\nMultiply left by the head of right.              \"又乘其次\"\nTake right from left until the head is gone.     \"亦以直除\"\n% 其次 read as the next column, the left (so Liu Hui: 復去左行首).\nMultiply left by the 中禾 of middle.             \"然以中行中禾不盡者，徧乘左行\"\nTake middle from left until the head is gone.    \"而以直除\"\n% Liu Hui: 亦令兩行相乘去行之中禾也. No figure for any column is stated by\n% the text, Liu Hui, or Dai Zhen, so there are no Gives lines.\n% Dai Zhen (訂訛 p. 36) reads each 徧乘 ... 直除 as mutual: 以右行上禾徧乘中行，\n% 復以中行上禾徧乘右行，然後可相對減 (i.e. `crosswise`), the text naming only one\n% multiplication 古人文省. He gives no figures.\nSolve.\nAnswer 9 1/4, 4 1/4, 2 3/4\n";
 const PROBLEM_2 = "No. 8.2\n% Sibu congkan pp. 6-7\n\"今有上禾七秉，損實一斗，益之下禾二秉，而實十斗，下禾八秉，益實一斗，與上禾二秉，而實十斗，問上下禾實一秉各幾何\"\n% Suppose 7 bundles of top-grade grain, their yield lessened by 1 dou, with 2 bundles of low-grade\n% grain added, yield 10 dou; 8 bundles of low-grade grain, their yield increased by 1 dou, with\n% 2 bundles of top-grade, yield 10 dou. How much does one bundle of each grade yield?\n\"荅曰，上禾一秉實一斗五十二分斗之十八，下禾一秉實五十二分斗之四十一\"\n% Answer: one bundle of top grain yields 1 dou and 18/52 of a dou; one of low grain, 41/52 of a dou.\n% (十 / 八 of the first answer is broken across pp. 6-7.)\n\"術曰，如方程，損之曰益，益之曰損，損實一斗者，其實過十斗也，益實一斗者，其實不滿十斗也\"\n% in 斗\n% The procedure says only 如方程, with 損之曰益，益之曰損: the 斗 taken off the first\n% condition is added to its 實 (10 + 1), and the 斗 put on the second is taken from\n% its 實 (10 - 1). Each condition is a column, the first the right.\nThings 上禾 下禾 實\nSet right  7 2 11        \"損之曰益\"\nSet left   2 8 9         \"益之曰損\"\nGives right 7 2 11       \"今按實云上禾七秉，下禾二秉，實十一斗\"\nGives left  2 8 9        \"上禾二秉，下禾八秉，實九斗也\"\n% Liu Hui's commentary states both columns; the Gives lines record it.\nSolve.\nAnswer 1 18/52, 41/52\n";
 const PROBLEM_6 = "No. 8.6\n% Sibu congkan pp. 13-14\n\"今有上禾三秉，益實六斗，當下禾十秉，下禾五秉，益實一斗，當上禾二秉，問上下禾實一秉各幾何\"\n% Suppose the yield of 3 bundles of top-grade grain, increased by 6 dou, equals that of 10 bundles\n% of low-grade; the yield of 5 bundles of low-grade, increased by 1 dou, equals that of 2 bundles\n% of top-grade. How much does one bundle of each grade yield?\n\"荅曰，上禾一秉實八斗，下禾一秉實三斗\"\n% Answer: one bundle of top grain yields 8 dou; one of low grain, 3 dou.\n\"術曰，如方程，置上禾三秉正，下禾十秉負，益實六斗正，次置上禾二秉負，下禾五秉正，益實一斗正，以正負術入之\"\n% in 斗\n% The signs are set as the procedure states them, 益實 正 in both columns (image p. 14\n% reads 正 after 益實六斗 and after 益實一斗; re-read, it says so). The Wikisource\n% text of this scan agrees (正, 正). The punctuated Wikisource text of another edition\n% (jiuzhang.wiki) reads 益實六斗負 ... 益實一斗負; with those signs the board gives 8, 3.\n% Not changed: this page follows the scan. jiuzhang finds -8, -3 (法 -5, 實 40 15).\nThings 上禾 下禾 實\nSet right  3 -10 6       \"置上禾三秉正，下禾十秉負，益實六斗正\"\nSet left   -2 5 1        \"次置上禾二秉負，下禾五秉正，益實一斗正\"\nSolve.                   \"以正負術入之\"\nAnswer 8, 3\n";
 const DAI_ZHEN_145 = "No. 8.18 (Dai Zhen, 訂訛: 145 and 99)\n% Sibu congkan pp. 48-49, Dai Zhen's collation notes on Liu Hui's commentary to Problem 18.\n% He calls Liu Hui's account of the old method corrupt (訛舛不可通) and gives his own,\n% with his own counts of 算.\n\"以上所言舊術訛舛不可通據方程術凡五物及總價求其各物之價者應列五行行五位及價以上一位互乘因徧乘次位以下及價兩兩相對減去其頭位所減之餘重列之減至一物一價乃止物爲法價爲實實如法而一得一物之價轉減而上以知各價\"\n% \"What is said above of the old method is corrupt and cannot be followed. By the fangcheng\n% procedure, to find each price from five things and their total prices, set five columns of\n% five positions and the price; cross-multiply by the top positions, and so multiply through the\n% positions below and the price; take each pair from the other to remove its head; set out again\n% what is left; go on until one thing and one price remain. The thing is the 法, the price the 實;\n% divide, and one price is found; work back upwards to know each price.\"\nThings 麻 麥 菽 荅 黍 實\nSet right 9 7 3 2 5 140\nSet 2nd   7 6 4 5 3 128\nSet 3rd   3 5 7 6 4 116\nSet 4th   2 5 3 9 4 112\nSet left  1 3 2 8 5  95\nSolve by cross.\nAnswer 7, 4, 3, 5, 6\n\"先化五爲四次化四爲三次化三爲二次化二爲一凡用十算兼乘減除言之則一百四十五算\"\n% \"First five become four, then four three, three two, two one: ten [eliminations] in all;\n% counting multiplications, takings and divisions together, 145 算.\"\nCount 145                                    \"兼乘減除言之則一百四十五算\"\n";
+
+const HART_77 = "No. 8.18 (Hart's reading of Liu Hui's 77: rods)\n% Roger Hart, \"Tracing Practices Purloined by the 'Three Pillars'\", Korean Journal for the History of\n% Science 34 (2012), pp. 323-329: 算 read as counting rods, and a reconstruction of the old method on which\n% the board never holds more than 77. Columns are set as they are needed; others stay on the board. Each\n% Rods line is the count Hart reports after the step; rods are counted as jiuzhang counts them (a digit\n% to five is that many rods, six to nine one for five and the rest; no rod for a sign), which is the rule\n% his counts follow. Read by a second model, OpenAI Codex; see docs/guo-77.md. Hart's prose says \"subtract\"\n% at steps 7 and 9 where his formulas add; the formulas are followed.\nThings 麻 麥 菽 荅 黍 實\n% 1\nSet 3rd   3 5 7 6 4 116\nSet 4th   2 5 3 9 4 112\nRods 44\n% 2\nTake 4th from 3rd.\nRods 35\n% 3\nSet left  1 3 2 8 5  95\nRods 60\n% 4: 3 left - 2 (4th)\nMultiply left by 3.\nTake 4th from left 2 times.\nRods 45\n% 5\nSet right 9 7 3 2 5 140\nRods 68\n% 6\nTake 4th from right.\nRods 60\n% 7: (right + 2 left) / 5\nAdd left to right 2 times.\nDivide right by 5.\nRods 53\n% 8: 4 (4th) - 3 (3rd)\nMultiply 3rd by -3.\nAdd 4th to 3rd 4 times.\nRods 69\n% 9: (3rd + 20 left) / 3\nAdd left to 3rd 20 times.\nDivide 3rd by 3.\nRods 75\n% 10: 3rd + 5 right\nAdd right to 3rd 5 times.\nRods 53\n% 11: the 2nd set: the most the board holds\nSet 2nd   7 6 4 5 3 128\nRods 77\n% 12: 4 (4th) - 3 (2nd)\nMultiply 2nd by -3.\nAdd 4th to 2nd 4 times.\nRods 71\n% 13: (2nd + 2 left) / 3\nAdd left to 2nd 2 times.\nDivide 2nd by 3.\nRods 67\n% 14: (2nd + 5 right) / 2\nAdd right to 2nd 5 times.\nDivide 2nd by 2.\nRods 62\n% 15: (30 (2nd) - 4 (3rd)) / 62: the 黍 alone, worth 6\nMultiply 2nd by 30.\nTake 3rd from 2nd 4 times.\nDivide 2nd by 62.\nGives 2nd 0 0 0 0 1 6\nRods 56\n";
 
 // Four edits, each run by jiuzhang in the page. What each notice says was
 // checked by running the same text through jiuzhang.wasm.
@@ -141,23 +143,38 @@ export function NineChaptersNotebook({ record }: { record: PublicationRecord }) 
         { label: "COMBINATIONS", value: "100,000,000", detail: "Of the menu’s operations, not 100,000,000 interpretations." },
         { label: "DONE TO THE END", value: "229,906" },
         { label: "LEAVE THE PRICE OF 黍", value: "0", detail: "As the passage says the 4th column should." },
-      ]} note="None of these readings of the unemended passage works, nor any in the review’s wider search. Chemla and Guo (2004) emend the passage and Guo Shuchun (2020) works it to 77; those emendations were not run here, and Liu Hui’s 77 is not tested."/>
+      ]} note="None of these readings of the unemended passage works, nor any in the review’s wider search. The passage has been emended and worked by others; their reconstructions are run next."/>
+    </> },
+    { label: "Two readings of the 77", kind: "evidence", children: <>
+      {act(8)}
+      <StudyMeasures label="TWO PUBLISHED RECONSTRUCTIONS, RUN ON THE BOARD" items={[
+        { label: "GUO SHUCHUN (2020): 算 AS OPERATIONS", value: "67 + 10", detail: "His emended text runs to all five prices; his own rule counts 67 operations, leaving 10 of his 77 for placing rods, which are not modelled. The board holds up to 116 rods." },
+        { label: "HART (2012): 算 AS RODS", value: "15 of 15", detail: "Every rod count he reports agrees with the board; his path ends with the 黍 at six. Under Guo’s rule it is 59 operations and 5 placings." },
+      ]} note="Each reading reaches 77 only on its own path. The number they share cannot choose between them."/>
+      <StudyMeasures label="JIUZHANG RODS: THE MOST RODS ON HART’S BOARD, BY HOW EACH STEP IS WORKED" items={[
+        { label: "AT THE END OF EACH STEP", value: "77", detail: "What Hart counts." },
+        { label: "A POSITION AT A TIME, BOTTOM UP", value: "77", detail: "Each figure set straight to its new value; so too in the best order for each step." },
+        { label: "A POSITION AT A TIME, TOP DOWN", value: "78", detail: "His twelfth step, briefly." },
+        { label: "A COLUMN AT A TIME", value: "86", detail: "A product set down, then taken from." },
+      ]} note="Hart’s 77 holds under an assumption about how a step is worked that neither the text nor he states."/>
+      <NineChaptersRunner label="HART’S RECONSTRUCTION, AS A PAGE / EVERY ROD COUNT CHECKED" page={HART_77} play="/demos/nine-chapters?page=hart-18-old"
+        note="Each Rods line is the count Hart reports after the step, checked against the board. Change a step, setting a column earlier or multiplying by a different figure, and see which counts no longer hold. Guo’s emended working is in the playground as guo-18-old."/>
     </> },
     { label: "An independent review", children: <>
-      {act(8)}
+      {act(9)}
       <StudyMeasures label="WHAT A SECOND MODEL FOUND IN COMMIT 8532977" items={[
         { label: "MISTRANSCRIPTIONS AT THE PLACES CHECKED", value: "0", detail: "Every answer, Problem 6’s signs, the commentary figures, the 77 passage and the four counts, against the scans." },
         { label: "PROBE PAGES THAT MADE THE CHECKER FAIL", value: "fixed", detail: "A contradictory board ticked, a stale answer, wrong arity and unwritten forms unmarked, unchecked fractions." },
         { label: "CLAIMS WIDER THAN THE PROGRAM", value: "reworded", detail: "Statements, not figures; recorded boards; the census’s menu; Dai Zhen’s rules." },
       ]} note="The review is a model’s, like the transcription. No person has checked either."/>
     </> },
-    { label: "Reading the text", children: <>{act(9)}</> },
-    { label: "Earlier work", children: <>{act(10)}</> },
-    { label: "Run it yourself", kind: "operate", children: <>{act(11)}</> },
+    { label: "Reading the text", children: <>{act(10)}</> },
+    { label: "Earlier work", children: <>{act(11)}</> },
+    { label: "Run it yourself", kind: "operate", children: <>{act(12)}</> },
     { label: "What this does not show", children: <>
-      {act(12)}
       {act(13)}
+      {act(14)}
     </> },
-    { label: "What the chapter has become", children: <>{act(14)}</> },
+    { label: "What the chapter has become", children: <>{act(15)}</> },
   ]}/>;
 }
