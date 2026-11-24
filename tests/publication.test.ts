@@ -97,7 +97,7 @@ test("notebook archive searches experiment identifiers and intersects programme 
  assert.deepEqual(notebookArchive({ q: "MACHINE-DISCOVERY-1" }).entries.map(record => record.id), ["N-MACHINE-DISCOVERY"]);
  assert.equal(notebookArchive({ q: "MACHINE-DISCOVERY-1", programme: "cell80" }).entries.length, 0);
  assert.equal(notebookArchive({ programme: "practice" }).entries.length, 2);
- assert.deepEqual(notebookArchive({ programme: "languages" }).entries.map(record => record.id).sort(), ["N-ALGOL-60", "N-BASIC", "N-BOHM", "N-CPL", "N-GEORGE", "N-IPLV", "N-JOSS", "N-LANING-ZIERLER", "N-MOUSE", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-RHIND-PAPYRUS", "N-TURING-ACE"]);
+ assert.deepEqual(notebookArchive({ programme: "languages" }).entries.map(record => record.id).sort(), ["N-ALGOL-60", "N-BASIC", "N-BOHM", "N-CPL", "N-GEORGE", "N-IPLV", "N-JOSS", "N-LANING-ZIERLER", "N-MOUSE", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-RHIND-PAPYRUS", "N-TPK", "N-TURING-ACE"]);
  assert.equal(notebookArchive({ programme: "unknown" }).programme, "all");
  assert.equal(notebookArchive({ q: "a".repeat(400) }).q.length, 300);
 });
@@ -570,6 +570,6 @@ test("llms.txt lists every language playground beside its note", async () => {
  const languages = programmes.find(programme => programme.id === "languages")!;
  assert.ok(document.includes("## Interactive studies — the languages, running in the browser"));
  for (const play of languages.play ?? []) assert.ok(document.includes(`(https://chrishayuk.com${play.href}): ${play.name}, ${play.year}.`), play.href);
- assert.match(document, /\/demos\/joss\): JOSS, 1964\. .* The note: \[In 1965, the computer learned to say I\.\]/);
+ assert.match(document, /\/demos\/joss\): JOSS, 1964\. .* The notes: \[In 1965, the computer learned to say I\.\]\(.*\), [^;]*; \[Knuth and Trabb Pardo’s TPK, run/);
  assert.match(document, /\/demos\/nine-chapters\): .* The notes: \[The Nine Chapters writes 18\/52 as the board leaves it\]\(.*\), PUBLISHED [^;]*; \[Liu Hui’s 124 is the most rods the board holds\]/);
 });

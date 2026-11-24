@@ -28,6 +28,7 @@ import { georgeRecord } from "./george-record.ts";
 import { algol60Record } from "./algol-60-record.ts";
 import { nineChaptersRecord } from "./nine-chapters-record.ts";
 import { nineChapters124Record } from "./nine-chapters-124-record.ts";
+import { tpkRecord } from "./tpk-record.ts";
 import { iplvRecord } from "./iplv-record.ts";
 import { turingAceRecord } from "./turing-ace-record.ts";
 import { basicRecord } from "./basic-record.ts";
@@ -72,7 +73,7 @@ const filmSources = [
 ];
 for (const f of filmSources) authored.push({ ...draft, id: f.id, slug: f.slug, kind: "film", title: f.title, dek: f.dek, abstract: f.abstract, concepts: f.concepts, related: ["W-MCP", "W-LARQL"], media: ["moe-feature"], episode: f.episode, collection: "Mixture of Experts", originalUrl: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}`, sources: [{ title: `IBM — original episode ${f.episode}`, url: `https://www.ibm.com/think/podcasts/mixture-of-experts/${f.original}` }], body: [{ kind: "observation", label: "THE CONVERSATION", text: f.abstract }, { kind: "observation", label: "CREDITS", text: "Produced and published by IBM. Chris Hay appears as a participant. This is Chris Hay’s editorial record of the appearance; the original production and its rights remain with their respective owners." }] });
 
-authored.unshift(machineLinkRecord, recoveryRecord, machineRecognitionRecord, machineDiscoveryRecord, machinePeerRecord, ...ecologyRecords, machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, mouseRecord, bohmRecord, cplRecord, jossRecord, laningZierlerRecord, turingAceRecord, iplvRecord, rhindPapyrusRecord, nineChaptersRecord, nineChapters124Record, georgeRecord, algol60Record, basicRecord, addressBuildRecord, ...visualNotebooks);
+authored.unshift(machineLinkRecord, recoveryRecord, machineRecognitionRecord, machineDiscoveryRecord, machinePeerRecord, ...ecologyRecords, machineCapabilityRecord, machineMotivationRecord, machineTaskRecord, machineSelfReadRecord, machinePermissionRecord, machineVisitRecord, ...cell80Records, ...cell80FurtherRecords, cell80BoundRecord, exhibitionRecord, agentAttributionRecord, mouseRecord, bohmRecord, cplRecord, jossRecord, laningZierlerRecord, turingAceRecord, iplvRecord, rhindPapyrusRecord, nineChaptersRecord, nineChapters124Record, tpkRecord, georgeRecord, algol60Record, basicRecord, addressBuildRecord, ...visualNotebooks);
 authored.push(...videoRecords);
 
 export type Snapshot = { record: PublicationRecord; hash: string; algorithm: "sha256" };

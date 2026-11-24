@@ -218,6 +218,14 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Nine Chapters on the Mathematical Art", "Liu Hui", "fangcheng", "counting rods", "Guo Shuchun", "Roger Hart", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
 
+ "N-TPK": {
+  subject: "Knuth and Trabb Pardo’s TPK program, from their 1976 survey of early programming languages, run on executable reconstructions of nine early systems: their programs for Böhm, Laning and Zierler, and ALGOL 60 as printed, and new programs for Turing’s ACE, GEORGE, IPL-V, JOSS, Dartmouth BASIC and CPL",
+  question: "Would Knuth and Trabb Pardo’s TPK programs have been accepted by the systems they were written for?",
+  searchTitle: "Knuth and Trabb Pardo’s TPK, Run on the Systems It Describes: None of Their Three Programs Is Accepted as Printed",
+  description: "The TPK program of The Early Development of Programming Languages (1976), run on reconstructions of nine early systems. Their Böhm, Laning–Zierler and ALGOL 60 programs are each refused as printed; six systems they did not cover give six other answers. Run every one in your browser.",
+  concepts: ["TPK algorithm", "Donald Knuth", "Luis Trabb Pardo", "history of programming languages", "ALGOL 60", "Electrologica X1", "Corrado Böhm", "Laning and Zierler", "Turing ACE", "GEORGE", "IPL-V", "JOSS", "Dartmouth BASIC", "CPL", "coding agents", "verification", "WebAssembly"],
+ },
+
  "N-GEORGE": {
   subject: "Rebuilding GEORGE, Charles Hamblin’s 1957–58 reverse Polish scheme for the English Electric DEUCE, from his manual with a coding agent, and running his own translator, transcribed from his handwritten coding sheets, on a simulated DEUCE",
   question: "When a run of handwritten code disagrees with its manual, which one was GEORGE?",
