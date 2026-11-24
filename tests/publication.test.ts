@@ -571,4 +571,5 @@ test("llms.txt lists every language playground beside its note", async () => {
  assert.ok(document.includes("## Interactive studies — the languages, running in the browser"));
  for (const play of languages.play ?? []) assert.ok(document.includes(`(https://chrishayuk.com${play.href}): ${play.name}, ${play.year}.`), play.href);
  assert.match(document, /\/demos\/joss\): JOSS, 1964\. .* The note: \[In 1965, the computer learned to say I\.\]/);
+ assert.match(document, /\/demos\/nine-chapters\): .* The notes: \[The Nine Chapters writes 18\/52 as the board leaves it\]\(.*\), PUBLISHED [^;]*; \[Liu Hui’s 124 is the most rods the board holds\]/);
 });

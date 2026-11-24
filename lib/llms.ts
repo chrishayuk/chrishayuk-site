@@ -45,9 +45,11 @@ const section = (heading: string, lines: string[]): string | null =>
 const of = (kind: PublicationRecord["kind"]) =>
  records.filter(record => record.kind === kind && !record.youtubeId).map(entry);
 
-/** Which note each language playground belongs to: the languages collection
- * lists the notes and the playgrounds side by side, in the same order. */
-const playgroundNotes: Record<string, string> = { Mouse: "N-MOUSE", BASIC: "N-BASIC", "Böhm": "N-BOHM", CPL: "N-CPL", JOSS: "N-JOSS", "Turing’s ACE": "N-TURING-ACE", "IPL-V": "N-IPLV", "Laning and Zierler": "N-LANING-ZIERLER", "Rhind Papyrus": "N-RHIND-PAPYRUS", "Nine Chapters": "N-NINE-CHAPTERS", GEORGE: "N-GEORGE", "ALGOL 60": "N-ALGOL-60" };
+/** Which notes each language playground belongs to: the languages collection
+ * lists the notes and the playgrounds side by side, in the same order. A
+ * playground that later notes were written about lists them all, first note
+ * first. */
+const playgroundNotes: Record<string, string[]> = { Mouse: ["N-MOUSE"], BASIC: ["N-BASIC"], "Böhm": ["N-BOHM"], CPL: ["N-CPL"], JOSS: ["N-JOSS"], "Turing’s ACE": ["N-TURING-ACE"], "IPL-V": ["N-IPLV"], "Laning and Zierler": ["N-LANING-ZIERLER"], "Rhind Papyrus": ["N-RHIND-PAPYRUS"], "Nine Chapters": ["N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124"], GEORGE: ["N-GEORGE"], "ALGOL 60": ["N-ALGOL-60"] };
 
 /** The playgrounds of the languages collection. They are tools, not records:
  * each runs the interpreter its note was written about, in the browser, and
@@ -55,8 +57,9 @@ const playgroundNotes: Record<string, string> = { Mouse: "N-MOUSE", BASIC: "N-BA
 function playgrounds(): string[] {
  const languages = programmes.find(programme => programme.id === "languages");
  return (languages?.play ?? []).map(play => {
-  const note = getRecord(playgroundNotes[play.name] ?? "");
-  const about = note ? ` The note: [${note.title}](${SITE}${recordPath(note)}), ${entryState(note)}.` : "";
+  const notes = (playgroundNotes[play.name] ?? []).map(id => getRecord(id)).filter(note => note !== undefined);
+  const links = notes.map(note => `[${note.title}](${SITE}${recordPath(note)}), ${entryState(note)}`);
+  const about = links.length ? ` ${links.length > 1 ? "The notes" : "The note"}: ${links.join("; ")}.` : "";
   return `- [${play.label}](${SITE}${play.href}): ${play.name}, ${play.year}. ${play.detail}${about}`;
  });
 }
