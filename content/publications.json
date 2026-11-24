@@ -6276,5 +6276,297 @@
     },
     "hash": "71829420d0433e9382868f4fd61822fb822d6651d04771e1d36501ad984416f7",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-TPK",
+      "slug": "tpk-run-on-the-systems-it-describes",
+      "kind": "notebook",
+      "title": "Knuth and Trabb Pardo’s TPK, run: none of their three programs is accepted as printed",
+      "dek": "In 1976 Knuth and Trabb Pardo wrote one program, TPK, in about twenty early languages. Run on reconstructions built from each system’s own sources, their Böhm, Laning–Zierler and ALGOL 60 programs are each refused as printed. Six systems they did not cover give six other answers.",
+      "abstract": "Knuth and Trabb Pardo’s survey of early programming languages (1976) compares them by writing one fixed algorithm, TPK, in each, as “fairly close replicas” of what each language’s author would have written. This collection has executable reconstructions of nine early systems, each built from its own primary sources and independently of their paper. Three are languages they wrote TPK in, and each of those programs is refused as printed: Böhm’s, because it names a group S and a variable X, the letters his compiler keeps for itself, so compiled by his method it prints nothing; Laning and Zierler’s, because it reads its input with v|N, which the manual says “is not yet in operation”, and uses a computed zero as an index; ALGOL 60’s, because its procedure heading puts the specification before the value part, against the Report, and because the surviving X1 compiler, run on a simulator, stops on its label and compiles the heading’s parameter as a value array. Knuth had already corrected the heading in his errata (2014); the other findings were not found in a limited search. The six systems they did not cover give six kinds of answer: Turing’s ACE runs TPK only after correcting two of Turing’s own tables; GEORGE, IPL-V and JOSS accept it by their manuals; whether the first Dartmouth BASIC could run it cannot be settled from what survives; and the defining document of CPL cannot express it. Where they run, every value is right at the system’s precision but one, GEORGE’s 79.7062, traced to Hamblin’s add routine. On the two machine-level systems, output costs more than the arithmetic.",
+      "created": "2026-11-24",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "1976 SURVEY → PRIMARY SOURCES → NINE RECONSTRUCTIONS → TPK, RUN",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-ALGOL-60",
+        "N-BOHM",
+        "N-LANING-ZIERLER",
+        "N-TURING-ACE",
+        "N-GEORGE",
+        "N-IPLV",
+        "N-JOSS",
+        "N-BASIC",
+        "N-CPL"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / ONE FIXED ALGORITHM",
+          "text": "In The Early Development of Programming Languages (Stanford, 1976), Donald Knuth and Luis Trabb Pardo compare about twenty early languages by writing one program, TPK, in each. Read eleven numbers. Then, from the last to the first, print each one’s position i and f(aᵢ) = √|aᵢ| + 5aᵢ³, or TOO LARGE if that exceeds 400. They say plainly what the programs are: written in the style of each language’s author, “not truly authentic excerpts from the historical record, but … fairly close replicas” (p. 3). For weaker languages they give rules: integers only means integer input and an integer square root; no text means 999 for TOO LARGE; no user functions means f written out. This collection has executable reconstructions of nine early systems, each built from its own manuals and papers, without reference to their paper. Three are languages they wrote TPK in. That makes a test possible that they could not make: would each printed program have been accepted by the system it was written for?",
+          "references": [
+            {
+              "label": "Knuth and Trabb Pardo, STAN-CS-76-562 (1976)",
+              "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / ALGOL 60: THE REPORT, AND THE FIRST COMPILER",
+          "text": "Their reference version is “in a dialect of Algol 60”. Against the Revised Report it fails twice. Its procedure heading, real procedure f(t); real t; value t;, gives the specification before the value part, and section 5.4.1 puts the value part first. And read and write are not in the Report, which has no input or output. The first ALGOL 60 system, Dijkstra and Zonneveld’s for the Electrologica X1, has a compiler that survives and can be run on a simulator. Given the program with only read and write changed to the X1’s, the compiler stops at once with stop 0–25: TPK: begin is a labelled program, and property 1 of the system’s manual says a program is an unlabelled block. Given the heading as printed in a program of its own, it accepts it without comment, but compiles t as a value array, with the operations RVA and VAP where value t; real t; gives TRAD. The simulator’s run-time then stops with “too many dimensions for value array”; what the X1’s own run-time did is not known, because its routines have not been found. With the label dropped and the value part first, the compiler’s program gives all eleven values to the 13 digits the simulator prints. The X1 findings come from the real compiler, not from the reconstruction.",
+          "references": [
+            {
+              "label": "The ALGOL 60 note",
+              "url": "/notebook/the-first-algol-60-system"
+            },
+            {
+              "label": "examples/tpk-1976.alg, as printed",
+              "url": "https://github.com/chrishayuk/algol-60/blob/main/examples/tpk-1976.alg"
+            },
+            {
+              "label": "The X1 probes and their results, compare/README.md",
+              "url": "https://github.com/chrishayuk/algol-60/blob/main/compare/README.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / BÖHM: TWO LETTERS HIS COMPILER KEEPS",
+          "text": "Corrado Böhm’s thesis (1951) defines a language and a compiler for it, written in the language itself. Knuth and Trabb Pardo’s TPK for it is right as algebra: read as formulas, it gives all 22 values, 999 for i = 10 down to 5 and then 322, 136, 41, 6 and 0. But it names a group S and a variable X, and chapter 6 of the thesis uses those two letters for the polynomials its compiler builds. Compiled by Böhm’s own method, the program’s S and X collide with the compiler’s, and the machine stops after 142 steps having printed nothing. The same program with S and X renamed K and Z agrees all three ways: as algebra, through a reference translation, and through Böhm’s compiler on the machine.",
+          "references": [
+            {
+              "label": "The Böhm note",
+              "url": "/notebook/a-compiler-from-1951-ran-it-needed-four-corrections"
+            },
+            {
+              "label": "programs/tpk.bohm and tpk-renamed.bohm",
+              "url": "https://github.com/chrishayuk/bohm/tree/main/programs"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / LANING AND ZIERLER: AN INPUT NOT YET IN OPERATION",
+          "text": "Their Laning and Zierler program (pp. 56–57) reads its eleven numbers with v|N. The manual of January 1954 lists that among its temporary restrictions: it “is not yet in operation” (E-364, p. 21). It also counts i down by i = i − 1 and uses it as an index when it reaches zero, and page 13 permits a zero index only “if assigned by the specific equation n = 0”. Under the rules of January 1954 the translator stops at the first line. Run without that restriction it types ten lines and then an alarm at the computed zero, though that alarm rests on this reconstruction’s model of zero, not on the manual. Whether Whirlwind itself would have failed is not known.",
+          "references": [
+            {
+              "label": "The Laning and Zierler note",
+              "url": "/notebook/a-1954-manual-asked-for-trouble-reports"
+            },
+            {
+              "label": "examples/1976-knuth-tpk.lzr",
+              "url": "https://github.com/chrishayuk/laning-zierler/blob/main/examples/1976-knuth-tpk.lzr"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHAT WAS ALREADY KNOWN",
+          "text": "A search in November 2026 covered Knuth’s errata, reviews of the paper and its reprints, histories of each language, Rosetta Code, Wikipedia’s talk pages and Hacker News. The heading was found: Knuth’s errata for Selected Papers on Computer Languages (2003), which reprints the paper, change “real t; value t;” to “value t; real t;” in an entry dated 12 February 2014, listed as a typographical correction. Wikipedia’s article on TPK still prints the old order. The same errata (22 September 2022) correct a different line of the Laning and Zierler program, so that 999 is printed for y > 400 and not for y ≥ 400, if the zero the test produces is +0; on Whirlwind a zero may or may not take the jump (E-364, p. 8). They leave v|N and the count down to zero as they were. Sestoft’s translation of Böhm’s thesis notes that the letters are used in the translation of polynomials (appendix A.1), but the search found no one connecting that to TPK. Nothing was found on the X1 refusing the label or compiling the heading as a value array, on v|N, or on the zero index. The search was limited, and the 1977 and 1980 reprints and most of van den Hove’s 2019 thesis on the X1 system could not be read.",
+          "references": [
+            {
+              "label": "Knuth, errata for Selected Papers on Computer Languages",
+              "url": "https://www-cs-faculty.stanford.edu/~knuth/cl.html"
+            },
+            {
+              "label": "Sestoft’s translation of Böhm’s thesis",
+              "url": "https://raspi.itu.dk/~sestoft/boehmthesis/"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / SIX SYSTEMS THEY DID NOT COVER",
+          "text": "Their survey stops in 1957, and machine codes are outside it. The collection’s other six systems therefore have no printed TPK, and the programs for them are new: each written from that system’s own sources, in its author’s style, following Knuth and Trabb Pardo’s rules, and checked against its manual. They were written with a reconstruction to test them on, which Knuth and Trabb Pardo did not have, so that they run is no evidence that they were better read. What is of interest is what each system forced, and whether its own documents would accept the result. The six give six different kinds of answer."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / TURING’S ACE: ONLY AFTER CORRECTING TURING",
+          "text": "The ACE of Turing’s 1945 report is a design, not a machine, and TPK on it is an instruction table. Its arithmetic is whole numbers, so by Knuth and Trabb Pardo’s rules the input is 0 to 10, the square root is an integer one, here by taking away 1, 3, 5 … and counting, and TOO LARGE is 999. The report has no square root, no input conversion and no way to step an index down, and the program needs two of the subsidiary tables Turing printed: INDEXIN, to fetch aᵢ, and DISCRIM, to choose a way on. As printed, INDEXIN gives wrong cards, and DISCRIM answers “no” to the word that both of TPK’s tests produce, so the square root never ends. With the two corrections the reconstruction already lists, it runs, in 24.4 seconds of the design’s time, three quarters of the computing spent converting to decimal.",
+          "references": [
+            {
+              "label": "The Turing ACE note",
+              "url": "/notebook/turings-1945-computer-run-as-written"
+            },
+            {
+              "label": "examples/tpk.ace",
+              "url": "https://github.com/chrishayuk/turing-ace/blob/main/examples/tpk.ace"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "08 / GEORGE, IPL-V AND JOSS: ACCEPTED BY THEIR MANUALS",
+          "text": "Three of the six accept TPK as their manuals describe them. GEORGE, Hamblin’s reverse Polish scheme for the DEUCE (1957), has no text, so TOO LARGE is 999 and the output is 22 cards; its repetition only counts up, so i is 10 − j; and t³ is dup dup × ×, because its power goes through a logarithm and stops on a negative base. It runs both in the interpreter and on Hamblin’s own coding sheets in a simulated DEUCE. IPL-V (1961) has no arrays and no square root: the eleven numbers are a list, reversed by J64, and the square root is a routine by Newton’s method, which takes two thirds of the run’s 2,757 interpretation cycles. TOO LARGE is two data terms, because a data term holds five characters. JOSS (1964–65) has no user functions before JOSS-II, so f is written out; Demand asks for each number; and text and a number share a line only through a form. Each is a judgement from the manuals. For IPL-V it rests on every process used being older than the 1964 additions, and the JOSS reconstruction is the only JOSS that runs."
+        },
+        {
+          "kind": "observation",
+          "label": "09 / BASIC AND CPL: WHAT SURVIVES CANNOT DECIDE",
+          "text": "For the first Dartmouth BASIC the question cannot be settled. The instruction manual of May 1964 survives only as Part I. Arrays, DIM and probably REM are left to Part II. Page 4 counts the operations: nine in Part I and four more in Part II. The October 1964 manual lists fifteen statements, five of them, GOSUB, RETURN, DIM, STOP and REM, not in Part I, so one of those five was not yet in the first system. Which one cannot be identified, so whether TPK could be written in May 1964 is unknown. The program also has to write the cube as T*T*T, because the manual says A↑B “is actually interpreted as |A|^B”. For CPL the defining document cannot express TPK at all: the 1966 Reference Manual’s section on input and output was “postponed”, and the appendix that would define square root and absolute value was never finished. The program uses the Elementary Programming Manual and its supplement for the trial Cambridge system instead.",
+          "references": [
+            {
+              "label": "samples/classic/tpk.bas",
+              "url": "https://github.com/chrishayuk/chuk-basic-rs/blob/main/samples/classic/tpk.bas"
+            },
+            {
+              "label": "examples/tpk.cpl",
+              "url": "https://github.com/chrishayuk/cpl/blob/main/examples/tpk.cpl"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "10 / THE VALUES, AND ONE THAT IS NOT",
+          "text": "On Knuth’s input, 1 (.5) 2 (.25) 3.5 (1) 5.5, every value printed by every system that runs is the true value at that system’s precision, with two exceptions. The X1’s 40-bit numbers end …005 at i = 4 where the true value ends …008: that is storage, not a fault. And GEORGE prints 79.7062 where the value, 79.70614, rounds to 79.7061. The interpreter and Hamblin’s own coding sheets on the simulated DEUCE both print it, and the reconstruction traces it to Hamblin’s add routine, which rounds a leftover 0.38 of a unit upward. It has not been checked against a real DEUCE. The integer systems, the ACE and Böhm, agree with each other and with the arithmetic."
+        },
+        {
+          "kind": "observation",
+          "label": "11 / THE COST, IN EACH SYSTEM’S OWN UNITS",
+          "text": "The units do not convert into one another, so each is reported as its reconstruction counts it. Turing’s ACE: 48,246 instructions in 761,189 minor cycles of 32 µs, 24.4 seconds if cards go at 100 a minute, about three quarters of the computing spent converting to decimal. GEORGE on the simulated DEUCE: 33,477 instructions, 38.7 seconds, about 59% of it punching the 22 cards, after 57 seconds to load GEORGE. IPL-V: 2,757 interpretation cycles, the unit the Logic Theorist’s effort was measured in, 68% of them in the square root. CPL: 437 steps of the reconstruction’s abstract machine, a modern unit. On both machine-level systems, output costs more than the arithmetic; where a system lacked a primitive, the substitute dominated. All of these are from simulations, with the DEUCE’s reader and punch at the simulator’s mid-range timings."
+        },
+        {
+          "kind": "connection",
+          "text": "Each program runs where it is described, on the same WebAssembly builds as the playgrounds. Change one and run it again, or open its playground.",
+          "links": [
+            {
+              "href": "/demos/algol-60",
+              "label": "ALGOL 60, the Report and the X1 — playground"
+            },
+            {
+              "href": "/demos/bohm",
+              "label": "Böhm — playground"
+            },
+            {
+              "href": "/demos/laning-zierler",
+              "label": "Laning and Zierler — playground"
+            },
+            {
+              "href": "/demos/turing-ace",
+              "label": "Turing’s ACE — playground"
+            },
+            {
+              "href": "/demos/george",
+              "label": "GEORGE — playground"
+            },
+            {
+              "href": "/demos/ipl-v",
+              "label": "IPL-V — playground"
+            },
+            {
+              "href": "/demos/joss",
+              "label": "JOSS — playground"
+            },
+            {
+              "href": "/demos/basic",
+              "label": "Dartmouth BASIC — playground"
+            },
+            {
+              "href": "/demos/cpl",
+              "label": "CPL — playground"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "It does not show that Knuth and Trabb Pardo were careless. They said their programs were replicas. What is measured is the distance between a careful reading of each language in 1976 and what its own system enforced, and each time it comes from something a reader of the papers would not see: a compiler’s private letters, a routine not yet in operation, a rule about labels, code that depends on the order of a heading.",
+            "Only the X1 findings come from a surviving system. The Böhm, Laning and Zierler, and Report findings are the rules of their documents applied by a reconstruction, and the reconstructions are readings of those documents. Whether Whirlwind would have run the Laning and Zierler program is not known.",
+            "The six new programs are ours, and that they run says as much about the reconstructions they were tested on as about the languages. ‘Accepted by the manual’ is a judgement for IPL-V and JOSS, and BASIC’s answer depends on a part of a manual that is lost.",
+            "The costs are from simulators, not machines, and are not comparable with each other.",
+            "The search for earlier work was limited, by a coding agent. Nothing here is claimed as new beyond what that search did not find."
+          ],
+          "principle": "A program printed as a replica can be tested by running it on what it replicates."
+        },
+        {
+          "kind": "question",
+          "text": "Did the 1977 or 1980 reprint of the paper change the ALGOL heading?",
+          "status": "OPEN",
+          "detail": "The paper was reprinted in the Encyclopedia of Computer Science and Technology (1977) and in A History of Computing in the Twentieth Century (1980). Both are only lent by archive.org, and were not read. Knuth’s correction is dated 2014, against the 2003 reprint."
+        },
+        {
+          "kind": "observation",
+          "label": "12 / WHAT THE COMPARISON DID",
+          "text": "In 1976 a common program let two readers compare twenty languages on paper. Run on systems rebuilt from their own sources, the same program asks something sharper of each language: not what it looks like, but whether its own rules let it through. Of their three programs that could be asked, none passes as printed, and one of the reasons, the heading, Knuth had already found. Of the six new ones, the answers range from accepted, to accepted only after correcting the designer, to a question that a lost Part II of a manual would settle. The reconstructions gained something too. Writing TPK in each exposed gaps of their own: the ALGOL interpreter accepted the misordered heading and, in X1 mode, the labelled program; the IPL-V loader read a floating-point digit from a column its manual leaves unused; and a JOSS listing was dated too late. Each is now fixed or recorded in its repository."
+        }
+      ],
+      "sources": [
+        {
+          "title": "D. E. Knuth and L. Trabb Pardo, The Early Development of Programming Languages, Stanford report STAN-CS-76-562, August 1976",
+          "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+          "note": "TPK in ALGOL 60, p. 3; in Böhm’s language, pp. 36–39; in Laning and Zierler’s, pp. 56–57; the rules for weaker languages, pp. 4–5."
+        },
+        {
+          "title": "D. E. Knuth, errata for Selected Papers on Computer Languages (2003)",
+          "url": "https://www-cs-faculty.stanford.edu/~knuth/cl.html",
+          "note": "The ALGOL heading corrected (12 February 2014); the Laning and Zierler test reordered (22 September 2022)."
+        },
+        {
+          "title": "chrishayuk/algol-60",
+          "url": "https://github.com/chrishayuk/algol-60",
+          "note": "examples/tpk-1976.alg, examples/tpk.alg; the X1 probes tpk-1976, value-after-spec and tpk-x1 in compare/; tests/x1.rs."
+        },
+        {
+          "title": "chrishayuk/bohm",
+          "url": "https://github.com/chrishayuk/bohm",
+          "note": "programs/tpk.bohm and tpk-renamed.bohm; tests/thesis.rs."
+        },
+        {
+          "title": "chrishayuk/laning-zierler",
+          "url": "https://github.com/chrishayuk/laning-zierler",
+          "note": "examples/1976-knuth-tpk.lzr, with the rules of January 1954."
+        },
+        {
+          "title": "chrishayuk/turing-ace",
+          "url": "https://github.com/chrishayuk/turing-ace",
+          "note": "examples/tpk.ace, with the corrections to INDEXIN and DISCRIM it needs."
+        },
+        {
+          "title": "chrishayuk/george",
+          "url": "https://github.com/chrishayuk/george",
+          "note": "examples/tpk.george, run by the interpreter and on Hamblin’s coding sheets in the simulated DEUCE; RUNNING-GEORGE.md, finding 15, for 79.7062."
+        },
+        {
+          "title": "chrishayuk/ipl-v",
+          "url": "https://github.com/chrishayuk/ipl-v",
+          "note": "examples/tpk.iplv."
+        },
+        {
+          "title": "chrishayuk/joss",
+          "url": "https://github.com/chrishayuk/joss",
+          "note": "examples/tpk.joss; sources/AUDIT.md for the dating."
+        },
+        {
+          "title": "chrishayuk/chuk-basic-rs",
+          "url": "https://github.com/chrishayuk/chuk-basic-rs",
+          "note": "samples/classic/tpk.bas; sources/README.md for what Part II of the May 1964 manual leaves open."
+        },
+        {
+          "title": "chrishayuk/cpl",
+          "url": "https://github.com/chrishayuk/cpl",
+          "note": "examples/tpk.cpl."
+        },
+        {
+          "title": "Coding-agent session, 24 November 2026",
+          "note": "The six new programs, the runs and the literature search were made in this session; every figure can be rerun in the note’s runners or with each repository’s tests."
+        }
+      ],
+      "published": "2026-11-24"
+    },
+    "hash": "c7dad307b981a78fdc89c719f39640c2e05065b6b6c1f80b62767ecf2863cda5",
+    "algorithm": "sha256"
   }
 ]
