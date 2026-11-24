@@ -215,7 +215,7 @@ for (const [id,slug] of [["N-MAP","what-is-the-map"],["N-STATE","what-has-to-sur
 const systems=await request("/systems");
 assert.doesNotMatch(systems.body,/ORIGINAL MEDIA TO FOLLOW|media-required/);
 assert.match(systems.body,/CONCEPTUAL STUDY \/ DISCOVER/);
-for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus", "/demos/george"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
+for (const play of ["/demos/mouse", "/demos/basic", "/demos/bohm", "/demos/cpl", "/demos/joss", "/demos/laning-zierler", "/demos/turing-ace", "/demos/ipl-v", "/demos/rhind-papyrus", "/demos/george", "/demos/nine-chapters"]) assert.ok(systems.body.includes(`data-language-playground="${play}"`), `Systems links to ${play}`);
 const thread=await request("/thread/the-map");
 assert.equal(thread.status,200);
 assert.match(thread.body,/rel="canonical" href="https:\/\/chrishayuk.com\/thread\/the-map"/);
@@ -329,6 +329,18 @@ assert.match(george.body,/name="robots" content="noindex, follow"/);
 assert.match(george.body,/data-george-editor/,"the playground uses the language-aware editor");
 for (const asset of ["/demos/george/george.wasm","/demos/george/george-lsp.wasm","/demos/george/worker.js","/demos/george/lsp-worker.js","/demos/george/george.js","/demos/george/wasi.js","/demos/george/examples.json","/media/notebook/george/manual-p11-example-3-simpson-vector.jpg","/media/notebook/george/manual-p21-coding-table.jpg","/media/notebook/george/coding-sheet-21-sin-cos-coefficients.jpg","/media/notebook/george/flow-diagram-p22-relations-and-logic.jpg"]) assert.equal((await request(asset)).status,200,asset);
 assert.ok((await request("/notebook/a-handwritten-program-from-1958-runs-again")).body.includes('href="/demos/george"'), 'GEORGE note links to the playground');
+// The Nine Chapters: the playground and its assets, and its working note, published and listed.
+const nineChapters=await request("/demos/nine-chapters");
+assert.equal(nineChapters.status,200);
+assert.match(nineChapters.body,/The Nine Chapters,/);
+assert.match(nineChapters.body,/name="robots" content="noindex, follow"/);
+for (const asset of ["/demos/nine-chapters/jiuzhang.wasm","/demos/nine-chapters/wasi.js","/demos/nine-chapters/worker.js","/demos/nine-chapters/lsp-worker.js","/demos/nine-chapters/corpus.json","/media/notebook/nine-chapters/p06-p07-problem-2-answer.jpg","/media/notebook/nine-chapters/p14-problem-6-procedure.jpg","/media/notebook/nine-chapters/p32-seventy-seven-suan.jpg","/media/notebook/nine-chapters/p48-one-hundred-forty-five-suan.jpg"]) assert.equal((await request(asset)).status,200,asset);
+const nineChaptersNote=await request("/notebook/the-nine-chapters-writes-18-52-as-the-board-leaves-it");
+assert.equal(nineChaptersNote.status,200);
+assert.ok(nineChaptersNote.body.includes('href="/demos/nine-chapters"'),"the Nine Chapters note links to the playground");
+assert.ok(!nineChaptersNote.body.includes("UNLISTED PREVIEW"),"the Nine Chapters note is not a preview");
+assert.ok(!nineChaptersNote.body.includes('content="noindex, nofollow"'),"the Nine Chapters note may be indexed");
+assert.ok((await request("/sitemap.xml")).body.includes("/notebook/the-nine-chapters-writes-18-52-as-the-board-leaves-it"),"the Nine Chapters note is in the sitemap");
 const bohm=await request("/demos/bohm");
 assert.equal(bohm.status,200);
 assert.match(bohm.body,/Böhm’s language/);

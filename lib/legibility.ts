@@ -202,6 +202,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Dijkstra and Zonneveld’s ALGOL 60 for the Electrologica X1 went into operation in 1960; no copy of its run-time routines has been found. Rebuilt from its manuals with a coding agent, it reproduces 80 of the 82 numbers the X1 printed for Zonneveld’s outer planets in 1964. Run any program both ways in your browser.",
   concepts: ["ALGOL 60", "Edsger Dijkstra", "Jaap Zonneveld", "Electrologica X1", "Mathematical Centre Amsterdam", "call by name", "man or boy test", "Donald Knuth", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-NINE-CHAPTERS": {
+  subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking what the text and its commentators state where the notation can hold it, reviewed by a second model",
+  question: "When a procedure is run exactly as the text gives it, where do the text and the board part?",
+  searchTitle: "The Nine Chapters Writes 18/52 as the Board Leaves It: Chapter 8 (Fangcheng) Worked on a Counting Board",
+  description: "Chapter 8 of the Nine Chapters on the Mathematical Art (方程), set out in counting rods and worked as the text says. Of 39 statements the board reaches, 38 agree; Problem 2’s answer is written over 52, the 法 as the board leaves it, not in lowest terms. Step through it on a 3D board in your browser.",
+  concepts: ["Nine Chapters on the Mathematical Art", "Jiuzhang suanshu", "fangcheng", "counting rods", "Liu Hui", "Dai Zhen", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
+ },
 
  "N-GEORGE": {
   subject: "Rebuilding GEORGE, Charles Hamblin’s 1957–58 reverse Polish scheme for the English Electric DEUCE, from his manual with a coding agent, and running his own translator, transcribed from his handwritten coding sheets, on a simulated DEUCE",
