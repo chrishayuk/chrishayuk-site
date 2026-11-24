@@ -210,6 +210,14 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Nine Chapters on the Mathematical Art", "Jiuzhang suanshu", "fangcheng", "counting rods", "Liu Hui", "Dai Zhen", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
  },
 
+ "N-NINE-CHAPTERS-124": {
+  subject: "Liu Hui’s 124 算 for his new method on the last problem of Nine Chapters chapter 8, run on Guo Shuchun’s working and counted as operations and as counting rods",
+  question: "Is Liu Hui’s 124 a count of operations or of counting rods?",
+  searchTitle: "Liu Hui’s 124 Is the Most Counting Rods the Board Holds: The Nine Chapters’ New Method, Run",
+  description: "Liu Hui said his new fangcheng method takes 124 算. Run on Guo Shuchun’s working, no count of operations gives 124, but the board peaks at exactly 124 counting rods, just before the text clears a column away. Step through it in your browser.",
+  concepts: ["Nine Chapters on the Mathematical Art", "Liu Hui", "fangcheng", "counting rods", "Guo Shuchun", "Roger Hart", "Chinese mathematics", "history of mathematics", "coding agents", "verification", "WebAssembly"],
+ },
+
  "N-GEORGE": {
   subject: "Rebuilding GEORGE, Charles Hamblin’s 1957–58 reverse Polish scheme for the English Electric DEUCE, from his manual with a coding agent, and running his own translator, transcribed from his handwritten coding sheets, on a simulated DEUCE",
   question: "When a run of handwritten code disagrees with its manual, which one was GEORGE?",
