@@ -1616,5 +1616,51 @@
         "note": "The transcription, the program and its tests were made in this session by a coding agent and its sub-agents, and changed after the review. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-GEORGE",
+    "version": "1.1",
+    "recordHash": "aa970f7647d728186ef3c8dcd072a505dc087ba4664e3c10e4cf98e344a03716",
+    "revision": {
+      "kind": "correction",
+      "summary": "After a second independent review: the random-program comparison now checks the stop each run ends on, and gives 4,993 of 5,000 the same, not 5,000 of 5,000; 0 ÷ 0 now stops as the manual says; the cases where the interpreter follows the manual over Hamblin's code are five, not two; and 'word for word' is said to mean agreement with the simulated, corrected sheets",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "C. L. Hamblin, “GEORGE IA and II: A semi-translation programming scheme for DEUCE. Programming and Operation Manual”, University of New South Wales, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEProgrammingManual.pdf",
+        "note": "23 pages, typed. The running accumulator is on printed p. 2 (PDF p. 5); the comma on p. 4 (PDF p. 7); Example 3 on pp. 7-8 (PDF pp. 10-11); the twelve cells on p. 10 (PDF p. 13); the coding table, Appendix I, on p. 18 (PDF p. 21)."
+      },
+      {
+        "title": "“GEORGE flow diagrams”, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEFlowCharts.pdf",
+        "note": "52 pages, handwritten DEUCE instruction listings. Relations and logic on p. 22; ] on p. 23; skips on p. 25; rep on pp. 26-27; sin and cos on p. 38."
+      },
+      {
+        "title": "“UTECOM Programme GEORGE”, coding sheets, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEProgramCode.pdf",
+        "note": "22 pages, handwritten DEUCE instructions. The sin and cos coefficients are on sheet 21, DL8, track 15/13."
+      },
+      {
+        "title": "David Green’s DEUCE archive, section GEORGE",
+        "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+        "note": "Scanned from the UTECOM originals and supplied by Robin Vowels. Downloaded on 22 November 2026."
+      },
+      {
+        "title": "English Electric, “DEUCE Programming Manual”, May 1956; “DEUCE Logical Design Manual, Part I”, NS-y-37/11-57",
+        "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+        "note": "The simulator’s sources. The multiplier is chapter 10 of the Logical Design Manual."
+      },
+      {
+        "title": "chrishayuk/george",
+        "url": "https://github.com/chrishayuk/george",
+        "note": "The interpreter, the DEUCE simulator, the transcription of the coding sheets, the word-for-word tests against Hamblin’s code, 16 example programs, a tutorial, a language server, the errata, the decisions, the reading notes and an independent review."
+      },
+      {
+        "title": "Coding-agent sessions, November 2026",
+        "note": "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george."
+      }
+    ]
   }
 ]
