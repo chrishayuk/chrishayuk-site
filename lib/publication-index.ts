@@ -31,7 +31,7 @@ export const programmes = [
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
     description: "Historical computational systems reconstructed from their original sources, tested against the surviving evidence, and made executable in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124"], continuation: undefined,
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-TPK"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
       { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
