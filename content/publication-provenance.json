@@ -1733,5 +1733,59 @@
         "note": "The transcription, the program and its tests were made in these sessions by a coding agent and its sub-agents, and changed after the review. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-NINE-CHAPTERS-124",
+    "version": "1.0",
+    "recordHash": "71829420d0433e9382868f4fd61822fb822d6651d04771e1d36501ad984416f7",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication: Liu Hui's 124, run on Guo Shuchun's working of the new method; no count of operations gives it, and the board peaks at exactly 124 rods, at the step before the text takes the third column away."
+    },
+    "sources": [
+      {
+        "title": "九章算術, Sibu congkan (四部叢刊) photographic reprint of the Weiboxie (微波榭) edition, with Liu Hui’s commentary (263)",
+        "url": "https://commons.wikimedia.org/wiki/File:Sibu_Congkan0392-%E5%8A%89%E5%BE%BD-%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93-3-3.djvu",
+        "note": "Liu Hui’s new method and its 124, pp. 31–35. Public domain."
+      },
+      {
+        "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+        "note": "The new method worked through, ch. 8, notes 41–62; the 124 stated, note 82; one 算 defined, note 40. Read by a second model from an OCR transcription, not by this project."
+      },
+      {
+        "title": "Source extraction for Guo’s working, by OpenAI Codex with web search, 24 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/guo-77.md",
+        "note": "Section 3: the new method’s operations, marked as read or worked out, and the states they give."
+      },
+      {
+        "title": "Literature check on the 124-rod peak, by OpenAI Codex with web search, 24 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-124.md",
+        "note": "What each source says about 124 and rods, what was read, and the sources that could not be opened, Wei and Guo (2016) first among them."
+      },
+      {
+        "title": "R. Hart, “Tracing Practices Purloined by the ‘Three Pillars’”, The Korean Journal for the History of Science 34(2), 2012, pp. 287–357",
+        "url": "https://www.rhart.org/papers/KJHS-Hart.pdf",
+        "note": "77 and 124 read as rods, note 34; the old method worked in rods, pp. 322–329. Read by the second model, not by this project."
+      },
+      {
+        "title": "魏雪刚 (Wei Xuegang) and 郭世荣 (Guo Shirong), 《九章算术》方程章“麻麦”问刘徽注中“算”字新释及方程“旧术”新校, 自然科学史研究 35(1), 2016, pp. 10–17",
+        "url": "https://m.fx361.com/news/2016/1216/16730222.html",
+        "note": "算 read as counting rods. Only the abstract and opening paragraphs could be read."
+      },
+      {
+        "title": "J. Hudeček, Matematika v devíti kapitolách, Matfyzpress, 2008",
+        "url": "https://dml.cz/bitstream/handle/10338.dmlcz/400845/DejinyMat_37-2008-1_15.pdf",
+        "note": "The new method’s boards, p. 206, n. 66; attempts to reach 124 by counting operations, n. 71. Read by the second model."
+      },
+      {
+        "title": "chrishayuk/nine-chapters, commit 9b0cee7",
+        "url": "https://github.com/chrishayuk/nine-chapters",
+        "note": "The pages guo-18-new and guo-18-old-placed, jiuzhang rods and counts, and the tests that fix the 124, the 130 and the last board."
+      },
+      {
+        "title": "Coding-agent session, 24 November 2026",
+        "note": "The page, the counts and the note were made in this session; every figure can be rerun in the interactive study or with cargo test."
+      }
+    ]
   }
 ]
