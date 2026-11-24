@@ -1,5 +1,5 @@
 {
- "retrieved_at": "2026-11-22",
+ "retrieved_at": "2026-11-24",
  "sources": [
   {
    "id": "openai-gptbot",
@@ -87,7 +87,7 @@
     "ChatGPT-User"
    ],
    "url": "https://openai.com/chatgpt-user.json",
-   "creation_time": "2026-11-06T18:12:14.689393",
+   "creation_time": "2026-11-24T23:39:17.995613",
    "prefixes": [
     "104.208.184.192/28",
     "104.210.139.192/28",
@@ -206,6 +206,7 @@
     "20.63.221.64/28",
     "20.78.130.48/28",
     "20.83.243.176/28",
+    "20.83.39.160/28",
     "20.98.18.80/28",
     "23.101.217.176/28",
     "23.102.140.144/28",
@@ -415,7 +416,7 @@
     "Googlebot"
    ],
    "url": "https://developers.google.com/static/search/apis/ipranges/googlebot.json",
-   "creation_time": "2026-11-20T15:45:50.000000",
+   "creation_time": "2026-11-24T15:46:04.000000",
    "prefixes": [
     "192.178.4.0/27",
     "192.178.4.128/27",
