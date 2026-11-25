@@ -56,7 +56,7 @@ export function BasicNotebook({ record }: { record: PublicationRecord }) {
       ]} note="DEF names a formula, DIM makes room for a list, and END is always last. That is most of the 1964 language."/>
       {act(2)}
       <Runner label="TRY IT / CHANGE IT AND RUN AGAIN" program={"10 FOR N = 1 TO 5\n20 LET S = N * N\n30 PRINT N, S\n40 NEXT N\n50 PRINT \"DONE\"\n60 END"}
-        note="Change the 5 on line 10, or the formula on line 20: N↑3 is N cubed. Add a line 35 and it runs between 30 and 40, because the numbers are the order. The point after each whole number is how the 1964 results are printed."/>
+        note="Change the 5 on line 10, or the formula on line 20: N↑3 is N cubed. Add a line 35 and it runs between 30 and 40, because the numbers are the order. Each number takes one of five zones of fifteen columns, as the October 1964 manual describes."/>
     </> },
     { label: "The page prints its own answers", kind: "evidence", children: <>
       <Excerpt src="manual-1964-program-1.jpg" width={1300} height={840}
@@ -104,9 +104,13 @@ export function BasicNotebook({ record }: { record: PublicationRecord }) {
       ]} note="The first is on the page above. The second is not runnable here. The third is, below: run it, then switch on AS IN 1964."/>
       {act(10)}
     </> },
-    { label: "What this does not show", children: <>
+    { label: "October 1964", kind: "evidence", children: <>
       {act(11)}
       {act(12)}
+    </> },
+    { label: "What this does not show", children: <>
+      {act(13)}
+      {act(14)}
     </> },
   ]}/>;
 }
