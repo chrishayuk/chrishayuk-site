@@ -28,6 +28,11 @@ const CPL = "let A = Newarray[real, (0, 10)]\nlet f[t] = Sqrt[Mod[t]] + 5t**3\n\
 
 const INTEGERS = "0 1 2 3 4 5 6 7 8 9 10\n";
 const KNUTH = "1 1.5 2 2.25 2.5 2.75 3 3.25 3.5 4.5 5.5\n";
+const NEGATIVE = "-1 -2.5 0 0.25 -4 4.5 -9 2 -0.5 3.5 -5.5\n";
+const ALGOL_NEGATIVE = "begin integer i; real y; real array a[0:10];\n  real procedure f(t); value t; real t;\n    f := sqrt(abs(t)) + 5 × t ↑ 3;\n  a[0] := -1; a[1] := -2.5; a[2] := 0; a[3] := 0.25; a[4] := -4; a[5] := 4.5;\n  a[6] := -9; a[7] := 2; a[8] := -0.5; a[9] := 3.5; a[10] := -5.5;\n  for i := 10 step -1 until 0 do\n  begin y := f(a[i]);\n    outinteger(1, i);\n    if y > 400 then outstring(1, \"TOO LARGE\")\n    else outreal(1, y);\n    outstring(1, \"\\n\")\n  end\nend\n";
+const JOSS_NEGATIVE = "1.1 Demand a(i).\n\n2.1 Set y = sqrt(|a(i)|) + 5·a(i)*3.\n2.2 Type i in form 1 if y > 400.\n2.3 Type i, y in form 2 if y ≤ 400.\n\n3.1 Do part 1 for i = 0(1)10.\n3.2 Do part 2 for i = 10(-1)0.\n\nForm 1:\n__   TOO LARGE\nForm 2:\n__   ___.______\n\nDo part 3.\n-1\n-2.5\n0\n0.25\n-4\n4.5\n-9\n2\n-0.5\n3.5\n-5.5\n";
+const JOSS_DOTS = "1.1 Demand a(i).\n\n2.1 Set y = sqrt(|a(i)|) + 5·a(i)*3.\n2.2 Type i in form 1 if y > 400.\n2.3 Type i, y in form 2 if y ≤ 400.\n\n3.1 Do part 1 for i = 0(1)10.\n3.2 Do part 2 for i = 10(-1)0.\n\nForm 1:\n__   TOO LARGE\nForm 2:\n__   ...........\n\nDo part 3.\n-1\n-2.5\n0\n0.25\n-4\n4.5\n-9\n2\n-0.5\n3.5\n-5.5\n";
+const BASIC_POWER = "10 REM TPK WITH T↑3: THE 1964 MANUAL SAYS A↑B IS |A|^B (P. 5)\n200 DIM A(10)\n210 DEF FNF(T) = SQR(ABS(T)) + 5*T↑3\n220 FOR I = 0 TO 10\n230 READ A(I)\n240 NEXT I\n250 FOR I = 10 TO 0 STEP -1\n260 LET Y = FNF(A(I))\n270 IF Y > 400 THEN 295\n280 PRINT I, Y\n290 GO TO 299\n295 PRINT I, \"TOO LARGE\"\n299 NEXT I\n300 DATA -1, -2.5, 0, 0.25, -4, 4.5, -9, 2, -0.5, 3.5, -5.5\n999 END\n";
 
 /** TPK across the collection: the three printed programs run as printed, and six new ones. */
 export function TpkNotebook({ record }: { record: PublicationRecord }) {
@@ -108,8 +113,22 @@ export function TpkNotebook({ record }: { record: PublicationRecord }) {
         { label: "CPL", value: "437 steps", detail: "Of the reconstruction’s abstract machine: a modern unit." },
       ]} note="From simulators, and not comparable with each other."/>
     </> },
-    { label: "Run it yourself", kind: "operate", children: <>{act(11)}</> },
-    { label: "What this does not show", children: <>{act(12)}{act(13)}</> },
-    { label: "What the comparison did", children: <>{act(14)}</> },
+    { label: "A second input, with negatives", kind: "evidence", children: <>
+      {act(11)}
+      <AlgolRunner label="ALGOL 60 / THE NEGATIVE INPUT, BY THE REPORT AND AS THE X1" program={ALGOL_NEGATIVE}
+        note="The Report gives 0 for i = 2. The X1 mode gives 1.49166814624004e-154: not 0, as the X1’s manual says, but the digits are the stand-in’s."/>
+      <JossRunner label="JOSS / THE SAME PROGRAM, THE NEGATIVE INPUT" program={JOSS_NEGATIVE}
+        note="It stops at the first value form 2 cannot hold."/>
+      <JossRunner label="JOSS / FORM 2 AS A FIELD OF DOTS" program={JOSS_DOTS}/>
+      <GeorgeRunner label="GEORGE / THE NEGATIVE INPUT" program={GEORGE} data={NEGATIVE.trim().split(" ").join("\n")}
+        note="Cards 8 and 1: 0.0821066 and −76.5438, each one unit low in the last binary digit."/>
+      <div className="basic-inline basic-runner">
+        <BasicStudy source={{ title: "DARTMOUTH BASIC, 1964 / WITH T↑3 FOR T*T*T", program: BASIC_POWER }}/>
+        <p className="basic-runner-note">With AS IN 1964 ticked, the negative cubes come out positive. Untick it and a later BASIC gets them right.</p>
+      </div>
+    </> },
+    { label: "Run it yourself", kind: "operate", children: <>{act(12)}</> },
+    { label: "What this does not show", children: <>{act(13)}{act(14)}</> },
+    { label: "What the comparison did", children: <>{act(15)}</> },
   ]}/>;
 }
