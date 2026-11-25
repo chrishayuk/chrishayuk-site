@@ -209,6 +209,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Atlas Autocode, Manchester’s language of 1965, rebuilt from its manual with a coding agent, prints the words of all 29 lines of the one full page COMPILER AB printed that survives. The program printed beside it declares a′ and assigns a″, so it would not have compiled. Type it on a Flexowriter in your browser.",
   concepts: ["Atlas Autocode", "Ferranti Atlas", "Manchester University", "Tony Brooker", "Friden Flexowriter", "paper tape", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-BABBAGE": {
+  subject: "Charles Babbage’s two programs of 4 and 5 August 1837 for the Analytical Engine, on the sheet BAB/L/001 in the Science Museum, transcribed cell for cell from the scans by a coding agent and run on the engine as the sheet itself shows it, with every cell checked",
+  question: "Do the other 26 sets of Babbage’s notations run as written, and when does the engine they need change?",
+  searchTitle: "Babbage’s First Programs (August 1837) Run as He Wrote Them: 122 of 123 Cells Agree",
+  description: "Charles Babbage’s two programs of August 1837 for the Analytical Engine, run as written with a coding agent: 122 of the 123 things the sheet states agree, every accent among them. The sheet relies on the mill keeping a table of multiples; one row asks the mill to subtract twice. Step through it in your browser.",
+  concepts: ["Charles Babbage", "Analytical Engine", "first computer program", "Science Museum", "Babbage Papers", "simultaneous equations", "history of computing", "coding agents", "verification", "WebAssembly"],
+ },
  "N-NINE-CHAPTERS": {
   subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking what the text and its commentators state where the notation can hold it, reviewed by a second model",
   question: "When a procedure is run exactly as the text gives it, where do the text and the board part?",
