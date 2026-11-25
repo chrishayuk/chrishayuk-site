@@ -1988,5 +1988,50 @@
         "note": "The six new programs, the runs and the literature search were made in this session; every figure can be rerun in the note’s runners or with each repository’s tests."
       }
     ]
+  },
+  {
+    "id": "N-ATLAS-AUTOCODE",
+    "version": "1.0",
+    "recordHash": "391b83c975c66388f285d7bf0cdd55f2d8d859b6177571161094b297b0373c59",
+    "revision": {
+      "kind": "initial",
+      "summary": "First published: Atlas Autocode rebuilt from the 1965 Reference Manual with a coding agent, both compilers and the Flexowriter; the words of all 29 lines of COMPILER AB's page B1.4 reproduced, and the Mini-Manual's binomial table; the listing of p. B1.3 would not compile as printed; reviewed independently, eighteen findings acted on; with a playground that types on a Flexowriter."
+    },
+    "sources": [
+      {
+        "title": "R. A. Brooker and J. S. Rohl, “Atlas Autocode Reference Manual”, Manchester University, 1 March 1965",
+        "url": "https://gtoal.com/history.dcs.ed.ac.uk/archive/docs/Atlas_Autocode_1965.pdf",
+        "note": "The language of COMPILER AA. Bound in at the end: “Amendments for COMPILER AB”, pp. B1.1–B1.4, with the program and printout of pp. B1.3–B1.4."
+      },
+      {
+        "title": "W. F. Lunnon and G. Riding, “The Atlas Autocode Mini-Manual”, Manchester University, July 1965",
+        "url": "http://www.ancientgeek.org.uk/EMAS/Miscellaneous/Atlas_Autocode_Mini_Manual.pdf",
+        "note": "COMPILER AB in nine pages. Pp. 7–8: the binomial coefficients program and its printout."
+      },
+      {
+        "title": "Ferranti, the “Atlas Bible”, sections dated 1963",
+        "url": "https://gtoal.com/history.dcs.ed.ac.uk/archive/atlas/atlasbible.pdf",
+        "note": "§3.1 for the floating-point orders and their rounding; §8.7.4 for the Flexowriter’s seven-track code, key by key."
+      },
+      {
+        "title": "The Edinburgh KDF9 compiler for Atlas Autocode, Version 4G, 1965",
+        "url": "https://gtoal.com/history.dcs.ed.ac.uk/archive/languages/atlas-autocode/",
+        "note": "Written in Atlas Autocode. The wording of two messages the Atlas documents do not give."
+      },
+      {
+        "title": "chrishayuk/atlas-autocode, release v0.1.0",
+        "url": "https://github.com/chrishayuk/atlas-autocode",
+        "note": "The interpreter, both compilers, the 1965 printouts as tests, the errata, the independent review, a tutorial, a language server and editor extension, and the playground."
+      },
+      {
+        "title": "The independent review of the repository, by OpenAI Codex CLI, 25 November 2026",
+        "url": "https://github.com/chrishayuk/atlas-autocode/blob/main/docs/independent-review.md",
+        "note": "Eighteen findings and what was done about each."
+      },
+      {
+        "title": "Coding-agent sessions, 24–25 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons were made in these sessions. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]
