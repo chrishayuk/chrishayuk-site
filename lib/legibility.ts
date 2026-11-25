@@ -202,6 +202,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Dijkstra and Zonneveld’s ALGOL 60 for the Electrologica X1 went into operation in 1960; no copy of its run-time routines has been found. Rebuilt from its manuals with a coding agent, it reproduces 80 of the 82 numbers the X1 printed for Zonneveld’s outer planets in 1964. Run any program both ways in your browser.",
   concepts: ["ALGOL 60", "Edsger Dijkstra", "Jaap Zonneveld", "Electrologica X1", "Mathematical Centre Amsterdam", "call by name", "man or boy test", "Donald Knuth", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
+ "N-ATLAS-AUTOCODE": {
+  subject: "Atlas Autocode, the language of the Ferranti Atlas at Manchester, rebuilt with a coding agent from Brooker and Rohl’s 1965 Reference Manual, with both of its compilers and the Flexowriter it was typed on, and checked against the two pages of output that survive with their programs",
+  question: "What else did Atlas print that survives with its program?",
+  searchTitle: "Atlas Autocode Rebuilt from Its 1965 Manual: the Printout Shows the Printed Program Never Ran",
+  description: "Atlas Autocode, Manchester’s language of 1965, rebuilt from its manual with a coding agent, prints the words of all 29 lines of the one full page COMPILER AB printed that survives. The program printed beside it declares a′ and assigns a″, so it would not have compiled. Type it on a Flexowriter in your browser.",
+  concepts: ["Atlas Autocode", "Ferranti Atlas", "Manchester University", "Tony Brooker", "Friden Flexowriter", "paper tape", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ },
  "N-NINE-CHAPTERS": {
   subject: "Working chapter 8 of the Nine Chapters on the Mathematical Art on a counting board, step by step as the text says, on a transcription of the Sibu congkan reprint made by a coding agent, and checking what the text and its commentators state where the notation can hold it, reviewed by a second model",
   question: "When a procedure is run exactly as the text gives it, where do the text and the board part?",
