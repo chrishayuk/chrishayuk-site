@@ -6568,5 +6568,215 @@
     },
     "hash": "c7dad307b981a78fdc89c719f39640c2e05065b6b6c1f80b62767ecf2863cda5",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-NINE-CHAPTERS-124",
+      "slug": "liu-huis-124-is-the-most-rods-the-board-holds",
+      "kind": "notebook",
+      "title": "Liu Hui’s 124 is the most rods the board holds",
+      "dek": "In 263 Liu Hui said his new method for the last problem of the Nine Chapters’ chapter 8 takes 124 算. Run on the one published working of it, no count of operations gives 124. It is the most counting rods the board ever holds, just before the text clears a column away.",
+      "abstract": "Liu Hui closes two workings of the last problem of chapter 8 of the Nine Chapters with a number: the old method, made short, takes 77 算, and his new method 124. 算 can mean an operation or a counting rod, and both readings are published. An earlier note ran two reconstructions of the 77, one for each reading, and found that each reaches 77 only on its own path, so the 77 cannot decide. This note runs the 124. Guo Shuchun’s working of the new method (2020), transcribed as a page, runs on the board, and all seven figures the text and his notes state agree. Counted as operations it cannot be 124: under Guo’s own rule, as his tally of the 77 applies it, the part that finds the rates is already 228, and no other rule gives 124. Counted as rods, with the rule that confirmed all fifteen of Hart’s counts for the 77, the board holds 116 rods when the five columns are set and at most 124 after, exactly. Up to that peak, every operation is fixed by the text, and the peak falls just before the text says 訖廢去第三行, take the third column away. The same question asked of the old method gives 100, not 77, on Guo’s working: a rods reading of the 77 needs another path, such as Hart’s. That 124 means rods is already the reading of Hart (2012) and of Wei Xuegang and Guo Shirong (2016), whose full text could not be read and may contain this count; Hudeček (2008) prints this board. A second model’s search did not find the peak stated in what it could read. No person has checked the transcription.",
+      "created": "2026-11-24",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "TEXT → GUO 2020 → SOURCE EXTRACTION → PAGE → JIUZHANG → RODS",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-NINE-CHAPTERS",
+        "N-RHIND-PAPYRUS"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / TWO NUMBERS",
+          "text": "Problem 18 of chapter 8 of the Nine Chapters asks the prices of five grains from five conditions: five columns of six figures on a counting board. Liu Hui, in his commentary of 263, works it twice. Of the old method, made short, he says 如此凡用七十七算: this way uses 77 算 in all. Of his new method he says 如此則凡用一百二十四算也: 124. 算 is a calculation, or a counting rod (筭), and both readings are published. Chemla and Guo (2004) and Guo Shuchun (2020) count operations: Guo’s note 40 makes one 算 each placing of rods, each multiplication or division of a whole column, each taking of one column from another, and each division of a 實 by a 法, and his working of the 77 adds up to 77. Hart (2012) and Wei Xuegang and Guo Shirong (2016) count rods: the most the board holds. Hart’s working of the old method never holds more than 77. The earlier note on chapter 8 ran both workings of the 77 on jiuzhang’s board. Each reached 77, but only on its own path: Guo’s needs 116 rods, and Hart’s is 59 operations and 5 placings. The 77 cannot choose. This note asks the same of the 124.",
+          "references": [
+            {
+              "label": "The earlier note: the Nine Chapters writes 18/52 as the board leaves it",
+              "url": "/notebook/the-nine-chapters-writes-18-52-as-the-board-leaves-it"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / THE NEW METHOD, AS GUO WORKS IT",
+          "text": "As printed, the passage of the new method stops by its fourth clause under every reading the project offered: Dai Zhen called it corrupt too. Guo Shuchun works it through (九章筭術譯注, 2020, notes 41–62), and a second model, OpenAI’s Codex, read his notes and wrote out the operations, marking what it read and what it worked out: the figure that would show each board, 8-8, was not in the transcription it could read, so how many times each column is taken is calculated from the figures, not read. That working was set down as a page in jiuzhang’s notation. It runs to the end. The seven figures the text and Guo’s notes state all agree with the board: 菽 5 against 荅 3, 荅 6 against 黍 5, 麥 3 against 菽 4, 麻 4 against 麥 7, and the figures before two of the reductions, −310 and 186, and −10 and 5. Its last board is, column for column, the one the extraction worked out by hand. One sign differs: at note 61, adding as the page says gives 3 and −4 where Guo’s note has −3 and 4, the same rate.",
+          "references": [
+            {
+              "label": "The page, corpus/guo-18-new.jz",
+              "url": "https://github.com/chrishayuk/nine-chapters/blob/main/corpus/guo-18-new.jz"
+            },
+            {
+              "label": "The source extraction, section 3",
+              "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/guo-77.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / AS OPERATIONS, IT CANNOT BE 124",
+          "text": "Guo gives no tally for the 124: his note 82 states the total only. His rule, applied as his tally of the 77 applies it, counts a column taken from another seven times as seven takings. The new method takes the third column from the first 35 times, to clear its 實 of 140 by 4 at a time, from the second 32 times and from the fourth 28. Counted so, the part of the method that finds the rates, before the last part, is already 228. jiuzhang’s other rules of counting do no better: counting each figure multiplied, taken or divided gives 199; counting every figure, by one or not, 123, and the last part’s first taking alone adds 6; counting each operation on a whole column gives 35, far short. On this working, no way of counting operations that the project could find gives 124."
+        },
+        {
+          "kind": "observation",
+          "label": "04 / AS RODS, IT IS 124 EXACTLY",
+          "text": "A figure in rods takes as many rods as its digits do: one to five rods for one to five, one rod across for five and the rest for six to nine, none for zero, and none for the sign, which is the colour. Counted so, all fifteen of Hart’s counts for the 77 agree with jiuzhang’s board. The new method sets all five columns: 116 rods. Then, for its first six operations, the text leaves nothing to choose. 先以第四行減第三行: the fourth from the third, once. 次以第三行去右行及第二行第四行下位: the third clears the 實 of the right, the second and the fourth, 35, 32 and 28 times. 又以減右行下位不足減乃止: the third from the left as far as it goes, 23 times, with the printed 右 read as 左, as Guo reads it, since the right’s 實 is already gone. 次以左行減第三行下位: the left from the third, once. The board now holds 124 rods: 23, 21, 27, 27 and 26 in its five columns. 次以第三行去左行下位: the third clears the left’s 實, 3 times; the left changes, and the board still holds 124. Then the text says 訖廢去第三行: that done, take the third column away. Its 27 rods go, and the board never holds as many again. The last part, the columns set afresh, needs about half as many."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / HOW A STEP IS WORKED",
+          "text": "Those counts are of the board after each step. While a column is being worked it passes through other figures, and jiuzhang rods measures the board within a step too. Worked a position at a time, each figure set straight to its new value from the bottom up, or in the best order for the step, or a whole column at once, the new method keeps to 124. Worked from the top down, it needs 130 at one step. Hart’s 77 behaves the same way: 77 from the bottom up or in the best order, 78 from the top. Both of Liu Hui’s numbers, read as rods, hold under one way of working and not under another, and neither the text nor the reconstructions say which way a reckoner worked. A reader then asked what happens if a repeated taking is done literally, one take at a time. At the step just before the peak, 次以第三行去左行下位, the third column is taken from the left three times, until the left’s 實 of 3 is gone. Taken singly on the whole column, the left column passes through −68 9 −278 237 15 1, 35 rods, and the board reaches 133. Taken singly a position at a time, each position passing through every figure its own takes give it, jiuzhang rods now searches every interleaving of the positions: the least is 125, one more than Liu Hui’s number. One figure taken three times at once, any one of the 麻, 菽 or 荅, brings it back to 124, and no other step needs more than 124 with its takes done singly. Hart’s 77 survives the same test. So if the 124 counts rods, it also says something about how the work was done: a multiple taken at once, at one position at least, not the column taken again and again."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / THE OLD METHOD, ASKED THE SAME",
+          "text": "If 算 is rods, the 77 should be the most rods on the old method’s board. Guo’s working of it sets all five columns at the start, 116 rods. The text sets them one at a time (先置第三行 … 次置第二行 … 次置右行), so the same working was run with each column set only when an operation first uses it. It peaks at 100, not 77. So, read as rods, the 77 needs a different path from Guo’s emended working: Hart’s, which sets the columns as they are needed and is built to keep within 77, is one. The 124 needs no such path. On the only published working of the new method, it is what the board holds.",
+          "references": [
+            {
+              "label": "The page, corpus/guo-18-old-placed.jz",
+              "url": "https://github.com/chrishayuk/nine-chapters/blob/main/corpus/guo-18-old-placed.jz"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / WHAT IS ALREADY KNOWN",
+          "text": "That the 124 counts rods is not a new reading. Hart (2012, note 34) reads both 77 and 124 as rods, though he works only the old method. Wei Xuegang and Guo Shirong (2016) argue that 算 here means counting rods, and say they begin from the new method to settle the meaning; their full text is behind a login and could not be read, so they may well have counted this peak, perhaps on this board. Zhu Yiwen (2025) calls the totals 77 rods and 124 rods, citing them. Hudeček (2008, p. 206) prints this board’s figures, and his note 71 records failed attempts to reach 124 by counting operations. Chemla and Guo (2004) and Guo (2020) read 124 as calculation steps. A second model’s search, which read parts of most of these, did not find the peak itself, 124 rods on Guo’s working at the step before 訖廢去第三行, stated in anything it could read. One difference is open: Zhu (2010, p. 82) counts 110 rods to set out the problem, where this rule counts 116.",
+          "references": [
+            {
+              "label": "The literature check, with what was read and what could not be",
+              "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-124.md"
+            },
+            {
+              "label": "Hart (2012), pp. 314–330",
+              "url": "https://www.rhart.org/papers/KJHS-Hart.pdf"
+            },
+            {
+              "label": "Wei and Guo (2016): abstract and opening only",
+              "url": "https://m.fx361.com/news/2016/1216/16730222.html"
+            },
+            {
+              "label": "Hudeček (2008), chapter 8",
+              "url": "https://dml.cz/bitstream/handle/10338.dmlcz/400845/DejinyMat_37-2008-1_15.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "The page runs in the browser, on the same three-dimensional board as the rest of chapter 8. Step through it to the third column’s last moment, or change an operation and watch what the board holds.",
+          "links": [
+            {
+              "href": "/demos/nine-chapters?page=guo-18-new",
+              "label": "Liu Hui’s new method, as Guo works it — interactive study"
+            },
+            {
+              "href": "/demos/nine-chapters?page=hart-18-old",
+              "label": "Hart’s 77, for comparison"
+            },
+            {
+              "href": "/demos/nine-chapters?page=guo-18-old-placed",
+              "label": "Guo’s old method, each column set when first used"
+            },
+            {
+              "href": "https://github.com/chrishayuk/nine-chapters/blob/main/tutorial/09-a-corrupt-passage.md",
+              "label": "Tutorial chapter 9: a corrupt passage, and the 124"
+            },
+            {
+              "href": "https://github.com/chrishayuk/nine-chapters",
+              "label": "Source, language server and editor extensions"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "It is one working. Guo’s is the only published working of the new method the project could read; another working could peak elsewhere. Up to the peak the text fixes the operations, so any working that follows the text there, with all five columns set, reaches 124 at that step, but nothing here shows that no working exceeds it later.",
+            "It is not shown what Liu Hui meant. A board total near 124 could arise by chance: in the first steps it runs between 104 and 124. What makes it more than a number near another is that it is exact, that it is the most the board holds, that it falls where the text itself clears a column away, and that no count of operations gives 124. That is evidence for a reading, not proof of one.",
+            "Guo’s working was read by a second model from an OCR transcription of his book; his figure 8-8 was not seen, and how many times each column is taken was worked out, not read. No person has checked it against the printed page.",
+            "The rule of rods is the one Hart’s counts follow, and it confirms all fifteen of them; Zhu (2010, p. 82) gives 110 for setting out the problem, where it counts 116, but his digit rule (note 29) is the same one, and under it that board is 116 rods; his 110 matches the board’s 38 non-zero digits at the average of 2.9 rods a digit he gives in the next sentence, 110.2, which no other rule and no single misread coefficient does. That is an inference, since he does not show the count. The counts are of figures on the board: rods held in the hand, or set aside for a product, are not counted.",
+            "With every take done singly, the least the new method needs is 125, not 124; the 124 holds only if at least one figure at the step before the peak is taken three times at once. Whether a Han reckoner did that, the text does not say, and nothing here shows it.",
+            "Wei and Guo (2016) may already state this. Their paper could not be read beyond its opening. Nothing here is claimed as new."
+          ],
+          "principle": "A number in a text can be tested by running what the text says; it cannot be proved by the run."
+        },
+        {
+          "kind": "question",
+          "text": "Do Wei Xuegang and Guo Shirong (2016) count 124 rods on this board?",
+          "status": "OPEN",
+          "detail": "Their paper, 《九章算术》方程章“麻麦”问刘徽注中“算”字新释及方程“旧术”新校, 自然科学史研究 35(1), pp. 10–17, argues that 算 here is counting rods and begins from the new method. Its body is on CNKI behind a login. If it counts the board on the same working, the peak is theirs and this note is a confirmation by machine; if it counts another way, the two can be run side by side."
+        },
+        {
+          "kind": "observation",
+          "label": "08 / WHAT THE SECOND NUMBER DID",
+          "text": "The 77 could not decide between the readings: each reading has a path that reaches it. The 124 can, on the evidence there is. On the one published working of the new method, with every operation up to the peak fixed by the text, a count of operations misses it by a hundred, and a count of rods lands on it, at the step before the text takes a column away. The test came from running the text as written, on a board that confirmed another scholar’s fifteen counts before it was asked this question. What was hard by hand, counting the rods on five columns of three-figure numbers after every step, under every way of working a step, is a command. The interpretation was already published. What the run adds is a measurement that supports it, and that anyone can repeat in the browser."
+        }
+      ],
+      "sources": [
+        {
+          "title": "九章算術, Sibu congkan (四部叢刊) photographic reprint of the Weiboxie (微波榭) edition, with Liu Hui’s commentary (263)",
+          "url": "https://commons.wikimedia.org/wiki/File:Sibu_Congkan0392-%E5%8A%89%E5%BE%BD-%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93-3-3.djvu",
+          "note": "Liu Hui’s new method and its 124, pp. 31–35. Public domain."
+        },
+        {
+          "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+          "note": "The new method worked through, ch. 8, notes 41–62; the 124 stated, note 82; one 算 defined, note 40. Read by a second model from an OCR transcription, not by this project."
+        },
+        {
+          "title": "Source extraction for Guo’s working, by OpenAI Codex with web search, 24 November 2026",
+          "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/guo-77.md",
+          "note": "Section 3: the new method’s operations, marked as read or worked out, and the states they give."
+        },
+        {
+          "title": "Literature check on the 124-rod peak, by OpenAI Codex with web search, 24 November 2026",
+          "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-124.md",
+          "note": "What each source says about 124 and rods, what was read, and the sources that could not be opened, Wei and Guo (2016) first among them."
+        },
+        {
+          "title": "R. Hart, “Tracing Practices Purloined by the ‘Three Pillars’”, The Korean Journal for the History of Science 34(2), 2012, pp. 287–357",
+          "url": "https://www.rhart.org/papers/KJHS-Hart.pdf",
+          "note": "77 and 124 read as rods, note 34; the old method worked in rods, pp. 322–329. Read by the second model, not by this project."
+        },
+        {
+          "title": "魏雪刚 (Wei Xuegang) and 郭世荣 (Guo Shirong), 《九章算术》方程章“麻麦”问刘徽注中“算”字新释及方程“旧术”新校, 自然科学史研究 35(1), 2016, pp. 10–17",
+          "url": "https://m.fx361.com/news/2016/1216/16730222.html",
+          "note": "算 read as counting rods. Only the abstract and opening paragraphs could be read."
+        },
+        {
+          "title": "J. Hudeček, Matematika v devíti kapitolách, Matfyzpress, 2008",
+          "url": "https://dml.cz/bitstream/handle/10338.dmlcz/400845/DejinyMat_37-2008-1_15.pdf",
+          "note": "The new method’s boards, p. 206, n. 66; attempts to reach 124 by counting operations, n. 71. Read by the second model."
+        },
+        {
+          "title": "朱一文 (Zhu Yiwen), 數：筭與術——以九數之方程為例, 漢學研究 28(4), 2010, pp. 73–105",
+          "url": "https://ccsndb.ncl.edu.tw/nclccs/pdf/01_028_004_01_03.pdf",
+          "note": "110 rods to set out the last problem, p. 82; the digit rule and the 2.9 average, note 29. Read by this project."
+        },
+        {
+          "title": "chrishayuk/nine-chapters, commit 6ee962c",
+          "url": "https://github.com/chrishayuk/nine-chapters",
+          "note": "The pages guo-18-new and guo-18-old-placed, jiuzhang rods and counts, the tests that fix the 124, the 130 and the last board, Zhu’s 110 worked through in docs/literature-124.md, and the counts with each take done singly."
+        },
+        {
+          "title": "Coding-agent session, 24 November 2026",
+          "note": "The page, the counts and the note were made in this session; every figure can be rerun in the interactive study or with cargo test."
+        }
+      ],
+      "published": "2026-11-24",
+      "revised": "2026-11-25"
+    },
+    "hash": "03b3b39f570c57f3b264048845ba4612718505e0d2200455b6b1e50735c965a8",
+    "algorithm": "sha256"
   }
 ]
