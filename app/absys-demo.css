@@ -1,0 +1,109 @@
+/* Copied from the absys repository's web/playground.css. Rebuild it there and copy it across. */
+/* The playground's look, scoped to .ab so that it can sit inside another
+   page (chrishayuk.com copies this file). Its colours are its own tokens,
+   light or dark with the reader's setting; .ab-light keeps them light. */
+.ab {
+  --ab-paper: #f2efe8; --ab-ink: #1c1a17; --ab-mute: #7d7465; --ab-rule: #d9d2c3; --ab-accent: #a8822e; --ab-card: #faf8f3;
+  --ab-good: #2f7a3d; --ab-bad: #a33a2f; --ab-wait: #b07a12; --ab-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  --ab-string: #5d8a2c; --ab-macro: #8a4fb0; --ab-function: #2f6fb0; --ab-number: #b0532f;
+  color: var(--ab-ink);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ab:not(.ab-light) { --ab-paper: #14120f; --ab-ink: #eee6d6; --ab-mute: #9c917e; --ab-rule: #3a352c; --ab-accent: #d1a64a; --ab-card: #1d1a16;
+    --ab-good: #79c48a; --ab-bad: #e0877b; --ab-wait: #e0b34f; --ab-string: #9ccc6b; --ab-macro: #c79be6; --ab-function: #7fb4ea; --ab-number: #ec9a76; }
+}
+:root[data-theme="dark"] .ab:not(.ab-light) { --ab-paper: #14120f; --ab-ink: #eee6d6; --ab-mute: #9c917e; --ab-rule: #3a352c; --ab-accent: #d1a64a; --ab-card: #1d1a16;
+  --ab-good: #79c48a; --ab-bad: #e0877b; --ab-wait: #e0b34f; --ab-string: #9ccc6b; --ab-macro: #c79be6; --ab-function: #7fb4ea; --ab-number: #ec9a76; }
+.ab, .ab * { box-sizing: border-box; }
+.ab code { font: 13px var(--ab-mono); }
+  .ab .ab-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 20px; margin-top: 18px; }
+  @media (max-width: 960px) {  .ab .ab-grid { grid-template-columns: 1fr; }  }
+  .ab .ab-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; align-items: center; }
+  .ab select,.ab button { font: 13px var(--ab-mono); background: var(--ab-card); color: var(--ab-ink); border: 1px solid var(--ab-rule); border-radius: 6px; padding: 5px 8px; }
+  .ab button { cursor: pointer; }
+  .ab button:disabled { opacity: .45; cursor: default; }
+  .ab .ab-run { background: var(--ab-accent); color: #fff; border-color: var(--ab-accent); margin-left: auto; }
+  .ab .ab-pick { flex: 1; min-width: 12em; }
+  .ab .ab-editor { position: relative; height: 62vh; min-height: 360px; border: 1px solid var(--ab-rule); border-radius: 8px; background: var(--ab-card); overflow: hidden; }
+  .ab .ab-text,.ab .ab-paint { position: absolute; inset: 0; margin: 0; padding: 12px 14px; font: 13.5px/1.6 var(--ab-mono); white-space: pre; overflow: auto; tab-size: 4; }
+  .ab .ab-text { color: transparent; caret-color: var(--ab-ink); background: transparent; border: 0; resize: none; outline: none; z-index: 1; }
+  .ab .ab-paint { pointer-events: none; color: var(--ab-ink); }
+  .ab .ab-band { position: absolute; left: 0; right: 0; background: color-mix(in srgb, var(--ab-accent) 16%, transparent); border-left: 3px solid var(--ab-accent); }
+  .ab .t-comment { color: var(--ab-mute); font-style: italic; } .ab .t-string { color: var(--ab-string); } .ab .t-keyword { color: var(--ab-accent); font-weight: 600; }
+  .ab .t-macro { color: var(--ab-macro); } .ab .t-function { color: var(--ab-function); } .ab .t-variable { color: inherit; } .ab .t-number { color: var(--ab-number); } .ab .t-operator { color: var(--ab-mute); }
+  .ab .ab-problem { font: 13px var(--ab-mono); min-height: 1.6em; margin-top: 6px; color: var(--ab-mute); }
+  .ab .ab-problem.bad { color: var(--ab-bad); }
+  .ab .ab-hover { position: fixed; right: 18px; bottom: 18px; max-width: 520px; max-height: 50vh; overflow: auto; background: var(--ab-card); border: 1px solid var(--ab-rule);
+              border-radius: 8px; padding: 10px 12px; font-size: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.18); z-index: 10; }
+  .ab .ab-hover hr { border: 0; border-top: 1px solid var(--ab-rule); }
+
+  .ab .ab-steps { display: flex; gap: 8px; align-items: center; }
+  .ab .ab-where { font: 13px var(--ab-mono); color: var(--ab-mute); flex: 1; text-align: center; }
+  .ab .ab-timeline { list-style: none; padding: 0; margin: 8px 0; max-height: 22vh; overflow: auto; border: 1px solid var(--ab-rule); border-radius: 8px; counter-reset: a; }
+  .ab .ab-timeline li { display: flex; gap: 8px; align-items: center; padding: 3px 10px; cursor: pointer; border-bottom: 1px solid var(--ab-rule); counter-increment: a; }
+  .ab .ab-timeline li::before { content: counter(a); font: 11px var(--ab-mono); color: var(--ab-mute); width: 2em; }
+  .ab .ab-timeline li:last-child { border-bottom: 0; }
+  .ab .ab-timeline li.on { background: color-mix(in srgb, var(--ab-accent) 16%, transparent); }
+  .ab .ab-timeline code { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ab .ab-count { font: 11px var(--ab-mono); border-radius: 10px; padding: 1px 8px; background: color-mix(in srgb, var(--ab-good) 18%, transparent); color: var(--ab-good); }
+  .ab .ab-count.dead { background: color-mix(in srgb, var(--ab-bad) 18%, transparent); color: var(--ab-bad); }
+  .ab .ab-summary { font-size: 14px; color: var(--ab-mute); margin: 6px 0 2px; }
+  .ab .ab-summary.dead { color: var(--ab-bad); }
+  .ab h3 { font: 12px var(--ab-mono); letter-spacing: .06em; text-transform: uppercase; font-weight: 500; margin: 16px 0 8px; display: flex; gap: 14px; align-items: baseline; }
+  .ab h3 label,.ab summary label { text-transform: none; letter-spacing: 0; color: var(--ab-mute); font-size: 12px; }
+  .ab .ab-derivs { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+  .ab .ab-card { background: var(--ab-card); border: 1px solid var(--ab-rule); border-radius: 8px; padding: 8px 10px; font-size: 14px; }
+  .ab .ab-card.new { border-color: var(--ab-accent); }
+  .ab .ab-card header { display: flex; gap: 8px; align-items: baseline; padding: 0; margin-bottom: 4px; }
+  .ab .ab-status { font: 11px var(--ab-mono); color: var(--ab-mute); }
+  .ab .ab-card.elaborating .ab-status { color: var(--ab-wait); }
+  .ab .ab-new { font: 11px var(--ab-mono); color: var(--ab-accent); margin-left: auto; }
+  .ab .ab-ans { border-collapse: collapse; width: 100%; }
+  .ab .ab-ans th { text-align: left; font: 13px var(--ab-mono); font-weight: 600; padding: 1px 8px 1px 0; vertical-align: top; width: 1%; white-space: nowrap; }
+  .ab .ab-ans td { padding: 1px 0; word-break: break-all; }
+  .ab .ab-ans tr.changed td > code { background: color-mix(in srgb, var(--ab-accent) 22%, transparent); }
+  .ab .ab-via { font-size: 12px; color: var(--ab-mute); }
+  .ab .ab-via code,.ab .ab-procs code { margin-left: 4px; }
+  .ab .ab-procs { font-size: 12px; color: var(--ab-mute); margin-bottom: 4px; }
+  .ab .ab-label { font: 10.5px var(--ab-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ab-mute); margin-top: 6px; }
+  .ab .chip { display: inline-block; font: 12.5px var(--ab-mono); border-radius: 5px; padding: 1px 7px; margin: 2px 4px 0 0; background: color-mix(in srgb, var(--ab-wait) 18%, transparent); }
+  .ab .chip.equation { border: 1px dashed var(--ab-wait); }
+  .ab .ab-pend code { display: block; color: var(--ab-mute); }
+  .ab .ab-out { font-size: 13px; color: var(--ab-good); }
+  .ab .ab-env code { word-break: break-all; font-size: 12px; }
+  .ab .ab-none { color: var(--ab-bad); }
+  .ab details { margin-top: 14px; border-top: 1px solid var(--ab-rule); padding-top: 6px; }
+  .ab summary { font: 12px var(--ab-mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+  .ab .ab-treelist,.ab .ab-treelist ul { list-style: none; margin: 0; padding-left: 1.2em; border-left: 1px solid var(--ab-rule); }
+  .ab .ab-treelist { font: 12.5px var(--ab-mono); max-height: 30vh; overflow: auto; border: 0; padding-left: 0; }
+  .ab .ab-treelist li { margin: 1px 0; }
+  .ab .ab-treelist .t-failed > span { color: var(--ab-bad); } .ab .ab-treelist .t-failed small { color: var(--ab-mute); }
+  .ab .ab-treelist .t-alive > span { color: var(--ab-good); font-weight: 700; }
+  .ab .ab-log { list-style: none; padding: 0; margin: 6px 0; font: 12.5px/1.5 var(--ab-mono); max-height: 40vh; overflow: auto; }
+  .ab .ab-log li { display: flex; gap: 8px; padding: 1px 0; border-bottom: 1px solid color-mix(in srgb, var(--ab-rule) 50%, transparent); }
+  .ab .ab-d { color: var(--ab-mute); width: 3.5em; flex: none; }
+  .ab .ab-k { width: 6.5em; flex: none; color: var(--ab-accent); }
+  .ab .k-fail .ab-k { color: var(--ab-bad); } .ab .k-suspend .ab-k { color: var(--ab-wait); } .ab .k-output .ab-k { color: var(--ab-good); }
+  .ab .k-or .ab-k { font-weight: 700; }
+
+
+/* One cell of a notebook: a text, a button, and what absys prints. */
+.ab.ab-cell { margin: 20px 0; border: 1px solid var(--ab-rule); border-radius: 8px; background: var(--ab-card); overflow: hidden; }
+.ab.ab-cell .ab-cell-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--ab-rule); }
+.ab.ab-cell .ab-cell-label { font: 11px var(--ab-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ab-mute); flex: 1; min-width: 12em; }
+.ab.ab-cell .ab-cell-args { font: 12px var(--ab-mono); color: var(--ab-mute); }
+.ab.ab-cell .ab-editor { height: auto; min-height: 0; border: 0; border-radius: 0; }
+.ab.ab-cell .ab-text, .ab.ab-cell .ab-paint { position: relative; inset: auto; overflow: hidden; white-space: pre-wrap; word-break: break-word; }
+.ab.ab-cell .ab-text { position: absolute; inset: 0; }
+.ab.ab-cell .ab-cell-out { margin: 0; padding: 10px 14px; font: 12.5px/1.55 var(--ab-mono); white-space: pre; overflow-x: auto; border-top: 1px solid var(--ab-rule);
+  background: color-mix(in srgb, var(--ab-paper) 60%, var(--ab-card)); color: var(--ab-ink); max-height: 32em; overflow-y: auto; }
+.ab.ab-cell .ab-cell-out[hidden] { display: none; }
+.ab.ab-cell .ab-cell-note { margin: 0; padding: 8px 14px 10px; font-size: 14px; color: var(--ab-mute); border-top: 1px solid var(--ab-rule); }
+
+/* The site's own: the notebook's cells, and the playground page. */
+.absys-playground { margin: 24px 0; }
+.absys-runner { margin: 28px 0; }
+.absys-runner .record-voice { display: block; font-size: 10px; margin-bottom: 8px; }
+.absys-play-link { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: baseline; margin: 24px 0; }
+.absys-quote { margin: 28px 0; padding: 14px 18px; border-left: 3px solid var(--rule); font: 13.5px/1.6 "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; white-space: pre; overflow-x: auto; }
+.absys-quote figcaption { font-family: inherit; white-space: normal; font-size: 10px; margin-top: 10px; }
