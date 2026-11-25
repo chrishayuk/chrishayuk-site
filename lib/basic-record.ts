@@ -1,5 +1,6 @@
 import type { PublicationRecord } from "./types.ts";
 
+const OCTOBER = { label: "BASIC manual, Dartmouth, 1 October 1964", url: "https://alandix.com/wp-content/uploads/2021/07/BASIC_Oct64.pdf" };
 const MANUAL = { label: "First BASIC instruction manual, Dartmouth, May 1964", url: "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf" };
 
 /** A note about Dartmouth BASIC as its first instruction manual describes it,
@@ -14,7 +15,7 @@ export const basicRecord: PublicationRecord = {
   kind: "notebook",
   title: "The manual stopped at line 40.",
   dek: "Dartmouth BASIC, typed in from its first instruction manual of May 1964, and the one program a later BASIC would not run.",
-  abstract: "A note about Dartmouth BASIC, with the language running in the page. The first instruction manual, from May 1964, explains the language in a few pages and prints three example programs with their results; they are typed in here beside the pages they came from, and print the same figures. The interpreter running them was written in Rust with a coding agent and checked against later BASICs, which it matched. The manual’s own second example then stopped at line 40: in 1964 a square root was taken of the absolute value, and the later BASICs it had been checked against call that an error.",
+  abstract: "A note about Dartmouth BASIC, with the language running in the page. The first instruction manual, from May 1964, explains the language in a few pages and prints three example programs with their results; they are typed in here beside the pages they came from, and print the same figures. The interpreter running them was written in Rust with a coding agent and checked against later BASICs, which it matched. The manual’s own second example then stopped at line 40: in 1964 a square root was taken of the absolute value, and the later BASICs it had been checked against call that an error. A second manual, of October 1964, later supplied the rules for printing the first had left out, and twenty-six more programs.",
   created: "2026-11-22",
   version: "0.1",
   status: "OPEN",
@@ -48,11 +49,16 @@ export const basicRecord: PublicationRecord = {
       { href: "/demos/basic?example=example2&arithmetic=later", label: "Open the full study" },
       { href: "https://github.com/chrishayuk/chuk-basic-rs", label: "Source, tutorial and the scanned pages" },
     ] },
+    { kind: "observation", label: "08 / OCTOBER 1964", text: "Dartmouth’s second manual, dated 1 October 1964, describes what the beginners’ part left out, and settles some of what this note had guessed. Page 34 gives the rules for printing a number: no more than six significant figures, and “if the number is an exact integer, the decimal point is not printed”. So a point after a whole number means the figure only rounds to one. The May page prints program 2’s roots as 3. and −1.: the 1964 square root of 16 was not exactly 4. This interpreter’s is, so in 1964 mode it prints 3 and −1. Page 31 gives five zones of fifteen columns, and “each number occupies one zone”, which is why the May page puts −1. under the third coefficient; 1964 mode now does too. Page 39 says that INT chops, “INT(-7.8) is -7, not -8”, and that RND’s argument “has no significance”: the note had taken both from Thomas Kurtz’s account of 2005. Its appendix lists fifteen statements, one more than the May manual’s fourteen. The manual prints 26 programs. Typed in, those with printed results agree in their figures, except where 1964’s arithmetic was inexact, where its random numbers differ, where its system caught a mistake before the run that this interpreter lets through, and where the page puts a space inside a number, which this interpreter refuses.", references: [OCTOBER] },
+    { kind: "connection", demonstration: "basic", text: "The table of cubes from page 35, in 1964 mode. A semicolon packs the numbers, and the page prints eleven on the first line, eight on each line after, and 1000000 alone at the end. This prints the same thirteen lines. The study has nine of the October programs beside their pages.", links: [
+      { href: "/demos/basic?example=cubes", label: "Open the full study — the October programs and pages" },
+      { href: "https://github.com/chrishayuk/chuk-basic-rs/tree/main/samples/dartmouth-oct64", label: "The 26 programs, and where they disagree" },
+    ] },
     { kind: "refusal", title: "WHAT THIS DOES NOT SHOW", lines: [
-      "This is not Dartmouth’s 1964 BASIC. It is an interpreter written sixty-two years later. In 1964 mode it follows the manual on square roots, powers, printing and the end of the data, and Thomas Kurtz’s later account on INT, RND and a leading minus sign, which the beginners’ part does not cover. Taking Kurtz’s account as a description of May 1964 is a reading.",
-      "How numbers are printed in 1964 mode, six figures and a point after a whole number, is copied from the results on pages 21 to 23. The beginners’ part does not state the rule, and I have not seen Part II.",
-      "In 1964 mode it still accepts everything the later BASICs added. It does not refuse INPUT or a variable called NAME$.",
-      "Three examples agreeing is three examples, and agreeing in their figures: the page’s layout, its TIME: lines, and its READ PART where the program says REAL PART, are not reproduced. The rule for square roots turned up because one program happened to need it. Other differences may be waiting for a program that needs them.",
+      "This is not Dartmouth’s 1964 BASIC. It is an interpreter written sixty-two years later. In 1964 mode it follows the May manual on square roots, powers and the end of the data, the October manual on printing, LOG, INT and RND, and Thomas Kurtz’s later account on a leading minus sign, which neither manual covers. Taking the October manual, or Kurtz, as a description of May 1964 is a reading.",
+      "Its printing follows the October manual’s rules; its arithmetic is not 1964’s. Its powers and square roots are exact where 1964’s were not, so where a page prints 4. or 3., with the point that marks an inexact figure, this prints 4 and 3. Its random numbers are not 1964’s.",
+      "In 1964 mode it still accepts everything the later BASICs added. It does not refuse INPUT or a variable called NAME$, nor stop on the mistakes the October manual’s session shows the 1964 system catching before a run.",
+      "The manuals’ programs agree in their figures and, under the October rules, their columns; the pages’ TIME: lines, and the May page’s READ PART where the program says REAL PART, are not reproduced. The rule for square roots turned up because one program happened to need it. Other differences may be waiting for a program that needs them.",
       "The checks were run by the coding agent and reported to me. It also miscounted its own tests twice, saying 120 and then 122 when there were 88, and corrected itself when it ran them again.",
       "A second model, OpenAI’s Codex, later reviewed the repository independently. It found that 1964 mode differed from Kurtz’s account on INT, RND and a leading minus, that RANDOMIZE could change numbers the playground had already shown, and that the games were described as unmodified. These are put right, and its review, with what was done about each point, is in the repository.",
     ], principle: "Sources that agree with each other are evidence about those sources." },
@@ -60,9 +66,11 @@ export const basicRecord: PublicationRecord = {
   ],
   sources: [
     { title: "Dartmouth College Computation Center, “BASIC”, instruction manual, May 1964, first draft. Commemorative reprint hosted by Dartmouth College", url: "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf", note: "The preface is on p. 1; “only 13 other operations” on p. 4; numbers, variables, the arrow and SQR on p. 5; the example programs and their results on pp. 21–23." },
-    { title: "chrishayuk/chuk-basic-rs", url: "https://github.com/chrishayuk/chuk-basic-rs", note: "The interpreter, a compiler to WebAssembly, their tests, a tutorial, 150 sample programs including the manual’s, and reduced scans of the manual." },
+    { title: "Dartmouth College Computation Center, “BASIC”, manual, 1 October 1964", url: OCTOBER.url, note: "Rules for printing on pp. 31 and 34; LOG of the absolute value on p. 11; INT and RND on p. 39; the table of cubes on p. 35; fifteen statements in Appendix C. The copy linked is one public scan; the one read for this note is another scan of the same edition." },
+    { title: "chrishayuk/chuk-basic-rs", url: "https://github.com/chrishayuk/chuk-basic-rs", note: "The interpreter, a compiler to WebAssembly, their tests, a tutorial, 168 sample programs including both manuals’, and reduced scans of the pages used." },
     { title: "David H. Ahl (ed.), BASIC Computer Games, 1978. Listings from coding-horror/basic-computer-games", url: "https://github.com/coding-horror/basic-computer-games", note: "103 program listings (the collection counts 96 games), run unmodified, as a check on the interpreter." },
     { title: "PC-BASIC 2.0.8, an emulation of Microsoft GW-BASIC", url: "https://robhagemans.github.io/pcbasic/", note: "Run on the manual’s program 2 for this note: it stops with “Illegal function call in 40”." },
+    { title: "Coding-agent session, 24 November 2026", note: "The October manual’s programs typed in and run, its rules for printing put into 1964 mode, and this note brought up to date." },
     { title: "Coding-agent session, 21–22 November 2026", note: "The counts in section 06 are the agent’s, as reported. The programs from the manual were run again for this note, and can be run above." },
   ],
 };
