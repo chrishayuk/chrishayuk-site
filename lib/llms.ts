@@ -49,7 +49,7 @@ const of = (kind: PublicationRecord["kind"]) =>
  * lists the notes and the playgrounds side by side, in the same order. A
  * playground that later notes were written about lists them all, first note
  * first. */
-const playgroundNotes: Record<string, string[]> = { Mouse: ["N-MOUSE"], BASIC: ["N-BASIC", "N-TPK"], "Böhm": ["N-BOHM", "N-TPK"], CPL: ["N-CPL", "N-TPK"], JOSS: ["N-JOSS", "N-TPK"], "Turing’s ACE": ["N-TURING-ACE", "N-TPK"], "IPL-V": ["N-IPLV", "N-TPK"], "Laning and Zierler": ["N-LANING-ZIERLER", "N-TPK"], "Rhind Papyrus": ["N-RHIND-PAPYRUS"], "Nine Chapters": ["N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124"], GEORGE: ["N-GEORGE", "N-TPK"], "ALGOL 60": ["N-ALGOL-60", "N-TPK"], "Atlas Autocode": ["N-ATLAS-AUTOCODE"] };
+const playgroundNotes: Record<string, string[]> = { Mouse: ["N-MOUSE"], BASIC: ["N-BASIC", "N-TPK"], "Böhm": ["N-BOHM", "N-TPK"], CPL: ["N-CPL", "N-TPK"], JOSS: ["N-JOSS", "N-TPK"], "Turing’s ACE": ["N-TURING-ACE", "N-TPK"], "IPL-V": ["N-IPLV", "N-TPK"], "Laning and Zierler": ["N-LANING-ZIERLER", "N-TPK"], "Rhind Papyrus": ["N-RHIND-PAPYRUS"], "Nine Chapters": ["N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124"], GEORGE: ["N-GEORGE", "N-TPK"], "ALGOL 60": ["N-ALGOL-60", "N-TPK"], "Atlas Autocode": ["N-ATLAS-AUTOCODE"], "Analytical Engine": ["N-BABBAGE"] };
 
 /** The playgrounds of the languages collection. They are tools, not records:
  * each runs the interpreter its note was written about, in the browser, and
