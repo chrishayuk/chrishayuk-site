@@ -1917,5 +1917,76 @@
         "note": "The page, the counts and the note were made in this session; every figure can be rerun in the interactive study or with cargo test."
       }
     ]
+  },
+  {
+    "id": "N-TPK",
+    "version": "1.1",
+    "recordHash": "6054166e14c4db4b8090ef0e1875059607757b0d0c67a813e6f39aa42807a62b",
+    "revision": {
+      "kind": "clarification",
+      "summary": "A second input, with negative numbers and a zero: every program right in general except ours for JOSS, whose output form holds y only from -99.999999 to 999.999999, and the X1 mode prints its least-real stand-in's digits for f(0). Runners added for both.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, The Early Development of Programming Languages, Stanford report STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "TPK in ALGOL 60, p. 3; in Böhm’s language, pp. 36–39; in Laning and Zierler’s, pp. 56–57; the rules for weaker languages, pp. 4–5."
+      },
+      {
+        "title": "D. E. Knuth, errata for Selected Papers on Computer Languages (2003)",
+        "url": "https://www-cs-faculty.stanford.edu/~knuth/cl.html",
+        "note": "The ALGOL heading corrected (12 February 2014); the Laning and Zierler test reordered (22 September 2022)."
+      },
+      {
+        "title": "chrishayuk/algol-60",
+        "url": "https://github.com/chrishayuk/algol-60",
+        "note": "examples/tpk-1976.alg, examples/tpk.alg; the X1 probes tpk-1976, value-after-spec and tpk-x1 in compare/; tests/x1.rs."
+      },
+      {
+        "title": "chrishayuk/bohm",
+        "url": "https://github.com/chrishayuk/bohm",
+        "note": "programs/tpk.bohm and tpk-renamed.bohm; tests/thesis.rs."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "examples/1976-knuth-tpk.lzr, with the rules of January 1954."
+      },
+      {
+        "title": "chrishayuk/turing-ace",
+        "url": "https://github.com/chrishayuk/turing-ace",
+        "note": "examples/tpk.ace, with the corrections to INDEXIN and DISCRIM it needs."
+      },
+      {
+        "title": "chrishayuk/george",
+        "url": "https://github.com/chrishayuk/george",
+        "note": "examples/tpk.george, run by the interpreter and on Hamblin’s coding sheets in the simulated DEUCE; RUNNING-GEORGE.md, finding 15, for 79.7062."
+      },
+      {
+        "title": "chrishayuk/ipl-v",
+        "url": "https://github.com/chrishayuk/ipl-v",
+        "note": "examples/tpk.iplv."
+      },
+      {
+        "title": "chrishayuk/joss",
+        "url": "https://github.com/chrishayuk/joss",
+        "note": "examples/tpk.joss; sources/AUDIT.md for the dating."
+      },
+      {
+        "title": "chrishayuk/chuk-basic-rs",
+        "url": "https://github.com/chrishayuk/chuk-basic-rs",
+        "note": "samples/classic/tpk.bas; sources/README.md for what Part II of the May 1964 manual leaves open."
+      },
+      {
+        "title": "chrishayuk/cpl",
+        "url": "https://github.com/chrishayuk/cpl",
+        "note": "examples/tpk.cpl."
+      },
+      {
+        "title": "Coding-agent session, 24 November 2026",
+        "note": "The six new programs, the runs and the literature search were made in this session; every figure can be rerun in the note’s runners or with each repository’s tests."
+      }
+    ]
   }
 ]
