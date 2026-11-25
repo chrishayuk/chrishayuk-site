@@ -67,7 +67,7 @@ export function AtlasNotebook({ record }: { record: PublicationRecord }) {
       {act(2)}
       <StudyMeasures label="P. B1.4, AGAINST THE REBUILT COMPILER" items={[
         { label: "LINES ON THE PAGE", value: "29", detail: "The program map and the monitor, compared word for word: the page was retyped for the manual." },
-        { label: "THE SAME", value: "29", detail: "Serial numbers, line numbers, every value and every cycle." },
+        { label: "SAME WORDS", value: "29", detail: "Serial numbers, line numbers, every value and every cycle. Spacing is not compared." },
         { label: "LEFT OUT", value: "addresses", detail: "The machine addresses and code sizes in the map. No machine code is written here." },
       ]} note="The comparison is a test in the repository, tests/transcripts.rs."/>
       <AtlasRunner label="THE PROGRAM OF P. B1.3, WITH THE PAGE OF P. B1.4 BESIDE IT" example="1965-ab-monitor" compiler="ab"

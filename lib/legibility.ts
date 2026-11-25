@@ -206,7 +206,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Atlas Autocode, the language of the Ferranti Atlas at Manchester, rebuilt with a coding agent from Brooker and Rohl’s 1965 Reference Manual, with both of its compilers and the Flexowriter it was typed on, and checked against the two pages of output that survive with their programs",
   question: "What else did Atlas print that survives with its program?",
   searchTitle: "Atlas Autocode Rebuilt from Its 1965 Manual: the Printout Shows the Printed Program Never Ran",
-  description: "Atlas Autocode, Manchester’s language of 1965, rebuilt from its manual with a coding agent, reproduces all 29 lines of the one full page COMPILER AB printed that survives. The program printed beside it declares a′ and assigns a″, so it would not have compiled. Type it on a Flexowriter in your browser.",
+  description: "Atlas Autocode, Manchester’s language of 1965, rebuilt from its manual with a coding agent, prints the words of all 29 lines of the one full page COMPILER AB printed that survives. The program printed beside it declares a′ and assigns a″, so it would not have compiled. Type it on a Flexowriter in your browser.",
   concepts: ["Atlas Autocode", "Ferranti Atlas", "Manchester University", "Tony Brooker", "Friden Flexowriter", "paper tape", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
  "N-NINE-CHAPTERS": {
