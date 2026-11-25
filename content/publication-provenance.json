@@ -2078,5 +2078,66 @@
         "note": "The interpreter, the transcriptions and the comparisons were made in these sessions. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.3",
+    "recordHash": "aad061674b4f322cd5211d28c10177039af1565f8148f33a8875e8230ce566ff",
+    "revision": {
+      "kind": "interpretation",
+      "summary": "Adds the one page of 1954 output found: the lead-pursuit program and its first output page, from Laning's letter to Knuth of 2 July 1976, transcribed and run; its 62 values agree with the page to within 4.2 parts in ten million, except two from the arcsine, within 7.2 parts in a million, and the page shows unary minus working, a zero typed +.16155871-27 and 6400 typed +.64000003+04. Reports the surviving listing of March 1953 in Knuth's papers, a smaller system that treats -x as 1 - x, and Stabile's run of it on Fedorkow's simulator. Says what the page does not check: x|N, broken rules, and the run after t = .6. A second review by Codex of the new transcriptions is described.",
+      "previous": "1.2"
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "J. H. Laning Jr., letter to D. E. Knuth, 2 July 1976, with enclosures",
+        "url": "https://cs.stanford.edu/~knuth/from-Laning-76-07-02.pdf",
+        "note": "The 1953 listing is enclosure 1, not reproduced here; the lead-pursuit program, pp. 12–14, and the first page of its output, p. 15, are enclosure 2. The minus sign in “X = −1” is on p. 6."
+      },
+      {
+        "title": "D. E. Knuth, letter to J. H. Laning Jr., 16 August 1976",
+        "url": "https://cs.stanford.edu/~knuth/to-Laning-76-08-16.pdf",
+        "note": "“The program has only one bug, namely the problem you mentioned about unary minus: −x gets treated as 1−x.”"
+      },
+      {
+        "title": "J. H. Laning Jr., Whirlwind algebraic interpreter, listing, March 1953, with D. E. Knuth’s notes of August 1976, Knuth Digital Archive U2774, Computer History Museum",
+        "url": "https://archive.computerhistory.org/resources/text/Knuth_Don_X4100/PDF_index/KnuthDigitalArchive-Index.html",
+        "note": "“Tape T-2134-m8 plus correction tape P-2134-10”, 20 sheets. Knuth’s notes, p. 4: “subscripted variables, drum overlay usage, D operator: not yet implemented.”"
+      },
+      {
+        "title": "L. A. Stabile, the 1953 listing transcribed and run on G. Fedorkow’s Whirlwind simulator",
+        "url": "https://github.com/gfedorkow/Whirlwind-Instruction-Simulator/tree/master/Code-Samples/Laning-and-Zierler-Interpreter",
+        "note": "With Stabile’s paper of March 2026 and Knuth’s correspondence with Laning. Read for this note, not checked."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Coding-agent sessions, 22 and 25 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in the first; the lead-pursuit program and its page were transcribed and compared in the second, and reviewed by OpenAI Codex. Every result in this note can be rerun on the interactive study."
+      }
+    ]
   }
 ]

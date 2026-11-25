@@ -18,6 +18,8 @@ const ODE = "    t = 2,\n    h = 0.5,\n    y|1 = 0,\n    y|2 = 0,\n1   PRINT t, 
 const INNOCUOUS = "    t = 2,\n    h = 0.5,\n    y|1 = 0,\n    y|2 = 0,\n1   PRINT t, y|1, y|2.\n    e = 9.7 - t,\n    CP 3,\n2   a = y|2 + 1,\n    D y|1 = a,\n    D y|2 = - y|1,\n    e = -e,\n    CP 2,\n    SP 1,\n3   STOP";
 const SUMMER = "    t = 2,\n    h = 0.5,\n    y|1 = 0,\n    y|2 = 0,\n1   D y|1 = y|2 + 1,\n    D y|2 = -y|1,\n    k = t - 10.1,\n    CP 1,\n    STOP";
 const PURSUIT = "    t = 0,\n    h = 0.02,\n    w = 1.25,\n    x = 0,\n    y = 0,\n    n = 0,\n1   Dx = w(1 - x)/F^1((1 - x)^2 + (t - y)^2),\n    Dy = w(t - y)/F^1((1 - x)^2 + (t - y)^2),\n    d = F^1((1 - x)^2 + (t - y)^2),\n    n = n + 1,\n    e = n - 9.5,\n    CP 2,\n    n = 0,\n    PRINT t, x, y, d.\n2   e = d - .03,\n    CP 3,\n    SP 1,\n3   PRINT t, x, y, d.\n    STOP";
+const LEAD = "    c|10 = 2.4588,\n    c|11 = 1.4759,\n    c|12 = -.1284,\n    c|13 = .51485,\n    c|20 = .93082,\n    c|21 = .021173,\n    c|22 = .0025995,\n    c|31 = 9.9666,\n    c|32 = .36072,\n    c|33 = -.15711,\n    c|34 = .11966,\n    k = 250.5,\n    c = .367,\n    v|2 = 2870,\n    g = 32.2,\n    v = 880,\n    v|1 = 750,\n    p|0 = 1373.9,\n    i|0 = 1.00589,\n    f|0 = 1379.9,\n    d|0 = 1,\n    x = 6400,\n    t = 0,\n    d = 0,\n    a = 1.2153,\n    j|1 = .00735,\n    j|2 = .00689,\n    t|1 = 3.007198,\n    h = .1,\n    i|1 = 0,\n    k|1 = ((v + v|2)/v|2)(d|0 v/k),\n    SR 2,\n    b = F^7(j|1/j|2),\n    SR 3,\n    m = 1,\n    z = 0,\n1   D z = 0,\n7   p = x d|0/c + p|0,\n8   q = .0001p,\n    u = 10000/(c|10 + c|11 q + c|12 q^2 + c|13 q^3),\n    q|1 = F^3(a),\n    q|2 = F^3(d),\n    s|1 = F^2(a),\n    s|2 = F^2(d),\n    i = c|20 + 10000c|21/u + 10^8 c|22/u^2,\n    y|1 = c(i - i|0)/2d|0,\n    x|1 = -(v - v|1 q|1 q|2)/(1 - v|1 q|1 q|2/u + y|1 s|2),\n    D x = x|1,\n    d|1 = -((v|1 q|1 s|2/u + y|1 q|2)x|1 + v j|2 + v|1 q|1 s|2)/x,\n    z|1 = -(v|1(1 + x|1/u)s|1 + v j|1)/x q|2,\n    b = F^7(j|1/j|2),\n    D d = d|1,\n    D a = z|1,\n    D j|1 = -z|1 q|2 - k|1 j|1 + d|0 v i|1 F^2(b)/k - g j|1 s|2/v + z|1 j|2 s|2 - (g j|1/v - z|1 j|2)s|2,\n    D j|2 = -d|1 + g q|2/v - k|1 j|2 + d|0 v i|1 F^3(b)/k - g j|2 s|2/v - z|1 j|1 s|2 - (g j|2/v + z|1 j|1)s|2,\n    D t|1 = x|1/u,\n2   PRINT t.\n3   PRINT x, d, a, j|1, j|2, t|1, b.\n    e = .67 - t,\n    CR 4,\n    e = 2.7 - t,\n    CR 5,\n    SP 6,\n4   h = .15,\n5   h = .2,\n6   m = -m,\n    CP 1,\n    SR 7,\n    SR 8,\n    f = 1000(c|31 q + c|32 q^2 + c|33 q^3 + c|34 q^4),\n    y = c^2(f - f|0 - i|0 d|0 x/c)/2(d|0)^2,\n    r = F^1(x^2 + y^2 + 2x y F^2(d)),\n    r|0 = F^1((v|1 t|1)^2 + r^2 - 2v|1 t|1 x F^3(d)F^3(a)),\n    a|1 = F^6(x F^3(d)F^3(a)/r),\n    a|0 = F^5(r F^2(a|1)/r|0),\n    PRINT r, r|0, a|0.\n    e = t - 4.9,\n    CP 1,\n    STOP";
+const LANING_1976 = "https://cs.stanford.edu/~knuth/from-Laning-76-07-02.pdf";
 
 /** A detail of a scanned page, credited to the document it came from. */
 function Excerpt({ src, alt, width, height, caption, narrow, href = E364 }: { src: string; alt: string; width: number; height: number; caption: ReactNode; narrow?: boolean; href?: string }) {
@@ -126,12 +128,26 @@ export function LzNotebook({ record }: { record: PublicationRecord }) {
         caption="KNUTH AND TRABB PARDO, 1976, P. 59" href={KNUTH}/>
       {act(7)}
       <LzRunner label="A PURSUIT CURVE, IN MEMORY OF THE LEAD-PURSUIT PROBLEM" program={PURSUIT}
-        note="Not Laning’s program, whose listing I have not seen: a flat pursuit written for this reconstruction. The target flies up the line x = 1 at speed 1; the pursuer, at 1.25, always heads straight at it. Theory says it is caught at t = 2.22; the tape stops when the gap is under .03, at t = 2.12."/>
+        note="Not Laning’s program, which is in the next section: a flat pursuit written for this reconstruction. The target flies up the line x = 1 at speed 1; the pursuer, at 1.25, always heads straight at it. Theory says it is caught at t = 2.22; the tape stops when the gap is under .03, at t = 2.12."/>
     </> },
-    { label: "Run it yourself", kind: "operate", children: <>{act(8)}</> },
+    { label: "What Whirlwind typed", kind: "evidence", children: <>
+      <Excerpt src="laning-1976-lead-pursuit-program.jpg" width={1300} height={1011}
+        alt="The middle of the lead-pursuit program as the Flexowriter typed it: m=1, z=0, 1 Dz=0, 7 p=xd|0/c+p|0, 8 q=.0001p, the equations for u, q|1, q|2, s|1, s|2, i, y|1, x|1, d|1, z|1 and b, the D equations for x, d, a, j|1, j|2 and t|1, the second running off the right edge of the sheet, then 2 PRINT t. 3 PRINT x, d, a, j|1, j|2, t|1, b. e=.67-t, CR4, e=2.7-t, CR5, SP6."
+        caption="LANING TO KNUTH, 2 JULY 1976, P. 13 / THE LEAD-PURSUIT PROGRAM, EARLY 1954" href={LANING_1976}/>
+      <Excerpt src="laning-1976-lead-pursuit-output.jpg" width={1300} height={419}
+        alt="The first output page, headed ZIELRER: t=+.16155871-27, then x=+.64000003+04 d=+.16155871-27 a=+.12152999+01 and j|1, j|2, t|1 and b; t=+.10000000-00 and the second line of values; t=+.20000000-00, the third, and r=+.62442894+04 r|0=+.58358421+04 a|0=+.15602501+01."
+        caption="LANING TO KNUTH, 2 JULY 1976, P. 15 / WHAT WHIRLWIND TYPED" href={LANING_1976}/>
+      {act(8)}
+      <LzRunner label="THE LEAD-PURSUIT PROGRAM, AS TYPED IN 1954" program={LEAD}
+        note="Feed it and compare the first seven steps with the page above. The last digits differ, and a|0, from the arcsine, in the sixth. Here a zero is typed +.00000000+00, where Whirlwind typed +.16155871−27. The page stops at t = .6; the run goes on to t = 4.9, with the step widened at .67 and 2.7."/>
+      <Excerpt src="knuth-1976-letter-unary-minus.jpg" width={1100} height={510} narrow
+        alt="Knuth to Laning, 16 August 1976: Last weekend I amused myself by studying the vintage 1953 compiler listing you sent. I can now certify that the program has only one bug, namely the problem you mentioned about unary minus: -x gets treated as 1-x. It was remarkable how much logic you squeezed into 430 instructions."
+        caption="KNUTH TO LANING, 16 AUGUST 1976 / THE 1953 LISTING’S ONE BUG" href="https://cs.stanford.edu/~knuth/to-Laning-76-08-16.pdf"/>
+    </> },
+    { label: "Run it yourself", kind: "operate", children: <>{act(9)}</> },
     { label: "What this does not show", children: <>
-      {act(9)}
       {act(10)}
+      {act(11)}
     </> },
   ]}/>;
 }

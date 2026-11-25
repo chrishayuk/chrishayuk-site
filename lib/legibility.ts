@@ -171,7 +171,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Running the programs in Laning and Zierler’s 1954 manual for MIT’s Whirlwind I, and a later one, under that manual’s own rules, on a reconstruction built from it with a coding agent",
   question: "If a manual is all that survives, can you tell what the program did?",
   searchTitle: "A 1954 Manual Asked for Trouble Reports: Laning and Zierler’s Algebraic System for Whirlwind, Rebuilt and Held to Its Own Rules",
-  description: "The algebraic system MIT’s Whirlwind ran in 1953, rebuilt from its 1954 manual with a coding agent. a/b/c is ac over b, a zero has two signs, and Knuth and Trabb Pardo’s 1976 example breaks the manual’s rule for a zero index. Try it in the browser.",
+  description: "The algebraic system MIT’s Whirlwind ran in 1953, rebuilt from its 1954 manual with a coding agent. a/b/c is ac over b, a zero has two signs, Knuth and Trabb Pardo’s 1976 example breaks the manual’s rule for a zero index, and the one page of 1954 output agrees with it. Try it in the browser.",
   concepts: ["Laning and Zierler", "Whirlwind I", "MIT Instrumentation Laboratory", "compilers", "history of programming languages", "Runge-Kutta-Gill", "coding agents", "verification", "WebAssembly"],
  },
  "N-TURING-ACE": {

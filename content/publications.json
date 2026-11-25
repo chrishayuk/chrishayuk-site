@@ -7486,5 +7486,219 @@
     },
     "hash": "391b83c975c66388f285d7bf0cdd55f2d8d859b6177571161094b297b0373c59",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-LANING-ZIERLER",
+      "slug": "a-1954-manual-asked-for-trouble-reports",
+      "kind": "notebook",
+      "title": "A 1954 manual asked for trouble reports. So I sent some.",
+      "dek": "Algebra typed on tape for MIT’s Whirlwind in 1953, rebuilt from its manual by a coding agent. The one page of 1954 output I found agrees to the last digit or two. Its rules find a slip in its arithmetic, a 1954 copy that would not run, and a forbidden zero index in Knuth’s TPK.",
+      "abstract": "A note about rebuilding the algebraic system J. H. Laning Jr. and N. Zierler wrote for MIT’s Whirlwind I, from the manual they published in January 1954, with a coding agent. You typed equations on a Flexowriter and the answers came back typewritten. The manual ends by admitting that “exhaustive tests have not been made” and asking for information about “any troubles encountered in the use of this program”. Its three complete programs run on the reconstruction, and their answers check against mathematics. One program of the time can be checked against Whirlwind itself: the lead-pursuit problem of early 1954, whose tape and first page of output Laning sent Knuth in 1976. Its 62 values agree with that page to within 4.2 parts in ten million, except two from the arcsine, within 7.2 parts in a million. Its rules mean what they say: a/b/c is ac over b, and a zero has two signs, which its own loops step round. The troubles worth reporting are elsewhere. The manual’s decimal for its largest number is wrong in the fifth place. The 1954 summer school’s version of its differential-equation program would not have been accepted. And Knuth and Trabb Pardo’s 1976 example in the language is incompatible with the 1954 specification: it reads its numbers with v|N, which was not yet working, and on its last number it uses a computed zero as an index, which the manual forbids whatever the zero’s sign. An earlier, smaller version of the translator survives, as a hand-written listing of March 1953 in Knuth’s papers; the reconstruction was not built from it. A second model reviewed the reconstruction independently, twice. The system runs in the browser.",
+      "created": "2026-11-22",
+      "version": "1.3",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "MANUAL → SCAN → AGENT → INTERPRETER → TAPE",
+      "concepts": [
+        "ai-agents",
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-JOSS",
+        "N-BOHM",
+        "N-CPL"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A COMPUTER WITHIN A COMPUTER",
+          "text": "In 1952 J. H. Laning Jr. of the MIT Instrumentation Laboratory wrote a program that let Whirlwind I take mathematics typed as mathematics, and with N. Zierler made it a usable system by May 1953. Equations typed on a Flexowriter were punched on paper tape, translated into Whirlwind’s own instructions, and the answers typed back. “The effect of our program is to create a computer within a computer …” In 1954 John Backus came to MIT with two colleagues to see it run. I asked a coding agent to rebuild the system from its manual, Engineering Memorandum E-364, and to run the manual’s programs under the manual’s own rules.",
+          "references": [
+            {
+              "label": "Laning and Zierler, E-364, January 1954",
+              "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / EXHAUSTIVE TESTS HAVE NOT BEEN MADE",
+          "text": "The manual ends with Temporary Rules and Restrictions, among them “The x|N is not yet in operation.” Then: “All other portions of the program are believed to be operating satisfactorily but exhaustive tests have not been made. Information relative to any troubles encountered in the use of this program would be appreciated by the authors.” A progress report for the first quarter of 1954 says every routine had been tested and worked except the x|N routine. I have not found Zierler’s report on the program’s inner workings, and that summer it was said that “there are no annotated copies of the conversion routine”. A hand-written listing of an earlier version, dated March 1953, does survive, in Knuth’s papers. It has no superscript variables, no drum, no D equations, no SR or CR, and treats −x as 1 − x. So for the system of 1954 the manual is the specification, and what it does not say is this reconstruction’s choice.",
+          "references": [
+            {
+              "label": "Project Whirlwind Summary Report No. 37, first quarter 1954",
+              "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf"
+            },
+            {
+              "label": "MIT Summer Session 1954, lecture 13",
+              "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / A PERFECTLY REASONABLE EXPRESSION",
+          "text": "Multiplication is writing things side by side: 2ay is 2 times a times y, and a space between two digits is a multiplication sign, so 2 3 is six. Inside a term a slash sends everything after it to the other side of the fraction, until the next slash. So cd/a(b + c) is cd over a(b + c), and “a/b/c is properly interpreted as the product ac divided by b”, not a over bc, as FORTRAN would have it. In 1976 Laning wrote: “The notion of operator precedence as a formal concept did not occur to me at the time; I lived in fear that someone would write a perfectly reasonable algebraic expression that my system would not analyze correctly.”"
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TWO ZEROS",
+          "text": "Numbers have 24 binary digits and an exponent, about seven decimal places, and zero has a sign. CP jumps if the last quantity computed was negative, and on a zero “the CP may or may not behave like an SP since 0 may appear as +0 or −0.” The manual’s loops step round this: to go round ten times one tests n − 9.5, never n − 10, and another counts down in twos, so its test never comes to zero. The reconstruction has to decide, and my inference is a one’s-complement adder’s: a zero typed as 0 is +0, and the difference of two equal numbers is −0. So n − 5 with n equal to 5 is typed −.00000000+00, and CP jumps."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / KNUTH’S EXAMPLE AND THE 1954 RULES",
+          "text": "Knuth and Trabb Pardo’s 1976 example in the language, TPK, reads eleven numbers with v|N, copies them to a|0 to a|10, and works back down with i = i − 1. Page 13 allows a letter as an index, but: “Negative values of n are not permitted in this connection, nor are values between zero and one half inclusive, with the exception that the value zero is permissible if assigned by the specific equation n = 0,.” The last time round, i is zero, and it got there by i = i − 1, not by i = 0. Page 13 forbids that whatever the zero’s sign, so the 1976 example and the 1954 specification are incompatible. Under the rules of January 1954 it could not have run at all, because it begins with v|N, and “The x|N is not yet in operation.” What the reconstruction does about it is a separate matter. It approximates page 13 by the sign of zero, refusing −0 and allowing +0, and since my inference is that a computed zero is −0, it types ten lines and then ALARM EQUATION 2 PRECEDED BY 109. That alarm rests on the inference, not on the manual, which names no alarm for it. Make every zero +0 and TPK runs to the end, still breaking the rule. Its checker points at i = i − 1 before anything runs."
+        },
+        {
+          "kind": "observation",
+          "label": "06 / THE INNOCUOUS CHANGE",
+          "text": "Write dy/dt as D y = …, and the stretch from the first D equation to the last is gone through four times a step, by “the method of Gill - a variation of the 4th order Runge-Kutta technique”. The manual’s example has the answers sin(t − 2) and cos(t − 2) − 1, and the reconstruction is within about .004 of them at every t it prints: what a step of one half costs. Then the manual warns. Move y|2 + 1 into a helper, a = y|2 + 1, just before the first D equation, and the change “would appear to be innocuous”. It is not, because the later passes start at the first D equation and never recompute a. At t = 10, y|1 is 2.58 where sin 8 is .99. The checker warns about it, quoting the page."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / A PROGRAM THAT WOULD NOT HAVE RUN",
+          "text": "The MIT summer school notes of 1954 give their own, shorter version of the manual’s differential-equation program. As printed, its last two lines lack the commas the rules require, so the translator would not have accepted it. It also has no PRINT, so with the commas put back it integrates from t = 2 to past t = 10 and types nothing; it may have been meant to leave its answers in storage. The manual’s own examples have three smaller slips: a missing comma on page 8, a semicolon for a comma on page 11, and a figure on page 7 that types a ninth value nobody asked for. The manual has a slip of its own, on page 6. Its largest number, 2⁶³ − 2³⁹, is “(or, roughly, 9.2233995 · 10¹⁸)”. It is 9.2233715 · 10¹⁸, wrong in the fifth decimal place. And the manual prints .05 as +.50000000−01, which the nearest 24-bit number to .05 gives only if the digits are cut off rather than rounded. So the reconstruction cuts them off: a choice that fits the page, not something the page proves.",
+          "references": [
+            {
+              "label": "MIT Summer Session 1954, lecture 13",
+              "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "08 / IT RAN THE FIRST TIME",
+          "text": "These are the troubles the authors asked for, seventy years late: slips in the manual, one in a copy of it, and the rest its rules doing what they say. The system itself did real work. Laning recalled a three-dimensional lead-pursuit problem, coded with its sceptical owners “in a 2-1/2 hour coding session, at least half of which was spent in defining notation”, which “ran successfully the first time”: 79 statements, with seven uses of the differential-equation feature. The summer school heard that “with a single exception, all programs coded in the Laning-Zierler system have been completed successfully on their first run”. The price was speed: “a reduction of computing speed of the order of magnitude of ten to one from an efficient computer program”, as C. W. Adams put it in May 1954, and six to eight times the Laboratory’s usual interpretive system, as the summer school did."
+        },
+        {
+          "kind": "observation",
+          "label": "09 / WHAT WHIRLWIND TYPED",
+          "text": "In 1976 Laning sent Knuth that lead-pursuit program as the Flexowriter typed it, with the first page of what it printed: “the first effort to use the Whirlwind compiler on a serious engineering problem”, from “very early 1954”, he guessed. It has 79 statements, seven of them D equations, as he had said. It is the only output of the 1954 system I have found, and it exercises most of the system: superscript variables, eighteen function calls, Gill’s method, SR and CP, and the slash. Typed into the reconstruction, it prints the same variables in the same order, and all 62 values on the page agree to within 4.2 parts in ten million, except the two of a|0, which come from the arcsine, one of the routines the reconstruction had to choose, and are out by 7.2 parts in a million. One line of the program runs off the edge of the sheet; of the endings tried, only one makes the numbers agree. The page also shows what the reconstruction does not do: a zero set by t = 0 was typed +.16155871−27, a zero exponent −00, and 6400 came back +.64000003+04. And it shows the minus sign working. The listing of March 1953 treats −x as 1 − x, “the problem you mentioned about unary minus”, Knuth wrote to Laning; this program uses unary minus throughout, and with that bug it would have typed d as about .1 at its first step, not .00052. It never uses x|N, so whether that ever worked is still open.",
+          "references": [
+            {
+              "label": "Laning to Knuth, 2 July 1976, enclosure 2, pp. 12–15",
+              "url": "https://cs.stanford.edu/~knuth/from-Laning-76-07-02.pdf"
+            },
+            {
+              "label": "Knuth to Laning, 16 August 1976",
+              "url": "https://cs.stanford.edu/~knuth/to-Laning-76-08-16.pdf"
+            },
+            {
+              "label": "The program, and the page as typed",
+              "url": "https://github.com/chrishayuk/laning-zierler/blob/main/examples/1954-lead-pursuit.whirlwind"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "The system runs in the browser, compiled from the same Rust source as the command-line version, with the manual’s programs among its tapes. Type a tape, feed it, and the printer types the answers, as slowly as ten characters a second if you like. The translation shows each equation’s block of orders, and the same tape can be fed with each kind of zero side by side.",
+          "links": [
+            {
+              "href": "/demos/laning-zierler?example=1976-knuth-tpk",
+              "label": "Feed Knuth’s TPK — interactive study"
+            },
+            {
+              "href": "/demos/laning-zierler?example=1954-lead-pursuit",
+              "label": "Feed the lead-pursuit program of 1954"
+            },
+            {
+              "href": "https://github.com/chrishayuk/laning-zierler/tree/main/examples",
+              "label": "Every program in the manual, with the page it types"
+            },
+            {
+              "href": "https://github.com/chrishayuk/laning-zierler/tree/main/docs/scans",
+              "label": "The pages quoted here"
+            },
+            {
+              "href": "https://github.com/chrishayuk/laning-zierler",
+              "label": "Source, tutorial and language server"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "I have not found the translator of 1954. This is built from a programmer’s manual, which says what the system does and not how. The listing that survives is of a smaller version of March 1953, and the reconstruction was not built from it. Larry Stabile has transcribed that listing and runs it on Guy Fedorkow’s Whirlwind simulator; I have read that work, not checked it.",
+            "The manual prints almost none of what its programs typed. Three numbers on page 6, 5, .05 and −π, can be compared digit for digit, and match; its programs are checked against mathematics. One later page, the lead-pursuit program’s, is checked against Whirlwind, but only as far as it goes: to t = .6, before the program changes its step, with no x|N and no rule broken.",
+            "The sign of a computed zero is an inference from the manual’s warning on page 8 and from the arithmetic of the time, not from a listing. The reconstruction uses that sign to approximate the rule of page 13, so it lets through some computed zeros the rule forbids, such as n = 0·5, and the TPK alarm rests on the inference. The alarm’s wording is this reconstruction’s.",
+            "TPK was never run on Whirlwind, as far as I know. Knuth and Trabb Pardo wrote it to show what the language looked like, not to test it.",
+            "How Gill’s method was arranged inside the system, the rounding of each operation, the function routines, and what happened to a number too small to hold are this reconstruction’s choices, each listed in the repository. Nothing is timed.",
+            "The pages were read by the same coding agent that wrote the interpreter, from the page images. No person has checked the reading against the scans by eye. A second model, OpenAI’s Codex, reviewed the repository independently and checked twenty places against the page images: seventeen matched, and three were repairs that had not been disclosed, the three slips in the manual’s examples, which are now listed. It also found that the option making every zero +0 left a negated zero as −0, which is fixed. Its review, and what was done about each point, is in the repository. The lead-pursuit program and its page were read the same way, and a second review by Codex found no error in either reading; it found ten things to put right in the claims and the test, and they were.",
+            "No search has been made for earlier discussion of these troubles. Someone may well have noticed them before."
+          ],
+          "principle": "When only the manual survives, its rules are the program. Running them shows what the rules say, not what Whirlwind did."
+        },
+        {
+          "kind": "question",
+          "text": "If a manual is all that survives, can you tell what the program did?",
+          "status": "OPEN",
+          "detail": "The three complete programs in E-364 run on the reconstruction and give answers that check against mathematics. That shows the manual is consistent with itself and with arithmetic. It does not show that Whirlwind typed the same eight digits, or did the same thing when a tape broke a rule. One printout from 1954 has now been found, and where it exercises the system the reconstruction agrees with it to the last digit or two. What Whirlwind did with x|N, or with a tape that broke a rule, is still not shown."
+        }
+      ],
+      "sources": [
+        {
+          "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+          "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+          "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+        },
+        {
+          "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+          "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+          "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+        },
+        {
+          "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+          "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+          "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+        },
+        {
+          "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+          "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+          "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+        },
+        {
+          "title": "J. H. Laning Jr., letter to D. E. Knuth, 2 July 1976, with enclosures",
+          "url": "https://cs.stanford.edu/~knuth/from-Laning-76-07-02.pdf",
+          "note": "The 1953 listing is enclosure 1, not reproduced here; the lead-pursuit program, pp. 12–14, and the first page of its output, p. 15, are enclosure 2. The minus sign in “X = −1” is on p. 6."
+        },
+        {
+          "title": "D. E. Knuth, letter to J. H. Laning Jr., 16 August 1976",
+          "url": "https://cs.stanford.edu/~knuth/to-Laning-76-08-16.pdf",
+          "note": "“The program has only one bug, namely the problem you mentioned about unary minus: −x gets treated as 1−x.”"
+        },
+        {
+          "title": "J. H. Laning Jr., Whirlwind algebraic interpreter, listing, March 1953, with D. E. Knuth’s notes of August 1976, Knuth Digital Archive U2774, Computer History Museum",
+          "url": "https://archive.computerhistory.org/resources/text/Knuth_Don_X4100/PDF_index/KnuthDigitalArchive-Index.html",
+          "note": "“Tape T-2134-m8 plus correction tape P-2134-10”, 20 sheets. Knuth’s notes, p. 4: “subscripted variables, drum overlay usage, D operator: not yet implemented.”"
+        },
+        {
+          "title": "L. A. Stabile, the 1953 listing transcribed and run on G. Fedorkow’s Whirlwind simulator",
+          "url": "https://github.com/gfedorkow/Whirlwind-Instruction-Simulator/tree/master/Code-Samples/Laning-and-Zierler-Interpreter",
+          "note": "With Stabile’s paper of March 2026 and Knuth’s correspondence with Laning. Read for this note, not checked."
+        },
+        {
+          "title": "chrishayuk/laning-zierler",
+          "url": "https://github.com/chrishayuk/laning-zierler",
+          "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+        },
+        {
+          "title": "Coding-agent sessions, 22 and 25 November 2026",
+          "note": "The interpreter, its tests and the reading of the manual were made in the first; the lead-pursuit program and its page were transcribed and compared in the second, and reviewed by OpenAI Codex. Every result in this note can be rerun on the interactive study."
+        }
+      ],
+      "published": "2026-11-22",
+      "revised": "2026-11-25"
+    },
+    "hash": "aad061674b4f322cd5211d28c10177039af1565f8148f33a8875e8230ce566ff",
+    "algorithm": "sha256"
   }
 ]
