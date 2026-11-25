@@ -212,8 +212,8 @@ export const publicationLegibility: Record<string, Legibility> = {
  "N-BABBAGE": {
   subject: "Charles Babbage’s two programs of 4 and 5 August 1837 for the Analytical Engine, on the sheet BAB/L/001 in the Science Museum, transcribed cell for cell from the scans by a coding agent and run on the engine as the sheet itself shows it, with every cell checked",
   question: "Do the other 26 sets of Babbage’s notations run as written, and when does the engine they need change?",
-  searchTitle: "Babbage’s First Programs (August 1837) Run as He Wrote Them: 122 of 123 Cells Agree",
-  description: "Charles Babbage’s two programs of August 1837 for the Analytical Engine, run as written with a coding agent: 122 of the 123 things the sheet states agree, every accent among them. The sheet relies on the mill keeping a table of multiples; one row asks the mill to subtract twice. Step through it in your browser.",
+  searchTitle: "Babbage Reordered a Program in August 1837 to Save Ten Turns of the Hand: His First Programs Run as Written",
+  description: "Charles Babbage’s two programs of August 1837 for the Analytical Engine, run as written with a coding agent: 122 of the 123 things the sheet states agree. His margin note reorders the first to keep the mill’s table of multiples and save ten turns of the hand; the next day he keeps a, b and c as complements. Step through it in your browser.",
   concepts: ["Charles Babbage", "Analytical Engine", "first computer program", "Science Museum", "Babbage Papers", "simultaneous equations", "history of computing", "coding agents", "verification", "WebAssembly"],
  },
  "N-NINE-CHAPTERS": {

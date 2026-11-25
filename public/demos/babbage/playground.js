@@ -5,8 +5,10 @@
 //
 //   mountPlayground(host, { page, step, theme })  the whole playground: picker,
 //                                          engine, sheet, and the transcription in an editor
-//   mountRunner(host, { page, step, numbers, theme })
-//                                          one program's engine, stepped, for a note
+//   mountRunner(host, { page, step, numbers, theme, text, editable, hint })
+//                                          one program's engine, stepped, for a note;
+//                                          `text` runs a page of its own, `editable`
+//                                          puts it in a box under the engine to change
 //
 // theme "auto" follows the reader's light or dark setting; "light" keeps it light.
 //
@@ -134,6 +136,8 @@ const CSS = `
 .bab .rh-token-string { color: #7d5a9e; } .bab .rh-token-number { color: var(--red); } .bab .rh-token-variable { color: #2d6a8a; }
 .bab .rh-token-parameter { color: #5d7a2a; } .bab .rh-token-macro { font-weight: 700; } .bab .rh-token-operator { color: var(--soft); }
 .bab.runner .engine { padding: 14px; }
+.bab .runner-text { display: block; width: 100%; min-height: 0; height: auto; margin-top: 10px; font: 13px/1.55 var(--mono); background: var(--card); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 10px; resize: vertical; }
+.bab .runner-hint { font: 13px/1.5 var(--mono); color: var(--soft); margin: 6px 0 0; }
 .bab.runner .bar { margin: 12px 0 0; }
 .bab.runner .bar button { background: rgba(255,255,255,.06); color: #efe6d4; border-color: rgba(227,199,122,.3); }
 .bab.runner .bar button[aria-pressed="true"] { background: #d9a45a; color: #1d1a16; }
@@ -489,7 +493,7 @@ export function mountPlayground(host, { page = null, step = null, theme = "auto"
  * One program's engine, stepped. `step` is the operation to open at (from 1;
  * 0 for the store as it starts). `numbers` opens on the worked example.
  */
-export function mountRunner(host, { page = "L001-1", step = 0, numbers = false, theme = "auto" } = {}) {
+export function mountRunner(host, { page = "L001-1", step = 0, numbers = false, theme = "auto", text = null, editable = false, hint = null } = {}) {
   addStyles();
   const root = el("div", theme === "light" ? "bab runner light" : "bab runner");
   root.innerHTML = ENGINE.replace('<div class="caption"></div>', `<div class="caption"></div><div class="bar">${CONTROLS}<span class="stat"></span></div>`);
@@ -498,21 +502,52 @@ export function mountRunner(host, { page = "L001-1", step = 0, numbers = false, 
   view.numbers = numbers;
   root.querySelector('[data-do="nums"]').setAttribute("aria-pressed", String(numbers));
   let entry = null;
+  let source = text;
+  let first = true;
+  let box = null;
+  if (editable) {
+    box = el("textarea", "runner-text");
+    box.spellcheck = false;
+    root.appendChild(box);
+    if (hint) root.appendChild(el("p", "runner-hint", hint));
+  }
   const load = async () => {
     try {
-      view.run = await runPage(entry.text, entry, view.numbers);
+      view.run = await runPage(source ?? entry.text, entry, view.numbers);
     } catch (e) {
       root.querySelector(".caption").textContent = String(e.message ?? e);
       return;
     }
     const r = view.run;
-    root.querySelector(".stat").innerHTML = `${entry.title} · <b>${r.agree}</b> of <b>${r.statements}</b> agree`;
-    view.show(view.at === -1 && step ? step - 1 : view.at);
+    const name = text != null ? "this page" : entry.title;
+    root.querySelector(".stat").innerHTML = `${name} · <b>${r.agree}</b> of <b>${r.statements}</b> agree`;
+    if (r.stopped) root.querySelector(".stat").innerHTML += ` · stops`;
+    if (first) {
+      first = false;
+      view.show(step ? step - 1 : -1);
+    } else view.show(Math.min(view.at, r.steps.length - 1));
+    if (r.stopped && view.at >= r.steps.length - 1) {
+      root.querySelector(".caption").appendChild(el("span", "no", "✗ the run stops: " + r.stopped));
+    }
   };
   const ctl = controls(root, view, load);
+  if (box) {
+    let wait = null;
+    box.addEventListener("input", () => {
+      clearTimeout(wait);
+      wait = setTimeout(() => {
+        source = box.value;
+        load();
+      }, 250);
+    });
+  }
   addEventListener("resize", view.redrawWires);
   pages().then((ps) => {
     entry = ps.find((p) => p.name === page) ?? ps[0];
+    if (box) {
+      box.value = source ?? entry.text;
+      box.rows = Math.min(16, box.value.split("\n").length + 1);
+    }
     load();
   });
   return {

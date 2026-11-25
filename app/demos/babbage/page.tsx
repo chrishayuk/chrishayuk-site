@@ -11,7 +11,7 @@ export default function Page() {
       <h1>Babbage’s programs of 1837,<br/><em>run as he wrote them.</em></h1>
       <p className="dek">Two programs on one sheet of the Babbage Papers: No. 1 of 4 August 1837 eliminates x between two equations, and No. 2 of 5 August finds x and y.</p>
       <p>Choose a program and step through it. In the mill: the operation, where each number came from, and the table of multiples it keeps. In the store: each column read is left at zero, and each column given a number shows it; <strong>numbers</strong> runs the same program on a worked example. Below, the sheet as Babbage laid it out, each row checked, and the transcription, which runs again as you edit it. Try <strong>No. 2, operation 12</strong>, the one row that does not agree.</p>
-      <div className="inline-links"><Link className="text-link" href="/notebook/babbages-programs-of-august-1837-run-as-he-wrote-them">THE WORKING NOTE ↗</Link><a className="text-link" href="https://github.com/chrishayuk/analytical-engine">SOURCE AND TUTORIAL ↗</a><a className="text-link" href="https://collection.sciencemuseumgroup.org.uk/documents/aa110000065">THE SHEET ↗</a></div>
+      <div className="inline-links"><Link className="text-link" href="/notebook/babbage-reordered-a-program-to-save-ten-turns-of-the-hand">THE WORKING NOTE ↗</Link><a className="text-link" href="https://github.com/chrishayuk/analytical-engine">SOURCE AND TUTORIAL ↗</a><a className="text-link" href="https://collection.sciencemuseumgroup.org.uk/documents/aa110000065">THE SHEET ↗</a></div>
     </header>
     <BabbagePlayground/>
     <footer className="demo-provenance">

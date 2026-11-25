@@ -59,9 +59,10 @@ export function BabbagePlayground() {
 }
 
 /** One program's engine, opened at an operation (0 for the store as it
- * starts), with buttons to step it. */
-export function BabbageRunner({ label, page, step = 0, numbers = false, note }: { label: string; page: string; step?: number; numbers?: boolean; note?: string }) {
-  const host = useModule((module, el) => module.mountRunner(el, { page, step, numbers, theme: "light" }), [page, step, numbers]);
+ * starts), with buttons to step it. With `text`, a page of its own; with
+ * `editable`, that page in a box to change, run as it is typed. */
+export function BabbageRunner({ label, page, step = 0, numbers = false, note, text, editable = false, hint }: { label: string; page: string; step?: number; numbers?: boolean; note?: string; text?: string; editable?: boolean; hint?: string }) {
+  const host = useModule((module, el) => module.mountRunner(el, { page, step, numbers, theme: "light", text, editable, hint }), [page, step, numbers, text, editable, hint]);
   return <figure className="babbage-runner">
     <figcaption className="record-voice">{label}</figcaption>
     <div ref={host}/>
