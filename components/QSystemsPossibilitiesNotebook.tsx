@@ -67,8 +67,8 @@ export function QSystemsPossibilitiesNotebook({ record }: { record: PublicationR
     </> },
     { label: "Two results, 8,190 applications", kind: "evidence", children: <>
       <Quote page="P. 22"
-        french="On ajoute donc au graphe le tout nouveau chemin."
-        english="So the whole new path is added to the graph."/>
+        french="On ajoute donc au graphe le tout nouveau chemin […]"
+        english="So the brand-new path is added to the graph […]"/>
       {act(1)}
       <StudyMeasures label="CARRIED ALONG THE STRING, TWELVE CHOICES" items={[
         { label: "PARITY", value: "8,190", detail: "Applications for 2 different results. 8,166 of the arrows made repeat one already made." },
@@ -86,7 +86,7 @@ export function QSystemsPossibilitiesNotebook({ record }: { record: PublicationR
         { label: "PARITY, TWELVE CHOICES", value: "8,190 → 46", detail: "4,096 arrows left, or 2. With the record of what made each, the 4,096 derivations can still be counted." },
         { label: "SEVEN FACTS COMPOSED", value: "294 → 56", detail: "R(A,H) 132 times, or once, its 132 derivations recorded." },
         { label: "EACH STRING PACKED", value: "8,190 → 8,190", detail: "Every result is different, so there is nothing to merge." },
-        { label: "A == A.", value: "∞ → 1", detail: "It never stops; merged, it empties the graph." },
+        { label: "A == A.", value: "∞ → 1", detail: "It never stops; merged, it empties the graph. So do A + B == A + B. and A == X. X == A." },
       ]} note="QSYS-E11 and E12. The merging machine is src/experimental.rs, not Colmerauer’s; with merging off it is checked against the historical one."/>
     </> },
     { label: "A rule takes its neighbours", kind: "evidence", children: <>

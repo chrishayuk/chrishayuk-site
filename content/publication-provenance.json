@@ -2291,5 +2291,35 @@
         "note": "The interpreter, the transcriptions and the comparisons were made in this session. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-Q-SYSTEMS-POSSIBILITIES",
+    "version": "1.0",
+    "recordHash": "9375e170b18c90c8c6fc9680a1f5fc0d06dd9f3a02ec886c31ce613e7217de6f",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository and the report's page scans"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "The definition of a phase, p. 22, and of -INV-, p. 33; the grammar of section 11; the cul-de-sac of pp. 30–31. Read from the page scans for the first note."
+      },
+      {
+        "title": "chrishayuk/q-systems, docs/research.md, QSYS-E08 to E15",
+        "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+        "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The historical machine, src/machine.rs, unchanged by these experiments; the variants, src/experimental.rs; the programs of E15, research/."
+      },
+      {
+        "title": "Coding-agent session, 26 November 2026",
+        "note": "The experiments were designed, run and written up with a coding agent. Every result can be rerun with cargo test --release --test research in the repository; the 131,424 sentences of the first note need -- --ignored as well."
+      }
+    ]
   }
 ]
