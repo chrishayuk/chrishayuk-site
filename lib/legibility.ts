@@ -221,6 +221,12 @@ export const publicationLegibility: Record<string, Legibility> = {
   searchTitle: "Absys, Aberdeen 1967, Rebuilt from Its Designers’ Papers: It Did Not Unify Two Unknowns, It Waited",
   description: "Absys, the logic programming language Foster and Elcock built at Aberdeen around 1967, rebuilt from their papers with a coding agent, reproduces Elcock’s binding environments variable for variable, suspended equations included. His own setdiff example favours one order of its steps over another. Run it in your browser.",
   concepts: ["Absys", "logic programming", "E. W. Elcock", "J. M. Foster", "University of Aberdeen", "Elliott 4120", "unification", "suspended equations", "Prolog", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ }, "N-Q-SYSTEMS-POSSIBILITIES": {
+  subject: "The Q-systems of Alain Colmerauer’s report of 1970, reconstructed with a coding agent, measured on graphs built to test them: what a phase costs on many strings at once, what its second phase loses, and two variants of the machine kept apart from the historical one",
+  question: "Did any later Q-system merge equal arrows?",
+  searchTitle: "Colmerauer’s Q-systems, Measured: a Trillion Strings in 80 Arrows, and No Way to See Two Results Become One",
+  description: "A rebuilt 1969 rule language, measured. One Q-system graph holds 2⁴⁰ strings in 80 arrows and a rule works on all of them at once, but a result reached along many paths is made once per path: parity of twelve choices costs 8,190 applications. Run it in your browser.",
+  concepts: ["Q-systems", "Alain Colmerauer", "TAUM", "graph rewriting", "shared alternatives", "dynamic programming", "chart parsing", "reversible grammar", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  }, "N-Q-SYSTEMS": {
   subject: "The Q-systems, the graph-rewriting rule language Alain Colmerauer designed at the Université de Montréal for the TAUM machine-translation project, in use from 1969, reconstructed with a coding agent from his report of 1970, and run on every example it prints",
   question: "What did the TAUM grammars look like?",

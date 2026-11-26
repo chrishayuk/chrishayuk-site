@@ -297,6 +297,7 @@ assert.match(qsystems.body,/Q-systems/);
 assert.match(qsystems.body,/name="robots" content="noindex, follow"/);
 for (const asset of ["/demos/q-systems/qsys.wasm","/demos/q-systems/worker.js","/demos/q-systems/lsp-worker.js","/demos/q-systems/wasi.js","/demos/q-systems/playground.js","/demos/q-systems/examples.json","/media/notebook/q-systems/p29-figure.jpg"]) assert.equal((await request(asset)).status,200,asset);
 assert.ok((await request("/notebook/a-q-system-rule-never-replaced-anything")).body.includes('href="/demos/q-systems'), 'Q-systems note links to the playground');
+assert.ok((await request("/notebook/a-q-system-can-hold-a-trillion-strings-but-never-sees-two-become-one")).body.includes('href="/demos/q-systems?example=e08-parity'), 'the second Q-systems note links to the playground');
 // Laning and Zierler: the playground and its assets, and the note links to it.
 const lz=await request("/demos/laning-zierler");
 assert.equal(lz.status,200);
@@ -527,6 +528,7 @@ for (const entry of signal.latest) {
 }
 assert.ok(signal.latest.some(e => e.id === "N-ABSYS"), "N-ABSYS is not in the publication signal");
 assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS"), "N-Q-SYSTEMS is not in the publication signal");
+assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS-POSSIBILITIES"), "N-Q-SYSTEMS-POSSIBILITIES is not in the publication signal");
 
 // ARCHIVE appears exactly where there is a capture to point at, and nowhere
 // else. An identifier that does not exist is absent, never a placeholder.
