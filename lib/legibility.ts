@@ -215,6 +215,18 @@ export const publicationLegibility: Record<string, Legibility> = {
   searchTitle: "Babbage Reordered a Program in August 1837 to Save Ten Turns of the Hand: His First Programs Run as Written",
   description: "Charles Babbage’s two programs of August 1837 for the Analytical Engine, run as written with a coding agent: 122 of the 123 things the sheet states agree. His margin note reorders the first to keep the mill’s table of multiples and save ten turns of the hand; the next day he keeps a, b and c as complements. Step through it in your browser.",
   concepts: ["Charles Babbage", "Analytical Engine", "first computer program", "Science Museum", "Babbage Papers", "simultaneous equations", "history of computing", "coding agents", "verification", "WebAssembly"],
+ }, "N-BABBAGE-REVISIONS": {
+  subject: "Three versions of one program for Charles Babbage’s Analytical Engine, the elliptic radius vector of BAB/L/017 (1838), BAB/L/025 (undated) and BAB/L/018 (1841) in the Science Museum, transcribed by a coding agent and each run strictly on the same model of the engine",
+  question: "Do any cards for these programs survive, and do they carry L/017’s fault or L/018’s?",
+  searchTitle: "Babbage’s Elliptic Radius Vector Program, Three Versions 1838–1841, Run Strictly: A Lost Number and a Swapped Sign",
+  description: "Charles Babbage wrote one program for the Analytical Engine three times. Run as written with a coding agent, the 1838 version loses Q0 and gets five of six coefficients wrong; an undated pencil version gets all six right; the fair copy of 1841 mends the fault another way and swaps two signs.",
+  concepts: ["Charles Babbage", "Analytical Engine", "elliptic radius vector", "Science Museum", "Babbage Papers", "debugging", "history of computing", "coding agents", "verification"],
+ }, "N-BABBAGE-HISTORY": {
+  subject: "Charles Babbage’s yearly history sheets of the Analytical Engine, BAB/N/001 to N/008 (1834 to 1841) in the Science Museum, transcribed by a coding agent and set against the capabilities his programs of Series L need when they are run",
+  question: "Are any of the other slips in Babbage’s programs capabilities his history records?",
+  searchTitle: "Babbage’s History Sheets of the Analytical Engine, 1834–1841, Against His Programs: Which Came First",
+  description: "Charles Babbage’s month-by-month history of the Analytical Engine, set against what his programs needed, runs both ways: some parts recorded years before use, others used years before recorded. A sign in a program of July 1840, taken for a slip, is an order to the mill recorded that June.",
+  concepts: ["Charles Babbage", "Analytical Engine", "Babbage Papers", "Science Museum", "history sheets", "chronology", "punched cards", "history of computing", "coding agents", "verification"],
  }, "N-ABSYS": {
   subject: "Absys, the assertional language J. M. Foster and E. W. Elcock built at Aberdeen around 1967, reconstructed with a coding agent from their papers of 1968, 1969 and 1990, and run on every example they printed",
   question: "What did the rest of Absys-4 look like?",

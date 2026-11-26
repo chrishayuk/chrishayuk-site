@@ -97,7 +97,7 @@ test("notebook archive searches experiment identifiers and intersects programme 
  assert.deepEqual(notebookArchive({ q: "MACHINE-DISCOVERY-1" }).entries.map(record => record.id), ["N-MACHINE-DISCOVERY"]);
  assert.equal(notebookArchive({ q: "MACHINE-DISCOVERY-1", programme: "cell80" }).entries.length, 0);
  assert.equal(notebookArchive({ programme: "practice" }).entries.length, 2);
- assert.deepEqual(notebookArchive({ programme: "languages" }).entries.map(record => record.id).sort(), ["N-ABSYS", "N-ALGOL-60", "N-ATLAS-AUTOCODE", "N-BABBAGE", "N-BASIC", "N-BOHM", "N-CPL", "N-GEORGE", "N-IPLV", "N-JOSS", "N-LANING-ZIERLER", "N-MOUSE", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-Q-SYSTEMS", "N-RHIND-PAPYRUS", "N-TPK", "N-TURING-ACE"]);
+ assert.deepEqual(notebookArchive({ programme: "languages" }).entries.map(record => record.id).sort(), ["N-ABSYS", "N-ALGOL-60", "N-ATLAS-AUTOCODE", "N-BABBAGE", "N-BABBAGE-HISTORY", "N-BABBAGE-REVISIONS", "N-BASIC", "N-BOHM", "N-CPL", "N-GEORGE", "N-IPLV", "N-JOSS", "N-LANING-ZIERLER", "N-MOUSE", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-Q-SYSTEMS", "N-RHIND-PAPYRUS", "N-TPK", "N-TURING-ACE"]);
  assert.equal(notebookArchive({ programme: "unknown" }).programme, "all");
  assert.equal(notebookArchive({ q: "a".repeat(400) }).q.length, 300);
 });
