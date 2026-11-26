@@ -35,7 +35,7 @@ export function AbsysNotebook({ record }: { record: PublicationRecord }) {
     { label: "An equation that waits", kind: "evidence", children: <>
       {act(1)}
       <Quote page="P. 12">{`X₁/1,  L₁/[2,U],  X₂/2,  L₂/[U],  L₃/[ ],  L/[2,1]
-and the suspended equations   U = X₃  and  X₃ = V`}</Quote>
+and the with [sic] the suspended equations   U = X₃  and  X₃ = V`}</Quote>
       <StudyMeasures label="ELCOCK’S BINDING ENVIRONMENTS, AGAINST THE RECONSTRUCTION" items={[
         { label: "APPEND, P. 10", value: "4 / 4", detail: "X₁/1, L₁/[], N₁/[2], U/[2]; and tout prints U = [2], as note 11 says." },
         { label: "REVERSE, P. 12", value: "6 / 6", detail: "Bindings, with U = X₃ and X₃ = V suspended." },
@@ -58,22 +58,22 @@ and the suspended equations   U = X₃  and  X₃ = V`}</Quote>
     { label: "The order does not matter, except for not", kind: "evidence", children: <>
       {act(3)}
       <StudyMeasures label="EVERY ORDER OF A TEXT, ACCEPTED" items={[
-        { label: "SEVEN ASSERTIONS", value: "5,040 orders", detail: "One outcome. 1,260 orders ran out of budget on some assertion before a later one cut it short." },
-        { label: "COST", value: "34–22,021", detail: "Steps, from the cheapest order to the dearest." },
+        { label: "SEVEN ASSERTIONS", value: "5,040 orders", detail: "One outcome. In 1,260 orders some assertion ran past its 20,000-step budget before a later one cut it short." },
+        { label: "COST", value: "34–22,021", detail: "Steps, from the cheapest order to the dearest; the dearest are stopped by the budget." },
         { label: "WITH NOT: ORDERS / OUTCOMES", value: "2 / 2", detail: "not(X = 1) and X = 2 give a different result in each order: not is decided on the bindings as they stand." },
       ]} note="absys permute accepts the assertions of a text in every order and groups the orders by outcome."/>
       <AbsysRunner label="NOT(X = 1) AND X = 2, IN BOTH ORDERS" example="e02-negation-order" args={["permute"]}/>
     </> },
-    { label: "His own example decides", kind: "evidence", children: <>
+    { label: "His own example prefers one order", kind: "evidence", children: <>
       <Quote page="P. 15">{`setdiff = lambda S₁, S₂, S
         {set(X), {mem(X, S₁), not(mem(X, S2))}, S}`}</Quote>
       {act(4)}
       <AbsysRunner label="SETDIFF, THE BODY IN THE GOAL’S PLACE" example="setdiff"
-        note="[1,3]: the members of [1,2,3,4] that are not in [2,4,6]. mem is not in the paper; this definition is ours."/>
+        note="[1,3]: the members of [1,2,3,4] that are not in [2,4,6]. The paper prints no query or result; these inputs and this mem are ours."/>
       <AbsysRunner label="SETDIFF, EVERY LITERAL STRICTLY IN TURN (NOT ABSYS)" example="setdiff" args={["--select", "fifo"]}
         note="[1]. The not is decided before the recursion has given X a value, in every derivation that recurses."/>
     </> },
-    { label: "Two misprints", children: <>
+    { label: "Three misprints", children: <>
       {act(5)}
       <AbsysRunner label="CLARK’S STUDENTS, CORRECTED, ASKED ABOUT SMITH"
         text={`student = lambda X\n    {X = 'BROWN'} or {X = 'SMITH'}\nmath-course = lambda C\n    {C = 'C101'} or {C = 'C301'}\ntakes = lambda X, C\n    {X = 'BROWN', C = 'C101'} or\n    {X = 'SMITH', C = 'C101'} or\n    {X = 'SMITH', C = 'C301'}\nnon-maths-major = lambda X\n    {math-course(C), not(takes(X, C))}\nnon-maths-major('SMITH')`}

@@ -219,7 +219,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Absys, the assertional language J. M. Foster and E. W. Elcock built at Aberdeen around 1967, reconstructed with a coding agent from their papers of 1968, 1969 and 1990, and run on every example they printed",
   question: "What did the rest of Absys-4 look like?",
   searchTitle: "Absys, Aberdeen 1967, Rebuilt from Its Designers’ Papers: It Did Not Unify Two Unknowns, It Waited",
-  description: "Absys, the logic programming language Foster and Elcock built at Aberdeen around 1967, rebuilt from their papers with a coding agent, reproduces Elcock’s binding environments variable for variable, suspended equations included. His own setdiff example decides the order Absys took its steps in. Run it in your browser.",
+  description: "Absys, the logic programming language Foster and Elcock built at Aberdeen around 1967, rebuilt from their papers with a coding agent, reproduces Elcock’s binding environments variable for variable, suspended equations included. His own setdiff example favours one order of its steps over another. Run it in your browser.",
   concepts: ["Absys", "logic programming", "E. W. Elcock", "J. M. Foster", "University of Aberdeen", "Elliott 4120", "unification", "suspended equations", "Prolog", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
 
