@@ -221,6 +221,12 @@ export const publicationLegibility: Record<string, Legibility> = {
   searchTitle: "Absys, Aberdeen 1967, Rebuilt from Its Designers’ Papers: It Did Not Unify Two Unknowns, It Waited",
   description: "Absys, the logic programming language Foster and Elcock built at Aberdeen around 1967, rebuilt from their papers with a coding agent, reproduces Elcock’s binding environments variable for variable, suspended equations included. His own setdiff example favours one order of its steps over another. Run it in your browser.",
   concepts: ["Absys", "logic programming", "E. W. Elcock", "J. M. Foster", "University of Aberdeen", "Elliott 4120", "unification", "suspended equations", "Prolog", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ }, "N-Q-SYSTEMS": {
+  subject: "The Q-systems, the graph-rewriting rule language Alain Colmerauer designed at the Université de Montréal in 1969 for the TAUM machine-translation project, reconstructed with a coding agent from his report of 1970, and run on every example it prints",
+  question: "What did the TAUM grammars look like?",
+  searchTitle: "Colmerauer’s Q-systems, Montréal 1969, Rebuilt from His 1970 Report: A Rule Adds a Path, It Never Replaces One",
+  description: "Alain Colmerauer’s Q-systems, the rule language of the TAUM translation project, rebuilt from his 1970 report with a coding agent. The same sixteen rules analyse a French sentence and synthesise its eighteen paraphrases into one graph that matches his printout line for line. Run it in your browser.",
+  concepts: ["Q-systems", "Alain Colmerauer", "TAUM", "Université de Montréal", "machine translation", "graph rewriting", "reversible grammar", "Prolog", "history of programming languages", "coding agents", "verification", "WebAssembly"],
  },
 
  "N-NINE-CHAPTERS": {
