@@ -225,7 +225,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "The graphs of strings made by a reconstruction of Colmerauer’s Q-systems of 1969, read as an exact next-token language model, compared with a trigram model, and the report’s French grammar read as an open probabilistic grammar with no tree given",
   question: "Can the rules be learned from the sentences?",
   searchTitle: "Can a Language from 1969 Predict the Next Token? Colmerauer’s Q-systems as an Exact Language Model",
-  description: "A graph made by a rebuilt 1969 rule language predicts the next word exactly over 9,565,938 sentences without listing them. It never produces bad French, unlike a trigram model, but it is closed; the same rules read as a grammar are open. Explore it in your browser.",
+  description: "A graph made by a rebuilt 1969 rule language predicts the next word over 9,565,938 sentences without listing them. It produces only grammatical French, unlike a trigram model, but it is closed; the same rules read as a grammar are open. Explore it in your browser.",
   concepts: ["Q-systems", "Alain Colmerauer", "language models", "next-token prediction", "probabilistic grammar", "n-gram model", "graph rewriting", "history of programming languages", "coding agents", "verification"],
  }, "N-Q-SYSTEMS-POSSIBILITIES": {
   subject: "The Q-systems of Alain Colmerauer’s report of 1970, reconstructed with a coding agent, measured on graphs built to test them: what a phase costs on many strings at once, what its second phase loses, and two variants of the machine kept apart from the historical one",

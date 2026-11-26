@@ -12,7 +12,7 @@ export function QSystemsNextTokenNotebook({ record }: { record: PublicationRecor
     { label: "A graph of every sentence", children: <>
       {act(0)}
       <QSystemsRunner label="THE REPORT’S TREATMENT: EIGHTEEN SENTENCES IN ONE GRAPH" example="paraphrase"
-        note="Phase 2 is the graph read here as a language model: every path from -01- to -02- is one sentence. Nine of the eighteen begin RICHARD, six LE and three L, so the first word is RICHARD with probability 1/2; all nine that begin RICHARD go on with CONSTATE."/>
+        note="Phase 2 is the graph read here as a language model: every path from its entry, -01-, to its exit, -19-, is one sentence. Nine of the eighteen begin RICHARD, six LE and three L, so the first word is RICHARD with probability 1/2; all nine that begin RICHARD go on with CONSTATE."/>
     </> },
     { label: "Counting without listing", kind: "evidence", children: <>
       {act(1)}
@@ -21,7 +21,7 @@ export function QSystemsNextTokenNotebook({ record }: { record: PublicationRecor
         { label: "SENTENCES IN THE LARGEST GRAPH", value: "9,565,938", detail: "In 2,760 arrows; 2,085 deterministic states." },
         { label: "ENTROPY", value: "23.19 bits", detail: "Uniform over the paraphrases: log₂ 9,565,938." },
         { label: "SAMPLES ANALYSED BACK", value: "20 / 20", detail: "Each gives the tree it came from." },
-      ]} note="QSYS-E16 in docs/research.md; tests/research.rs asserts every number. The prediction layer is not historical."/>
+      ]} note="QSYS-E16 in docs/research.md; tests/research.rs asserts every number shown. The prediction layer is not historical."/>
     </> },
     { label: "Paths or sentences", kind: "evidence", children: <>{act(2)}</> },
     { label: "Against a trigram", kind: "evidence", children: <>
@@ -39,7 +39,7 @@ export function QSystemsNextTokenNotebook({ record }: { record: PublicationRecor
       <StudyMeasures label="THE OPEN MODEL: NO TREE GIVEN, NO BOUND ON DEPTH" items={[
         { label: "TREES WHERE THE GRAMMAR GIVES THE MACHINE’S STRINGS", value: "8,414", detail: "Every one checked, path for derivation." },
         { label: "DEEPER SENTENCES ABOVE ZERO", value: "300 / 300", detail: "The trigram: 16. The closed graph: 0." },
-        { label: "SAMPLES GRAMMATICAL", value: "300 / 300", detail: "53 of them deeper than one embedded clause." },
+        { label: "SAMPLES GRAMMATICAL", value: "300 / 300", detail: "53 of them with two or more levels of embedding." },
         { label: "MOST DERIVATIONS LIVE", value: "2,160", detail: "Reading the 88-word paraphrase, with merging or without." },
       ]} note="QSYS-E17. The grammar is read off the report’s rules by hand; its probabilities are chosen, not learned."/>
     </> },
