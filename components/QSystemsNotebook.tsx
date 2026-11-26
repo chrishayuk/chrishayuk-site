@@ -16,7 +16,7 @@ const CUL_DE_SAC = `** C70 PAGES 30 AND 31: THE CUL-DE-SAC.
 LE + FAIT + QUE + LE + FAIT + QUE == /CUL + /DE + /SAC.
 /CUL + /DE == /CULDE. /DE + /SAC == /DESAC.`;
 
-/** The first example of p. 27, to edit. */
+/** The example of section 8, p. 27, to edit. */
 const ABC = `** C70 PAGE 27: EXEMPLE DE SYSTEME-Q.
 A* + A*(U*) == A*(1,U*) / A* -DANS- A,B,C.
 A(U*) + B(U*) + C(U*) == S(1,U*).`;
@@ -62,7 +62,7 @@ export function QSystemsNotebook({ record }: { record: PublicationRecord }) {
       <Excerpt src="p29-figure.jpg" width={1600} height={532}
         alt="The figure of page 29: the string A A A B B B C C C on a line of arrows; above and below it, brackets for the paths the rules added: two A(1), one A(1,1), the same for B and C, and one S(1,1,1) from the first vertex to the last."
         caption="PAGE 29, THE GRAPH AFTER THE FIRST PHASE"/>
-      <QSystemsRunner label="THE FIRST EXAMPLE, EVERY RULE APPLICATION" example="abc" args={["--det"]}
+      <QSystemsRunner label="THE EXAMPLE OF SECTION 8, EVERY RULE APPLICATION" example="abc" args={["--det"]}
         note="Each application adds a path beside the one it matched; the arrows it rewrote stay until the phase ends. The second graph has two A, three B and two C, and leaves no S."/>
       <p className="qsystems-play-link record-voice"><Link href="/demos/q-systems?example=abc">STEP THROUGH IT ↗</Link><span>The same phase drawn as page 29 draws it, one application at a time.</span></p>
     </> },
@@ -89,7 +89,7 @@ export function QSystemsNotebook({ record }: { record: PublicationRecord }) {
       <QSystemsRunner label="THE PARAPHRASE TREATMENT, ALL FOUR PHASES" example="paraphrase"
         note="Phase 1 is the system inverted; phase 2 the same system as written, printed as pages 38 to 40 print it. Phases 3 and 4 put each sentence on a line of its own."/>
       <Excerpt src="p42-synthesis-graph.jpg" width={1600} height={924}
-        alt="Page 42, turned to read: the synthesis graph drawn by hand as nested brackets, its vertices numbered 1 to 19, with the words of each path along it, such as L ETONNEMENT DE GAETANE from 1 to 2 and PAR LA DESTRUCTION DE BEAUCEVILLE PAR BENOIT from 2 to 3."
+        alt="Page 42, turned to read: the synthesis graph drawn as nested brackets, its vertices numbered 1 to 19, with the words of each path along it, such as L ETONNEMENT DE GAETANE from 1 to 2 and PAR LA DESTRUCTION DE BEAUCEVILLE PAR BENOIT from 2 to 3."
         caption="PAGE 42, THE SYNTHESIS GRAPH, TURNED TO READ"/>
       <QSystemsRunner label="THE EIGHTEEN, EACH ANALYSED BACK" example="e02-round-trip"
         note="Eighteen graphs in one data file, each a sentence of the synthesis. Each leaves the same tree."/>
@@ -118,10 +118,10 @@ export function QSystemsNotebook({ record }: { record: PublicationRecord }) {
     { label: "Ambiguity costs nothing", kind: "evidence", children: <>
       {act(5)}
       <StudyMeasures label="THE GRAMMAR OF SECTION 11, EVERY SENTENCE" items={[
-        { label: "NORMALISED TREES", value: "8,112", detail: "Three verbs, four names, and up to one level of embedded clause." },
+        { label: "NORMALISED TREES", value: "8,112", detail: "Three verbs, four names, and at most one embedded clause; each of their sentences analyses back to its tree." },
         { label: "SENTENCES", value: "131,424", detail: "All different. No sentence comes from two trees." },
-        { label: "ORDERS OF THE RULES", value: "32 / 1", detail: "Orders tried, and printouts they gave: every rotation of all four phases, forwards and backwards." },
-      ]} note="QSYS-E03 and QSYS-E06 in docs/research.md; tests/research.rs checks the numbers."/>
+        { label: "ORDERS OF THE RULES", value: "32 / 1", detail: "Orders tried, and printouts they gave: every rotation of every phase, forwards and backwards. The last two phases have one rule each, and the printout is sorted." },
+      ]} note="QSYS-E03 and QSYS-E06 in docs/research.md; tests/research.rs asserts the numbers."/>
       <QSystemsRunner label="AN EXPERIMENT, NOT HISTORICAL: TWO READINGS AT ONCE" example="e05-two-readings"
         note="Our grammar, not the report’s. Both readings come out of one analysis, as two arrows between the same two vertices."/>
     </> },
@@ -132,7 +132,7 @@ export function QSystemsNotebook({ record }: { record: PublicationRecord }) {
         caption="PHASE 7 OF A TAUM TREATMENT, THE FORM OF A PRINTED GRAPH"/>
     </> },
     { label: "Run it yourself", kind: "operate", children: <>
-      <QSystemsRunner label="THE FIRST EXAMPLE, TO EDIT" program={ABC} data="-0- A + A + B + B + C + C -1-"
+      <QSystemsRunner label="THE EXAMPLE OF SECTION 8, TO EDIT" program={ABC} data="-0- A + A + B + B + C + C -1-"
         note="Two of each leaves S(1,1). Make the counts unequal and no S comes out; put -INV- on a line above it all and give it S(1,1,1) as data."/>
       {act(7)}
       <p className="qsystems-play-link record-voice"><Link href="/demos/q-systems">OPEN THE PLAYGROUND ↗</Link><span>Every example of the report and every experiment, a phase at a time.</span></p>

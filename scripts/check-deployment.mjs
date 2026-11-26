@@ -526,6 +526,7 @@ for (const entry of signal.latest) {
   if (entry.state !== "published") assert.equal(entry.published_at, undefined, `${entry.id} is a draft with a published_at`);
 }
 assert.ok(signal.latest.some(e => e.id === "N-ABSYS"), "N-ABSYS is not in the publication signal");
+assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS"), "N-Q-SYSTEMS is not in the publication signal");
 
 // ARCHIVE appears exactly where there is a capture to point at, and nowhere
 // else. An identifier that does not exist is absent, never a placeholder.

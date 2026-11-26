@@ -2174,5 +2174,40 @@
         "note": "The interpreter, the transcriptions and the comparisons were made in this session. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-Q-SYSTEMS",
+    "version": "1.0",
+    "recordHash": "9da8fb9bc2f9d8c32232aeb1ede2c0b84ebb54b892eb1ed1f08316495057ef44",
+    "revision": {
+      "kind": "initial",
+      "summary": "The note after an independent fact-check against the report's page images: two results of the report differ, not one (the p. 30 rules do not stop, and the last printout is reversed); fourteen branching vertices, not six; the grammar's unambiguity is stated for sentences with at most one embedded clause, and every one of them was analysed back to its tree; the p. 27 system is the example of section 8, not the first; TAUM 71 is given only as holding the English morphology; METEO is named; the 1992 republication is recorded as not seen."
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "Read in full from the page scans on Alain Colmerauer’s site, linked from the Computer History Museum’s Prolog archive. Every example and quotation was read from the images, not the OCR. The scan lacks printed page 23 and has page 16 twice. All the figures but the TAUM printout are cropped from it. Republished in Traitement Automatique des Langues 33 (1–2), 1992, pp. 105–148, according to Colmerauer’s bibliography (TPLP, 2004); that version was not seen."
+      },
+      {
+        "title": "I. Findeisen-Bellert, interactive session with TAUM translating a sentence from English to French, c. 1972. Gift of Janusz Bień, Computer History Museum",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/montreal/src/Findeisen-Bellert-TAUM-1972.pdf",
+        "note": "Line-printer output, folded at a fixed width. Used only for the form of a printed graph: PHASE n, then -01- … -02-."
+      },
+      {
+        "title": "Computer History Museum, History of Prolog, section Université de Montréal",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/",
+        "note": "The source of both documents, and of the history quoted from Colmerauer and Roussel’s “The birth of Prolog” (1996), which was not read in the original."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The machine, every example of the report with its output, 21 acceptance tests that name their pages, every decision with its evidence, the experiments, and the playground."
+      },
+      {
+        "title": "Coding-agent session, 26 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons were made with a coding agent. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]
