@@ -2293,9 +2293,45 @@
     ]
   },
   {
+    "id": "N-Q-SYSTEMS",
+    "version": "1.1",
+    "recordHash": "8120cbb738c710fcd3012fb6e013b6add627cf4cd9ad5116cc93f79884c42d91",
+    "revision": {
+      "kind": "correction",
+      "summary": "The bound on the 8,112 trees is one level of embedding, a clause in either argument but none inside another, not one embedded clause",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "Read in full from the page scans on Alain Colmerauer’s site, linked from the Computer History Museum’s Prolog archive. Every example and quotation was read from the images, not the OCR. The scan lacks printed page 23 and has page 16 twice. All the figures but the TAUM printout are cropped from it. Republished in Traitement Automatique des Langues 33 (1–2), 1992, pp. 105–148, according to Colmerauer’s bibliography (TPLP, 2004); that version was not seen."
+      },
+      {
+        "title": "I. Findeisen-Bellert, interactive session with TAUM translating a sentence from English to French, c. 1972. Gift of Janusz Bień, Computer History Museum",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/montreal/src/Findeisen-Bellert-TAUM-1972.pdf",
+        "note": "Line-printer output, folded at a fixed width. Used only for the form of a printed graph: PHASE n, then -01- … -02-."
+      },
+      {
+        "title": "Computer History Museum, History of Prolog, section Université de Montréal",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/",
+        "note": "The source of both documents, and of the history quoted from Colmerauer and Roussel’s “The birth of Prolog” (1996), which was not read in the original."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The machine, every example of the report with its output, 21 acceptance tests that name their pages, every decision with its evidence, the experiments, and the playground."
+      },
+      {
+        "title": "Coding-agent session, 26 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons were made with a coding agent. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
     "id": "N-Q-SYSTEMS-POSSIBILITIES",
     "version": "1.0",
-    "recordHash": "ba6d0aa791c3cb103b8f536148627dc4df01e463474b204de8366be3dfb28f02",
+    "recordHash": "d9df2aaab94e8099fd578c58c122c650794cc3418e030628ebb6ab53009cacf7",
     "revision": {
       "kind": "initial",
       "summary": "First publication, after an independent fact-check against the repository and the report's page scans"

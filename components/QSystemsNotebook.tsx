@@ -118,7 +118,7 @@ export function QSystemsNotebook({ record }: { record: PublicationRecord }) {
     { label: "Ambiguity costs nothing", kind: "evidence", children: <>
       {act(5)}
       <StudyMeasures label="THE GRAMMAR OF SECTION 11, EVERY SENTENCE" items={[
-        { label: "NORMALISED TREES", value: "8,112", detail: "Three verbs, four names, and at most one embedded clause; each of their sentences analyses back to its tree." },
+        { label: "NORMALISED TREES", value: "8,112", detail: "Three verbs, four names, and at most one level of embedding; each of their sentences analyses back to its tree." },
         { label: "SENTENCES", value: "131,424", detail: "All different. No sentence comes from two trees." },
         { label: "ORDERS OF THE RULES", value: "32 / 1", detail: "Orders tried, and printouts they gave: every rotation of every phase, forwards and backwards. The last two phases have one rule each, and the printout is sorted." },
       ]} note="QSYS-E03 and QSYS-E06 in docs/research.md; tests/research.rs asserts the numbers."/>
