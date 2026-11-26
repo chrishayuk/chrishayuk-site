@@ -3,7 +3,8 @@
 // one rule application at a time, then what the second phase removes, then
 // what is left, as the line printer printed it.
 //
-// qsys.wasm does the work (`qsys json`), in a worker. The graph is drawn as
+// qsys.wasm does the work (`qsys json`), in a worker; the language server
+// (`qsys lsp`, the same file) gives the hover text, in another. The graph is drawn as
 // C70 draws it on p. 29: the data on a line, and each path a rule adds as a
 // bracket above or below the path it was applied to.
 
@@ -49,6 +50,7 @@ function client(script) {
   };
 }
 const runner = client("worker.js");
+const server = client("lsp-worker.js");
 
 /** [from, to, kind] for each piece of a program or data text, for colouring. */
 export function tokens(text) {
@@ -72,6 +74,62 @@ function paintInto(paint, text) {
     at = to;
   }
   paint.innerHTML = html + esc(text.slice(at)) + "\n";
+}
+
+const hoverBox = (() => {
+  let box = null;
+  return () => (box ??= $("div", { class: "qs-hover", hidden: true }));
+})();
+
+/** Hover: what the language server says about the place under the pointer. */
+function withHover(area, uri, host) {
+  const box = hoverBox();
+  if (!box.isConnected) host.append(box);
+  area.addEventListener("mousemove", (e) => {
+    clearTimeout(area._h);
+    area._h = setTimeout(() => ask(e), 350);
+  });
+  area.addEventListener("mouseleave", () => {
+    clearTimeout(area._h);
+    box.hidden = true;
+  });
+  async function ask(e) {
+    const offset = offsetAt(area, e);
+    if (offset === null) return (box.hidden = true);
+    const before = area.value.slice(0, offset);
+    const line = before.split("\n").length - 1;
+    const character = offset - (before.lastIndexOf("\n") + 1);
+    const r = await server({ text: area.value, uri, requests: [{ method: "textDocument/hover", params: { position: { line, character } } }] });
+    const md = r?.results?.[0]?.contents?.value;
+    if (!md) return (box.hidden = true);
+    box.innerHTML = esc(md)
+      .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\n\n---\n\n/g, "<hr>")
+      .replace(/\n\n/g, "<br>");
+    box.hidden = false;
+  }
+}
+
+/** The character under the pointer, from the monospace grid. */
+function offsetAt(area, e) {
+  const r = area.getBoundingClientRect();
+  const cs = getComputedStyle(area);
+  const lh = parseFloat(cs.lineHeight) || 20;
+  const probe = $("span", {}, "0000000000");
+  probe.style.font = cs.font;
+  probe.style.visibility = "hidden";
+  document.body.append(probe);
+  const cw = probe.getBoundingClientRect().width / 10;
+  probe.remove();
+  const y = e.clientY - r.top - parseFloat(cs.paddingTop) + area.scrollTop;
+  const x = e.clientX - r.left - parseFloat(cs.paddingLeft) + area.scrollLeft;
+  const lines = area.value.split("\n");
+  const line = Math.floor(y / lh);
+  if (line < 0 || line >= lines.length) return null;
+  const col = Math.floor(x / cw);
+  if (col < 0 || col >= lines[line].length) return null;
+  return lines.slice(0, line).reduce((n, l) => n + l.length + 1, 0) + col;
 }
 
 function editor(label, rows) {
@@ -223,7 +281,17 @@ function drawGraph(ph) {
 function mountWith(host, { examples, initial, theme }) {
   host.classList.add("qs");
   if (theme === "light") host.classList.add("qs-light");
-  const state = { run: null, graph: 0, phase: 0, step: 0, drawn: null, timer: null };
+  const state = { run: null, graph: 0, phase: 0, step: 0, drawn: null, timer: null, zoom: 1, focus: false };
+  function zoom(z) {
+    const d = state.drawn;
+    if (!d) return;
+    const w = Number(d.svg.getAttribute("width"));
+    const h = Number(d.svg.getAttribute("height"));
+    if (z === "fit") z = Math.min(1, (canvas.clientWidth - 2) / w);
+    state.zoom = Math.max(0.1, Math.min(3, z));
+    d.svg.style.width = `${w * state.zoom}px`;
+    d.svg.style.height = `${h * state.zoom}px`;
+  }
 
   // ---- the left ----
   const pick = $("select", { class: "qs-pick", "aria-label": "Example" });
@@ -240,6 +308,8 @@ function mountWith(host, { examples, initial, theme }) {
   const prog = editor("Q-treatment");
   const data = editor("Data: graphs of strings", true);
   const problem = $("div", { class: "qs-problem", role: "status" });
+  withHover(prog.area, "file:///text.q", host);
+  withHover(data.area, "file:///text.dat", host);
   const left = $(
     "div",
     { class: "qs-left" },
@@ -262,6 +332,11 @@ function mountWith(host, { examples, initial, theme }) {
   const where = $("span", { class: "qs-where" });
   const summary = $("div", { class: "qs-summary" });
   const canvas = $("div", { class: "qs-canvas" });
+  const zoomOut = $("button", { onclick: () => zoom(state.zoom / 1.25), "aria-label": "Smaller" }, "−");
+  const zoomFit = $("button", { onclick: () => zoom("fit"), "aria-label": "Fit the width" }, "fit");
+  const zoomIn = $("button", { onclick: () => zoom(state.zoom * 1.25), "aria-label": "Larger" }, "+");
+  const focus = $("input", { type: "checkbox", onchange: (e) => ((state.focus = e.target.checked), show(state.step, true)) });
+  const tools = $("div", { class: "qs-tools" }, zoomOut, zoomFit, zoomIn, $("label", {}, focus, " fade all but this step"));
   const rules = $("ol", { class: "qs-rules" });
   const result = $("pre", { class: "qs-result" });
   const log = $("ol", { class: "qs-log" });
@@ -274,6 +349,7 @@ function mountWith(host, { examples, initial, theme }) {
     $("div", { class: "qs-steps" }, prev, play, slider, next),
     where,
     summary,
+    tools,
     canvas,
     $("div", { class: "qs-legend" }, $("span", { class: "k-input" }, "data"), $("span", { class: "k-new" }, "added"), $("span", { class: "k-match" }, "path matched"), $("span", { class: "k-rewritten" }, "rewritten"), $("span", { class: "k-stranded" }, "stranded")),
     $("h3", {}, "Rules of this phase"),
@@ -375,6 +451,7 @@ function mountWith(host, { examples, initial, theme }) {
     const d = drawGraph(ph);
     state.drawn = d;
     canvas.replaceChildren(d.svg);
+    zoom(state.zoom);
     slider.max = ph.applications.length + 2;
     show(keep ? Math.min(state.step, ph.applications.length + 2) : ph.applications.length + 2, true);
   }
@@ -425,6 +502,7 @@ function mountWith(host, { examples, initial, theme }) {
       summary.replaceChildren($("span", {}, counts));
     }
     const cur = i >= 1 && i <= N ? ph.applications[i - 1] : null;
+    state.drawn.svg.classList.toggle("qs-focus", state.focus && (cur !== null || i === N + 1));
     const match = new Set(cur ? cur.path : []);
     const added = new Set(cur ? cur.added : []);
     state.drawn.els.forEach((g, k) => {

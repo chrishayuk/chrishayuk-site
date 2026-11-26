@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  * time, then what the second phase removes and what is left.
  *
  * The playground is public/demos/q-systems/playground.js, copied from the
- * q-systems repository's web/ folder with qsys.wasm, worker.js, wasi.js and
+ * q-systems repository's web/ folder with qsys.wasm, worker.js, lsp-worker.js, wasi.js and
  * examples.json beside it, and its styles are app/q-systems-demo.css, copied
  * from web/playground.css. It has no framework; these components load it and
  * give it an element. Rebuild it there and copy it across, rather than

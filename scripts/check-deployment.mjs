@@ -295,7 +295,7 @@ const qsystems=await request("/demos/q-systems");
 assert.equal(qsystems.status,200);
 assert.match(qsystems.body,/Q-systems/);
 assert.match(qsystems.body,/name="robots" content="noindex, follow"/);
-for (const asset of ["/demos/q-systems/qsys.wasm","/demos/q-systems/worker.js","/demos/q-systems/wasi.js","/demos/q-systems/playground.js","/demos/q-systems/examples.json","/media/notebook/q-systems/p29-figure.jpg"]) assert.equal((await request(asset)).status,200,asset);
+for (const asset of ["/demos/q-systems/qsys.wasm","/demos/q-systems/worker.js","/demos/q-systems/lsp-worker.js","/demos/q-systems/wasi.js","/demos/q-systems/playground.js","/demos/q-systems/examples.json","/media/notebook/q-systems/p29-figure.jpg"]) assert.equal((await request(asset)).status,200,asset);
 assert.ok((await request("/notebook/a-q-system-rule-never-replaced-anything")).body.includes('href="/demos/q-systems'), 'Q-systems note links to the playground');
 // Laning and Zierler: the playground and its assets, and the note links to it.
 const lz=await request("/demos/laning-zierler");
