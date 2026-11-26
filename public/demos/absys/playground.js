@@ -47,14 +47,14 @@ const server = client("lsp-worker.js");
 export function tokens(text, notation) {
   const out = [];
   const re =
-    notation === "1969"
-      ? /(%[^\n]*)|('[^'\n]*'|"[^"\n]*")|\b(lambda|or|begin|end|key)\b|\b(tout|null)(?=\s*\()|([A-Za-z][A-Za-z0-9_]*)(?=\s*\(|'?\s*=\s*lambda)|([A-Za-z][A-Za-z0-9_]*'?)|(\d+)|(=>|[=&;|+\-*/])/g
+    notation === "1969" || notation === "1982"
+      ? /(%[^\n]*)|('[^'\n]*'|"[^"\n]*")|\b(lambda|or|and|begin|end|key)\b|\b(tout|null)(?=\s*\()|([A-Za-z][A-Za-z0-9_]*)(?=\s*\(|'?\s*=\s*lambda)|([A-Za-z][A-Za-z0-9_]*'?)|(\d+)|(=>|<<|>>|[=&;|,+\-*/])/g
       : /(%[^\n]*)|('[^'\n]*'|"[^"\n]*")|\b(lambda|or|not)\b|\b(tout|set)(?=\s*\()|([a-z][A-Za-z0-9_]*(?:-[A-Za-z][A-Za-z0-9_]*)*)(?=\s*\(|\s*=\s*lambda)|([A-Z_][A-Za-z0-9_]*|[a-z][A-Za-z0-9_]*(?:-[A-Za-z][A-Za-z0-9_]*)*)|(\d+)|([=|,])/g;
   const kinds = [null, "comment", "string", "keyword", "macro", "function", "variable", "number", "operator"];
   for (const m of text.matchAll(re)) {
     const k = m.findIndex((g, i) => i > 0 && g !== undefined);
     // a quote straight after a name, in 1969, is a prime, not a constant
-    if (k === 2 && notation === "1969" && m.index > 0 && /[A-Za-z0-9_]/.test(text[m.index - 1])) continue;
+    if (k === 2 && notation !== "1990" && m.index > 0 && /[A-Za-z0-9_]/.test(text[m.index - 1])) continue;
     out.push([m.index, m.index + m[0].length, kinds[k]]);
   }
   return out;
@@ -100,7 +100,7 @@ function mountWith(host, { examples, initial, theme }) {
     }
     pick.lastChild.append($("option", { value: i }, `${ex.name}  ·  ${ex.notation}`));
   }
-  const notation = $("select", { "aria-label": "Notation" }, $("option", { value: "1990" }, "1990 notation (Elcock)"), $("option", { value: "1969" }, "1969 notation (Absys 1)"));
+  const notation = $("select", { "aria-label": "Notation" }, $("option", { value: "1990" }, "1990 notation (Elcock)"), $("option", { value: "1969" }, "1969 notation (Absys 1)"), $("option", { value: "1982" }, "1982 notation (Elcock, CSCSI)"));
   const search = $("select", { "aria-label": "Search" }, $("option", { value: "fair" }, "search: fair"), $("option", { value: "depth-first" }, "search: depth-first"));
   const select = $("select", { "aria-label": "Literal" }, $("option", { value: "in-place" }, "literals: in place"), $("option", { value: "fifo" }, "literals: fifo"));
   const negation = $("select", { "aria-label": "Negation" }, $("option", { value: "immediate" }, "not: immediate"), $("option", { value: "delayed" }, "not: delayed"));
@@ -196,7 +196,7 @@ function mountWith(host, { examples, initial, theme }) {
     const before = area.value.slice(0, offset);
     const line = before.split("\n").length - 1;
     const character = offset - (before.lastIndexOf("\n") + 1);
-    const uri = notation.value === "1969" ? "file:///text.ab1" : "file:///text.abs";
+    const uri = notation.value === "1969" ? "file:///text.ab1" : notation.value === "1982" ? "file:///text.ab2" : "file:///text.abs";
     const r = await server({ text: area.value, uri, requests: [{ method: "textDocument/hover", params: { position: { line, character } } }] });
     const md = r?.results?.[0]?.contents?.value;
     if (!md) return (hoverBox.hidden = true);
@@ -414,7 +414,7 @@ export function loadExamples() {
  * prints. The text can be edited before it is run.
  *
  * @param {HTMLElement} host
- * @param {{example?: string, text?: string, notation?: "1990"|"1969", args?: string[], label?: string, note?: string, theme?: "auto"|"light"}} options
+ * @param {{example?: string, text?: string, notation?: "1990"|"1969"|"1982", args?: string[], label?: string, note?: string, theme?: "auto"|"light"}} options
  *        example names a text of examples.json; otherwise `text` and
  *        `notation` give it. args go before the text: ["--each"],
  *        ["--trace"], ["permute"], ["--search", "depth-first"] …
