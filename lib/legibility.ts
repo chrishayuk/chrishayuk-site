@@ -221,6 +221,12 @@ export const publicationLegibility: Record<string, Legibility> = {
   searchTitle: "Absys, Aberdeen 1967, Rebuilt from Its Designers’ Papers: It Did Not Unify Two Unknowns, It Waited",
   description: "Absys, the logic programming language Foster and Elcock built at Aberdeen around 1967, rebuilt from their papers with a coding agent, reproduces Elcock’s binding environments variable for variable, suspended equations included. His own setdiff example favours one order of its steps over another. Run it in your browser.",
   concepts: ["Absys", "logic programming", "E. W. Elcock", "J. M. Foster", "University of Aberdeen", "Elliott 4120", "unification", "suspended equations", "Prolog", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+ }, "N-Q-SYSTEMS-NEXT-TOKEN": {
+  subject: "The graphs of strings made by a reconstruction of Colmerauer’s Q-systems of 1969, read as an exact next-token language model, compared with a trigram model, and the report’s French grammar read as an open probabilistic grammar with no tree given",
+  question: "Can the rules be learned from the sentences?",
+  searchTitle: "Can a Language from 1969 Predict the Next Token? Colmerauer’s Q-systems as an Exact Language Model",
+  description: "A graph made by a rebuilt 1969 rule language predicts the next word exactly over 9,565,938 sentences without listing them. It never produces bad French, unlike a trigram model, but it is closed; the same rules read as a grammar are open. Explore it in your browser.",
+  concepts: ["Q-systems", "Alain Colmerauer", "language models", "next-token prediction", "probabilistic grammar", "n-gram model", "graph rewriting", "history of programming languages", "coding agents", "verification"],
  }, "N-Q-SYSTEMS-POSSIBILITIES": {
   subject: "The Q-systems of Alain Colmerauer’s report of 1970, reconstructed with a coding agent, measured on graphs built to test them: what a phase costs on many strings at once, what its second phase loses, and two variants of the machine kept apart from the historical one",
   question: "Did any later Q-system merge equal arrows?",

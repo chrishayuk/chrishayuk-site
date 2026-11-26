@@ -41,6 +41,7 @@ export const notebookObjectSelections: Record<string, number[]> = {
  'N-ABSYS': [1, 2, 3, 4],
  'N-Q-SYSTEMS': [2, 3, 4, 5],
  'N-Q-SYSTEMS-POSSIBILITIES': [1, 2, 3, 4],
+ 'N-Q-SYSTEMS-NEXT-TOKEN': [1, 3, 4, 5],
  'N-NINE-CHAPTERS': [3, 4, 5, 9],
  'N-NINE-CHAPTERS-124': [3, 4, 6, 7],
  'N-TPK': [1, 2, 3, 9],
