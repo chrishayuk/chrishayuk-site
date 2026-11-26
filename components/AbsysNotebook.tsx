@@ -79,14 +79,27 @@ and the with [sic] the suspended equations   U = X₃  and  X₃ = V`}</Quote>
         text={`student = lambda X\n    {X = 'BROWN'} or {X = 'SMITH'}\nmath-course = lambda C\n    {C = 'C101'} or {C = 'C301'}\ntakes = lambda X, C\n    {X = 'BROWN', C = 'C101'} or\n    {X = 'SMITH', C = 'C101'} or\n    {X = 'SMITH', C = 'C301'}\nnon-maths-major = lambda X\n    {math-course(C), not(takes(X, C))}\nnon-maths-major('SMITH')`}
         note="Smith takes both maths courses, so no derivation survives. Change SMITH to BROWN and one does."/>
     </> },
+    { label: "The list of relations, 1982", kind: "evidence", children: <>
+      <figure className="absys-quote">{`(u: u+v = 16; w*u = v) ; (v: u+v = 16; w*u = v) and (w: w*u = v)
+(2+v = 16; w*2 = v)
+(2+14 = 16; w*2 = 14; w*2 = 14)
+(7*2 = 14; 7*2 = 14)`}<figcaption className="record-voice">ELCOCK 1982, P. 123 · <a href="https://www.caiac.ca/sites/default/files/shared/canai-archives/1982_CSCSI_Proceedings-opt.pdf">THE PROCEEDINGS ↗</a></figcaption></figure>
+      {act(6)}
+      <AbsysRunner label="ELCOCK’S PROGRAM OF 1982, STEP BY STEP" example="relation-list" notation="1982" args={["--trace"]}
+        note="Each relation that cannot yet be elaborated waits; each binding returns the relations waiting on it, to the head of the list."/>
+      <AbsysRunner label="THE SAME, WITH RETURNED RELATIONS APPENDED (NOT ABSYS AS PRINTED)" example="relation-list" notation="1982" args={["--trace", "--wake", "back"]}
+        note="Appended to the end, w*2 = 14 binds w before 2+14 = 16 is checked. The bindings come out the same."/>
+      <AbsysRunner label="TWO EQUATIONS, TWO UNKNOWNS" example="e09-simultaneous" notation="1969"
+        note="Each relation waits for two of its three numbers. Nothing can be inferred: the system needs elimination."/>
+    </> },
     { label: "Run it yourself", kind: "operate", children: <>
       <AbsysRunner label="ELCOCK’S REVERSE, TO EDIT" text={`${REVERSE}\nrev([1,2,U], [V|L])\nrev([5], [V])`} args={["--trace"]}
         note="Every step: each equation, each suspension, each or distributed, each derivation that fails or hibernates."/>
-      {act(6)}
+      {act(7)}
     </> },
     { label: "What this does not show", children: <>
-      {act(7)}
       {act(8)}
+      {act(9)}
     </> },
   ]}/>;
 }

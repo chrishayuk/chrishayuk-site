@@ -60,7 +60,7 @@ export function AbsysPlayground() {
 
 /** One text, a button to run it, and what absys prints. `args` go before the
  * text: ["--each"], ["--env"], ["permute"], ["--select", "fifo"] … */
-export function AbsysRunner({ label, example, text, notation = "1990", args = [], note }: { label: string; example?: string; text?: string; notation?: "1990" | "1969"; args?: string[]; note?: string }) {
+export function AbsysRunner({ label, example, text, notation = "1990", args = [], note }: { label: string; example?: string; text?: string; notation?: "1990" | "1969" | "1982"; args?: string[]; note?: string }) {
   const host = useModule((module, el) => module.mountRunner(el, { example, text, notation, args, note, theme: "light" }), [example, text, notation, args.join(" "), note]);
   return <figure className="absys-runner">
     <figcaption className="record-voice">{label}</figcaption>

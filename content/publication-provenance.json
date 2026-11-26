@@ -2174,5 +2174,46 @@
         "note": "The interpreter, the transcriptions and the comparisons were made in this session. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
       }
     ]
+  },
+  {
+    "id": "N-ABSYS",
+    "version": "1.1",
+    "recordHash": "c97a8107b8a9958309738410b7c18d6bb93b8ab55f4f69286e984721ff596367",
+    "revision": {
+      "kind": "interpretation",
+      "summary": "Adds Elcock's paper of 1982, found after 1.0: its list of relations awaiting elaboration, printed step by step, now comes out as printed, once a relation returns for each of its variables bound and returned relations go to the head of the list, against the paper's word 'appended'. Records that the paper describes the alternatives as implemented by backtracking, where the retrospective has a fair search, and dates Absys 1968, not 1967; adds where data-directed elaboration stops (x+y=10, x-y=4), with a runnable trace of both readings; and replaces 'no Prolog was run' with the comparison run on SWI-Prolog 11.0.1. Checked independently against the 1982 scans; six findings corrected.",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "E. W. Elcock, “Absys: the first logic programming language — a retrospective and a commentary”, Journal of Logic Programming 9(1), 1990, pp. 1–17",
+        "url": "https://doi.org/10.1016/0743-1066(90)90030-9",
+        "note": "Read in full from the page scans of the Elsevier open archive. Every program and binding environment quoted was read from the images; the OCR garbles them."
+      },
+      {
+        "title": "J. M. Foster and E. W. Elcock, “Absys 1: an incremental compiler for assertions; an introduction”, Machine Intelligence 4, Edinburgh University Press, 1969, from p. 423",
+        "url": "https://archive.org/details/machineintellige0004unse",
+        "note": "Read only from the OCR extracts of most of its sections quoted on HOPL; the scan is on archive.org for lending only."
+      },
+      {
+        "title": "E. W. Elcock, “Goal selection strategies in Horn clause programming”, Proceedings of the Fourth Biennial Conference of the CSCSI/SCEIO, Saskatoon, 1982, pp. 121–124",
+        "url": "https://www.caiac.ca/sites/default/files/shared/canai-archives/1982_CSCSI_Proceedings-opt.pdf",
+        "note": "Read in full from the page scans of the proceedings (PDF pp. 129–132). Found after version 1.0 of this note; its list of relations is now an acceptance test."
+      },
+      {
+        "title": "J. M. Foster, “Assertions: programs written without specifying unnecessary order”, Machine Intelligence 3, Edinburgh University Press, 1968, pp. 387–391",
+        "url": "https://archive.org/details/mi3_20200519",
+        "note": "Read in full. A design paper; the system it describes was then “partly implemented on an Elliott 4120”. Its “pass sets” are the rule for arithmetic here."
+      },
+      {
+        "title": "chrishayuk/absys",
+        "url": "https://github.com/chrishayuk/absys",
+        "note": "The interpreter, both notations, the published results as tests, every decision with its evidence, the experiments, a tutorial, a language server and editor extension, and the playground."
+      },
+      {
+        "title": "Coding-agent session, 25 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons were made in this session. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
   }
 ]
