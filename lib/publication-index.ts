@@ -31,7 +31,7 @@ export const programmes = [
     threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
     description: "Historical computational systems reconstructed from their original sources, tested against the surviving evidence, and made executable in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-ATLAS-AUTOCODE", "N-BABBAGE", "N-ABSYS", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-TPK"], continuation: undefined,
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-ATLAS-AUTOCODE", "N-BABBAGE", "N-ABSYS", "N-Q-SYSTEMS", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-TPK"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
       { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
@@ -47,6 +47,7 @@ export const programmes = [
       { label: "Atlas Autocode playground", href: "/demos/atlas-autocode", name: "Atlas Autocode", year: "1965", detail: "The language of the Ferranti Atlas at Manchester, typed on a Flexowriter: underline a word by backspacing over it, see the tape it punches, and run it as COMPILER AA or AB. Two programs run beside the pages COMPILER AB printed for them in 1965." },
       { label: "Analytical Engine playground", href: "/demos/babbage", name: "Analytical Engine", year: "1837", detail: "Charles Babbage’s two programs of August 1837, run as he wrote them: the mill and the columns of the store stepped one operation at a time, the sheet laid out as he laid it out, and every cell checked." },
       { label: "Absys playground", href: "/demos/absys", name: "Absys", year: "1967", detail: "Foster and Elcock’s assertional language from Aberdeen, rebuilt from their papers. Type assertions and step through them: every derivation, its bindings, the equations it holds suspended until an unknown is known, and the tree of alternatives each or made." },
+      { label: "Q-systems playground", href: "/demos/q-systems", name: "Q-systems", year: "1969", detail: "Colmerauer’s rule language for the Montréal translation project, rebuilt from his report of 1970. Step through a phase one rule application at a time: each rule adds a path beside the one it matched, and the rewritten arrows go only at the end." },
       { label: "Nine Chapters playground", href: "/demos/nine-chapters", name: "Nine Chapters", year: "Han dynasty", detail: "Chapter 8 of the Nine Chapters on the Mathematical Art, set out in counting rods and worked as the text says, what it states checked against the board. Step through it on a board in three dimensions." },
     ] },
   { id: "practice", title: "Practice / Systems", question: "What does making reveal?",
