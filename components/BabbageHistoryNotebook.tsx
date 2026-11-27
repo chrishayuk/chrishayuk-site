@@ -36,12 +36,12 @@ export function BabbageHistoryNotebook({ record }: { record: PublicationRecord }
         { label: "TABLE OF MULTIPLES", value: "12 Mar 1835", detail: "“Plan of Mult. by Table”. First used by L/001, 4 Aug 1837." },
         { label: "REPETITION", value: "7 Mar 1836", detail: "“To repeat an Opn any variable No of times”. First used by L/023, 7 Jun 1838." },
         { label: "LETTER CARDS", value: "18 Nov 1837", detail: "“Two sets of variable cards”. First used by L/023, 7 Jun 1838." },
+        { label: "CARD BACKING", value: "Dec 1837", detail: "Sketch Book Vol 3 pp 161–162, cited by the history. First used by L/023, 7 Jun 1838." },
       ]} note="babbage history. The dates of use are the first program whose run needs the capability."/>
     </> },
     { label: "Used first", kind: "evidence", children: <>
       {act(3)}
       <StudyMeasures label="IN A PROGRAM BEFORE THE HISTORY RECORDS IT" items={[
-        { label: "CARD BACKING", value: "8 months", detail: "L/023, 7 Jun 1838; “Card backing App.”, Feb 1839." },
         { label: "MANY NUMBERS ADDED", value: "11 months", detail: "L/011, 28 Aug 1837; “Principles of Compound Addn”, Jul 1838." },
         { label: "COMPLEMENTS", value: "over 2 years", detail: "L/001 No. 2, 5 Aug 1837; “Selecting App. for number and Comp.”, Dec 1839." },
       ]} note="Where the history gives only a month, the gap is counted in months."/>
