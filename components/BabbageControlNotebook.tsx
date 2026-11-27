@@ -9,7 +9,7 @@ import { BabbageExplorer } from "./BabbageExplorer";
 const VOL2 = "https://collection.sciencemuseumgroup.org.uk/documents/aa110001323";
 const CREDIT = "SCIENCE MUSEUM GROUP COLLECTION";
 
-// The decks, from github.com/chrishayuk/analytical-engine at 72c338c:
+// The decks, from github.com/chrishayuk/analytical-engine at a9093f5:
 // control/tower-halting.txt, control/max-1838.txt, and `babbage control
 // minsky add 2,3 loop|trap1838|trap1837`, the counter machine that adds
 // counter 1 into counter 0, translated three ways.

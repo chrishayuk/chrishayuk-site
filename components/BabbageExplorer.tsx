@@ -7,7 +7,7 @@ import { useState } from "react";
  * switches, each a rule that a page leaves open or does not give, and a
  * date. Every line shown is a theorem of github.com/chrishayuk/analytical-engine
  * formal/ (PROVED), a deck run in its tests (TESTED), an argument in its docs
- * (ARGUED) or an open question (OPEN), as of commit 72c338c.
+ * (ARGUED) or an open question (OPEN), as of commit a9093f5.
  */
 
 const REPO = "https://github.com/chrishayuk/analytical-engine/blob/main";
@@ -34,10 +34,10 @@ function verdict(date: Date, store: boolean, inLoop: boolean, trap: boolean): Ve
   const trapNothing: Line = { status: "PROVED", text: "With every backing card counted, a trap only ends a run sooner: the same bounds hold at every point a run reaches.", names: ["no_tetration_reach", "no_pentation_reach"], file: FILE.Trap };
   if (date === "1836") {
     const lines: Line[] = store
-      ? [{ status: "PROVED", text: "Nothing as large as 2↑↑↑n (pentation) for every n.", names: ["no_pentation"], file: FILE.GrowthStore },
+      ? [{ status: "PROVED", text: "It does not give 2↑↑↑n (pentation) for every n.", names: ["no_pentation"], file: FILE.GrowthStore },
          { status: "ARGUED", text: "Not 2↑↑n either: with no backing, each card is passed once, so the tower has a height fixed by the deck.", file: FILE.expressiveness }]
       : [{ status: "PROVED", text: "Everything given off is below a tower of 2s of height fixed by the deck: no 2↑↑n for every n.", names: ["out_le_tower", "no_tetration_eventually"], file: FILE.Separation }];
-    if (inLoop) lines.push({ status: "PROVED", text: "March 1836 has no combinatorial cards, so there is no count to set inside a loop.", names: ["c1836"], file: FILE.Machine });
+    if (inLoop) lines.push({ status: "PROVED", text: "March 1836 has no combinatorial cards, so there is no count to set inside a loop: its configuration, c1836, accepts none.", file: FILE.Machine });
     if (trap) lines.push(trapNothing);
     return { model: store ? "MODEL B" : "MODEL A", headline: "A fixed number of exponentials", lines };
   }
@@ -47,7 +47,7 @@ function verdict(date: Date, store: boolean, inLoop: boolean, trap: boolean): Ve
   ] };
   if (trap && date === "1838") return { model: "MODEL D", headline: "General, given Minsky’s theorem, with no new card", lines: [
     { status: "PROVED", text: "With the unconditional backing card, each pass ends 1 ÷ W, and W is 0 only once the machine has halted. The deck stops there exactly when the machine halts, its counters in the store.", names: ["trap_halts", "machine_halts_of_trap"], file: FILE.Trap },
-    { status: "PROVED", text: "The configuration of 30 May 1838 accepts the deck, under either reading of where a count comes from.", names: ["trapDeck_accepted"], file: FILE.Trap },
+    { status: "PROVED", text: "The configuration of 30 May 1838 accepts the deck, and it has no repetition card, so it holds under either reading. Its combinatorial counts come from the store, as the pages allow.", names: ["trapDeck_accepted", "trapDeck_constReps"], file: FILE.Trap },
     { status: "ARGUED", text: "No text read treats such a stop as the end of a computation. In Menabrea (1842) the engine rings a bell and waits for the attendant.", file: FILE.expressiveness },
   ] };
   if (date === "1837" && (inLoop || trap)) {
@@ -75,11 +75,11 @@ function verdict(date: Date, store: boolean, inLoop: boolean, trap: boolean): Ve
     return { model: store ? "MODEL B" : "MODEL A", headline: store ? "Tetration, of limited height" : "A double exponential", lines };
   }
   const lines: Line[] = store
-    ? [{ status: "PROVED", text: "Tetration and beyond: a deck of 30 May 1838 gives 2↑↑2ⁿ.", names: ["tet_exp_halts_1838"], file: FILE.Classes },
-       { status: "PROVED", text: "Nothing as large as 2↑↑↑n (pentation) for every n.", names: ["no_pentation"], file: FILE.GrowthStore },
+    ? [{ status: "PROVED", text: "Tetration and beyond: a deck of 30 May 1838 gives 2↑↑2ⁿ.", names: ["tet_exp_halts_1838", "tetDeck_accepted"], file: FILE.Classes },
+       { status: "PROVED", text: "It does not give 2↑↑↑n (pentation) for every n.", names: ["no_pentation"], file: FILE.GrowthStore },
        { status: "ARGUED", text: "Inside the fourth Grzegorczyk class, E⁴; whether it is all of it is open.", file: FILE.classes }]
     : [{ status: "PROVED", text: "Everything given off is below a tower of 2s whose height is fixed by the deck: for every n from some point on, nothing as large as 2↑↑n.", names: ["out_le_tower", "no_tetration_eventually"], file: FILE.Separation },
-       { status: "PROVED", text: "But more than December 1837: a deck of 30 May 1838 gives 2^2^2ⁿ.", names: ["triple_halts_1838"], file: FILE.Classes },
+       { status: "PROVED", text: "But more than December 1837: a deck of 30 May 1838 gives 2^2^2ⁿ, by putting a computed 2ⁿ on the wheels.", names: ["triple_halts_1838", "tripleDeck_constReps", "tripleDeck_refused_1837"], file: FILE.Classes },
        { status: "TESTED", text: "The larger of two numbers, every count set before its group.", file: FILE.max },
        { status: "ARGUED", text: "Inside the elementary functions, E³; it is all of them if it can compute x mod y, which is open.", file: FILE.classes }];
   if (trap) lines.push(trapNothing);
@@ -93,7 +93,7 @@ export function BabbageExplorer() {
   const [trap, setTrap] = useState(false);
   const v = verdict(date, store, inLoop, trap);
   const switches: { label: string; detail: string; on: boolean; set: (on: boolean) => void }[] = [
-    { label: "Repetition counts from the store", detail: "7 March 1836 says “a given variable number”, not where it comes from. Off: from number cards only.", on: store, set: setStore },
+    { label: "Repetition counts from the store", detail: "7 March 1836 says “a given variable number”, not where it comes from. Off: from number cards only. Either way the wheels may take a computed number.", on: store, set: setStore },
     { label: "A count set inside its own loop", detail: "No page read does this. Every arrangement found sets the count before the group.", on: inLoop, set: setInLoop },
     { label: "A stop at 1 ÷ 0 read as the end", detail: "No text read treats it so. Off: a halt is passing the last card.", on: trap, set: setTrap },
   ];
