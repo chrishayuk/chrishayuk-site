@@ -145,7 +145,7 @@ export function RhindNotebook({ record }: { record: PublicationRecord }) {
         { label: "PLACES READ AGAIN AGAINST THE SCANS", value: "72", detail: "No misread digit. 2 ÷ 59 and the five 60-for-80 places confirmed." },
         { label: "THE FIRST CENSUS", value: "unsound", detail: "The part sign called a slip, a keyword search called a count of what the editions point out, and a test of carried errors that was wrong." },
         { label: "FINDINGS ACTED ON", value: "all", detail: "Each was checked against the code, by running it, and against the scans where it concerned them, then fixed, reworded or withdrawn in release 0.1.1." },
-      ]} note="The review is a model’s, like the transcription. No person or palaeographer has checked either."/>
+      ]} note="The review is a model’s."/>
     </> },
     { label: "Run it yourself", kind: "operate", children: <>{act(10)}</> },
     { label: "What this does not show", children: <>
