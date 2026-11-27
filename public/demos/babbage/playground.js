@@ -41,9 +41,11 @@ function babbage(args, text = "") {
 let corpus = null;
 const pages = () => (corpus ??= fetch(here("corpus.json")).then((r) => r.json()));
 
-async function runPage(text, page, numbers) {
+async function runPage(text, page, numbers, strict = false) {
   const args = ["json", "-"];
   if (numbers && page?.at) args.push("--at", page.at);
+  // Strict: the run never goes on with the sheet's value where they differ.
+  if (strict) args.push("--strict");
   const result = await babbage(args, text);
   if (result.error || !result.out) throw new Error(result.error || result.err || "babbage gave nothing");
   return JSON.parse(result.out);
@@ -199,12 +201,13 @@ const CONTROLS = `
 <button data-do="play" title="Play (space)" aria-pressed="false">▶ play</button>
 <button data-do="fwd" title="Forward an operation (→)">▶</button>
 <button data-do="last" title="The last operation (End)">▶|</button>
-<button data-do="nums" title="Letters, or the numbers of a worked example" aria-pressed="false">numbers</button>`;
+<button data-do="nums" title="Letters, or the numbers of a worked example" aria-pressed="false">numbers</button>
+<button data-do="strict" title="Strict: never go on with the sheet's value where it differs from the machine's" aria-pressed="false">strict</button>`;
 
 /** The engine at one step: state shared by the playground and the runner. */
 function engine(root) {
   const q = (s) => root.querySelector(s);
-  const view = { run: null, at: -1, numbers: false, onStep: null };
+  const view = { run: null, at: -1, numbers: false, strict: false, onStep: null };
 
   const show = (h) => {
     if (!h) return "";
@@ -311,7 +314,7 @@ function engine(root) {
     else {
       const bad = s.checks.filter((c) => !c.ok);
       cap.replaceChildren(
-        el("span", "what", `${s.number}${s.star ? " *" : ""}  ${s.op ?? "transfer"}  ${prime(s.card)}`),
+        el("span", "what", s.input ? "in  numbers from outside the table" : `${s.number}${s.star ? " *" : ""}  ${s.op ?? "transfer"}  ${prime(s.card)}`),
         el("span", bad.length ? "no" : "ok", bad.length ? `✗ ${bad.map((c) => c.detail).join("; ")}` : `✓ ${s.checks.length} statements`)
       );
     }
@@ -350,6 +353,11 @@ function controls(root, view, rerun) {
   button("nums").onclick = () => {
     view.numbers = !view.numbers;
     button("nums").setAttribute("aria-pressed", String(view.numbers));
+    rerun();
+  };
+  button("strict").onclick = () => {
+    view.strict = !view.strict;
+    button("strict").setAttribute("aria-pressed", String(view.strict));
     rerun();
   };
   return { stop, play };
@@ -421,7 +429,7 @@ export function mountPlayground(host, { page = null, step = null, theme = "auto"
 
   const check = async (text) => {
     try {
-      view.run = await runPage(text, list[current], view.numbers);
+      view.run = await runPage(text, list[current], view.numbers, view.strict);
     } catch (e) {
       q(".sheet").textContent = String(e.message ?? e);
       return;
@@ -513,7 +521,7 @@ export function mountRunner(host, { page = "L001-1", step = 0, numbers = false, 
   }
   const load = async () => {
     try {
-      view.run = await runPage(source ?? entry.text, entry, view.numbers);
+      view.run = await runPage(source ?? entry.text, entry, view.numbers, view.strict);
     } catch (e) {
       root.querySelector(".caption").textContent = String(e.message ?? e);
       return;
