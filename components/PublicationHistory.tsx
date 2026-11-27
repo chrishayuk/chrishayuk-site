@@ -7,7 +7,8 @@ export function PublicationHistory({ id, version }: { id: string; version: strin
   <p>Each version preserves its manuscript, claims and source references. Research status is recorded separately from publication.</p>
   <ol>{history.versions.map(entry => <li key={entry.version} aria-current={entry.version === version ? "true" : undefined}>
    <a href={entry.url}>V{entry.version} · {entry.revised || entry.published} ↗</a>
-   <p>{entry.revision?.summary} {entry.scientificStatus && <span className="record-voice">{entry.scientificStatus}</span>}</p>
+   <p>{entry.display?.summary} {entry.scientificStatus && <span className="record-voice">{entry.scientificStatus}</span>}</p>
+   {entry.display?.amended && <p className="record-voice">{entry.display.amended.note} {entry.display.amended.date}</p>}
    {entry.supersedes?.map(reference => <p key={reference.url}>Revises <a href={reference.url}>{reference.id} v{reference.version}</a>: {reference.reason}</p>)}
    {entry.supersededBy.map(reference => <p key={reference.url}>Later interpretation: <a href={reference.url}>{reference.id} v{reference.version}</a>. {reference.reason}</p>)}
    <p className="record-voice"><a href={entry.manuscript}>MANUSCRIPT JSON ↗</a> · <a href={`${entry.citations}&format=bibtex`}>BIBTEX ↗</a> · <a href={`${entry.citations}&format=csl-json`}>CSL JSON ↗</a></p>
