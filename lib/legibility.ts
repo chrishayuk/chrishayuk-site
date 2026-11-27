@@ -231,19 +231,19 @@ export const publicationLegibility: Record<string, Legibility> = {
   subject: "Q-LM, learners given only the sentences of Colmerauer’s French from the reconstructed Q-systems, compared with transformers on sentences deeper than any they saw, with the corrections the repository records",
   question: "Can a learner keep a capability its data rarely shows?",
   searchTitle: "From Q-systems to Q-LM: A Grammar Learned From Sentences Alone, Against Transformers at Depth",
-  description: "A grammar learned from Colmerauer’s sentences alone derives deeper sentences than any it saw. Its lead over a transformer shrank once training ran to convergence and a Llama-shaped model was tried; rotary positions carry the difference.",
+  description: "A grammar learned from Colmerauer’s sentences alone derives deeper sentences than any it saw. Its lead over a transformer shrank once training ran to convergence and a Llama-shaped model was tried; rotary positions carry the difference between the two transformers.",
   concepts: ["Q-LM", "Q-systems", "Alain Colmerauer", "grammar induction", "substitutability", "inside–outside", "recursion", "transformers", "rotary position embeddings", "Llama", "language models", "verification"],
  }, "N-Q-LM-SCALE": {
   subject: "How the cost of a grammar learned by substitutability grows with the amount of text, on Colmerauer’s language and on TinyStories, and bounded-context word classes against a 5-gram and a small transformer",
   question: "What should a learned graph condition on beyond the last few words?",
   searchTitle: "The Language Model That Gets Smaller as It Learns, and Why It Breaks on TinyStories",
   description: "On Colmerauer’s language a learned grammar falls from 85,969 rules at 300 sentences to 1,772 from 10,000 on. On TinyStories nothing merges. Bounded-context classes beat the 5-gram, but trail a small transformer by 0.3 bits at 100,000 sentences.",
-  concepts: ["Q-LM", "grammar induction", "scaling", "TinyStories", "word classes", "Brown clustering", "Kneser–Ney", "n-gram model", "transformers", "language models"],
+  concepts: ["Q-LM", "grammar induction", "scaling", "TinyStories", "word classes", "class-based language models", "Kneser–Ney", "n-gram model", "transformers", "language models"],
  }, "N-Q-LM-TRANSPLANT": {
   subject: "Activation patching in small transformers trained on invented worlds of facts: answer states, entity transport by attention heads, a relation component moved between prompts, and a fact edited from an external table",
   question: "Does a deeper model hold a relation apart from its entity for longer?",
   searchTitle: "Can You Transplant a Relationship Inside a Transformer? Activation Patching on Invented Facts",
-  description: "In small four-block Llama-shaped models, a relation component from one person’s prompt added to another’s retrieves the second person’s birth city in 51% of pairs, and the first person’s in none. An edited table’s city vector changes a stated capital in 90%.",
+  description: "In small four-block Llama-shaped models, after the first block, a relation component from one person’s prompt added to another’s retrieves the second person’s birth city in 51% of pairs, and the first person’s in none, meeting its criterion in 4 of 9 models. An edited table’s city vector changes a stated capital in 90%.",
   concepts: ["activation patching", "causal intervention", "mechanistic interpretability", "factual recall", "residual stream", "attention heads", "knowledge editing", "Llama", "LARQL", "Q-LM"],
  }, "N-Q-SYSTEMS-POSSIBILITIES": {
   subject: "The Q-systems of Alain Colmerauer’s report of 1970, reconstructed with a coding agent, measured on graphs built to test them: what a phase costs on many strings at once, what its second phase loses, and two variants of the machine kept apart from the historical one",

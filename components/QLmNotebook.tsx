@@ -22,21 +22,21 @@ export function QLmNotebook({ record }: { record: PublicationRecord }) {
         { label: "GRAMMAR, FIVE ROUNDS (FIRST REPORTED)", value: "1.59" },
         { label: "GRAMMAR, CONVERGED (40 ROUNDS)", value: "2.37", detail: "Still derives all 300 deeper sentences." },
         { label: "CUSTOM TRANSFORMER", value: "4.75", detail: "Seed 1, on the same first 100 deeper sentences." },
-      ]} note="QLM-004 in docs/results-qlm004.md. Lower is better. Development numbers; the confirmation set has not been read."/>
+      ]} note="Inside–outside to convergence, docs/results-qlm004.md. Lower is better. Development numbers; the confirmation set has not been read."/>
     </> },
     { label: "The transformer, not transformers", kind: "evidence", children: <>
       {act(3)}
       <StudyMeasures label="THE FIRST 100 DEEPER SENTENCES, 105,138 TRAINING SENTENCES" items={[
         { label: "CONVERGED GRAMMAR", value: "2.37" },
         { label: "LLAMA, THREE SEEDS", value: "2.39–2.97", detail: "About 1% better than the grammar on the corpus." },
-        { label: "CUSTOM TRANSFORMER", value: "4.75" },
+        { label: "CUSTOM TRANSFORMER", value: "4.75", detail: "Seed 1." },
       ]} note="docs/results-architectures.md. Bits per token; lower is better."/>
     </> },
     { label: "Not a length effect", kind: "evidence", children: <>{act(4)}</> },
     { label: "Rotary positions carry it", kind: "evidence", children: <>
       {act(5)}
       <StudyMeasures label="QLM-ARCH-001: ONE CHANGE AT A TIME, 105,138 SENTENCES, MEAN OF THREE SEEDS" items={[
-        { label: "BASE (THE CUSTOM MODEL)", value: "4.580" },
+        { label: "BASE (THE CUSTOM MODEL, REIMPLEMENTED)", value: "4.580" },
         { label: "ROTARY POSITIONS", value: "2.452", detail: "The only single change that passes the plan’s rule." },
         { label: "ALL FOUR CHANGES", value: "2.456", detail: "Llama, on the same sentences: 2.56." },
       ]} note="Bits per token on all 300 deeper sentences of corpus words. That rotary positions work by making attention relative is the repository’s interpretation."/>
