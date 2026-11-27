@@ -226,19 +226,19 @@ export const publicationLegibility: Record<string, Legibility> = {
   question: "Can the rules be learned from the sentences?",
   searchTitle: "Can a Language from 1969 Predict the Next Token? Colmerauer’s Q-systems as an Exact Language Model",
   description: "A graph made by a rebuilt 1969 rule language predicts the next word over 9,565,938 sentences without listing them. It produces only grammatical French, unlike a trigram model, but it is closed; the same rules read as a grammar are open. Explore it in your browser.",
-  concepts: ["Q-systems", "Alain Colmerauer", "language models", "next-token prediction", "probabilistic grammar", "n-gram model", "graph rewriting", "history of programming languages", "coding agents", "verification"],
+  concepts: ["Q-systems", "Alain Colmerauer", "language models", "next-token prediction", "probabilistic grammar", "n-gram model", "graph rewriting", "history of programming languages", "verification"],
  }, "N-Q-SYSTEMS-POSSIBILITIES": {
-  subject: "The Q-systems of Alain Colmerauer’s report of 1970, reconstructed with a coding agent, measured on graphs built to test them: what a phase costs on many strings at once, what its second phase loses, and two variants of the machine kept apart from the historical one",
+  subject: "The Q-systems of Alain Colmerauer’s report of 1970, measured on graphs built to test them: what a phase costs on many strings at once, what its second phase loses, and two variants of the machine kept apart from the historical one",
   question: "Did any later Q-system merge equal arrows?",
   searchTitle: "Colmerauer’s Q-systems, Measured: a Trillion Strings in 80 Arrows, and No Way to See Two Results Become One",
   description: "A rebuilt 1969 rule language, measured. One Q-system graph holds 2⁴⁰ strings in 80 arrows and a rule works on all of them at once, but a result reached along many paths is made once per path: parity of twelve choices costs 8,190 applications. Run it in your browser.",
-  concepts: ["Q-systems", "Alain Colmerauer", "TAUM", "graph rewriting", "shared alternatives", "dynamic programming", "chart parsing", "reversible grammar", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+  concepts: ["Q-systems", "Alain Colmerauer", "TAUM", "graph rewriting", "shared alternatives", "dynamic programming", "chart parsing", "reversible grammar", "history of programming languages", "verification", "WebAssembly"],
  }, "N-Q-SYSTEMS": {
-  subject: "The Q-systems, the graph-rewriting rule language Alain Colmerauer designed at the Université de Montréal for the TAUM machine-translation project, in use from 1969, reconstructed with a coding agent from his report of 1970, and run on every example it prints",
+  subject: "The Q-systems, the graph-rewriting rule language Alain Colmerauer designed at the Université de Montréal for the TAUM machine-translation project, in use from 1969, reconstructed from his report of 1970, and run on every example it prints",
   question: "What did the TAUM grammars look like?",
   searchTitle: "Colmerauer’s Q-systems, Montréal 1969, Rebuilt from His 1970 Report: A Rule Adds a Path, It Never Replaces One",
-  description: "Alain Colmerauer’s Q-systems, the rule language of the TAUM translation project, rebuilt from his 1970 report with a coding agent. The same sixteen rules analyse a French sentence and synthesise its eighteen paraphrases into one graph that matches his printout line for line. Run it in your browser.",
-  concepts: ["Q-systems", "Alain Colmerauer", "TAUM", "Université de Montréal", "machine translation", "graph rewriting", "reversible grammar", "Prolog", "history of programming languages", "coding agents", "verification", "WebAssembly"],
+  description: "Alain Colmerauer’s Q-systems, the rule language of the TAUM translation project, rebuilt from his 1970 report. The same sixteen rules analyse a French sentence and synthesise its eighteen paraphrases into one graph that matches his printout line for line. Run it in your browser.",
+  concepts: ["Q-systems", "Alain Colmerauer", "TAUM", "Université de Montréal", "machine translation", "graph rewriting", "reversible grammar", "Prolog", "history of programming languages", "verification", "WebAssembly"],
  },
 
  "N-NINE-CHAPTERS": {
