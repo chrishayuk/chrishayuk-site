@@ -8983,6 +8983,674 @@
   },
   {
     "record": {
+      "id": "N-Q-LM",
+      "slug": "from-q-systems-to-q-lm",
+      "kind": "notebook",
+      "title": "From Q-systems to Q-LM.",
+      "dek": "A learner given only the sentences of Colmerauer’s French finds a category that holds a name and a clause, and derives sentences deeper than any it saw. How far it led a transformer at depth depended on when its training stopped and which transformer it met.",
+      "abstract": "The third Q-systems note asked whether the rules could be learned from the sentences. Q-LM, a modern experiment that leaves the reconstructed machine unchanged, uses it to make a corpus of 131,424 sentences, every sentence of every tree with at most one level of embedding, and to judge what learners produce. A learner given only 105,138 training sentences and the vocabulary groups substrings that share a context into categories. From 1,000 sentences one category holds both a name and an embedded clause, and every one of 300 deeper sentences of known words can be derived. From 10,000 sentences on, the grammar is the same 192 categories and 1,772 rules. Its first write-up, QLM-003, put it far ahead of a transformer at depth. Two corrections followed, and a test. Its five rounds of inside–outside were early stopping: run to convergence, it gives deeper sentences 2.37 bits per token at full size, not 1.59, though its structure still derives all of them. The transformer it beat was one custom model: a Llama-shaped model of about the same size comes within 0.02 to 0.6 bits of the grammar at full size, and is about 1% better on the corpus. The test showed that the custom model’s failure was not sentence length, and an ablation finds that rotary positions alone carry the difference between the two transformers. On three generated languages, the grammar still leads Llama at depth by 0.2 to 1.5 bits.",
+      "created": "2026-11-27",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "THE RECONSTRUCTED MACHINE’S CORPUS → A GRAMMAR LEARNED BY SUBSTITUTION → THE CORRECTIONS → WHICH TRANSFORMER, AND WHY",
+      "concepts": [
+        "verification",
+        "programming-languages",
+        "grammar-induction",
+        "language-models"
+      ],
+      "related": [
+        "N-Q-SYSTEMS-NEXT-TOKEN",
+        "N-Q-LM-SCALE",
+        "N-Q-LM-TRANSPLANT"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / ONLY THE SENTENCES",
+          "text": "The third Q-systems note ended on a question: can the rules be learned from the sentences? Q-LM is the attempt. It uses the reconstructed machine for three things and changes nothing in it. The corpus is every sentence of every tree with at most one level of embedding, synthesised by the report’s rules: 131,424 sentences. In a fixed shuffle, 105,138 are for training, 13,143 for development and 13,143 for confirmation, which has not been read. The deeper test is 300 sentences of trees with two levels of embedding, and 300 more that use only words of the training sentences, so that depth is tested apart from unseen words. The judge is the report’s system inverted: a sentence is grammatical if it analyses to exactly one tree. The learners see the training sentences and the vocabulary, and nothing else: no rules and no trees. Nothing in Q-LM is historical.",
+          "references": [
+            {
+              "label": "chrishayuk/q-lm, README",
+              "url": "https://github.com/chrishayuk/q-lm"
+            },
+            {
+              "label": "QLM-002, docs/results.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / A CATEGORY THAT HOLDS A CLAUSE",
+          "text": "The learner groups every substring of every sentence with every other substring that ever occurs in the same context, the words before it and after it: the substitutability of Clark and Eyraud (2007). Each group is a category, each split of a member a binary rule, and the probabilities are fitted by inside–outside. From 1,000 sentences, one learned category holds both BENOIT and LE FAIT QUE BEAUCEVILLE EST CONSTATE PAR BEAUCEVILLE: a name and an embedded clause, interchangeable as arguments. With it, all 300 deeper sentences made of known words can be derived, and 299 of 300 development sentences with two words swapped are rejected. From 10,000 sentences on, the learned grammar is the same, 192 categories and 1,772 rules, against 38,121 rules at 1,000. Next-token probabilities come from it exactly, by the prefix probabilities of Jelinek and Lafferty (1991), equal to those of listing a small finite language to 1e-12. The rules are recursive in behaviour; they are not shown to be Colmerauer’s. After five rounds, about 6% of its samples were ungrammatical, and its categories hold over-merges.",
+          "references": [
+            {
+              "label": "QLM-003, docs/results.md; src/subst.rs, src/prefix.rs",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / FIVE ROUNDS WAS EARLY STOPPING",
+          "text": "The QLM-003 write-up scored the grammar after five rounds of inside–outside, and put it far ahead of the transformer at depth: 1.59 bits per token on deeper sentences, and 34 to 44 deeper samples in 300. Nothing had chosen five rounds. Run on, inside–outside converges in about 12 to 20 rounds, and each round makes the corpus likelier and the deeper sentences less likely. On the first 100 deeper sentences of corpus words, they are best after two rounds, 1.39 bits, and after 40 cost 1.81 bits at 1,000 training sentences, 2.19 at 10,000 and 2.37 at 105,138; deeper samples fall to between 1 and 12 in 300. The structure keeps depth while the probabilities give it up: at every size and every round, the grammar still derives all 300 deeper sentences. The recursive rules lose probability because no training sentence uses them twice, which is what maximum likelihood should do. Choosing the rounds by the deeper scores would be fitting to the test, and development sentences, of one level of embedding, improve all the way to convergence, so convergence is the setting kept. The custom transformer, seed 1, gives the same 100 sentences 2.97, 3.69 and 4.75 bits. Both get worse at depth with more data.",
+          "references": [
+            {
+              "label": "Inside–outside to convergence, docs/results-qlm004.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm004.md"
+            },
+            {
+              "label": "The correction, docs/results.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / THE TRANSFORMER, NOT TRANSFORMERS",
+          "text": "Every comparison so far was with one transformer, a custom model with learned absolute positions, a GELU feed-forward and a separate output layer: 4 layers, width 128, 832,023 parameters. A Llama-shaped model of about the same size, with rotary positions, RMSNorm, a gated feed-forward and tied embeddings, was trained identically, with three seeds. It changed the headline. On the first 100 deeper sentences at full size it gives 2.45, 2.97 and 2.39 bits against the converged grammar’s 2.37, and it is about 1% better on the corpus. The grammar still leads at depth at every size, by 0.36 to 0.56 bits at 1,000 sentences, but at full size by only 0.02 to 0.6, depending on the seed. The large depth advantage reported until then was over the custom transformer, not over transformers, and “superior recursive prediction” was withdrawn as a general claim. What still separates them is that the grammar derives every deeper sentence by a mechanism that can be read, and does better at depth from little data.",
+          "references": [
+            {
+              "label": "docs/results-architectures.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-architectures.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / NOT A LENGTH EFFECT",
+          "text": "The custom transformer learns one embedding per position, and deeper sentences are longer: up to 27 words, where no training sentence has more than 20, and 175 of the 300 deeper sentences of corpus words are longer than every training sentence. Positions past the training lengths never get any gradient, so its failure could have been about length rather than depth. It is not. At full size, on the 125 deeper sentences of 20 words or fewer, the custom transformer, seed 1, gives 4.97 bits per token, against 4.57 on the longer ones; the converged grammar gives 2.72 and 2.14, and Llama 2.61 to 3.23 and 2.20 to 2.76. The shorter deeper sentences cost more per token for every model.",
+          "references": [
+            {
+              "label": "docs/results-architectures.md, “Not a length effect”",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-architectures.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / ROTARY POSITIONS CARRY IT",
+          "text": "Llama differs from the custom model in four things at once. QLM-ARCH-001 made each change alone to a reimplementation of the custom model, with three seeds an arm. Its plan, written before any ablation run, says a change carries depth if, at full size, its mean on deeper sentences beats the base arm’s by more than both arms’ seed ranges combined. Only rotary positions pass: they take the deeper sentences from 4.58 bits to 2.45, a gap of 2.13 against a combined range of 1.36. At 1,000 sentences they take them from 2.94 to 2.13. RMSNorm and the gated feed-forward are slightly worse than base. Tied embeddings do not pass at full size, make depth much worse at 1,000 sentences, 4.70, and cost corpus fit at both. With rotary positions, depth gets worse with more data much less: 2.13 to 2.45, against base’s 2.94 to 4.58. The repository’s reading is that relative positions let an embedded clause look the same wherever it starts, which is what recursion asks for; it labels that an interpretation, since the experiment shows only that rotary positions alone carry the difference. These arms were scored on all 300 deeper sentences of corpus words and the grammar on the first 100, so the two are not yet compared on the same sentences.",
+          "references": [
+            {
+              "label": "QLM-ARCH-001, docs/results-qlm-arch-001.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-arch-001.md"
+            },
+            {
+              "label": "Its plan, docs/qlm-arch-001-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/qlm-arch-001-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / THREE OTHER LANGUAGES",
+          "text": "Colmerauer’s is one small language. QLM-005 generated three more from seeded random grammars, named by where an embedded clause sits: after its marker (right), between two markers (centre), or before its marker (left). Each is one seed; every argument is a bare noun, and no sentence has two trees, so they are simpler than his in those ways. There Llama does not close the gap. At full size the grammar gives deeper sentences 3.25, 2.91 and 2.27 bits per token; Llama 3.45 to 3.58, 3.77 to 4.43 and 3.53 to 3.77; the custom transformer 4.60 to 4.76, 4.73 to 5.12 and 3.77 to 3.85. Llama has rotary positions, so on these languages rotary positions do not close the gap, though the rotary-only arm has not yet been run on them. The Llama arm was a change to the plan, added after the right family’s results were seen. Depth and length are not yet separated on the families, whose deeper sentences are longer, relative to training, than Colmerauer’s. And on the left family the grammar learner overgenerates: it is 10% behind on development, failing that criterion.",
+          "references": [
+            {
+              "label": "QLM-005, docs/results-qlm005.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm005.md"
+            },
+            {
+              "label": "Its plan, docs/qlm005-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/qlm005-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "Every number is in the repository’s results documents, with the commands that reproduce them. The next two notes follow the same learner to natural text, and look inside the transformers.",
+          "links": [
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md",
+              "label": "QLM-002 and QLM-003: the learned grammar, with its correction"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm004.md",
+              "label": "Inside–outside to convergence, QLM-004 pruning and QLM-PERF-001 cost"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-architectures.md",
+              "label": "The Llama arm and the length test"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-arch-001.md",
+              "label": "QLM-ARCH-001: rotary positions"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm005.md",
+              "label": "QLM-005: three generated languages"
+            },
+            {
+              "href": "/notebook/can-a-language-from-1969-predict-the-next-token",
+              "label": "The third Q-systems note, which asked the question"
+            },
+            {
+              "href": "/notebook/the-language-model-that-gets-smaller-as-it-learns",
+              "label": "The next note: the learner’s cost, and TinyStories"
+            },
+            {
+              "href": "/notebook/can-you-transplant-a-relationship-inside-a-transformer",
+              "label": "The note after: inside the transformers"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "Nothing in Q-LM is historical. The reconstructed machine of the earlier notes makes the corpus and judges the samples; the learners, the transformers and every measure are modern.",
+            "Every number is a development number. The confirmation sentences, set aside before the experiments, have not been read.",
+            "The learned grammar is recursive in behaviour, not shown to be Colmerauer’s. It overgenerates, and on the left family it overgenerates enough to fail.",
+            "Other corrections the repository records: minimum description length, as coded, chose a grammar that had lost the recursion on Colmerauer’s language, though not on two of the three generated ones; and pruned, the grammar is level with the transformer in cost per next token, 0.28 ms against 0.26, so the claim that it was the faster machine was withdrawn. Both were unoptimised code.",
+            "Four small synthetic languages. The three generated ones are on one seed each, with no modifiers and no sentence of two trees, simpler than Colmerauer’s. The transformers had no tuning. Nothing here is a claim about natural language or about large models.",
+            "Categories by substitution are Clark and Eyraud’s, next-token probabilities from a grammar Jelinek and Lafferty’s. What is tried here is setting them against transformers on a language whose grammar is known exactly."
+          ],
+          "principle": "Before calling a result an advantage, check when the training stopped and which opponent it beat."
+        },
+        {
+          "kind": "question",
+          "text": "Can a learner keep a capability its data rarely shows?",
+          "status": "OPEN",
+          "detail": "Inside–outside lowers the probability of the recursive rules because no training sentence uses them twice, while the structure keeps them. A prior that does not punish recursion would have to be justified from the training sentences, not from the deeper test."
+        }
+      ],
+      "sources": [
+        {
+          "title": "chrishayuk/q-lm",
+          "url": "https://github.com/chrishayuk/q-lm",
+          "note": "The corpus, the learners (src/subst.rs, src/prefix.rs), the transformers (transformer/train.py), and the commands that reproduce every table."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results.md, QLM-002 and QLM-003",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md",
+          "note": "The learned grammar and its exact next-token prediction, with the correction for early stopping. The first run is kept as docs/results-run1.md."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm004.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm004.md",
+          "note": "Inside–outside run to convergence, pruning by expected rule count, and inference cost against the transformer."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-architectures.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-architectures.md",
+          "note": "The Llama arm, and the test that rules out sentence length."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-arch-001.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-arch-001.md",
+          "note": "Which of Llama’s four changes carries depth."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm005.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm005.md",
+          "note": "Three generated languages, against the plan written before they were generated."
+        },
+        {
+          "title": "chrishayuk/q-systems",
+          "url": "https://github.com/chrishayuk/q-systems",
+          "note": "The reconstruction of Colmerauer’s Q-systems, whose machine makes the corpus and judges grammar."
+        }
+      ],
+      "published": "2026-11-27"
+    },
+    "hash": "7ed7505accf6ed1bf61bfd34402579c97c5bb02cebdf62de40857eb641060593",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-Q-LM-SCALE",
+      "slug": "the-language-model-that-gets-smaller-as-it-learns",
+      "kind": "notebook",
+      "title": "The language model that gets smaller as it learns.",
+      "dek": "On Colmerauer’s language, a learned grammar has 85,969 rules at 300 sentences and 1,772 from 10,000 on, and its cost per next token falls about 584 times from that peak. On TinyStories nothing merges, and it grows with the text.",
+      "abstract": "A second note on Q-LM, a modern experiment that learns a grammar from sentences alone by grouping substrings that share a context. QLM-SCALE-001 measures how its cost grows. On more sentences of the same language, the grammar is largest with little data: at 300 of Colmerauer’s sentences it has 85,969 rules, uses 23,948 of them per sentence, and takes 613 milliseconds per next token. From 10,000 sentences to 105,138 it is the same 192 categories and 1,772 rules, at about a millisecond per next token, some 584 times less. A generated language does the same sooner. What keeps growing is the learner’s bookkeeping: every substring of every sentence, over a million at full size. On sentences from TinyStories it breaks. The learner takes the context of a substring to be the whole rest of its sentence, and in natural text such contexts almost never recur, so almost nothing merges: 5.4 million categories from 6.6 million substrings at 100,000 sentences, with the rules growing about linearly. Q-LM v2 starts again from contexts of a few words. Its first stages are a known technique, distributional word classes mixed with a 5-gram in the line of Brown et al. (1992). They beat the 5-gram, and with little data a small Llama-shaped transformer, but at 100,000 sentences the transformer is ahead by about 0.3 bits, and building classes on classes added almost nothing beyond an ensemble of independent class models.",
+      "created": "2026-11-27",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "A GRAMMAR LEARNED FROM SENTENCES → MORE OF THE SAME LANGUAGE → TINYSTORIES → BOUNDED CONTEXTS",
+      "concepts": [
+        "verification",
+        "grammar-induction",
+        "language-models",
+        "scaling"
+      ],
+      "related": [
+        "N-Q-LM",
+        "N-Q-LM-TRANSPLANT"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / MORE OF THE SAME LANGUAGE",
+          "text": "The learner of the last note groups substrings that share a context into categories, and fits their rules by inside–outside. QLM-SCALE-001 asks how its cost grows: with the amount of text, or with the amount of new structure the text holds. Only the second could scale. The first measure is the simplest, more sentences of the same structures: nested subsets of Colmerauer’s corpus, from 100 training sentences to 105,138, and of a generated language, the right family, from 100 to 36,000. Each size ran in its own process, with 20 rounds of inside–outside. The plan’s criteria were revised before any measurement: the stored grammar should stop growing, its rules at the largest size within 20% of those at 10,000; the rules each sentence uses should stop growing; and the time to fit it should grow at most linearly with the corpus.",
+          "references": [
+            {
+              "label": "QLM-SCALE-001, docs/results-qlm-scale-001-kind1.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md"
+            },
+            {
+              "label": "Its plan, docs/qlm-scale-001-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/qlm-scale-001-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / LARGEST AT 300 SENTENCES",
+          "text": "The grammar is largest with little data. At 300 of Colmerauer’s sentences it has 6,390 categories and 85,969 rules; each development sentence touches 23,948 of them on average; a next-token distribution takes 613 milliseconds, and the run needs 2.2 GB. Then merging takes hold. At 1,000 sentences there are 38,121 rules, at 3,000 there are 3,280, and from 10,000 on there are 192 categories and 1,772 rules, identical at 30,000 and at 105,138. A sentence then touches 454 rules, and a next token takes 0.97 to 1.05 milliseconds: from the peak to the full corpus, about 584 times less. The right family does the same sooner: 15,518 rules at 300 sentences, then 52 categories and 351 rules from 3,000 on, with 103.6 milliseconds per next token falling to 0.33. The smaller grammar is not quite free: development costs 1.046 bits per token at 1,000 Colmerauer sentences and 1.058 from 3,000 on, though the 300-sentence peak itself scores 1.059. The model really does become smaller and faster as it learns more, but only after an expensive phase of too little evidence.",
+          "references": [
+            {
+              "label": "QLM-SCALE-001, kind 1, docs/results-qlm-scale-001-kind1.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE BOOKKEEPING STILL GROWS",
+          "text": "Against the plan, the three criteria hold for both languages: the stored grammar and the rules each sentence uses stop growing, and estimation time grows no faster than the corpus. What grows is the learner’s own bookkeeping, not the model. Distinct substrings grow roughly linearly, to 1,086,642 at 105,138 sentences, and peak memory with them, to 607 MB, because the learner lists every substring of every sentence with its whole-sentence context. Estimation re-reads every sentence on every round: 22.7 seconds at 10,000 sentences, 67.1 at 30,000, 238.4 at 105,138. A fourth criterion, that adding a tenth more data should cost about a tenth, fails by design: the learner relearns from scratch. The model is fixed in size; the cost of finding and fitting it is not.",
+          "references": [
+            {
+              "label": "QLM-SCALE-001, kind 1, against the plan’s criteria",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / TINYSTORIES: NOTHING MERGES",
+          "text": "The same learner was run on natural text, as a feasibility run and not a modelling result: sentences from the first 20,000 TinyStories training stories, lowercased, with punctuation as tokens, 12 tokens long on average. That is 346,098 training sentences and 10,952 words. Each size had 15 minutes, and grammars of more than 200,000 rules were measured for structure without estimation. Here the grammar never begins to collapse. At every size, categories are 81% to 94% of the distinct substrings: at 100,000 sentences, 5,373,773 categories from 6,607,023 substrings, and 49,056,462 rules. The rules grow about linearly, 9.6 times and then 8.7 times per tenfold; a first draft said faster than linearly, which the measurements did not bear out. At 100 and 300 sentences, the only sizes small enough to estimate, development costs 13.7 bits per token, no better than the floor: a uniform choice among the 10,952 words is 13.4 bits.",
+          "references": [
+            {
+              "label": "QLM-SCALE-001, docs/results-qlm-scale-001-tinystories.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-tinystories.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / WHY: NO CONTEXT RECURS",
+          "text": "The learner takes the context of a substring to be the whole rest of its sentence. In the synthetic languages, contexts repeat, and a few thousand sentences were enough for the grammar to collapse to tens of categories. In natural text, whole-sentence contexts almost never recur, so two substrings rarely share one, and nearly every substring becomes a category of its own. The model then grows with the text, from an enormous constant: the opposite of what it did on the synthetic languages. Memory follows the grammar. The next-token computation closes a dense left-corner relation, categories squared, which at 300 sentences and 21,093 categories needs 15.5 GB, and structure alone needs 13.8 GB at 100,000 sentences. The repository’s conclusion is that this needs a different way of finding categories, judged on a few words either side, not a larger run of this one. Short contexts bring the opposite danger: almost anything can follow “the”, so merging on one shared context would merge far too much.",
+          "references": [
+            {
+              "label": "QLM-SCALE-001, TinyStories, “What breaks, and why”",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-tinystories.md"
+            },
+            {
+              "label": "chrishayuk/q-lm, README, “Direction”",
+              "url": "https://github.com/chrishayuk/q-lm"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / BOUNDED CONTEXTS, A KNOWN TECHNIQUE",
+          "text": "Q-LM v2 starts again on TinyStories, with a vocabulary of 8,525: the training words seen twice or more, and one token for the rest. Its stages E1 to E3 give each word a vector of the words up to one, two or four places either side, weight it by PPMI, reduce it to 128 dimensions, and cluster the words into nodes, each word keeping its identity, with memberships in one or more nodes; the best settings use one. A class trigram over the nodes is mixed with a Kneser–Ney word 5-gram. There is no backpropagation, and all stages take about 2.5 seconds at 10,000 sentences. This is a known technique: distributional word classes interpolated with an n-gram, in the line of Brown et al. (1992), and the repository says so. It passes its plan’s bar, at least 0.05 bits per token better than the 5-gram alone at both 10,000 and 100,000 sentences, for every PPMI setting but one. The best mixtures give 4.999 bits per token against the 5-gram’s 5.130 at 10,000 sentences, and 4.058 against 4.134 at 100,000. The best setting was chosen on the scored sentences; only the mixing weight was fitted apart. The gain shrinks with data, from 0.131 to 0.076, as class models’ gains usually do.",
+          "references": [
+            {
+              "label": "Q-LM v2, E1 to E3, docs/results-qlm-v2-e1-e3.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e1-e3.md"
+            },
+            {
+              "label": "Its plan, docs/qlm-v2-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/qlm-v2-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / AHEAD WITH LITTLE DATA, BEHIND WITH MORE",
+          "text": "Against a Llama-shaped transformer of 2,141,312 parameters, trained on one seed with no tuning and, by the repository’s account, scored on the same development sentences: at 1,000 training sentences the v2 mixture gives 6.184 bits per token to the transformer’s 6.755, and at 10,000, 4.999 to 5.074. The transformer is behind the 5-gram at both sizes. At 100,000 it is ahead of the mixture, 3.761 against 4.058, by 0.30 bits: it gains 1.31 bits from 10,000 sentences to 100,000, where the mixture gains 0.94. The next stage, E4, fed the learned nodes back in as contexts for further nodes, after fixes asked for once E1 to E3 were done, with a split of the development sentences kept for confirmation. Read, as the repository reads it, against independent class models with the same number of components, it fails its criterion. At 100,000 sentences, four passes built on one another are slightly worse than four independent class models with different seeds, 4.1615 bits against 4.1563 on the confirmation sentences, and the transformer gives 3.844, 0.31 bits ahead. The class trigram and the 5-gram see at most four words back; the transformer sees the whole sentence. A later run, with a transformer limited to the 5-gram’s four words, splits the gap of 0.29 bits into about 0.12 of better generalisation over the same words and 0.17 of longer context.",
+          "references": [
+            {
+              "label": "Q-LM v2, E1 to E3, against the transformer",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e1-e3.md"
+            },
+            {
+              "label": "Q-LM v2, E4, docs/results-qlm-v2-e4.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e4.md"
+            },
+            {
+              "label": "The windowed transformer, docs/results-qlm-key-001-b.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-key-001-b.md"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "The tables, the commands that make them and the plans they are reported against are in the repository.",
+          "links": [
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md",
+              "label": "QLM-SCALE-001: more of the same language"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-tinystories.md",
+              "label": "QLM-SCALE-001: TinyStories"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e1-e3.md",
+              "label": "Q-LM v2, E1 to E3: bounded-context classes"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e4.md",
+              "label": "Q-LM v2, E4: abstractions as contexts, no gain"
+            },
+            {
+              "href": "/notebook/from-q-systems-to-q-lm",
+              "label": "The first Q-LM note: the learner, and its corrections"
+            },
+            {
+              "href": "/notebook/can-you-transplant-a-relationship-inside-a-transformer",
+              "label": "The next note: inside the transformers"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "The shrinking is shown on two synthetic languages, Colmerauer’s and one generated family, with more sentences of the same structures. The plan’s other two kinds of growth, more facts and more structure, are not measured yet.",
+            "One run per size. The learner relearns from scratch at every size; nothing here is incremental.",
+            "The TinyStories run is a feasibility run. Most of its sizes were too large to estimate. It shows that this learner does not merge natural text, not how well any grammar learner could model it.",
+            "v2’s first stages are a known technique, not a new one, and their best setting was chosen on the scored sentences. E4, the first stage meant to add something, failed its criterion. The E1 to E3 numbers come from before the fixes made for E4.",
+            "The transformer was trained once, on one seed, with no tuning for TinyStories and the same 6,000 steps at every size: a reference, not a tuned bar. Nothing here is compared with GPT-2 or any large model."
+          ],
+          "principle": "A model that shrinks on a language that repeats itself says nothing yet about one that does not; measure both."
+        },
+        {
+          "kind": "question",
+          "text": "What should a learned graph condition on beyond the last few words?",
+          "status": "OPEN",
+          "detail": "Of the gap of about 0.3 bits to the transformer at 100,000 sentences, a windowed control puts about 0.17 down to context: the class models see four words back, the transformer the whole sentence. The other 0.12 is generalisation over the same few words. Can a graph learner summarise the clause or the sentence so far in nodes of its own, and keep the merging that made it small?"
+        }
+      ],
+      "sources": [
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-scale-001-kind1.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md",
+          "note": "Kind 1 of QLM-SCALE-001: nested subsets of Colmerauer’s language and the right family, against the plan as revised before measurement."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-scale-001-tinystories.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-tinystories.md",
+          "note": "The same learner on TinyStories sentences, a feasibility run."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-v2-e1-e3.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e1-e3.md",
+          "note": "Bounded-context word classes mixed with a 5-gram, and the Llama-shaped transformer on the same sentences."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-v2-e4.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e4.md",
+          "note": "Abstractions as contexts, with the seeds and flat controls and a confirmation split."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-key-001-b.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-key-001-b.md",
+          "note": "A transformer limited to the 5-gram’s window, which splits v2’s gap to the full transformer."
+        },
+        {
+          "title": "chrishayuk/q-lm",
+          "url": "https://github.com/chrishayuk/q-lm",
+          "note": "The learners, v2/classes.py and v2/hier.py, and the commands that reproduce every table."
+        }
+      ],
+      "published": "2026-11-27"
+    },
+    "hash": "b1cdf27f8123d6c104e103a89477292890fc9703ee32c7628806eb33cc1c916c",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-Q-LM-TRANSPLANT",
+      "slug": "can-you-transplant-a-relationship-inside-a-transformer",
+      "kind": "notebook",
+      "title": "Can you transplant a relationship inside a transformer?",
+      "dek": "In small four-block models trained on invented facts, a relation component from one person’s question, added to another’s, gives the second person’s fact in half the pairs and never the first’s: after the first block only, and by the plan’s criterion in 4 of 9 Llama models.",
+      "abstract": "A third note on Q-LM, a modern experiment. Two small transformers, a custom model and a Llama-shaped one, were trained with three seeds on worlds of invented facts: 24 countries, their capitals and continents, and 48 people with a home city, most of them with a birth city too. Both carry a fact to a phrasing they never saw it in; Llama composes two relations; neither reverses one. Inside them, the first transplants of whole states moved the answer, not the fact: a donor with the same answer through another relation worked as well. Before the answer forms, the custom model holds the entity at its own position, and a few attention heads carry it to the answer position, by the plan’s criterion in 8 of 9 Llama models and 4 of 9 custom ones. In Llama, after block 1, a relation component can be moved on its own. Taken from “P was born in” into “P lives in” for the same person, it makes the birth city win for 70% of held-out people, passing the plan’s criterion in 8 of 9 models. Taken from person B and added to person A’s “A lives in”, it gives A’s birth city in 51% of pairs and B’s in none, passing in 4 of 9. The custom model passes neither in any model. The fact is not looked up at the entity’s position, as an account from larger models has it: that test failed every criterion. It is written at the answer position, where a city vector chosen by an external table makes Llama state an edited capital in 90% of prompts, and 92% on three fresh worlds, with no weight changed.",
+      "created": "2026-11-27",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "INVENTED WORLDS OF FACTS → WHOLE-STATE TRANSPLANTS → THE ENTITY AND ITS HEADS → A RELATION MOVED ALONE → A FACT FROM A TABLE",
+      "concepts": [
+        "causal-intervention",
+        "model-representation",
+        "residual-stream",
+        "factual-recall",
+        "activation-patching",
+        "external-memory"
+      ],
+      "related": [
+        "N-Q-LM",
+        "N-Q-LM-SCALE",
+        "W-LARQL"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / WORLDS OF INVENTED FACTS",
+          "text": "Q-LM’s semantic worlds are small and made up: 24 countries on 4 continents, each with one capital, and 48 people, each living in one city, every name an invented word. Most facts can be stated in two phrasings, such as “C has capital K .” and “the capital of C is K .”, and some statements are held out of training. Three worlds give the same names different facts. Two small transformers, the custom model of the earlier notes and a Llama-shaped one, were trained on each world with three seeds: 18 models, of four blocks each. Both carry a fact to the phrasing it was held out of, 98% of the time. Llama composes two relations, a person’s city and that city’s continent, in 65% of tests, passing the plan’s criterion in 7 of 9 runs. Neither reverses a relation: given only “C has capital K”, the custom model never completes “K is located in” with C, and Llama does so for 5 of 12 countries in one run of 9, and never in the other 8. The first version of the worlds scored 87% to 95% there, through an ordering leak found because the result was too good. The grammar learner of the earlier notes fails every one of these tests. In version 3, 44 of the 48 people also have a birth city, never the city they live in.",
+          "references": [
+            {
+              "label": "QLM-SEMANTIC-001, docs/results-qlm-semantic-001.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-semantic-001.md"
+            },
+            {
+              "label": "Its plan, docs/qlm-semantic-001-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/qlm-semantic-001-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / IT MOVED THE ANSWER",
+          "text": "The first test, LARQL-QLM-SEM-001 on the version-2 worlds, replaced the last-position state of “the capital of C′ is” with the state of a prompt about C. From the other wording, C’s capital then wins as it does from the same wording. But a donor with the same answer through another relation and another subject, “P lives in” for a resident P of C’s capital, works just as well: in Llama, after block 1, in 98% of pairs. What moved was the answer, already resolved after block 1 or 2 in Llama and by block 3 in the custom model. The plan had been amended before measurement for exactly this. It asked that states of the same fact be at least 0.1 more alike than states of the same answer, where similarity peaks; the excess was 0.04 in Llama and 0.00 in the custom model, a failure. There is weaker evidence of something fact-specific earlier, an excess of 0.26 at block 2 and 0.11 at block 3 in Llama and 0.13 at block 3 in the custom model, but by then the transplants move the answer as well from a same-answer donor. Moving only a relation component from “C is in” into “C has capital” did turn the answer into C’s continent. But with 4 continents and a 4-dimensional subspace, that component could carry the type of the answer and the continent itself, the confound the plan’s second amendment named. Version 3 was made to remove it.",
+          "references": [
+            {
+              "label": "LARQL-QLM-SEM-001, version 2, docs/results-larql-qlm-sem-001-v2.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v2.md"
+            },
+            {
+              "label": "Its plan and amendments, docs/larql-qlm-sem-001-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/larql-qlm-sem-001-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / THE ENTITY, CARRIED BY A FEW HEADS",
+          "text": "Before the answer forms, there is the entity. In the custom model, replacing the state at the country’s own position after block 1 with another country’s moves the computed capital to that country’s in 96% of pairs. The country is held as itself at its own position, and the later blocks compute its capital; after block 3, the transplant moves nothing. A first draft said this transplant did nothing; that was read from one model, and corrected. In Llama the hand-off happens mostly within block 1: after it, the share is 18%. LARQL-QLM-TRANSPORT-001 traced the hand-off. It is spread over two consecutive attention steps, blocks 2 and 3 in the custom model and 1 and 2 in Llama, so it fails the plan’s criterion that a single block’s attention do it. It is carried by a few heads that attend from the answer position to the country. With the top three heads chosen on half the pairs and judged on the other half, in an addendum after the first results, patching them gives the donor’s capital in 69% of pairs in Llama and 39% in the custom model, and restoring only them recovers the clean answer in 70% and 38%; three other heads do almost nothing. That passes the plan’s criterion in 8 of 9 Llama models and 4 of 9 custom ones; chosen and judged on the same pairs, the shares were 73% and 50%, with the same counts. In the custom model, what the top heads carry already looks partly like the capital. Their effects add there; in Llama, together they move the answer 1.2 to 1.8 times as far as the sum of their separate effects.",
+          "references": [
+            {
+              "label": "LARQL-QLM-SEM-001, version 2: the entity transplant",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v2.md"
+            },
+            {
+              "label": "LARQL-QLM-TRANSPORT-001, docs/results-larql-qlm-transport-001.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-transport-001.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / A RELATION, MOVED ON ITS OWN",
+          "text": "In version 3 both relations, where a person lives and where they were born, answer with one of the same 24 cities, so a change of answer type cannot explain a switch. Only people whose two facts the model already gives are tested: 44 of the 48 in every model, 33 for fitting and 11 for testing. A relation subspace, the mean difference between “P is a native of” and “P is from” plus the top 3 directions of the per-person differences, was fitted on the 33 in the second wording, and applied to the other 11 in the first. Moving only the relation component of “P was born in” into “P lives in”, for the same person, after block 1, makes the birth city beat the home city for 70% of held-out people in Llama, from 36% to 100% across models. A random subspace, matched in the size of its change, does it for none. That passes the plan’s criterion in 8 of 9 Llama models, all at block 1. After block 2 it falls to 18%, and after block 3 to 5%: by then the answer has formed. The custom model passes in 0 of 9. Its relation may be held elsewhere, or not linearly; that was not tested.",
+          "references": [
+            {
+              "label": "LARQL-QLM-SEM-001, version 3, docs/results-larql-qlm-sem-001-v3.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v3.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / A QUESTION NEITHER DONOR ASKED",
+          "text": "The sharper test recombines two people, A and B. At the last position of “A lives in”, after block 1, B’s relation difference, “B was born in” minus “B lives in” projected on the relation subspace, is added. B is chosen so that B’s birth city is neither A’s birth city nor A’s home city. If A’s birth city wins, the model has answered a question neither prompt asked. In Llama it does in 51% of pairs, from 29% to 78% across models. B’s birth city wins in 0%, so this is not B’s answer carried over, and the random control in 0%. When it fails, nothing changes: A’s home city stays, in 49%. The criterion, from the plan’s third amendment, made before measurement, asks for A’s birth city in at least half the pairs, with B’s and the random control under a tenth. Llama passes in 4 of 9 models; in the other 5, A’s birth city wins in 29% to 49%. The custom model passes in 0 of 9. After block 2 the composed answer wins in 1% of pairs, and after that in none. The window is block 1 alone.",
+          "references": [
+            {
+              "label": "LARQL-QLM-SEM-001, version 3: the recombined query",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v3.md"
+            },
+            {
+              "label": "The plan’s third amendment, docs/larql-qlm-sem-001-plan.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/larql-qlm-sem-001-plan.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / NOT LOOKED UP WHERE THE ENTITY IS",
+          "text": "An account reported in large models has the feed-forward layers at the subject’s position enrich it with its facts, and attention then extract the one asked for (Geva et al., 2023). LARQL-QLM-ENRICH-001 tested that here, and it failed every criterion, at every block, in every model. Patching the feed-forward output at the country’s position moves almost no answer, 1% on average at its best block; removing it costs nothing; restoring it repairs nothing; and one patch at a person’s position never changes both of their facts. A follow-up outside the plan patched the feed-forward at the answer position instead. There, in Llama, blocks 3 and 4 move the answer in 77% and 81% of pairs, and in the custom model block 4 in 57%, the last block, read directly by the output head. LARQL-QLM-RESOLVE-001 then found the answer forming in the middle blocks at the answer position: block 2 in Llama, block 3 in the custom model. That the late feed-forward looks the fact up afresh is not established; a first draft said it computes the answer again, and that overstated it. Four blocks may leave no room for a separate enrichment stage.",
+          "references": [
+            {
+              "label": "LARQL-QLM-ENRICH-001, docs/results-larql-qlm-enrich-001.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-enrich-001.md"
+            },
+            {
+              "label": "LARQL-QLM-RESOLVE-001, part A, docs/results-larql-qlm-resolve-001.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-resolve-001.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / A FACT FROM A TABLE",
+          "text": "If the fact is written at the answer position, can it be written from outside? In RESOLVE-001, each city’s answer vector is the mean feed-forward output at the answer position of “P lives in” for that city’s two residents: another relation and other people, never the capital prompt. A table outside the model names a city for each country, and the feed-forward output of “the capital of C is” at one block is replaced by that city’s vector. With the table edited, a different city for every country, Llama states the edited capital in 90% of prompts when the vector enters at block 3, with block 4 running on it unchanged; a random vector of the same size gives the edited city in 1%. On three fresh worlds, trained after the plan was written, it gives 92%. No weight is changed. In the custom model an edit works only at the last block, in 74%, just under the plan’s 75%, and partly by construction. The table was told the entity and the relation. In LARQL-QLM-EXTERNAL-001, a provider had to read them from the activations alone. In Llama it read the relation in 93% of held-out prompts, but the entity in only 76%; in the custom model, 91% and 40%. with an edited graph, Llama stated the edited answer in 62%, and a birth city it had never learned in 42%, both short of the plan’s thresholds of 75% and three in four. Both results, and both failures, replicated on the fresh worlds.",
+          "references": [
+            {
+              "label": "LARQL-QLM-RESOLVE-001, part B and confirmation",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-resolve-001.md"
+            },
+            {
+              "label": "LARQL-QLM-EXTERNAL-001, docs/results-larql-qlm-external-001.md",
+              "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-external-001.md"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "Each experiment is reported against a plan written before it was measured, with the tables in the repository. The exceptions are labelled: the follow-up outside ENRICH’s plan, TRANSPORT’s held-out head selection and interaction analysis, added after its first results, and RESOLVE’s corrected measures.",
+          "links": [
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v3.md",
+              "label": "The relation swap and the recombined query"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v2.md",
+              "label": "Answer states, and the entity at its own position"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-transport-001.md",
+              "label": "The heads that carry the entity"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-enrich-001.md",
+              "label": "No enrichment at the entity’s position"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-resolve-001.md",
+              "label": "Where the answer forms, and a fact edited from a table"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-external-001.md",
+              "label": "A provider driven by activations alone"
+            },
+            {
+              "href": "https://github.com/chrishayuk/larql",
+              "label": "LARQL, the series these experiments are named for"
+            },
+            {
+              "href": "/notebook/from-q-systems-to-q-lm",
+              "label": "The first Q-LM note: the learner and the transformers"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "These are small synthetic models, four blocks each, trained on 24 countries and 48 people with invented names and a handful of relations. Whether larger models, more relations or real text behave the same is not shown, and nothing here is a claim about large language models.",
+            "The relation transplant is demonstrated in these small synthetic models after block 1 only, and in one of two architectures. The recombined query passes its criterion in 4 of 9 Llama models and in none of the custom ones, with 11 test people a world.",
+            "Failed criteria are failures: no fact state apart from the answer state at the block the plan named; no single block’s attention that carries the entity; no enrichment at the entity’s position; and a provider driven by activations that fails all three of its plan’s criteria, its entity decoding, 76% in Llama, the bottleneck.",
+            "The plans were written before measurement, and amended before measurement where this note says so. The feed-forward at the answer position was a follow-up outside its plan. Choosing heads on the pairs they were judged on inflated their shares by 0.04 to 0.11; the held-out shares are given. In RESOLVE-001, three measures were corrected before reporting, after one model of each architecture showed them wrong, and its true-table criterion cannot be judged, because the answer is already in the residual stream.",
+            "The interventions read PyTorch states. For Llama, LARQL’s per-layer states matched PyTorch’s to 1e-6 in an earlier experiment, GROUP-001, and that check was not repeated on these models. The custom model cannot be loaded by VINDEX3."
+          ],
+          "principle": "A transplant that works may only have moved the answer; give it a donor with the same answer and a different question before calling it a relation."
+        },
+        {
+          "kind": "question",
+          "text": "Does a deeper model hold a relation apart from its entity for longer?",
+          "status": "OPEN",
+          "detail": "In four blocks, a relation component can be moved on its own, in Llama, only after the first, and the fact has formed by the second or third. Models with more layers may have room for stages these could not show, such as the enrichment that failed here. Do they keep the relation separable, and for how many layers?"
+        }
+      ],
+      "sources": [
+        {
+          "title": "chrishayuk/q-lm, docs/results-qlm-semantic-001.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-semantic-001.md",
+          "note": "The semantic worlds, and what the learners do on them."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-larql-qlm-sem-001-v2.md and docs/results-larql-qlm-sem-001-v3.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v3.md",
+          "note": "Answer states, the entity at its own position, the relation swap and the recombined query, against docs/larql-qlm-sem-001-plan.md and its three amendments."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-larql-qlm-transport-001.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-transport-001.md",
+          "note": "The attention steps and heads that carry the entity, with heads chosen on held-out pairs."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-larql-qlm-enrich-001.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-enrich-001.md",
+          "note": "The enrichment test that failed, and the follow-up at the answer position."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-larql-qlm-resolve-001.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-resolve-001.md",
+          "note": "Where the answer forms, and the fact edited from an external table, confirmed on worlds 4 to 6."
+        },
+        {
+          "title": "chrishayuk/q-lm, docs/results-larql-qlm-external-001.md",
+          "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-external-001.md",
+          "note": "A provider that reads the entity and relation from activations, against its plan, confirmed on worlds 4 to 6."
+        },
+        {
+          "title": "chrishayuk/larql",
+          "url": "https://github.com/chrishayuk/larql",
+          "note": "The series these experiments are named for; for Llama, its per-layer states were checked against PyTorch’s in GROUP-001."
+        },
+        {
+          "title": "M. Geva et al., “Dissecting recall of factual associations”, 2023",
+          "note": "The subject-enrichment account tested by ENRICH-001, as the repository cites it."
+        }
+      ],
+      "published": "2026-11-27"
+    },
+    "hash": "f65141ee3f87505c724c9d6ab0549f25397ea19aef68904cea10ae0eb3ce1d86",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
       "id": "N-Q-SYSTEMS",
       "slug": "a-q-system-rule-never-replaced-anything",
       "kind": "notebook",

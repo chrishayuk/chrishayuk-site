@@ -28,10 +28,10 @@ export const programmes = [
     threads: [cell80Thread], extra: [], continuation: undefined },
   { id: "learned-systems", title: "Learned systems", question: "How does a model find what it knows?",
     description: "Look inside a model’s memory. Trace how it builds an answer—and test what changes it.", href: mapThread.path,
-    threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR"], continuation: undefined },
+    threads: [mapThread], extra: ["N-CONTEXT", "N-OPERATOR", "N-Q-LM-SCALE", "N-Q-LM-TRANSPLANT"], continuation: undefined },
   { id: "languages", title: "Languages", question: "What did the printed page actually say?",
     description: "Historical computational systems reconstructed from their original sources, tested against the surviving evidence, and made executable in your browser.", href: "/notebook?collection=languages",
-    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-ATLAS-AUTOCODE", "N-BABBAGE", "N-ABSYS", "N-Q-SYSTEMS", "N-Q-SYSTEMS-POSSIBILITIES", "N-Q-SYSTEMS-NEXT-TOKEN", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-TPK"], continuation: undefined,
+    threads: [], extra: ["N-MOUSE", "N-BASIC", "N-BOHM", "N-CPL", "N-JOSS", "N-LANING-ZIERLER", "N-TURING-ACE", "N-IPLV", "N-RHIND-PAPYRUS", "N-GEORGE", "N-ALGOL-60", "N-ATLAS-AUTOCODE", "N-BABBAGE", "N-ABSYS", "N-Q-SYSTEMS", "N-Q-SYSTEMS-POSSIBILITIES", "N-Q-SYSTEMS-NEXT-TOKEN", "N-Q-LM", "N-NINE-CHAPTERS", "N-NINE-CHAPTERS-124", "N-TPK"], continuation: undefined,
     play: [
       { label: "Mouse playground", href: "/demos/mouse", name: "Mouse", year: "1979", detail: "Peter Grogono’s single-character language, from the listing printed in BYTE." },
       { label: "BASIC playground", href: "/demos/basic", name: "BASIC", year: "1964", detail: "Dartmouth BASIC, typed in from its first instruction manual." },
