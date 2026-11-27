@@ -15,7 +15,7 @@ if (base && !/^0+$/.test(base)) {
   // the base commit itself is still fatal, rather than silently skipping CI.
   execFileSync("git", ["cat-file", "-e", `${base}^{commit}`]);
   const exists = execFileSync("git", ["ls-tree", "--name-only", base, "--", path], { encoding: "utf8" }).trim();
-  if (exists) assertAppendOnly(JSON.parse(execFileSync("git", ["show", `${base}:${path}`], { encoding: "utf8" })), entries, key);
+  if (exists) assertAppendOnly(JSON.parse(execFileSync("git", ["show", `${base}:${path}`], { encoding: "utf8", maxBuffer: 256 * 1024 * 1024 })), entries, key);
  }
 }
 console.log("HAUSE / PROVENANCE & CONTINUITY");
