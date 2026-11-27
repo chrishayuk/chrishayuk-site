@@ -222,6 +222,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Babbage’s Sketch Books of 1836 to 1838, modelled card for card and proved in Lean: with repetition counts from number cards, no halting deck reaches 2↑↑n for every large n; from the store it reaches 2↑↑n but not 2↑↑↑n for every n. Given Minsky’s theorem, a count set inside its own loop, or (for 30 May 1838) a stop at 1 ÷ 0 read as the end, makes it general. Run the decks and change the rules in your browser.",
   concepts: ["Charles Babbage", "Analytical Engine", "Sketch Books", "Lean", "formal verification", "loop programs", "Grzegorczyk hierarchy", "tetration", "Minsky machines", "Turing completeness", "history of computing", "WebAssembly"],
  },
+ "N-BABBAGE-NOTE-G": {
+  subject: "The conditional control of the published accounts of Babbage’s Analytical Engine (Menabrea 1842, Lovelace’s Note G 1843), read two ways and proved general in Lean under each, given Minsky’s theorem, with Lovelace’s program for the Bernoulli numbers run as printed and corrected",
+  question: "If a program survives only as a printed table and a few sentences, how much of the machine it ran on can be recovered from the program?",
+  searchTitle: "Ada Lovelace’s Note G, Run Two Ways: Both Readings Make Babbage’s Engine a General Machine",
+  description: "Lovelace’s Note G has a result choose between two courses. Read as a cycle a result ends, or as a step forward past Babbage’s 1837 backing card, it makes the engine general, proved in Lean given Minsky’s theorem. Her Bernoulli program runs as printed (−95/126) and corrected (−1/30) in your browser.",
+  concepts: ["Ada Lovelace", "Note G", "Bernoulli numbers", "Charles Babbage", "Analytical Engine", "first computer program", "Lean", "formal verification", "Minsky machines", "Turing completeness", "history of computing", "WebAssembly"],
+ },
  "N-ABSYS": {
   subject: "Absys, the assertional language J. M. Foster and E. W. Elcock built at Aberdeen around 1967, reconstructed from their papers of 1968, 1969 and 1990, and run on every example they printed",
   question: "What did the rest of Absys-4 look like?",
