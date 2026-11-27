@@ -23,7 +23,7 @@ export function BabbageNoteGNotebook({ record }: { record: PublicationRecord }) 
   const act = (index: number) => <Acts acts={[record.body[index]]} anchored offset={index} staticRefusals/>;
   return <NotebookEntry record={record} className="babbage-notebook" chapters={[
     { label: "The one place a result chooses", children: <>
-      <Plate caption="A. A. LOVELACE, NOTE G, DIAGRAM FOR THE COMPUTATION OF THE NUMBERS OF BERNOULLI, SCIENTIFIC MEMOIRS 3, 1843"/>
+      <Plate caption="A. A. LOVELACE, NOTE G, DIAGRAM FOR THE COMPUTATION OF THE NUMBERS OF BERNOULLI, SCIENTIFIC MEMOIRS 3, 1843 (NOT THE COPY TRANSCRIBED)"/>
       {act(0)}
     </> },
     { label: "Two readings of one sentence", children: <>
@@ -42,7 +42,7 @@ export function BabbageNoteGNotebook({ record }: { record: PublicationRecord }) 
     { label: "Three changes of three kinds", kind: "evidence", children: <>
       {act(3)}
       <StudyMeasures label="WHAT EACH CHANGE IS" items={[
-        { label: "OPERATION 4", value: "AN ERROR", detail: "Printed V5 ÷ V4; the plate’s own statement of results gives V4 ÷ V5. Reported elsewhere before." },
+        { label: "OPERATION 4", value: "AN ERROR", detail: "Printed V5 ÷ V4; the plate’s own statement of results gives (2n − 1)/(2n + 1), that is V4 ÷ V5. Reported before (Wikipedia, secondary)." },
         { label: "OPERATION 21", value: "AN ADAPTATION", detail: "B5 from V23 on the second pass, as the text says. Six cards not in the table, because this machine cannot advance a variable card." },
         { label: "OPERATION 24", value: "A CONVENTION", detail: "B7 is minus the sum; the table leaves signs aside (p. 727)." },
       ]} note="Operation 4 alone gives −1/2; with Operation 24 as well, 1/2; with Operation 21 instead, 1/30; all three, −1/30."/>

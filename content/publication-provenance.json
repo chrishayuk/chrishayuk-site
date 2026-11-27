@@ -2444,5 +2444,57 @@
         "note": "The machine, the rules, the theorems, the archival reading, two independent reviews and the publication fact-check were done in these sessions. Every result in this note can be rerun from the repository."
       }
     ]
+  },
+  {
+    "id": "N-BABBAGE-NOTE-G",
+    "version": "1.0",
+    "recordHash": "8b0228d9793764dfff523a60fd2a1011a3409e2f9bdc7d73a66e5677605425a5",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after a fact-check against analytical-engine a9a0b50: the title names Note G and the engine, not the program; the archive's judgement that Reading A fits the text better is given; the Reading B count's source marked as an encoding choice; December 1837 accepts the deck only with the forward course added; the comparison's coverage and the plate's resolution stated exactly; corrections described by kind with their sources."
+    },
+    "sources": [
+      {
+        "title": "L. F. Menabrea, “Sketch of the Analytical Engine invented by Charles Babbage”, trans. and with notes by A. A. Lovelace, Scientific Memoirs 3 (1843), pp. 666–731",
+        "url": "https://www.fourmilab.ch/babbage/sketch.html",
+        "note": "“the mill will order other cards” (p. 687); Note G, the two courses (p. 728) and V₁₀ (pp. 730–731). Read in sources/notes/menabrea-lovelace-1843-control.md."
+      },
+      {
+        "title": "A. A. Lovelace, Note G, “Diagram for the computation by the Engine of the Numbers of Bernoulli”, folding plate after p. 722, Scientific Memoirs 3 (1843)",
+        "url": "https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg",
+        "note": "Transcribed from the Natural History Museum copy on archive.org (scientificmemoir03memo), leaf 0754; sources/notes/note-g-table.md. The image in this note is the public-domain scan on Wikimedia Commons, not the copy transcribed."
+      },
+      {
+        "title": "C. Babbage, Scribbling Book Vol. III, p. 162 (December 1837), the Babbage Papers, Science Museum Group",
+        "note": "The card that “always orders the backing”, which Reading B needs. Transcribed in sources/notes/codesign-L023.md §1.2."
+      },
+      {
+        "title": "R. Rojas, “Unconventional universal computation in Babbage’s Analytical Engine”, arXiv:2408.03334, 2024",
+        "url": "https://arxiv.org/abs/2408.03334",
+        "note": "Universality from a conditional backing, after Bromley (2000). The general result is his."
+      },
+      {
+        "title": "A. G. Bromley, “Babbage’s Analytical Engine plans 28 and 28a: the programmer’s interface”, IEEE Annals of the History of Computing 22(4), 2000",
+        "note": "Not read (paywalled); known only through Rojas (2024) and Wikipedia."
+      },
+      {
+        "title": "M. L. Minsky, Computation: Finite and Infinite Machines, Prentice-Hall, 1967",
+        "note": "Two counters suffice. Cited, not formalised."
+      },
+      {
+        "title": "Note G, “Error”, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Note_G",
+        "note": "Secondary: reports the swapped division of Operation 4. Its figure for the uncorrected program, −25621/630, was not reproduced."
+      },
+      {
+        "title": "chrishayuk/analytical-engine, commit a9a0b50",
+        "url": "https://github.com/chrishayuk/analytical-engine/tree/a9a0b50",
+        "note": "src/sketch.rs (the machine, configurations 1843 and 1843-B), control/note-g-*.txt, tests/note_g.rs, formal/Babbage/Note43.lean and Multi.lean, scripts/lean-diff.sh, docs/published-control-1843.md."
+      },
+      {
+        "title": "Coding-agent sessions, 27 November 2026",
+        "note": "The reconstruction, the transcription of the plate, the proofs and two independent reviews were done in these sessions."
+      }
+    ]
   }
 ]

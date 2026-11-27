@@ -223,10 +223,10 @@ export const publicationLegibility: Record<string, Legibility> = {
   concepts: ["Charles Babbage", "Analytical Engine", "Sketch Books", "Lean", "formal verification", "loop programs", "Grzegorczyk hierarchy", "tetration", "Minsky machines", "Turing completeness", "history of computing", "coding agents", "WebAssembly"],
  },
  "N-BABBAGE-NOTE-G": {
-  subject: "The conditional control of the published accounts of Babbage’s Analytical Engine (Menabrea 1842, Lovelace’s Note G 1843), read two ways and proved general in Lean under each, with Lovelace’s program for the Bernoulli numbers run as printed and corrected",
+  subject: "The conditional control of the published accounts of Babbage’s Analytical Engine (Menabrea 1842, Lovelace’s Note G 1843), read two ways and proved general in Lean under each, given Minsky’s theorem, with Lovelace’s program for the Bernoulli numbers run as printed and corrected",
   question: "If a program survives only as a printed table and a few sentences, how much of the machine it ran on can be recovered from the program?",
   searchTitle: "Ada Lovelace’s Note G, Run Two Ways: Both Readings Make Babbage’s Engine a General Machine",
-  description: "Lovelace’s Note G has a result choose between two courses. Read as a cycle a result ends, or as a step forward past Babbage’s 1837 backing card, it makes the engine general, proved in Lean. Her Bernoulli program runs as printed (−95/126) and corrected (−1/30) in your browser.",
+  description: "Lovelace’s Note G has a result choose between two courses. Read as a cycle a result ends, or as a step forward past Babbage’s 1837 backing card, it makes the engine general, proved in Lean given Minsky’s theorem. Her Bernoulli program runs as printed (−95/126) and corrected (−1/30) in your browser.",
   concepts: ["Ada Lovelace", "Note G", "Bernoulli numbers", "Charles Babbage", "Analytical Engine", "first computer program", "Lean", "formal verification", "Minsky machines", "Turing completeness", "history of computing", "coding agents", "WebAssembly"],
  },
  "N-ABSYS": {
