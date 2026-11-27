@@ -67,7 +67,7 @@ export function MouseNotebook({ record }: { record: PublicationRecord }) {
     { label: "Thirty-three or one", kind: "evidence", children: <>
       <StudyMeasures label="LANE’S TEST ON THREE INTERPRETERS" items={[
         { label: "THE C REFERENCE", value: "33", detail: "As Lane said the published interpreter would." },
-        { label: "THE AGENT’S FIRST PORT", value: "33", detail: "Copied from the C without knowing." },
+        { label: "THE FIRST PORT", value: "33", detail: "Copied from the C without knowing." },
         { label: "WITH LANE’S CORRECTIONS", value: "1", detail: "Each macro keeps its own variables." },
       ]} note="One four-line program, run on each. The first two are not runnable here; the third is, below."/>
       <MouseRunner label="LANE’S TEST, FROM HIS LETTER" program={"#A,#B;;\n\n$A Q 1 = %A Q. ! @\n$B Q 33 = @\n$$"}
