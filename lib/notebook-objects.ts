@@ -38,6 +38,7 @@ export const notebookObjectSelections: Record<string, number[]> = {
  'N-ALGOL-60': [3, 5, 6, 7],
  'N-ATLAS-AUTOCODE': [2, 3, 4, 5],
  'N-BABBAGE': [1, 2, 3, 4, 5],
+ 'N-BABBAGE-CONTROL': [2, 3, 5, 6],
  'N-ABSYS': [1, 2, 3, 4],
  'N-Q-SYSTEMS': [2, 3, 4, 5],
  'N-Q-SYSTEMS-POSSIBILITIES': [1, 2, 3, 4],
