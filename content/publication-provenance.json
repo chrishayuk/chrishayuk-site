@@ -2387,5 +2387,62 @@
         "note": "The experiments were designed, run and written up with a coding agent. Every result can be rerun with cargo test --release --test research in the repository."
       }
     ]
+  },
+  {
+    "id": "N-BABBAGE-CONTROL",
+    "version": "1.0",
+    "recordHash": "72e249c6396a80c9ae8efe8b3a3515be463f53c852889c7b320816888f01d02e",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after a fact-check against analytical-engine a9093f5: repetition counts distinguished from combinatorial counts throughout; December 1837 refuses the 1838 trap deck and needs a second deck; pentation stated as 'not for every n'; the Lean-Rust comparison described as 4,015 runs on 2,015 decks; the maximum tested for small inputs; links pinned to the commit."
+    },
+    "sources": [
+      {
+        "title": "C. Babbage, Scribbling Book Vol. II (1835–1837), p. 84, 7 March 1836, BAB/S/1/02, the Babbage Papers, Science Museum Group",
+        "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110001323",
+        "note": "“a given variable number of repetitions … put on an axis”. Transcribed at full resolution in the repository (sources/notes/repetition-count-1836-1842.md)."
+      },
+      {
+        "title": "C. Babbage, Scribbling Book Vol. III, pp. 161–165 (December 1837) and reverse pp. 74–75 (“30 May”, the year inferred as 1838), the Babbage Papers, Science Museum Group",
+        "note": "The combinatorial wheels and cards, counted and unconditional backing, and backing to any card. Transcribed in sources/notes/sketchbooks-control.md."
+      },
+      {
+        "title": "L. F. Menabrea, “Sketch of the Analytical Engine invented by Charles Babbage”, trans. and with notes by A. A. Lovelace, Scientific Memoirs 3 (1843), pp. 666–731",
+        "url": "https://www.fourmilab.ch/babbage/sketch.html",
+        "note": "The bell at “the passage through zero or infinity” (p. 685); “the mill will order other cards” (p. 687); Note G (pp. 728–731). Read in sources/notes/menabrea-lovelace-1843-control.md."
+      },
+      {
+        "title": "R. Rojas, “How to make Zuse’s Z3 a universal computer”, IEEE Annals of the History of Computing 20(3), 1998, pp. 51–54",
+        "url": "https://doi.org/10.1109/85.707574",
+        "note": "One loop of arithmetic, ended by an operation the machine cannot do."
+      },
+      {
+        "title": "R. Rojas, “Unconventional universal computation in Babbage’s Analytical Engine”, arXiv:2408.03334, 2024",
+        "url": "https://arxiv.org/abs/2408.03334",
+        "note": "Universality from a backing that depends on a computed result: the step the 1836–1838 arrangements lack."
+      },
+      {
+        "title": "M. L. Minsky, Computation: Finite and Infinite Machines, Prentice-Hall, 1967",
+        "note": "Two counters suffice. Cited, not formalised, and not read for this note."
+      },
+      {
+        "title": "A. R. Meyer and D. M. Ritchie, “The complexity of loop programs”, Proc. ACM National Meeting, 1967; A. Grzegorczyk, “Some classes of recursive functions”, Rozprawy Matematyczne 4, 1953",
+        "note": "The bounds on loops whose count is fixed at entry. Meyer and Ritchie read; Grzegorczyk cited, not read."
+      },
+      {
+        "title": "The literature review",
+        "url": "https://github.com/chrishayuk/analytical-engine/blob/a9093f5/docs/literature-expressiveness.md",
+        "note": "What was read, what was not, and what was not found."
+      },
+      {
+        "title": "chrishayuk/analytical-engine, commit a9093f5",
+        "url": "https://github.com/chrishayuk/analytical-engine/tree/a9093f5",
+        "note": "src/sketch.rs (the machine), control/ (the decks), formal/ (Lean: Termination, Growth, Separation, Tower, GrowthStore, RatSize, Minsky, Trap, Classes), scripts/lean-diff.sh, docs/semantics.md, docs/expressiveness.md, docs/growth-classes.md."
+      },
+      {
+        "title": "Coding-agent sessions, 27 November 2026",
+        "note": "The machine, the rules, the theorems, the archival reading, two independent reviews and the publication fact-check were done in these sessions. Every result in this note can be rerun from the repository."
+      }
+    ]
   }
 ]

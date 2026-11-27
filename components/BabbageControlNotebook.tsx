@@ -54,11 +54,11 @@ export function BabbageControlNotebook({ record }: { record: PublicationRecord }
     { label: "Two readings, two theorems", kind: "evidence", children: <>
       {act(3)}
       <StudyMeasures label="WHAT A HALTING DECK CAN GIVE OFF" items={[
-        { label: "COUNTS FROM NUMBER CARDS", value: "< 2↑↑n", detail: "A tower of fixed height. no_tetration_eventually." },
-        { label: "COUNTS FROM THE STORE", value: "2↑↑n", detail: "tower_halts, for every n ≥ 1." },
-        { label: "COUNTS FROM THE STORE", value: "< 2↑↑↑n", detail: "A fixed number of tetrations. no_pentation." },
-        { label: "A COUNT SET IN ITS OWN LOOP", value: "ANY", detail: "Every computable function, given Minsky. No page." },
-      ]} note="Each is a theorem in Lean, for whole numbers and for exact fractions."/>
+        { label: "REPETITION COUNTS FROM NUMBER CARDS", value: "< 2↑↑n", detail: "A tower of fixed height. no_tetration_eventually." },
+        { label: "REPETITION COUNTS FROM THE STORE", value: "2↑↑n", detail: "tower_halts, for every n ≥ 1." },
+        { label: "REPETITION COUNTS FROM THE STORE", value: "NOT 2↑↑↑n", detail: "Not for every n: below a fixed number of tetrations. no_pentation." },
+        { label: "A COUNT SET IN ITS OWN LOOP", value: "ANY", detail: "30 May 1838 with that one step: every partial computable function, given Minsky. No page." },
+      ]} note="The bounds are theorems in Lean for whole numbers and exact fractions; 2↑↑n is a theorem for whole numbers; ANY is a Lean theorem about a translation of counter machines, general given Minsky’s theorem (cited)."/>
     </> },
     { label: "One step no page gives", kind: "evidence", children: <>
       {act(4)}

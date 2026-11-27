@@ -7,10 +7,10 @@ import { useState } from "react";
  * switches, each a rule that a page leaves open or does not give, and a
  * date. Every line shown is a theorem of github.com/chrishayuk/analytical-engine
  * formal/ (PROVED), a deck run in its tests (TESTED), an argument in its docs
- * (ARGUED) or an open question (OPEN), as of commit a9093f5.
+ * (ARGUED) or an open question (OPEN), as of commit a9093f5 (links pinned there).
  */
 
-const REPO = "https://github.com/chrishayuk/analytical-engine/blob/main";
+const REPO = "https://github.com/chrishayuk/analytical-engine/blob/a9093f5";
 const FILE: Record<string, string> = {
   Machine: `${REPO}/formal/Babbage/Machine.lean`, Separation: `${REPO}/formal/Babbage/Separation.lean`, GrowthStore: `${REPO}/formal/Babbage/GrowthStore.lean`,
   Tower: `${REPO}/formal/Babbage/Tower.lean`, Minsky: `${REPO}/formal/Babbage/Minsky.lean`,
@@ -34,10 +34,10 @@ function verdict(date: Date, store: boolean, inLoop: boolean, trap: boolean): Ve
   const trapNothing: Line = { status: "PROVED", text: "With every backing card counted, a trap only ends a run sooner: the same bounds hold at every point a run reaches.", names: ["no_tetration_reach", "no_pentation_reach"], file: FILE.Trap };
   if (date === "1836") {
     const lines: Line[] = store
-      ? [{ status: "PROVED", text: "It does not give 2↑↑↑n (pentation) for every n.", names: ["no_pentation"], file: FILE.GrowthStore },
-         { status: "ARGUED", text: "Not 2↑↑n either: with no backing, each card is passed once, so the tower has a height fixed by the deck.", file: FILE.expressiveness }]
+      ? [{ status: "PROVED", text: "It does not give 2↑↑↑n (pentation) for every n: for some n, everything given off is smaller.", names: ["no_pentation"], file: FILE.GrowthStore },
+         { status: "ARGUED", text: "Not 2↑↑n either: with no backing, each card is passed once, so the tower has a height fixed by the deck.", file: FILE.classes }]
       : [{ status: "PROVED", text: "Everything given off is below a tower of 2s of height fixed by the deck: no 2↑↑n for every n.", names: ["out_le_tower", "no_tetration_eventually"], file: FILE.Separation }];
-    if (inLoop) lines.push({ status: "PROVED", text: "March 1836 has no combinatorial cards, so there is no count to set inside a loop: its configuration, c1836, accepts none.", file: FILE.Machine });
+    if (inLoop) lines.push({ status: "ARGUED", text: "March 1836 has no combinatorial cards, so there is no count to set inside a loop: by the definition of its configuration, c1836.", file: FILE.Machine });
     if (trap) lines.push(trapNothing);
     return { model: store ? "MODEL B" : "MODEL A", headline: "A fixed number of exponentials", lines };
   }
@@ -53,14 +53,14 @@ function verdict(date: Date, store: boolean, inLoop: boolean, trap: boolean): Ve
   if (date === "1837" && (inLoop || trap)) {
     if (store && trap) return { model: "MODEL D", headline: "General, given Minsky’s theorem, in December 1837", lines: [
       { status: "PROVED", text: "Each flag [c > 0] is one operation repeated c times, its count read from the store. The deck has no combinatorial card and no counted backing, and December 1837 accepts it.", names: ["trapDeck37_accepted", "trap37_halts", "machine_halts_of_trap37"], file: FILE.Trap },
-      { status: "PROVED", text: "It needs the store reading: with counts from number cards, it is not a deck of Model A.", names: ["trapDeck37_not_constReps"], file: FILE.Trap },
+      { status: "PROVED", text: "It needs the store reading: with repetition counts from number cards, it is not a deck of Model A.", names: ["trapDeck37_not_constReps"], file: FILE.Trap },
     ] };
-    if (store) return { model: "MODEL C", headline: "Probably general; not proved for December 1837", lines: [
-      { status: "OPEN", text: "The flags of the December 1837 trap deck, with the loop’s count set inside the loop, look as if they translate counter machines. That deck has not been written out or proved; the proof is for 30 May 1838.", file: FILE.expressiveness },
+    if (store) return { model: "MODEL C", headline: "Open", lines: [
+      { status: "OPEN", text: "December 1837 with a count set in its own loop has not been analysed; the translation is proved only for backing to any card.", names: ["compile_accepted"], file: FILE.Minsky },
     ] };
     return { model: trap ? "MODEL D" : "MODEL C", headline: "Open", lines: [
-      { status: "OPEN", text: "December 1837 backs only to the first card, so the flag groups of the 1838 translation cannot be used, and with counts from number cards no other way of testing a counter for zero has been found.", file: FILE.expressiveness },
-      { status: "PROVED", text: "The 1838 deck is refused: its flag groups back to card 3.", names: ["trapDeck_refused_1837"], file: FILE.Trap },
+      { status: "OPEN", text: "December 1837 backs only to the first card, so the flag groups of the 1838 translation cannot be used, and with repetition counts from number cards no other way of testing a counter for zero has been found.", file: FILE.expressiveness },
+      ...(trap ? [{ status: "PROVED" as Status, text: "The 1838 trap deck is refused: its flag groups back to the fourth card.", names: ["trapDeck_refused_1837"], file: FILE.Trap }] : []),
     ] };
   }
   if (date === "1837") {
@@ -76,10 +76,10 @@ function verdict(date: Date, store: boolean, inLoop: boolean, trap: boolean): Ve
   }
   const lines: Line[] = store
     ? [{ status: "PROVED", text: "Tetration and beyond: a deck of 30 May 1838 gives 2↑↑2ⁿ.", names: ["tet_exp_halts_1838", "tetDeck_accepted"], file: FILE.Classes },
-       { status: "PROVED", text: "It does not give 2↑↑↑n (pentation) for every n.", names: ["no_pentation"], file: FILE.GrowthStore },
+       { status: "PROVED", text: "It does not give 2↑↑↑n (pentation) for every n: for some n, everything given off is smaller.", names: ["no_pentation"], file: FILE.GrowthStore },
        { status: "ARGUED", text: "Inside the fourth Grzegorczyk class, E⁴; whether it is all of it is open.", file: FILE.classes }]
     : [{ status: "PROVED", text: "Everything given off is below a tower of 2s whose height is fixed by the deck: for every n from some point on, nothing as large as 2↑↑n.", names: ["out_le_tower", "no_tetration_eventually"], file: FILE.Separation },
-       { status: "PROVED", text: "But more than December 1837: a deck of 30 May 1838 gives 2^2^2ⁿ, by putting a computed 2ⁿ on the wheels.", names: ["triple_halts_1838", "tripleDeck_constReps", "tripleDeck_refused_1837"], file: FILE.Classes },
+       { status: "PROVED", text: "But more than December 1837: a deck of 30 May 1838 gives 2^2^2ⁿ, by putting a computed 2ⁿ on the wheels.", names: ["triple_halts_1838", "tripleDeck_accepted", "tripleDeck_constReps", "tripleDeck_refused_1837"], file: FILE.Classes },
        { status: "TESTED", text: "The larger of two numbers, every count set before its group.", file: FILE.max },
        { status: "ARGUED", text: "Inside the elementary functions, E³; it is all of them if it can compute x mod y, which is open.", file: FILE.classes }];
   if (trap) lines.push(trapNothing);
