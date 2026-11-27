@@ -17,29 +17,33 @@ type Run = {
 };
 type Report = { deck?: string; title?: string; trap?: boolean; runs?: Run[]; error?: string };
 
-const FILES = "/demos/babbage-control";
+/** Where the files are: each note keeps the build it was written against. */
+const DEFAULT_FILES = "/demos/babbage-control";
 
-let worker: Worker | null = null;
+const workers = new Map<string, Worker>();
 let nextId = 0;
 const waiting = new Map<number, (value: { out?: string; err?: string; error?: string }) => void>();
 
-function babbage(args: string[], text: string): Promise<{ out?: string; err?: string; error?: string }> {
+function babbage(files: string, args: string[], text: string): Promise<{ out?: string; err?: string; error?: string }> {
+  let worker = workers.get(files);
   if (!worker) {
-    worker = new Worker(`${FILES}/worker.js`, { type: "module" });
+    worker = new Worker(`${files}/worker.js`, { type: "module" });
     worker.onmessage = (event: MessageEvent) => {
       const { id, ...rest } = event.data;
       waiting.get(id)?.(rest);
       waiting.delete(id);
     };
+    workers.set(files, worker);
   }
   const id = nextId++;
+  const w = worker;
   return new Promise(resolve => {
     waiting.set(id, resolve);
-    worker!.postMessage({ id, wasmUrl: new URL(`${FILES}/babbage.wasm`, window.location.href).href, args, text });
+    w.postMessage({ id, wasmUrl: new URL(`${files}/babbage.wasm`, window.location.href).href, args, text });
   });
 }
 
-const LABEL: Record<string, string> = { "1836-03": "MARCH 1836", "1837-12": "DECEMBER 1837", "1838-05": "30 MAY 1838", "not-found": "NOT FOUND" };
+const LABEL: Record<string, string> = { "1836-03": "MARCH 1836", "1837-12": "DECEMBER 1837", "1838-05": "30 MAY 1838", "1843": "1843, READING A", "1843-B": "1843, READING B", "not-found": "NOT FOUND" };
 
 function outcome(run: Run, show: string[]): string {
   if (!run.accepted) return `Refused: ${run.refusal}`;
@@ -52,8 +56,8 @@ function outcome(run: Run, show: string[]): string {
   return `Runs on: ${run.stopped ?? "stopped"}.`;
 }
 
-export function BabbageDeckRunner({ label, deck, note, show = [], trap: offerTrap = false, startTrap = false }: {
-  label: string; deck: string; note?: string; show?: string[]; trap?: boolean; startTrap?: boolean;
+export function BabbageDeckRunner({ label, deck, note, show = [], trap: offerTrap = false, startTrap = false, files = DEFAULT_FILES }: {
+  label: string; deck: string; note?: string; show?: string[]; trap?: boolean; startTrap?: boolean; files?: string;
 }) {
   const [source, setSource] = useState(deck);
   const [trap, setTrap] = useState(startTrap);
@@ -65,12 +69,12 @@ export function BabbageDeckRunner({ label, deck, note, show = [], trap: offerTra
   const run = useCallback(async () => {
     setRunning(true);
     const args = ["control", "run", "-", ...(offerTrap ? [trap ? "--trap" : "--no-trap"] : [])];
-    const answer = await babbage(args, source);
+    const answer = await babbage(files, args, source);
     if (!live.current) return;
     setRunning(false);
     if (answer.error) { setReport({ error: answer.error }); return; }
     try { setReport(JSON.parse(answer.out || "{}")); } catch { setReport({ error: answer.err || "no answer" }); }
-  }, [offerTrap, source, trap]);
+  }, [files, offerTrap, source, trap]);
 
   return <figure className="babbage-deck">
     <figcaption className="record-voice">{label}</figcaption>
