@@ -8980,5 +8980,560 @@
     },
     "hash": "115b37eca5115a731054df845e052f4c8fb683225fc1646886232c6722491c3b",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-Q-SYSTEMS",
+      "slug": "a-q-system-rule-never-replaced-anything",
+      "kind": "notebook",
+      "title": "A Q-system rule never replaced anything.",
+      "dek": "Colmerauer’s Q-systems, the Montréal translation project’s rule language, rebuilt from his report of 1970. Sixteen rules analyse a French sentence into its tree; run the other way, they write its eighteen paraphrases into one graph that matches his printout.",
+      "abstract": "A note about reconstructing the Q-systems, the rule language Alain Colmerauer designed at the Université de Montréal for the TAUM machine-translation project, in use from October 1969. No program text of it is known to survive. The language was rebuilt from Colmerauer’s report of September 1970, read from its page scans. A Q-system rewrites a graph of strings, not a string: a rule adds a path beside every path it matches and replaces nothing, and the arrows it rewrote are removed only when no rule applies any more. So one graph holds every alternative, with the shared parts shared. Run on the report’s examples, the reconstruction gives every result the report prints, with two exceptions. Its French example runs both ways: the sixteen rules, inverted, analyse a sentence into its normalised tree, and as written they synthesise its eighteen paraphrases into one graph of nineteen vertices, which is the report’s printout line for line, vertex numbers and all; each of the eighteen analyses back to the one tree. The exceptions: the report’s rules for turning a tree into a string do not stop as printed, and the eighteen sentences of the last printout come out in exactly the reverse of the report’s order. And the rules for removing one string remove its neighbours too.",
+      "created": "2026-11-26",
+      "version": "1.2",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "COLMERAUER 1970 → THE MACHINE THE REPORT DESCRIBES → ITS EXAMPLES RUN → ITS PRINTOUT COMPARED",
+      "concepts": [
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-ABSYS",
+        "N-IPLV",
+        "N-JOSS",
+        "N-ALGOL-60"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A GRAPH OF EVERY GROUPING",
+          "text": "In October 1969 a program written in ALGOL by Alain Colmerauer was running on the CDC 6400 of the Université de Montréal. It ran his Q-systems, the rule language of TAUM, the university’s project to translate English into French by computer. In the project’s chain, his report says, an English sentence went through no fewer than fifteen Q-systems before it came out in French. The Computer History Museum’s Prolog archive says that Colmerauer considered the Q-systems the ancestor of Prolog. The report opens on the problem they were made for. To analyse a sentence you must try every partial grouping of its words, and to hold that multitude economically Colmerauer used a directed graph, each arrow carrying a tree. A Q-system is a set of rules that turns one such graph into another. No program text of the Q-systems is known to us. The report, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, of September 1970, gives the whole grammar, the meaning of every construct and the printed results of its examples. The language was rebuilt from it, and every example it prints was run.",
+          "references": [
+            {
+              "label": "A. Colmerauer, Les systèmes-Q, publication interne no 43, Université de Montréal, September 1970, pp. 4–5",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            },
+            {
+              "label": "Computer History Museum, History of Prolog: Université de Montréal",
+              "url": "https://softwarepreservation.computerhistory.org/prolog/"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / A RULE ADDS A PATH",
+          "text": "Every path from the entry of the graph to its exit is one string, and a rule a1 + … + ap == b1 + … + bq. is applied to a path, not a string. For every path whose trees match its left side, the first phase adds a new path, carrying the right side, between the same two vertices. Nothing is replaced: “on ajoute donc au graphe le tout nouveau chemin”, so the old path and the new one sit side by side, and later rules match paths through either. This goes on until no rule applies to a path it has not been applied to. Only then does the second phase remove every arrow some rule was applied to, and after it every arrow no longer on a way from entry to exit. The example of the report’s section 8 recognises AⁿBⁿCⁿ in two rules. On A + A + A + B + B + B + C + C + C, the first phase grows nine arrows into nineteen: two A(1), one A(1,1), the same for B and C, and one S(1,1,1), exactly the arrows of the figure on page 29. The second phase leaves S(1,1,1). The report says the result of a phase that converges does not depend on the order in which the rules were applied. The rules of the report’s largest example were put in 32 orders (its last two phases have one rule each, so the orders differ in the first two); every order printed the same graphs. The printout is sorted, so this compares what was made, not the order it was made in. It follows from the definition: every rule is applied to every path, whatever the order.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, p. 22: the two phases; pp. 27–29: the example of section 8 and its figure",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / ONE SYSTEM, BOTH WAYS",
+          "text": "Colmerauer called reversibility one of the originalities of the Q-systems: practically the same system can describe a transformation and its inverse, analysis and synthesis. His last section shows it. Sixteen rules take a normalised sentence, a tree of verbs and their subjects and objects, to French: active or passive, each embedded clause as a clause or as a noun. -INV- exchanges the two sides of every rule. The treatment runs the system inverted, then as written. Inverted, it analyses RICHARD CONSTATE QUE LA DESTRUCTION DE BEAUCEVILLE PAR BENOIT ETONNE GAETANE into the tree drawn on page 36; along the way it makes 38 arrows of partial groupings and keeps one. As written, it synthesises from that tree every paraphrase: eighteen sentences in one graph of nineteen vertices and 139 arrows, where written out one to a line they take 282. Pages 38 to 40 print that graph as 35 lines. The reconstruction prints the same 35 lines, with Colmerauer’s vertex numbers, and page 42 draws the same graph. Then each of the eighteen sentences was put back through the inverted system. Every one gives the one tree.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, p. 4: reversibility; pp. 35–42: the paraphrase treatment and its results",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / THE RULES OF PAGE 30 DO NOT STOP",
+          "text": "Page 30 gives two rules to take a tree apart into a “structured” string: A*(U*) == [(A*) + ](U*) / U* ≠ -NUL-. and ](I*,U*) == I* + ](U*). Applied to A(B,C(A,E(F))), the report says, they would produce [(A) + B + [(C) + A + [(E) + F + ] + ] + ]. Applied as the report’s own section 7 defines, they never stop. The [(A) they make is itself a tree of the form A*(U*), with [ for A* and A for U*, and nothing stops the first rule matching it again: it becomes [([) + ](A), then [([) + ]([), and so on. Every path is matched, including the new ones, so a rule that matches its own output goes on for ever. With one condition the report does not have, that A* is neither [ nor ], they produce exactly the printed string. The inverse pair, on the same page, works as printed, because its condition already keeps the brackets out. So as printed these rules run only one way.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, p. 30",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / A RULE REWRITES ARROWS, NOT STRINGS",
+          "text": "The same page gives three rules to delete from a graph “tout chemin portant une chaîne donnée”, every path carrying a given string, here LE + FAIT + QUE + LE + FAIT + QUE. The first rewrites it as /CUL + /DE + /SAC, and the other two add /CULDE and /DESAC beside the pairs they match. When the rewritten arrows are removed, /CULDE and /DESAC are left leading nowhere, and “à la fin de cette dernière phase il ne reste plus rien”, page 31 says. That is what happens. But the second phase removes arrows, and an arrow can belong to many strings. Given a graph that carries LE + FAIT + QUE + LE + FAIT + QUE and also LE + FAIT + QUE + BENOIT, sharing their first three arrows, the rules remove both: nothing is left of either. A shared prefix belongs to every string through it, and it cannot be taken from one and left to the others. The same holds for every rule, not only these: an arrow some rule used is gone from every string that ran through it. In analysis that is usually harmless, because every string through such an arrow was rewritten too.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, pp. 30–31: the cul-de-sac",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / AMBIGUITY COSTS NOTHING",
+          "text": "The French grammar of the last section is recursive, and allows infinitely many sentences. Every normalised sentence with at most one level of embedding, a clause in either argument but none inside another, was synthesised, with its three verbs and four names: 8,112 trees give 131,424 different sentences, and no sentence comes from two trees. Then every one of the 131,424 was put back through the inverted system, and each gives back its one tree. The report’s own example has a clause inside a clause, two levels of embedding, so it is not among them; its eighteen paraphrases analyse back too. The many groupings of the introduction exist only during the first phase, as partial analyses that the second throws away. What a graph does with a sentence that is ambiguous needed a grammar of our own, not the report’s. In it AVEC LE TELESCOPE can go with the seeing or with the man. Analysed, JEAN VOIT L HOMME AVEC LE TELESCOPE gives one graph with both readings, as two arrows between the same two vertices. Nothing chooses between them; a later phase can work on both at once.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, p. 35: the normalised sentences; p. 4: the combinatorial problem",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / THE ORDER THAT DOES NOT MATCH",
+          "text": "Every computation the report gives a result for comes out as it says, with two exceptions: the rules of page 30, above, and this one. The last two phases of the paraphrase treatment pack each sentence into one tree and unpack it again, so that each of the eighteen is printed on a line of its own, from -01- to -02-. Pages 40 and 41 print them in one order. The reconstruction prints the same eighteen lines in exactly the reverse order. The report does not say how its program ordered the paths leaving a vertex. At all fourteen vertices of the synthesis graph with more than one path leaving them, the printed paths are in ascending order of their trees, and that order reproduces pages 38 to 40; the same order puts pages 40 and 41 backwards. No simple order of making or keeping arrows was found that fits both pages. The order was most likely a side effect of the lists of the lost program. The test for pages 40 and 41 checks the reversal, so that it stays a recorded difference and not a hidden one.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, pp. 38–41",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "The Q-systems run in the browser, compiled from the same Rust source as the command-line version. Choose a treatment and step through a phase one rule application at a time: the path each rule matched, the path it added beside it, then what the second phase removes and what is left, drawn as the report draws its figure on page 29.",
+          "links": [
+            {
+              "href": "/demos/q-systems?example=abc",
+              "label": "AⁿBⁿCⁿ, the example of section 8, step by step — interactive study"
+            },
+            {
+              "href": "/demos/q-systems?example=paraphrase",
+              "label": "The paraphrase treatment: analysis, then synthesis"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems/blob/main/docs/decisions.md",
+              "label": "Every rule of the machine, and the page it rests on"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+              "label": "The experiments, with their numbers"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems",
+              "label": "Source, examples, acceptance tests and the playground"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "No program text of the Q-systems is known to us. This is the formalism as Colmerauer’s report describes it, not the program he wrote; where the report is silent, the choice made is listed as a decision.",
+            "The scan of the report is missing printed page 23, which most likely held a first, simplified example. The system of section 8 is therefore called an example here, not the first. A 1972 TAUM printout was used only for the form of the output.",
+            "The order in which paths are printed is a decision fitted to pages 38 to 40, and it puts pages 40 and 41 in reverse. The form of the details printed for -DET- is our own.",
+            "The two-readings grammar is ours, not the report’s. The TAUM grammars, the earliest large Q-system programs, have not been seen, nor has METEO, written later in Q-systems, nor any later version of the formalism.",
+            "Everything was read from scans. No literature search was made, so nothing here is claimed as new."
+          ],
+          "principle": "A language that survives only as a description can be rebuilt as that description; its own printed results are the test, including the one that does not match."
+        },
+        {
+          "kind": "question",
+          "text": "What did the TAUM grammars look like?",
+          "status": "OPEN",
+          "detail": "Colmerauer and Roussel name the TAUM grammars written in Q-systems: English morphology, the analysis of English, transfer, French synthesis and French morphology. TAUM 71, edited by Colmerauer in January 1971, is listed by the Computer History Museum as holding the English morphology, and may hold the others. They are the earliest large Q-system programs. Run here, they would test the decisions made from a 45-page report, and show what the graph of every grouping cost on real English."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+          "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+          "note": "Read in full from the page scans on Alain Colmerauer’s site, linked from the Computer History Museum’s Prolog archive. Every example and quotation was read from the images, not the OCR. The scan lacks printed page 23 and has page 16 twice. All the figures but the TAUM printout are cropped from it. Republished in Traitement Automatique des Langues 33 (1–2), 1992, pp. 105–148, according to Colmerauer’s bibliography (TPLP, 2004); that version was not seen."
+        },
+        {
+          "title": "I. Findeisen-Bellert, interactive session with TAUM translating a sentence from English to French, c. 1972. Gift of Janusz Bień, Computer History Museum",
+          "url": "https://softwarepreservation.computerhistory.org/prolog/montreal/src/Findeisen-Bellert-TAUM-1972.pdf",
+          "note": "Line-printer output, folded at a fixed width. Used only for the form of a printed graph: PHASE n, then -01- … -02-."
+        },
+        {
+          "title": "Computer History Museum, History of Prolog, section Université de Montréal",
+          "url": "https://softwarepreservation.computerhistory.org/prolog/",
+          "note": "The source of both documents, and of the history quoted from Colmerauer and Roussel’s “The birth of Prolog” (1996), which was not read in the original."
+        },
+        {
+          "title": "chrishayuk/q-systems",
+          "url": "https://github.com/chrishayuk/q-systems",
+          "note": "The machine, every example of the report with its output, 21 acceptance tests that name their pages, every decision with its evidence, the experiments, and the playground."
+        },
+        {
+          "title": "Reconstruction, 26 November 2026",
+          "note": "The interpreter, the transcriptions and the comparisons. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+        }
+      ],
+      "published": "2026-11-26",
+      "revised": "2026-11-27"
+    },
+    "hash": "856dd873baf94c7f4a36fb2276d7e994614aa7bbdde1c1e9a084c63ffc47ecdc",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-Q-SYSTEMS-POSSIBILITIES",
+      "slug": "a-q-system-can-hold-a-trillion-strings-but-never-sees-two-become-one",
+      "kind": "notebook",
+      "title": "A Q-system can hold a trillion strings, but never sees two become one.",
+      "dek": "Colmerauer’s Q-systems, rebuilt from his report of 1970, measured. One graph holds 2⁴⁰ strings in 80 arrows, and a rule can work on all of them at once. A result that comes out the same along many paths is made once for each path.",
+      "abstract": "A second note on the Q-systems, Alain Colmerauer’s rule language of 1969 for the TAUM translation project, reconstructed from his report of 1970. The first note checked the reconstruction against every result the report prints. This one measures the machine on graphs built to test it. Forty independent choices give 1,099,511,627,776 strings in 80 arrows, and a rule that looks at one or two words at a time works on all of them in 80 applications or fewer. So does a rule that fans one word out into two, which is how the report’s grammar writes 9,565,938 French sentences in 2,760 arrows. But a result carried along a string is made once for every path that reaches it. The parity of twelve choices has two possible values and costs 8,190 applications, exactly what writing each of the 4,096 strings out as a tree costs. The report adds a brand-new path for every application and says nothing of merging, so read literally two equal arrows are kept; and no rule can merge them, because a rule matches one path and two alternatives are never on one path. A variant of the machine that merges them, kept apart from the historical one, does parity in 46 applications and can still count every derivation, but it changes what some rules mean. The second phase, which removes every arrow a rule used, removes strings no rule touched; purifying by strings instead keeps them, but breaks the report’s own analysis and its recipe for deleting a string. Whether or not Colmerauer saw that loss, his systems depend on it: it is what makes an analysis return only complete analyses.",
+      "created": "2026-11-26",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "THE RECONSTRUCTED MACHINE → GRAPHS BUILT TO TEST IT → WHAT IT COSTS → WHAT IT LOSES → A VARIANT, KEPT APART",
+      "concepts": [
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-Q-SYSTEMS",
+        "N-ABSYS",
+        "N-NINE-CHAPTERS-124"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A TRILLION STRINGS IN 80 ARROWS",
+          "text": "Colmerauer made the Q-systems to hold every partial grouping of a sentence at once, economically, in one graph: each path from its entry to its exit carries one string, and paths that share words share arrows. The first note rebuilt the machine from his report of 1970 and checked it against every result the report prints. This note asks what the machine can do with the economy. Take n independent choices between A and B: n + 1 vertices with two arrows between each pair, carrying 2ⁿ strings. Forty choices carry 1,099,511,627,776 strings in 80 arrows. The rules A == X. and B == Y. rewrite every one of them in 80 applications, and the graph after has 80 arrows and 2⁴⁰ strings. A rule matches paths, and here there are only 80 paths of one arrow. A rule that reads two words, A + B == C., applies 39 times. Fanning out costs as little: A == X. and A == Y. on one string of forty As give 2⁴⁰ strings in 80 arrows. This is how the report’s grammar works. Synthesising a sentence with fourteen embedded clauses, three levels deep on both sides, writes its 9,565,938 paraphrases into 2,760 arrows in 3,108 applications. Every sentence tried, 500 walks through that graph, analysed back to its one tree.",
+          "references": [
+            {
+              "label": "QSYS-E08 and E10, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            },
+            {
+              "label": "Colmerauer 1970, p. 4: the economy of the graph; p. 35: the grammar",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / TWO RESULTS, 8,190 APPLICATIONS",
+          "text": "Now carry something along the string. Put an arrow S before twelve choices, and six rules that keep the parity of the number of As: S + A == O., E + A == O., O + A == E., and so on. There are two possible results, and the phase makes 8,190 arrows to reach them, one for every prefix of every string: 2¹³ − 2. Of those, 8,166 repeat an arrow already made, with the same two ends and the same tree. The graph after holds 4,096 arrows, each O or E, from the entry to the exit. Packing each whole string into one tree, P(A,B,B,…), whose 4,096 results really are all different, costs exactly the same, 8,190. The cost is set by the number of derivations, not by the number of results. That is the report’s definition read literally. Each application adds “le tout nouveau chemin”, a brand-new path, and the report says nothing of merging one with an equal arrow already there, so equal arrows are kept. And no rule can merge them. A rule’s left side matches one path, and two alternatives never lie on one path: a rule never sees both. Composing a relation along seven facts in a row, R(A*,B*) + R(B*,C*) == R(A*,C*)., makes the one fact R(A,H) 132 times, once for each way of bracketing the chain. The graph shares what is the same before a rule. It cannot share what becomes the same after one. None of the report’s own examples ever makes two equal arrows, so its printed results cannot say whether the lost program merged them.",
+          "references": [
+            {
+              "label": "Colmerauer 1970, p. 22: “on ajoute donc au graphe le tout nouveau chemin”",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            },
+            {
+              "label": "QSYS-E08, E11 and E15, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / A MACHINE THAT MERGES",
+          "text": "What would merging buy? A second machine, kept apart from the historical one in the repository, reuses an equal arrow, or an equal path the phase has already made, instead of adding another. With its merging turned off, it gives the historical machine’s graphs and application counts on every example of the report whose phases stop, and a test checks that. Merged, parity takes 46 applications instead of 8,190, and leaves two arrows, O and E. Composing the seven facts takes 56 instead of 294, and leaves R(A,H) once. Packing does not change, because its results really are all different. A third setting merges in the same way but records every application that made each arrow. From those records the number of derivations can still be counted, 4,096 for parity and 132 for the facts, without the copies. The count is what is kept, not everything: the order the copies would have been made in, the separate arrows and vertices each would have had, and the 8,190 applications a -DET- listing would show are gone. It is the same idea as the shared forests of later chart parsers. On every one of those examples the merged machine prints exactly what the historical one prints; that is a result about those examples, not about every Q-system that stops. But merging is not harmless. Under the report’s definition A == A. never stops: the arrow it adds is a new path it applies to. Merged, its one application adds nothing, finds the data’s own arrow, and the second phase removes that arrow as rewritten, leaving an empty graph. Others behave the same, A + B == A + B. and A == X. X == A. among them: each gives back an arrow equal to one it read, never stops under the report’s definition, and leaves an empty graph when merged. In every change found, the report’s result was undefined to begin with.",
+          "references": [
+            {
+              "label": "QSYS-E11 and E12, docs/research.md; src/experimental.rs",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / A RULE TAKES ITS NEIGHBOURS",
+          "text": "The second phase removes every arrow of every path a rule was applied to, and then every arrow left leading nowhere. The first note found that the report’s recipe for deleting one string deletes its neighbours too. Measured on the choices, the effect is complete. A + B == C. on ten choices leaves two strings, of 1,024. Eleven of the 1,024 have no A + B in them, so the rule applied to none of them, and none of the eleven survives. Every arrow except the first B and the last A is on some path the rule was applied to. On three choices, A + A + A has no A + B, but its first arrow is also the first arrow of A + B + A, so it goes; from three choices on, no untouched string survives. Add a copy of every word to a new label, A == X. and B == Y., and every one of the original strings comes through, relabelled, beside every string with C in it: 5, 12, 29, 169, 985 and 5,741 strings for 2, 3, 4, 6, 8 and 10 choices, the Pell numbers. The copy has to go to a new label. A == A. never stops.",
+          "references": [
+            {
+              "label": "QSYS-E09, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            },
+            {
+              "label": "Colmerauer 1970, pp. 22 and 30–31",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / THE LOSS IS THE POINT",
+          "text": "So the second phase could keep strings instead: keep every string from entry to exit that does not run through a path some rule was applied to. The second machine does this too. To keep one string and drop another that shares an arrow with it, the graph has to be unshared, each vertex split by the arrows just crossed to reach it. On the ten choices, nothing is lost. All 1,024 strings come through, each A + B rewritten as C, in 69 arrows where the report’s phase keeps 11. On the report’s own systems it breaks them. The analysis of the French sentence keeps 72 strings, the tree and every partial analysis no rule took further, where the report keeps one. The example of section 8 keeps eight, S(1,1,1) and seven partial analyses, where the report keeps one. And the recipe for deleting a string no longer empties the graph: the string goes, but the dead ends it builds, /CUL + /DESAC and /CULDE + /SAC, survive, because the recipe works by having the second phase remove their arrows. Nothing in the report says the loss of neighbours was known or wanted; its recipe is offered for deleting every path carrying one given string, and it deletes more. But whether or not Colmerauer saw the loss, his systems depend on what causes it. A second phase that kept the neighbours would return partial analyses and keep the dead ends.",
+          "references": [
+            {
+              "label": "QSYS-E13, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            },
+            {
+              "label": "Colmerauer 1970, pp. 30–31: the cul-de-sac",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / WHAT -INV- CAN UNDO",
+          "text": "The report’s grammar runs both ways: inverted with -INV-, the rules that wrote eighteen paraphrases analyse each back to its tree, and so do all 131,424 sentences with at most one level of embedding. That is a property of the grammar, not of -INV-. Three systems were run on all 64 strings of six choices, then inverted and run on the result. A == X. and B == Y. give back each string exactly. A == X. and B == X. give back all 64 strings for every input: each one does give X + … + X, and nothing records which was there. Parity’s inverse never stops, because E + B == E., inverted, is E == E + B., which applies to its own result. Phases in sequence lose in another way. The report’s last two phases pack each sentence into one tree and unpack it, “pour sortir les résultats en clair”, to print the results plainly. They give back exactly the eighteen sentences, and 282 arrows where the synthesis had 139: the identity on strings, and the undoing of the sharing. And phases do not commute: on A + B, A == B. and A + B == D. give D in one phase, B + B as two phases in that order, and D in the other.",
+          "references": [
+            {
+              "label": "QSYS-E09 and E14, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            },
+            {
+              "label": "Colmerauer 1970, p. 33: -INV-",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "07 / OTHER COMPUTATIONS",
+          "text": "Written in the report’s language and run by the historical machine, lists make data easy. Unary addition is N(U*) + PLUS + N(V*) == N(U*,V*)., and a parameter used twice tests equality: N(U*) + EGAL + N(U*) == VRAI. Multiplication, adding one in binary with a carry that moves right, reversing a list, and one step of the cellular automaton rule 110 all work, in one to nine rules. Each repeated step is a scan from left to right with an accumulator, because a rule reads its whole left side and replaces it: it cannot read a neighbour as context and leave it, so the overlapping windows of the automaton cannot all be rewritten at once. Facts are joined only when they are next to each other. R(B,C) + R(A,B) is never composed. A rule that lets facts change places joins them, but never stops, and two facts held side by side as alternatives are never joined at all, since no path runs through both. That is the same limit again.",
+          "references": [
+            {
+              "label": "QSYS-E15, docs/research.md; research/e15-*.q",
+              "url": "https://github.com/chrishayuk/q-systems/tree/main/research"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "Every count is asserted by a test in the repository, and the historical machine is unchanged by any of it. Parity and the pair rule run in the playground, one application at a time.",
+          "links": [
+            {
+              "href": "/demos/q-systems?example=e08-parity",
+              "label": "Parity on six choices: 126 applications for two results — interactive study"
+            },
+            {
+              "href": "/demos/q-systems?example=e09-pair",
+              "label": "A + B == C. on four choices, and what the second phase takes"
+            },
+            {
+              "href": "/notebook/a-q-system-rule-never-replaced-anything",
+              "label": "The first note: the reconstruction, checked against the report"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+              "label": "QSYS-E08 to E15, with their numbers"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems/blob/main/src/experimental.rs",
+              "label": "The merging and string-purifying machine, not historical"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "This is the machine as the report describes it, rebuilt; no program text of the Q-systems is known to us. The lost ALGOL program, its FORTRAN translation, the machine-code version Colmerauer and Roussel mention, and the later Q-systems of METEO may have merged equal arrows. None of the report’s examples could show it.",
+            "Two arrows are called equal here when they have the same two ends and the same tree. Merging is about that, not about strings or meanings that are equivalent in some wider sense.",
+            "The merging and string-purifying machines are experiments of our own, not Colmerauer’s. They were run on the systems named here and on the report’s examples, nothing more. That merging left every one of those examples unchanged does not show it leaves every Q-system that stops unchanged, and keeping the count of derivations is not keeping every property of the derivations. The only changes merging was found to make were in systems like A == A., which never stop under the report’s definition; others may exist.",
+            "Beyond one level of embedding the grammar was sampled, not exhausted: of 9,565,938 sentences of one tree, 500 tried. That no sentence tried was ambiguous is not a proof that none is.",
+            "The graphs of choices were built to test the machine, not taken from any use of it. No literature search was made, and merging equal results is the familiar idea of tabulation and chart parsing, so nothing here is claimed as new."
+          ],
+          "principle": "A rebuilt machine can be measured where its designer never ran it, so long as what was measured is kept apart from what was changed."
+        },
+        {
+          "kind": "question",
+          "text": "Did any later Q-system merge equal arrows?",
+          "status": "OPEN",
+          "detail": "The report defines a phase by adding a whole new path for every application, and none of its examples meets the case where that matters. The FORTRAN translation of the ALGOL program, the machine-code version Colmerauer and Roussel mention, and the Q-systems METEO was written in may have done otherwise. A manual or listing of any of them would say whether the cost of fanning in measured here was ever paid in practice."
+        }
+      ],
+      "sources": [
+        {
+          "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+          "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+          "note": "The definition of a phase, p. 22, and of -INV-, p. 33; the grammar of section 11; the cul-de-sac of pp. 30–31. Read from the page scans for the first note."
+        },
+        {
+          "title": "chrishayuk/q-systems, docs/research.md, QSYS-E08 to E15",
+          "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+          "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+        },
+        {
+          "title": "chrishayuk/q-systems",
+          "url": "https://github.com/chrishayuk/q-systems",
+          "note": "The historical machine, src/machine.rs, unchanged by these experiments; the variants, src/experimental.rs; the programs of E15, research/."
+        },
+        {
+          "title": "Experiments, 26 November 2026",
+          "note": "Every result can be rerun with cargo test --release --test research in the repository; the 131,424 sentences of the first note need -- --ignored as well."
+        }
+      ],
+      "published": "2026-11-26",
+      "revised": "2026-11-27"
+    },
+    "hash": "954a41472596fd0ceed2a7688b4831d295c75b4d1921d913858c6574f5dab812",
+    "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-Q-SYSTEMS-NEXT-TOKEN",
+      "slug": "can-a-language-from-1969-predict-the-next-token",
+      "kind": "notebook",
+      "title": "Can a language from 1969 predict the next token?",
+      "dek": "A graph made by Colmerauer’s Q-systems, rebuilt from his report of 1970, read as a language model. It predicts the next word over 9,565,938 sentences without listing one, exactly where checked, but only for sentences it was built to hold.",
+      "abstract": "A third note on the Q-systems, Alain Colmerauer’s rule language of 1969, reconstructed from his report of 1970. The graphs the reconstructed machine makes hold every sentence they allow. Read as a language model, which is a modern experiment and not anything Colmerauer did, a graph gives the probability of each next word as the share of its complete paths that continue the prefix with that word. Counted by dynamic programming, without listing any sentence, the counts equal those of listing at all 13,510 prefixes of a graph of 1,458 sentences, and the 9,565,938 paraphrases of one sentence of the report’s grammar decode from 2,760 arrows. Against a trigram model trained on all 131,424 sentences of the grammar with at most one level of embedding, the graph of those sentences samples only grammatical French, where the trigram’s samples are grammatical 91 times in 300. But the graph is closed: it gives zero to every sentence with deeper embedding, and the trigram gives a probability to 16 of 300 and invents 29 grammatical sentences it never saw. Read instead as a grammar, by hand, and checked against the machine on 8,414 trees, then given a probability for each choice with the tree drawn only as the prefix needs it, the report’s sixteen rules predict with no tree given and no bound on depth: every sample grammatical, every deeper sentence given a probability. Merging equal partial derivations saved nothing there: no two of them ever left the same work.",
+      "created": "2026-11-26",
+      "version": "1.1",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "THE RECONSTRUCTED MACHINE → ITS GRAPHS READ AS A LANGUAGE MODEL → A TRIGRAM BASELINE → THE RULES READ AS AN OPEN GRAMMAR",
+      "concepts": [
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-Q-SYSTEMS",
+        "N-Q-SYSTEMS-POSSIBILITIES"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A GRAPH OF EVERY SENTENCE",
+          "text": "Colmerauer’s Q-systems hold a set of strings as a graph: every path from its entry to its exit carries one string, and strings that share words share arrows. The first two notes rebuilt the machine from his report of 1970 and measured it. Its French grammar, run as written, writes every paraphrase of a sentence into one graph: a sentence with fourteen embedded clauses has 9,565,938 paraphrases, held in 2,760 arrows. A language model gives the probability of each next word after a prefix. A graph that holds every sentence of a set can do that exactly: the probability of a word is the share of the complete paths that spell the prefix and go on with that word. This note asks how far that goes. It is a modern experiment. Colmerauer used the graphs to analyse and to synthesise, and the TAUM project later to translate, not to predict, and nothing here changes the machine that makes them; the counting reads what it leaves.",
+          "references": [
+            {
+              "label": "QSYS-E16, docs/research.md; src/lm.rs, not historical",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            },
+            {
+              "label": "Colmerauer 1970, pp. 35–42: the grammar and its graph",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / COUNTING WITHOUT LISTING",
+          "text": "Two counts are enough. For each vertex, the number of paths from it to the exit, which the graph gives in one pass from the exit backwards. And for a prefix, the vertices it can reach, with how many paths reach each, which the prefix gives one word at a time. The probability of the next word is then a sum over the arrows leaving those vertices. No sentence is listed. On the 1,458 paraphrases of a sentence with two levels of embedding, the counts were compared with those got by listing every sentence, at every one of their 13,510 prefixes, and they are equal. On the graph of 9,565,938 paraphrases, every sentence is one of the paraphrases, so the distribution is uniform and its entropy is log₂ 9,565,938, 23.19 bits. Choosing the likeliest word each time gives one of them, 88 words long. In the run that explored it, a whole sentence took about 30 microseconds; that was not measured as a benchmark. Twenty sampled sentences, put back through the report’s system inverted, each gave back the tree they came from.",
+          "references": [
+            {
+              "label": "QSYS-E16, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / PATHS OR SENTENCES",
+          "text": "A graph can carry one sentence on two paths, so there are two ways to count: by paths, or by distinct sentences. The second needs the graph made deterministic, its paths that spell the same prefix merged into one state, which can be done only as far as a question needs. In the large French graph the two agree: counted either way it holds 9,565,938, so no paraphrase is spelled twice. Where two paths do spell one string they part. Two rules that turn both A and B into X, run on four choices of A, B or C, leave 81 paths but only 16 strings. Counted by paths, the first word is X 54 times and C 27; counted by strings, 8 and 8. The second note found the same thing in the machine: it counts derivations, not results.",
+          "references": [
+            {
+              "label": "QSYS-E16 and E11, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / AGAINST A TRIGRAM",
+          "text": "The whole language with at most one level of embedding, 8,112 trees, a clause allowed in either argument but none inside another, was put through the grammar as one graph: 131,424 sentences, 2,021,088 words, in 536,641 arrows. A trigram model, the probability of each word given the two before it, was trained on all 131,424. Both were tested on 300 sentences of trees with two levels of embedding, and on 300 sentences sampled from each. The judge of grammar was the report’s own system inverted: a sentence counts as French if it analyses to exactly one tree. Every sample from the graph is grammatical; 91 of the trigram’s 300 are. Of the 300 deeper sentences, the graph gives every one a probability of zero, and the trigram gives 16 a probability above zero. And 29 of the trigram’s grammatical samples are sentences it never saw; each analyses to a tree with two or more levels of embedding. The two fail in opposite ways. The graph is exact and closed: it is a model of the sentences of the trees it was built from, the paraphrases of a given meaning, and nothing else. The trigram generalises and overgenerates.",
+          "references": [
+            {
+              "label": "QSYS-E16, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "05 / THE GRAMMAR IS NOT CLOSED",
+          "text": "The graph is finite; the grammar is not. The report calls the language of its last section “un ensemble restreint mais cependant infini”, and its analysis recognised every deeper sentence tried here. So the sixteen rules were read as a grammar: the clause, active or passive, and a preposition before an argument, giving the name with its prefix, the clause after LE FAIT QUE, QUE, PAR LE FAIT QUE or DE CE QUE, or the clause turned into a noun. That reading was made by hand, and checked against the machine: for each of 8,414 trees, all 8,112 with at most one level of embedding, 300 random trees with clauses on both sides at depth two and two chains of depth five, it gives exactly the strings of the machine’s graph, each as often as the graph has paths for it. Then a probability for each choice. An argument the prefix has not yet reached is left unknown; when it is needed it becomes a name, or, one time in four, a clause whose own arguments are unknown. Each choice between two rewritings is an even chance. To predict, the model keeps every partial derivation that agrees with the prefix, expanded only until its next word is known: the graph built as the prefix asks for it, and no further.",
+          "references": [
+            {
+              "label": "QSYS-E17, docs/research.md; src/open.rs, not historical",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            },
+            {
+              "label": "Colmerauer 1970, p. 35",
+              "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / OPEN AND EXACT",
+          "text": "Bounded at one level of embedding, the model’s 131,424 sentences have probabilities that sum to one, and its predictions equal those of listing every derivation at all 3,287 prefixes of 200 of them. With no bound, every one of the 300 deeper sentences gets a probability above zero, and so do 20 sampled from the 9,565,938 paraphrases. Of 300 sentences it samples, all 300 analyse back to one tree, and 53 have two or more levels of embedding, deeper than anything in the graph of the language. Reading the 88-word paraphrase, it holds at most 2,160 partial derivations at once. Merging those that leave the same work to do, as the second note merged equal arrows, changes nothing: the count is 2,160 with or without, and the probability is the same. No two derivations of a prefix ever left the same work: no ambiguity was found at one level of embedding or in the largest graph, though that does not prove the grammar has none. Merging saves only where there is something equal to merge, and here there was nothing.",
+          "references": [
+            {
+              "label": "QSYS-E17, docs/research.md",
+              "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md"
+            }
+          ]
+        },
+        {
+          "kind": "connection",
+          "text": "The graphs are made by the historical machine, which can be run here; the counting and the open model are in the repository, with the tests that assert every number.",
+          "links": [
+            {
+              "href": "/demos/q-systems?example=paraphrase",
+              "label": "The paraphrase treatment: the graph of eighteen sentences — interactive study"
+            },
+            {
+              "href": "/notebook/a-q-system-can-hold-a-trillion-strings-but-never-sees-two-become-one",
+              "label": "The second note: what the machine costs and loses"
+            },
+            {
+              "href": "/notebook/a-q-system-rule-never-replaced-anything",
+              "label": "The first note: the reconstruction, checked against the report"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+              "label": "QSYS-E16 and E17, with their numbers"
+            },
+            {
+              "href": "https://github.com/chrishayuk/q-systems/blob/main/src/open.rs",
+              "label": "The open model, not historical"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "Colmerauer did not use the Q-systems to predict anything. The prediction layer is ours; the graphs it reads are the reconstructed machine’s, made as his report describes.",
+            "The open model is a hand-made reading of the sixteen rules, checked against the machine on 8,414 fully known trees, not on every tree; the drawing of unknown arguments used for prediction was checked against listing every derivation at one level of embedding, not against the machine. Its probabilities, a clause one time in four and an even chance at each choice, are a choice made here, not learned from anything.",
+            "Nothing here is learned. The trigram is the only model that learns from sentences, and it is a weak baseline; no smoothed n-gram, probabilistic grammar learned from data, or neural network was compared.",
+            "The domain is the report’s: three verbs, four names, one construction. Grammaticality is judged by the report’s own analysis, so the test cannot find French the grammar does not cover.",
+            "Next-token prediction from a grammar is old: probabilistic grammars and their prefix probabilities are well studied, and no literature search was made. Nothing here is claimed as new except that it was done with a machine from 1969."
+          ],
+          "principle": "A model that is exact and a model that generalises fail in opposite ways; to say which a system is, test it on what it was not built from."
+        },
+        {
+          "kind": "question",
+          "text": "Can the rules be learned from the sentences?",
+          "status": "OPEN",
+          "detail": "The open model works because the grammar was read off the report. Given only sentences, could a learner recover rules of the same shape, a clause, a marker and its argument, a choice between rewritings, and would a neural network trained on the same sentences come to hold anything like them?"
+        }
+      ],
+      "sources": [
+        {
+          "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+          "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+          "note": "The grammar of section 11, pp. 35–37, whose synthesis makes the graphs and whose analysis judges grammar. Read from the page scans for the first note."
+        },
+        {
+          "title": "chrishayuk/q-systems, docs/research.md, QSYS-E16 and E17",
+          "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+          "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+        },
+        {
+          "title": "chrishayuk/q-systems",
+          "url": "https://github.com/chrishayuk/q-systems",
+          "note": "The historical machine, src/machine.rs; the counting, src/lm.rs, and the open model, src/open.rs, neither historical."
+        },
+        {
+          "title": "Experiments, 26 November 2026",
+          "note": "Every result can be rerun with cargo test --release --test research in the repository."
+        }
+      ],
+      "published": "2026-11-26",
+      "revised": "2026-11-27"
+    },
+    "hash": "803250633f18b139c2c6af1cf18e0a2387fa840042b86fbd40404bd94da510ae",
+    "algorithm": "sha256"
   }
 ]

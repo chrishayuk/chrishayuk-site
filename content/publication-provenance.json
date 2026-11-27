@@ -2387,5 +2387,103 @@
         "note": "The experiments were designed, run and written up with a coding agent. Every result can be rerun with cargo test --release --test research in the repository."
       }
     ]
+  },
+  {
+    "id": "N-Q-SYSTEMS",
+    "version": "1.2",
+    "recordHash": "856dd873baf94c7f4a36fb2276d7e994614aa7bbdde1c1e9a084c63ffc47ecdc",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "Read in full from the page scans on Alain Colmerauer’s site, linked from the Computer History Museum’s Prolog archive. Every example and quotation was read from the images, not the OCR. The scan lacks printed page 23 and has page 16 twice. All the figures but the TAUM printout are cropped from it. Republished in Traitement Automatique des Langues 33 (1–2), 1992, pp. 105–148, according to Colmerauer’s bibliography (TPLP, 2004); that version was not seen."
+      },
+      {
+        "title": "I. Findeisen-Bellert, interactive session with TAUM translating a sentence from English to French, c. 1972. Gift of Janusz Bień, Computer History Museum",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/montreal/src/Findeisen-Bellert-TAUM-1972.pdf",
+        "note": "Line-printer output, folded at a fixed width. Used only for the form of a printed graph: PHASE n, then -01- … -02-."
+      },
+      {
+        "title": "Computer History Museum, History of Prolog, section Université de Montréal",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/",
+        "note": "The source of both documents, and of the history quoted from Colmerauer and Roussel’s “The birth of Prolog” (1996), which was not read in the original."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The machine, every example of the report with its output, 21 acceptance tests that name their pages, every decision with its evidence, the experiments, and the playground."
+      },
+      {
+        "title": "Reconstruction, 26 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-SYSTEMS-POSSIBILITIES",
+    "version": "1.1",
+    "recordHash": "954a41472596fd0ceed2a7688b4831d295c75b4d1921d913858c6574f5dab812",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "The definition of a phase, p. 22, and of -INV-, p. 33; the grammar of section 11; the cul-de-sac of pp. 30–31. Read from the page scans for the first note."
+      },
+      {
+        "title": "chrishayuk/q-systems, docs/research.md, QSYS-E08 to E15",
+        "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+        "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The historical machine, src/machine.rs, unchanged by these experiments; the variants, src/experimental.rs; the programs of E15, research/."
+      },
+      {
+        "title": "Experiments, 26 November 2026",
+        "note": "Every result can be rerun with cargo test --release --test research in the repository; the 131,424 sentences of the first note need -- --ignored as well."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-SYSTEMS-NEXT-TOKEN",
+    "version": "1.1",
+    "recordHash": "803250633f18b139c2c6af1cf18e0a2387fa840042b86fbd40404bd94da510ae",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "The grammar of section 11, pp. 35–37, whose synthesis makes the graphs and whose analysis judges grammar. Read from the page scans for the first note."
+      },
+      {
+        "title": "chrishayuk/q-systems, docs/research.md, QSYS-E16 and E17",
+        "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+        "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The historical machine, src/machine.rs; the counting, src/lm.rs, and the open model, src/open.rs, neither historical."
+      },
+      {
+        "title": "Experiments, 26 November 2026",
+        "note": "Every result can be rerun with cargo test --release --test research in the repository."
+      }
+    ]
   }
 ]
