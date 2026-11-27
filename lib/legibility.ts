@@ -215,7 +215,14 @@ export const publicationLegibility: Record<string, Legibility> = {
   searchTitle: "Babbage Reordered a Program in August 1837 to Save Ten Turns of the Hand: His First Programs Run as Written",
   description: "Charles Babbage’s two programs of August 1837 for the Analytical Engine, run as written with a coding agent: 122 of the 123 things the sheet states agree. His margin note reorders the first to keep the mill’s table of multiples and save ten turns of the hand; the next day he keeps a, b and c as complements. Step through it in your browser.",
   concepts: ["Charles Babbage", "Analytical Engine", "first computer program", "Science Museum", "Babbage Papers", "simultaneous equations", "history of computing", "coding agents", "verification", "WebAssembly"],
- }, "N-ABSYS": {
+ }, "N-BABBAGE-CONTROL": {
+  subject: "What the control mechanisms of Charles Babbage’s Sketch Books of 1836 to 1838 can compute, at the dates the pages give, proved in Lean for each reading of a page of 7 March 1836 that does not say where a repetition count comes from",
+  question: "If a page does not say where a number comes from, how much of what a machine could compute is in the machine, and how much in the reading?",
+  searchTitle: "How Powerful Was Babbage’s Engine in 1836–1838? It Depends on Where One Number Comes From",
+  description: "Babbage’s Sketch Books of 1836 to 1838, modelled card for card and proved in Lean: with repetition counts from cards the control cannot reach 2↑↑n; from the store it reaches 2↑↑n but not 2↑↑↑n. A count set inside its own loop, or a stop at 1 ÷ 0 read as the end, makes it general. Run the decks and change the rules in your browser.",
+  concepts: ["Charles Babbage", "Analytical Engine", "Sketch Books", "Lean", "formal verification", "loop programs", "Grzegorczyk hierarchy", "tetration", "Minsky machines", "Turing completeness", "history of computing", "coding agents", "WebAssembly"],
+ },
+ "N-ABSYS": {
   subject: "Absys, the assertional language J. M. Foster and E. W. Elcock built at Aberdeen around 1967, reconstructed with a coding agent from their papers of 1968, 1969 and 1990, and run on every example they printed",
   question: "What did the rest of Absys-4 look like?",
   searchTitle: "Absys, Aberdeen 1967, Rebuilt from Its Designers’ Papers: It Did Not Unify Two Unknowns, It Waited",
