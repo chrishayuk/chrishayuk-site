@@ -2391,7 +2391,7 @@
   {
     "id": "N-BABBAGE-CONTROL",
     "version": "1.0",
-    "recordHash": "72e249c6396a80c9ae8efe8b3a3515be463f53c852889c7b320816888f01d02e",
+    "recordHash": "df553e239d4598dcc2e605782bb7ccc8a33117c244b48d4d9211716b6601cbc3",
     "revision": {
       "kind": "initial",
       "summary": "First publication, after a fact-check against analytical-engine a9093f5: repetition counts distinguished from combinatorial counts throughout; December 1837 refuses the 1838 trap deck and needs a second deck; pentation stated as 'not for every n'; the Lean-Rust comparison described as 4,015 runs on 2,015 decks; the maximum tested for small inputs; links pinned to the commit."
@@ -2438,10 +2438,6 @@
         "title": "chrishayuk/analytical-engine, commit a9093f5",
         "url": "https://github.com/chrishayuk/analytical-engine/tree/a9093f5",
         "note": "src/sketch.rs (the machine), control/ (the decks), formal/ (Lean: Termination, Growth, Separation, Tower, GrowthStore, RatSize, Minsky, Trap, Classes), scripts/lean-diff.sh, docs/semantics.md, docs/expressiveness.md, docs/growth-classes.md."
-      },
-      {
-        "title": "Coding-agent sessions, 27 November 2026",
-        "note": "The machine, the rules, the theorems, the archival reading, two independent reviews and the publication fact-check were done in these sessions. Every result in this note can be rerun from the repository."
       }
     ]
   }

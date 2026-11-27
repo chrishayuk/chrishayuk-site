@@ -220,7 +220,7 @@ export const publicationLegibility: Record<string, Legibility> = {
   question: "If a page does not say where a number comes from, how much of what a machine could compute is in the machine, and how much in the reading?",
   searchTitle: "How Powerful Was Babbage’s Engine in 1836–1838? It Depends on Where One Number Comes From",
   description: "Babbage’s Sketch Books of 1836 to 1838, modelled card for card and proved in Lean: with repetition counts from number cards, no halting deck reaches 2↑↑n for every large n; from the store it reaches 2↑↑n but not 2↑↑↑n for every n. Given Minsky’s theorem, a count set inside its own loop, or (for 30 May 1838) a stop at 1 ÷ 0 read as the end, makes it general. Run the decks and change the rules in your browser.",
-  concepts: ["Charles Babbage", "Analytical Engine", "Sketch Books", "Lean", "formal verification", "loop programs", "Grzegorczyk hierarchy", "tetration", "Minsky machines", "Turing completeness", "history of computing", "coding agents", "WebAssembly"],
+  concepts: ["Charles Babbage", "Analytical Engine", "Sketch Books", "Lean", "formal verification", "loop programs", "Grzegorczyk hierarchy", "tetration", "Minsky machines", "Turing completeness", "history of computing", "WebAssembly"],
  },
  "N-ABSYS": {
   subject: "Absys, the assertional language J. M. Foster and E. W. Elcock built at Aberdeen around 1967, reconstructed with a coding agent from their papers of 1968, 1969 and 1990, and run on every example they printed",
