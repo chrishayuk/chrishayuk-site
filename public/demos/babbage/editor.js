@@ -55,7 +55,7 @@ const positionOf = (doc, offset) => {
  */
 export function localTokens(text) {
   const out = [];
-  const re = /(^[ \t]*%[^\n]*|(?<= )%[^\n]*)|(^[ \t]*(?:Sheet|No\.)\b)|("[^"\n]*"?)|(^[ \t]*(?:Date|Title|Image|Letters|Unknowns|Equation|Find|Store|Working|Op|In|Turn|Wheels|Let|Gives|Cards|Carried|Group|Total|Running|Deck|Letter|Back|Result|Time|Moves|Backing|Composition|States|Remark|Unrun)\b)|((?:v|Car)\d+['′″‴]*)|([×÷+−\-|*=·\/]|\bC(?!ar\d)\.?(?=[a-zA-Z(Δ]))|(\d+)|([a-z]['′]*)/gm;
+  const re = /(^[ \t]*%[^\n]*|(?<= )%[^\n]*)|(^[ \t]*(?:Sheet|No\.)\b)|("[^"\n]*"?)|(^[ \t]*(?:Date|Title|Image|Letters|Unknowns|Equation|Find|Store|Working|Op|In|Turn|Wheels|Let|Gives|Cards|Carried|Group|Total|Running|Deck|Letter|Back|Result|Count|Moves|Backing|Composition|States|Remark|Unrun)\b)|((?:v|Car)\d+['′″‴]*)|([×÷+−\-|*=·\/]|\bC(?!ar\d)\.?(?=[a-zA-Z(Δ]))|(\d+)|([a-z]['′]*)/gm;
   for (const m of text.matchAll(re)) {
     const kind = m[1] ? "comment" : m[2] ? "macro" : m[3] ? "string" : m[4] ? "keyword" : m[5] ? "variable" : m[6] ? "operator" : m[7] ? "number" : "parameter";
     const from = m.index + ((m[2] || m[4]) ? m[0].length - m[0].trimStart().length : 0);
