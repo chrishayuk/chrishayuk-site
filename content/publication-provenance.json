@@ -2387,5 +2387,142 @@
         "note": "The experiments were designed, run and written up with a coding agent. Every result can be rerun with cargo test --release --test research in the repository."
       }
     ]
+  },
+  {
+    "id": "N-Q-LM",
+    "version": "1.0",
+    "recordHash": "7ed7505accf6ed1bf61bfd34402579c97c5bb02cebdf62de40857eb641060593",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository's results documents and plans"
+    },
+    "sources": [
+      {
+        "title": "chrishayuk/q-lm",
+        "url": "https://github.com/chrishayuk/q-lm",
+        "note": "The corpus, the learners (src/subst.rs, src/prefix.rs), the transformers (transformer/train.py), and the commands that reproduce every table."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results.md, QLM-002 and QLM-003",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md",
+        "note": "The learned grammar and its exact next-token prediction, with the correction for early stopping. The first run is kept as docs/results-run1.md."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm004.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm004.md",
+        "note": "Inside–outside run to convergence, pruning by expected rule count, and inference cost against the transformer."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-architectures.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-architectures.md",
+        "note": "The Llama arm, and the test that rules out sentence length."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-arch-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-arch-001.md",
+        "note": "Which of Llama’s four changes carries depth."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm005.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm005.md",
+        "note": "Three generated languages, against the plan written before they were generated."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The reconstruction of Colmerauer’s Q-systems, whose machine makes the corpus and judges grammar."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-LM-SCALE",
+    "version": "1.0",
+    "recordHash": "b1cdf27f8123d6c104e103a89477292890fc9703ee32c7628806eb33cc1c916c",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository's results documents and plans"
+    },
+    "sources": [
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-scale-001-kind1.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md",
+        "note": "Kind 1 of QLM-SCALE-001: nested subsets of Colmerauer’s language and the right family, against the plan as revised before measurement."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-scale-001-tinystories.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-tinystories.md",
+        "note": "The same learner on TinyStories sentences, a feasibility run."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-v2-e1-e3.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e1-e3.md",
+        "note": "Bounded-context word classes mixed with a 5-gram, and the Llama-shaped transformer on the same sentences."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-v2-e4.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e4.md",
+        "note": "Abstractions as contexts, with the seeds and flat controls and a confirmation split."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-key-001-b.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-key-001-b.md",
+        "note": "A transformer limited to the 5-gram’s window, which splits v2’s gap to the full transformer."
+      },
+      {
+        "title": "chrishayuk/q-lm",
+        "url": "https://github.com/chrishayuk/q-lm",
+        "note": "The learners, v2/classes.py and v2/hier.py, and the commands that reproduce every table."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-LM-TRANSPLANT",
+    "version": "1.0",
+    "recordHash": "f65141ee3f87505c724c9d6ab0549f25397ea19aef68904cea10ae0eb3ce1d86",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository's results documents and plans"
+    },
+    "sources": [
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-semantic-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-semantic-001.md",
+        "note": "The semantic worlds, and what the learners do on them."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-sem-001-v2.md and docs/results-larql-qlm-sem-001-v3.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v3.md",
+        "note": "Answer states, the entity at its own position, the relation swap and the recombined query, against docs/larql-qlm-sem-001-plan.md and its three amendments."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-transport-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-transport-001.md",
+        "note": "The attention steps and heads that carry the entity, with heads chosen on held-out pairs."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-enrich-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-enrich-001.md",
+        "note": "The enrichment test that failed, and the follow-up at the answer position."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-resolve-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-resolve-001.md",
+        "note": "Where the answer forms, and the fact edited from an external table, confirmed on worlds 4 to 6."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-external-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-external-001.md",
+        "note": "A provider that reads the entity and relation from activations, against its plan, confirmed on worlds 4 to 6."
+      },
+      {
+        "title": "chrishayuk/larql",
+        "url": "https://github.com/chrishayuk/larql",
+        "note": "The series these experiments are named for; for Llama, its per-layer states were checked against PyTorch’s in GROUP-001."
+      },
+      {
+        "title": "M. Geva et al., “Dissecting recall of factual associations”, 2023",
+        "note": "The subject-enrichment account tested by ENRICH-001, as the repository cites it."
+      }
+    ]
   }
 ]
