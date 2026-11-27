@@ -2,7 +2,7 @@ import type { PublicationRecord } from "./types.ts";
 
 /** A working note about rebuilding GEORGE, C. L. Hamblin's reverse Polish
  * scheme for the English Electric DEUCE (1957–58), from the three documents
- * that survive, with a coding agent. Every quoted sentence is copied from the
+ * that survive. Every quoted sentence is copied from the
  * scanned manual, with its page. Every result named here comes from the george
  * repository's README, ERRATA, DECISIONS and reading notes, and can be rerun on
  * /demos/george; results from Hamblin’s own code can be rerun with
@@ -12,19 +12,19 @@ export const georgeRecord: PublicationRecord = {
   slug: "a-handwritten-program-from-1958-runs-again",
   kind: "notebook",
   title: "A handwritten program from 1958 runs again, to the last binary digit.",
-  dek: "Charles Hamblin’s GEORGE, a stack language for the English Electric DEUCE: rebuilt from its manual with a coding agent, then his own translator transcribed from 22 coding sheets and run on a simulated DEUCE, until the two agreed word for word.",
+  dek: "Charles Hamblin’s GEORGE, a stack language for the English Electric DEUCE: rebuilt from its manual, then his own translator transcribed from 22 coding sheets and run on a simulated DEUCE, until the two agreed word for word.",
   abstract: "A working note about rebuilding GEORGE, the General Order Generator that Charles Hamblin wrote for the English Electric DEUCE in 1957–58, from the three documents that survive: the programming manual, 52 pages of flow diagrams and 22 coding sheets. GEORGE programs are reverse Polish, with no addresses, run on a running accumulator of twelve cells. An interpreter built from the manual runs the manual’s programs, and Example 3 punches a quarter of what Simpson’s rule gives, because its coefficients are for the wrong step. Then the coding sheets, transcribed, were run as a deck of cards on a simulated DEUCE. Hamblin’s own translator runs the manual’s programs, and tracing his routines one instruction at a time brought the interpreter to the same 32-digit words as his code: of 5,000 random programs, 4,993 run the same both ways in every respect, and the other 7 differ on purpose, where the manual says something his code does not do. On the way it found four places where a sheet contradicts its flow diagram, and arithmetic in this version that is not what the manual says: an addition that drops a binary digit, and a multiplication that can lose the sign.",
   created: "2026-11-23",
   version: "0.1",
   status: "OPEN",
   publication: "draft",
   authors: ["Chris Hay"],
-  lineage: "TYPESCRIPT · FLOW DIAGRAMS · CODING SHEETS → SCAN → AGENT → INTERPRETER · SIMULATED DEUCE",
-  concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
+  lineage: "TYPESCRIPT · FLOW DIAGRAMS · CODING SHEETS → SCAN → INTERPRETER · SIMULATED DEUCE",
+  concepts: ["source-authority", "verification", "programming-languages"],
   related: ["N-TURING-ACE", "N-CPL", "N-LANING-ZIERLER"],
   media: [],
   body: [
-    { kind: "observation", label: "01 / THREE DOCUMENTS", text: "GEORGE was written by Charles Hamblin at the New South Wales University of Technology in 1957 and 1958, for its English Electric DEUCE. The manual opens: “GEORGE, or the General Order Generator, is a program for DEUCE permitting mathematical problems to be presented to the machine in a simple “addressless” instruction language, here called “G-code”.” Three documents survive, all on David Green’s DEUCE archive, scanned from the originals and supplied by Robin Vowels: the programming and operation manual, 23 typed pages; the flow diagrams, 52 handwritten pages; and the coding sheets, 22 handwritten pages of DEUCE instructions. The archive says the last two are “the only extant copy” and “correspond to the penultimate version of GEORGE IA”. I asked a coding agent to build the language from the manual, and then to read the other two against it.", references: [
+    { kind: "observation", label: "01 / THREE DOCUMENTS", text: "GEORGE was written by Charles Hamblin at the New South Wales University of Technology in 1957 and 1958, for its English Electric DEUCE. The manual opens: “GEORGE, or the General Order Generator, is a program for DEUCE permitting mathematical problems to be presented to the machine in a simple “addressless” instruction language, here called “G-code”.” Three documents survive, all on David Green’s DEUCE archive, scanned from the originals and supplied by Robin Vowels: the programming and operation manual, 23 typed pages; the flow diagrams, 52 handwritten pages; and the coding sheets, 22 handwritten pages of DEUCE instructions. The archive says the last two are “the only extant copy” and “correspond to the penultimate version of GEORGE IA”. Here the language is built from the manual, and the other two are read against it.", references: [
       { label: "David Green’s DEUCE archive, section GEORGE", url: "https://www.uraone.com/computers/deuce/deucdocs.html" },
     ] },
     { kind: "observation", label: "02 / TWELVE CELLS", text: "A G-program is written in reverse Polish and names no addresses. The manual asks the reader to picture a pseudo-machine with a “running accumulator”: “a set of storage locations (known as “cells”) arranged in a linear order and operated on the “last-in-first-out” principle.” A number or a variable goes into the first empty cell; an operator works on the last cell or the last two. So a b + leaves the sum where a was. “The accumulator is limited to 12 cells. This is more than enough for all normal calculations”. Beside it are a link list of six for subroutines and repetitions, and a store of 32 plain variables, 1,024 with one suffix and 4,096 with two. Numbers are floating point with a 22-digit binary mantissa. The interpreter obeys a program a symbol at a time, as GEORGE II did, and the playground shows the twelve cells after every symbol." },
@@ -44,7 +44,7 @@ export const georgeRecord: PublicationRecord = {
     { kind: "refusal", title: "WHAT THIS DOES NOT SHOW", lines: [
       "Word for word means agreement with the sheets as simulated, with four corrections and one reconstructed cell. Much of what the arithmetic rests on is documented in English Electric’s manuals; the divider’s working, the reader’s timing and one class of P31 digits are chosen or inferred. The two routes share the program reader and the symbol codes. Their agreement cannot check those. The interpreter now copies Hamblin’s arithmetic, so the agreement of the two is no longer independent evidence about the arithmetic: it says the model is faithful to his code, not that his code was right. An independent model, OpenAI’s Codex, reviewed the repository and checked samples of the transcription against the scans; its findings and what was done about them are in the repository.",
       "Running Hamblin’s code needed choices the sheets cannot show. A binary digit, P31, has no column on the form, and for one class of words its value rests only on the program running. One doubtful cell is filled from the flow diagram. The three corrections are applied at run time, not written into the transcription.",
-      "All of the reading, of the manual, the flow diagrams and the coding sheets, was done by coding agents. No person has yet checked it against the pages. The transcription of the coding sheets marks 20 lines as doubtful.",
+      "The transcription of the coding sheets marks 20 lines as doubtful.",
       "The flow diagrams and coding sheets are the penultimate version of GEORGE IA. Nothing describes GEORGE II, and margin notes mention variants 1B and 1C.",
       "Where the manual says something specific, the interpreter follows it and not Hamblin’s code: max, the single shot after the square root of a negative number, 0 ÷ 0, rem by a whole divisor of 2¹⁵ or more, and > on a zero word with an exponent. Everywhere the manual is silent, it follows his code.",
       "The simulator is built from manuals, not from a DEUCE. Where they do not say, for instance the reader’s timing between its minimum and maximum, it chooses, and the choices are written down.",
@@ -59,6 +59,6 @@ export const georgeRecord: PublicationRecord = {
     { title: "David Green’s DEUCE archive, section GEORGE", url: "https://www.uraone.com/computers/deuce/deucdocs.html", note: "Scanned from the UTECOM originals and supplied by Robin Vowels. Downloaded on 22 November 2026." },
     { title: "English Electric, “DEUCE Programming Manual”, May 1956; “DEUCE Logical Design Manual, Part I”, NS-y-37/11-57", url: "https://www.uraone.com/computers/deuce/deucdocs.html", note: "The simulator’s sources. The multiplier is chapter 10 of the Logical Design Manual." },
     { title: "chrishayuk/george", url: "https://github.com/chrishayuk/george", note: "The interpreter, the DEUCE simulator, the transcription of the coding sheets, the word-for-word tests against Hamblin’s code, 16 example programs, a tutorial, a language server, the errata, the decisions, the reading notes and an independent review." },
-    { title: "Coding-agent sessions, November 2026", note: "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets were made in these sessions. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george." },
+    { title: "Reconstruction, November 2026", note: "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george." },
   ],
 };

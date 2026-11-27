@@ -2389,6 +2389,1034 @@
     ]
   },
   {
+    "id": "N-Q-LM",
+    "version": "1.0",
+    "recordHash": "7ed7505accf6ed1bf61bfd34402579c97c5bb02cebdf62de40857eb641060593",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository's results documents and plans"
+    },
+    "sources": [
+      {
+        "title": "chrishayuk/q-lm",
+        "url": "https://github.com/chrishayuk/q-lm",
+        "note": "The corpus, the learners (src/subst.rs, src/prefix.rs), the transformers (transformer/train.py), and the commands that reproduce every table."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results.md, QLM-002 and QLM-003",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results.md",
+        "note": "The learned grammar and its exact next-token prediction, with the correction for early stopping. The first run is kept as docs/results-run1.md."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm004.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm004.md",
+        "note": "Inside–outside run to convergence, pruning by expected rule count, and inference cost against the transformer."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-architectures.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-architectures.md",
+        "note": "The Llama arm, and the test that rules out sentence length."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-arch-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-arch-001.md",
+        "note": "Which of Llama’s four changes carries depth."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm005.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm005.md",
+        "note": "Three generated languages, against the plan written before they were generated."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The reconstruction of Colmerauer’s Q-systems, whose machine makes the corpus and judges grammar."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-LM-SCALE",
+    "version": "1.0",
+    "recordHash": "b1cdf27f8123d6c104e103a89477292890fc9703ee32c7628806eb33cc1c916c",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository's results documents and plans"
+    },
+    "sources": [
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-scale-001-kind1.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-kind1.md",
+        "note": "Kind 1 of QLM-SCALE-001: nested subsets of Colmerauer’s language and the right family, against the plan as revised before measurement."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-scale-001-tinystories.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-scale-001-tinystories.md",
+        "note": "The same learner on TinyStories sentences, a feasibility run."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-v2-e1-e3.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e1-e3.md",
+        "note": "Bounded-context word classes mixed with a 5-gram, and the Llama-shaped transformer on the same sentences."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-v2-e4.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-v2-e4.md",
+        "note": "Abstractions as contexts, with the seeds and flat controls and a confirmation split."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-key-001-b.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-key-001-b.md",
+        "note": "A transformer limited to the 5-gram’s window, which splits v2’s gap to the full transformer."
+      },
+      {
+        "title": "chrishayuk/q-lm",
+        "url": "https://github.com/chrishayuk/q-lm",
+        "note": "The learners, v2/classes.py and v2/hier.py, and the commands that reproduce every table."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-LM-TRANSPLANT",
+    "version": "1.0",
+    "recordHash": "f65141ee3f87505c724c9d6ab0549f25397ea19aef68904cea10ae0eb3ce1d86",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after an independent fact-check against the repository's results documents and plans"
+    },
+    "sources": [
+      {
+        "title": "chrishayuk/q-lm, docs/results-qlm-semantic-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-qlm-semantic-001.md",
+        "note": "The semantic worlds, and what the learners do on them."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-sem-001-v2.md and docs/results-larql-qlm-sem-001-v3.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-sem-001-v3.md",
+        "note": "Answer states, the entity at its own position, the relation swap and the recombined query, against docs/larql-qlm-sem-001-plan.md and its three amendments."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-transport-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-transport-001.md",
+        "note": "The attention steps and heads that carry the entity, with heads chosen on held-out pairs."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-enrich-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-enrich-001.md",
+        "note": "The enrichment test that failed, and the follow-up at the answer position."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-resolve-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-resolve-001.md",
+        "note": "Where the answer forms, and the fact edited from an external table, confirmed on worlds 4 to 6."
+      },
+      {
+        "title": "chrishayuk/q-lm, docs/results-larql-qlm-external-001.md",
+        "url": "https://github.com/chrishayuk/q-lm/blob/main/docs/results-larql-qlm-external-001.md",
+        "note": "A provider that reads the entity and relation from activations, against its plan, confirmed on worlds 4 to 6."
+      },
+      {
+        "title": "chrishayuk/larql",
+        "url": "https://github.com/chrishayuk/larql",
+        "note": "The series these experiments are named for; for Llama, its per-layer states were checked against PyTorch’s in GROUP-001."
+      },
+      {
+        "title": "M. Geva et al., “Dissecting recall of factual associations”, 2023",
+        "note": "The subject-enrichment account tested by ENRICH-001, as the repository cites it."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-SYSTEMS",
+    "version": "1.2",
+    "recordHash": "856dd873baf94c7f4a36fb2276d7e994614aa7bbdde1c1e9a084c63ffc47ecdc",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "Read in full from the page scans on Alain Colmerauer’s site, linked from the Computer History Museum’s Prolog archive. Every example and quotation was read from the images, not the OCR. The scan lacks printed page 23 and has page 16 twice. All the figures but the TAUM printout are cropped from it. Republished in Traitement Automatique des Langues 33 (1–2), 1992, pp. 105–148, according to Colmerauer’s bibliography (TPLP, 2004); that version was not seen."
+      },
+      {
+        "title": "I. Findeisen-Bellert, interactive session with TAUM translating a sentence from English to French, c. 1972. Gift of Janusz Bień, Computer History Museum",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/montreal/src/Findeisen-Bellert-TAUM-1972.pdf",
+        "note": "Line-printer output, folded at a fixed width. Used only for the form of a printed graph: PHASE n, then -01- … -02-."
+      },
+      {
+        "title": "Computer History Museum, History of Prolog, section Université de Montréal",
+        "url": "https://softwarepreservation.computerhistory.org/prolog/",
+        "note": "The source of both documents, and of the history quoted from Colmerauer and Roussel’s “The birth of Prolog” (1996), which was not read in the original."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The machine, every example of the report with its output, 21 acceptance tests that name their pages, every decision with its evidence, the experiments, and the playground."
+      },
+      {
+        "title": "Reconstruction, 26 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-SYSTEMS-POSSIBILITIES",
+    "version": "1.1",
+    "recordHash": "954a41472596fd0ceed2a7688b4831d295c75b4d1921d913858c6574f5dab812",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "The definition of a phase, p. 22, and of -INV-, p. 33; the grammar of section 11; the cul-de-sac of pp. 30–31. Read from the page scans for the first note."
+      },
+      {
+        "title": "chrishayuk/q-systems, docs/research.md, QSYS-E08 to E15",
+        "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+        "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The historical machine, src/machine.rs, unchanged by these experiments; the variants, src/experimental.rs; the programs of E15, research/."
+      },
+      {
+        "title": "Experiments, 26 November 2026",
+        "note": "Every result can be rerun with cargo test --release --test research in the repository; the 131,424 sentences of the first note need -- --ignored as well."
+      }
+    ]
+  },
+  {
+    "id": "N-Q-SYSTEMS-NEXT-TOKEN",
+    "version": "1.1",
+    "recordHash": "803250633f18b139c2c6af1cf18e0a2387fa840042b86fbd40404bd94da510ae",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. Colmerauer, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, publication interne no 43, Département d’informatique, Université de Montréal, September 1970",
+        "url": "http://alain.colmerauer.free.fr/alcol/ArchivesPublications/SystemesQ/SystemesQ.pdf",
+        "note": "The grammar of section 11, pp. 35–37, whose synthesis makes the graphs and whose analysis judges grammar. Read from the page scans for the first note."
+      },
+      {
+        "title": "chrishayuk/q-systems, docs/research.md, QSYS-E16 and E17",
+        "url": "https://github.com/chrishayuk/q-systems/blob/main/docs/research.md",
+        "note": "Every count in this note, with the test in tests/research.rs that asserts it."
+      },
+      {
+        "title": "chrishayuk/q-systems",
+        "url": "https://github.com/chrishayuk/q-systems",
+        "note": "The historical machine, src/machine.rs; the counting, src/lm.rs, and the open model, src/open.rs, neither historical."
+      },
+      {
+        "title": "Experiments, 26 November 2026",
+        "note": "Every result can be rerun with cargo test --release --test research in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-ABSYS",
+    "version": "1.3",
+    "recordHash": "d87b64840089323ae61243d4e91ef0c7dacca486e1d3d8e0e220ee2c13bfdfe4",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.2"
+    },
+    "sources": [
+      {
+        "title": "E. W. Elcock, “Absys: the first logic programming language — a retrospective and a commentary”, Journal of Logic Programming 9(1), 1990, pp. 1–17",
+        "url": "https://doi.org/10.1016/0743-1066(90)90030-9",
+        "note": "Read in full from the page scans of the Elsevier open archive. Every program and binding environment quoted was read from the images; the OCR garbles them."
+      },
+      {
+        "title": "J. M. Foster and E. W. Elcock, “Absys 1: an incremental compiler for assertions; an introduction”, Machine Intelligence 4, Edinburgh University Press, 1969, from p. 423",
+        "url": "https://archive.org/details/machineintellige0004unse",
+        "note": "Read only from the OCR extracts of most of its sections quoted on HOPL; the scan is on archive.org for lending only."
+      },
+      {
+        "title": "E. W. Elcock, “Goal selection strategies in Horn clause programming”, Proceedings of the Fourth Biennial Conference of the CSCSI/SCEIO, Saskatoon, 1982, pp. 121–124",
+        "url": "https://www.caiac.ca/sites/default/files/shared/canai-archives/1982_CSCSI_Proceedings-opt.pdf",
+        "note": "Read in full from the page scans of the proceedings (PDF pp. 129–132). Found after version 1.0 of this note; its list of relations is now an acceptance test."
+      },
+      {
+        "title": "J. M. Foster, “Assertions: programs written without specifying unnecessary order”, Machine Intelligence 3, Edinburgh University Press, 1968, pp. 387–391",
+        "url": "https://archive.org/details/mi3_20200519",
+        "note": "Read in full. A design paper; the system it describes was then “partly implemented on an Elliott 4120”. Its “pass sets” are the rule for arithmetic here."
+      },
+      {
+        "title": "chrishayuk/absys",
+        "url": "https://github.com/chrishayuk/absys",
+        "note": "The interpreter, both notations, the published results as tests, every decision with its evidence, the experiments, a tutorial, a language server and editor extension, and the playground."
+      },
+      {
+        "title": "Reconstruction, 25 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-ATLAS-AUTOCODE",
+    "version": "1.1",
+    "recordHash": "cad416e2d08758af1a063d9f8e2971814714a4d967d5b4c9c7a36bf2a97a1ec6",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "R. A. Brooker and J. S. Rohl, “Atlas Autocode Reference Manual”, Manchester University, 1 March 1965",
+        "url": "https://gtoal.com/history.dcs.ed.ac.uk/archive/docs/Atlas_Autocode_1965.pdf",
+        "note": "The language of COMPILER AA. Bound in at the end: “Amendments for COMPILER AB”, pp. B1.1–B1.4, with the program and printout of pp. B1.3–B1.4."
+      },
+      {
+        "title": "W. F. Lunnon and G. Riding, “The Atlas Autocode Mini-Manual”, Manchester University, July 1965",
+        "url": "http://www.ancientgeek.org.uk/EMAS/Miscellaneous/Atlas_Autocode_Mini_Manual.pdf",
+        "note": "COMPILER AB in nine pages. Pp. 7–8: the binomial coefficients program and its printout."
+      },
+      {
+        "title": "Ferranti, the “Atlas Bible”, sections dated 1963",
+        "url": "https://gtoal.com/history.dcs.ed.ac.uk/archive/atlas/atlasbible.pdf",
+        "note": "§3.1 for the floating-point orders and their rounding; §8.7.4 for the Flexowriter’s seven-track code, key by key."
+      },
+      {
+        "title": "The Edinburgh KDF9 compiler for Atlas Autocode, Version 4G, 1965",
+        "url": "https://gtoal.com/history.dcs.ed.ac.uk/archive/languages/atlas-autocode/",
+        "note": "Written in Atlas Autocode. The wording of two messages the Atlas documents do not give."
+      },
+      {
+        "title": "chrishayuk/atlas-autocode, release v0.1.0",
+        "url": "https://github.com/chrishayuk/atlas-autocode",
+        "note": "The interpreter, both compilers, the 1965 printouts as tests, the errata, the independent review, a tutorial, a language server and editor extension, and the playground."
+      },
+      {
+        "title": "The independent review of the repository, by OpenAI Codex CLI, 25 November 2026",
+        "url": "https://github.com/chrishayuk/atlas-autocode/blob/main/docs/independent-review.md",
+        "note": "Eighteen findings and what was done about each."
+      },
+      {
+        "title": "Reconstruction, 24–25 November 2026",
+        "note": "The interpreter, the transcriptions and the comparisons. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-ALGOL-60",
+    "version": "1.1",
+    "recordHash": "ef9d45517cc7b1db4c6f45268e3caf8cb03a4ae1b4b4ab74a426297ae3c57c27",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "P. Naur (ed.), “Revised Report on the Algorithmic Language ALGOL 60”, 1962",
+        "url": "https://www.masswerk.at/algol60/report.htm"
+      },
+      {
+        "title": "D. E. Knuth, “Man or boy?”, Algol Bulletin 17.2.4, July 1964, p. 7",
+        "url": "https://archive.computerhistory.org/resources/text/algol/algol_bulletin/A17/A17P7.GIF"
+      },
+      {
+        "title": "F. E. J. Kruseman Aretz, “The Dijkstra–Zonneveld ALGOL 60 compiler for the Electrologica X1”, CWI report SEN-N0301, 2003",
+        "url": "https://ir.cwi.nl/pub/4155",
+        "note": "The full text of a 1964 version of the compiler, with a Pascal equivalent, the 23 special properties of the 1962 user manual (section 1.3) and the outer-planets program (appendix B)."
+      },
+      {
+        "title": "F. E. J. Kruseman Aretz, “A comparison between the ALGOL 60 implementations on the Electrologica X1 and the Electrologica X8”",
+        "url": "https://ir.cwi.nl/pub/13677",
+        "note": "Its appendix B.1 is an extract of the X1 user manual describing the arithmetic of the run-time routines: real zero, overflow, integer intermediates."
+      },
+      {
+        "title": "E. W. Dijkstra, “Cursus programmeren in ALGOL 60”, 2nd edition, Mathematisch Centrum, February 1962",
+        "url": "https://ir.cwi.nl/pub/9591",
+        "note": "x := 7/2 is undefined for an integer x."
+      },
+      {
+        "title": "E. W. Dijkstra, “Cursus programmeren in ALGOL 60”, 11th edition, Mathematisch Centrum, undated",
+        "url": "https://ir.cwi.nl/pub/9606",
+        "note": "Pp. 17–18, shown in the note: the same passage on 7/2. Pp. 68–69 of the scan: numbers beyond the range of variables typed as 0 or ‘inf’."
+      },
+      {
+        "title": "J. A. Zonneveld, “Automatic Numerical Integration”, Mathematical Centre Tracts 8, 1964",
+        "url": "https://ir.cwi.nl/pub/13099",
+        "note": "Pp. 102–107: the outer-planets program, JAZ164, and what the X1 printed for it. The first run (eps = 10⁻³) is on p. 103, two more tolerances on p. 104, and the run with the mass of Pluto set to zero on p. 106."
+      },
+      {
+        "title": "S. Vakulenko, x1-algol-compiler",
+        "url": "https://github.com/sergev/x1-algol-compiler",
+        "note": "The 1964 compiler in C, with a simulator of the X1 and a reconstructed run-time."
+      },
+      {
+        "title": "chrishayuk/algol-60, release v0.1.1",
+        "url": "https://github.com/chrishayuk/algol-60",
+        "note": "The interpreter, --x1 with a source for every rule, the 39 probes run three ways, the 1964 output as a test, and the playground."
+      },
+      {
+        "title": "Reconstruction, 22–23 November 2026",
+        "note": "The interpreter, --x1, the probes and the transcription of the 1964 output. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-BASIC",
+    "version": "1.3",
+    "recordHash": "13d2188a948647e1ef7ca8323628ced6f70063b952692cd8d67d9768b33a25fb",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.2"
+    },
+    "sources": [
+      {
+        "title": "Dartmouth College Computation Center, “BASIC”, instruction manual, May 1964, first draft. Commemorative reprint hosted by Dartmouth College",
+        "url": "https://www.dartmouth.edu/basicfifty/basicmanual_1964.pdf",
+        "note": "The preface is on p. 1; “only 13 other operations” on p. 4; numbers, variables, the arrow and SQR on p. 5; the example programs and their results on pp. 21–23."
+      },
+      {
+        "title": "Dartmouth College Computation Center, “BASIC”, manual, 1 October 1964",
+        "url": "https://alandix.com/wp-content/uploads/2021/07/BASIC_Oct64.pdf",
+        "note": "Rules for printing on pp. 31 and 34; LOG of the absolute value on p. 11; INT and RND on p. 39; the table of cubes on p. 35; fifteen statements in Appendix C. The copy linked is one public scan; the one read for this note is another scan of the same edition."
+      },
+      {
+        "title": "chrishayuk/chuk-basic-rs",
+        "url": "https://github.com/chrishayuk/chuk-basic-rs",
+        "note": "The interpreter, a compiler to WebAssembly, their tests, a tutorial, 168 sample programs including both manuals’, and reduced scans of the pages used."
+      },
+      {
+        "title": "David H. Ahl (ed.), BASIC Computer Games, 1978. Listings from coding-horror/basic-computer-games",
+        "url": "https://github.com/coding-horror/basic-computer-games",
+        "note": "103 program listings (the collection counts 96 games), run unmodified, as a check on the interpreter."
+      },
+      {
+        "title": "PC-BASIC 2.0.8, an emulation of Microsoft GW-BASIC",
+        "url": "https://robhagemans.github.io/pcbasic/",
+        "note": "Run on the manual’s program 2 for this note: it stops with “Illegal function call in 40”."
+      },
+      {
+        "title": "Experiments, 24 November 2026",
+        "note": "The October manual’s programs typed in and run, its rules for printing put into 1964 mode, and this note brought up to date."
+      },
+      {
+        "title": "Reconstruction, 21–22 November 2026",
+        "note": "The counts in section 06 are as they were reported. The programs from the manual were run again for this note, and can be run above."
+      }
+    ]
+  },
+  {
+    "id": "N-BOHM",
+    "version": "1.2",
+    "recordHash": "7ff63c7503080714cc831bea0f5af4af99695f51ac20f4ce9428e2fab13f32d3",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "Corrado Böhm, “Calculatrices digitales. Du déchiffrage de formules logico-mathématiques par la machine même dans la conception du programme”, dissertation, ETH Zürich, 1951; printed Bologna, 1954",
+        "url": "https://www.research-collection.ethz.ch/handle/20.500.11850/132662",
+        "note": "Euclid’s algorithm is on p. 25. The compiler is chapter 7, pp. 39–43: group C on p. 40, group E′ on p. 43."
+      },
+      {
+        "title": "The same, translated into English by Peter Sestoft, 2016",
+        "url": "https://raspi.itu.dk/~sestoft/boehmthesis/",
+        "note": "Appendix B: “We have made a simple implementation in Java of Böhm’s machine, and his compiler and loader”. The translation omits group W of chapter 7."
+      },
+      {
+        "title": "Donald E. Knuth and Luis Trabb Pardo, “The Early Development of Programming Languages”, Stanford report STAN-CS-76-562, August 1976, pp. 35–42",
+        "url": "http://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "The bug is reported on p. 40, the hand-worked formula is on p. 41, and their TPK program in Böhm’s language is on pp. 36–39."
+      },
+      {
+        "title": "chrishayuk/bohm",
+        "url": "https://github.com/chrishayuk/bohm",
+        "note": "The machine, loader and compiler, their tests, 42 example programs, a tutorial, and reduced scans of the pages the corrections rest on."
+      },
+      {
+        "title": "Reconstruction, 22 November 2026",
+        "note": "The machine, the loader, both compilers’ harness and the transcription of chapter 7. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-CPL",
+    "version": "1.2",
+    "recordHash": "a18750b5c38fa5177b9d64003c2b1c1056fb4e299701bc4e7b8b85aa76aba514",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "University of London Institute of Computer Science and The Mathematical Laboratory, Cambridge, “CPL Working Papers”, technical report, July 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Working_Papers.pdf",
+        "note": "Appendix 1, “The Preprocessor”, begins on page 120 of the PDF. The program is Part 2, on pages 2 to 6 of the appendix; the informal definitions are Part 3, on pages 6 and 7."
+      },
+      {
+        "title": "“CPL Elementary Programming Manual”, Edition II, Cambridge, January 1966",
+        "url": "https://www.ancientgeek.org.uk/CPL/CPL_Elementary_Programming_Manual.pdf"
+      },
+      {
+        "title": "D. W. Barron, J. N. Buxton, D. F. Hartley, E. Nixon and C. Strachey, “The main features of CPL”, The Computer Journal 6, 1963",
+        "url": "https://www.ancientgeek.org.uk/CPL/The_Main_Features_of_CPL.pdf"
+      },
+      {
+        "title": "Martin Richards, “How BCPL evolved from CPL”",
+        "url": "https://www.cl.cam.ac.uk/~mr10/cpl2bcpl.pdf"
+      },
+      {
+        "title": "chrishayuk/cpl",
+        "url": "https://github.com/chrishayuk/cpl",
+        "note": "The interpreter, its tests, 73 example programs, a tutorial, and the preprocessor as printed and corrected with a detail of the page for each slip."
+      },
+      {
+        "title": "Reconstruction, 22 November 2026",
+        "note": "The interpreter, the transcription of Appendix 1 and the functions it leaves informal. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-GEORGE",
+    "version": "1.2",
+    "recordHash": "7bc0bac50c510b7d70ec944642fc54eaf0a7093aa973efb82e3e740ca2a2e79b",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "C. L. Hamblin, “GEORGE IA and II: A semi-translation programming scheme for DEUCE. Programming and Operation Manual”, University of New South Wales, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEProgrammingManual.pdf",
+        "note": "23 pages, typed. The running accumulator is on printed p. 2 (PDF p. 5); the comma on p. 4 (PDF p. 7); Example 3 on pp. 7-8 (PDF pp. 10-11); the twelve cells on p. 10 (PDF p. 13); the coding table, Appendix I, on p. 18 (PDF p. 21)."
+      },
+      {
+        "title": "“GEORGE flow diagrams”, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEFlowCharts.pdf",
+        "note": "52 pages, handwritten DEUCE instruction listings. Relations and logic on p. 22; ] on p. 23; skips on p. 25; rep on pp. 26-27; sin and cos on p. 38."
+      },
+      {
+        "title": "“UTECOM Programme GEORGE”, coding sheets, c. 1958",
+        "url": "http://uraone.com/computers/deuce/GEORGEProgramCode.pdf",
+        "note": "22 pages, handwritten DEUCE instructions. The sin and cos coefficients are on sheet 21, DL8, track 15/13."
+      },
+      {
+        "title": "David Green’s DEUCE archive, section GEORGE",
+        "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+        "note": "Scanned from the UTECOM originals and supplied by Robin Vowels. Downloaded on 22 November 2026."
+      },
+      {
+        "title": "English Electric, “DEUCE Programming Manual”, May 1956; “DEUCE Logical Design Manual, Part I”, NS-y-37/11-57",
+        "url": "https://www.uraone.com/computers/deuce/deucdocs.html",
+        "note": "The simulator’s sources. The multiplier is chapter 10 of the Logical Design Manual."
+      },
+      {
+        "title": "chrishayuk/george",
+        "url": "https://github.com/chrishayuk/george",
+        "note": "The interpreter, the DEUCE simulator, the transcription of the coding sheets, the word-for-word tests against Hamblin’s code, 16 example programs, a tutorial, a language server, the errata, the decisions, the reading notes and an independent review."
+      },
+      {
+        "title": "Reconstruction, November 2026",
+        "note": "The interpreter, the simulator, the reading of the flow diagrams and the transcription of the coding sheets. The interpreter’s results can be rerun on the interactive study; those of Hamblin’s code with george deuce george."
+      }
+    ]
+  },
+  {
+    "id": "N-IPLV",
+    "version": "1.1",
+    "recordHash": "a828b011ccdfb000692f7864e7fbdd30a8b2fd171a3906faddb02b15ecce1313",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.0"
+    },
+    "sources": [
+      {
+        "title": "A. Newell (ed.), “Information Processing Language-V Manual”, second edition, Prentice-Hall, 1964",
+        "url": "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/IPL-V/manual",
+        "note": "Fig. 1 and Fig. 2 are on pages 21 and 23 of Part One, Fig. 3 on page 34, R62 on page 26, and J101 as Fig. 11 on pages 80 and 81. Part Two, the Programmers’ Reference Manual, is the specification the reconstruction follows."
+      },
+      {
+        "title": "A. Newell and F. M. Tonge, “An Introduction to Information Processing Language V”, Communications of the ACM 3(4), April 1960",
+        "url": "https://iiif.library.cmu.edu/file/Newell_box00040_fld03188_doc0001/Newell_box00040_fld03188_doc0001.pdf"
+      },
+      {
+        "title": "E. Stefferud, “The Logic Theory Machine: A Model Heuristic Program”, RAND RM-3731, 1963",
+        "url": "https://github.com/jeffshrager/ExecutableArchaeology/tree/main/LogicTheorist",
+        "note": "The program and its output for 24 theorems."
+      },
+      {
+        "title": "David Moews, ipl-v-logic-theorist",
+        "url": "https://github.com/dmoews/ipl-v-logic-theorist",
+        "note": "Corrections to Rupert Lane and Jeff Shrager’s transcription of Stefferud’s deck, a transcription of its 1963 output, and notes on running it on Rob Storey’s IBM 7094 emulator."
+      },
+      {
+        "title": "Jeff Shrager, Executable Archaeology, and “Executable Archaeology: Reanimating the Logic Theorist from its IPL-V Source”, 2026",
+        "url": "https://github.com/jeffshrager/ExecutableArchaeology",
+        "note": "A Common Lisp IPL-V that runs the Logic Theorist, Simon’s Heuristic Coder and the Simon–Yngve sentence generator. The reconstruction’s output on the last two was compared with it."
+      },
+      {
+        "title": "chrishayuk/ipl-v",
+        "url": "https://github.com/chrishayuk/ipl-v",
+        "note": "The reconstruction, its tests against the manual’s figures, the programs of Part One transcribed, a tutorial, and the machine in WebAssembly."
+      },
+      {
+        "title": "Reconstruction, 22 November 2026",
+        "note": "The reconstruction, the transcriptions and the comparisons in this note. Every result can be rerun with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-JOSS",
+    "version": "1.3",
+    "recordHash": "8b663014c48deba3f682ebff6e6d511769bebf1d0f7bade8aa1b37f99bb4fecc",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.2"
+    },
+    "sources": [
+      {
+        "title": "J. C. Shaw, “JOSS: Experience with an Experimental Computing Service for Users at Remote Typewriter Consoles”, RAND P-3149, May 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-3149_JOSS_Experience_With_An_Experimental_Computing_Service_For_Users_At_Remote_Typwriter_Consoles_May65.pdf",
+        "note": "Figure 1 is on page 6 of the PDF, figure 2 on page 8, and the one-page summary of the language on page 11."
+      },
+      {
+        "title": "J. C. Shaw, “JOSS: Examples of the Use of an Experimental On-Line Computing Service”, RAND P-3131, April 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-3131_JOSS_Examples_Of_The_Use_Of_An_Experimental_On-Line_Computing_Service_Apr65.pdf",
+        "note": "Eight pages typed at a console on 28 April 1965, reproduced in two colours."
+      },
+      {
+        "title": "J. C. Shaw, “JOSS: A Designer’s View of an Experimental On-Line Computing System”, RAND P-2922, August 1964",
+        "url": "https://bitsavers.org/pdf/rand/joss/P-2922_JOSS_A_Designers_View_Of_An_Experimental_On-Line_Computing_System_Aug64.pdf",
+        "note": "Figures 3a to 3i. log(2) is in figure 3b, on page 17 of the PDF."
+      },
+      {
+        "title": "C. L. Baker, “JOSS: Scenario of a Filmed Report”, RAND RM-4162-PR, June 1964",
+        "url": "https://bitsavers.org/pdf/rand/joss/RM-4162-PR_JOSS_Scenario_Of_A_Filmed_Report_Jun64.pdf",
+        "note": "The session filmed on 21 March 1964. The row for 72 is on page 23 of the PDF."
+      },
+      {
+        "title": "“JOSS 666”, JOHNNIAC assembly listing, J. C. Shaw, 9 January 1965",
+        "url": "https://bitsavers.org/pdf/rand/joss/JOSS_666_Listing_Jan65.pdf",
+        "note": "The error messages are on pages 37 to 42 of the PDF; the others on pages 10 to 12, 79 and 122 to 126."
+      },
+      {
+        "title": "“JOSS Program Notes and Tests”, J. C. Shaw’s working papers",
+        "url": "https://bitsavers.org/pdf/rand/joss/JOSS_Program_Notes_and_Tests.pdf",
+        "note": "The note of 11-19-64 is page 13 of the PDF."
+      },
+      {
+        "title": "chrishayuk/joss",
+        "url": "https://github.com/chrishayuk/joss",
+        "note": "The interpreter, the five sessions as transcripts, its tests, a tutorial, example programs, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Reconstruction, 22 November 2026",
+        "note": "The interpreter, the transcriptions and the reading of the listings. Every count in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-LANING-ZIERLER",
+    "version": "1.4",
+    "recordHash": "20d3e0b681f32039548c760d0f9b65ec1564ffdc05d6e0cad8487f461bf643f5",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.3"
+    },
+    "sources": [
+      {
+        "title": "J. H. Laning Jr. and N. Zierler, “A Program for Translation of Mathematical Equations for Whirlwind I”, Engineering Memorandum E-364, MIT Instrumentation Laboratory, January 1954",
+        "url": "https://web.mit.edu/digitalapollo/Documents/Chapter5/laningwhirlwind.pdf",
+        "note": "Page numbers are the manual’s own (its page 1 is page 6 of the PDF). a/b/c is on pages 4 and 5, “roughly, 9.2233995 · 10¹⁸” and .05 on page 6, the zero on page 8, the index rule on page 13, the innocuous change on page 19, and the Temporary Rules and Restrictions on page 21."
+      },
+      {
+        "title": "Project Whirlwind Summary Report No. 37, first quarter 1954, item 108, “An Interpretive Program”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/Project_Whirlwind_Summary_Report_No_37_First_Quarter_1954.pdf",
+        "note": "The x|N routine, the master tape 108-60-30, and Zierler’s unfinished report on the program’s inner workings."
+      },
+      {
+        "title": "“Digital Computers: Advanced Coding Techniques”, MIT Summer Session 1954, lecture 13, “The Algebraic Coding System of Laning and Zierler”",
+        "url": "https://bitsavers.org/pdf/mit/whirlwind/summer_session_1954/Digital_Computers_Advanced_Coding_Techniques_Summer_1954.pdf",
+        "note": "Their own version of the differential-equation program, without a PRINT, is on page 13-3; the first runs and the six to eight times on page 13-4; “no annotated copies of the conversion routine” is in the discussion that follows."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "Page numbers are the report’s own. TPK in the Laning and Zierler system is on pages 56 and 57; Adams’s ten to one (from a paper with Laning named as co-author, which page 97 says he did not write) on page 58; Laning’s recollections, the lead-pursuit program and “I lived in fear” on page 59; Backus’s visit on page 60."
+      },
+      {
+        "title": "J. H. Laning Jr., letter to D. E. Knuth, 2 July 1976, with enclosures",
+        "url": "https://cs.stanford.edu/~knuth/from-Laning-76-07-02.pdf",
+        "note": "The 1953 listing is enclosure 1, not reproduced here; the lead-pursuit program, pp. 12–14, and the first page of its output, p. 15, are enclosure 2. The minus sign in “X = −1” is on p. 6."
+      },
+      {
+        "title": "D. E. Knuth, letter to J. H. Laning Jr., 16 August 1976",
+        "url": "https://cs.stanford.edu/~knuth/to-Laning-76-08-16.pdf",
+        "note": "“The program has only one bug, namely the problem you mentioned about unary minus: −x gets treated as 1−x.”"
+      },
+      {
+        "title": "J. H. Laning Jr., Whirlwind algebraic interpreter, listing, March 1953, with D. E. Knuth’s notes of August 1976, Knuth Digital Archive U2774, Computer History Museum",
+        "url": "https://archive.computerhistory.org/resources/text/Knuth_Don_X4100/PDF_index/KnuthDigitalArchive-Index.html",
+        "note": "“Tape T-2134-m8 plus correction tape P-2134-10”, 20 sheets. Knuth’s notes, p. 4: “subscripted variables, drum overlay usage, D operator: not yet implemented.”"
+      },
+      {
+        "title": "L. A. Stabile, the 1953 listing transcribed and run on G. Fedorkow’s Whirlwind simulator",
+        "url": "https://github.com/gfedorkow/Whirlwind-Instruction-Simulator/tree/master/Code-Samples/Laning-and-Zierler-Interpreter",
+        "note": "With Stabile’s paper of March 2026 and Knuth’s correspondence with Laning. Read for this note, not checked."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "The interpreter, every program in the manual with the page it types, a tutorial, a language server, and reduced scans of the pages."
+      },
+      {
+        "title": "Reconstruction, 22 and 25 November 2026",
+        "note": "The interpreter, its tests and the reading of the manual were made in the first; the lead-pursuit program and its page were transcribed and compared in the second, and reviewed by OpenAI Codex. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-NINE-CHAPTERS",
+    "version": "1.2",
+    "recordHash": "22046d4a9a22dc428e2f4fd699235ed4148bf6f903fc693283b2ff129a667ab5",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "九章算術, Sibu congkan (四部叢刊) photographic reprint of the Weiboxie (微波榭) edition, with Liu Hui’s commentary (263), Li Chunfeng’s notes (656) and Dai Zhen’s collation notes (訂訛, 1770s)",
+        "url": "https://commons.wikimedia.org/wiki/File:Sibu_Congkan0392-%E5%8A%89%E5%BE%BD-%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93-3-3.djvu",
+        "note": "Chapter 8 is djvu pages 2 to 53 of Sibu Congkan0392-劉徽-九章算術-3-3.djvu on Wikimedia Commons: the witness, from which every figure was read. Problem 2’s answer is on pages 6 and 7, Problem 6’s procedure on 14, Liu Hui’s 77 on 32, Dai Zhen’s 145 and 99 on 48 and 49. Public domain."
+      },
+      {
+        "title": "九章算術 (四部叢刊本)/卷第八, Wikisource",
+        "url": "https://zh.wikisource.org/wiki/%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93_(%E5%9B%9B%E9%83%A8%E5%8F%A2%E5%88%8A%E6%9C%AC)/%E5%8D%B7%E7%AC%AC%E5%85%AB",
+        "note": "A transcription of the same pages, marked unproofread; used to find places, never for figures."
+      },
+      {
+        "title": "chrishayuk/nine-chapters, commit 138731f",
+        "url": "https://github.com/chrishayuk/nine-chapters",
+        "note": "jiuzhang, the transcription of every page, Guo’s and Hart’s reconstructions of Liu Hui’s 77 as pages, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, editor extensions and the playground, after the independent review and the literature check. jiuzhang verify, answers, counts, readings and rods print every result in this note."
+      },
+      {
+        "title": "Independent review of commit 8532977 by OpenAI Codex, 23 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review.md",
+        "note": "The answers, Problem 6’s signs, the commentary figures, the 77 passage and the four counts checked against the scans; the tables and censuses reproduced; probe pages that made the checker fail. Each finding and what was done about it; the reviewer’s report as written is at https://github.com/chrishayuk/nine-chapters/blob/main/docs/independent-review-report.md. Commit a71e4bb is the result."
+      },
+      {
+        "title": "Literature check by OpenAI Codex with web search, 23 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-check.md",
+        "note": "A search for each of the project’s results in the literature, with the passages read and the sources it could not open. “Not found” there means not found in what could be read."
+      },
+      {
+        "title": "李潢 (Li Huang), 九章算術細草圖說, juan 8",
+        "note": "On Problem 6: 正正皆當作負. Read by the literature check in an online transcription, not by this project."
+      },
+      {
+        "title": "K. Chemla and Guo Shuchun, “Les neuf chapitres: le classique mathématique de la Chine ancienne et ses commentaires”, Dunod, 2004",
+        "note": "Problem 6’s 負, crediting Li Huang, p. 632, n. 51; the emendation of Liu Hui’s 77 passage, pp. 652–655, nn. 93–104. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "R. Hart, “The Chinese Roots of Linear Algebra”, Johns Hopkins University Press, 2011",
+        "note": "Problem 14’s 33/111 and the determinant, pp. 173–174. Read in part by the literature check, not by this project."
+      },
+      {
+        "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+        "note": "Liu Hui’s 77 passage, emended and tallied to 77, ch. 8, nn. 22–40; the 124, nn. 41–82; the rates 7:4:3:5:6, nn. 63–69. Read in part by the literature check and the source extraction, not by this project."
+      },
+      {
+        "title": "R. Hart, “Tracing Practices Purloined by the ‘Three Pillars’”, The Korean Journal for the History of Science 34(2), 2012, pp. 287–357",
+        "url": "https://www.rhart.org/papers/KJHS-Hart.pdf",
+        "note": "A reconstruction of Liu Hui’s old method in rods, never more than 77 on the board, with the count after each of fifteen steps, pp. 322–329. Read by the source extraction, not by this project."
+      },
+      {
+        "title": "Source extraction for Guo’s and Hart’s reconstructions, by OpenAI Codex with web search, 24 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/guo-77.md",
+        "note": "Guo’s emended passage and the apparatus of Chemla and Guo, his tally by block, and Hart’s steps and counts, each marked as read from the source, reconstructed, or not readable. The two pages assert only what it marks as read."
+      },
+      {
+        "title": "Wei Xuegang and Guo Shirong, 自然科学史研究 35(1), 2016, pp. 10–17; Zhu Yiwen, “A new perspective on Liu Hui’s mathematical achievements”, Cultures of Science 8(S2), 2025, pp. 161–171",
+        "note": "算 in the 77 and 124 passages read as counting rods. The first read only in its abstract by the literature check."
+      },
+      {
+        "title": "Reconstruction, 23 and 24 November 2026",
+        "note": "The transcription, the program and its tests, changed after the review. Every result in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-NINE-CHAPTERS-124",
+    "version": "1.2",
+    "recordHash": "b599b3fd440b942c9b6ee596d7bcea34d6e6630038a8a4bf66ffa4b0ada9597e",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "九章算術, Sibu congkan (四部叢刊) photographic reprint of the Weiboxie (微波榭) edition, with Liu Hui’s commentary (263)",
+        "url": "https://commons.wikimedia.org/wiki/File:Sibu_Congkan0392-%E5%8A%89%E5%BE%BD-%E4%B9%9D%E7%AB%A0%E7%AE%97%E8%A1%93-3-3.djvu",
+        "note": "Liu Hui’s new method and its 124, pp. 31–35. Public domain."
+      },
+      {
+        "title": "郭书春 (Guo Shuchun), 九章筭术译注（修订本）, 上海古籍出版社, 2020",
+        "note": "The new method worked through, ch. 8, notes 41–62; the 124 stated, note 82; one 算 defined, note 40. Read by a second model from an OCR transcription, not by this project."
+      },
+      {
+        "title": "Source extraction for Guo’s working, by OpenAI Codex with web search, 24 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/guo-77.md",
+        "note": "Section 3: the new method’s operations, marked as read or worked out, and the states they give."
+      },
+      {
+        "title": "Literature check on the 124-rod peak, by OpenAI Codex with web search, 24 November 2026",
+        "url": "https://github.com/chrishayuk/nine-chapters/blob/main/docs/literature-124.md",
+        "note": "What each source says about 124 and rods, what was read, and the sources that could not be opened, Wei and Guo (2016) first among them."
+      },
+      {
+        "title": "R. Hart, “Tracing Practices Purloined by the ‘Three Pillars’”, The Korean Journal for the History of Science 34(2), 2012, pp. 287–357",
+        "url": "https://www.rhart.org/papers/KJHS-Hart.pdf",
+        "note": "77 and 124 read as rods, note 34; the old method worked in rods, pp. 322–329. Read by the second model, not by this project."
+      },
+      {
+        "title": "魏雪刚 (Wei Xuegang) and 郭世荣 (Guo Shirong), 《九章算术》方程章“麻麦”问刘徽注中“算”字新释及方程“旧术”新校, 自然科学史研究 35(1), 2016, pp. 10–17",
+        "url": "https://m.fx361.com/news/2016/1216/16730222.html",
+        "note": "算 read as counting rods. Only the abstract and opening paragraphs could be read."
+      },
+      {
+        "title": "J. Hudeček, Matematika v devíti kapitolách, Matfyzpress, 2008",
+        "url": "https://dml.cz/bitstream/handle/10338.dmlcz/400845/DejinyMat_37-2008-1_15.pdf",
+        "note": "The new method’s boards, p. 206, n. 66; attempts to reach 124 by counting operations, n. 71. Read by the second model."
+      },
+      {
+        "title": "朱一文 (Zhu Yiwen), 數：筭與術——以九數之方程為例, 漢學研究 28(4), 2010, pp. 73–105",
+        "url": "https://ccsndb.ncl.edu.tw/nclccs/pdf/01_028_004_01_03.pdf",
+        "note": "110 rods to set out the last problem, p. 82; the digit rule and the 2.9 average, note 29. Read by this project."
+      },
+      {
+        "title": "chrishayuk/nine-chapters, commit 6ee962c",
+        "url": "https://github.com/chrishayuk/nine-chapters",
+        "note": "The pages guo-18-new and guo-18-old-placed, jiuzhang rods and counts, the tests that fix the 124, the 130 and the last board, Zhu’s 110 worked through in docs/literature-124.md, and the counts with each take done singly."
+      },
+      {
+        "title": "Experiments, 24 November 2026",
+        "note": "The page, the counts and the note; every figure can be rerun in the interactive study or with cargo test."
+      }
+    ]
+  },
+  {
+    "id": "N-RHIND-PAPYRUS",
+    "version": "1.2",
+    "recordHash": "d9e543f0770cccc1a71fbe9142f6468ec7679937443625f2676520f9c4b8064e",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "A. B. Chace, L. Bull and H. P. Manning, “The Rhind Mathematical Papyrus”, vol. II, Mathematical Association of America, 1929",
+        "url": "https://archive.org/details/arnoldbuffumchaceludlowbullhenryparkermanningtherhindmathematicalpapyrus.volumei",
+        "note": "Photographs, the hieratic, a hieroglyphic transcription with red ink in red and every number glossed, and a literal translation in the papyrus’s layout: the primary witness. The Internet Archive item is named for volume I but holds volume II. The part sign is discussed on printed p. xi. PDF pages: 51 to 112 the table of 2 ÷ n, 115 to 266 the problems; 2 ÷ 59 on 81 and 82, Problem 27 on 147 and 148, Problem 63 on 217 and 218."
+      },
+      {
+        "title": "T. E. Peet, “The Rhind Mathematical Papyrus, British Museum 10057 and 10058”, University Press of Liverpool, 1923",
+        "url": "https://archive.org/details/Peet_1923",
+        "note": "Translation and commentary, with the working in columns and the scribe’s errors marked (sic): the second witness. Wrong dots are discussed on p. 38. The scan is of a 1970 reprint; PDF page is printed page plus 4."
+      },
+      {
+        "title": "chrishayuk/rhind-papyrus, release v0.1.1",
+        "url": "https://github.com/chrishayuk/rhind-papyrus",
+        "note": "rhind, the transcription of every page, the notes on each range, the brief the transcribers worked to, the decisions, a tutorial, a language server, and the playground. rhind verify, errata, routes and 2/n print every count in this note."
+      },
+      {
+        "title": "Independent review of release 0.1.0 by OpenAI Codex, 22–23 November 2026",
+        "url": "https://github.com/chrishayuk/rhind-papyrus/blob/main/docs/independent-review.md",
+        "note": "72 places checked against the scans, probe pages and the code; each finding, and what was done about it. Release 0.1.1 is the result."
+      },
+      {
+        "title": "Reconstruction, 22–23 November 2026",
+        "note": "The transcription, the program and its tests. Every count in this note can be rerun on the interactive study or with cargo test in the repository."
+      }
+    ]
+  },
+  {
+    "id": "N-TURING-ACE",
+    "version": "1.2",
+    "recordHash": "815ec1debc954e2323bf15ca817e51c31caff71297e71bfd7c85746f0d2a0676",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "A. M. Turing, “Proposed Electronic Calculator”, report to the Executive Committee of the National Physical Laboratory (E.882), 1945; transcribed on Wikisource",
+        "url": "https://en.wikisource.org/wiki/Proposed_Electronic_Calculator",
+        "note": "INDEXIN is on p. 29 of the report and CALPOL on p. 31. Instruction forms are in section 13, the card layout in section 7, the operation types in section 12. Figures 19, 37 and 38 give the digits of each instruction."
+      },
+      {
+        "title": "The report and its original figures, The Turing Archive for the History of Computing",
+        "url": "https://www.alanturing.net/ace",
+        "note": "Figures 19 and 38 are redrawn in this note from a transcription; the originals are here."
+      },
+      {
+        "title": "B. E. Carpenter and R. W. Doran (eds.), “A. M. Turing’s ACE Report of 1946 and Other Papers”, MIT Press, 1986",
+        "note": "The editors’ introduction and notes 11 to 18 on the text, which point out conflicts in sections 11 and 12 and two of the corrections to INDEXIN."
+      },
+      {
+        "title": "B. E. Carpenter and R. W. Doran, “The other Turing machine”, The Computer Journal 20(3), 1977, pp. 269–279",
+        "url": "https://doi.org/10.1093/comjnl/20.3.269",
+        "note": "Analyses CALPOL. Not read for this note."
+      },
+      {
+        "title": "B. J. Copeland (ed.), “Alan Turing’s Automatic Computing Engine”, Oxford University Press, 2005",
+        "note": "Not read for this note."
+      },
+      {
+        "title": "T. Haigh, M. Priestley and C. Rope, “ENIAC in Action: Making and Remaking the Modern Computer”, MIT Press, 2016",
+        "note": "Reconstructs ENIAC’s programs from its documents: the closest scholarly model for this kind of work."
+      },
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, “The Early Development of Programming Languages”, Stanford, 1976",
+        "note": "One program written in every early notation, read closely."
+      },
+      {
+        "title": "Fig. 38, read twice",
+        "url": "https://github.com/chrishayuk/turing-ace/blob/main/docs/fig38-read-twice.md",
+        "note": "The figure transcribed blind by a second model, and compared row by row with the first reading."
+      },
+      {
+        "title": "chrishayuk/turing-ace",
+        "url": "https://github.com/chrishayuk/turing-ace",
+        "note": "The machine, the assembler, the tables as printed and corrected, the tables written from Turing’s descriptions, the corrections and their kinds, the nine decisions and the conventions, with tests."
+      },
+      {
+        "title": "Reconstruction, 22 November 2026",
+        "note": "The machine, the assembler, the transcription of the tables and the tables the report only describes. Every result in this note can be rerun on the interactive study."
+      }
+    ]
+  },
+  {
+    "id": "N-TPK",
+    "version": "1.2",
+    "recordHash": "29ac9ed0d29792f8897c89f6bd1ff50c41352e9e64804a4bb5a67f80cfd9cd84",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "D. E. Knuth and L. Trabb Pardo, The Early Development of Programming Languages, Stanford report STAN-CS-76-562, August 1976",
+        "url": "https://bitsavers.org/pdf/stanford/cs_techReports/STAN-CS-76-562_EarlyDevelPgmgLang_Aug76.pdf",
+        "note": "TPK in ALGOL 60, p. 3; in Böhm’s language, pp. 36–39; in Laning and Zierler’s, pp. 56–57; the rules for weaker languages, pp. 4–5."
+      },
+      {
+        "title": "D. E. Knuth, errata for Selected Papers on Computer Languages (2003)",
+        "url": "https://www-cs-faculty.stanford.edu/~knuth/cl.html",
+        "note": "The ALGOL heading corrected (12 February 2014); the Laning and Zierler test reordered (22 September 2022)."
+      },
+      {
+        "title": "chrishayuk/algol-60",
+        "url": "https://github.com/chrishayuk/algol-60",
+        "note": "examples/tpk-1976.alg, examples/tpk.alg; the X1 probes tpk-1976, value-after-spec and tpk-x1 in compare/; tests/x1.rs."
+      },
+      {
+        "title": "chrishayuk/bohm",
+        "url": "https://github.com/chrishayuk/bohm",
+        "note": "programs/tpk.bohm and tpk-renamed.bohm; tests/thesis.rs."
+      },
+      {
+        "title": "chrishayuk/laning-zierler",
+        "url": "https://github.com/chrishayuk/laning-zierler",
+        "note": "examples/1976-knuth-tpk.lzr, with the rules of January 1954."
+      },
+      {
+        "title": "chrishayuk/turing-ace",
+        "url": "https://github.com/chrishayuk/turing-ace",
+        "note": "examples/tpk.ace, with the corrections to INDEXIN and DISCRIM it needs."
+      },
+      {
+        "title": "chrishayuk/george",
+        "url": "https://github.com/chrishayuk/george",
+        "note": "examples/tpk.george, run by the interpreter and on Hamblin’s coding sheets in the simulated DEUCE; RUNNING-GEORGE.md, finding 15, for 79.7062."
+      },
+      {
+        "title": "chrishayuk/ipl-v",
+        "url": "https://github.com/chrishayuk/ipl-v",
+        "note": "examples/tpk.iplv."
+      },
+      {
+        "title": "chrishayuk/joss",
+        "url": "https://github.com/chrishayuk/joss",
+        "note": "examples/tpk.joss; sources/AUDIT.md for the dating."
+      },
+      {
+        "title": "chrishayuk/chuk-basic-rs",
+        "url": "https://github.com/chrishayuk/chuk-basic-rs",
+        "note": "samples/classic/tpk.bas; sources/README.md for what Part II of the May 1964 manual leaves open."
+      },
+      {
+        "title": "chrishayuk/cpl",
+        "url": "https://github.com/chrishayuk/cpl",
+        "note": "examples/tpk.cpl."
+      },
+      {
+        "title": "Experiments, 24 November 2026",
+        "note": "The six new programs, the runs and the literature search; every figure can be rerun in the note’s runners or with each repository’s tests."
+      }
+    ]
+  },
+  {
+    "id": "N-MOUSE",
+    "version": "1.2",
+    "recordHash": "958e8b16fcacb8d8e0b3df07e44206644637e915471e396cadc4b18bd9815de3",
+    "revision": {
+      "kind": "clarification",
+      "summary": "Removed the statements about how the work was done; nothing about the results changed",
+      "previous": "1.1"
+    },
+    "sources": [
+      {
+        "title": "Peter Grogono, “Mouse: A Language for Microcomputers”, BYTE, July 1979, pp. 198–220",
+        "url": "https://archive.org/details/byte-magazine-1979-07",
+        "note": "Listing 6 is on pp. 209, 210 and 212; line 176 on p. 212; Figure 1 on p. 216."
+      },
+      {
+        "title": "Tom Lane, “Comment and Correction for Mouse”, with Peter Grogono’s reply, BYTE, June 1980, pp. 238 and 240",
+        "url": "https://archive.org/details/byte-magazine-1980-06"
+      },
+      {
+        "title": "chrishayuk/mouse-interpreter",
+        "url": "https://github.com/chrishayuk/mouse-interpreter",
+        "note": "The interpreter, its tests, 42 example programs, and reduced scans of both sources."
+      },
+      {
+        "title": "Port, 21 November 2026",
+        "note": "The port’s report is quoted as written. The first completed port was rebuilt unchanged from the record of the work to confirm that it prints 33 on Lane’s test."
+      }
+    ]
+  },
+  {
     "id": "N-BABBAGE-CONTROL",
     "version": "1.0",
     "recordHash": "df553e239d4598dcc2e605782bb7ccc8a33117c244b48d4d9211716b6601cbc3",

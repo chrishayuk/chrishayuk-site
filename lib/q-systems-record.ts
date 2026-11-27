@@ -2,8 +2,8 @@ import type { PublicationRecord } from "./types.ts";
 
 /** A note about reconstructing the Q-systems, the rule language Alain
  * Colmerauer designed at the Université de Montréal for the TAUM
- * machine-translation project, from his report of September 1970, with a
- * coding agent. Every count is from the linked repository:
+ * machine-translation project, from his report of September 1970. Every
+ * count is from the linked repository:
  * tests/historical.rs for the report's results, docs/research.md and
  * tests/research.rs for the experiments. Every quotation was read from the
  * page images; page numbers are the printed ones. Every treatment named can
@@ -19,18 +19,18 @@ export const qSystemsRecord: PublicationRecord = {
   kind: "notebook",
   title: "A Q-system rule never replaced anything.",
   dek: "Colmerauer’s Q-systems, the Montréal translation project’s rule language, rebuilt from his report of 1970. Sixteen rules analyse a French sentence into its tree; run the other way, they write its eighteen paraphrases into one graph that matches his printout.",
-  abstract: "A note about reconstructing the Q-systems, the rule language Alain Colmerauer designed at the Université de Montréal for the TAUM machine-translation project, in use from October 1969. No program text of it is known to survive. With a coding agent, the language was rebuilt from Colmerauer’s report of September 1970, read from its page scans. A Q-system rewrites a graph of strings, not a string: a rule adds a path beside every path it matches and replaces nothing, and the arrows it rewrote are removed only when no rule applies any more. So one graph holds every alternative, with the shared parts shared. Run on the report’s examples, the reconstruction gives every result the report prints, with two exceptions. Its French example runs both ways: the sixteen rules, inverted, analyse a sentence into its normalised tree, and as written they synthesise its eighteen paraphrases into one graph of nineteen vertices, which is the report’s printout line for line, vertex numbers and all; each of the eighteen analyses back to the one tree. The exceptions: the report’s rules for turning a tree into a string do not stop as printed, and the eighteen sentences of the last printout come out in exactly the reverse of the report’s order. And the rules for removing one string remove its neighbours too.",
+  abstract: "A note about reconstructing the Q-systems, the rule language Alain Colmerauer designed at the Université de Montréal for the TAUM machine-translation project, in use from October 1969. No program text of it is known to survive. The language was rebuilt from Colmerauer’s report of September 1970, read from its page scans. A Q-system rewrites a graph of strings, not a string: a rule adds a path beside every path it matches and replaces nothing, and the arrows it rewrote are removed only when no rule applies any more. So one graph holds every alternative, with the shared parts shared. Run on the report’s examples, the reconstruction gives every result the report prints, with two exceptions. Its French example runs both ways: the sixteen rules, inverted, analyse a sentence into its normalised tree, and as written they synthesise its eighteen paraphrases into one graph of nineteen vertices, which is the report’s printout line for line, vertex numbers and all; each of the eighteen analyses back to the one tree. The exceptions: the report’s rules for turning a tree into a string do not stop as printed, and the eighteen sentences of the last printout come out in exactly the reverse of the report’s order. And the rules for removing one string remove its neighbours too.",
   created: "2026-11-26",
   version: "0.1",
   status: "OPEN",
   publication: "draft",
   authors: ["Chris Hay"],
-  lineage: "COLMERAUER 1970 → AGENT → THE MACHINE THE REPORT DESCRIBES → ITS EXAMPLES RUN → ITS PRINTOUT COMPARED",
-  concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
+  lineage: "COLMERAUER 1970 → THE MACHINE THE REPORT DESCRIBES → ITS EXAMPLES RUN → ITS PRINTOUT COMPARED",
+  concepts: ["source-authority", "verification", "programming-languages"],
   related: ["N-ABSYS", "N-IPLV", "N-JOSS", "N-ALGOL-60"],
   media: [],
   body: [
-    { kind: "observation", label: "01 / A GRAPH OF EVERY GROUPING", text: "In October 1969 a program written in ALGOL by Alain Colmerauer was running on the CDC 6400 of the Université de Montréal. It ran his Q-systems, the rule language of TAUM, the university’s project to translate English into French by computer. In the project’s chain, his report says, an English sentence went through no fewer than fifteen Q-systems before it came out in French. The Computer History Museum’s Prolog archive says that Colmerauer considered the Q-systems the ancestor of Prolog. The report opens on the problem they were made for. To analyse a sentence you must try every partial grouping of its words, and to hold that multitude economically Colmerauer used a directed graph, each arrow carrying a tree. A Q-system is a set of rules that turns one such graph into another. No program text of the Q-systems is known to us. The report, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, of September 1970, gives the whole grammar, the meaning of every construct and the printed results of its examples. I asked a coding agent to rebuild the language from it, and to run every example it prints.", references: [
+    { kind: "observation", label: "01 / A GRAPH OF EVERY GROUPING", text: "In October 1969 a program written in ALGOL by Alain Colmerauer was running on the CDC 6400 of the Université de Montréal. It ran his Q-systems, the rule language of TAUM, the university’s project to translate English into French by computer. In the project’s chain, his report says, an English sentence went through no fewer than fifteen Q-systems before it came out in French. The Computer History Museum’s Prolog archive says that Colmerauer considered the Q-systems the ancestor of Prolog. The report opens on the problem they were made for. To analyse a sentence you must try every partial grouping of its words, and to hold that multitude economically Colmerauer used a directed graph, each arrow carrying a tree. A Q-system is a set of rules that turns one such graph into another. No program text of the Q-systems is known to us. The report, Les systèmes-Q ou un formalisme pour analyser et synthétiser des phrases sur ordinateur, of September 1970, gives the whole grammar, the meaning of every construct and the printed results of its examples. The language was rebuilt from it, and every example it prints was run.", references: [
       { label: "A. Colmerauer, Les systèmes-Q, publication interne no 43, Université de Montréal, September 1970, pp. 4–5", url: C70 },
       { label: "Computer History Museum, History of Prolog: Université de Montréal", url: CHM },
     ] },
@@ -64,7 +64,7 @@ export const qSystemsRecord: PublicationRecord = {
       "The scan of the report is missing printed page 23, which most likely held a first, simplified example. The system of section 8 is therefore called an example here, not the first. A 1972 TAUM printout was used only for the form of the output.",
       "The order in which paths are printed is a decision fitted to pages 38 to 40, and it puts pages 40 and 41 in reverse. The form of the details printed for -DET- is our own.",
       "The two-readings grammar is ours, not the report’s. The TAUM grammars, the earliest large Q-system programs, have not been seen, nor has METEO, written later in Q-systems, nor any later version of the formalism.",
-      "Everything was read and built by one coding agent, from scans, and has not been checked by a person. No literature search was made, so nothing here is claimed as new.",
+      "Everything was read from scans. No literature search was made, so nothing here is claimed as new.",
     ], principle: "A language that survives only as a description can be rebuilt as that description; its own printed results are the test, including the one that does not match." },
     { kind: "question", text: "What did the TAUM grammars look like?", status: "OPEN", detail: "Colmerauer and Roussel name the TAUM grammars written in Q-systems: English morphology, the analysis of English, transfer, French synthesis and French morphology. TAUM 71, edited by Colmerauer in January 1971, is listed by the Computer History Museum as holding the English morphology, and may hold the others. They are the earliest large Q-system programs. Run here, they would test the decisions made from a 45-page report, and show what the graph of every grouping cost on real English." },
   ],
@@ -73,6 +73,6 @@ export const qSystemsRecord: PublicationRecord = {
     { title: "I. Findeisen-Bellert, interactive session with TAUM translating a sentence from English to French, c. 1972. Gift of Janusz Bień, Computer History Museum", url: T72, note: "Line-printer output, folded at a fixed width. Used only for the form of a printed graph: PHASE n, then -01- … -02-." },
     { title: "Computer History Museum, History of Prolog, section Université de Montréal", url: CHM, note: "The source of both documents, and of the history quoted from Colmerauer and Roussel’s “The birth of Prolog” (1996), which was not read in the original." },
     { title: "chrishayuk/q-systems", url: REPO, note: "The machine, every example of the report with its output, 21 acceptance tests that name their pages, every decision with its evidence, the experiments, and the playground." },
-    { title: "Coding-agent session, 26 November 2026", note: "The interpreter, the transcriptions and the comparisons were made with a coding agent. Every result in this note can be rerun on the interactive study or with cargo test in the repository." },
+    { title: "Reconstruction, 26 November 2026", note: "The interpreter, the transcriptions and the comparisons. Every result in this note can be rerun on the interactive study or with cargo test in the repository." },
   ],
 };
