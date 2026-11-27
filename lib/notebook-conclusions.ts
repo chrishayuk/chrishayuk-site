@@ -73,7 +73,7 @@ export const notebookConclusions: Record<string, Conclusion> = {
   takeaway: 'A website can stage an idea through the form its information needs: evidence, uncertainty, transformation and refusal each deserve a distinct voice. Making the notebook extended HAUSE’s shared language.',
   scope: 'This is a design thesis and a record of making. Cinematic movement must explain a relationship, with a designed resting state when motion is reduced. Whether a machine can learn to stage ideas remains an open question.' },
  'N-MOUSE': {
-  takeaway: 'A port can match its reference exactly and still be wrong, because the reference was. One inherited misprint was guessed, and the guess was reported as unchecked; three other bugs were copied without anyone knowing they were there.',
+  takeaway: 'A port can match its reference exactly and still be wrong, because the reference was. The port guessed the correction to one inherited misprint and reported the guess as unchecked; it copied three other bugs without anyone knowing they were there.',
   scope: 'One port, one session, one small interpreter. The bugs were found by a reader in 1980, not in the porting. Where the C reference came from has not been established.' },
  'N-BOHM': {
   takeaway: 'A compiler written in 1951 for a machine that was never more than a design runs, and compiles itself, once four slips in its printed text are corrected. Three of them were found by running it; the fourth had been reported in 1976.',
