@@ -1,6 +1,7 @@
 import entries from "../content/publication-provenance.json" with { type: "json" };
 import { getRecord, isListed, publicationSnapshots, recordPath, SITE } from "./records.ts";
 import { compareVersions, type Provenance, type EvidenceReference } from "../vendor/hause/provenance.ts";
+import { displayRevision } from "./revision-display.ts";
 
 export const publicationProvenance = entries as Provenance[];
 export const provenanceFor = (id: string, version: string) => publicationProvenance.find(entry => entry.id === id && entry.version === version);
@@ -21,6 +22,8 @@ export function publicationHistory(id: string) {
     supersededBy: publicationSnapshots.flatMap(candidate => (candidate.record.supersedes || []).filter(reference => reference.id === record.id && reference.version === record.version).map(reference => ({ id: candidate.record.id, version: candidate.record.version, reason: reference.reason, url: versionUrl(candidate.record.id, candidate.record.version) }))),
     hash: snapshot.hash, algorithm: snapshot.algorithm,
     revision: provenance?.revision,
+    /** What the history shows; differs from revision only where an editorial correction says so. */
+    display: displayRevision(record.id, record.version, provenance?.revision),
     previous: snapshots[index - 1] ? versionUrl(record.id, snapshots[index - 1].record.version) : undefined,
     next: snapshots[index + 1] ? versionUrl(record.id, snapshots[index + 1].record.version) : undefined,
     sources: (provenance?.sources || record.sources) as EvidenceReference[],

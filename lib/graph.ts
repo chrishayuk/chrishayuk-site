@@ -75,7 +75,7 @@ function buildGraph() {
   const history = publicationHistory(r.id);
   if (history?.versions.length) {
    const historyId = `${r.id}:history`;
-   nodes.push({ id: historyId, kind: "publication-history", title: `${r.title} / publication history`, text: history.versions.map(entry => `Version ${entry.version}, ${entry.revised || entry.published}. ${entry.revision?.summary || ""} Scientific status: ${entry.scientificStatus || "not recorded"}.`).join(" "), url: `${url}#versions`, sourceUrl: `${url}#versions`, basis: "publication-history", retrievable: true, scope: "records", publication: r.publication, recordId: r.id, keywords: "provenance citation revision version history" });
+   nodes.push({ id: historyId, kind: "publication-history", title: `${r.title} / publication history`, text: history.versions.map(entry => `Version ${entry.version}, ${entry.revised || entry.published}. ${entry.display?.summary || ""} Scientific status: ${entry.scientificStatus || "not recorded"}.`).join(" "), url: `${url}#versions`, sourceUrl: `${url}#versions`, basis: "publication-history", retrievable: true, scope: "records", publication: r.publication, recordId: r.id, keywords: "provenance citation revision version history" });
    addEdge(r.id, historyId, "has-history", "preserved-publication");
    history.versions.forEach((entry, index) => {
     const id = `${r.id}@${entry.version}`;

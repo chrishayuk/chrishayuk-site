@@ -24,7 +24,7 @@ export const tpkRecord: PublicationRecord = {
   publication: "draft",
   authors: ["Chris Hay"],
   lineage: "1976 SURVEY → PRIMARY SOURCES → NINE RECONSTRUCTIONS → TPK, RUN",
-  concepts: ["ai-agents", "source-authority", "verification", "programming-languages"],
+  concepts: ["source-authority", "verification", "programming-languages"],
   related: ["N-ALGOL-60", "N-BOHM", "N-LANING-ZIERLER", "N-TURING-ACE", "N-GEORGE", "N-IPLV", "N-JOSS", "N-BASIC", "N-CPL"],
   media: [],
   body: [
@@ -80,7 +80,7 @@ export const tpkRecord: PublicationRecord = {
       "Only the X1 findings come from a surviving system. The Böhm, Laning and Zierler, and Report findings are the rules of their documents applied by a reconstruction, and the reconstructions are readings of those documents. Whether Whirlwind would have run the Laning and Zierler program is not known.",
       "The six new programs are ours, and that they run says as much about the reconstructions they were tested on as about the languages. ‘Accepted by the manual’ is a judgement for IPL-V and JOSS, and BASIC’s answer depends on a part of a manual that is lost.",
       "The costs are from simulators, not machines, and are not comparable with each other.",
-      "The search for earlier work was limited, by a coding agent. Nothing here is claimed as new beyond what that search did not find.",
+      "The search for earlier work was limited. Nothing here is claimed as new beyond what that search did not find.",
     ], principle: "A program printed as a replica can be tested by running it on what it replicates." },
     { kind: "question", text: "Did the 1977 or 1980 reprint of the paper change the ALGOL heading?", status: "OPEN", detail: "The paper was reprinted in the Encyclopedia of Computer Science and Technology (1977) and in A History of Computing in the Twentieth Century (1980). Both are only lent by archive.org, and were not read. Knuth’s correction is dated 2014, against the 2003 reprint." },
     { kind: "observation", label: "13 / WHAT THE COMPARISON DID", text: "In 1976 a common program let two readers compare twenty languages on paper. Run on systems rebuilt from their own sources, the same program asks something sharper of each language: not what it looks like, but whether its own rules let it through. Of their three programs that could be asked, none passes as printed, and one of the reasons, the heading, Knuth had already found. Of the six new ones, the answers range from accepted, to accepted only after correcting the designer, to a question that a lost Part II of a manual would settle. The reconstructions gained something too. Writing TPK in each exposed gaps of their own: the ALGOL interpreter accepted the misordered heading and, in X1 mode, the labelled program; the IPL-V loader read a floating-point digit from a column its manual leaves unused; and a JOSS listing was dated too late. Each is now fixed or recorded in its repository." },
@@ -97,6 +97,6 @@ export const tpkRecord: PublicationRecord = {
     { title: "chrishayuk/joss", url: `${GH}/joss`, note: "examples/tpk.joss; sources/AUDIT.md for the dating." },
     { title: "chrishayuk/chuk-basic-rs", url: `${GH}/chuk-basic-rs`, note: "samples/classic/tpk.bas; sources/README.md for what Part II of the May 1964 manual leaves open." },
     { title: "chrishayuk/cpl", url: `${GH}/cpl`, note: "examples/tpk.cpl." },
-    { title: "Coding-agent session, 24 November 2026", note: "The six new programs, the runs and the literature search were made in this session; every figure can be rerun in the note’s runners or with each repository’s tests." },
+    { title: "Experiments, 24 November 2026", note: "The six new programs, the runs and the literature search; every figure can be rerun in the note’s runners or with each repository’s tests." },
   ],
 };

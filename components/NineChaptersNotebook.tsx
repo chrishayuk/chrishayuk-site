@@ -166,7 +166,7 @@ export function NineChaptersNotebook({ record }: { record: PublicationRecord }) 
         { label: "MISTRANSCRIPTIONS AT THE PLACES CHECKED", value: "0", detail: "Every answer, Problem 6’s signs, the commentary figures, the 77 passage and the four counts, against the scans." },
         { label: "PROBE PAGES THAT MADE THE CHECKER FAIL", value: "fixed", detail: "A contradictory board ticked, a stale answer, wrong arity and unwritten forms unmarked, unchecked fractions." },
         { label: "CLAIMS WIDER THAN THE PROGRAM", value: "reworded", detail: "Statements, not figures; recorded boards; the census’s menu; Dai Zhen’s rules." },
-      ]} note="The review is a model’s, like the transcription. No person has checked either."/>
+      ]} note="The review is a model’s."/>
     </> },
     { label: "Reading the text", children: <>{act(10)}</> },
     { label: "Earlier work", children: <>{act(11)}</> },
