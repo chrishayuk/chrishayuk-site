@@ -533,13 +533,15 @@ for (const entry of signal.latest) {
   assert.ok(entry.updated_at >= entry.recorded_at, `${entry.id} was updated before it was recorded`);
   if (entry.state !== "published") assert.equal(entry.published_at, undefined, `${entry.id} is a draft with a published_at`);
 }
-assert.ok(signal.latest.some(e => e.id === "N-ABSYS"), "N-ABSYS is not in the publication signal");
-assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS"), "N-Q-SYSTEMS is not in the publication signal");
-assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS-POSSIBILITIES"), "N-Q-SYSTEMS-POSSIBILITIES is not in the publication signal");
-assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS-NEXT-TOKEN"), "N-Q-SYSTEMS-NEXT-TOKEN is not in the publication signal");
-assert.ok(signal.latest.some(e => e.id === "N-Q-LM"), "N-Q-LM is not in the publication signal");
-assert.ok(signal.latest.some(e => e.id === "N-Q-LM-SCALE"), "N-Q-LM-SCALE is not in the publication signal");
-assert.ok(signal.latest.some(e => e.id === "N-Q-LM-TRANSPLANT"), "N-Q-LM-TRANSPLANT is not in the publication signal");
+// The signal carries only the latest versions (LATEST in lib/follow.ts), so
+// which notes are in it depends on what was published last. Named notes are
+// checked against the full record index the signal points to.
+assert.equal(signal.record_index, "https://chrishayuk.com/api/records");
+const recordIndex = JSON.parse((await request("/api/records")).body);
+const indexed = new Set(recordIndex.records.map(r => r.id));
+for (const id of ["N-ABSYS", "N-Q-SYSTEMS", "N-Q-SYSTEMS-POSSIBILITIES", "N-Q-SYSTEMS-NEXT-TOKEN", "N-Q-LM", "N-Q-LM-SCALE", "N-Q-LM-TRANSPLANT"]) {
+  assert.ok(indexed.has(id), `${id} is not in the record index`);
+}
 
 // ARCHIVE appears exactly where there is a capture to point at, and nowhere
 // else. An identifier that does not exist is absent, never a placeholder.
