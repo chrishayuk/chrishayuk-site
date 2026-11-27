@@ -299,6 +299,12 @@ for (const asset of ["/demos/q-systems/qsys.wasm","/demos/q-systems/worker.js","
 assert.ok((await request("/notebook/a-q-system-rule-never-replaced-anything")).body.includes('href="/demos/q-systems'), 'Q-systems note links to the playground');
 assert.ok((await request("/notebook/a-q-system-can-hold-a-trillion-strings-but-never-sees-two-become-one")).body.includes('href="/demos/q-systems?example=e08-parity'), 'the second Q-systems note links to the playground');
 assert.ok((await request("/notebook/can-a-language-from-1969-predict-the-next-token")).body.includes('href="/demos/q-systems?example=paraphrase'), 'the third Q-systems note links to the playground');
+// Q-LM: three notes, each citing the public repository's results documents.
+for (const [slug, doc] of [["from-q-systems-to-q-lm","results-qlm-arch-001.md"],["the-language-model-that-gets-smaller-as-it-learns","results-qlm-scale-001-tinystories.md"],["can-you-transplant-a-relationship-inside-a-transformer","results-larql-qlm-sem-001-v3.md"]]) {
+ const page=await request(`/notebook/${slug}`);
+ assert.equal(page.status,200,slug);
+ assert.ok(page.body.includes(`https://github.com/chrishayuk/q-lm/blob/main/docs/${doc}`), `${slug} cites ${doc}`);
+}
 // Laning and Zierler: the playground and its assets, and the note links to it.
 const lz=await request("/demos/laning-zierler");
 assert.equal(lz.status,200);
@@ -531,6 +537,9 @@ assert.ok(signal.latest.some(e => e.id === "N-ABSYS"), "N-ABSYS is not in the pu
 assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS"), "N-Q-SYSTEMS is not in the publication signal");
 assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS-POSSIBILITIES"), "N-Q-SYSTEMS-POSSIBILITIES is not in the publication signal");
 assert.ok(signal.latest.some(e => e.id === "N-Q-SYSTEMS-NEXT-TOKEN"), "N-Q-SYSTEMS-NEXT-TOKEN is not in the publication signal");
+assert.ok(signal.latest.some(e => e.id === "N-Q-LM"), "N-Q-LM is not in the publication signal");
+assert.ok(signal.latest.some(e => e.id === "N-Q-LM-SCALE"), "N-Q-LM-SCALE is not in the publication signal");
+assert.ok(signal.latest.some(e => e.id === "N-Q-LM-TRANSPLANT"), "N-Q-LM-TRANSPLANT is not in the publication signal");
 
 // ARCHIVE appears exactly where there is a capture to point at, and nowhere
 // else. An identifier that does not exist is absent, never a placeholder.
