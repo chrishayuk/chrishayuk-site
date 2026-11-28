@@ -13614,5 +13614,203 @@
     },
     "hash": "963ef36cf332796203c78257a90cd63af365902481ae68b8af014c7dc34ca2e4",
     "algorithm": "sha256"
+  },
+  {
+    "record": {
+      "id": "N-BABBAGE-SERIES-F",
+      "slug": "read-as-persistent-connections-babbages-1836-timing-charts-predict-held-out-sheets",
+      "kind": "notebook",
+      "title": "Read as connections that persist, Babbage’s 1836 timing charts predict the motions of sheets held out from the reading.",
+      "dek": "In January 1836 Babbage charted, row by row, how the parts of his engine moved. Read as connections to travelling platforms that last until released, his B and U labels predicted motion marks that had not yet been read, across division and square root.",
+      "abstract": "A note about Series F of the Babbage Papers at the Science Museum: the mechanical notation of January 1836, timing charts in which each column is a part of the engine and each row a moment of its cycle. Many columns carry labels, “B 3”, “U 5”, at the head of a band of rows. Read here, as a hypothesis, as a part being bolted to travelling platform 3, or unbolted from platform 5: the platforms are in Babbage’s notebooks of 1835, and he writes “Lock … to Pl. 4” in December 1835. Built from the multiplication sheets, the reading was tested twice on sheets held out from it, with rules and predictions committed before the motion marks were read by a reader not shown them (it had the list of labels, to find the columns). In the second test, on four sheets of division without a table, four of square root, the ordinary cycle and the notation of carriage, a fresh “B k” moved its part 173 times out of 173, the way F/013’s table gives for platform k 168 times. Parts attached by an earlier B, with no label of their own, moved 37 times out of 43 (37 of 47 if four cells where the paper ends are counted as not moving), every time the right way; a reading in which only a fresh label moves a part gets 6 (or 10). No part moved in a band where it had been released: 198 cases (251 counting those cells). The failures are reported as fully: parts with a bare “B” move, by amounts outside the table; parts with no label yet on their sheet move; and on the carriage sheet three mid-band “B 7”s go the other way from the table. A simulator, written after the scoring, executes the labels as state, band by band, and marks what the tests do not settle as unresolved or unverified. What the motions do to numbers is not reconstructed.",
+      "created": "2026-11-28",
+      "version": "1.0",
+      "status": "OPEN",
+      "publication": "published",
+      "authors": [
+        "Chris Hay"
+      ],
+      "lineage": "THE CHARTS → B AND U → PLATFORMS → FROZEN PREDICTIONS → HELD-OUT SHEETS → SIMULATOR",
+      "concepts": [
+        "source-authority",
+        "verification",
+        "programming-languages"
+      ],
+      "related": [
+        "N-BABBAGE",
+        "N-BABBAGE-CONTROL",
+        "N-BABBAGE-NOTE-G"
+      ],
+      "media": [],
+      "body": [
+        {
+          "kind": "observation",
+          "label": "01 / A CHART OF EVERY MOVING PART",
+          "text": "In January 1836 Babbage drew, for one operation after another (multiplication with and without a table, division, square root, the ordinary cycle, carriage), a chart of the engine’s motions. Each column is a part: an axis, a pinion, a figure wheel. The rows are read here as moments of the cycle: a short arrow in a row as the part moving up or down then, with a figure for how far; a double-headed arrow later in the band as its return. Many columns carry a label at the head of a band, “B 5”, “U 3”, “U 7 B 4”. Babbage does not say what B and U mean on these sheets.",
+          "references": [
+            {
+              "label": "BAB/F/021, Division without table, sheet 1 of 4, January 1836 (Science Museum Group)",
+              "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110000505"
+            },
+            {
+              "label": "The glossary of the notation, with confidence levels",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/f-glossary.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "02 / BOLTED TO A TRAVELLING PLATFORM",
+          "text": "The reading tested here: “B k” bolts the part to travelling platform k, and “U k” unbolts it; while bolted, the part moves as its platform moves. Babbage’s history of the engine, written in 1836, says that in 1835 barrels “bolted the necessary axes to travelling platforms which being raised” gave their vertical motion, and records “a plan for locking axes to travelling platforms” (5 March 1835); his notebook of December 1835 writes “Lock … to Pl. 4”. A drawing of 4 February 1836 is headed “Method of bolting to platforms for vertical motion of Axes”. The multiplication sheet of 5 January 1836 heads twelve platform columns with signed figures: platform 3 +1.1, platform 7 −.2. The expansion of B and U is not written anywhere read here; the reading is of what the labels do.",
+          "references": [
+            {
+              "label": "The audit of B and U, and the archive read for it",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/f-bu-audit.md"
+            },
+            {
+              "label": "Travelling platforms, 1835–1836: the sources",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/sources/notes/platforms-1835-1836.md"
+            },
+            {
+              "label": "“Lock … to Pl. 4”: Scribbling Book Vol. II p. 42, December 1835",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/sources/notes/bolting-plates-sources.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "03 / TWO TESTS ON HELD-OUT SHEETS",
+          "text": "The reading was built from the multiplication sheets. Then it was tested on sheets it had not seen, twice. Each time, rules and predictions were committed before the arrows were read: a program turned the sheets’ labels into predictions, and a reader who was shown neither the rules nor the predictions, but had the list of labels to find the columns, read every column’s arrows. The first test, on table division, got every direction right (42 of 42) and the lift 38 times, but its fixed rule for when a part returns failed (18 of 30), and was dropped. The second test, on ten sheets of four kinds, added a rule that a bolt lasts until a U, and replaced the fixed return row with the platform’s own return. Its program was revised once in its implementation (bare labels, conflicts, the carriage sheet’s mid-band labels, among others) before any part’s arrow was read; both versions were scored.",
+          "references": [
+            {
+              "label": "The rules of the second test, frozen",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/held-out-2-rules.md"
+            },
+            {
+              "label": "Its scoring protocol, frozen",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/held-out-2-protocol.md"
+            },
+            {
+              "label": "The first test’s result",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/f015-f016-result.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "04 / A FRESH B MOVES ITS PART",
+          "text": "Across division without a table, square root, the ordinary cycle and carriage, a part with a fresh “B k” moved in the band’s first row 173 times out of 173. No held-out sheet heads its platforms, so direction and lift come from F/013’s table: it moved the way that table gives platform k 168 times, and by that table’s lift in 145 of the 150 cases where a figure is written. Its return, later in the band, went the other way 123 times out of 124. A part carrying a U and no B did not move: 123 out of 123 (151 of 151 counting four cells where the paper ends as not moving)."
+        },
+        {
+          "kind": "observation",
+          "label": "05 / AND IT STAYS BOLTED",
+          "text": "The case that tells the readings apart is a part with no label in a band, bolted by a B in an earlier band and not unbolted since. If a label is a single instruction, it should stay still. If a bolt persists, it should move with its platform again. It moved 37 times out of 43: in division 14 of 16, in square root 21 of 24, in carriage 2 of 3. Where the paper ends inside the first row of a band, four more such parts show no arrow in what is visible; counted as not moving, it is 37 of 47. All 37 went the way F/013’s table gives the platform bolted earlier; of the 29 with a figure, 28 by that table’s lift. A part unbolted earlier and not bolted again never moved: 75 cases. Three of the six that did not move are on one square-root sheet, where the reader found U labels over exactly those columns that the list of labels had missed; they are scored as failures, as frozen.",
+          "references": [
+            {
+              "label": "The result of the second test, every miss listed",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/held-out-2-result.md"
+            },
+            {
+              "label": "The scores, as the scorer wrote them",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/held-out-2-scores.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "06 / WHAT FAILED",
+          "text": "Every part with a bare “B”, no number, moved (37 of 37), mostly by 0.45 or 0.3, lifts that are not among the twelve platforms of 5 January; the revised program had predicted they would not, and that fails. Parts with no label in the band and no earlier B move 102 times: 70 in columns never labelled on their sheet, among them the same three columns in every band of three division sheets, and 32 in columns labelled only later on it. A rule that an unlabelled part stays still fails, and the sheets are not self-contained. On the carriage sheet, three “B 7”s in the middle of its bands go up, where F/013’s platform 7 goes down (its first-row “B 7” goes down, as the table says). The rule that a part returns when its platform returns could not be tested: no held-out sheet numbers its platform columns. In an exploratory check frozen with the predictions, F/032’s “L k” behaved as “B k” would (5 of 5), as December 1835’s “Lock … to Pl. 4” would suggest."
+        },
+        {
+          "kind": "observation",
+          "label": "07 / A SIMULATOR OF THE LABELS",
+          "text": "The labels are executed as state: parts; numbered platforms, each with a displacement from a configuration; unknown resources, one for each bare B; bolts that persist until a U; and timed events, band by band, with the mid-band changes of the carriage sheet where they are written. It was written after the scoring, and its choices for a bare B (it moves, to an unknown resource) and for carriage (no table adopted) follow the failures above. What the tests support is marked supported. What they do not settle is left unknown rather than filled in: where a bare B goes, how far a carriage part moves, a part whose state at the start of a sheet is not known, and what the Lock columns do. Returns are placed at the end of the band and marked unverified. Step through any held-out sheet and see each simulated motion beside what the reader transcribed.",
+          "references": [
+            {
+              "label": "The simulator (scripts/f_sim.py)",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/scripts/f_sim.py"
+            },
+            {
+              "label": "Its model, entity by entity",
+              "url": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/f-mech-model.md"
+            }
+          ]
+        },
+        {
+          "kind": "observation",
+          "label": "08 / HOW IT WAS CHECKED",
+          "text": "The rules (dc3bf1d), the protocol (1833752) and both versions of the predictions (64ca93e, 1732e2f) are in the repository’s history before the transcription (cdb7aac). The transcription is of full-resolution photographs of the sheets, every column of every band, by one reader shown neither rules nor predictions; it had the list of labels, to find the columns, and while it worked its notes on the first sheet were looked at. Cropped and unreadable cells are counted and not scored. Some scoring choices were made after the transcription was seen, among them two column names, where the carriage sheet’s mid-band arrows are read, its band-closing labels left unscored, which columns count as parts, and reporting four cells at the paper’s edge both ways; they are listed in the result. An independent review of the scorer reproduced every count, and found that its first comparison of the models did not score exactly what the frozen predictions said; it was rescored as frozen, the open conventions are reported both ways, and the first figures stay in the history."
+        },
+        {
+          "kind": "connection",
+          "text": "Every prediction, every mark read, and every miss is in the repository.",
+          "links": [
+            {
+              "href": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/held-out-2-result.md",
+              "label": "The second held-out result"
+            },
+            {
+              "href": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/sources/notes/F021-F033-arrows.md",
+              "label": "The blind transcription, column by column"
+            },
+            {
+              "href": "https://github.com/chrishayuk/analytical-engine/blob/fa29a6a/docs/predictions/held-out-2-predictions-v2.md",
+              "label": "The frozen predictions (v2; v1 beside it)"
+            },
+            {
+              "href": "https://collection.sciencemuseumgroup.org.uk/documents/aa110000497",
+              "label": "BAB/F/013, Table multiplication, 5 January 1836 (Science Museum Group)"
+            },
+            {
+              "href": "/notebook/where-babbages-1836-count-comes-from-decides-what-his-engine-could-compute",
+              "label": "The earlier note: what the Sketch Books’ control could compute"
+            }
+          ]
+        },
+        {
+          "kind": "refusal",
+          "title": "WHAT THIS DOES NOT SHOW",
+          "lines": [
+            "What B and U stand for. “Bolt” and “unbolt” is a reading supported by what the labels do and by the platforms of 1835; the words are not written on the sheets read here.",
+            "That the engine computes anything in these charts. No motion here has been turned into a digit; the arithmetic is not reconstructed.",
+            "When a part returns. The rule that it returns with its platform could not be tested: no held-out sheet numbers its platform columns.",
+            "What a bare B attaches to, what moves the unlabelled parts, or how the carriage sheet’s parts are driven. They are left unknown.",
+            "That the transcriptions are final. They are one reader’s, from photographs, and have not been checked against the originals by a specialist. Nor is it claimed that nobody has read these charts this way before."
+          ],
+          "principle": "Freeze the prediction, then read the sheet."
+        },
+        {
+          "kind": "question",
+          "text": "If Babbage’s timing charts describe which parts are connected to which motions, and for how long, can the arithmetic be recovered by running them?",
+          "status": "OPEN",
+          "detail": "Open here: the return-with-platform rule, on a sheet that numbers its platforms; what a bare B attaches to; the carriage sheet’s own motions; the Lock columns; and what the motions do to the figure wheels."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Babbage Papers, Series F: mechanical notations, BAB/F/013–033 (January–March 1836), Science Museum Group",
+          "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110000505",
+          "note": "Read from the Science Museum Group’s photographs, at full resolution. BAB/F/013 (aa110000497), F/021 (aa110000505), F/026 (aa110000510)."
+        },
+        {
+          "title": "Babbage Papers, Scribbling Book Vol. II (BAB/S/1/02, 1835–1837), Science Museum Group",
+          "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110001323",
+          "note": "Travelling platforms from 30 Nov 1835; “Lock … to Pl. 4”, p. 42, December 1835. Read in sources/notes/bolting-plates-sources.md §3.7."
+        },
+        {
+          "title": "Babbage Papers, Scribbling Book Vol. XIII (BAB/S/1/13), Science Museum Group",
+          "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110069630",
+          "note": "The history of the engine, written from May 1836: locking axes to travelling platforms, 1835. Read in sources/notes/platforms-1835-1836.md."
+        },
+        {
+          "title": "C. Hay, analytical-engine (GitHub), commit fa29a6a",
+          "url": "https://github.com/chrishayuk/analytical-engine",
+          "note": "The predictions, transcriptions, scorer, results and simulator."
+        }
+      ],
+      "published": "2026-11-28"
+    },
+    "hash": "914e9fe3d19f50dd0748aa90059fd62671d1adba86e1975081b76206a4a64cc2",
+    "algorithm": "sha256"
   }
 ]
