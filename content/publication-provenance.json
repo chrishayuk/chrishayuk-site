@@ -3516,5 +3516,36 @@
         "note": "src/sketch.rs (the machine, configurations 1843 and 1843-B), control/note-g-*.txt, tests/note_g.rs, formal/Babbage/Note43.lean and Multi.lean, scripts/lean-diff.sh, docs/published-control-1843.md."
       }
     ]
+  },
+  {
+    "id": "N-BABBAGE-SERIES-F",
+    "version": "1.0",
+    "recordHash": "d63d04ae98b7c95eac7466edd5c976dbcb55a6df4cb858e3f5c5a3e81195803c",
+    "revision": {
+      "kind": "initial",
+      "summary": "First publication, after a fact-check against analytical-engine fa29a6a: the transcription disclosed as one reading by a coding agent (an AI model), given the list of labels to find the columns, with no person verifying it; direction and lift attributed to F/013's table; the cut-off band-4 cells reported both ways, kept apart by category (four persistence, 28 lone-U, 53 released); the 102 unlabelled movers split 70/32; return timing, not returns, untested; the carriage failure limited to its mid-band labels; E1 exploratory; the simulator written after the scoring; Vol XIII's history dated 1836 and Vol II p. 42 cited for Lock to Pl. 4; F/021 dated January 1836."
+    },
+    "sources": [
+      {
+        "title": "Babbage Papers, Series F: mechanical notations, BAB/F/013–033 (January–March 1836), Science Museum Group",
+        "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110000505",
+        "note": "Read from the Science Museum Group’s photographs, at full resolution. BAB/F/013 (aa110000497), F/021 (aa110000505), F/026 (aa110000510)."
+      },
+      {
+        "title": "Babbage Papers, Scribbling Book Vol. II (BAB/S/1/02, 1835–1837), Science Museum Group",
+        "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110001323",
+        "note": "Travelling platforms from 30 Nov 1835; “Lock … to Pl. 4”, p. 42, December 1835. Read in sources/notes/bolting-plates-sources.md §3.7."
+      },
+      {
+        "title": "Babbage Papers, Scribbling Book Vol. XIII (BAB/S/1/13), Science Museum Group",
+        "url": "https://collection.sciencemuseumgroup.org.uk/documents/aa110069630",
+        "note": "The history of the engine, written from May 1836: locking axes to travelling platforms, 1835. Read in sources/notes/platforms-1835-1836.md."
+      },
+      {
+        "title": "C. Hay, analytical-engine (GitHub), commit fa29a6a",
+        "url": "https://github.com/chrishayuk/analytical-engine",
+        "note": "The predictions, transcriptions, scorer, results and simulator."
+      }
+    ]
   }
 ]

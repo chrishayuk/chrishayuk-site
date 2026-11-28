@@ -229,6 +229,13 @@ export const publicationLegibility: Record<string, Legibility> = {
   description: "Lovelace’s Note G has a result choose between two courses. Read as a cycle a result ends, or as a step forward past Babbage’s 1837 backing card, it makes the engine general, proved in Lean given Minsky’s theorem. Her Bernoulli program runs as printed (−95/126) and corrected (−1/30) in your browser.",
   concepts: ["Ada Lovelace", "Note G", "Bernoulli numbers", "Charles Babbage", "Analytical Engine", "first computer program", "Lean", "formal verification", "Minsky machines", "Turing completeness", "history of computing", "WebAssembly"],
  },
+ "N-BABBAGE-SERIES-F": {
+  subject: "Babbage’s mechanical notation of January 1836 (Series F of the Babbage Papers): his B and U labels read as bolting parts to travelling platforms, tested by predictions frozen before the motion marks of held-out sheets were read, and executed by a stateful simulator",
+  question: "If Babbage’s timing charts describe which parts are connected to which motions, and for how long, can the arithmetic be recovered by running them?",
+  searchTitle: "Babbage’s 1836 Mechanical Notation: Testing the Meaning of Persistent Connections",
+  description: "Babbage’s January 1836 timing charts label parts B 3, U 5. Read as bolting a part to a travelling platform until it is unbolted, the labels predicted the motion marks of sheets of division and square root, read afterwards: 173 of 173 fresh motions, and 37 of 43 parts that stayed bolted. Step through the simulator.",
+  concepts: ["Charles Babbage", "Analytical Engine", "mechanical notation", "Series F", "travelling platforms", "pre-registration", "held-out test", "simulation", "history of computing"],
+ },
  "N-ABSYS": {
   subject: "Absys, the assertional language J. M. Foster and E. W. Elcock built at Aberdeen around 1967, reconstructed from their papers of 1968, 1969 and 1990, and run on every example they printed",
   question: "What did the rest of Absys-4 look like?",

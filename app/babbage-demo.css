@@ -46,3 +46,17 @@
 .babbage-status-open{color:var(--muted)}
 .babbage-lean{font-size:12px;white-space:nowrap}
 .babbage-explorer-note{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* The Series F note: the chart-driven simulator. */
+.series-f-svg{display:block;width:100%;max-height:180px;margin:8px 0 4px}
+.series-f-zero{stroke:var(--rule);stroke-width:1}
+.series-f-bar{stroke:currentColor;stroke-width:3}
+.series-f-part circle{fill:currentColor}
+.series-f-unknown{font-size:16px;fill:currentColor}
+.series-f-supported{color:#1d4e89}
+.series-f-unresolved{color:#8a5a00}
+.series-f-unverified{color:var(--muted)}
+.series-f-svg .series-f-miss circle{fill:#b3261e}
+.series-f-row.series-f-miss i{color:#b3261e}
+.series-f-row.series-f-hit i{color:#1b6b3a}
+.series-f-name{font-size:9px;fill:var(--muted)}
