@@ -13618,11 +13618,11 @@
   {
     "record": {
       "id": "N-BABBAGE-SERIES-F",
-      "slug": "read-as-persistent-connections-babbages-1836-timing-charts-predict-held-out-sheets",
+      "slug": "babbages-1836-mechanical-notation-testing-the-meaning-of-persistent-connections",
       "kind": "notebook",
-      "title": "Read as connections that persist, Babbage’s 1836 timing charts predict the motions of sheets held out from the reading.",
+      "title": "Babbage’s 1836 Mechanical Notation: Testing the Meaning of Persistent Connections",
       "dek": "In January 1836 Babbage charted, row by row, how the parts of his engine moved. Read as connections to travelling platforms that last until released, his B and U labels predicted motion marks that had not yet been read, across division and square root.",
-      "abstract": "A note about Series F of the Babbage Papers at the Science Museum: the mechanical notation of January 1836, timing charts in which each column is a part of the engine and each row a moment of its cycle. Many columns carry labels, “B 3”, “U 5”, at the head of a band of rows. Read here, as a hypothesis, as a part being bolted to travelling platform 3, or unbolted from platform 5: the platforms are in Babbage’s notebooks of 1835, and he writes “Lock … to Pl. 4” in December 1835. Built from the multiplication sheets, the reading was tested twice on sheets held out from it, with rules and predictions committed before the motion marks were read by a reader not shown them (it had the list of labels, to find the columns). In the second test, on four sheets of division without a table, four of square root, the ordinary cycle and the notation of carriage, a fresh “B k” moved its part 173 times out of 173, the way F/013’s table gives for platform k 168 times. Parts attached by an earlier B, with no label of their own, moved 37 times out of 43 (37 of 47 if four cells where the paper ends are counted as not moving), every time the right way; a reading in which only a fresh label moves a part gets 6 (or 10). No part moved in a band where it had been released: 198 cases (251 counting those cells). The failures are reported as fully: parts with a bare “B” move, by amounts outside the table; parts with no label yet on their sheet move; and on the carriage sheet three mid-band “B 7”s go the other way from the table. A simulator, written after the scoring, executes the labels as state, band by band, and marks what the tests do not settle as unresolved or unverified. What the motions do to numbers is not reconstructed.",
+      "abstract": "A note about Series F of the Babbage Papers at the Science Museum: the mechanical notation of January 1836, timing charts in which each column is a part of the engine and each row a moment of its cycle. Many columns carry labels, “B 3”, “U 5”, at the head of a band of rows. Read here, as a hypothesis, as a part being bolted to travelling platform 3, or unbolted from platform 5: the platforms are in Babbage’s notebooks of 1835, and he writes “Lock … to Pl. 4” in December 1835. Built from the multiplication sheets, the reading was tested twice on sheets held out from it, with rules and predictions committed before the motion marks were read by a reader not shown them: a coding agent (an AI model), which had the list of labels to find the columns. No person has verified its readings. In the second test, on four sheets of division without a table, four of square root, the ordinary cycle and the notation of carriage, a fresh “B k” moved its part 173 times out of 173, the way F/013’s table gives for platform k 168 times. Parts attached by an earlier B, with no label of their own, moved 37 times out of 43 (37 of 47 if the cells of bands where the paper ends inside the first row are counted as not moving, which adds four such parts), every time the right way; a reading in which only a fresh label moves a part gets 6 (or 10). No part moved in a band where it had been released: 198 cases (251 counting those cells, which add 53). The failures are reported as fully: parts with a bare “B” move, by amounts outside the table; parts with no label yet on their sheet move; and on the carriage sheet three mid-band “B 7”s go the other way from the table. A simulator, written after the scoring, executes the labels as state, band by band, and marks what the tests do not settle as unresolved or unverified. What the motions do to numbers is not reconstructed.",
       "created": "2026-11-28",
       "version": "1.0",
       "status": "OPEN",
@@ -13699,7 +13699,7 @@
         {
           "kind": "observation",
           "label": "04 / A FRESH B MOVES ITS PART",
-          "text": "Across division without a table, square root, the ordinary cycle and carriage, a part with a fresh “B k” moved in the band’s first row 173 times out of 173. No held-out sheet heads its platforms, so direction and lift come from F/013’s table: it moved the way that table gives platform k 168 times, and by that table’s lift in 145 of the 150 cases where a figure is written. Its return, later in the band, went the other way 123 times out of 124. A part carrying a U and no B did not move: 123 out of 123 (151 of 151 counting four cells where the paper ends as not moving)."
+          "text": "Across division without a table, square root, the ordinary cycle and carriage, a part with a fresh “B k” moved in the band’s first row 173 times out of 173. No held-out sheet heads its platforms, so direction and lift come from F/013’s table: it moved the way that table gives platform k 168 times, and by that table’s lift in 145 of the 150 cases where a figure is written. Its return, later in the band, went the other way 123 times out of 124. A part carrying a U and no B did not move: 123 out of 123 (151 of 151 if the 28 such cells where the paper ends inside the first row are counted as not moving)."
         },
         {
           "kind": "observation",
@@ -13739,7 +13739,7 @@
         {
           "kind": "observation",
           "label": "08 / HOW IT WAS CHECKED",
-          "text": "The rules (dc3bf1d), the protocol (1833752) and both versions of the predictions (64ca93e, 1732e2f) are in the repository’s history before the transcription (cdb7aac). The transcription is of full-resolution photographs of the sheets, every column of every band, by one reader shown neither rules nor predictions; it had the list of labels, to find the columns, and while it worked its notes on the first sheet were looked at. Cropped and unreadable cells are counted and not scored. Some scoring choices were made after the transcription was seen, among them two column names, where the carriage sheet’s mid-band arrows are read, its band-closing labels left unscored, which columns count as parts, and reporting four cells at the paper’s edge both ways; they are listed in the result. An independent review of the scorer reproduced every count, and found that its first comparison of the models did not score exactly what the frozen predictions said; it was rescored as frozen, the open conventions are reported both ways, and the first figures stay in the history."
+          "text": "The rules (dc3bf1d), the protocol (1833752) and both versions of the predictions (64ca93e, 1732e2f) are in the repository’s history before the transcription (cdb7aac). The transcription is of full-resolution photographs of the sheets, every column of every band, by one reader, a coding agent (an AI model), shown neither rules nor predictions; it had the list of labels, to find the columns, and while it worked its notes on the first sheet were looked at. No person has verified the readings, and the reader is not independent of the project: the strength of the test rests on its having been shown neither the rules nor the predictions. Cropped and unreadable cells are counted and not scored. Some scoring choices were made after the transcription was seen, among them two column names, where the carriage sheet’s mid-band arrows are read, its band-closing labels left unscored, which columns count as parts, and reporting four cells at the paper’s edge both ways; they are listed in the result. An independent review of the scorer reproduced every count, and found that its first comparison of the models did not score exactly what the frozen predictions said; it was rescored as frozen, the open conventions are reported both ways, and the first figures stay in the history."
         },
         {
           "kind": "connection",
@@ -13775,7 +13775,7 @@
             "That the engine computes anything in these charts. No motion here has been turned into a digit; the arithmetic is not reconstructed.",
             "When a part returns. The rule that it returns with its platform could not be tested: no held-out sheet numbers its platform columns.",
             "What a bare B attaches to, what moves the unlabelled parts, or how the carriage sheet’s parts are driven. They are left unknown.",
-            "That the transcriptions are final. They are one reader’s, from photographs, and have not been checked against the originals by a specialist. Nor is it claimed that nobody has read these charts this way before."
+            "That the transcriptions are final. They are one reading, by a coding agent (an AI model), from photographs; no person has verified them against the photographs or the originals. Nor is it claimed that nobody has read these charts this way before."
           ],
           "principle": "Freeze the prediction, then read the sheet."
         },
@@ -13810,7 +13810,7 @@
       ],
       "published": "2026-11-28"
     },
-    "hash": "914e9fe3d19f50dd0748aa90059fd62671d1adba86e1975081b76206a4a64cc2",
+    "hash": "d63d04ae98b7c95eac7466edd5c976dbcb55a6df4cb858e3f5c5a3e81195803c",
     "algorithm": "sha256"
   }
 ]

@@ -43,8 +43,8 @@ export function BabbageSeriesFNotebook({ record }: { record: PublicationRecord }
         { label: "A BOLT PERSISTS", value: "37 / 43", detail: "Division 14 of 16, square root 21 of 24, carriage 2 of 3." },
         { label: "ONLY A FRESH LABEL MOVES", value: "6 / 43" },
         { label: "DIRECTION, WHEN IT MOVED", value: "37 / 37" },
-        { label: "RELEASED, AND STILL", value: "198 / 198", detail: "A U in the band, or released earlier; 251 / 251 counting the edge cells." },
-      ]} note="Four band-4 cells where the paper ends inside row 1 are left unscored here. Counted as not moving: persistence 37 of 47 (10 still), released 251 of 251. Three of the six that did not move sit under U labels the list of labels had missed."/>
+        { label: "RELEASED, AND STILL", value: "198 / 198", detail: "A U in the band, or released earlier; 251 / 251 counting the cut-off band-4 cells." },
+      ]} note="Where the paper ends inside row 1 of a band 4, its cells are left unscored here. Counted as not moving, they add four persistence cases (37 of 47, 10 still) and 53 released ones (251 of 251). Three of the six that did not move sit under U labels the list of labels had missed."/>
     </> },
     { label: "What failed", kind: "evidence", children: <>
       {act(5)}

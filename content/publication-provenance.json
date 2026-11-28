@@ -3520,10 +3520,10 @@
   {
     "id": "N-BABBAGE-SERIES-F",
     "version": "1.0",
-    "recordHash": "914e9fe3d19f50dd0748aa90059fd62671d1adba86e1975081b76206a4a64cc2",
+    "recordHash": "d63d04ae98b7c95eac7466edd5c976dbcb55a6df4cb858e3f5c5a3e81195803c",
     "revision": {
       "kind": "initial",
-      "summary": "First publication, after a fact-check against analytical-engine fa29a6a: the title states the reading as a reading; the reader had the list of labels to find the columns, and the note says so; direction and lift are attributed to F/013's table; the four edge cells reported both ways in the panels and abstract; the 102 unlabelled movers split into 70 never labelled and 32 labelled later; return timing, not returns, is what is untested; the carriage failure limited to its mid-band labels; E1 marked exploratory; the simulator said to have been written after the scoring; Vol XIII's history dated 1836 and Vol II p. 42 cited for Lock to Pl. 4; F/021's date given as January 1836."
+      "summary": "First publication, after a fact-check against analytical-engine fa29a6a: the transcription disclosed as one reading by a coding agent (an AI model), given the list of labels to find the columns, with no person verifying it; direction and lift attributed to F/013's table; the cut-off band-4 cells reported both ways, kept apart by category (four persistence, 28 lone-U, 53 released); the 102 unlabelled movers split 70/32; return timing, not returns, untested; the carriage failure limited to its mid-band labels; E1 exploratory; the simulator written after the scoring; Vol XIII's history dated 1836 and Vol II p. 42 cited for Lock to Pl. 4; F/021 dated January 1836."
     },
     "sources": [
       {
